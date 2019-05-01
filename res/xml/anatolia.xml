@@ -106,4 +106,10 @@
         android:title="@string/about_settings"
         android:summary="@string/summary_placeholder" />
 
+    <Preference
+        android:key="display_customization"
+        android:title="@string/display_customization"
+        android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations"
+        android:summary="@string/display_customization"/>   
+         
 </PreferenceScreen>
