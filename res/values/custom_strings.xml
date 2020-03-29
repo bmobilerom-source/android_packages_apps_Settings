@@ -136,5 +136,11 @@
     <string name="appsec_blocked_message">App Security access is blocked</string>
     <string name="blocation_blocked_message">Enhanced Location access is blocked</string>
     <string name="page_blocked_message">This page is blocked</string>
+
+    <!-- Adaptive Playback -->
+    <string name="adaptive_playback_title">Adaptive playback</string>
+    <string name="adaptive_playback_summary">Pause media when volume is muted and resume it by increasing volume within the timeout</string>
+    <string name="adaptive_playback_intro_text">Automatically pauses media when the volume is muted and will resume automatically when volume is restored within the set time</string>
+
 </resources>
 
