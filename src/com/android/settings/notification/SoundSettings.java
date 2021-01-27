@@ -21,6 +21,13 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -36,6 +43,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.RingtonePreference;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
@@ -47,6 +55,9 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.ActionBarShadowController;
+
+import com.android.settings.preferences.ui.AdaptiveSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -219,6 +230,24 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
             controller.setCallback(mVolumeCallback);
             getSettingsLifecycle().addObserver(controller);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initActionbar();
+    }
+
+    private void initActionbar() {
+        final ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar == null) {
+            return;
+        }
+        actionBar.setBackgroundDrawable(
+                new ColorDrawable(
+                        Utils.getColorAttrDefaultColor(getActivity(), android.R.attr.colorPrimaryDark)));
+        actionBar.setElevation(0);
+        ActionBarShadowController.attachToView(getActivity(), getSettingsLifecycle(), getListView());
     }
 
     // === Volumes ===

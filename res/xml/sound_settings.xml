@@ -33,24 +33,17 @@
     <!-- Media volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="media_volume"
+        android:layout="@layout/dot_preference_top_card_progress"
         android:icon="@drawable/ic_media_stream"
         android:title="@string/media_volume_option_title"
         android:order="-180"
         settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.MediaVolumePreferenceController"/>
 
-    <!-- Media output switcher -->
-    <Preference
-        android:key="media_output"
-        android:title="@string/media_output_title"
-        android:dialogTitle="@string/media_output_title"
-        android:order="-175"
-        settings:searchable="false"
-        settings:controller="com.android.settings.sound.MediaOutputPreferenceController"/>
-
     <!-- Call volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="call_volume"
+        android:layout="@layout/dot_preference_middle_card_progress"
         android:icon="@drawable/ic_local_phone_24_lib"
         android:title="@string/call_volume_option_title"
         android:order="-170"
@@ -72,12 +65,14 @@
         android:icon="@drawable/ic_ring_volume"
         android:title="@string/separate_ring_volume_option_title"
         android:order="-155"
+        android:layout="@layout/dot_preference_middle_card_progress"
         settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.SeparateRingVolumePreferenceController"/>
 
     <!-- Notification volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="notification_volume"
+        android:layout="@layout/dot_preference_middle_card_progress"
         android:icon="@drawable/ic_notifications"
         android:title="@string/notification_volume_option_title"
         android:order="-150"
@@ -91,8 +86,19 @@
         android:icon="@*android:drawable/ic_audio_alarm"
         android:title="@string/alarm_volume_option_title"
         android:order="-140"
+        android:layout="@layout/dot_preference_bottom_card_progress"
         settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
+
+    <!-- Media output switcher -->
+    <Preference
+        android:key="media_output"
+        settings:layout="@layout/system_features_preference_card"
+        android:title="@string/media_output_title"
+        android:dialogTitle="@string/media_output_title"
+        android:order="-135"
+        settings:searchable="false"
+        settings:controller="com.android.settings.sound.MediaOutputPreferenceController"/>
 
     <!-- TODO(b/174964721): make this a PrimarySwitchPreference -->
     <!-- Interruptions -->
@@ -100,7 +106,8 @@
         android:key="zen_mode"
         android:title="@string/zen_mode_settings_title"
         android:fragment="com.android.settings.notification.zen.ZenModeSettings"
-        android:order="-130"
+        android:order="-130"       
+        android:visibility="gone"
         settings:useAdminDisabledSummary="true"
         settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
         settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"/>
@@ -114,6 +121,23 @@
         android:ringtoneType="ringtone"
         android:order="-120"
         settings:keywords="@string/sound_settings"/>
+
+    
+    <!-- Default notification ringtone -->
+    <com.android.settings.DefaultRingtonePreference
+        android:key="notification_ringtone"
+        android:title="@string/notification_ringtone_title"
+        android:dialogTitle="@string/notification_ringtone_title"
+        android:summary="@string/summary_placeholder"
+        android:ringtoneType="notification"
+        android:order="-119"/>
+
+    <!-- Custom charging sounds -->
+    <lineageos.preference.LineagePartsPreference
+        android:key="charging_sounds_settings"
+        android:order="-117"
+        settings:replacesKey="charging_sounds"
+        settings:requiresConfig="@bool/config_show_charging_sounds" />
 
     <!-- Live Caption -110 and Now Playing -105-->
 
@@ -138,10 +162,11 @@
         android:fragment="com.android.settings.accessibility.VibrationSettings"
         android:key="vibration_and_haptics"
         android:title="@string/accessibility_vibration_settings_title"
-        android:order="-90"
+        android:order="-100"
         settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
         settings:keywords="@string/keywords_vibration"/>
-
+ 
+    <!-- Prevent ringing gesture -->
     <com.android.settingslib.PrimarySwitchPreference
         android:key="gesture_prevent_ringing_sound"
         android:title="@string/gesture_prevent_ringing_sound_title"
@@ -185,12 +210,6 @@
         android:key="charging_sounds"
         android:title="@string/charging_sounds_title"
         android:order="-40"/>
-
-    <!-- Custom charging sounds -->
-    <lineageos.preference.LineagePartsPreference
-        android:key="charging_sounds_settings"
-        settings:replacesKey="charging_sounds"
-        settings:requiresConfig="@bool/config_show_charging_sounds" />
 
     <!-- Docking sounds -->
     <SwitchPreferenceCompat
