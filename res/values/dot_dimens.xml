@@ -15,8 +15,11 @@
      limitations under the License.
 -->
 <resources>
-    <dimen name="contextual_card_stroke_width">1dp</dimen>
-
     <dimen name="storage_card_min_width">148dp</dimen>
     <dimen name="storage_card_min_height">@dimen/storage_card_min_width</dimen>
+
+    <dimen name="dot_settings_bar_height">190dp</dimen>
+    <dimen name="contextual_card_stroke_width">1dp</dimen>
+
+    <dimen name="dot_pref_radius">16dp</dimen>
 </resources> 

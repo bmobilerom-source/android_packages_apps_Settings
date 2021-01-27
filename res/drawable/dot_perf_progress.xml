@@ -9,14 +9,13 @@
         </shape>
     </item>
     <item android:id="@android:id/progress">
-        <clip>
+        <scale android:scaleWidth="100%">
             <shape android:tint="?android:attr/colorAccent" >
                 <solid android:color="#99FFFFFF"/>
                 <size android:height="18dp"/>
                 <corners android:radius="@dimen/dot_pref_radius" />
             </shape>
-        </clip>
+        </scale>
     </item>
-
 
 </layer-list>
