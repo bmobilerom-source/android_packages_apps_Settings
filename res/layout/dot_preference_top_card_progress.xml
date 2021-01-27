@@ -21,7 +21,7 @@
 
     <FrameLayout
         android:id="@+id/container"
-        style="@style/DotPreferenceMiddleCard"
+        style="@style/DotPreferenceTopCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -76,7 +76,7 @@
                         android:paddingStart="12dp"
                         android:singleLine="true"
                         android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-                        android:textColor="?android:attr/colorAccent"/>
+                        android:textColor="?android:attr/colorAccent" />
                     <!-- Preference should place its actual preference widget here. -->
                     <LinearLayout
                         android:id="@*android:id/widget_frame"
