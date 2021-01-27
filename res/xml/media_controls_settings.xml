@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2020 The Android Open Source Project
+  ~ Copyright (C) 2025 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -17,8 +17,51 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title=" "
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="sounds"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/mediaplayer"/>
+
+     <!-- Header -->
+  <PreferenceCategory
+        android:title="Media Controls"
+        android:order="-999"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+    <!-- intro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="media_controls_bubbles_desc"
+        android:order="-996"
+        android:title="@string/media_controls_bubbles_description" />    
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="media_controls_bubbles_desc2"
+        android:order="-995"
+        android:title="@string/media_controls_bubbles_description2" />
+
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="media_controls_bubbles_desc3"
+        android:order="-994"
+        android:title="@string/media_controls_bubbles_description3" />
+
+    <!-- ambient music -->
+    <Preference
+        android:key="ambient_music_info"
+        android:title="@string/ambient_music_info_title"
+        android:summary="@string/ambient_music_info_summary"
+        android:order="-990"
+        android:layout="@layout/dot_preference_top_card">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.sourajitk.ambient_music"
+                android:targetClass="com.sourajitk.ambient_music.MainActivity" />
+    </Preference>
 
     <SwitchPreferenceCompat
         android:key="media_controls_resume_switch"
