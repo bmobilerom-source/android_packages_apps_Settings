@@ -93,6 +93,8 @@ android_library {
         // Settings dependencies
         "FingerprintManagerInteractor",
         "MediaDrmSettingsFlagsLib",
+        "glide",
+        "lottie",
         "Settings-change-ids",
         "SettingsLib",
         "SettingsLibActivityEmbedding",
@@ -186,4 +188,22 @@ android_library_import {
 filegroup {
     name: "Settings_proguard_flags",
     srcs: ["proguard.flags"],
+}
+
+// The sources for Settings need to be exposed to SettingsGoogle, etc.
+// so they can run the com.android.settingslib.search.IndexableProcessor
+// over all the sources together.
+filegroup {
+    name: "Settings_srcs",
+    srcs: ["src/**/*.java", "src/**/*.kt"],
+}
+
+filegroup {
+    name: "Settings_manifest",
+    srcs: ["AndroidManifest.xml"],
+}
+
+android_library_import {
+    name: "glide",
+    aars: ["libs/glide-4.14.2.aar"],
 }
