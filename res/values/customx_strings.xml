@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="userinfo_bubble_setting_description">welcome to your user page below are options to gain access to your user information </string>
+    <string name="multiuser_settings_title">Multi User Options</string>
+    <string name="accounts_settings_title">Personal Accounts</string>
+    <string name="emergency_settings_title">Emergency</string>
+
+</resources>
