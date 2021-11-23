@@ -13939,4 +13939,9 @@
     <string name="search_gesture_feature_summary">Touch and hold the Home button or the navigation handle to search using the content on your screen.</string>
     <!-- usercard titles -->
     <string name="wellbeing_title">Wellbeing</string>
+    <!-- Owner info -->
+    <string name="about_user">Owner Info</string>
+    <string name="userpref_summary">Personal Information about current user</string>
+    <string name="user_title">User Info</string>
+
 </resources>
