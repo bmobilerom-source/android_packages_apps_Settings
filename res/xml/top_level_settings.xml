@@ -20,13 +20,11 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
    
-    <!-- FlexoOS logo -->
-    <PreferenceScreen
-        android:key="flexo_lottie_animation"
-        android:layout="@layout/flexoos_card"
+  <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/about_device_info"
+        android:key="about_device_info"
         android:selectable="false"
-        android:order="-190" />
-
+        android:order="-2000"/>
    <com.android.settingslib.widget.LayoutPreference
             android:layout="@layout/usercard_blank"
             android:fragment="com.android.settings.users.UserSettings"
