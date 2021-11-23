@@ -190,6 +190,8 @@
 
     <!-- Icon tint color for battery usage system icon -->
     <color name="battery_usage_system_icon_color">?android:attr/textColorPrimary</color>
+    <!-- Restored single definition used by user_info_frag -->
+    <color name="usercardbg">@*android:color/system_accent2_600</color>
 
     <!-- Power anomaly color for icons, button -->
     <color name="power_anomaly_app_warning_hint_color">#D56E0C</color>
