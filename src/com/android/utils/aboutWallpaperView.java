@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.afterlife.preferences;
+package com.android.utils;
 
 import android.app.WallpaperManager;
 import android.content.Context;

@@ -93,7 +93,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
     @Override
     public void onStart() {
         super.onStart();
-        initActionbar();
     }
 
     @Override
@@ -114,54 +113,13 @@ public class MyDeviceInfoFragment extends DashboardFragment
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, MyDeviceInfoFragment fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-
-        final ExecutorService executor = (fragment == null) ? null :
-                Executors.newSingleThreadExecutor();
-        androidx.lifecycle.Lifecycle lifecycleObject = (fragment == null) ? null :
-                fragment.getLifecycle();
-        final SlotSimStatus slotSimStatus = new SlotSimStatus(context, executor, lifecycleObject);
-
-        controllers.add(new IpAddressPreferenceController(context, lifecycle));
-        controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
-        controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));
         controllers.add(new RegulatoryInfoPreferenceController(context));
         controllers.add(new SafetyInfoPreferenceController(context));
         controllers.add(new ManualPreferenceController(context));
         controllers.add(new FeedbackPreferenceController(fragment, context));
         controllers.add(new FccEquipmentIdPreferenceController(context));
         controllers.add(new UptimePreferenceController(context, lifecycle));
-
-        Consumer<String> imeiInfoList = imeiKey -> {
-            ImeiInfoPreferenceController imeiRecord =
-                    new ImeiInfoPreferenceController(context, imeiKey);
-            imeiRecord.init(fragment, slotSimStatus);
-            controllers.add(imeiRecord);
-        };
-
-        if (fragment != null) {
-            imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY);
-        }
-
-        for (int slotIndex = 0; slotIndex < slotSimStatus.size(); slotIndex ++) {
-            SimStatusPreferenceController slotRecord =
-                    new SimStatusPreferenceController(context,
-                    slotSimStatus.getPreferenceKey(slotIndex));
-            slotRecord.init(fragment, slotSimStatus);
-            controllers.add(slotRecord);
-
-            if (fragment != null) {
-                imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (1 + slotIndex));
-            }
-        }
-
-        EidStatus eidStatus = new EidStatus(slotSimStatus, context, executor);
-        SimEidPreferenceController simEid = new SimEidPreferenceController(context, KEY_EID_INFO);
-        simEid.init(slotSimStatus, eidStatus);
-        controllers.add(simEid);
-
-        if (executor != null) {
-            executor.shutdown();
-        }
+        controllers.add(new SyberiaInfoPreferenceController(context));
         return controllers;
     }
 
@@ -171,14 +129,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void initActionbar() {
-        final ActionBar actionBar = getActivity().getActionBar();
-        if (actionBar == null) {
-            return;
-        }
-        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
