@@ -96,7 +96,8 @@ public class ImeiInfoPreferenceControllerTest {
         mockService(Context.USER_SERVICE, UserManager.class, mUserManager);
 
         when(mScreen.getContext()).thenReturn(mContext);
-        final String categoryKey = "device_detail_category";
+        doReturn(mSecondSimPreference).when(mController).createNewPreference(mContext);
+        final String categoryKey = "basic_info_category";
         when(mScreen.findPreference(categoryKey)).thenReturn(mCategory);
     }
 
