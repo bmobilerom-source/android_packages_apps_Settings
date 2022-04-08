@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C)  2025  The-jekts
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License. thanks EpicROM-AOSP
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="aboutus_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/aboutus"/>
+
+    <!-- Accessibility Header -->
+    <PreferenceCategory
+        android:title="About Us"
+        android:order="-998"
+        android:layout="@layout/settings_title_header" />
+   
+    <!-- intro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="aboutus_bubbles_desc"
+        android:order="-997"
+        android:title="@string/aboutus_bubble_setting_description" />
+      
+    <!-- system info -->
+    <Preference
+        android:key="system_info"
+        android:title="@string/about_us_info_system_title"
+        android:summary="@string/about_us_info_system_title_summary"
+        android:order="-990"
+        android:layout="@layout/dot_preference_full_alone_card">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="dev.sebaubuntu.athena"
+                android:targetClass="dev.sebaubuntu.athena.MainActivity" />
+    </Preference>
+
+    <!-- website -->
+    <Preference
+        android:key="about_us_info"
+        android:title="@string/about_us_info"
+        android:summary="@string/about_us_info_summary">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://github.com/bashamobile" />
+    </Preference>
+
+    <!-- telegram help -->
+    <Preference
+        android:key="aboutus_link"
+        android:title="@string/aboutus_link_title"
+        android:summary="@string/aboutus_link_summary">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://t.me/orchidosdemo" />
+    </Preference>
+
+</PreferenceScreen>

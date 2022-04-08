@@ -14,32 +14,37 @@
  * limitations under the License.
  */
 
-package com.afterlife.preferences;
+package com.radiant.widget;
 
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.graphics.RenderEffect;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 
-public class aboutWallpaperView extends ImageView {
+public class WallpaperBlurView extends ImageView {
 
     Context contextM;
 
-    public aboutWallpaperView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WallpaperBlurView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         contextM = context;
+        setRenderEffect(RenderEffect.createBlurEffect(15, 15, Shader.TileMode.CLAMP));
     }
 
-    public aboutWallpaperView(Context context, AttributeSet attrs) {
+    public WallpaperBlurView(Context context, AttributeSet attrs) {
         super(context, attrs);
         contextM = context;
+        setRenderEffect(RenderEffect.createBlurEffect(15, 15, Shader.TileMode.CLAMP));
     }
 
 
-    public aboutWallpaperView(Context context) {
+    public WallpaperBlurView(Context context) {
         super(context);
         contextM = context;
+        setRenderEffect(RenderEffect.createBlurEffect(15, 15, Shader.TileMode.CLAMP));
     }
 
     @Override
