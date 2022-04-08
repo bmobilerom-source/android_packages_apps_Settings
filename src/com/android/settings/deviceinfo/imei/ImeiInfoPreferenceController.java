@@ -43,7 +43,7 @@ import com.android.settingslib.Utils;
  */
 public class ImeiInfoPreferenceController extends BasePreferenceController {
 
-    private static final String TAG = "ImeiInfoPreferenceController";
+    private static final String KEY_PREFERENCE_CATEGORY = "basic_info_category";
 
     private static final String KEY_PREFERENCE_CATEGORY = "device_detail_category";
     public static final String DEFAULT_KEY = "imei_info";
