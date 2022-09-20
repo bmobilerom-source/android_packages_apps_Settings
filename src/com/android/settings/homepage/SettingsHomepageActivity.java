@@ -93,8 +93,6 @@ import java.util.Set;
 import java.util.*;
 import java.lang.*;
 
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
 /** Settings homepage activity */
 public class SettingsHomepageActivity extends FragmentActivity implements
         CategoryMixin.CategoryHandler {
@@ -301,157 +299,56 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                         .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
             }
         }
+        
+        final TextView textView = findViewById(R.id.homepage_title);
 
-    final View root = findViewById(R.id.settings_homepage_container);
-    // For v2 layout, TextViews are in the app bar container
-    final View appBarContainer = findViewById(R.id.app_bar_container);
-    final TextView textView = appBarContainer != null ? appBarContainer.findViewById(R.id.user_title) : 
-                             (root != null ? root.findViewById(R.id.user_title) : null);
-    final TextView homepageTitle = appBarContainer != null ? appBarContainer.findViewById(R.id.homepage_title) : 
-                                  (root != null ? root.findViewById(R.id.homepage_title) : null);
-    final TextView searchTextView = root != null
-            ? (root.findViewById(R.id.search_bar_title) != null
-                ? root.findViewById(R.id.search_bar_title)
-                : root.findViewById(R.id.search_action_bar_title))
-            : null;
-
-    // Always set contextual messages - force visibility and text
-    Log.d(TAG, "Contextual: textView=" + (textView != null) + ", homepageTitle=" + (homepageTitle != null));
-    
-    // Force create TextViews if they don't exist
-    if (textView == null && homepageTitle == null) {
-        Log.w(TAG, "No contextual TextViews found, creating fallback");
-        // Create a simple text view programmatically as fallback
-        final View contextualContainer = findViewById(R.id.app_bar_container);
-        if (contextualContainer != null) {
-            final TextView fallbackText = new TextView(this);
-            fallbackText.setText("Welcome to Settings");
-            fallbackText.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorPrimary));
-            fallbackText.setTextSize(18);
-            fallbackText.setPadding(16, 8, 16, 8);
-            ((ViewGroup) contextualContainer).addView(fallbackText, 0);
-        }
-    }
-    
-    if (textView != null || homepageTitle != null) {
-        if (textView != null) {
-            textView.setVisibility(View.VISIBLE);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                    getResources().getDimensionPixelSize(R.dimen.header_text_size_contextual));
-            // Ensure readable color on all themes
-            textView.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorPrimary));
-        }
-        if (homepageTitle != null) {
-            homepageTitle.setVisibility(View.VISIBLE);
-            // Ensure readable color on all themes
-            homepageTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorSecondary));
-        }
-
-	String[] randomMsgSearch = getResources().getStringArray(R.array.settings_random);
-        String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
-        String[] morningMsgGreet = getResources().getStringArray(R.array.dashboard_morning_greetings);
-        String[] msgNight = getResources().getStringArray(R.array.dashboard_night);
-        String[] msgearlyNight = getResources().getStringArray(R.array.dashboard_early_night);
-        String[] msgNoon = getResources().getStringArray(R.array.dashboard_noon);
-        String[] msgMN = getResources().getStringArray(R.array.dashboard_midnight);
-        String[] msgRandom = getResources().getStringArray(R.array.dashboard_random);
-        String[] msgRandomGreet = getResources().getStringArray(R.array.dashboard_random_greetings);
-
-        String greetingsEN = getString(R.string.dashboard_early_night2);
-        String greetingsN = getString(R.string.dashboard_night4);
-        String greetingsNoon = getString(R.string.dashboard_noon1);
-        String random6 = getResources().getString(R.string.dashboard_random6);
-
-	Random genSearchMsg = new Random();
-	int searchRnd = genSearchMsg.nextInt(randomMsgSearch.length-1);
-    // Keep the search bar hint unchanged; contextual messages are shown above the search bar.
-
-        String headerLine = null;
-        String subLine = null;
         switch (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
             case 5: case 6: case 7: case 8: case 9: case 10:
        	// Generate random welcome massage as title header
+        	String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
         	Random genMorningMsg = new Random();
         	int morning = genMorningMsg.nextInt(morningMsg.length-1);
-        	int morningGreet = genMorningMsg.nextInt(morningMsgGreet.length-1);
-        	textView.setText(morningMsgGreet[morningGreet] + " " + getOwnerName() + ",");
-        	homepageTitle.setText(morningMsg[morning]);
+        	textView.setText(morningMsg[morning]);
                 break;
 
             case 18: case 19: case 20: 
+        	String[] msgearlyNight = getResources().getStringArray(R.array.dashboard_early_night);
         	Random genmsgeNight = new Random();
         	int eNight = genmsgeNight.nextInt(msgearlyNight.length-1);
-        	textView.setText(greetingsEN + " " + getOwnerName() + ",");
-        	homepageTitle.setText(msgearlyNight[eNight]);
+        	textView.setText(msgearlyNight[eNight]);
                 break;
-                
+
             case 21: case 22: case 23: case 0: 
+        	String[] msgNight = getResources().getStringArray(R.array.dashboard_night);
         	Random genmsgNight = new Random();
         	int night = genmsgNight.nextInt(msgNight.length-1);
-        	textView.setText(greetingsN + " " + getOwnerName() + ",");
-        	homepageTitle.setText(msgNight[night]);
+        	textView.setText(msgNight[night]);
                 break;
 
              case 16: case 17:
+        	String[] msgNoon = getResources().getStringArray(R.array.dashboard_noon);
         	Random genmsgNoon = new Random();
         	int noon = genmsgNoon.nextInt(msgNoon.length-1);
-        	textView.setText(greetingsNoon + " " + getOwnerName() + ",");
-        	homepageTitle.setText(msgNoon[noon]);
+        	textView.setText(msgNoon[noon]);
                 break;
 
             case 1: case 2: case 3: case 4:
+        	String[] msgMN = getResources().getStringArray(R.array.dashboard_midnight);
         	Random genmsgMN = new Random();
         	int mn = genmsgMN.nextInt(msgMN.length-1);
-        	int rd = genmsgMN.nextInt(msgRandom.length-1);
-        	textView.setText(msgRandom[rd] + " " + getOwnerName() + ",");
-        	homepageTitle.setText(msgMN[mn]);
+        	textView.setText(msgMN[mn]);
                 break;
-                
+
             case 11: case 12: case 13: case 14: case 15:
+        	String[] msgRD = getResources().getStringArray(R.array.dashboard_random);
         	Random genmsgRD = new Random();
-        	int randomm = genmsgRD.nextInt(msgRandom.length-1);
-        	int randomGreet = genmsgRD.nextInt(msgRandomGreet.length-1);
-        	headerLine = msgRandom[randomm] + " " + getOwnerName() + ",";
-        	subLine = msgRandomGreet[randomGreet];
+        	int randomm = genmsgRD.nextInt(msgRD.length-1);
+        	textView.setText(msgRD[randomm]);
                 break;
 
             default:
                 break;
-        }
-        // Final safety defaults to ensure something is shown
-        if (headerLine == null) headerLine = getString(R.string.settings_label);
-        if (subLine == null) subLine = getString(R.string.settings_random1);
-
-        if (textView != null) {
-            textView.setText(headerLine);
-        }
-        if (homepageTitle != null) {
-            homepageTitle.setText(subLine);
-        }
-    } // End of contextual messages if block
-        setupEdgeToEdge();
-        mActivityEmbeddingController = ActivityEmbeddingController.getInstance(this);
-        mIsTwoPane = mActivityEmbeddingController.isActivityEmbedded(this);
-        
-        updateAppBarMinHeight();
-        initHomepageContainer();
-        updateHomepageAppBar();
-        initSearchBarView();
-        // Only allow features on high ram devices.
-        if (!getSystemService(ActivityManager.class).isLowRamDevice()) {
-            final boolean scrollNeeded = mIsEmbeddingActivityEnabled
-                    && !TextUtils.equals(getString(DEFAULT_HIGHLIGHT_MENU_KEY), highlightMenuKey);
-            showSuggestionFragment(scrollNeeded);
-            if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
-                showFragment(() -> new ContextualCardsFragment(), R.id.contextual_cards_content);
-                ((FrameLayout) findViewById(R.id.main_content))
-                        .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
-          }
-        }
-        getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
-        mCategoryMixin = new CategoryMixin(this);
-        getLifecycle().addObserver(mCategoryMixin);
-
+      }
         mMainFragment = showFragment(() -> {
             final TopLevelSettings fragment = new TopLevelSettings();
             fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
