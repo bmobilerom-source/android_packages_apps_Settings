@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2024 The Android Open Source Project
+     Copyright (C) 2025 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -64,11 +64,43 @@
         app:elevation="0dp"
         android:touchscreenBlocksFocus="false"
         android:keyboardNavigationCluster="false">
+        
+        <!-- Contextual messages header -->
+        <LinearLayout
+            android:id="@+id/contextual_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:background="?android:attr/colorBackground">
+            
+               <TextView
+                   android:id="@+id/user_title"
+                   android:text="@string/settings_label"
+                   android:textSize="0sp"
+                   android:textColor="?android:attr/textColorPrimary"
+                   android:layout_height="wrap_content"
+                   android:layout_width="wrap_content"
+                   android:layout_marginBottom="2dp" />
+
+               <TextView
+                   android:id="@+id/homepage_title"
+                   android:text="@string/settings_label"
+                   android:textSize="40sp"
+                   android:textColor="?android:attr/textColorPrimary"
+                   android:textStyle="bold"
+                   android:layout_height="wrap_content"
+                   android:layout_width="wrap_content" />
+        </LinearLayout>
+        
         <LinearLayout
             android:id="@+id/app_bar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:paddingTop="8dp"
             android:paddingBottom="16dp"
             android:paddingStart="?android:attr/listPreferredItemPaddingStart"

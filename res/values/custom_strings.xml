@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Stubs to satisfy references from top_level_settings_v2.xml -->
-    <string name="about_user_base">Owner</string>
-    <string name="about_user_summary_base">Tap for more info</string>
-
-     <!-- Fallback user display name -->
-    <string name="default_user">Owner</string>
+<!--
+     Copyright (C) 2021-2022 Rising
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
     <string name="dashboard_morning1">Start your day positively!</string>
     <string name="dashboard_morning2">The Sun is up!</string>
     <string name="dashboard_morning3">A nice morning</string>
@@ -47,8 +55,6 @@
     <string name="settings_random4">Finders keepers</string>
     <string name="settings_random5">Search settings</string>
     <string name="settings_random6">Dream big and dare to fail</string>
-    <string name="default_user">User</string>
-    <!-- duplicate removed: default_user defined earlier -->
     <string name="status_bar_title">Status bar</string>
     <string name="volume_panel_haptic_feedback_title">Haptic feedback on volume panel</string>
     <string name="volume_panel_haptic_feedback_summary">Vibrate when adjusting volume</string>
