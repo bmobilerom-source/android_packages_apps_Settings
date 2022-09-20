@@ -245,4 +245,6 @@
     <!-- Connected displays -->
     <color name="display_topology_background_color">@color/settingslib_color_grey100</color>
     <!-- Icon tint color for battery usage system icon -->
+    
+    <!-- Settings Header (moved earlier in file) -->
 </resources>
