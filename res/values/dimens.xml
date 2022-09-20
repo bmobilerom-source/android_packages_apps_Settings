@@ -79,7 +79,7 @@
     <!-- Search bar -->
     <dimen name="search_bar_margin">16dp</dimen>
     <dimen name="search_bar_height">52dp</dimen>
-    <dimen name="search_bar_text_size">20sp</dimen>
+    <dimen name="search_bar_text_size">18sp</dimen>
     <dimen name="search_bar_corner_radius">28dp</dimen>
     <dimen name="search_bar_content_inset">56dp</dimen>
     <dimen name="search_bar_padding_start">4dp</dimen>
@@ -568,4 +568,11 @@
      <dimen name="card_radius">12dp</dimen>
      
 
+    <dimen name="zen_mode_icon_list_item_size">96dp</dimen>
+    <dimen name="zen_mode_icon_list_circle_diameter">56dp</dimen>
+    <dimen name="zen_mode_icon_list_icon_size">32dp</dimen>
+    
+    <!-- Header Messages -->
+    <dimen name="header_text_size_contextual">34sp</dimen>
+    <dimen name="header_text_size_default">40sp</dimen>
 </resources>
