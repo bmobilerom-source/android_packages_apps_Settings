@@ -499,6 +499,8 @@ public class Settings extends SettingsActivity {
      * Activity for MediaControlsSettings
      */
     public static class MediaControlsSettingsActivity extends SettingsActivity {}
+    // EpicROM-AOSP Additions.
+    public static class AnatoliaSettingsActivity extends SettingsActivity {}
 
     /**
      * Activity for AppDashboard.
@@ -522,4 +524,8 @@ public class Settings extends SettingsActivity {
     public static class HearingDevicesActivity extends SettingsActivity { /* empty */ }
     public static class HearingDevicesPairingActivity extends SettingsActivity { /* empty */ }
     public static class ContactsStorageSettingsActivity extends SettingsActivity { /* empty */ }
+    /**
+     * Activity for SkylineUI Workstation
+     */
+    public static class StartLabActivity extends SettingsActivity {}
 }

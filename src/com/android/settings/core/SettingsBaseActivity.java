@@ -148,6 +148,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         final Toolbar toolbar = findViewById(R.id.action_bar);
         if (!isToolbarEnabled() || isAnySetupWizard) {
             toolbar.setVisibility(View.GONE);
+            ((AppBarLayout) findViewById(R.id.baseAppBar)).setExpanded(false);
             return;
         }
         setActionBar(toolbar);

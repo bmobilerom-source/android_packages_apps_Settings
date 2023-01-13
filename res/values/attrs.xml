@@ -203,4 +203,8 @@
     <declare-styleable name="BackgroundPreference">
         <attr name="background" format="reference" />
     </declare-styleable>
+
+    <!-- Custom attributes used by preferences/layouts -->
+    <attr name="units" format="string"/>
+    <attr name="interval" format="integer"/>
 </resources>
