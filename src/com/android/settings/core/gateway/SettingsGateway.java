@@ -22,6 +22,7 @@ import com.android.settings.MainClear;
 import com.android.settings.MainClearConfirm;
 import com.android.settings.ResetNetwork;
 import com.android.settings.Settings;
+import com.skylineui.settings.laboratory.LabSettings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TrustedCredentialsSettings;
 import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
@@ -409,7 +410,10 @@ public class SettingsGateway {
             HearingDevicePairingFragment.class.getName(),
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
-            ContactsStorageSettings.class.getName()
+            ContactsStorageSettings.class.getName(),
+            LabSettings.class.getName(),            
+            // Anatolia Additions
+            Anatolia.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
@@ -456,5 +460,7 @@ public class SettingsGateway {
             UserBackupSettingsActivity.class.getName(),
             Settings.MemtagPageActivity.class.getName(),
             Settings.NavigationModeSettingsActivity.class.getName(),
+            // Anatolia Additions
+            Settings.AnatoliaSettingsActivity.class.getName(),
     };
 }

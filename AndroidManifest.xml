@@ -5486,5 +5486,33 @@
         </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
+
+       <!-- SkylineUI Workstation -->
+       <activity android:name="Settings$StartLabActivity"
+            android:label="@string/skylineui_lab_title"
+            android:exported="true"            
+            android:icon="@drawable/ic_skylineui_lab">
+            <intent-filter>
+                <action android:name="com.android.settings.action.SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />                
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.skylineui.settings.laboratory.LabSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <!-- EpicROM-AOSP -->
+        <activity android:name=".Settings$AnatoliaSettingsActivity"
+                  android:label="@string/anatolia_settings_title"
+                  android:icon="@drawable/ic_homepage_anatolia"
+                  android:exported="true">
+            <intent-filter android:priority="1">
+                  <action android:name="android.intent.action.ANATOLİA_SETTINGS" />
+                  <category android:name="com.android.settings.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                  android:value="com.epic.Anatolia"/>
+        </activity>
     </application>
 </manifest>
