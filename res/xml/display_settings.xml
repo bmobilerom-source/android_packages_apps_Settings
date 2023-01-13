@@ -29,6 +29,11 @@
         android:order="-1001"
         app:lottie_rawRes="@raw/display"/>
 
+        
+	<com.android.settings.widget.HomepagePreference
+        android:fragment="com.epic.Anatolia"
+        android:key="top_level_anatolia"
+        android:title="@string/anatolia_settings_title" />	
 
     <PreferenceCategory
         android:title="@string/category_name_brightness"

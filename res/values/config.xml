@@ -514,7 +514,7 @@
     <bool name="config_show_wifi_mac_address">true</bool>
 
     <!-- Whether to disable "Uninstall Updates" menu item for System apps or not. -->
-    <bool name="config_disable_uninstall_update">false</bool>
+    <bool name="config_disable_uninstall_update">true</bool>
 
     <!-- Slice Uri to query nearby devices. -->
     <string name="config_nearby_devices_slice_uri" translatable="false">content://com.google.android.gms.nearby.fastpair/device_status_list_item</string>

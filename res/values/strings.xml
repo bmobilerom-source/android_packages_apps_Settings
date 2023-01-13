@@ -13944,4 +13944,8 @@
     <string name="userpref_summary">Personal Information about current user</string>
     <string name="user_title">User Info</string>
 
+ 
+    <!-- Display Customizations Fragment 1 to 5 -->
+    <string name="display_customization">custom page</string>
+    
 </resources>
