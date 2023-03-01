@@ -14,9 +14,11 @@
      limitations under the License.
 -->
 
+
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" "
     settings:keywords="@string/keywords_dark_ui_mode">
     
@@ -26,7 +28,14 @@
         android:title="@string/dark_ui_text"
         settings:searchable="false"/>
 
-
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="dark_illustration_desc"
+            android:title="@string/dark_ui_text"/>
+            
+        <com.android.settingslib.widget.IllustrationPreference
+            android:key="dark_illustration"
+            app:lottie_rawRes="@raw/darkmode"/>
+            
     <com.android.settingslib.widget.BannerMessagePreference
         android:key="dark_ui_location_off"
         android:title="@string/twilight_mode_location_off_dialog_message"

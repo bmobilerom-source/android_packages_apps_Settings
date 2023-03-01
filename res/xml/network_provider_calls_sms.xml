@@ -15,11 +15,16 @@
 -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="provider_model_calls_and_sms_screen"
-    android:title="@string/calls_and_sms">
+    android:title=" ">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="call_sms_animation"
+        android:layout="@layout/call_sms_animation" />
+        
     <ListPreference
         android:key="provider_model_calls_preference"
         android:title="@string/calls_preference_title"

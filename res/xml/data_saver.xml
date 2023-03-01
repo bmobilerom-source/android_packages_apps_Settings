@@ -17,8 +17,12 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/data_saver_title">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
 
+   <com.android.settingslib.widget.LayoutPreference
+        android:key="data_saver_animation"
+        android:layout="@layout/data_saver_animation" />
     <Preference
         android:key="unrestricted_access"
         android:title="@string/unrestricted_data_saver"

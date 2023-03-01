@@ -19,8 +19,9 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="gesture_navigation_settings_page"
-    android:title="@string/gesture_settings_activity_title"
+    android:title=" "
     settings:keywords="@string/keywords_gesture_navigation_settings">
 
     <lineageos.preference.LineageSystemSettingSwitchPreference
@@ -28,6 +29,10 @@
         android:title="@string/show_navbar_hint_title"
         android:summary="@string/show_navbar_hint_summary"
         android:defaultValue="true" />
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="gesture_settings" 
+        android:layout="@layout/gesture_settings_animation"/>
 
     <PreferenceCategory
         android:key="assistant_gesture_category"

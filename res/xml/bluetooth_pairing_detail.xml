@@ -17,7 +17,13 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/bluetooth_pairing_pref_title">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+     <com.android.settingslib.widget.LayoutPreference
+        android:key="bluetooth_pair_animation"
+         android:order="-999"       
+        android:layout="@layout/bluetooth_pair_animation" />
 
     <Preference
         android:key="bt_pair_rename_devices"
@@ -29,6 +35,11 @@
         android:key="available_devices"
         android:title="@string/bluetooth_preference_found_media_devices"/>
 
+    <Preference
+        android:key="bt_received_files"
+        android:icon="@drawable/ic_folder_vd_theme_24"
+        android:title="@string/bluetooth_show_files_received_via_bluetooth"/>
+        
     <com.android.settingslib.widget.FooterPreference/>
 
 </PreferenceScreen>

@@ -17,10 +17,15 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="display_settings_screen"
-    android:title="@string/display_settings"
+    android:title=" "
     settings:keywords="@string/keywords_display">
 
+   <com.android.settingslib.widget.LayoutPreference
+        android:key="display_animation"
+        android:layout="@layout/display_animation" />
+        
     <PreferenceCategory
         android:title="@string/category_name_brightness"
         android:order="-200">

@@ -17,7 +17,12 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/connected_device_saved_title">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="previously_connected_animation"
+        android:layout="@layout/previously_connected_animation" />
 
     <PreferenceCategory
         android:key="saved_device_list"

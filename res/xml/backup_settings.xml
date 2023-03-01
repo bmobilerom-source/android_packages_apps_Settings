@@ -15,9 +15,14 @@
   ~ limitations under the License
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/privacy_settings_title">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="backup_settings_animation"
+        android:layout="@layout/backup_settings_animation" />
 
     <!-- Backup settings provided by the backup transport or the default settings -->
     <Preference
