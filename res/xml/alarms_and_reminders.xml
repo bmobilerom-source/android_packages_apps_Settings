@@ -16,15 +16,18 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
                   android:title="@string/alarms_and_reminders_title">
 
+  
+ <com.android.settingslib.widget.FooterPreference
+        android:key="alarms_and_reminders_description"
+        android:order="-988"
+        android:title="@string/alarms_and_reminders_footer_title"
+        android:selectable="false" />
     <com.android.settings.widget.FilterTouchesRestrictedSwitchPreference
         android:key="alarms_and_reminders_switch"
         android:title="@string/alarms_and_reminders_switch_title" />
-
-    <com.android.settingslib.widget.FooterPreference
-        android:key="alarms_and_reminders_description"
-        android:title="@string/alarms_and_reminders_footer_title"
-        android:selectable="false" />
+ 
 
 </PreferenceScreen>

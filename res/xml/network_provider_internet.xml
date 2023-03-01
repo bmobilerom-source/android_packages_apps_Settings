@@ -17,9 +17,19 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="network_provider_and_internet_screen"
-    android:title="@string/network_dashboard_title">
+    android:title=" ">
+    
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="net_illustration"
+        settings:lottie_rawRes="@raw/net_illustration"
+        android:order="-1001" />
 
+  
+
+
+        
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.network.NetworkProviderSettings"
         android:key="internet_settings"

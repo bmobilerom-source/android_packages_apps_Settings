@@ -181,6 +181,8 @@
     <string name="bluetooth_media_title">Media and system sounds</string>
     <!-- Bluetooth audio output settings. Title of the option managing notification audio path. [CHAR LIMIT=60] -->
     <string name="bluetooth_notification_title">Notifications</string>
+    <!-- Bluetooth pairing detail settings. Title for showing files received via Bluetooth. [CHAR LIMIT=30] -->
+    <string name="bluetooth_show_files_received_via_bluetooth">Show files received via Bluetooth</string>
     <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_audio_routing_footer_summary">By default, audio output is determined by individual apps</string>
 
@@ -594,6 +596,15 @@
     <string name="airplane_mode">Airplane mode</string>
     <!-- Wireless Settings screen title for things like Wi-Fi, bluetooth, airplane mode. -->
     <string name="wireless_networks_settings_title">Wireless &amp; networks</string>
+
+    <!-- Network traffic settings. Title for network traffic state toggle. [CHAR LIMIT=30] -->
+    <string name="network_traffic_state_title">Network traffic</string>
+    <!-- Network traffic settings. Title for network options category. [CHAR LIMIT=30] -->
+    <string name="network_options_title">Options</string>
+    <!-- Network traffic settings. Title for autohide threshold toggle. [CHAR LIMIT=30] -->
+    <string name="network_traffic_autohide_title">Auto-hide when idle</string>
+    <!-- Network traffic settings. Summary for autohide threshold toggle. [CHAR LIMIT=60] -->
+    <string name="network_traffic_autohide_summary">Hide network traffic when there is no activity</string>
 
     <!-- mobile network settings screen, setting check box title -->
     <string name="roaming">Roaming</string>
@@ -9473,6 +9484,8 @@
 
     <!-- [CHAR LIMIT=120] Zen mode settings: Title for conversations settings page -->
     <string name="zen_mode_conversations_title">Conversations</string>
+    <!-- [CHAR LIMIT=30] Zen mode settings: Title for conversations section -->
+    <string name="zen_mode_conversations_section_title">Conversations</string>
     <string name="zen_mode_from_all_conversations">All conversations</string>
     <!-- [CHAR LIMIT=40] Version of zen_mode_from_all_conversations when it is a non-first member of a list -->
     <string name="zen_mode_from_all_conversations_second">all conversations</string>
@@ -11162,8 +11175,6 @@
     <!-- [CHAR_LIMIT_NONE] Footer description. Explains to the user what will happen when work apps are turned off. -->
     <string name="managed_profile_settings_footer">When work apps are off, they’re paused and can’t be accessed or send you notifications</string>
 
-    <!-- Used as title on the automatic storage manager settings. [CHAR LIMIT=60] -->
-    <string name="automatic_storage_manager_settings">Manage storage</string>
 
     <!-- Used as wall of text to describe the feature. [CHAR LIMIT=NONE] -->
     <string name="automatic_storage_manager_text">To help free up storage space, storage manager removes backed up photos and videos from your device.</string>
@@ -11173,6 +11184,10 @@
 
     <!-- Preference title for the automatic storage manager toggle. [CHAR LIMIT=60]-->
     <string name="automatic_storage_manager_preference_title">Storage manager</string>
+
+    <!-- Title for automatic storage manager settings screen [CHAR LIMIT=60] -->
+    <string name="automatic_storage_manager_settings">Storage manager</string>
+
 
     <!-- Used in the storage manager settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="automatic_storage_manager_primary_switch_title">Use Storage manager</string>

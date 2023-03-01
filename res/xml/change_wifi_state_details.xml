@@ -16,6 +16,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="change_wifi_state"
+    android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/change_wifi_state_title">
 
   <com.android.settings.widget.FilterTouchesSwitchPreference

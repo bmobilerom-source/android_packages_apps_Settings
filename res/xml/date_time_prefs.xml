@@ -17,7 +17,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/date_and_time"
+    android:title=" "
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     settings:keywords="@string/keywords_date_and_time">
 
     <com.android.settingslib.RestrictedSwitchPreference

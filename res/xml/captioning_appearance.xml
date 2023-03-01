@@ -18,16 +18,30 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/captioning_appearance_title">
+    android:title=" ">
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="captioning_preview"
         android:title="@string/summary_placeholder"
         android:layout="@layout/captioning_preview"
+        android:selectable="false"        
+        android:order="-997"
+        settings:searchable="false"/>
+
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Captioning"
+        android:order="-996"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="captioning_appearance_footer"
+        android:title="@string/accessibility_captioning_preference_summary"
         android:selectable="false"
         settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.CaptioningPreviewPreferenceController"/>
-
+        android:order="-900"
+        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
     <ListPreference
         android:entries="@array/captioning_font_size_selector_titles"
         android:entryValues="@array/captioning_font_size_selector_values"
@@ -99,10 +113,4 @@
             settings:controller="com.android.settings.accessibility.CaptioningWindowOpacityController"/>
     </PreferenceCategory>
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="captioning_appearance_footer"
-        android:title="@string/accessibility_captioning_preference_summary"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
 </PreferenceScreen>

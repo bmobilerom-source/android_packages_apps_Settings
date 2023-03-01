@@ -19,18 +19,17 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="storage_dashboard_fragment"
     android:title="@string/storage_settings"
-    settings:keywords="@string/keywords_storage">
-    <com.android.settingslib.widget.SettingsSpinnerPreference
-        android:key="storage_spinner"
-        android:order="1"
-        settings:searchable="false"
-        settings:controller="com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController"/>
-    <com.android.settingslib.widget.UsageProgressBarPreference
-        android:key="storage_summary"
-        android:order="2"
+    settings:keywords=" ">
+    
+   
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="device_name"
+        android:order="-500"
+        android:layout="@layout/device_info_header"
         android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"/>
+        settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
+        settings:isPreferenceVisible="true"/>
+    
     <com.android.settingslib.PrimarySwitchPreference
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
         android:key="toggle_asm"
@@ -38,7 +37,7 @@
         android:icon="@drawable/ic_storage"
         android:order="3"
         settings:controller="com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController"/>
-    <com.android.settings.widget.CardPreference
+    <com.android.settingslib.widget.CardPreference
         android:key="free_up_space"
         android:order="4"
         android:title="@string/storage_free_up_space_title"

@@ -19,15 +19,31 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="gesture_navigation_settings_page"
-    android:title="@string/gesture_settings_activity_title"
+    android:title=" "
     settings:keywords="@string/keywords_gesture_navigation_settings">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="gesture_settings" 
+        android:order="-999"
+        android:layout="@layout/gesture_settings_animation"/>
     <lineageos.preference.LineageSystemSettingSwitchPreference
         android:key="navigation_bar_hint"
         android:title="@string/show_navbar_hint_title"
+        android:order="-990"
         android:summary="@string/show_navbar_hint_summary"
         android:defaultValue="true" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="gesture_navigation_settings_footer"
+        android:order="-980"
+        android:title="@string/back_sensitivity_dialog_message"
+        android:selectable="false"
+        settings:searchable="false"/>
+
+
+    
 
     <PreferenceCategory
         android:key="assistant_gesture_category"
@@ -63,10 +79,5 @@
             settings:textEnd="@string/high_label"/>
     </PreferenceCategory>
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="gesture_navigation_settings_footer"
-        android:title="@string/back_sensitivity_dialog_message"
-        android:selectable="false"
-        settings:searchable="false"/>
 </PreferenceScreen>
 

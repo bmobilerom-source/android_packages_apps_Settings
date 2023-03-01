@@ -421,11 +421,33 @@
         <item name="android:textSize">16dp</item>
     </style>
 
+    <!-- Custom style for PreferenceScreen titles with system accent color -->
+    <style name="PreferenceScreenTitle.Accent" parent="@style/TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">@android:color/system_accent1_600</item>
+    </style>
+
     <style name="device_info_dialog_label">
         <item name="android:textAlignment">viewStart</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <!-- Toolbar/ActionBar title accent overlay -->
+    <style name="Settings.ActionBar.Accent" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
+        <item name="android:textColorPrimary">@android:color/system_accent1_600</item>
+        <item name="android:titleTextStyle">@style/Settings.ActionBar.TitleText</item>
+    </style>
+
+    <!-- Explicit title text style to force ActionBar title color -->
+    <style name="Settings.ActionBar.TitleText" parent="@*android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/system_accent1_600</item>
+    </style>
+
+    <!-- Toolbar style for AppCompat/Material toolbars -->
+    <style name="Settings.Toolbar.Accent" parent="@style/Widget.Material3.Toolbar">
+        <item name="titleTextColor">@android:color/system_accent1_600</item>
+        <item name="subtitleTextColor">@android:color/system_accent1_600</item>
     </style>
 
     <style name="device_info_dialog_value">

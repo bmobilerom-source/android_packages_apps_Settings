@@ -16,6 +16,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+         android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/bluetooth_pairing_pref_title">
 
     <com.android.settings.bluetooth.BluetoothProgressCategory

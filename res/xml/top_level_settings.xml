@@ -19,6 +19,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
+   <com.android.settings.widget.HomepagePreference
+        android:icon="@drawable/ic_phone_info"
+        android:key="top_level_about_device"
+        android:order="-170"
+        android:title="@string/about_settings"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.epic.fragments.StatusBarSettings"/>
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.network.NetworkDashboardFragment"

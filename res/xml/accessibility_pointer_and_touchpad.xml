@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_pointer_and_touchpad"
     android:persistent="false"
-    android:title="@string/accessibility_pointer_and_touchpad_title">
+    android:title=" ">
 
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="pointer_scale_preference"

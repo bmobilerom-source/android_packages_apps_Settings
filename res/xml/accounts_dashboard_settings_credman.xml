@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="user_and_account_settings_screen"
     android:title="@string/account_dashboard_title_with_passkeys"
-    settings:keywords="@string/keywords_accounts">
+    settings:keywords=" ">
 
     <com.android.settingslib.widget.TopIntroPreference
       android:title="@string/credman_main_settings_intro_text" />

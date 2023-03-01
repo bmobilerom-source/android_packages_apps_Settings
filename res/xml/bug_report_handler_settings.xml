@@ -19,5 +19,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/bug_report_handler_title"
+    android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     settings:staticPreferenceLocation="append" >
 </PreferenceScreen>

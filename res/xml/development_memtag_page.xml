@@ -17,12 +17,18 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+        android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/development_memtag_page_title">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/development_memtag_intro"
         settings:searchable="false"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/development_memtag_footer"
+        android:key="memtag_footer"
+        settings:searchable="false"
+        settings:controller="com.android.settings.development.DevelopmentMemtagFooterPreferenceController" />
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="development_memtag"
         android:title="@string/development_memtag_toggle"
@@ -33,9 +39,4 @@
         android:title="@string/reboot_with_mte_title"
         settings:controller="com.android.settings.development.RebootWithMtePreferenceController" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:title="@string/development_memtag_footer"
-        android:key="memtag_footer"
-        settings:searchable="false"
-        settings:controller="com.android.settings.development.DevelopmentMemtagFooterPreferenceController" />
 </PreferenceScreen>

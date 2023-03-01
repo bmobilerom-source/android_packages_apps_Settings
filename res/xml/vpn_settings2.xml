@@ -14,11 +14,25 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/vpn_title">
+<PreferenceScreen     
+xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:title=" ">
     <PreferenceCategory
         android:key="advanced_vpn_group"/>
 
     <PreferenceCategory
         android:key="vpn_group"/>
+
+     <com.android.settingslib.widget.LayoutPreference
+        android:key="vpn_settings_animation"
+        android:layout="@layout/vpn_settings_animation" />
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Vpn"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+
+
 </PreferenceScreen>

@@ -19,9 +19,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="user_and_account_settings_screen"
-    android:title="@string/account_dashboard_title"
+    android:title=" "
     settings:keywords="@string/keywords_accounts">
-
+    <!-- Header -->
+  <PreferenceCategory
+        android:title="My Accounts"
+         android:order="-998"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory> 
     <PreferenceCategory
         android:key="passwords_category"
         android:order="10"

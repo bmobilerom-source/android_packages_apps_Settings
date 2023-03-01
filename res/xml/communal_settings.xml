@@ -17,4 +17,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="communal_preference_screen"
+     xmlns:settings="http://schemas.android.com/apk/res-auto"
+     android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/communal_settings_title" />

@@ -15,10 +15,19 @@
   ~ limitations under the License
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/privacy_settings_title">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" ">    
+    
+    
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="backup_animation"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/backup_settings"/>
 
+       
     <!-- Backup settings provided by the backup transport or the default settings -->
     <Preference
         android:key="backup_settings" />
