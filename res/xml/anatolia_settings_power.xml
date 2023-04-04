@@ -17,12 +17,33 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-	android:title=" ">
-        <com.android.settingslib.widget.LayoutPreference
-                android:key="device_name"
-                android:order="-1"
-                android:selectable="false"
-                android:layout="@layout/atomichub"
-                settings:isPreferenceVisible="true" />
+     android:title=" ">
+    
+    
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="onthegomode_anim"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/onthegomode"/>
+
+  
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="On the Go mode"
+        android:order="-998"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+      
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="onthegomode_bubbles_desc"
+            android:order="-997"
+            android:title="@string/onthegomode_bubble_setting_description"/>
+
+  <SwitchPreferenceCompat
+    android:key="global_actions_onthego"
+    android:title="@string/onthegomode_title"
+    android:summary="@string/onthegomode_summary"
+    android:defaultValue="false"
+    settings:controller="com.android.settings.power.OnTheGoPreferenceController" />
 
 </PreferenceScreen>
