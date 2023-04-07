@@ -44,14 +44,14 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemSettingsOnthego extends SettingsPreferenceFragment implements
+public class SystemSettingsAboutus extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        addPreferencesFromResource(R.xml.system_settings_onthego);
+        addPreferencesFromResource(R.xml.system_settings_aboutus);
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
     }
