@@ -554,7 +554,7 @@
     <dimen name="op_control_margin_list_bottom4">21.0dip</dimen>
     <dimen name="op_control_margin_list_top4">21.0dip</dimen>
     <dimen name="op_control_avatar_size3">33.0dip</dimen>
-    <dimen name="op_control_icon_size_indicator">16.0dip</dimen>
+       <dimen name="op_control_icon_size_indicator">16.0dip</dimen>
     
     <!-- Card Layout -->
      <dimen name="card_margin_start">16.0dp</dimen>

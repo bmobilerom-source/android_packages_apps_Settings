@@ -220,6 +220,7 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
             getSettingsLifecycle().addObserver(controller);
         }
     }
+  
 
     // === Volumes ===
 

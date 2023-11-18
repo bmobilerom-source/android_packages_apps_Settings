@@ -16,6 +16,30 @@
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-	android:title="@string/lockscreen_title">
+	android:title=" ">
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="battery_stats_view"
+            android:title="@string/qs_brightness_slider_haptic_title"
+        android:selectable="false"
+        android:enabled="false"
+        android:shouldDisableView="false"
+        android:layout="@layout/dot_battery_stats_pref" />
+    <com.android.settingslib.widget.LayoutPreference
+            android:title="@string/qs_brightness_slider_haptic_title"
+        android:selectable="false"
+        android:enabled="false"
+        android:shouldDisableView="false"
+        android:layout="@layout/dot_battery_opt" />
+    <com.android.settings.widget.CardPreference
+        android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
+        android:key="battery_saver_summary"
+            android:title="@string/qs_brightness_slider_haptic_title"
+        android:layout="@layout/card_preference_layout_bm"/>
+
+        <com.android.settings.custom.preference.SystemSettingSwitchPreference
+            android:key="qs_brightness_slider_haptic"
+            android:title="@string/qs_brightness_slider_haptic_title"
+            android:summary="@string/qs_brightness_slider_haptic_summary"
+            android:defaultValue="false" />
 
 </PreferenceScreen>
