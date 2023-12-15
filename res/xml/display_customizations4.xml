@@ -18,5 +18,9 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="display_customizations4"
     android:title=" ">
-
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/homepage_widgets"
+        android:key="top_level_homepage_widgets"
+        android:selectable="false"
+        android:order="-180" />
 </PreferenceScreen>

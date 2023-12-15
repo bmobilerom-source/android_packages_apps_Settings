@@ -19,4 +19,10 @@
     android:key="display_customizations2"
     android:title=" ">
 
+        
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/top_level_preference_banner_view"
+        android:key="top_level_homepage_banner_view"
+        android:order="-190"/>
+
 </PreferenceScreen>

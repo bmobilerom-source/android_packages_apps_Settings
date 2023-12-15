@@ -30,4 +30,11 @@
             android:persistent="false"
             android:fragment="com.palladium.atomichub.Atomichub" />
    
+
+        
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/about_device_info"
+        android:key="about_device_info"
+        android:selectable="false"
+        android:order="-10" />
 </PreferenceScreen>
