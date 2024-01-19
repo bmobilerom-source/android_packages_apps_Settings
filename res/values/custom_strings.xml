@@ -141,6 +141,14 @@
     <string name="adaptive_playback_title">Adaptive playback</string>
     <string name="adaptive_playback_summary">Pause media when volume is muted and resume it by increasing volume within the timeout</string>
     <string name="adaptive_playback_intro_text">Automatically pauses media when the volume is muted and will resume automatically when volume is restored within the set time</string>
+    
+    <!-- Volume Steps -->
+    <string name="volume_steps_title">Volume Steps</string>
+    <string name="volume_steps_summary">Control the granularity of each stream</string>
+    <string name="max_music_volume_title">Media</string>
+    <string name="max_call_volume_title">Calls</string>
+    <string name="max_alarm_volume_title">Alarms</string>
+    <string name="steps_unit">steps</string>
 
 </resources>
 

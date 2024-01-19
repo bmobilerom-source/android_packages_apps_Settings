@@ -45,10 +45,6 @@
         android:title="@string/media_controls_bubbles_description2" />
 
 
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="media_controls_bubbles_desc3"
-        android:order="-994"
-        android:title="@string/media_controls_bubbles_description3" />
 
     <!-- ambient music -->  
     <Preference

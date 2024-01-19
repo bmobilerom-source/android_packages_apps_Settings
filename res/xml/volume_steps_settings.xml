@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024 Yet Another AOSP Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+ xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/volume_steps_title">
+
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="sounds"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/mediaplayer"/>
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="media_controls_bubbles_desc"
+        android:order="-996"
+        android:title="@string/media_controls_bubbles_description" />    
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="media_controls_bubbles_desc2"
+        android:order="-995"
+        android:title="@string/media_controls_bubbles_description2" />
+
+    <ListPreference
+        android:key="max_music_volume"
+        android:title="@string/max_music_volume_title"
+        android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
+        android:entries="@array/volume_steps_music_entries"
+        android:entryValues="@array/volume_steps_music_values"
+        android:defaultValue="15"
+        android:order="0" />
+
+    <ListPreference
+        android:key="max_call_volume"
+        android:title="@string/max_call_volume_title"
+        android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
+        android:entries="@array/volume_steps_call_entries"
+        android:entryValues="@array/volume_steps_call_values"
+        android:defaultValue="7"
+        android:order="1" />
+
+    <ListPreference
+        android:key="max_alarm_volume"
+        android:title="@string/max_alarm_volume_title"
+        android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
+        android:entries="@array/volume_steps_alarm_entries"
+        android:entryValues="@array/volume_steps_alarm_values"
+        android:defaultValue="7"
+        android:order="2" />
+
+</PreferenceScreen>
