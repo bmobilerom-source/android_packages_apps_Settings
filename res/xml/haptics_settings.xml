@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Haptics Settings -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/haptics_settings_title">
+
+    <PreferenceCategory
+        android:title="@string/haptics_info_title"
+        android:summary="@string/haptics_info_summary">
+
+        <!-- Back Gesture Haptic Intensity -->
+        <SeekBarPreference
+            android:key="back_gesture_haptic_intensity"
+            android:title="@string/back_gesture_haptic_intensity_title"
+            android:summary="@string/back_gesture_haptic_intensity_summary"
+            android:defaultValue="1"
+            android:max="5"
+            android:min="0" />
+
+        <!-- Brightness Slider Haptics -->
+        <SeekBarPreference
+            android:key="qs_brightness_slider_haptic"
+            android:title="@string/qs_brightness_slider_haptic_title"
+            android:summary="@string/qs_brightness_slider_haptic_summary"
+            android:defaultValue="0"
+            android:max="5"
+            android:min="0" />
+
+        <!-- Edge Scrolling Haptics -->
+        <SeekBarPreference
+            android:key="edge_scrolling_haptics_intensity"
+            android:title="@string/edge_scrolling_haptics_intensity_title"
+            android:summary="@string/edge_scrolling_haptics_intensity_summary"
+            android:defaultValue="1"
+            android:max="5"
+            android:min="0" />
+
+        <!-- Quick Settings Haptics -->
+        <SeekBarPreference
+            android:key="qs_haptics_intensity"
+            android:title="@string/qs_haptics_intensity_title"
+            android:summary="@string/qs_haptics_intensity_summary"
+            android:defaultValue="1"
+            android:max="5"
+            android:min="0" />
+
+        <!-- QS Tile Haptics -->
+        <SeekBarPreference
+            android:key="qs_panel_tile_haptic"
+            android:title="@string/qs_panel_tile_haptic_title"
+            android:summary="@string/qs_panel_tile_haptic_summary"
+            android:defaultValue="0"
+            android:max="5"
+            android:min="0" />
+
+        <!-- Volume Slider Haptics -->
+        <SeekBarPreference
+            android:key="volume_slider_haptics_intensity"
+            android:title="@string/volume_slider_haptics_intensity_title"
+            android:summary="@string/volume_slider_haptics_intensity_summary"
+            android:defaultValue="1"
+            android:max="5"
+            android:min="0" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/haptics_tips_title">
+
+        <Preference
+            android:key="haptics_tips"
+            android:title="@string/haptics_tips_title"
+            android:summary="@string/haptics_tips_summary"
+            android:selectable="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

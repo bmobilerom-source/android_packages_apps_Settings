@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Haptics Settings Strings -->
+<resources>
+    <!-- Haptics Settings Page -->
+    <string name="haptics_settings_title">Haptics</string>
+    <string name="haptics_settings_summary">Customize vibration feedback intensities</string>
+
+    <!-- Back Gesture Haptic Intensity -->
+    <string name="back_gesture_haptic_intensity_title">Back gesture vibration</string>
+    <string name="back_gesture_haptic_intensity_summary">Adjust vibration intensity for back gestures</string>
+
+    <!-- Brightness Slider Haptics -->
+    <string name="qs_brightness_slider_haptic_title">Brightness slider vibration</string>
+    <string name="qs_brightness_slider_haptic_summary">Vibrate when adjusting brightness slider</string>
+
+    <!-- Edge Scrolling Haptics -->
+    <string name="edge_scrolling_haptics_intensity_title">Edge scrolling vibration</string>
+    <string name="edge_scrolling_haptics_intensity_summary">Adjust vibration intensity for edge scrolling</string>
+
+    <!-- Quick Settings Haptics -->
+    <string name="qs_haptics_intensity_title">Quick settings vibration</string>
+    <string name="qs_haptics_intensity_summary">Adjust vibration intensity for quick settings panel</string>
+
+    <!-- QS Tile Haptics -->
+    <string name="qs_panel_tile_haptic_title">Quick settings tile vibration</string>
+    <string name="qs_panel_tile_haptic_summary">Vibrate when tapping quick settings tiles</string>
+
+    <!-- Volume Slider Haptics -->
+    <string name="volume_slider_haptics_intensity_title">Volume slider vibration</string>
+    <string name="volume_slider_haptics_intensity_summary">Adjust vibration intensity for volume slider</string>
+
+    <!-- Haptics Information -->
+    <string name="haptics_info_title">Vibration Settings</string>
+    <string name="haptics_info_summary">Customize haptic feedback intensity for different system interactions. Higher values provide stronger vibration feedback.</string>
+
+    <!-- Haptics Tips -->
+    <string name="haptics_tips_title">Tips</string>
+    <string name="haptics_tips_summary">• Adjust intensities based on your preference\n• Lower values save battery but provide less feedback\n• Test different settings to find what works best for you</string>
+</resources>

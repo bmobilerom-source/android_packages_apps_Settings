@@ -35,4 +35,12 @@
 
     </PreferenceCategory>
 
+    <!-- System Haptics intensities preference -->
+    <Preference
+        android:key="haptics_settings"
+        android:title="@string/haptics_settings_title"
+        android:summary="@string/haptics_settings_summary"
+        android:order="-91"
+        android:fragment="com.android.settings.sound.HapticsPreferenceFragment"/>
+
 </PreferenceScreen>

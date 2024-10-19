@@ -13921,4 +13921,17 @@
 
     <!-- Device Name Dialog -->
     <string name="about_device_nearby">Nearby devices</string>
+
+    <!-- WiFi timeout strings -->
+    <string name="wifi_timeout">Wi-Fi timeout</string>
+    <string name="wifi_timeout_summary">Turn off Wi-Fi automatically when not in use</string>
+    <string name="wifi_timeout_summary_auto">Wi-Fi will turn off after %s of inactivity</string>
+    <string name="wifi_timeout_disabled">Never</string>
+    <string name="wifi_timeout_5_min">5 minutes</string>
+    <string name="wifi_timeout_10_min">10 minutes</string>
+    <string name="wifi_timeout_15_min">15 minutes</string>
+    <string name="wifi_timeout_30_min">30 minutes</string>
+    <string name="wifi_timeout_1_hour">1 hour</string>
+    <string name="wifi_timeout_4_hours">4 hours</string>
+    <string name="wifi_timeout_8_hours">8 hours</string>
 </resources>
