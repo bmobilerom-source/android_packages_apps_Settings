@@ -33,11 +33,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.ApplicationInfoFlags;
 import android.content.pm.UserInfo;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
@@ -73,7 +76,7 @@ import androidx.window.embedding.SplitRule;
 import androidx.window.java.embedding.SplitControllerCallbackAdapter;
 
 import com.android.settings.R;
-import com.android.settings.Settings;
+//import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsApplication;
 import com.android.settings.accounts.AvatarViewMixin;
@@ -88,10 +91,13 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
+import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.net.URISyntaxException;
+import java.util.Calendar;
+import java.util.Random;
 import java.util.List;
 import java.util.Set;
 import java.util.*;
@@ -219,9 +225,117 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
-        // Settings homepage should be the task root, otherwise there will be UI issues.
-        boolean isTaskRoot = isTaskRoot();
+        int dashboardStyle = Settings.System.getInt(getContentResolver(), "afl_dashboard_style", 0);
+        if (dashboardStyle == 1) {
+        mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
+        if (mIsEmbeddingActivityEnabled) {
+            final UserManager um = getSystemService(UserManager.class);
+            final UserInfo userInfo = um.getUserInfo(getUserId());
+            if (userInfo.isManagedProfile()) {
+                final Intent intent = new Intent(getIntent())
+                        .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                        .putExtra(EXTRA_USER_HANDLE, getUser())
+                        .putExtra(EXTRA_INITIAL_REFERRER, getCurrentReferrer());
+                if (TextUtils.equals(intent.getAction(), ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
+                        && this instanceof DeepLinkHomepageActivity) {
+                    intent.setClass(this, DeepLinkHomepageActivityInternal.class);
+                }
+                intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivityAsUser(intent, um.getProfileParent(userInfo.id).getUserHandle());
+                finish();
+                return;
+            }
+        }
 
+        setupEdgeToEdge();
+        setContentView(R.layout.settings_homepage_container_second);
+
+        mIsTwoPane = ActivityEmbeddingUtils.isAlreadyEmbedded(this);
+
+        updateAppBarMinHeight();
+        initHomepageContainer();
+        updateHomepageAppBar();
+        updateHomepageBackground();
+        mLoadedListeners = new ArraySet<>();
+
+            TextView homepageTitleView = findViewById(R.id.homepage_title);
+            TextView homepageGreetingsView = findViewById(R.id.homepage_greetings);
+            homepageTitleView.setText(getGreetings(true));
+            homepageGreetingsView.setText(getGreetings(false));
+            
+            View afterLabCard = findViewById(R.id.hori_afterlab);
+            View gameSpaceCard = findViewById(R.id.hori_game_space);
+            View darkModeCard = findViewById(R.id.hori_darkmode);
+            
+            afterLabCard.setOnClickListener(new View.OnClickListener() {
+            	@Override
+                public void onClick(View v) {
+                	Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$GesturesSettingsActivity"));
+                    startActivity(intent);
+                }
+            });
+            gameSpaceCard.setOnClickListener(new View.OnClickListener() {
+            	@Override
+                public void onClick(View v) {
+                	Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$SecurityDashboardActivity"));
+                    startActivity(intent);
+                }
+            });
+            darkModeCard.setOnClickListener(new View.OnClickListener() {
+            	@Override
+                public void onClick(View v) {
+                	Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$SoundDashboardActivity"));
+                    startActivity(intent);
+                }
+            });
+
+        initSearchBarView();
+
+        getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
+        mCategoryMixin = new CategoryMixin(this);
+        getLifecycle().addObserver(mCategoryMixin);
+
+        final String highlightMenuKey = getHighlightMenuKey();
+        // Only allow features on high ram devices.
+        if (!getSystemService(ActivityManager.class).isLowRamDevice()) {
+            initAvatarView();
+            final boolean scrollNeeded = mIsEmbeddingActivityEnabled
+                    && !TextUtils.equals(getString(DEFAULT_HIGHLIGHT_MENU_KEY), highlightMenuKey);
+            showSuggestionFragment(scrollNeeded);
+            if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
+                showFragment(() -> new ContextualCardsFragment(), R.id.contextual_cards_content);
+                ((FrameLayout) findViewById(R.id.main_content))
+                        .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+            }
+        }
+        mMainFragment = showFragment(() -> {
+            final TopLevelSettings fragment = new TopLevelSettings();
+            fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                    highlightMenuKey);
+            return fragment;
+        }, R.id.main_content);
+
+        // Launch the intent from deep link for large screen devices.
+        if (shouldLaunchDeepLinkIntentToRight()) {
+            launchDeepLinkIntentToRight();
+        }
+
+        // Settings app may be launched on an existing task. Reset SplitPairRule of SubSettings here
+        // to prevent SplitPairRule of an existing task applied on a new started Settings app.
+        if (mIsEmbeddingActivityEnabled
+                && (getIntent().getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TOP) != 0) {
+            initSplitPairRules();
+        }
+
+        updateHomepagePaddings();
+        updateSplitLayout();
+
+        enableTaskLocaleOverride();
+        
+        } else {
         mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
         if (mIsEmbeddingActivityEnabled) {
             final UserManager um = getSystemService(UserManager.class);
@@ -330,6 +444,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         enableTaskLocaleOverride();
     }
+}
 
     private void setContextualMessages() {
         // Use post() to ensure layout is fully inflated
@@ -444,6 +559,71 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
     }
 
+    public String getGreetings(boolean isTitle) {
+        String[] randomMsgSearch = getResources().getStringArray(R.array.settings_random);
+        String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
+        String[] morningMsgGreet = getResources().getStringArray(R.array.dashboard_morning_greetings);
+        String[] msgNight = getResources().getStringArray(R.array.dashboard_night);
+        String[] msgearlyNight = getResources().getStringArray(R.array.dashboard_early_night);
+        String[] msgNoon = getResources().getStringArray(R.array.dashboard_noon);
+        String[] msgMN = getResources().getStringArray(R.array.dashboard_midnight);
+        String[] msgRandom = getResources().getStringArray(R.array.dashboard_random);
+        String[] msgRandomGreet = getResources().getStringArray(R.array.dashboard_random_greetings);
+        String greetingsEN = getResources().getString(R.string.dashboard_early_night_greeting1);
+        String greetingsN = getResources().getString(R.string.dashboard_night_greetings1);
+        String greetingsNoon = getResources().getString(R.string.dashboard_noon_greeting1);
+        String random6 = getResources().getString(R.string.dashboard_random6);
+        Random genSearchMsg = new Random();
+        int searchRnd = genSearchMsg.nextInt(randomMsgSearch.length-1);
+        String greetings;
+        switch (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
+            case 5: case 6: case 7: case 8: case 9: case 10:
+                Random genMorningMsg = new Random();
+                int morning = genMorningMsg.nextInt(morningMsg.length-1);
+                int morningGreet = genMorningMsg.nextInt(morningMsgGreet.length-1);
+                greetings = isTitle ? morningMsgGreet[morningGreet] : morningMsg[morning];
+                break;
+            case 18: case 19: case 20:
+                Random genmsgeNight = new Random();
+                int eNight = genmsgeNight.nextInt(msgearlyNight.length-1);
+                greetings = isTitle ? greetingsEN : msgearlyNight[eNight];
+                break;
+            case 21: case 22: case 23: case 0:
+                Random genmsgNight = new Random();
+                int night = genmsgNight.nextInt(msgNight.length-1);
+                greetings = isTitle ? greetingsN : msgNight[night];
+                break;
+            case 16: case 17:
+                Random genmsgNoon = new Random();
+                int noon = genmsgNoon.nextInt(msgNoon.length-1);
+                greetings = isTitle ? greetingsNoon : msgNoon[noon];
+                break;
+            case 1: case 2: case 3: case 4:
+                Random genmsgMN = new Random();
+                int mn = genmsgMN.nextInt(msgMN.length-1);
+                int rd = genmsgMN.nextInt(msgRandom.length-1);
+                greetings = isTitle ? msgRandom[rd] : msgMN[mn];
+                break;
+            case 11: case 12: case 13: case 14: case 15:
+                Random genmsgRD = new Random();
+                int randomm = genmsgRD.nextInt(msgRandom.length-1);
+                int randomGreet = genmsgRD.nextInt(msgRandomGreet.length-1);
+                greetings = isTitle ? msgRandom[randomm] : msgRandomGreet[randomGreet];
+                break;
+            default:
+                greetings = "";
+                break;
+            }
+            return greetings + (isTitle ? " " + getOwnerName() + "." : "");
+    }
+    
+    private String getOwnerName(){
+        final UserManager mUserManager = getSystemService(UserManager.class);
+        final UserInfo userInfo = com.android.settings.Utils.getExistingUser(mUserManager,
+                    UserHandle.of(UserHandle.myUserId()));
+        return userInfo.name != null ? userInfo.name : getString(R.string.default_user);
+    }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -544,7 +724,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (AvatarViewMixin.isAvatarSupported(this)) {
             avatarView.setVisibility(View.VISIBLE);
             getLifecycle().addObserver(new AvatarViewMixin(this, avatarView));
-
             if (mIsEmbeddingActivityEnabled) {
                 avatarTwoPaneView.setVisibility(View.VISIBLE);
                 getLifecycle().addObserver(new AvatarViewMixin(this, avatarTwoPaneView));

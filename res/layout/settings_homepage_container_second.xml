@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2023 AfterLife Project
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settings_homepage_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/main_content_scrollable_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.android.settings.widget.HomepageAppBarScrollingViewBehavior">
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/homepage_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include
+                android:id="@+id/suggestion_container_two_pane"
+                android:visibility="gone"
+                layout="@layout/suggestion_container_two_pane" />
+            <FrameLayout
+                android:id="@+id/contextual_cards_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/contextual_card_side_margin"
+                android:layout_marginEnd="@dimen/contextual_card_side_margin" />
+            <com.google.android.material.card.MaterialCardView
+                android:padding="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="20dp"
+                app:cardBackgroundColor="@android:color/system_neutral1_50"
+                app:cardCornerRadius="26dp"
+                app:cardElevation="0dp">
+                <com.google.android.material.card.MaterialCardView
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
+                    android:clipToOutline="true"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp">
+                    <com.afterlife.preferences.WallpaperBlurView
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:elevation="0dp" />
+                    <FrameLayout
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="25sp"
+                            android:textColor="@android:color/white"
+                            android:ellipsize="marquee"
+                            android:gravity="center_horizontal"
+                            android:id="@+id/title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AfterLifeOS"
+                            android:singleLine="true"
+                            android:fontFamily="@font/BebasKai" />
+                        <TextView
+                            android:textSize="25sp"
+                            android:textColor="@android:color/system_accent1_100"
+                            android:ellipsize="marquee"
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AfterLifeOS"
+                            android:singleLine="true"
+                            android:maxLength="9"
+                            android:fontFamily="@font/BebasKai" />
+                    </FrameLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
+            <include layout="@layout/horizontal_scrollview_content" />
+            <FrameLayout
+                android:id="@+id/main_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:touchscreenBlocksFocus="false"
+        android:keyboardNavigationCluster="false">
+        <LinearLayout
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:id="@+id/app_bar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
+            <include
+                android:id="@+id/homepage_app_bar_regular_phone_view"
+                layout="@layout/settings_homepage_app_bar_regular_phone_layout_second" />
+            <include
+                android:id="@+id/homepage_app_bar_two_pane_view"
+                android:visibility="gone"
+                layout="@layout/settings_homepage_app_bar_two_pane_layout" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

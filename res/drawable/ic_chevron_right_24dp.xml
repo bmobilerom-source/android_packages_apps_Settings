@@ -14,14 +14,25 @@
   limitations under the License.
   -->
 
-<vector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:autoMirrored="true"
-    android:height="24dp"
-    android:width="24dp"
-    android:viewportHeight="24.0"
-    android:viewportWidth="24.0"
-    android:tint="?android:attr/colorControlNormal">
-    <path android:fillColor="#FF000000"
-          android:pathData="M9.71,18.71l-1.42,-1.42l5.3,-5.29l-5.3,-5.29l1.42,-1.42l6.7,6.71z"/>
+<vector android:tint="?android:colorControlNormal" xmlns:android="http://schemas.android.com/apk/res/android"
+				android:width="24.0dp"
+		android:height="24.0dp"
+		android:viewportWidth="24.0"
+		android:viewportHeight="24.0">
+	<path
+		android:fillColor="#00000000"
+		android:strokeColor="#000000"
+		android:strokeWidth="2.4182906"
+		android:strokeLineJoin="miter"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M12.05,14.91L15.02,12.01L7.84,4.69"/>
+	<path
+		android:fillColor="#00FFFFFF"
+		android:strokeColor="#50000000"
+		android:strokeWidth="2.4182906"
+		android:strokeLineJoin="miter"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M9.75,17.31L7.65,19.24"/>
 </vector>

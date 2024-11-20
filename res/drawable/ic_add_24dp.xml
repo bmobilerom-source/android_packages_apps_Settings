@@ -13,14 +13,57 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:width="24dp"
-        android:height="24dp"
-        android:viewportWidth="24"
-        android:viewportHeight="24"
-        android:tint="?android:attr/colorControlNormal">
-    <path
-        android:fillColor="@android:color/white"
-        android:pathData="M20,13h-7v7h-2v-7H4v-2h7V4h2v7h7V13z"/>
+<vector android:tint="?android:colorControlNormal" xmlns:android="http://schemas.android.com/apk/res/android"
+		android:width="24.0dp"
+		android:height="24.0dp"
+		android:viewportWidth="24.0"
+		android:viewportHeight="24.0">
+	<path
+		android:fillColor="#00000000"
+		android:strokeColor="#50000000"
+		android:strokeWidth="2.5096579"
+		android:strokeLineJoin="miter"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M11.77,20.91A8.87 8.80 -0.00 1 1 20.95,12.22"/>
+	<path
+		android:fillColor="#FF000000"
+		android:strokeColor="#FD000000"
+		android:strokeWidth="1.752"
+		android:strokeLineJoin="miter"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M20.17,15.92C20.43,15.92,20.65,16.13,20.65,16.39C20.65,16.64,20.43,16.85,20.17,16.85C19.91,16.85,19.70,16.64,19.70,16.39C19.70,16.13,19.91,15.92,20.17,15.92z"/>
+	<path
+		android:fillColor="#FF000000"
+		android:strokeColor="#FF000000"
+		android:strokeWidth="1.7643671"
+		android:strokeLineJoin="miter"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M16.71,19.50C16.97,19.50,17.18,19.71,17.18,19.96C17.18,20.22,16.97,20.43,16.71,20.43C16.45,20.43,16.24,20.22,16.24,19.96C16.24,19.71,16.45,19.50,16.71,19.50z"/>
+	<path
+		android:fillColor="#FF000000"
+		android:strokeColor="#FF000000"
+		android:strokeWidth="1.7643671"
+		android:strokeLineJoin="miter"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M8.16,11.87L16.01,11.87L16.01,12.37L8.16,12.37z"/>
+	<path
+		android:fillColor="#FF000000"
+		android:strokeColor="#FF000000"
+		android:strokeWidth="1.7643671"
+		android:strokeLineJoin="miter"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M12.27,15.96L11.81,15.95L11.90,8.28L12.36,8.28z"/>
+	<path
+		android:fillColor="#00000000"
+		android:strokeColor="#FF000000"
+		android:strokeWidth="2.6399999"
+		android:strokeLineJoin="miter"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M3.30,13.19A8.87 8.68 -0.00 1 1 20.95,12.37"/>
 </vector>
-

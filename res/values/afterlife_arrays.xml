@@ -374,6 +374,13 @@
     </string-array>
 
     <string-array name="qs_ui_values" translatable="false">
+
+    <!-- Values for Settings dashboard Style -->
+    <string-array name="afl_homepage_style_entries">
+        <item>Default</item>
+        <item>Second Style</item>
+    </string-array>
+    <string-array name="afl_homepage_style_values">
         <item>0</item>
         <item>1</item>
     </string-array>

@@ -14,12 +14,32 @@
     limitations under the License.
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:width="24dp"
-        android:height="24dp"
-        android:viewportWidth="24"
-        android:viewportHeight="24"
-        android:tint="@color/battery_usage_system_icon_color">
-    <path
-        android:fillColor="@android:color/white"
-        android:pathData="M17.71,7.71L12,2h-1v7.59L6.41,5 5,6.41 10.59,12 5,17.59 6.41,19 11,14.41L11,22h1l5.71,-5.71 -4.3,-4.29 4.3,-4.29zM13,5.83l1.88,1.88L13,9.59L13,5.83zM14.88,16.29L13,18.17v-3.76l1.88,1.88z"/>
+				android:width="24.0dp"
+		android:height="24.0dp"
+		android:viewportWidth="24.0"
+		android:viewportHeight="24.0">
+	<path
+		android:fillColor="#00000000"
+		android:strokeColor="#50000000"
+		android:strokeWidth="2.8173857"
+		android:strokeLineJoin="round"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M17.27,16.67L11.92,12.25L17.21,7.58L11.92,2.91L11.79,21.34L17.27,16.67z"/>
+	<path
+		android:fillColor="#00000000"
+		android:strokeColor="#50000000"
+		android:strokeWidth="2.8173857"
+		android:strokeLineJoin="round"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M6.24,16.64L11.43,12.25L6.32,7.80"/>
+	<path
+		android:fillColor="#00000000"
+		android:strokeColor="#000000"
+		android:strokeWidth="2.8173857"
+		android:strokeLineJoin="round"
+		android:fillType="nonZero"
+		android:strokeLineCap="round"
+		android:pathData="M17.21,7.58L11.62,2.91L11.79,21.34L17.27,16.67L12.27,12.54"/>
 </vector>

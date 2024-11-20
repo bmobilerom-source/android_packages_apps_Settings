@@ -68,6 +68,9 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @SearchIndexable(forTarget = MOBILE)
 public class TopLevelSettings extends DashboardFragment implements SplitLayoutListener,
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
@@ -100,7 +103,22 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     @Override
     protected int getPreferenceScreenResId() {
-        return Flags.homepageRevamp() ? R.xml.top_level_settings_v2 : R.xml.top_level_settings;
+        if (declanXafterlifeStyle() == 1) {
+			return R.xml.top_level_settings_second;/*  */
+		} else {
+			return R.xml.top_level_settings_v2;
+		}
+    }
+    
+    private int declanXafterlifeStyle() {
+		return Settings.System.getInt(getContentResolver(), "afl_dashboard_style", 0);
+	}
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
+        recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
     }
 
     @Override
@@ -242,71 +260,86 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     }
 
     private void onSetPrefCard() {
-	final PreferenceScreen screen = getPreferenceScreen();
-        final int count = screen.getPreferenceCount();
-        for (int i = 0; i < count; i++) {
-            final Preference preference = screen.getPreference(i);
+    final PreferenceScreen screen = getPreferenceScreen();
+    final int count = screen.getPreferenceCount();
+    
+    // Mapping key to layouts
+    Map<String, Integer> layoutMapStyle0 = new HashMap<>();
+    layoutMapStyle0.put("top_level_usercard", R.layout.preference_usercard);
+    layoutMapStyle0.put("top_level_about_device", R.layout.afterlife_cardview_single_left);
+    layoutMapStyle0.put("top_level_afterlab", R.layout.afterlife_cardview_single_right);
+    layoutMapStyle0.put("airplane_mode", R.layout.afterlife_cardview_top_switch);
+    layoutMapStyle0.put("internet_settings", R.layout.afterlife_cardview_middle);
+    layoutMapStyle0.put("tether_settings", R.layout.afterlife_cardview_middle);
+    layoutMapStyle0.put("top_level_connected_devices", R.layout.afterlife_cardview_bottom);
+    layoutMapStyle0.put("top_level_apps", R.layout.afterlife_cardview_top);
+	layoutMapStyle0.put("top_level_notifications", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("top_level_sound", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("top_level_display", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("top_level_wallpaper", R.layout.afterlife_cardview_bottom);
+	layoutMapStyle0.put("top_level_battery", R.layout.afterlife_cardview_top);
+	layoutMapStyle0.put("top_level_storage", R.layout.afterlife_cardview_bottom);
+	layoutMapStyle0.put("top_level_accessibility", R.layout.afterlife_cardview_top);
+	layoutMapStyle0.put("top_level_security", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("top_level_privacy", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("top_level_location", R.layout.afterlife_cardview_bottom);
+	layoutMapStyle0.put("top_level_emergency", R.layout.afterlife_cardview_top);
+	layoutMapStyle0.put("top_level_accounts", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("top_level_system", R.layout.afterlife_cardview_bottom);
+	layoutMapStyle0.put("dashboard_tile_pref_com.google.android.apps.wellbeing.settings.TopLevelSettingsActivity", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("dashboard_tile_pref_com.google.android.gms.app.settings.GoogleSettingsIALink", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("top_level_google", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("dashboard_tile_pref_com.google.android.apps.wellbeing.home.TopLevelSettingsActivity", R.layout.afterlife_cardview_middle);
+	layoutMapStyle0.put("top_level_wellbeing", R.layout.afterlife_cardview_middle);
 
-            String key = preference.getKey();
-            preference.setLayoutResource(R.layout.top_level_preference_solo_card);
-	    if (key.equals("top_level_about_device")) {
-                preference.setLayoutResource(R.layout.top_level_about);
-            }
-	}
+    Map<String, Integer> layoutMapStyle1 = new HashMap<>();
+    layoutMapStyle1.put("airplane_mode", R.layout.afterlife_card_homepage_top_switch);
+    layoutMapStyle1.put("internet_settings", R.layout.afterlife_card_homepage_middle);
+    layoutMapStyle1.put("tether_settings", R.layout.afterlife_card_homepage_middle);
+    layoutMapStyle1.put("top_level_connected_devices", R.layout.afterlife_card_homepage_bottom);
+	layoutMapStyle1.put("top_level_apps", R.layout.afterlife_card_homepage_top);
+	layoutMapStyle1.put("top_level_notifications", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("top_level_sound", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("top_level_display", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("top_level_wallpaper", R.layout.afterlife_card_homepage_bottom);
+	layoutMapStyle1.put("top_level_battery", R.layout.afterlife_card_homepage_top);
+	layoutMapStyle1.put("top_level_storage", R.layout.afterlife_card_homepage_bottom);
+	layoutMapStyle1.put("top_level_accessibility", R.layout.afterlife_card_homepage_top);
+	layoutMapStyle1.put("top_level_security", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("top_level_privacy", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("top_level_location", R.layout.afterlife_card_homepage_bottom);
+	layoutMapStyle1.put("top_level_emergency", R.layout.afterlife_card_homepage_top);
+	layoutMapStyle1.put("top_level_accounts", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("top_level_system", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("top_level_about_settings", R.layout.afterlife_card_homepage_bottom);
+	layoutMapStyle1.put("dashboard_tile_pref_com.google.android.apps.wellbeing.settings.TopLevelSettingsActivity", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("dashboard_tile_pref_com.google.android.gms.app.settings.GoogleSettingsIALink", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("top_level_google", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("dashboard_tile_pref_com.google.android.apps.wellbeing.home.TopLevelSettingsActivity", R.layout.afterlife_card_homepage_middle);
+	layoutMapStyle1.put("top_level_wellbeing", R.layout.afterlife_card_homepage_middle);
+	
+
+    int defaultLayoutStyle0 = R.layout.afterlife_cardview_middle;
+    int defaultLayoutStyle1 = R.layout.afterlife_card_homepage_middle;
+
+    for (int i = 0; i < count; i++) {
+        final Preference preference = screen.getPreference(i);
+        String key = preference.getKey();
+
+        if (declanXafterlifeStyle() == 0) {
+            // Get layout for style 0 or fallback to default
+            int layout = layoutMapStyle0.getOrDefault(key, defaultLayoutStyle0);
+            preference.setLayoutResource(layout);
+        } else if (declanXafterlifeStyle() == 1) {
+            // Get layout for style 1 or fallback to default
+            int layout = layoutMapStyle1.getOrDefault(key, defaultLayoutStyle1);
+            preference.setLayoutResource(layout);
+        } else {
+            // Fallback for unknown styles
+            preference.setLayoutResource(defaultLayoutStyle0);
+        }
     }
-
-    private void onUserCard() {
-        final Preference pref = getPreferenceScreen() != null
-                ? getPreferenceScreen().findPreference(KEY_USER_CARD)
-                : null;
-        if (!(pref instanceof LayoutPreference)) {
-            return;
-        }
-
-        final LayoutPreference headerPreference = (LayoutPreference) pref;
-        final View userCard = headerPreference.findViewById(R.id.entity_header);
-        if (userCard == null) {
-            return;
-        }
-
-        final Activity context = getActivity();
-        if (context == null) {
-            return;
-        }
-
-        final TextView textview = headerPreference.findViewById(R.id.summary);
-        final Bundle bundle = getArguments();
-
-        final EntityHeaderController controller = EntityHeaderController
-                .newInstance(context, this, userCard)
-                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
-                        EntityHeaderController.ActionType.ACTION_NONE);
-
-        userCard.setOnClickListener(v -> {
-            final Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setComponent(new ComponentName(
-                    "com.android.settings",
-                    "com.android.settings.Settings$UserSettingsActivity"));
-            startActivity(intent);
-        });
-
-        final int iconId = bundle != null ? bundle.getInt("icon_id", 0) : 0;
-        if (iconId == 0) {
-            final UserManager userManager = (UserManager) context.getSystemService(
-                    Context.USER_SERVICE);
-            if (userManager != null) {
-                final UserInfo info = Utils.getExistingUser(userManager,
-                        android.os.Process.myUserHandle());
-                if (info != null) {
-                    controller.setLabel(info.name);
-                    controller.setIcon(
-                            com.android.settingslib.Utils.getUserIcon(context, userManager, info));
-                }
-            }
-        }
-
-        controller.done(context);
-    }
+}
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -335,9 +368,11 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             Bundle savedInstanceState) {
         RecyclerView recyclerView = super.onCreateRecyclerView(inflater, parent,
                 savedInstanceState);
-        recyclerView.setVerticalScrollBarEnabled(false);
-        recyclerView.setHorizontalScrollBarEnabled(false);
-        recyclerView.setPadding(mPaddingHorizontal, 0, mPaddingHorizontal, 0);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+		layoutManager.setSpanSizeLookup(new DeclanSpanSizeOP());
+		if (declanXafterlifeStyle() == 0) {
+			recyclerView.setLayoutManager(layoutManager);
+		}
         return recyclerView;
     }
 
@@ -415,6 +450,44 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             mHighlightMixin.setHighlightMenuKey(menuKey, scrollNeeded);
         }
     }
+
+    private void onUserCard() {
+        if (declanXafterlifeStyle() == 0) {
+            final LayoutPreference headerPreference =
+                    (LayoutPreference) getPreferenceScreen().findPreference(KEY_USER_CARD);
+            final View userCard = headerPreference.findViewById(R.id.entity_header);
+            final TextView textview = headerPreference.findViewById(R.id.summary);
+            final Activity context = getActivity(); final Bundle bundle = getArguments();
+            final EntityHeaderController controller = EntityHeaderController
+                    .newInstance(context, this, userCard)
+                    .setRecyclerView(getListView(), getSettingsLifecycle())
+                    .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
+                            EntityHeaderController.ActionType.ACTION_NONE);
+
+            userCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$UserSettingsActivity"));
+                    startActivity(intent);
+
+                }
+            });
+
+            final int iconId = bundle.getInt("icon_id", 0);
+            if (iconId == 0) {
+                final UserManager userManager = (UserManager) getActivity().getSystemService(
+                    Context.USER_SERVICE);
+                final UserInfo info = Utils.getExistingUser(userManager,
+                    android.os.Process.myUserHandle());
+                controller.setLabel(info.name);
+                controller.setIcon(
+                    com.android.settingslib.Utils.getUserIcon(getActivity(), userManager, info));
+            }
+
+            controller.done(true /* rebindActions */);
+        }    
+   }
 
     @Override
     protected boolean shouldForceRoundedIcon() {

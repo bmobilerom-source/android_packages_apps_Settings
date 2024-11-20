@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="top_level_settings">
+
+    <SwitchPreferenceCompat
+        android:icon="@drawable/ic_airplanemode_active"
+        android:title="Airplane mode"
+        android:key="airplane_mode"
+        android:order="-180"
+        app:controller="com.android.settings.network.AirplaneModePreferenceController" />
+
+<com.android.settingslib.widget.LayoutPreference
+    android:layout="@layout/mainuser_profile_card"
+    android:key="about_device_info"
+    android:selectable="true"
+    android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+    android:order="-2000"/>
+
+
+    <Preference
+        android:icon="@drawable/ic_network_cell"
+        android:title="Connectivity"
+        android:key="internet_settings"
+        android:summary="@string/summary_placeholder"
+        android:order="-180"
+        android:fragment="com.android.settings.network.NetworkDashboardFragment" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_wireless"
+        android:title="Portable hotspot"
+        android:key="tether_settings"
+        android:summary="@string/summary_placeholder"
+        android:order="-160"
+        android:fragment="com.android.settings.network.tether.TetherSettings"
+        app:controller="com.android.settings.network.TetherPreferenceController" />
+
+    <Preference
+        android:icon="@drawable/ic_devices_other"
+        android:title="@string/connected_devices_dashboard_title"
+        android:key="top_level_connected_devices"
+        android:order="-140"
+        android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
+        app:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_connected_devices" />
+
+    <Preference
+        android:icon="@drawable/ic_apps"
+        android:title="@string/apps_dashboard_title"
+        android:key="top_level_apps"
+        android:order="-130"
+        android:fragment="com.android.settings.applications.AppDashboardFragment"
+        app:highlightableMenuKey="@string/menu_key_apps" />
+
+    <Preference
+        android:icon="@drawable/ic_notifications"
+        android:title="@string/configure_notification_settings"
+        android:key="top_level_notifications"
+        android:order="-120"
+        android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
+        app:highlightableMenuKey="@string/menu_key_notifications" />
+
+    <Preference
+        android:icon="@drawable/ic_volume_up_24dp"
+        android:title="@string/sound_settings"
+        android:key="top_level_sound"
+        android:order="-110"
+        android:fragment="com.android.settings.notification.SoundSettings"
+        app:highlightableMenuKey="@string/menu_key_sound" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_display_white"
+        android:title="@string/display_settings"
+        android:key="top_level_display"
+        android:order="-100"
+        android:fragment="com.android.settings.DisplaySettings"
+        app:controller="com.android.settings.display.TopLevelDisplayPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_display" />
+
+    <com.android.settings.widget.RestrictedHomepagePreference
+        android:icon="@drawable/ic_settings_wallpaper_white"
+        android:title="@string/wallpaper_settings_title"
+        android:key="top_level_wallpaper"
+        android:summary="@string/wallpaper_dashboard_summary"
+        android:order="-90"
+        app:controller="com.android.settings.display.TopLevelWallpaperPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_wallpaper" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_battery_white"
+        android:title="@string/power_usage_summary_title"
+        android:key="top_level_battery"
+        android:summary="@string/summary_placeholder"
+        android:order="-80"
+        android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"
+        app:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_battery" />
+
+    <Preference
+        android:icon="@drawable/ic_storage_white"
+        android:title="@string/storage_settings"
+        android:key="top_level_storage"
+        android:summary="@string/summary_placeholder"
+        android:order="-70"
+        android:fragment="com.android.settings.deviceinfo.StorageDashboardFragment"
+        app:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"
+        app:highlightableMenuKey="@string/menu_key_storage" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_accessibility"
+        android:title="@string/accessibility_settings"
+        android:key="top_level_accessibility"
+        android:order="-60"
+        android:fragment="com.android.settings.accessibility.AccessibilitySettings"
+        app:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_accessibility" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_safety_center"
+        android:title="@string/safety_center_title"
+        android:key="top_level_safety_center"
+        android:order="-55"
+        app:controller="com.android.settings.safetycenter.TopLevelSafetyCenterEntryPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_safety_center" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_security_white"
+        android:title="@string/security_settings_title"
+        android:key="top_level_security"
+        android:order="-50"
+        android:fragment="com.android.settings.security.SecuritySettings"
+        app:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_security" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_privacy"
+        android:title="@string/privacy_dashboard_title"
+        android:key="top_level_privacy"
+        android:order="-40"
+        android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
+        app:controller="com.android.settings.privacy.TopLevelPrivacyEntryPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_privacy" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_location"
+        android:title="@string/location_settings_title"
+        android:key="top_level_location"
+        android:summary="@string/location_settings_loading_app_permission_stats"
+        android:order="-30"
+        android:fragment="com.android.settings.location.LocationSettings"
+        app:controller="com.android.settings.location.TopLevelLocationPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_location" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_emergency"
+        android:title="@string/emergency_settings_preference_title"
+        android:key="top_level_emergency"
+        android:order="-20"
+        android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"
+        app:highlightableMenuKey="@string/menu_key_emergency"
+        app:isPreferenceVisible="@bool/config_show_emergency_settings" />
+
+    <Preference
+        android:icon="@drawable/ic_settings_accounts"
+        android:title="@string/account_dashboard_title"
+        android:key="top_level_accounts"
+        android:order="-10"
+        android:fragment="com.android.settings.accounts.AccountDashboardFragment" />
+    <Preference
+        android:icon="@drawable/ic_settings_system_dashboard_white"
+        android:title="@string/header_category_system"
+        android:key="top_level_system"
+        android:order="10"
+        android:fragment="com.android.settings.system.SystemDashboardFragment"
+        app:highlightableMenuKey="@string/menu_key_system" />
+    <Preference
+        android:icon="@drawable/ic_phone_info"
+        android:title="@string/about_settings"
+        android:key="about_settings"
+        android:summary="@string/summary_placeholder"
+        android:order="20"
+        android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
+        app:controller="com.android.settings.deviceinfo.aboutphone.TopLevelAboutDevicePreferenceController"
+        app:highlightableMenuKey="@string/menu_key_about_device" />
+    <Preference
+        android:icon="@drawable/ic_help"
+        android:title="@string/page_tab_title_support"
+        android:key="top_level_support"
+        android:summary="@string/support_summary"
+        android:order="100"
+        app:controller="com.android.settings.support.SupportPreferenceController"
+        app:highlightableMenuKey="@string/menu_key_support" />
+</PreferenceScreen>
