@@ -17,13 +17,9 @@
 <PreferenceScreen    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-                  android:title=" ">
+        android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
+     android:title="@string/user_choose_copy_apps_to_another_user">
 
 		
-		
-   <com.android.settingslib.widget.LayoutPreference
-        android:key="notification_animation"
-        android:layout="@layout/notification_animation"
-        android:order="-999"/>
 
 </PreferenceScreen>

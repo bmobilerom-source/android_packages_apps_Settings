@@ -18,9 +18,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/model_info"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" "
     settings:keywords="@string/keywords_model_and_hardware">
-
+   <com.android.settingslib.widget.LayoutPreference
+        android:key="my_device_info_header"
+        android:order="-500"
+        android:layout="@layout/device_info"
+        android:selectable="false"
+        settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
+        settings:isPreferenceVisible="true"/>
     <!-- Model -->
     <Preference
         android:key="hardware_info_device_model"

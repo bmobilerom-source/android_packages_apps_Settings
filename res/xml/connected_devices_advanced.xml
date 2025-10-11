@@ -15,14 +15,9 @@
 -->
 
 <PreferenceScreen
-     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto >
- 
- <com.android.settingslib.widget.LayoutPreference
-        android:key="connected_pref_animation"
-        android:layout="@layout/connected_pref_animation"
-        android:order="-11"/>
+    android:title=" ">
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"

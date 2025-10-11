@@ -25,6 +25,7 @@
         android:layout="@layout/settings_entity_header"
         android:selectable="false" />
 
+
     <!-- Buttons -->
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="buttons"

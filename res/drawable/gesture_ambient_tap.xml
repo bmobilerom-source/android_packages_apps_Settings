@@ -19,7 +19,7 @@
     android:height="200dp"
     android:viewportWidth="200"
     android:viewportHeight="200"
-    android:tint="?android:attr/colorOnSurface">
+    android:tint="?android:attr/textColorPrimary">
     
     <!-- Phone outline -->
     <path
@@ -34,19 +34,15 @@
         android:pathData="M30,30 L170,30 L170,170 L30,170 Z" />
     
     <!-- Tap indicator -->
-    <circle
+    <path
         android:fillColor="@android:color/white"
-        android:cx="100"
-        android:cy="100"
-        android:r="8" />
+        android:pathData="M100,92 A8,8 0 1,1 100,108 A8,8 0 1,1 100,92 Z" />
     
     <!-- Tap ripple -->
-    <circle
+    <path
         android:fillColor="@android:color/transparent"
         android:strokeColor="@android:color/white"
         android:strokeWidth="2"
-        android:cx="100"
-        android:cy="100"
-        android:r="20" />
+        android:pathData="M100,80 A20,20 0 1,1 100,120 A20,20 0 1,1 100,80 Z" />
     
 </vector>

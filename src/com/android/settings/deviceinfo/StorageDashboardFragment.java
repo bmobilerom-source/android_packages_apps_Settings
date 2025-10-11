@@ -55,6 +55,7 @@ import com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreference
 import com.android.settings.deviceinfo.storage.StorageUtils;
 import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
+import com.android.settings.deviceinfo.VolumeOptionMenuController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;

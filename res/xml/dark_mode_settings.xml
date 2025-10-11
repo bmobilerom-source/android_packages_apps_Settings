@@ -22,20 +22,6 @@
     android:title=" "
     settings:keywords="@string/keywords_dark_ui_mode">
     
-      
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="dark_ui_top_intro"
-        android:title="@string/dark_ui_text"
-        settings:searchable="false"/>
-
-        <com.android.settingslib.widget.TopIntroPreference
-            android:key="dark_illustration_desc"
-            android:title="@string/dark_ui_text"/>
-            
-        <com.android.settingslib.widget.IllustrationPreference
-            android:key="dark_illustration"
-            app:lottie_rawRes="@raw/darkmode"/>
-            
     <com.android.settingslib.widget.BannerMessagePreference
         android:key="dark_ui_location_off"
         android:title="@string/twilight_mode_location_off_dialog_message"
@@ -58,6 +44,14 @@
         android:layout="@layout/dark_ui_activation_button"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="dark_ui_top_intro"
+        android:title="@string/dark_ui_text"
+        settings:searchable="false"/>
+          <com.android.settingslib.widget.TopIntroPreference
+            android:key="dark_illustration_desc"
+            android:title="@string/dark_ui_text"/>
 
     <lineageos.preference.LineageSecureSettingSwitchPreference
         android:key="berry_black_theme"
@@ -91,29 +85,24 @@
         android:key="dark_ui_location_off"
         android:selectable="false"
         android:layout="@layout/twilight_mode_location_off"
-        settings:allowDividerBelow="true"
+        settings:allowDividerBelow="false"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
-
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="dark_ui_activated"
-        android:title="@string/dark_ui_title"
-        android:selectable="false"
-        android:layout="@layout/dark_ui_activation_button"
-        settings:allowDividerBelow="true"
-        settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
-
-    <com.android.settingslib.widget.FooterPreference
-        android:key="dark_ui_footer"
-        android:title="@string/dark_ui_text"
-        android:layout="@layout/dot_preference_footer"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:allowDividerAbove="true"/>
-    <com.android.settingslib.widget.FooterPreference
-        android:key="dark_theme_custom_bedtime_footer"
-        android:title="@string/dark_ui_bedtime_footer_summary"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.display.darkmode.DarkModeCustomBedtimePreferenceController" />
+        <!--
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="dark_ui_activated"
+            android:title="@string/dark_ui_title"
+            android:selectable="false"
+            android:layout="@layout/dark_ui_activation_button"
+            settings:allowDividerBelow="false"
+            settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
+        -->
+        <!--
+        <com.android.settingslib.widget.FooterPreference
+            android:key="dark_theme_custom_bedtime_footer"
+            android:title="@string/dark_ui_bedtime_footer_summary"
+            android:selectable="false"
+            settings:searchable="false"
+            settings:controller="com.android.settings.display.darkmode.DarkModeCustomBedtimePreferenceController" />
+        -->
 
 </PreferenceScreen>

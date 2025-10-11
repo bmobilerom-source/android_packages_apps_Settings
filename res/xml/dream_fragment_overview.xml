@@ -18,7 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="screensaver_settings_screen"
-    android:title="@string/screensaver_settings_title"
+    android:title=" "
     settings:keywords="@string/keywords_screensaver">
 
     <com.android.settingslib.widget.MainSwitchPreference

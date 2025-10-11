@@ -22,11 +22,14 @@
     android:title=" "
     settings:keywords="@string/keywords_accounts">
 
-    <com.android.settingslib.widget.LayoutPreference
+
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="account_animation"
-        android:layout="@layout/account_animation"
-        android:order="-999"/>
-        
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/account"/>
+
+
     <PreferenceCategory
         android:key="passwords_category"
         android:order="10"

@@ -22,6 +22,7 @@
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="previously_connected_animation"
+        android:order="-997"
         android:layout="@layout/previously_connected_animation" />
 
     <PreferenceCategory

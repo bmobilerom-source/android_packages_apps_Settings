@@ -21,10 +21,14 @@
     android:key="conversation_list"
     android:title=" ">
 
- <com.android.settingslib.widget.LayoutPreference
-        android:key="convo_animation"
-        android:layout="@layout/convo_animation" />
+ 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="convo_list"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/convo"/>
 
+  
     <com.android.settingslib.widget.LayoutPreference
         android:key="no_conversations"
         android:layout="@layout/conversation_onboarding"

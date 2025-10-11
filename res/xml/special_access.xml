@@ -15,7 +15,7 @@
 -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" ">
@@ -26,6 +26,13 @@
         android:order="-999"/>
 
 
+           <!-- Header -->
+  <PreferenceCategory
+        android:title="Special Access"
+        android:order="-996"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+        
     <Preference
         android:key="manage_external_storage"
         android:title="@string/manage_external_storage_title"

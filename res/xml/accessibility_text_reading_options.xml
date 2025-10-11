@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
-    android:title="@string/accessibility_text_reading_options_title">
+    android:title=" ">
 
     <com.android.settings.accessibility.TextReadingPreviewPreference
         android:key="preview"

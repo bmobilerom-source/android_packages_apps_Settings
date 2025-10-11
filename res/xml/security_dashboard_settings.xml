@@ -22,10 +22,17 @@
     android:key="security_dashboard_page"
     android:title=" ">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="security_animation"
-        android:layout="@layout/security_animation"
-        android:order="-20"/>
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="security"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/security"/> 
+           <!-- Header -->
+  <PreferenceCategory
+        android:title="Security hub"
+        android:order="-996"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
         
     <!-- security_settings_status.xml -->
     <PreferenceCategory

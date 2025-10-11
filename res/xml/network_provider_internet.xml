@@ -21,10 +21,15 @@
     android:key="network_provider_and_internet_screen"
     android:title=" ">
 
-  <com.android.settingslib.widget.LayoutPreference
-        android:key="wifi_anim" 
-        android:layout="@layout/wifi_animation"
-        android:order="-999"/>
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="wifi_animation"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/wifi"/>
+
+  
+
 
         
     <com.android.settingslib.RestrictedPreference

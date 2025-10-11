@@ -25,6 +25,7 @@
         android:key="dnd_animation"
         android:layout="@layout/dnd_animation" />
         
+
     <!-- Turn on DND button -->
     <com.android.settingslib.widget.LayoutPreference
         android:key="zen_mode_toggle"

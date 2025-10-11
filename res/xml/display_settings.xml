@@ -22,10 +22,14 @@
     android:title=" "
     settings:keywords="@string/keywords_display">
 
-   <com.android.settingslib.widget.LayoutPreference
+ 
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="display_animation"
-        android:layout="@layout/display_animation" />
-        
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/display"/>
+
+
     <PreferenceCategory
         android:title="@string/category_name_brightness"
         android:order="-200">
@@ -46,23 +50,26 @@
             settings:userRestriction="no_config_brightness"
             settings:controller="com.android.settings.display.AutoBrightnessPreferenceController" />
 
+
         <SwitchPreferenceCompat
             android:key="even_dimmer_activated"
             android:title="@string/even_dimmer_display_title"
             android:summary="@string/even_dimmer_display_summary"
+            android:icon="@drawable/ic_reduce_bright_colors"
             settings:controller="com.android.settings.display.EvenDimmerPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/category_name_lock_display"
         android:order="-190">
-
+        <!--
         <Preference
             android:key="lockscreen_from_display_settings"
             android:title="@string/lockscreen_settings_title"
             android:fragment="com.android.settings.security.LockscreenDashboardFragment"
             settings:keywords="@string/keywords_ambient_display_screen"
             settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController"/>
+        -->
 
         <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.display.FoldLockBehaviorSettings"
