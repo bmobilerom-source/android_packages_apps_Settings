@@ -53,12 +53,11 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
         mPowerManager = context.getSystemService(PowerManager.class);
         mUiModeManager = context.getSystemService(UiModeManager.class);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+        mFormat = new TimeFormatter(context);
     }
 
     @Override
     public final void updateState(Preference preference) {
-
-
         final boolean batterySaver = mPowerManager.isPowerSaveMode();
         if (batterySaver) {
             mTurnOnButton.setVisibility(View.GONE);
@@ -69,39 +68,39 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
         final boolean active = (mContext.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_YES) != 0;
 
-                updateNightMode(active);
-            }
+        updateNightMode(active);
+    }
         
-            private void updateNightMode(boolean active) {
-                final int mode = mUiModeManager.getNightMode();
-                String buttonText;
-        
-                if (mode == UiModeManager.MODE_NIGHT_AUTO) {
-                    buttonText = mContext.getString(active
-                            ? R.string.dark_ui_activation_off_auto
-                            : R.string.dark_ui_activation_on_auto);
-                } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
-                    final LocalTime time = active
-                            ? mUiModeManager.getCustomNightModeStart()
-                            : mUiModeManager.getCustomNightModeEnd();
-                    final String timeStr = mFormat.of(time);
-                    buttonText = mContext.getString(active
-                            ? R.string.dark_ui_activation_off_custom
-                            : R.string.dark_ui_activation_on_custom, timeStr);
-                } else {
-                    buttonText = mContext.getString(active
-                            ? R.string.dark_ui_activation_off_manual
-                            : R.string.dark_ui_activation_on_manual);
-                }
-                if (active) {
-                    mTurnOnButton.setVisibility(View.GONE);
-                    mTurnOffButton.setVisibility(View.VISIBLE);
-                    mTurnOffButton.setText(buttonText);
-                } else {
-                    mTurnOnButton.setVisibility(View.VISIBLE);
-                    mTurnOffButton.setVisibility(View.GONE);
-                    mTurnOnButton.setText(buttonText);
-                }
+    private void updateNightMode(boolean active) {
+        final int mode = mUiModeManager.getNightMode();
+        String buttonText;
+
+        if (mode == UiModeManager.MODE_NIGHT_AUTO) {
+            buttonText = mContext.getString(active
+                    ? R.string.dark_ui_activation_off_auto
+                    : R.string.dark_ui_activation_on_auto);
+        } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
+            final LocalTime time = active
+                    ? mUiModeManager.getCustomNightModeStart()
+                    : mUiModeManager.getCustomNightModeEnd();
+            final String timeStr = mFormat.of(time);
+            buttonText = mContext.getString(active
+                    ? R.string.dark_ui_activation_off_custom
+                    : R.string.dark_ui_activation_on_custom, timeStr);
+        } else {
+            buttonText = mContext.getString(active
+                    ? R.string.dark_ui_activation_off_manual
+                    : R.string.dark_ui_activation_on_manual);
+        }
+        if (active) {
+            mTurnOnButton.setVisibility(View.GONE);
+            mTurnOffButton.setVisibility(View.VISIBLE);
+            mTurnOffButton.setText(buttonText);
+        } else {
+            mTurnOnButton.setVisibility(View.VISIBLE);
+            mTurnOffButton.setVisibility(View.GONE);
+            mTurnOnButton.setText(buttonText);
+        }
     }
 
     @Override
