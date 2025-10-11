@@ -597,6 +597,15 @@
     <!-- Wireless Settings screen title for things like Wi-Fi, bluetooth, airplane mode. -->
     <string name="wireless_networks_settings_title">Wireless &amp; networks</string>
 
+    <!-- Network traffic settings. Title for network traffic state toggle. [CHAR LIMIT=30] -->
+    <string name="network_traffic_state_title">Network traffic</string>
+    <!-- Network traffic settings. Title for network options category. [CHAR LIMIT=30] -->
+    <string name="network_options_title">Options</string>
+    <!-- Network traffic settings. Title for autohide threshold toggle. [CHAR LIMIT=30] -->
+    <string name="network_traffic_autohide_title">Auto-hide when idle</string>
+    <!-- Network traffic settings. Summary for autohide threshold toggle. [CHAR LIMIT=60] -->
+    <string name="network_traffic_autohide_summary">Hide network traffic when there is no activity</string>
+
     <!-- mobile network settings screen, setting check box title -->
     <string name="roaming">Roaming</string>
     <!-- mobile network settings screen, setting option summary text when check box is selected -->
@@ -9475,6 +9484,8 @@
 
     <!-- [CHAR LIMIT=120] Zen mode settings: Title for conversations settings page -->
     <string name="zen_mode_conversations_title">Conversations</string>
+    <!-- [CHAR LIMIT=30] Zen mode settings: Title for conversations section -->
+    <string name="zen_mode_conversations_section_title">Conversations</string>
     <string name="zen_mode_from_all_conversations">All conversations</string>
     <!-- [CHAR LIMIT=40] Version of zen_mode_from_all_conversations when it is a non-first member of a list -->
     <string name="zen_mode_from_all_conversations_second">all conversations</string>
