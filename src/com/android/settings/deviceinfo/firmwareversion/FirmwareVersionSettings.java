@@ -19,6 +19,9 @@ package com.android.settings.deviceinfo.firmwareversion;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
