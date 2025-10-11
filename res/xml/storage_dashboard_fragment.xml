@@ -24,7 +24,17 @@
     
     <com.android.settingslib.widget.LayoutPreference
         android:key="storage_animation"
-        android:layout="@layout/storage_animation" />
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/storage"/> 
+        
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Storage"
+        android:order="-997"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+        
 		
     <com.android.settingslib.widget.SettingsSpinnerPreference
         android:key="storage_spinner"

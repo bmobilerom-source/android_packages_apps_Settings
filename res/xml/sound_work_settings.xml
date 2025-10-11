@@ -15,7 +15,7 @@
 -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" ">
@@ -24,6 +24,7 @@
         android:key="sound_animation"
         android:layout="@layout/sound_animation"
         android:order="-999"/>
+
 
     <!-- Use the same sounds of the work profile -->
     <SwitchPreferenceCompat

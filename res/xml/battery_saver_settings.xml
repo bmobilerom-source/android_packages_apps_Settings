@@ -24,9 +24,11 @@
 
  <com.android.settingslib.widget.LayoutPreference
         android:key="battery_saver_animation"
-        android:layout="@layout/battery_saver_animation" />
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/battery_saver"/>
 
-        
+
     <com.android.settingslib.widget.MainSwitchPreference
         android:order="-100"
         android:key="battery_saver"

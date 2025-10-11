@@ -22,11 +22,18 @@
     android:persistent="false"
     android:title=" ">
     
-    
-  <com.android.settingslib.widget.LayoutPreference
-        android:key="display_accessibility_animation"
-        android:layout="@layout/display_accessibility_animation" />
-
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Display Extras"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+<com.android.settingslib.widget.IllustrationPreference
+        android:key="captions_preview"
+        android:persistent="false"
+        android:order="-999"
+        android:selectable="false"
+        settings:lottie_rawRes="@raw/display_accessibility"
+        settings:searchable="false" />
     <Preference
         android:fragment="com.android.settings.display.ToggleFontSizePreferenceFragment"
         android:icon="@drawable/ic_font_size"

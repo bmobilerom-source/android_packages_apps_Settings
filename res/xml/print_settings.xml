@@ -22,10 +22,12 @@
     settings:keywords="@string/keywords_printing">
 
 
-     <com.android.settingslib.widget.LayoutPreference
-        android:key="print_settings_animation"
-        android:order="-140"
-        android:layout="@layout/print_animation" />
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="printing"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/printing"/> 
+
 
     <PreferenceCategory
         android:key="print_jobs_category"

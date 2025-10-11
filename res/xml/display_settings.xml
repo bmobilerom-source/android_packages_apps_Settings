@@ -22,10 +22,14 @@
     android:title=" "
     settings:keywords="@string/keywords_display">
 
-   <com.android.settingslib.widget.LayoutPreference
+ 
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="display_animation"
-        android:layout="@layout/display_animation" />
-        
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/display"/>
+
+
     <PreferenceCategory
         android:title="@string/category_name_brightness"
         android:order="-200">

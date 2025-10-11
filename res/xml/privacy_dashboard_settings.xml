@@ -21,11 +21,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="privacy_dashboard_page"
     android:title=" ">
+ 
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="privacy"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/privacy"/> 
 
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="privacy_animation"
-        android:layout="@layout/privacy_animation"/>
+
     <!-- Work Policy info -->
     <Preference
         android:key="work_policy_info"

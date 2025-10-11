@@ -25,6 +25,7 @@
         android:title="@string/accessibility_control_timeout_preference_intro_text"
         settings:searchable="false"/>
 
+  
     <com.android.settingslib.widget.IllustrationPreference
         android:key="accessibility_control_timeout_banner"
         settings:lottie_rawRes="@raw/a11y_timeout_banner"/>

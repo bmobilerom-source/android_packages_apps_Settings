@@ -21,10 +21,14 @@
     android:key="provider_model_calls_and_sms_screen"
     android:title=" ">
 
-    <com.android.settingslib.widget.LayoutPreference
+
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="call_sms_animation"
-        android:layout="@layout/call_sms_animation" />
-        
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/call_sms"/>
+
+  
     <ListPreference
         android:key="provider_model_calls_preference"
         android:title="@string/calls_preference_title"

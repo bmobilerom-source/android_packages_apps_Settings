@@ -25,9 +25,13 @@
         android:key="gesture_double_tap_screen_video"
         app:lottie_rawRes="@raw/gesture_ambient_tap"
         app:preview="@drawable/gesture_ambient_tap"
+        android:order="-997"
         app:controller="com.android.settings.widget.VideoPreferenceController" />
 
-    <SwitchPreferenceCompat
+
+
+
+    <SwitchPreference
         android:key="gesture_double_tap_screen"
         android:title="@string/ambient_display_title"
         android:summary="@string/ambient_display_summary"

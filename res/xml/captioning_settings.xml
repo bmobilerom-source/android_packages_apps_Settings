@@ -18,7 +18,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/accessibility_captioning_title">
+    android:persistent="false"
+    android:title=" ">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="captioning_intro"
@@ -26,10 +27,19 @@
         settings:searchable="false"/>
 
     <com.android.settingslib.widget.IllustrationPreference
-        android:key="captioning_preview"
+        android:key="captions_preview"
+        android:persistent="false"
+        android:order="-999"
         android:selectable="false"
         settings:lottie_rawRes="@drawable/a11y_captioning_banner"
         settings:searchable="false" />
+
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Caption options"
+        android:order="-996"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
 
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="captioning_preference_switch"

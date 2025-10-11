@@ -16,7 +16,7 @@
   -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" ">
@@ -24,6 +24,13 @@
      <com.android.settingslib.widget.LayoutPreference
         android:key="language_settings"
         android:layout="@layout/language_settings_animation" />
+
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="lang"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/language_settings"/>
 
     <PreferenceCategory
         android:key="languages_category"

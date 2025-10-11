@@ -21,12 +21,21 @@
     android:key="system_dashboard_screen"
     android:title=" ">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="system_animation"
-        android:order="-400"
-        android:layout="@layout/system_animation" 
-        android:selectable="false"/>
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="system_animation"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/system"/> 
+
+
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="System"
+        android:order="-997"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+        
     <Preference
         android:key="language_settings"
         android:title="@string/languages_settings"
