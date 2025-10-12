@@ -4,7 +4,7 @@
     android:id="@+id/entity_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rice_card_mt"
+    android:background="@drawable/card"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     android:layout_marginVertical="8dp"
@@ -65,7 +65,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:src="@drawable/dot_chevron_right"
+                android:src="@drawable/ic_chevron_right_24dp"
                 android:tint="?android:attr/textColorPrimary" />
 
         </androidx.cardview.widget.CardView>
