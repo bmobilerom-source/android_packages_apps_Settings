@@ -273,8 +273,8 @@ class StorageCardView(context: Context, attrs: AttributeSet?) : AboutBaseCard(co
         private var omega = 0.0
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            canvas.drawPath(mBlowWavePath, blowWavePaint)
-            canvas.drawPath(mAboveWavePath, aboveWavePaint)
+            blowWavePaint?.let { canvas.drawPath(mBlowWavePath, it) }
+            aboveWavePaint?.let { canvas.drawPath(mAboveWavePath, it) }
         }
 
         fun setAboveWaveColor(aboveWaveColor: Int) {
