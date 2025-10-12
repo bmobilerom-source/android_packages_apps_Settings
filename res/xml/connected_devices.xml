@@ -26,7 +26,12 @@
         settings:searchable="false"
         android:order="-999"
         app:lottie_rawRes="@raw/connected_devices"/>
-
+    <com.android.settingslib.widget.FooterPreference
+        android:key="discoverable_footer"
+        android:selectable="false"
+        android:title="@string/bluetooth_off_footer"
+        settings:controller="com.android.settings.connecteddevice.DiscoverableFooterPreferenceController">
+    </com.android.settingslib.widget.FooterPreference>
     <com.android.settings.slices.SlicePreference
         android:key="bt_nearby_slice"
         android:title="@string/summary_placeholder"
@@ -105,11 +110,6 @@
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="discoverable_footer"
-        android:selectable="false"
-        android:title="@string/bluetooth_off_footer"
-        settings:controller="com.android.settings.connecteddevice.DiscoverableFooterPreferenceController">
-    </com.android.settingslib.widget.FooterPreference>
+
 
 </PreferenceScreen>

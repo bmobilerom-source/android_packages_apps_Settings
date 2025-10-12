@@ -15,23 +15,9 @@
 -->
 
 <PreferenceScreen
-     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
- 
- <com.android.settingslib.widget.LayoutPreference
-        android:key="connected_pref_animation"
-        settings:searchable="false"
-        android:order="-999"
-        app:lottie_rawRes="@raw/connected_pref"/>
-
-        
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="Advanced options"
-        android:order="-997"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
+    android:title=" ">
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"

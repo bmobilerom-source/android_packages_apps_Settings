@@ -22,22 +22,6 @@
     android:title=" "
     settings:keywords="@string/keywords_dark_ui_mode">
     
-      
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="dark_ui_top_intro"
-        android:title="@string/dark_ui_text"
-        settings:searchable="false"/>
-
-        <com.android.settingslib.widget.IllustrationPreference
-            android:key="dark_illustration"
-            android:order="-997"
-            app:lottie_rawRes="@raw/darkmode"/>
-
-          <com.android.settingslib.widget.TopIntroPreference
-            android:key="dark_illustration_desc"
-            android:order="-995"
-            android:title="@string/dark_ui_text"/>
-            
     <com.android.settingslib.widget.BannerMessagePreference
         android:key="dark_ui_location_off"
         android:title="@string/twilight_mode_location_off_dialog_message"
@@ -60,6 +44,14 @@
         android:layout="@layout/dark_ui_activation_button"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="dark_ui_top_intro"
+        android:title="@string/dark_ui_text"
+        settings:searchable="false"/>
+          <com.android.settingslib.widget.TopIntroPreference
+            android:key="dark_illustration_desc"
+            android:title="@string/dark_ui_text"/>
 
     <lineageos.preference.LineageSecureSettingSwitchPreference
         android:key="berry_black_theme"

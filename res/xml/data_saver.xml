@@ -22,7 +22,7 @@
 
    <com.android.settingslib.widget.LayoutPreference
         android:key="data_saver_animation"
-        android:order="-999"
+        android:order="-9999"
         android:layout="@layout/data_saver_animation" />
 
     <Preference

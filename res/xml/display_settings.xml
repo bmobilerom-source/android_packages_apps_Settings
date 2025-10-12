@@ -60,13 +60,14 @@
     <PreferenceCategory
         android:title="@string/category_name_lock_display"
         android:order="-190">
-
+        <!--
         <Preference
             android:key="lockscreen_from_display_settings"
             android:title="@string/lockscreen_settings_title"
             android:fragment="com.android.settings.security.LockscreenDashboardFragment"
             settings:keywords="@string/keywords_ambient_display_screen"
             settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController"/>
+        -->
 
         <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.display.FoldLockBehaviorSettings"
