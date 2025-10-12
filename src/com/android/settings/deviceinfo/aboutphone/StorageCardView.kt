@@ -438,8 +438,8 @@ class StorageCardView(context: Context, attrs: AttributeSet?) : AboutBaseCard(co
 
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            canvas.drawRect(left.toFloat(), 0f, right.toFloat(), bottom.toFloat(), blowWavePaint)
-            canvas.drawRect(left.toFloat(), 0f, right.toFloat(), bottom.toFloat(), aboveWavePaint)
+            blowWavePaint?.let { canvas.drawRect(left.toFloat(), 0f, right.toFloat(), bottom.toFloat(), it) }
+            aboveWavePaint?.let { canvas.drawRect(left.toFloat(), 0f, right.toFloat(), bottom.toFloat(), it) }
         }
 
         init {
