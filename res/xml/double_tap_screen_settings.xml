@@ -28,9 +28,6 @@
         android:order="-997"
         app:controller="com.android.settings.widget.VideoPreferenceController" />
 
-
-
-
     <SwitchPreference
         android:key="gesture_double_tap_screen"
         android:title="@string/ambient_display_title"

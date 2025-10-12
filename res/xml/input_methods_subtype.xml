@@ -21,5 +21,6 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="input_methods_subtype_preference"
     android:title="@string/app_settings_link"
+    android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     settings:controller="com.android.settings.inputmethod.InputMethodAndSubtypePreferenceController" />
 

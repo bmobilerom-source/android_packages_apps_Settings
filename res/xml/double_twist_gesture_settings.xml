@@ -19,6 +19,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="double_twist_gesture_settings"
+    android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/double_twist_for_camera_mode_title">
 
     <com.android.settingslib.widget.IllustrationPreference

@@ -17,33 +17,20 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="storage_dashboard_fragment"
-    android:title=" "
+    android:title="@string/storage_settings"
     settings:keywords="@string/keywords_storage">
-  
- <com.android.settingslib.widget.LayoutPreference
-        android:key="device_name"
-        android:order="-1"
-        android:selectable="false"
-        android:layout="@layout/device_info_header"
-        settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
-        settings:isPreferenceVisible="false" />
-
-		
     <com.android.settingslib.widget.SettingsSpinnerPreference
         android:key="storage_spinner"
         android:order="1"
         settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController"/>
-    <!--
     <com.android.settingslib.widget.UsageProgressBarPreference
         android:key="storage_summary"
         android:order="2"
         android:selectable="false"
         settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"/>
-    -->
     <com.android.settingslib.PrimarySwitchPreference
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
         android:key="toggle_asm"

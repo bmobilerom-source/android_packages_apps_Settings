@@ -18,6 +18,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/connected_device_previously_associated_fast_pair_device_title">
 
     <PreferenceCategory

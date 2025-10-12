@@ -18,23 +18,24 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title=" ">
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="Flash notifications"
-        android:order="-998"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="flash_notifications_intro"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.FlashNotificationsIntroPreferenceController" />
-
-    <com.android.settingslib.widget.IllustrationPreference
+ <com.android.settingslib.widget.IllustrationPreference
         android:key="flash_notifications_illustration"
         settings:searchable="false"
         settings:lottie_rawRes="@drawable/flash_notifications_illustration"
         settings:controller="com.android.settings.accessibility.FlashNotificationIllustrationPreferenceController"/>
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="flash_notifications_intro"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.FlashNotificationsIntroPreferenceController" />
+
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="flash_notifications_footer"
+        android:title="@string/flash_notifications_note"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.FlashNotificationsFooterPreferenceController"/>
+   
     <SwitchPreferenceCompat
         android:key="camera_flash_notification_preference"
         android:persistent="false"
@@ -53,11 +54,5 @@
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsPreviewPreferenceController" />
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="flash_notifications_footer"
-        android:title="@string/flash_notifications_note"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.FlashNotificationsFooterPreferenceController"/>
 
 </PreferenceScreen>
