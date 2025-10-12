@@ -21,32 +21,29 @@
     android:key="storage_dashboard_fragment"
     android:title=" "
     settings:keywords="@string/keywords_storage">
-    
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="storage_animation"
-        settings:searchable="false"
-        android:order="-999"
-        app:lottie_rawRes="@raw/storage"/> 
-        
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="Storage"
-        android:order="-997"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
-        
+  
+ <com.android.settingslib.widget.LayoutPreference
+        android:key="device_name"
+        android:order="-1"
+        android:selectable="false"
+        android:layout="@layout/device_info_header"
+        settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
+        settings:isPreferenceVisible="false" />
+
 		
     <com.android.settingslib.widget.SettingsSpinnerPreference
         android:key="storage_spinner"
         android:order="1"
         settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController"/>
+    <!--
     <com.android.settingslib.widget.UsageProgressBarPreference
         android:key="storage_summary"
         android:order="2"
         android:selectable="false"
         settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"/>
+    -->
     <com.android.settingslib.PrimarySwitchPreference
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
         android:key="toggle_asm"
