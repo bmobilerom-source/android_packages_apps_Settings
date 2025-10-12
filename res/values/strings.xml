@@ -11188,8 +11188,6 @@
     <!-- Title for automatic storage manager settings screen [CHAR LIMIT=60] -->
     <string name="automatic_storage_manager_settings">Storage manager</string>
 
-    <!-- Title for storage settings screen [CHAR LIMIT=60] -->
-    <string name="storage_settings">Storage</string>
 
     <!-- Used in the storage manager settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="automatic_storage_manager_primary_switch_title">Use Storage manager</string>
