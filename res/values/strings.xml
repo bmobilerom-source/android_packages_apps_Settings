@@ -11175,8 +11175,6 @@
     <!-- [CHAR_LIMIT_NONE] Footer description. Explains to the user what will happen when work apps are turned off. -->
     <string name="managed_profile_settings_footer">When work apps are off, they’re paused and can’t be accessed or send you notifications</string>
 
-    <!-- Used as title on the automatic storage manager settings. [CHAR LIMIT=60] -->
-    <string name="automatic_storage_manager_settings">Manage storage</string>
 
     <!-- Used as wall of text to describe the feature. [CHAR LIMIT=NONE] -->
     <string name="automatic_storage_manager_text">To help free up storage space, storage manager removes backed up photos and videos from your device.</string>
@@ -11186,6 +11184,12 @@
 
     <!-- Preference title for the automatic storage manager toggle. [CHAR LIMIT=60]-->
     <string name="automatic_storage_manager_preference_title">Storage manager</string>
+
+    <!-- Title for automatic storage manager settings screen [CHAR LIMIT=60] -->
+    <string name="automatic_storage_manager_settings">Storage manager</string>
+
+    <!-- Title for storage settings screen [CHAR LIMIT=60] -->
+    <string name="storage_settings">Storage</string>
 
     <!-- Used in the storage manager settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="automatic_storage_manager_primary_switch_title">Use Storage manager</string>
