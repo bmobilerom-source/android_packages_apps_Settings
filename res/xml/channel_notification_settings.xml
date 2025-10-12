@@ -30,6 +30,10 @@
         android:key="block"
         android:order="2" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="block_desc"
+        android:order="3"
+        settings:allowDividerAbove="false"/>
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="allow_sound"
@@ -119,9 +123,5 @@
         android:icon="@drawable/ic_settings_24dp"
         settings:allowDividerAbove="true"/>
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="block_desc"
-        android:order="110"
-        settings:allowDividerAbove="false"/>
 
 </PreferenceScreen>

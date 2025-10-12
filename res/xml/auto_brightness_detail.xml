@@ -32,6 +32,11 @@
         settings:userRestriction="no_config_brightness"
         settings:controller="com.android.settings.display.AutoBrightnessDetailPreferenceController"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="auto_brightness_footer"
+        android:title="@string/auto_brightness_description"
+        android:selectable="false"
+        settings:searchable="false" />
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="auto_brightness_one_shot"
         android:title="@string/auto_brightness_one_shot_title"
@@ -41,12 +46,7 @@
         settings:controller="com.android.settings.display.AutoBrightnessOneShotPreferenceController"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_brightness"
-        settings:allowDividerAbove="true" />
+        settings:allowDividerAbove="false" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="auto_brightness_footer"
-        android:title="@string/auto_brightness_description"
-        android:selectable="false"
-        settings:searchable="false" />
 
 </PreferenceScreen>

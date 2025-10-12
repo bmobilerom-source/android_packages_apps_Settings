@@ -421,6 +421,11 @@
         <item name="android:textSize">16dp</item>
     </style>
 
+    <!-- Custom style for PreferenceScreen titles with system accent color -->
+    <style name="PreferenceScreenTitle.Accent" parent="@style/TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">@android:color/system_accent1_600</item>
+    </style>
+
     <style name="device_info_dialog_label">
         <item name="android:textAlignment">viewStart</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>

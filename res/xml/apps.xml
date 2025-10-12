@@ -65,7 +65,7 @@
     <PreferenceCategory
         android:key="general_category"
         android:title="@string/category_name_general"
-        android:order="-995"
+        android:order="-997"
         android:visibility="gone"
         settings:searchable="false"/>
 

@@ -16,14 +16,10 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title=" ">
+                  android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
+                  android:title="@string/alarms_and_reminders_title">
 
-  <!-- Header -->
-  <PreferenceCategory
-        android:title="Alarm and reminders"
-        android:order="-996"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
+  
  <com.android.settingslib.widget.FooterPreference
         android:key="alarms_and_reminders_description"
         android:order="-988"

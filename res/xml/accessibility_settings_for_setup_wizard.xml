@@ -26,7 +26,7 @@
         android:key="configure_notification_settings_animation"
         settings:searchable="false"
         android:order="-999"
-        app:lottie_rawRes="@raw/configure_notification_settings"/>
+        app:lottie_rawRes="@raw/display_accessibility"/>
 
         
    <!-- Header -->

@@ -28,6 +28,12 @@
         android:title="@string/accessibility_hearingaid_intro"
         settings:searchable="false" />
 
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="hearing_device_footer"
+        android:title="@string/accessibility_hearing_device_footer_summary"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.HearingDeviceFooterPreferenceController"/>
     <PreferenceCategory
         android:key="available_hearing_devices"
         android:title="@string/accessibility_hearing_device_connected_title"
@@ -68,10 +74,4 @@
             settings:controller="com.android.settings.accessibility.HearingAidCompatibilityPreferenceController"/>
     </PreferenceCategory>
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="hearing_device_footer"
-        android:title="@string/accessibility_hearing_device_footer_summary"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.HearingDeviceFooterPreferenceController"/>
 </PreferenceScreen>

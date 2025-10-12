@@ -17,6 +17,8 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/accelerometer_title" >
 
     <!-- Device state based auto-rotation preferences will be added programmatically here.  -->

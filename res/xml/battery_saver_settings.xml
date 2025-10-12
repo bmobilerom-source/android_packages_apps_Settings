@@ -36,7 +36,7 @@
         settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverButtonPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference
-        android:order="100"
+        android:order="110"
         android:key="battery_saver_footer_preference"
         android:title="@*android:string/battery_saver_description"
         settings:searchable="false"/>

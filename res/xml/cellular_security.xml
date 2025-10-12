@@ -17,6 +17,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="cellular_security_settings_screen"
+    android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/cellular_security_settings_title">
 
     <com.android.settingslib.widget.TopIntroPreference

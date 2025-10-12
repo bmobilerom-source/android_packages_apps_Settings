@@ -29,13 +29,6 @@
         app:lottie_rawRes="@raw/convo"/>
 
   
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="Conversations"
-        android:order="-997"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
-
     <com.android.settingslib.widget.LayoutPreference
         android:key="no_conversations"
         android:layout="@layout/conversation_onboarding"

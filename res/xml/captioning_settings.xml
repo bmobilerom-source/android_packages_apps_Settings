@@ -37,6 +37,12 @@
         android:layout="@layout/settings_title_header">
   </PreferenceCategory>
 
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="captioning_settings_footer"
+        android:title="@string/accessibility_captioning_preference_summary"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
     <com.android.settingslib.widget.TopIntroPreference
         android:key="captioning_intro"
         android:order="-992"
@@ -59,11 +65,5 @@
         android:title="@string/captioning_more_options_title"
         settings:searchable="false" />
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="captioning_settings_footer"
-        android:title="@string/accessibility_captioning_preference_summary"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
 
 </PreferenceScreen>

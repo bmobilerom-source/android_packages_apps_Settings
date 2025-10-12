@@ -35,6 +35,13 @@
         android:layout="@layout/settings_title_header">
   </PreferenceCategory>
 
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="captioning_appearance_footer"
+        android:title="@string/accessibility_captioning_preference_summary"
+        android:selectable="false"
+        settings:searchable="false"
+        android:order="-900"
+        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
     <ListPreference
         android:entries="@array/captioning_font_size_selector_titles"
         android:entryValues="@array/captioning_font_size_selector_values"
@@ -106,10 +113,4 @@
             settings:controller="com.android.settings.accessibility.CaptioningWindowOpacityController"/>
     </PreferenceCategory>
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="captioning_appearance_footer"
-        android:title="@string/accessibility_captioning_preference_summary"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
 </PreferenceScreen>
