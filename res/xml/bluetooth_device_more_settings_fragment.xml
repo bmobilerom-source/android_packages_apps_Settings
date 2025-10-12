@@ -16,8 +16,9 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="bluetooth_device_more_settings_screen"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="bluetooth_device_more_settings_screen"
     android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/device_details_more_settings">
 
