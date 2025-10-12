@@ -25,12 +25,13 @@
         android:order="1"
         settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController"/>
-    <com.android.settingslib.widget.UsageProgressBarPreference
-        android:key="storage_summary"
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="device_name"
         android:order="2"
         android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"/>
+        android:layout="@layout/device_info_header"
+        settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
+        settings:isPreferenceVisible="false" />
     <com.android.settingslib.PrimarySwitchPreference
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
         android:key="toggle_asm"
