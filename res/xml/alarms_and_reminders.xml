@@ -24,14 +24,14 @@
         android:order="-996"
         android:layout="@layout/settings_title_header">
   </PreferenceCategory>
-
+ <com.android.settingslib.widget.FooterPreference
+        android:key="alarms_and_reminders_description"
+        android:order="-988"
+        android:title="@string/alarms_and_reminders_footer_title"
+        android:selectable="false" />
     <com.android.settings.widget.FilterTouchesRestrictedSwitchPreference
         android:key="alarms_and_reminders_switch"
         android:title="@string/alarms_and_reminders_switch_title" />
-
-    <com.android.settingslib.widget.FooterPreference
-        android:key="alarms_and_reminders_description"
-        android:title="@string/alarms_and_reminders_footer_title"
-        android:selectable="false" />
+ 
 
 </PreferenceScreen>

@@ -23,7 +23,7 @@
     android:title=" "
     settings:keywords="@string/keywords_accounts">
 
-
+ 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="account_animation"
         settings:searchable="false"

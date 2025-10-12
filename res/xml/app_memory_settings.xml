@@ -17,12 +17,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:title=" ">
 
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="Memory usage"
-        android:order="-997"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
+
 
     <PreferenceCategory
         android:title="@string/average_memory_use">

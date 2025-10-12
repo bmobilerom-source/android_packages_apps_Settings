@@ -17,8 +17,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_hearing_devices_screen"
-    android:title="@string/accessibility_hearingaid_title">
+    android:title=" ">
 
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Hearing Aids"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>    
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/accessibility_hearingaid_intro"
         settings:searchable="false" />

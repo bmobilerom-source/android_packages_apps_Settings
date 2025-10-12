@@ -24,32 +24,28 @@
     
    <!-- Header -->
   <PreferenceCategory
-        android:title="Display Extras"
+        android:title="Color and Motion"
         android:layout="@layout/settings_title_header">
   </PreferenceCategory>
-<com.android.settingslib.widget.IllustrationPreference
-        android:key="captions_preview"
-        android:persistent="false"
-        android:order="-999"
-        android:selectable="false"
-        settings:lottie_rawRes="@raw/display_accessibility"
-        settings:searchable="false" />
-    <Preference
-        android:fragment="com.android.settings.display.ToggleFontSizePreferenceFragment"
-        android:icon="@drawable/ic_font_size"
-        android:key="font_size_preference_screen"
-        android:persistent="false"
-        android:title="@string/title_font_size"
-        settings:controller="com.android.settings.display.FontSizePreferenceController"
-        settings:searchable="false"/>
-
-    <com.android.settings.display.ScreenZoomPreference
-        android:fragment="com.android.settings.display.ScreenZoomSettings"
-        android:icon="@drawable/ic_screen_zoom"
-        android:key="accessibility_settings_screen_zoom"
-        android:persistent="false"
-        android:title="@string/screen_zoom_title"
-        settings:searchable="false"/>
+<!--
+<Preference
+    android:fragment="com.android.settings.display.ToggleFontSizePreferenceFragment"
+    android:icon="@drawable/ic_font_size"
+    android:key="font_size_preference_screen"
+    android:persistent="false"
+    android:title="@string/title_font_size"
+    settings:controller="com.android.settings.display.FontSizePreferenceController"
+    settings:searchable="false"/>
+-->
+        <!--
+        <com.android.settings.display.ScreenZoomPreference
+            android:fragment="com.android.settings.display.ScreenZoomSettings"
+            android:icon="@drawable/ic_screen_zoom"
+            android:key="accessibility_settings_screen_zoom"
+            android:persistent="false"
+            android:title="@string/screen_zoom_title"
+            settings:searchable="false"/>
+        -->
 
     <SwitchPreference
         android:key="toggle_force_bold_text"
@@ -79,6 +75,7 @@
 
     <!-- DarkModePreference is searchable in the Display & Touch setting.
          Therefore, we set searchable = false here to avoid duplicate search results. -->
+    <!--
     <com.android.settings.display.darkmode.DarkModePreference
         android:key="dark_ui_mode_accessibility"
         android:icon="@drawable/ic_dark_ui"
@@ -88,14 +85,16 @@
         settings:widgetLayout="@null"
         settings:controller="com.android.settings.display.DarkUIPreferenceController"
         settings:searchable="false"/>
-
-    <SwitchPreferenceCompat
-        android:icon="@drawable/ic_dark_ui"
-        android:key="toggle_force_invert"
-        android:persistent="false"
-        android:summary="@string/accessibility_force_invert_summary"
-        android:title="@string/accessibility_force_invert_title"
-        settings:controller="com.android.settings.accessibility.ToggleForceInvertPreferenceController"/>
+    -->
+        <!--
+            <SwitchPreferenceCompat
+                android:icon="@drawable/ic_dark_ui"
+                android:key="toggle_force_invert"
+                android:persistent="false"
+                android:summary="@string/accessibility_force_invert_summary"
+                android:title="@string/accessibility_force_invert_title"
+                settings:controller="com.android.settings.accessibility.ToggleForceInvertPreferenceController"/>
+        -->
 
     <SwitchPreferenceCompat
         android:icon="@drawable/ic_accessibility_animation"

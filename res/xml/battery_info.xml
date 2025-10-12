@@ -19,8 +19,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/battery_info"
-    settings:keywords="@string/keywords_battery_info">
-
+    settings:keywords="">
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Battery information"
+        android:order="-998"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
     <Preference
         android:key="battery_info_technology"
         android:title="@string/battery_technology"

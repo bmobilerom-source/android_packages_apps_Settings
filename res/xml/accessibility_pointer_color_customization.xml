@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_pointer_color_customization"
     android:persistent="false"
-    android:title="@string/accessibility_pointer_color_customization_title">
+    android:title=" ">
 
     <com.android.settings.inputmethod.PointerFillStylePreference
         android:key="pointer_fill_style"

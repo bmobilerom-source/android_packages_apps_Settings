@@ -19,12 +19,6 @@
         android:key="app_notifications"
         android:title=" ">
 
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="App notifications"
-        android:order="-997"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="pref_app_header"

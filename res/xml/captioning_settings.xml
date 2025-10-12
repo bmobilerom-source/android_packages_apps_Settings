@@ -20,11 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
     android:title=" ">
-
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="captioning_intro"
-        android:title="@string/accessibility_captioning_preference_intro"
-        settings:searchable="false"/>
+>
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="captions_preview"
@@ -41,6 +37,11 @@
         android:layout="@layout/settings_title_header">
   </PreferenceCategory>
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="captioning_intro"
+        android:order="-992"
+        android:title="@string/accessibility_captioning_preference_intro"
+        settings:searchable="false"/>
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="captioning_preference_switch"
         android:title="@string/accessibility_captioning_primary_switch_title"

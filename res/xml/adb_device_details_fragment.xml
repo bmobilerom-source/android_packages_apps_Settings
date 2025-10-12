@@ -25,11 +25,6 @@
         android:layout="@layout/settings_entity_header"
         android:selectable="false" />
 
-           <!-- Header -->
-  <PreferenceCategory
-        android:title="Adb Features"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
 
     <!-- Buttons -->
     <com.android.settingslib.widget.ActionButtonsPreference

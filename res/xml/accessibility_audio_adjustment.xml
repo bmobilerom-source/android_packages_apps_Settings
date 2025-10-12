@@ -20,17 +20,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" " >
 
-
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="sound"
-        settings:searchable="false"
-        android:order="-999"
-        app:lottie_rawRes="@raw/sound"/>
-
-  
    <!-- Header -->
   <PreferenceCategory
-        android:title="Audio adjust"
+        android:title="Audio adjustment"
         android:order="-998"
         android:layout="@layout/settings_title_header">
   </PreferenceCategory>
