@@ -112,6 +112,19 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     public void onStart() {
         super.onStart();
         onUserCard();
+        
+        if (mFirstStarted) {
+            mFirstStarted = false;
+            FeatureFactory.getFeatureFactory().getSearchFeatureProvider().sendPreIndexIntent(
+                    getContext());
+        } else if (mIsEmbeddingActivityEnabled && isOnlyOneActivityInTask()
+                && !isActivityEmbedded()) {
+            // Set default highlight menu key for 1-pane homepage since it will show the placeholder
+            // page once changing back to 2-pane.
+            Log.i(TAG, "Set default menu key");
+            setHighlightMenuKey(getString(SettingsHomepageActivity.DEFAULT_HIGHLIGHT_MENU_KEY),
+                    /* scrollNeeded= */ false);
+        }
     }
 
     @Override
@@ -196,22 +209,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         return mActivityEmbeddingController.isActivityEmbedded(getActivity());
     }
 
-    @Override
-    public void onStart() {
-        if (mFirstStarted) {
-            mFirstStarted = false;
-            FeatureFactory.getFeatureFactory().getSearchFeatureProvider().sendPreIndexIntent(
-                    getContext());
-        } else if (mIsEmbeddingActivityEnabled && isOnlyOneActivityInTask()
-                && !isActivityEmbedded()) {
-            // Set default highlight menu key for 1-pane homepage since it will show the placeholder
-            // page once changing back to 2-pane.
-            Log.i(TAG, "Set default menu key");
-            setHighlightMenuKey(getString(SettingsHomepageActivity.DEFAULT_HIGHLIGHT_MENU_KEY),
-                    /* scrollNeeded= */ false);
-        }
-        super.onStart();
-    }
 
     private boolean isOnlyOneActivityInTask() {
         final ActivityManager.RunningTaskInfo taskInfo = getSystemService(ActivityManager.class)
@@ -327,7 +324,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         final Bundle bundle = getArguments();
         final EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, userCard)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 
@@ -351,7 +347,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     com.android.settingslib.Utils.getUserIcon(getActivity(), userManager, info));
         }
 
-        controller.done(context, true /* rebindActions */);
+        controller.done(context);
     }
 
     @Override
