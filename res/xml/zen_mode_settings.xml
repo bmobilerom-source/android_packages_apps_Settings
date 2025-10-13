@@ -25,11 +25,6 @@
         android:key="dnd_animation"
         android:layout="@layout/dnd_animation" />
         
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="Do Not Disturb"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
 
     <!-- Turn on DND button -->
     <com.android.settingslib.widget.LayoutPreference
