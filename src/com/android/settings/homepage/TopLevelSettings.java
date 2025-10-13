@@ -239,10 +239,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             if (icon != null) {
                 icon.setTint(tintColor);
             }
-
-	    onSetPrefCard();
-
-        }
+        });
+        
+        onSetPrefCard();
     }
 
     private void onSetPrefCard() {
