@@ -85,7 +85,7 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.EPIC;
+        return SettingsEnums.CUSTOM_SETTINGS;
     }
 
    static String getEmail(Context context) {
