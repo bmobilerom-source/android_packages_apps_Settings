@@ -23,19 +23,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+   
     <com.android.settingslib.widget.IllustrationPreference
-        android:key="aboutphone"
-        settings:searchable="false"
-        android:order="-999"
-        app:lottie_rawRes="@raw/aboutphone"/> 
-        
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="Applications"
-        android:order="-998"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
-        
+        android:key="app_illustration"
+        settings:lottie_rawRes="@raw/app_illustration"
+        android:order="-1001" />
+ 
     <Preference
         android:key="all_app_infos"
         android:title="@string/all_apps"

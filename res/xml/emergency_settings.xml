@@ -23,13 +23,10 @@
     android:title=" ">
 
     
-     <com.android.settingslib.widget.IllustrationPreference
-        android:key="emergency_preview"
-        android:persistent="false"
-        android:order="-999"
-        android:selectable="false"
-        settings:lottie_rawRes="@raw/display_accessibility"
-        settings:searchable="false" />
+       <com.android.settingslib.widget.IllustrationPreference
+        android:key="emer_illustration"
+        settings:lottie_rawRes="@raw/emer_illustration"
+        android:order="-1001" />
         
    <!-- Header -->
   <PreferenceCategory
