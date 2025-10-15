@@ -307,13 +307,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     final TextView homepageTitle = root != null ? root.findViewById(R.id.homepage_title) : null;
     final TextView searchTextView = root != null ? root.findViewById(R.id.search_action_bar_title) : null;
 
-    // Guard against layouts that don't include these views
-    if (homepageTitle == null || textView == null || searchTextView == null) {
-        return;
-    }
-
-    homepageTitle.setVisibility(View.VISIBLE);
-    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.header_text_size_contextual));
+    // Only set contextual messages if the required TextViews exist
+    if (textView != null && homepageTitle != null) {
+        homepageTitle.setVisibility(View.VISIBLE);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.header_text_size_contextual));
 
 	String[] randomMsgSearch = getResources().getStringArray(R.array.settings_random);
         String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
@@ -384,6 +381,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             default:
                 break;
         }
+    } // End of contextual messages if block
         setupEdgeToEdge();
         mActivityEmbeddingController = ActivityEmbeddingController.getInstance(this);
         mIsTwoPane = mActivityEmbeddingController.isActivityEmbedded(this);
