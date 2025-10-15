@@ -20,7 +20,6 @@ package com.android.settings.deviceinfo;
 import static android.app.Activity.RESULT_OK;
 
 import com.android.internal.logging.nano.MetricsProto;
-import android.app.settings.SettingsEnums;
 
 import android.view.View;
 import android.view.LayoutInflater;
@@ -85,7 +84,7 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.USER;
+        return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
     }
 
    static String getEmail(Context context) {
@@ -156,18 +155,21 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
 
         final EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, userCard)
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 
-        final int iconId = bundle.getInt("icon_id", 0);
+        final int iconId = (bundle != null) ? bundle.getInt("icon_id", 0) : 0;
         if (iconId == 0) {
             final UserManager userManager = (UserManager) getActivity().getSystemService(
                     Context.USER_SERVICE);
             final UserInfo info = Utils.getExistingUser(userManager,
                     android.os.Process.myUserHandle());
-            controller.setLabel(info.name);
+            if (info != null) {
+                controller.setLabel(info.name);
+            }
         }
 
-        controller.done(context);
+        controller.done(true);
     }
 }

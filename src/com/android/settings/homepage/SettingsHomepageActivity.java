@@ -46,8 +46,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toolbar;
 import android.widget.TextView;
+import android.util.TypedValue;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.Insets;
@@ -62,6 +64,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitInfo;
 import androidx.window.embedding.SplitRule;
+import androidx.window.embedding.ActivityEmbeddingController;
 import androidx.window.java.embedding.SplitControllerCallbackAdapter;
 
 import com.android.settings.R;
@@ -82,12 +85,15 @@ import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
 import java.util.*;
 import java.lang.*;
+import java.util.Calendar;
+import java.util.Random;
 
 /** Settings homepage activity */
 public class SettingsHomepageActivity extends FragmentActivity implements
@@ -117,6 +123,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private View mTwoPaneSuggestionView;
     private CategoryMixin mCategoryMixin;
     private Set<HomepageLoadedListener> mLoadedListeners;
+    private ActivityEmbeddingController mActivityEmbeddingController;
+    CollapsingToolbarLayout collapsing_toolbar;
     private boolean mIsEmbeddingActivityEnabled;
     private boolean mIsTwoPane;
     // A regular layout shows icons on homepage, whereas a simplified layout doesn't.
@@ -192,6 +200,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         return mCategoryMixin;
     }
 
+    Context context;
+    UserManager mUserManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -262,6 +273,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         updateAppBarMinHeight();
         initHomepageContainer();
+
+        Context context = getApplicationContext();
+        mUserManager = context.getSystemService(UserManager.class);
+
         updateHomepageAppBar();
         updateHomepageBackground();
         mLoadedListeners = new ArraySet<>();
@@ -342,6 +357,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                     highlightMenuKey);
             return fragment;
         }, R.id.main_content);
+
+        // Add contextual dashboard messages
+        setupContextualMessages();
 
         // Launch the intent from deep link for large screen devices.
         if (shouldLaunchDeepLinkIntentToRight()) {
@@ -480,21 +498,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void initAvatarView() {
-        if (Flags.homepageRevamp()) {
-            return;
-        }
-
-        final ImageView avatarView = findViewById(R.id.account_avatar);
-        final ImageView avatarTwoPaneView = findViewById(R.id.account_avatar_two_pane_version);
-        if (AvatarViewMixin.isAvatarSupported(this)) {
-            avatarView.setVisibility(View.VISIBLE);
-            getLifecycle().addObserver(new AvatarViewMixin(this, avatarView));
-
-            if (mIsEmbeddingActivityEnabled) {
-                avatarTwoPaneView.setVisibility(View.VISIBLE);
-                getLifecycle().addObserver(new AvatarViewMixin(this, avatarTwoPaneView));
-            }
-        }
+        // Avatar functionality removed - no avatar in settings
+        return;
     }
 
     private void updateHomepageUI() {
@@ -911,5 +916,96 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 mActivity.updateHomepageUI();
             }
         }
+    }
+
+    private void setupContextualMessages() {
+        final View root = findViewById(R.id.settings_homepage_container);
+        if (root == null) return;
+        
+        final TextView textView = root.findViewById(R.id.user_title);
+        final TextView homepageTitle = root.findViewById(R.id.homepage_title);
+        final TextView searchTextView = root.findViewById(R.id.search_action_bar_title);
+
+        if (textView == null || homepageTitle == null || searchTextView == null) return;
+
+        homepageTitle.setVisibility(View.VISIBLE);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.header_text_size_contextual));
+
+        String[] randomMsgSearch = getResources().getStringArray(R.array.settings_random);
+        String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
+        String[] morningMsgGreet = getResources().getStringArray(R.array.dashboard_morning_greetings);
+        String[] msgNight = getResources().getStringArray(R.array.dashboard_night);
+        String[] msgearlyNight = getResources().getStringArray(R.array.dashboard_early_night);
+        String[] msgNoon = getResources().getStringArray(R.array.dashboard_noon);
+        String[] msgMN = getResources().getStringArray(R.array.dashboard_midnight);
+        String[] msgRandom = getResources().getStringArray(R.array.dashboard_random);
+        String[] msgRandomGreet = getResources().getStringArray(R.array.dashboard_random_greetings);
+
+        String greetingsEN = getResources().getString(R.string.dashboard_early_night_greeting1);
+        String greetingsN = getResources().getString(R.string.dashboard_night_greetings1);
+        String greetingsNoon = getResources().getString(R.string.dashboard_noon_greeting1);
+        String random6 = getResources().getString(R.string.dashboard_random6);
+
+        Random genSearchMsg = new Random();
+        int searchRnd = genSearchMsg.nextInt(randomMsgSearch.length-1);
+        searchTextView.setText(randomMsgSearch[searchRnd]);
+
+        switch (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
+            case 5: case 6: case 7: case 8: case 9: case 10:
+               // Generate random welcome massage as title header
+               Random genMorningMsg = new Random();
+               int morning = genMorningMsg.nextInt(morningMsg.length-1);
+               int morningGreet = genMorningMsg.nextInt(morningMsgGreet.length-1);
+               textView.setText(morningMsgGreet[morningGreet] + " " + getOwnerName() + ",");
+               homepageTitle.setText(morningMsg[morning]);
+                break;
+
+            case 18: case 19: case 20: 
+               Random genmsgeNight = new Random();
+               int eNight = genmsgeNight.nextInt(msgearlyNight.length-1);
+               textView.setText(greetingsEN + " " + getOwnerName() + ",");
+               homepageTitle.setText(msgearlyNight[eNight]);
+                break;
+                
+            case 21: case 22: case 23: case 0: 
+               Random genmsgNight = new Random();
+               int night = genmsgNight.nextInt(msgNight.length-1);
+               textView.setText(greetingsN + " " + getOwnerName() + ",");
+               homepageTitle.setText(msgNight[night]);
+                break;
+
+             case 16: case 17:
+               Random genmsgNoon = new Random();
+               int noon = genmsgNoon.nextInt(msgNoon.length-1);
+               textView.setText(greetingsNoon + " " + getOwnerName() + ",");
+               homepageTitle.setText(msgNoon[noon]);
+                break;
+
+            case 1: case 2: case 3: case 4:
+               Random genmsgMN = new Random();
+               int mn = genmsgMN.nextInt(msgMN.length-1);
+               int rd = genmsgMN.nextInt(msgRandom.length-1);
+               textView.setText(msgRandom[rd] + " " + getOwnerName() + ",");
+               homepageTitle.setText(msgMN[mn]);
+                break;
+                
+            case 11: case 12: case 13: case 14: case 15:
+               Random genmsgRD = new Random();
+               int randomm = genmsgRD.nextInt(msgRandom.length-1);
+               int randomGreet = genmsgRD.nextInt(msgRandomGreet.length-1);
+               textView.setText(msgRandom[randomm] + " " + getOwnerName() + ",");
+               homepageTitle.setText(msgRandomGreet[randomGreet]);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private String getOwnerName(){
+        final UserManager mUserManager = getSystemService(UserManager.class);
+        final UserInfo userInfo = com.android.settings.Utils.getExistingUser(mUserManager,
+                    UserHandle.of(UserHandle.myUserId()));
+        return userInfo.name != null ? userInfo.name : getString(R.string.default_user);
     }
 }

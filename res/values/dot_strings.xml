@@ -18,6 +18,16 @@
     <!-- About phone cards -->
     <string name="storage_card_title">Storage</string>
     <string name="storage_card_info">Occupied</string>
+    <string name="rom_name">Android</string>
+    <string name="rom_version">Version</string>
+    <string name="device_name_default">Device</string>
+    <string name="rom_logo">ROM Logo</string>
+    
+    <!-- xd. Build card -->
+    <string name="xd_build_status">Your device officially supported!</string>
+    <string name="xd_build_maintained_summary">Maintained by %s</string>
+    <string name="xd_build_unmaintained_summary">This build is maintained officially</string>
+    <string name="xd_summary_placeholder">CERTIFIED</string>
     <string name="about_device_rom_title">Android %s</string>
     <string name="about_device_nearby">The device name can and will be seen by the nearby devices.</string>
 

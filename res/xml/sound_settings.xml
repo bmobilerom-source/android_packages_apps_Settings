@@ -28,7 +28,12 @@
         android:order="-999"
         app:lottie_rawRes="@raw/sound"/> 
 
-    
+    <com.android.settingslib.widget.LayoutPreference
+    android:key="device_info_header"
+    android:order="-1"
+    android:selectable="false"
+    android:layout="@layout/device_info_header_safe"
+    settings:controller="com.android.settings.deviceinfo.DeviceInfoHeaderPreferenceController" />
         
     <!-- Remote volume group -->
     <PreferenceCategory

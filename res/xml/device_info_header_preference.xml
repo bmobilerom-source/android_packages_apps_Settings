@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="device_info_header"
+        android:order="-1"
+        android:selectable="false"
+        android:layout="@layout/device_info_header_safe"
+        settings:controller="com.android.settings.deviceinfo.DeviceInfoHeaderPreferenceController" />
+
+</PreferenceScreen>
