@@ -302,13 +302,18 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             }
         }
 
-	final View root = findViewById(R.id.settings_homepage_container);
-	final TextView textView = root.findViewById(R.id.user_title);
-	final TextView homepageTitle = root.findViewById(R.id.homepage_title);
-	final TextView searchTextView = root.findViewById(R.id.search_action_bar_title);
+    final View root = findViewById(R.id.settings_homepage_container);
+    final TextView textView = root != null ? root.findViewById(R.id.user_title) : null;
+    final TextView homepageTitle = root != null ? root.findViewById(R.id.homepage_title) : null;
+    final TextView searchTextView = root != null ? root.findViewById(R.id.search_action_bar_title) : null;
 
-	homepageTitle.setVisibility(View.VISIBLE);
-	textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.header_text_size_contextual));
+    // Guard against layouts that don't include these views
+    if (homepageTitle == null || textView == null || searchTextView == null) {
+        return;
+    }
+
+    homepageTitle.setVisibility(View.VISIBLE);
+    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.header_text_size_contextual));
 
 	String[] randomMsgSearch = getResources().getStringArray(R.array.settings_random);
         String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
@@ -327,7 +332,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
 	Random genSearchMsg = new Random();
 	int searchRnd = genSearchMsg.nextInt(randomMsgSearch.length-1);
-        searchTextView.setText(randomMsgSearch[searchRnd]);
+    searchTextView.setText(randomMsgSearch[searchRnd]);
 
         switch (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
             case 5: case 6: case 7: case 8: case 9: case 10:
