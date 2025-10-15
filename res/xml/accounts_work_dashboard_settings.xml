@@ -22,6 +22,11 @@
     android:key="user_and_account_settings_screen"
     android:title=" "
     settings:keywords="@string/keywords_accounts">
+    
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="pass_illustration"
+        settings:lottie_rawRes="@raw/pass_illustration"
+        android:order="-1001" />
 
  
     <com.android.settingslib.widget.IllustrationPreference

@@ -20,13 +20,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="network_provider_and_internet_screen"
     android:title=" ">
-
-
+    
     <com.android.settingslib.widget.IllustrationPreference
-        android:key="wifi_animation"
-        settings:searchable="false"
-        android:order="-999"
-        app:lottie_rawRes="@raw/wifi"/>
+        android:key="net_illustration"
+        settings:lottie_rawRes="@raw/net_illustration"
+        android:order="-1001" />
 
   
 

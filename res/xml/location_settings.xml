@@ -21,13 +21,8 @@
     android:key="location_settings"
     android:title=" "
     settings:keywords="@string/keywords_location">
-
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="location"
-        settings:searchable="false"
-        android:order="-999"
-        app:lottie_rawRes="@raw/location"/>
-
+    
+  
   
    <!-- Header -->
   <PreferenceCategory

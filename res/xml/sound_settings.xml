@@ -25,16 +25,16 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="sounds"
         settings:searchable="false"
-        android:order="-999"
+        android:order="-1001"
         app:lottie_rawRes="@raw/sound"/> 
 
-    
-        
+ 
+
     <!-- Remote volume group -->
     <PreferenceCategory
         android:key="remote_media_group"
         android:title=""
-        android:order="-185"
+        android:order="-999"
         settings:allowDividerBelow="true"
         settings:controller="com.android.settings.notification.RemoteVolumeGroupController">
     </PreferenceCategory>

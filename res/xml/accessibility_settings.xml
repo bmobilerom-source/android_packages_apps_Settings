@@ -19,6 +19,11 @@
     android:persistent="false"
     android:title=" "
     settings:keywords="@string/keywords_accessibility">
+    
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="acces_illustration"
+        settings:lottie_rawRes="@raw/acces_illustration"
+        android:order="-1001" />
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="accessibility"

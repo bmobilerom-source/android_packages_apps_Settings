@@ -18,23 +18,13 @@ Copyright (C) 2021 The Android Open Source Project
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="storage_header"
-    android:title="@string/storage_settings">
-    <com.android.settingslib.widget.SettingsSpinnerPreference
-        android:key="storage_spinner"
-        android:order="1"
-        settings:searchable="false"
-        settings:controller="com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController"/>
-    <com.android.settingslib.widget.UsageProgressBarPreference
-        android:key="storage_summary"
-        android:order="2"
+    android:title=" ">
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="device_name"
+        android:order="-500"
+        android:layout="@layout/device_info_header"
         android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"/>
-    <com.android.settingslib.PrimarySwitchPreference
-        android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
-        android:key="toggle_asm"
-        android:title="@string/automatic_storage_manager_preference_title"
-        android:icon="@drawable/ic_storage"
-        android:order="3"
-        settings:controller="com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController"/>
+        settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
+        settings:isPreferenceVisible="true"/>
+    
 </PreferenceScreen>
