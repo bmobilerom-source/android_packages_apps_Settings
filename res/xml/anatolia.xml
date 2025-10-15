@@ -97,7 +97,11 @@
         settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"
         settings:enableCopying="true"
         settings:keywords="@string/keywords_model_and_hardware"/>
-
+    <Preference
+        android:key="display_customization"
+        android:title="@string/display_customization"
+        android:fragment="com.android.settings."
+        android:summary="@string/display_customization"/>   
 
         <PreferenceScreen
         android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
@@ -111,5 +115,11 @@
         android:title="@string/display_customization"
         android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations"
         android:summary="@string/display_customization"/>   
-         
+            <!-- Quick settings -->
+        <PreferenceScreen
+            android:key="quicksettings_category"
+            android:title="@string/quicksettings_title"
+            android:summary="@string/quicksettings_summary"
+            android:fragment="com.afterlife.afterlab.CustomizeDashboard"
+            android:icon="@drawable/ic_anatolia_quicksettings" />     
 </PreferenceScreen>

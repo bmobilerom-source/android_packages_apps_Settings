@@ -24,4 +24,9 @@
         android:layout="@layout/team_base"
         android:selectable="false"/>
 
+<com.android.settingslib.widget.LayoutPreference
+        android:key="dot_battery_grid"
+        android:layout="@layout/dot_battery_stats"
+        android:selectable="false"/>
+
 </PreferenceScreen>
