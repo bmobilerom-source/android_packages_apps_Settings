@@ -401,10 +401,14 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             default:
                 break;
         }
-        if (textView != null && headerLine != null) {
+        // Final safety defaults to ensure something is shown
+        if (headerLine == null) headerLine = getString(R.string.settings_label);
+        if (subLine == null) subLine = getString(R.string.settings_random1);
+
+        if (textView != null) {
             textView.setText(headerLine);
         }
-        if (homepageTitle != null && subLine != null) {
+        if (homepageTitle != null) {
             homepageTitle.setText(subLine);
         }
     } // End of contextual messages if block
