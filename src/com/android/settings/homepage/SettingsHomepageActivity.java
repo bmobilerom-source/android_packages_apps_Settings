@@ -321,9 +321,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             textView.setVisibility(View.VISIBLE);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     getResources().getDimensionPixelSize(R.dimen.header_text_size_contextual));
+            // Ensure readable color on all themes
+            textView.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorPrimary));
         }
         if (homepageTitle != null) {
             homepageTitle.setVisibility(View.VISIBLE);
+            // Ensure readable color on all themes
+            homepageTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr/textColorSecondary));
         }
 
 	String[] randomMsgSearch = getResources().getStringArray(R.array.settings_random);
