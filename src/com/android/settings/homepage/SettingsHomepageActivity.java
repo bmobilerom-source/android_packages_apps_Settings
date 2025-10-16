@@ -309,10 +309,16 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                              (root != null ? root.findViewById(R.id.user_title) : null);
     final TextView homepageTitle = appBarContainer != null ? appBarContainer.findViewById(R.id.homepage_title) : 
                                   (root != null ? root.findViewById(R.id.homepage_title) : null);
-    final TextView searchTextView = root != null ? root.findViewById(R.id.search_action_bar_title) : null;
+    final TextView searchTextView = root != null
+            ? (root.findViewById(R.id.search_bar_title) != null
+                ? root.findViewById(R.id.search_bar_title)
+                : root.findViewById(R.id.search_action_bar_title))
+            : null;
 
     // Only set contextual messages if the required TextViews exist
     if (textView != null && homepageTitle != null) {
+        // Ensure both greeting views are visible in all themes/layouts
+        textView.setVisibility(View.VISIBLE);
         homepageTitle.setVisibility(View.VISIBLE);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.header_text_size_contextual));
 
