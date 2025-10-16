@@ -317,6 +317,22 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     // Always set contextual messages - force visibility and text
     Log.d(TAG, "Contextual: textView=" + (textView != null) + ", homepageTitle=" + (homepageTitle != null));
+    
+    // Force create TextViews if they don't exist
+    if (textView == null && homepageTitle == null) {
+        Log.w(TAG, "No contextual TextViews found, creating fallback");
+        // Create a simple text view programmatically as fallback
+        final View contextualContainer = findViewById(R.id.app_bar_container);
+        if (contextualContainer != null) {
+            final TextView fallbackText = new TextView(this);
+            fallbackText.setText("Welcome to Settings");
+            fallbackText.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorPrimary));
+            fallbackText.setTextSize(18);
+            fallbackText.setPadding(16, 8, 16, 8);
+            ((ViewGroup) contextualContainer).addView(fallbackText, 0);
+        }
+    }
+    
     if (textView != null || homepageTitle != null) {
         if (textView != null) {
             textView.setVisibility(View.VISIBLE);
