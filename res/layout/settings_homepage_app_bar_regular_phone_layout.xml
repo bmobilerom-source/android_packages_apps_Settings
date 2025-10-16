@@ -72,10 +72,9 @@
             android:accessibilityTraversalAfter="@id/homepage_title"
             android:contentDescription="@string/search_bar_account_avatar_content_description" />
 
-    <TextView
-        android:id="@+id/homepage_title"
-        android:text="@string/dashboard_random4"
-        style="@style/custom_toolbar.Expanded"/>
+	</LinearLayout>
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/suggestion_content"
