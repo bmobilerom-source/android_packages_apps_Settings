@@ -48,6 +48,9 @@
     <string name="settings_random3">Find features and options</string>
     <string name="settings_random4">Look for anything in Settings</string>
     <string name="settings_random5">Search by feature or app</string>
+
+    <!-- Fallback user display name -->
+    <string name="default_user">Owner</string>
 </resources>
 
 <?xml version="1.0" encoding="utf-8"?>
