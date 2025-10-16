@@ -315,7 +315,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 : root.findViewById(R.id.search_action_bar_title))
             : null;
 
-    // Set contextual messages if at least one target view exists
+    // Prepare contextual strings and set whichever views exist
     if (textView != null || homepageTitle != null) {
         if (textView != null) {
             textView.setVisibility(View.VISIBLE);
@@ -349,6 +349,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 	int searchRnd = genSearchMsg.nextInt(randomMsgSearch.length-1);
     // Keep the search bar hint unchanged; contextual messages are shown above the search bar.
 
+        String headerLine = null;
+        String subLine = null;
         switch (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
             case 5: case 6: case 7: case 8: case 9: case 10:
        	// Generate random welcome massage as title header
@@ -392,12 +394,18 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         	Random genmsgRD = new Random();
         	int randomm = genmsgRD.nextInt(msgRandom.length-1);
         	int randomGreet = genmsgRD.nextInt(msgRandomGreet.length-1);
-        	textView.setText(msgRandom[randomm] + " " + getOwnerName() + ",");
-        	homepageTitle.setText(msgRandomGreet[randomGreet]);
+        	headerLine = msgRandom[randomm] + " " + getOwnerName() + ",";
+        	subLine = msgRandomGreet[randomGreet];
                 break;
 
             default:
                 break;
+        }
+        if (textView != null && headerLine != null) {
+            textView.setText(headerLine);
+        }
+        if (homepageTitle != null && subLine != null) {
+            homepageTitle.setText(subLine);
         }
     } // End of contextual messages if block
         setupEdgeToEdge();
