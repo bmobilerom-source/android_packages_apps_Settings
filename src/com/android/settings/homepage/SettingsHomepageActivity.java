@@ -329,7 +329,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
 	Random genSearchMsg = new Random();
 	int searchRnd = genSearchMsg.nextInt(randomMsgSearch.length-1);
-    searchTextView.setText(randomMsgSearch[searchRnd]);
+    if (searchTextView != null) {
+        searchTextView.setText(randomMsgSearch[searchRnd]);
+    }
 
         switch (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
             case 5: case 6: case 7: case 8: case 9: case 10:
