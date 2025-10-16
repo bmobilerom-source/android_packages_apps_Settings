@@ -327,7 +327,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (homepageTitle != null) {
             homepageTitle.setVisibility(View.VISIBLE);
             // Ensure readable color on all themes
-            homepageTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr/textColorSecondary));
+            homepageTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorSecondary));
         }
 
 	String[] randomMsgSearch = getResources().getStringArray(R.array.settings_random);
@@ -340,9 +340,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         String[] msgRandom = getResources().getStringArray(R.array.dashboard_random);
         String[] msgRandomGreet = getResources().getStringArray(R.array.dashboard_random_greetings);
 
-        String greetingsEN = getResources().getString(R.string.dashboard_early_night_greeting1);
-        String greetingsN = getResources().getString(R.string.dashboard_night_greetings1);
-        String greetingsNoon = getResources().getString(R.string.dashboard_noon_greeting1);
+        String greetingsEN = getString(R.string.dashboard_early_night2);
+        String greetingsN = getString(R.string.dashboard_night4);
+        String greetingsNoon = getString(R.string.dashboard_noon1);
         String random6 = getResources().getString(R.string.dashboard_random6);
 
 	Random genSearchMsg = new Random();
