@@ -47,6 +47,6 @@
     <string name="settings_random4">Finders keepers</string>
     <string name="settings_random5">Search settings</string>
     <string name="settings_random6">Dream big and dare to fail</string>
-    <string name="default_user">User</string>
+    <!-- duplicate removed: default_user defined earlier -->
 </resources>
 
