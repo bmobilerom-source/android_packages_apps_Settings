@@ -6,6 +6,11 @@
 
      <!-- Fallback user display name -->
     <string name="default_user">Owner</string>
+    
+    <!-- Additional missing strings -->
+    <string name="qs_brightness_slider_haptic_title">Brightness slider haptic</string>
+    <string name="qs_brightness_slider_haptic_summary">Enable haptic feedback for brightness slider</string>
+    <string name="show_clipboard_overlay_title1">Show clipboard overlay</string>
     <string name="dashboard_morning1">Start your day positively!</string>
     <string name="dashboard_morning2">The Sun is up!</string>
     <string name="dashboard_morning3">A nice morning</string>
