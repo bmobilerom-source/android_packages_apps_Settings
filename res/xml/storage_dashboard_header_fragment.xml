@@ -18,7 +18,7 @@ Copyright (C) 2021 The Android Open Source Project
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="storage_header"
-    android:title="@string/storage_settings">
+    android:title=" ">
     <com.android.settingslib.widget.LayoutPreference
         android:key="device_name"
         android:order="-500"
