@@ -155,7 +155,6 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
 
         final EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, userCard)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 
@@ -168,6 +167,6 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
             controller.setLabel(info.name);
         }
 
-        controller.done(context, true);
+        controller.done(true);
     }
 }

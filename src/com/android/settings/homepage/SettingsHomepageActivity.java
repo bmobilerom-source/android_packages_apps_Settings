@@ -315,15 +315,19 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 : root.findViewById(R.id.search_action_bar_title))
             : null;
 
-    // Set contextual messages if at least one target view exists
+    // Prepare contextual strings and set whichever views exist
     if (textView != null || homepageTitle != null) {
         if (textView != null) {
             textView.setVisibility(View.VISIBLE);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     getResources().getDimensionPixelSize(R.dimen.header_text_size_contextual));
+            // Ensure readable color on all themes
+            textView.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorPrimary));
         }
         if (homepageTitle != null) {
             homepageTitle.setVisibility(View.VISIBLE);
+            // Ensure readable color on all themes
+            homepageTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorSecondary));
         }
 
 	String[] randomMsgSearch = getResources().getStringArray(R.array.settings_random);
@@ -336,15 +340,17 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         String[] msgRandom = getResources().getStringArray(R.array.dashboard_random);
         String[] msgRandomGreet = getResources().getStringArray(R.array.dashboard_random_greetings);
 
-        String greetingsEN = getResources().getString(R.string.dashboard_early_night_greeting1);
-        String greetingsN = getResources().getString(R.string.dashboard_night_greetings1);
-        String greetingsNoon = getResources().getString(R.string.dashboard_noon_greeting1);
+        String greetingsEN = getString(R.string.dashboard_early_night2);
+        String greetingsN = getString(R.string.dashboard_night4);
+        String greetingsNoon = getString(R.string.dashboard_noon1);
         String random6 = getResources().getString(R.string.dashboard_random6);
 
 	Random genSearchMsg = new Random();
 	int searchRnd = genSearchMsg.nextInt(randomMsgSearch.length-1);
     // Keep the search bar hint unchanged; contextual messages are shown above the search bar.
 
+        String headerLine = null;
+        String subLine = null;
         switch (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
             case 5: case 6: case 7: case 8: case 9: case 10:
        	// Generate random welcome massage as title header
@@ -388,12 +394,22 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         	Random genmsgRD = new Random();
         	int randomm = genmsgRD.nextInt(msgRandom.length-1);
         	int randomGreet = genmsgRD.nextInt(msgRandomGreet.length-1);
-        	textView.setText(msgRandom[randomm] + " " + getOwnerName() + ",");
-        	homepageTitle.setText(msgRandomGreet[randomGreet]);
+        	headerLine = msgRandom[randomm] + " " + getOwnerName() + ",";
+        	subLine = msgRandomGreet[randomGreet];
                 break;
 
             default:
                 break;
+        }
+        // Final safety defaults to ensure something is shown
+        if (headerLine == null) headerLine = getString(R.string.settings_label);
+        if (subLine == null) subLine = getString(R.string.settings_random1);
+
+        if (textView != null) {
+            textView.setText(headerLine);
+        }
+        if (homepageTitle != null) {
+            homepageTitle.setText(subLine);
         }
     } // End of contextual messages if block
         setupEdgeToEdge();
