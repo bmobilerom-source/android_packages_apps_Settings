@@ -303,8 +303,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
 
     final View root = findViewById(R.id.settings_homepage_container);
-    final TextView textView = root != null ? root.findViewById(R.id.user_title) : null;
-    final TextView homepageTitle = root != null ? root.findViewById(R.id.homepage_title) : null;
+    // For v2 layout, TextViews are in the app bar container
+    final View appBarContainer = findViewById(R.id.app_bar_container);
+    final TextView textView = appBarContainer != null ? appBarContainer.findViewById(R.id.user_title) : 
+                             (root != null ? root.findViewById(R.id.user_title) : null);
+    final TextView homepageTitle = appBarContainer != null ? appBarContainer.findViewById(R.id.homepage_title) : 
+                                  (root != null ? root.findViewById(R.id.homepage_title) : null);
     final TextView searchTextView = root != null ? root.findViewById(R.id.search_action_bar_title) : null;
 
     // Only set contextual messages if the required TextViews exist
