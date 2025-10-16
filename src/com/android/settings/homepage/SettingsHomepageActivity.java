@@ -315,7 +315,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 : root.findViewById(R.id.search_action_bar_title))
             : null;
 
-    // Prepare contextual strings and set whichever views exist
+    // Always set contextual messages - force visibility and text
+    Log.d(TAG, "Contextual: textView=" + (textView != null) + ", homepageTitle=" + (homepageTitle != null));
     if (textView != null || homepageTitle != null) {
         if (textView != null) {
             textView.setVisibility(View.VISIBLE);
