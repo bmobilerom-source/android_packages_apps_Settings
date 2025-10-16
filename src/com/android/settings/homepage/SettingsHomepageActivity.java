@@ -339,9 +339,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
 	Random genSearchMsg = new Random();
 	int searchRnd = genSearchMsg.nextInt(randomMsgSearch.length-1);
-    if (searchTextView != null) {
-        searchTextView.setText(randomMsgSearch[searchRnd]);
-    }
+    // Keep the search bar hint unchanged; contextual messages are shown above the search bar.
 
         switch (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
             case 5: case 6: case 7: case 8: case 9: case 10:
