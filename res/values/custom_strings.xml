@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Stubs to satisfy references from top_level_settings_v2.xml -->
+    <string name="about_user_base">Owner</string>
+    <string name="about_user_summary_base">Tap for more info</string>
+</resources>
+
+<?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2021-2022 Rising
      Licensed under the Apache License, Version 2.0 (the "License");
