@@ -4,4 +4,17 @@
     <dimen name="dot_pref_radius">12dp</dimen>
     <dimen name="preview_pager_padding">16dp</dimen>
     <dimen name="xd_pref_card_horizontal_padding">16dp</dimen>
+    
+    <!-- Contextual card dimensions -->
+    <dimen name="contextual_card_vertical_margin">8dp</dimen>
+    <dimen name="contextual_card_side_margin">16dp</dimen>
+    <dimen name="contextual_card_corner_radius">12dp</dimen>
+    
+    <!-- Dream item dimensions -->
+    <dimen name="dream_item_corner_radius">8dp</dimen>
+    <dimen name="dream_item_content_padding">16dp</dimen>
+    
+    <!-- Homepage title dimensions -->
+    <dimen name="homepage_title_margin_bottom">8dp</dimen>
+    <dimen name="homepage_title_margin_horizontal">16dp</dimen>
 </resources>
