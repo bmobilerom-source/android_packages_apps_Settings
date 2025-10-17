@@ -53,5 +53,10 @@
     <string name="settings_random5">Search settings</string>
     <string name="settings_random6">Dream big and dare to fail</string>
     <!-- duplicate removed: default_user defined earlier -->
+    <string name="status_bar_title">Status bar</string>
+    <string name="volume_panel_haptic_feedback_title">Haptic feedback on volume panel</string>
+    <string name="volume_panel_haptic_feedback_summary">Vibrate when adjusting volume</string>
+    <string name="smart_5g_title">Smart 5G</string>
+    <string name="smart_5g_summary">Automatically switch between 4G/5G to save power</string>
 </resources>
 
