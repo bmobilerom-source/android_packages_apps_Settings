@@ -560,7 +560,6 @@
     <!-- Header Messages -->
     <dimen name="header_text_size_contextual">34sp</dimen>
     <dimen name="header_text_size_default">40sp</dimen>
-</>
     <!-- Dot preference styling -->
     <dimen name="dot_pref_radius">12dp</dimen>
     <dimen name="preview_pager_padding">16dp</dimen>
