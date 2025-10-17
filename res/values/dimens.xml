@@ -122,4 +122,17 @@
     
     <!-- Developer options dialog -->
     <dimen name="developer_option_dialog_margin_start">24dp</dimen>
+    
+    <!-- Bluetooth find broadcast header/button/progress -->
+    <dimen name="bluetooth_find_broadcast_header_top_margin">16dp</dimen>
+    <dimen name="bluetooth_find_broadcast_button_one_size">40dp</dimen>
+    <dimen name="bluetooth_find_broadcast_button_two_size">40dp</dimen>
+    <dimen name="bluetooth_find_broadcast_button_start_margin">12dp</dimen>
+    <dimen name="bluetooth_find_broadcast_progress_height">4dp</dimen>
+    <dimen name="bluetooth_find_broadcast_progress_margin_top">8dp</dimen>
+    <dimen name="bluetooth_find_broadcast_progress_width">120dp</dimen>
+    
+    <!-- Bluetooth dialog paddings -->
+    <dimen name="bluetooth_dialog_padding_top">16dp</dimen>
+    <dimen name="bluetooth_dialog_padding">16dp</dimen>
 </resources>
