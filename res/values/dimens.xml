@@ -25,4 +25,23 @@
     <!-- Notification importance dimensions -->
     <dimen name="notification_importance_button_text">14sp</dimen>
     <dimen name="notification_importance_description_text">12sp</dimen>
+    
+    <!-- Accessibility contrast button dimensions -->
+    <dimen name="contrast_button_stroke_width">2dp</dimen>
+    <dimen name="contrast_button_radius">8dp</dimen>
+    
+    <!-- Battery hints chip dimensions -->
+    <dimen name="battery_hints_chip_corner_radius">12dp</dimen>
+    
+    <!-- Face enroll icon dimensions -->
+    <dimen name="face_enroll_icon_large_height">48dp</dimen>
+    <dimen name="face_enroll_icon_large_width">48dp</dimen>
+    
+    <!-- Homepage app bar dimensions -->
+    <dimen name="homepage_app_bar_corner_radius">12dp</dimen>
+    <dimen name="homepage_preference_corner_radius">8dp</dimen>
+    
+    <!-- Accessibility icon dimensions -->
+    <dimen name="accessibility_icon_size">24dp</dimen>
+    <dimen name="accessibility_icon_foreground_size">20dp</dimen>
 </resources>
