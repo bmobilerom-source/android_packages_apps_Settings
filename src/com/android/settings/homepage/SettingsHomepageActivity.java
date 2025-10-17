@@ -48,9 +48,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.net.URISyntaxException;
+import java.util.Calendar;
+import java.util.Random;
 import android.widget.LinearLayout;
 import android.widget.Toolbar;
-import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.Insets;
@@ -300,55 +304,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             }
         }
         
-        final TextView textView = findViewById(R.id.homepage_title);
-
-        switch (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
-            case 5: case 6: case 7: case 8: case 9: case 10:
-       	// Generate random welcome massage as title header
-        	String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
-        	Random genMorningMsg = new Random();
-        	int morning = genMorningMsg.nextInt(morningMsg.length-1);
-        	textView.setText(morningMsg[morning]);
-                break;
-
-            case 18: case 19: case 20: 
-        	String[] msgearlyNight = getResources().getStringArray(R.array.dashboard_early_night);
-        	Random genmsgeNight = new Random();
-        	int eNight = genmsgeNight.nextInt(msgearlyNight.length-1);
-        	textView.setText(msgearlyNight[eNight]);
-                break;
-
-            case 21: case 22: case 23: case 0: 
-        	String[] msgNight = getResources().getStringArray(R.array.dashboard_night);
-        	Random genmsgNight = new Random();
-        	int night = genmsgNight.nextInt(msgNight.length-1);
-        	textView.setText(msgNight[night]);
-                break;
-
-             case 16: case 17:
-        	String[] msgNoon = getResources().getStringArray(R.array.dashboard_noon);
-        	Random genmsgNoon = new Random();
-        	int noon = genmsgNoon.nextInt(msgNoon.length-1);
-        	textView.setText(msgNoon[noon]);
-                break;
-
-            case 1: case 2: case 3: case 4:
-        	String[] msgMN = getResources().getStringArray(R.array.dashboard_midnight);
-        	Random genmsgMN = new Random();
-        	int mn = genmsgMN.nextInt(msgMN.length-1);
-        	textView.setText(msgMN[mn]);
-                break;
-
-            case 11: case 12: case 13: case 14: case 15:
-        	String[] msgRD = getResources().getStringArray(R.array.dashboard_random);
-        	Random genmsgRD = new Random();
-        	int randomm = genmsgRD.nextInt(msgRD.length-1);
-        	textView.setText(msgRD[randomm]);
-                break;
-
-            default:
-                break;
-      }
+        // Set contextual messages for both v1 and v2 layouts
+        setContextualMessages();
         mMainFragment = showFragment(() -> {
             final TopLevelSettings fragment = new TopLevelSettings();
             fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
@@ -372,6 +329,82 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         updateSplitLayout();
 
         enableTaskLocaleOverride();
+    }
+
+    private void setContextualMessages() {
+        // Find TextViews for both v1 and v2 layouts
+        TextView userTitle = findViewById(R.id.user_title);
+        TextView homepageTitle = findViewById(R.id.homepage_title);
+        
+        // Debug logging
+        Log.d(TAG, "setContextualMessages: userTitle=" + (userTitle != null ? "found" : "null") + 
+              ", homepageTitle=" + (homepageTitle != null ? "found" : "null"));
+        
+        // Set user title if found
+        if (userTitle != null) {
+            userTitle.setVisibility(View.VISIBLE);
+            userTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorPrimary));
+            userTitle.setText(getString(R.string.settings_label));
+        }
+        
+        // Set contextual message based on time of day
+        if (homepageTitle != null) {
+            homepageTitle.setVisibility(View.VISIBLE);
+            homepageTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorSecondary));
+            
+            String contextualMessage = getContextualMessage();
+            homepageTitle.setText(contextualMessage);
+        }
+    }
+    
+    private String getContextualMessage() {
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        
+        try {
+            switch (hour) {
+                case 5: case 6: case 7: case 8: case 9: case 10:
+                    String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
+                    Random genMorningMsg = new Random();
+                    int morning = genMorningMsg.nextInt(morningMsg.length);
+                    return morningMsg[morning];
+
+                case 18: case 19: case 20: 
+                    String[] msgearlyNight = getResources().getStringArray(R.array.dashboard_early_night);
+                    Random genmsgeNight = new Random();
+                    int eNight = genmsgeNight.nextInt(msgearlyNight.length);
+                    return msgearlyNight[eNight];
+
+                case 21: case 22: case 23: case 0: 
+                    String[] msgNight = getResources().getStringArray(R.array.dashboard_night);
+                    Random genmsgNight = new Random();
+                    int night = genmsgNight.nextInt(msgNight.length);
+                    return msgNight[night];
+
+                case 16: case 17:
+                    String[] msgNoon = getResources().getStringArray(R.array.dashboard_noon);
+                    Random genmsgNoon = new Random();
+                    int noon = genmsgNoon.nextInt(msgNoon.length);
+                    return msgNoon[noon];
+
+                case 1: case 2: case 3: case 4:
+                    String[] msgMN = getResources().getStringArray(R.array.dashboard_midnight);
+                    Random genmsgMN = new Random();
+                    int mn = genmsgMN.nextInt(msgMN.length);
+                    return msgMN[mn];
+
+                case 11: case 12: case 13: case 14: case 15:
+                    String[] msgRD = getResources().getStringArray(R.array.dashboard_random);
+                    Random genmsgRD = new Random();
+                    int randomm = genmsgRD.nextInt(msgRD.length);
+                    return msgRD[randomm];
+
+                default:
+                    return getString(R.string.settings_label);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting contextual message", e);
+            return getString(R.string.settings_label);
+        }
     }
 
     @VisibleForTesting
@@ -836,9 +869,16 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void updateHomepageAppBar() {
-        if (Flags.homepageRevamp() || !mIsEmbeddingActivityEnabled) {
+        if (Flags.homepageRevamp()) {
+            // For v2 layout, ensure contextual messages are visible
+            setContextualMessages();
             return;
         }
+        
+        if (!mIsEmbeddingActivityEnabled) {
+            return;
+        }
+        
         updateAppBarMinHeight();
         if (mIsTwoPane) {
             findViewById(R.id.homepage_app_bar_regular_phone_view).setVisibility(View.GONE);

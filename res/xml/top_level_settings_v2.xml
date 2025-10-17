@@ -35,6 +35,12 @@
 	    android:title="@string/about_user_base"
         android:summary="@string/about_user_summary_base"
         android:order="-180" />
+        
+	<com.android.settings.widget.HomepagePreference
+        android:fragment="com.epic.Anatolia"
+        android:key="top_level_anatolia"
+        android:order="-135"
+        android:title="@string/anatolia_settings_title" />	
 
     <PreferenceCategory
         android:order="-130"
