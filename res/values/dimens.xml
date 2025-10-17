@@ -77,4 +77,8 @@
     
     <!-- Screen flash color button dimensions -->
     <dimen name="screen_flash_color_button_inner_circle_padding">2dp</dimen>
+    <dimen name="screen_flash_color_button_inner_circle_size">16dp</dimen>
+    <dimen name="screen_flash_color_button_inner_circle_stroke">2dp</dimen>
+    <dimen name="screen_flash_color_button_outer_circle_size">20dp</dimen>
+    <dimen name="screen_flash_color_button_outer_circle_stroke_width">2dp</dimen>
 </resources>
