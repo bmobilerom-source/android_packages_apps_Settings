@@ -97,4 +97,29 @@
     <!-- Accessibility QS tooltip dimensions -->
     <dimen name="accessibility_qs_tooltip_margin_top">8dp</dimen>
     <dimen name="accessibility_qs_tooltip_margin">16dp</dimen>
+    
+    <!-- QR code and preview sizes -->
+    <dimen name="qrcode_preview_size">240dp</dimen>
+    <dimen name="qrcode_size">200dp</dimen>
+    
+    <!-- Advanced Bluetooth header -->
+    <dimen name="advanced_bluetooth_header_title_text_size">20sp</dimen>
+    
+    <!-- Airplane mode message -->
+    <dimen name="airplane_mode_message_margin_vertical">12dp</dimen>
+    
+    <!-- Back gesture indicator -->
+    <dimen name="back_gesture_indicator_width">24dp</dimen>
+    
+    <!-- Battery chart graph -->
+    <dimen name="chartview_layout_height">160dp</dimen>
+    
+    <!-- Biometrics glif -->
+    <dimen name="biometrics_glif_header_height">200dp</dimen>
+    
+    <!-- Generic list item padding -->
+    <dimen name="list_preferred_item_padding">16dp</dimen>
+    
+    <!-- Developer options dialog -->
+    <dimen name="developer_option_dialog_margin_start">24dp</dimen>
 </resources>
