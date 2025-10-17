@@ -228,8 +228,8 @@ abstract class AppListFragment: Fragment(R.layout.apps_list_layout), MenuItem.On
                 mutex.withLock {
                     packageList.filter {
                         when (displayCategory) {
-                            CATEGORY_SYSTEM_ONLY -> it.applicationInfo.isSystemApp()
-                            CATEGORY_USER_ONLY -> !it.applicationInfo.isSystemApp()
+                            CATEGORY_SYSTEM_ONLY -> it.applicationInfo?.isSystemApp() == true
+                            CATEGORY_USER_ONLY -> it.applicationInfo?.isSystemApp() != true
                             else -> true
                         } &&
                         getLabel(it).contains(searchText, true) &&
@@ -249,11 +249,11 @@ abstract class AppListFragment: Fragment(R.layout.apps_list_layout), MenuItem.On
         AppInfo(
             packageInfo.packageName,
             getLabel(packageInfo),
-            packageInfo.applicationInfo.loadIcon(packageManager),
+            packageInfo.applicationInfo?.loadIcon(packageManager) ?: requireContext().getDrawable(android.R.drawable.sym_def_app_icon)!!,
         )
 
     private fun getLabel(packageInfo: PackageInfo) =
-        packageInfo.applicationInfo.loadLabel(packageManager).toString()
+        (packageInfo.applicationInfo?.loadLabel(packageManager) ?: packageInfo.packageName).toString()
 
     private inner class AppListAdapter :
             ListAdapter<AppInfo, AppListViewHolder>(itemCallback)

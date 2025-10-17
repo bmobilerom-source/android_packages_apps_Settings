@@ -8,7 +8,7 @@ import android.widget.TextView
 
 import com.android.settings.R
 
-class BatteryStatsView(context: Context?, attrs: AttributeSet?) : FrameLayout(context, attrs) {
+class BatteryStatsView(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
     private val statsLastFullCharge: TextView
     private val statsLastFullChargeTitle: TextView
@@ -28,7 +28,7 @@ class BatteryStatsView(context: Context?, attrs: AttributeSet?) : FrameLayout(co
     }
 
     fun updateLastFullChargeTitle(resID: Int) {
-        statsLastFullChargeTitle.text = context!!.getString(resID)
+        statsLastFullChargeTitle.text = context.getString(resID)
     }
 
     fun updateSOT(chars: CharSequence) {
