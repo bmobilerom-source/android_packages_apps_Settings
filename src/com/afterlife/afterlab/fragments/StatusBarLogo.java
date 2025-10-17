@@ -55,7 +55,7 @@ public class StatusBarLogo extends SettingsPreferenceFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.AFTERLIFE;
+        return MetricsEvent.CUSTOM_SETTINGS;
     }
 
     @Override

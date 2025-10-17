@@ -113,7 +113,7 @@ public class CustomizeDashboard extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.AFTERLIFE;
+        return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
     }
 	
 	private int afterLabsStyle() {
