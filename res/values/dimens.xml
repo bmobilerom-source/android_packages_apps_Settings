@@ -17,4 +17,12 @@
     <!-- Homepage title dimensions -->
     <dimen name="homepage_title_margin_bottom">8dp</dimen>
     <dimen name="homepage_title_margin_horizontal">16dp</dimen>
+    
+    <!-- Search bar dimensions -->
+    <dimen name="search_bar_corner_radius">8dp</dimen>
+    <dimen name="search_bar_text_size">16sp</dimen>
+    
+    <!-- Notification importance dimensions -->
+    <dimen name="notification_importance_button_text">14sp</dimen>
+    <dimen name="notification_importance_description_text">12sp</dimen>
 </resources>

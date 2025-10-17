@@ -36,12 +36,6 @@
         android:summary="@string/about_user_summary_base"
         android:order="-180" />
 
-   <com.android.settingslib.widget.LayoutPreference
-            android:layout="@layout/usercard_blank"
-            android:fragment="com.android.settings.users.UserSettings"
-            android:key="top_level_usercard"
-            android:order="-170" />
-
     <PreferenceCategory
         android:order="-130"
         android:key="top_level_connectivity_category"
