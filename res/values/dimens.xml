@@ -1,4 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <!-- Dot preference styling -->
     <dimen name="dot_pref_radius">12dp</dimen>
     <dimen name="preview_pager_padding">16dp</dimen>
     <dimen name="xd_pref_card_horizontal_padding">16dp</dimen>
+</resources>
