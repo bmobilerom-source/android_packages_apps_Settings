@@ -58,5 +58,10 @@
     <string name="volume_panel_haptic_feedback_summary">Vibrate when adjusting volume</string>
     <string name="smart_5g_title">Smart 5G</string>
     <string name="smart_5g_summary">Automatically switch between 4G/5G to save power</string>
+    <string name="qs_brightness_haptic_feedback_title">Brightness slider haptic</string>
+    <string name="qs_brightness_haptic_feedback_summary">Vibrate when adjusting brightness</string>
+    <string name="qs_styles_title">Quick Settings style</string>
+    <string name="adaptive_playback_screen_title">Adaptive playback</string>
+    <string name="button_pref_title">Buttons</string>
 </resources>
 

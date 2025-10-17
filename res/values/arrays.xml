@@ -18,6 +18,16 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="qs_styles_entries">
+        <item>Default</item>
+        <item>Rounded</item>
+        <item>Square</item>
+    </string-array>
+    <string-array name="qs_styles_values">
+        <item>default</item>
+        <item>rounded</item>
+        <item>square</item>
+    </string-array>
     <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown in a list dialog. -->
     <string-array name="screen_timeout_entries">
         <item>15 seconds</item>
