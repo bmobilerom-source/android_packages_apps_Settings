@@ -81,4 +81,20 @@
     <dimen name="screen_flash_color_button_inner_circle_stroke">2dp</dimen>
     <dimen name="screen_flash_color_button_outer_circle_size">20dp</dimen>
     <dimen name="screen_flash_color_button_outer_circle_stroke_width">2dp</dimen>
+    
+    <!-- Settings panel dimensions -->
+    <dimen name="settings_panel_corner_radius">12dp</dimen>
+    
+    <!-- Contrast button dimensions -->
+    <dimen name="contrast_button_total_size">48dp</dimen>
+    <dimen name="contrast_button_text_spacing">8dp</dimen>
+    <dimen name="contrast_button_text_size">14sp</dimen>
+    <dimen name="contrast_button_horizontal_spacing">16dp</dimen>
+    
+    <!-- Accessibility imageview dimensions -->
+    <dimen name="accessibility_imageview_size">24dp</dimen>
+    
+    <!-- Accessibility QS tooltip dimensions -->
+    <dimen name="accessibility_qs_tooltip_margin_top">8dp</dimen>
+    <dimen name="accessibility_qs_tooltip_margin">16dp</dimen>
 </resources>
