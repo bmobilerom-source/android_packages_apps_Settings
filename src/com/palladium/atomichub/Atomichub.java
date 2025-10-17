@@ -206,7 +206,7 @@ public class Atomichub extends SettingsPreferenceFragment implements  View.OnCli
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.ORCHIDOS_SETTINGS;
+        return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
     }
 
 

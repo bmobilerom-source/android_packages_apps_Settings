@@ -37,7 +37,7 @@ public class frag_theme extends SettingsPreferenceFragment implements OnPreferen
     }
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ORCHIDOS_SETTINGS;
+        return MetricsEvent.CUSTOM_SETTINGS;
     }
 
     @Override
