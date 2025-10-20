@@ -63,5 +63,8 @@
     <string name="qs_styles_title">Quick Settings style</string>
     <string name="adaptive_playback_screen_title">Adaptive playback</string>
     <string name="button_pref_title">Buttons</string>
+
+    <string name="mainuser_profile_text">User Profile</string>
+    <string name="clickhere_summary_title">Click here to view profile</string>
 </resources>
 

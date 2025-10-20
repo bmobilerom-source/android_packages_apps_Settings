@@ -20,14 +20,12 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
    
-    <!-- FlexoOS logo (force visible card at very top) -->
+  
     <com.android.settingslib.widget.LayoutPreference
-        android:key="flexo_lottie_animation"
-        android:layout="@layout/flexoos_card"
+        android:layout="@layout/about_device_info"
+        android:key="about_device_info"
         android:selectable="false"
-        android:order="-2000"
-        settings:isPreferenceVisible="true" />
-
+        android:order="-2000"/>
     <Preference
         android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
         android:icon="@drawable/ic_user"
