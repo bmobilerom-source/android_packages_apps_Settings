@@ -21,7 +21,7 @@
 
   <com.android.settingslib.widget.LayoutPreference
         android:key="orchidosrom_grid"
-        android:layout="@layout/afterlife_dashboard_header"
+        android:layout="@layout/afterlab_dashboard_header"
         android:selectable="false"/>
 
 </PreferenceScreen>
