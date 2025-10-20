@@ -19,17 +19,13 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/navbar_title">
  
-           <com.android.settingslib.widget.LayoutPreference
-        android:key="orchidosrom_grid"
-        android:layout="@layout/about"
-        android:selectable="false"/>
+   
 
-    <!-- Statusbar Settings -->
-    <Preference
-            settings:layout="@layout/dot_preference_middle_card"
-        android:key="statusbar_settings"
-        android:title="@string/status_bar_title"
-        android:icon="@drawable/ic_settings_statusbar"
-        android:order="-248"
-        android:fragment="com.android.settings.custom.statusbar.StatusBarSettings" />
+
+ <com.android.settingslib.widget.LayoutPreference
+        android:key="battery_stats_view"
+        android:selectable="false"
+        android:enabled="false"
+        android:shouldDisableView="false"
+        android:layout="@layout/afterlife_card_homepage_content" />
 </PreferenceScreen>

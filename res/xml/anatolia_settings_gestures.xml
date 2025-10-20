@@ -19,9 +19,14 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/gestures_title">
 
-  <com.android.settingslib.widget.LayoutPreference
-        android:key="orchidosrom_grid"
-        android:layout="@layout/team_base"
-        android:selectable="false"/>
+
+ <com.android.settingslib.widget.LayoutPreference
+        android:key="battery_stats_view"
+        android:selectable="false"
+        android:enabled="false"
+        android:shouldDisableView="false"
+        android:layout="@layout/xd_firmware_header" />
+
+
 
 </PreferenceScreen>
