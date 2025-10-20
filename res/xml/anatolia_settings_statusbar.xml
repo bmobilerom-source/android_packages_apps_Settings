@@ -15,12 +15,13 @@
 -->
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/statusbar_title">
     <!-- BananaDroid logo -->
     <com.android.settingslib.widget.LayoutPreference
         android:key="banana_logo"
-        android:layout="@layout/banana_logo"
+        android:layout="@layout/banana_card_about"
         android:selectable="false"/>
        
         <Preference
@@ -35,9 +36,4 @@
         android:layout="@layout/orchidosrom_grid"
         android:selectable="false"/>
         
-    <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/about_device_info"
-        android:key="about_device_info"
-        android:selectable="false"
-        android:order="-10" />
 </PreferenceScreen>

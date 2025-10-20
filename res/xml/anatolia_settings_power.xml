@@ -15,13 +15,14 @@
 -->
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title=" ">
         <com.android.settingslib.widget.LayoutPreference
                 android:key="device_name"
                 android:order="-1"
                 android:selectable="false"
-                android:layout="@layout/device_info_header"
+                android:layout="@layout/atomichub"
                 settings:isPreferenceVisible="false" />
 
 </PreferenceScreen>
