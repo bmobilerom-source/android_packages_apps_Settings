@@ -22,17 +22,12 @@
    
   
     <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/about_device_info"
+        android:layout="@layout/mainuser_profile_card"
         android:key="about_device_info"
-        android:selectable="false"
-        android:order="-2000"/>
-    <Preference
+        android:selectable="true"
         android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
-        android:icon="@drawable/ic_user"
-        android:key="top_level_userinfo"
-	    android:title="@string/about_user_base"
-        android:summary="@string/about_user_summary_base"
-        android:order="-180" />
+        android:order="-2000"/>
+
         
 	<com.android.settings.widget.HomepagePreference
         android:fragment="com.epic.Anatolia"
