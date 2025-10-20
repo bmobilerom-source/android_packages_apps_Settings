@@ -332,29 +332,38 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void setContextualMessages() {
-        // Find TextViews for both v1 and v2 layouts
-        TextView userTitle = findViewById(R.id.user_title);
-        TextView homepageTitle = findViewById(R.id.homepage_title);
-        
-        // Debug logging
-        Log.d(TAG, "setContextualMessages: userTitle=" + (userTitle != null ? "found" : "null") + 
-              ", homepageTitle=" + (homepageTitle != null ? "found" : "null"));
-        
-        // Set user title if found
-        if (userTitle != null) {
-            userTitle.setVisibility(View.VISIBLE);
-            userTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorPrimary));
-            userTitle.setText(getString(R.string.settings_label));
-        }
-        
-        // Set contextual message based on time of day
-        if (homepageTitle != null) {
-            homepageTitle.setVisibility(View.VISIBLE);
-            homepageTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorSecondary));
+        // Use post() to ensure layout is fully inflated
+        findViewById(android.R.id.content).post(() -> {
+            // Find TextViews for both v1 and v2 layouts
+            TextView userTitle = findViewById(R.id.user_title);
+            TextView homepageTitle = findViewById(R.id.homepage_title);
             
-            String contextualMessage = getContextualMessage();
-            homepageTitle.setText(contextualMessage);
-        }
+            // Debug logging
+            Log.d(TAG, "setContextualMessages: userTitle=" + (userTitle != null ? "found" : "null") + 
+                  ", homepageTitle=" + (homepageTitle != null ? "found" : "null"));
+            
+            // Set user title if found
+            if (userTitle != null) {
+                userTitle.setVisibility(View.VISIBLE);
+                userTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorPrimary));
+                userTitle.setText(getString(R.string.settings_label));
+                Log.d(TAG, "setContextualMessages: Set user title to: " + getString(R.string.settings_label));
+            } else {
+                Log.w(TAG, "setContextualMessages: userTitle is null!");
+            }
+            
+            // Set contextual message based on time of day
+            if (homepageTitle != null) {
+                homepageTitle.setVisibility(View.VISIBLE);
+                homepageTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorSecondary));
+                
+                String contextualMessage = getContextualMessage();
+                homepageTitle.setText(contextualMessage);
+                Log.d(TAG, "setContextualMessages: Set homepage title to: " + contextualMessage);
+            } else {
+                Log.w(TAG, "setContextualMessages: homepageTitle is null!");
+            }
+        });
     }
     
     private String getContextualMessage() {
