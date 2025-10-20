@@ -17,12 +17,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/notifications_title">
- <com.android.settings.custom.preference.SystemSettingSwitchPreference
-        android:key="volume_panel_haptic_feedback"
-                    android:layout="@layout/dot_preference_top_card"
-        android:title="@string/volume_panel_haptic_feedback_title"
-        android:summary="@string/volume_panel_haptic_feedback_summary"
-        android:defaultValue="true" />
+
     <!-- Statusbar Settings -->
     <Preference
             android:layout="@layout/dot_preference_bottom_card"

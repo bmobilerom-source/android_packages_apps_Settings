@@ -36,10 +36,5 @@
             android:title="@string/qs_brightness_slider_haptic_title"
         android:layout="@layout/card_preference_layout_bm"/>
 
-        <com.android.settings.custom.preference.SystemSettingSwitchPreference
-            android:key="qs_brightness_slider_haptic"
-            android:title="@string/qs_brightness_slider_haptic_title"
-            android:summary="@string/qs_brightness_slider_haptic_summary"
-            android:defaultValue="false" />
 
 </PreferenceScreen>

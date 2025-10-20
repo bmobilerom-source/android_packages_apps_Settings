@@ -17,5 +17,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/quicksettings_title">
-
+      <com.android.settingslib.widget.LayoutPreference
+        android:key="orchidosrom_grid"
+        android:layout="@layout/orchidosrom_grid"
+        android:selectable="false"/>
 </PreferenceScreen>

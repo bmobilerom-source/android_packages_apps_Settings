@@ -30,7 +30,10 @@
             android:persistent="false"
             android:fragment="com.palladium.atomichub.Atomichub" />
    
-
+      <com.android.settingslib.widget.LayoutPreference
+        android:key="orchidosrom_grid"
+        android:layout="@layout/orchidosrom_grid"
+        android:selectable="false"/>
         
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/about_device_info"
