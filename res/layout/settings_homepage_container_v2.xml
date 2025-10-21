@@ -80,9 +80,8 @@
                <TextView
                    android:id="@+id/user_title"
                    android:text="@string/settings_label"
-                   android:textSize="20sp"
+                   android:textSize="0sp"
                    android:textColor="?android:attr/textColorPrimary"
-                   android:textStyle="bold"
                    android:layout_height="wrap_content"
                    android:layout_width="wrap_content"
                    android:layout_marginBottom="2dp" />
@@ -90,8 +89,9 @@
                <TextView
                    android:id="@+id/homepage_title"
                    android:text="@string/settings_label"
-                   android:textSize="24sp"
-                   android:textColor="?android:attr/textColorSecondary"
+                   android:textSize="40sp"
+                   android:textColor="?android:attr/textColorPrimary"
+                   android:textStyle="bold"
                    android:layout_height="wrap_content"
                    android:layout_width="wrap_content" />
         </LinearLayout>
