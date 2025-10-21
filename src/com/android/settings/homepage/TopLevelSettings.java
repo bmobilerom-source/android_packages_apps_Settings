@@ -29,6 +29,38 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.provider.Settings;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
+import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.support.SupportPreferenceController;
+import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.LayoutPreference;
+import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -341,6 +373,18 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     }
 }
 
+/**
+ * Custom SpanSizeLookup for Declan/Afterlife grid layout
+ */
+class DeclanSpanSizeOP extends GridLayoutManager.SpanSizeLookup {
+    @Override
+    public int getSpanSize(int position) {
+        // Return 2 for full width items, 1 for half width items
+        // This creates a 2-column grid layout
+        return 1;
+    }
+}
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -460,7 +504,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             final Activity context = getActivity(); final Bundle bundle = getArguments();
             final EntityHeaderController controller = EntityHeaderController
                     .newInstance(context, this, userCard)
-                    .setRecyclerView(getListView(), getSettingsLifecycle())
                     .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                             EntityHeaderController.ActionType.ACTION_NONE);
 

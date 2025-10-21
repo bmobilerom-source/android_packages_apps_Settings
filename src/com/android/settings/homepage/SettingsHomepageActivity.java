@@ -337,6 +337,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         
         } else {
         mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
+        
+        // Check if this activity is the root of the task
+        boolean isTaskRoot = isTaskRoot();
+        
         if (mIsEmbeddingActivityEnabled) {
             final UserManager um = getSystemService(UserManager.class);
             final UserInfo userInfo = um.getUserInfo(getUserId());
@@ -1153,11 +1157,4 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             }
         }
     }
-
-    private String getOwnerName(){
-        final UserManager mUserManager = getSystemService(UserManager.class);
-        final UserInfo userInfo = com.android.settings.Utils.getExistingUser(mUserManager,
-                    UserHandle.of(UserHandle.myUserId()));
-        return userInfo.name != null ? userInfo.name : getString(R.string.default_user);
-        }
 }
