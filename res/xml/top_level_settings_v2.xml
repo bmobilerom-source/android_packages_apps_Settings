@@ -20,20 +20,13 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
    
-  
-    <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/mainuser_profile_card"
-        android:key="about_device_info"
-        android:selectable="true"
-        android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
-        android:order="-2000"/>
+<com.android.settingslib.widget.LayoutPreference
+    android:layout="@layout/mainuser_profile_card"
+    android:key="about_device_info"
+    android:selectable="true"
+    android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+    android:order="-2000"/>
 
-        
-	<com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.Anatolia"
-        android:key="top_level_anatolia"
-        android:order="-135"
-        android:title="@string/anatolia_settings_title" />	
 
     <PreferenceCategory
         android:order="-130"
@@ -44,6 +37,7 @@
             android:icon="@drawable/ic_settings_wireless_filled"
             android:key="top_level_network"
             android:order="-20"
+            settings:layout="@layout/afterlab_card_interface_single_top_left"
             android:title="@string/network_dashboard_title"
             android:summary="@string/summary_placeholder"
             settings:highlightableMenuKey="@string/menu_key_network"
@@ -54,6 +48,7 @@
             android:icon="@drawable/ic_devices_other_filled"
             android:key="top_level_connected_devices"
             android:order="-10"
+            settings:layout="@layout/afterlab_card_interface_single_top_right" 
             android:title="@string/connected_devices_dashboard_title"
             android:summary="@string/connected_devices_dashboard_default_summary"
             settings:highlightableMenuKey="@string/menu_key_connected_devices"
@@ -70,6 +65,7 @@
             android:key="top_level_apps"
             android:order="-60"
             android:title="@string/apps_dashboard_title"
+            settings:layout="@layout/afterlab_interface_single_left"
             android:summary="@string/app_and_notification_dashboard_summary"
             settings:highlightableMenuKey="@string/menu_key_apps"/>
 
@@ -80,6 +76,7 @@
             android:order="-50"
             android:title="@string/configure_notification_settings"
             android:summary="@string/notification_dashboard_summary"
+            settings:layout="@layout/afterlab_interface_single_right"
             settings:highlightableMenuKey="@string/menu_key_notifications"/>
 
         <com.android.settings.widget.HomepagePreference
