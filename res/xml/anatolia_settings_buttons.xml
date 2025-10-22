@@ -18,12 +18,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <!-- Animation -->
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="aboutus_anim"
-        settings:searchable="false"
-        android:order="-999"
-        app:lottie_rawRes="@raw/aboutus_settings" />
+
 
     <!-- Accessibility Header -->
     <PreferenceCategory
