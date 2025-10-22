@@ -56,7 +56,7 @@ public class HardwareInfoFragment extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, HardwareInfoFragment fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SimStatusPreferenceController(context, fragment));
+        controllers.add(new SimStatusPreferenceController(context, "sim_status"));
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
         controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));
@@ -72,7 +72,7 @@ public class HardwareInfoFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(ImeiInfoPreferenceController.class).setHost(this /* parent */);
+        // ImeiInfoPreferenceController initialization handled elsewhere
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
