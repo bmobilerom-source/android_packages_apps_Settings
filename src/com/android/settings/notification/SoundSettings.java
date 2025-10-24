@@ -56,7 +56,6 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ActionBarShadowController;
-import com.android.settingslib.widget.UpdatableListPreferenceDialogFragment;
 
 import com.arrow.support.preferences.SystemSettingSwitchPreference;
 
