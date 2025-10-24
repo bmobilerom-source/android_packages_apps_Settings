@@ -57,7 +57,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ActionBarShadowController;
 
-import com.arrow.support.preferences.SystemSettingSwitchPreference;
+import com.android.settings.preferences.ui.AdaptiveSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
