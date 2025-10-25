@@ -19,62 +19,11 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
      android:title=" ">
     
-    
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="onthegomode_anim"
-        settings:searchable="false"
-        android:order="-999"
-        app:lottie_rawRes="@raw/onthegomode"/>
-
-  
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="On the Go mode"
-        android:order="-998"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
-      
-        <com.android.settingslib.widget.TopIntroPreference
-            android:key="onthegomode_bubbles_desc"
-            android:order="-997"
-            android:title="@string/onthegomode_bubble_setting_description"/>
-
-  <!-- Main OnTheGo Toggle -->
-  <SwitchPreferenceCompat
-    android:key="global_actions_onthego"
-    android:title="@string/onthegomode_title"
-    android:summary="@string/onthegomode_summary"
-    android:defaultValue="false"
-    android:order="-996"
-    settings:controller="com.android.settings.power.OnTheGoPreferenceController" />
-
-  <!-- Transparency Control -->
-  <com.android.settings.widget.SeekBarPreference
-    android:key="onthego_alpha"
-    android:title="@string/onthego_transparency"
-    android:summary="@string/onthego_transparency_summary"
-    android:defaultValue="50"
-    android:max="75"
-    android:min="10"
-    android:order="-995"
-    settings:controller="com.android.settings.power.OnTheGoAlphaPreferenceController" />
-
-  <!-- Camera Selection -->
-  <SwitchPreferenceCompat
-    android:key="onthego_camera"
-    android:title="@string/onthego_front_camera"
-    android:summary="@string/onthego_front_camera_summary"
-    android:defaultValue="false"
-    android:order="-994"
-    settings:controller="com.android.settings.power.OnTheGoCameraPreferenceController" />
-
-  <!-- Service Restart Option -->
-  <SwitchPreferenceCompat
-    android:key="onthego_service_restart"
-    android:title="@string/onthego_service_toggle"
-    android:summary="@string/onthego_service_toggle_summary"
-    android:defaultValue="false"
-    android:order="-993"
-    settings:controller="com.android.settings.power.OnTheGoServiceRestartPreferenceController" />
+   <!-- Power menu -->
+        <PreferenceScreen
+            android:key="powermenu_category"
+            android:title="@string/onthegomode_title"
+            android:summary="@string/onthegomode_summary"
+            android:fragment="com.epic.fragments.SystemSettingsOnthego" />
 
 </PreferenceScreen>
