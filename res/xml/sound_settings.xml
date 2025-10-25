@@ -22,15 +22,11 @@
     android:key="sound_settings"
     settings:keywords="@string/keywords_sounds">
 
-    
-    
     <com.android.settingslib.widget.IllustrationPreference
         android:key="sounds"
         settings:searchable="false"
         android:order="-1001"
         app:lottie_rawRes="@raw/sound"/> 
-
- 
 
     <!-- Remote volume group -->
     <PreferenceCategory
