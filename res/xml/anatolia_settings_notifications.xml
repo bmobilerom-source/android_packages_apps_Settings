@@ -23,7 +23,7 @@
                 android:order="-1"
                 android:selectable="false"
                 android:layout="@layout/top_level_about"
-                settings:isPreferenceVisible="false" />
+                settings:isPreferenceVisible="true" />
     <!-- Statusbar Settings -->
     <Preference
             android:layout="@layout/dot_preference_bottom_card"

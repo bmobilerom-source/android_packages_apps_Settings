@@ -23,6 +23,6 @@
                 android:order="-1"
                 android:selectable="false"
                 android:layout="@layout/atomichub"
-                settings:isPreferenceVisible="false" />
+                settings:isPreferenceVisible="true" />
 
 </PreferenceScreen>
