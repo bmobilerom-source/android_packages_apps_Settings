@@ -65,4 +65,12 @@
     <string name="onthegomode_summary">mobile display options</string>
     <string name="onthegomode_bubble_setting_description">On-The-Go-Mode uses transparency and camera data to keep you aware of where you are walking. This mode aims to keep you as safe as possible should you attempt to walk and text. It uses transparency and your camera to keep you aware of your surroundings. In addition, On-The-Go-Mode enables the camera feed and underlays it on screen. it will then seem as if your phone screen is almost invisible that helps when your walking in a park at night anf you dont have to move your phone in couple of steps.</string>
 
+    <!-- OnTheGo additional features -->
+    <string name="onthego_transparency">Transparency</string>
+    <string name="onthego_transparency_summary">Adjust the transparency of the camera overlay</string>
+    <string name="onthego_front_camera">Use front camera</string>
+    <string name="onthego_front_camera_summary">Use front camera instead of rear camera</string>
+    <string name="onthego_service_toggle">Auto restart service</string>
+    <string name="onthego_service_toggle_summary">Automatically restart service when camera changes</string>
+
 </resources>

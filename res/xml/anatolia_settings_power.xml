@@ -39,11 +39,42 @@
             android:order="-997"
             android:title="@string/onthegomode_bubble_setting_description"/>
 
+  <!-- Main OnTheGo Toggle -->
   <SwitchPreferenceCompat
     android:key="global_actions_onthego"
     android:title="@string/onthegomode_title"
     android:summary="@string/onthegomode_summary"
     android:defaultValue="false"
+    android:order="-996"
     settings:controller="com.android.settings.power.OnTheGoPreferenceController" />
+
+  <!-- Transparency Control -->
+  <com.android.settings.widget.SeekBarPreference
+    android:key="onthego_alpha"
+    android:title="@string/onthego_transparency"
+    android:summary="@string/onthego_transparency_summary"
+    android:defaultValue="50"
+    android:max="75"
+    android:min="10"
+    android:order="-995"
+    settings:controller="com.android.settings.power.OnTheGoAlphaPreferenceController" />
+
+  <!-- Camera Selection -->
+  <SwitchPreferenceCompat
+    android:key="onthego_camera"
+    android:title="@string/onthego_front_camera"
+    android:summary="@string/onthego_front_camera_summary"
+    android:defaultValue="false"
+    android:order="-994"
+    settings:controller="com.android.settings.power.OnTheGoCameraPreferenceController" />
+
+  <!-- Service Restart Option -->
+  <SwitchPreferenceCompat
+    android:key="onthego_service_restart"
+    android:title="@string/onthego_service_toggle"
+    android:summary="@string/onthego_service_toggle_summary"
+    android:defaultValue="false"
+    android:order="-993"
+    settings:controller="com.android.settings.power.OnTheGoServiceRestartPreferenceController" />
 
 </PreferenceScreen>
