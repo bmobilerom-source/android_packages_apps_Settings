@@ -104,7 +104,6 @@
     <!-- Media output switcher -->
     <Preference
         android:key="media_output"
-        android:icon="@drawable/ic_media_output"
         android:title="@string/media_output_title"
         android:dialogTitle="@string/media_output_title"
         android:order="-135"
@@ -118,7 +117,7 @@
         android:title="@string/zen_mode_settings_title"
         android:fragment="com.android.settings.notification.zen.ZenModeSettings"
         android:order="-130"       
-         android:visibility="gone"
+        android:visibility="gone"
         settings:useAdminDisabledSummary="true"
         settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
         settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"/>
@@ -254,7 +253,6 @@
     <Preference
         android:key="sound_work_settings"
         android:title="@string/sound_work_settings"
-        settings:layout="@layout/xd_pref_card_mid2"              
         android:fragment="com.android.settings.notification.SoundWorkSettings"
         android:order="100"
         settings:controller="com.android.settings.notification.WorkSoundsPreferenceController"/>
