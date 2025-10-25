@@ -55,6 +55,15 @@
             android:targetPackage="com.kieronquinn.app.taptap" />
  </Preference>
 
-    
+        <!-- website -->
+    <Preference
+        android:key="taptap_info"
+        android:title="@string/taptap_info"
+        android:summary="@string/taptap_info_summary">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://github.com/KieronQuinn/TapTap" />
+    </Preference>
+
  
 </PreferenceScreen>
