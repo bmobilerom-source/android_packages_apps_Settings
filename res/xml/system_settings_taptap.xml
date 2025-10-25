@@ -36,19 +36,12 @@
             android:key="systemtaptap_bubbles_desc"
             android:order="-997"
             android:selectable="true"
-            android:title="@string/systemtaptap_bubble_setting_description"/>
-
-        <com.android.settingslib.widget.TopIntroPreference
-            android:key="systemtaptap_bubbles_desc"
-            android:order="-997"
-            android:selectable="true"
-            android:title="@string/taptapmode_bubble_setting_description"/>
+            android:title="@string/taptap_bubble_setting_description"/>
 
  <Preference
         android:key="tap_tap_gestures"
-        android:icon="@drawable/ic_settings_quick_gestures"
-        android:summary="@string/systemtaptap_summary"
-        android:title="@string/systemtaptap_title">
+        android:summary="@string/taptap_summary"
+        android:title="@string/taptap_title">
         <intent
             android:action="android.intent.action.MAIN"
             android:targetClass="com.kieronquinn.app.taptap.ui.activities.MainActivity"
