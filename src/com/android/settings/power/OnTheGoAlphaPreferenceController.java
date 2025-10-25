@@ -21,67 +21,47 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.util.Log;
 
-import androidx.preference.Preference;
-
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.widget.SeekBarPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Controller for OnTheGo transparency preference
  */
-public class OnTheGoAlphaPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, SeekBarPreference.OnSeekBarChangeListener {
+public class OnTheGoAlphaPreferenceController extends SliderPreferenceController {
 
     private static final String TAG = "OnTheGoAlphaController";
     private static final String KEY_ONTHEGO_ALPHA = "onthego_alpha";
 
     public OnTheGoAlphaPreferenceController(Context context) {
-        super(context);
+        super(context, KEY_ONTHEGO_ALPHA);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_ONTHEGO_ALPHA;
+    public int getSliderPosition() {
+        float alpha = Settings.System.getFloat(mContext.getContentResolver(),
+                Settings.System.ON_THE_GO_ALPHA, 0.5f);
+        return (int) (alpha * 100);
     }
 
     @Override
-    public boolean isAvailable() {
+    public boolean setSliderPosition(int position) {
+        float alpha = position / 100.0f;
+        Settings.System.putFloat(mContext.getContentResolver(),
+                Settings.System.ON_THE_GO_ALPHA, alpha);
+        
+        // Send broadcast to update the service
+        sendAlphaBroadcast(alpha);
         return true;
     }
 
     @Override
-    public void updateState(Preference preference) {
-        if (preference instanceof SeekBarPreference) {
-            SeekBarPreference seekBarPreference = (SeekBarPreference) preference;
-            float alpha = Settings.System.getFloat(mContext.getContentResolver(),
-                    Settings.System.ON_THE_GO_ALPHA, 0.5f);
-            int progress = (int) (alpha * 100);
-            seekBarPreference.setProgress(progress);
-            seekBarPreference.setOnSeekBarChangeListener(this);
-        }
+    public int getMax() {
+        return 100;
     }
 
     @Override
-    public void onProgressChanged(SeekBarPreference preference, int progress, boolean fromUser) {
-        if (fromUser) {
-            float alpha = progress / 100.0f;
-            Settings.System.putFloat(mContext.getContentResolver(),
-                    Settings.System.ON_THE_GO_ALPHA, alpha);
-            
-            // Send broadcast to update the service
-            sendAlphaBroadcast(alpha);
-        }
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBarPreference preference) {
-        // Nothing to do
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBarPreference preference) {
-        // Nothing to do
+    public int getMin() {
+        return 0;
     }
 
     private void sendAlphaBroadcast(float alpha) {
