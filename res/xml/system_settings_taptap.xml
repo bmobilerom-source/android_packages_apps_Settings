@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025  The-jekts
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title=" ">
+    
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="systemtaptap_anim"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/systemtaptap"/>
+
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Tap gesture options "
+        android:order="-998"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+      
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="systemtaptap_bubbles_desc"
+            android:order="-997"
+            android:selectable="true"
+            android:title="@string/systemtaptap_bubble_setting_description"/>
+
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="systemtaptap_bubbles_desc"
+            android:order="-997"
+            android:selectable="true"
+            android:title="@string/taptapmode_bubble_setting_description"/>
+
+ <Preference
+        android:key="tap_tap_gestures"
+        android:icon="@drawable/ic_settings_quick_gestures"
+        android:summary="@string/systemtaptap_summary"
+        android:title="@string/systemtaptap_title">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.kieronquinn.app.taptap.ui.activities.MainActivity"
+            android:targetPackage="com.kieronquinn.app.taptap" />
+ </Preference>
+
+    
+ 
+</PreferenceScreen>

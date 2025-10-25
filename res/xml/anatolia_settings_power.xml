@@ -26,4 +26,10 @@
             android:summary="@string/onthegomode_summary"
             android:fragment="com.epic.fragments.SystemSettingsOnthego" />
 
+   <!-- taptap menu -->
+        <PreferenceScreen
+            android:key="taptap_category"
+            android:title="@string/taptap_title"
+            android:summary="@string/taptap_summary"
+            android:fragment="com.epic.fragments.SystemSettingsTaptap" />
 </PreferenceScreen>
