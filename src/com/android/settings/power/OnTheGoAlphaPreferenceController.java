@@ -23,6 +23,7 @@ import android.util.Log;
 
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Controller for OnTheGo transparency preference
@@ -34,6 +35,11 @@ public class OnTheGoAlphaPreferenceController extends SliderPreferenceController
 
     public OnTheGoAlphaPreferenceController(Context context) {
         super(context, KEY_ONTHEGO_ALPHA);
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return AbstractPreferenceController.AVAILABLE;
     }
 
     @Override
