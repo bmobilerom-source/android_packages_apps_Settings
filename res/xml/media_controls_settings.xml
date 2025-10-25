@@ -42,7 +42,7 @@
     <com.android.settingslib.widget.TopIntroPreference
         android:key="media_controls_bubbles_desc2"
         android:order="-995"
-        android:title="@string/aboutus_bubble_setting_description2" />
+        android:title="@string/media_controls_bubbles_description2" />
 
 
     <com.android.settingslib.widget.TopIntroPreference
