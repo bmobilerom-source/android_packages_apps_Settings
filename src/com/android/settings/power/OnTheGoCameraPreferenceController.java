@@ -36,6 +36,7 @@ public class OnTheGoCameraPreferenceController extends AbstractPreferenceControl
 
     private static final String TAG = "OnTheGoCameraController";
     private static final String KEY_ONTHEGO_CAMERA = "onthego_camera";
+    private static final String SETTINGS_KEY_ONTHEGO_CAMERA = "on_the_go_camera";
 
     public OnTheGoCameraPreferenceController(Context context) {
         super(context);
@@ -58,7 +59,7 @@ public class OnTheGoCameraPreferenceController extends AbstractPreferenceControl
         if (preference instanceof SwitchPreferenceCompat) {
             SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) preference;
             boolean useFrontCamera = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.ON_THE_GO_CAMERA, 0) == 1;
+                    SETTINGS_KEY_ONTHEGO_CAMERA, 0) == 1;
             switchPreference.setChecked(useFrontCamera);
         }
     }
@@ -68,7 +69,7 @@ public class OnTheGoCameraPreferenceController extends AbstractPreferenceControl
         if (preference instanceof SwitchPreferenceCompat) {
             boolean useFrontCamera = (Boolean) newValue;
             Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.ON_THE_GO_CAMERA, useFrontCamera ? 1 : 0);
+                    SETTINGS_KEY_ONTHEGO_CAMERA, useFrontCamera ? 1 : 0);
             
             // Send broadcast to update the service
             sendCameraBroadcast();
@@ -80,7 +81,7 @@ public class OnTheGoCameraPreferenceController extends AbstractPreferenceControl
     private void sendCameraBroadcast() {
         try {
             Intent cameraBroadcast = new Intent();
-            cameraBroadcast.setAction("com.android.systemui.epic.onthego.OnTheGoService.ACTION_TOGGLE_CAMERA");
+            cameraBroadcast.setAction("toggle_camera");
             mContext.sendBroadcast(cameraBroadcast);
             Log.d(TAG, "Sent camera broadcast");
         } catch (Exception e) {

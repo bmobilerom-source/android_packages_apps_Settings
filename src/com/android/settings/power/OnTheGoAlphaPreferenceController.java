@@ -32,6 +32,7 @@ public class OnTheGoAlphaPreferenceController extends SliderPreferenceController
 
     private static final String TAG = "OnTheGoAlphaController";
     private static final String KEY_ONTHEGO_ALPHA = "onthego_alpha";
+    private static final String SETTINGS_KEY_ONTHEGO_ALPHA = "on_the_go_alpha";
 
     public OnTheGoAlphaPreferenceController(Context context) {
         super(context, KEY_ONTHEGO_ALPHA);
@@ -45,7 +46,7 @@ public class OnTheGoAlphaPreferenceController extends SliderPreferenceController
     @Override
     public int getSliderPosition() {
         float alpha = Settings.System.getFloat(mContext.getContentResolver(),
-                Settings.System.ON_THE_GO_ALPHA, 0.5f);
+                SETTINGS_KEY_ONTHEGO_ALPHA, 0.5f);
         return (int) (alpha * 100);
     }
 
@@ -53,7 +54,7 @@ public class OnTheGoAlphaPreferenceController extends SliderPreferenceController
     public boolean setSliderPosition(int position) {
         float alpha = position / 100.0f;
         Settings.System.putFloat(mContext.getContentResolver(),
-                Settings.System.ON_THE_GO_ALPHA, alpha);
+                SETTINGS_KEY_ONTHEGO_ALPHA, alpha);
         
         // Send broadcast to update the service
         sendAlphaBroadcast(alpha);
@@ -62,19 +63,19 @@ public class OnTheGoAlphaPreferenceController extends SliderPreferenceController
 
     @Override
     public int getMax() {
-        return 100;
+        return 75;
     }
 
     @Override
     public int getMin() {
-        return 0;
+        return 10;
     }
 
     private void sendAlphaBroadcast(float alpha) {
         try {
             Intent alphaBroadcast = new Intent();
-            alphaBroadcast.setAction("com.android.systemui.epic.onthego.OnTheGoService.ACTION_TOGGLE_ALPHA");
-            alphaBroadcast.putExtra("com.android.systemui.epic.onthego.OnTheGoService.EXTRA_ALPHA", alpha);
+            alphaBroadcast.setAction("toggle_alpha");
+            alphaBroadcast.putExtra("extra_alpha", alpha);
             mContext.sendBroadcast(alphaBroadcast);
             Log.d(TAG, "Sent alpha broadcast: " + alpha);
         } catch (Exception e) {

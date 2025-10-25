@@ -35,6 +35,7 @@ public class OnTheGoServiceRestartPreferenceController extends AbstractPreferenc
 
     private static final String TAG = "OnTheGoServiceRestartController";
     private static final String KEY_ONTHEGO_SERVICE_RESTART = "onthego_service_restart";
+    private static final String SETTINGS_KEY_ONTHEGO_SERVICE_RESTART = "on_the_go_service_restart";
 
     public OnTheGoServiceRestartPreferenceController(Context context) {
         super(context);
@@ -57,7 +58,7 @@ public class OnTheGoServiceRestartPreferenceController extends AbstractPreferenc
         if (preference instanceof SwitchPreferenceCompat) {
             SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) preference;
             boolean restartService = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.ON_THE_GO_SERVICE_RESTART, 0) == 1;
+                    SETTINGS_KEY_ONTHEGO_SERVICE_RESTART, 0) == 1;
             switchPreference.setChecked(restartService);
         }
     }
@@ -67,7 +68,7 @@ public class OnTheGoServiceRestartPreferenceController extends AbstractPreferenc
         if (preference instanceof SwitchPreferenceCompat) {
             boolean restartService = (Boolean) newValue;
             Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.ON_THE_GO_SERVICE_RESTART, restartService ? 1 : 0);
+                    SETTINGS_KEY_ONTHEGO_SERVICE_RESTART, restartService ? 1 : 0);
             
             Log.d(TAG, "Service restart setting updated: " + restartService);
             return true;

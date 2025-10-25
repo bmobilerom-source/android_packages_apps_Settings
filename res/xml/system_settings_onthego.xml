@@ -32,17 +32,13 @@
   </PreferenceCategory>
       
         <com.android.settingslib.widget.TopIntroPreference
-            android:key="onthegomode_bubbles_desc"
+            android:key="onthegomode_bubbles_desc1"
             android:order="-997"
             android:title="@string/onthegomode_bubble_setting_description"/>
             <com.android.settingslib.widget.TopIntroPreference
-            android:key="onthegomode_bubbles_desc"
+            android:key="onthegomode_bubbles_desc2"
             android:order="-995"
             android:title="@string/onthegomode_bubble_setting_description2"/>
-            <com.android.settingslib.widget.TopIntroPreference
-            android:key="onthegomode_bubbles_desc"
-            android:order="-994"
-            android:title="@string/onthegomode_bubble_setting_description3"/>
 
   <!-- Main OnTheGo Toggle -->
   <SwitchPreferenceCompat
@@ -83,8 +79,12 @@
     settings:controller="com.android.settings.power.OnTheGoServiceRestartPreferenceController" />
     
     <com.android.settingslib.widget.TopIntroPreference
-            android:key="onthegomode_bubbles_desc"
+            android:key="onthegomode_bubbles_desc3"
             android:order="-970"
+            android:title="@string/onthegomode_bubble_setting_description3"/>
+    <com.android.settingslib.widget.TopIntroPreference
+            android:key="onthegomode_bubbles_desc4"
+            android:order="-965"
             android:title="@string/onthegomode_bubble_setting_description4"/>
 
 </PreferenceScreen>
