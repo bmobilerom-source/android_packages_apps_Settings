@@ -610,4 +610,10 @@ s that internet users can use wisely.</string>
     <string name="always_on_display_schedule_sunrise">Sunrise</string>
     <string name="always_on_display_schedule_mixed_sunset">Turns on from sunset till a time</string>
     <string name="always_on_display_schedule_mixed_sunrise">Turns on from a time till sunrise</string>
+
+<!-- Media Controls -->
+    <string name="media_controls_bubbles_description">Customize your media experience and ambient features. Pin the media player for quick access, control lockscreen visibility, receive personalized recommendations from your assistant, and enable Ambient Music to Enjoy suttle background music for your listening pleasure.</string>
+    <string name="ambient_music_info_title">Ambient music</string>
+    <string name="ambient_music_info_summary">Play ambient music in the background</string>
+
 </resources>
