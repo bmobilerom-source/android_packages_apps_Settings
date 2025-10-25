@@ -39,7 +39,7 @@ public class OnTheGoAlphaPreferenceController extends SliderPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AbstractPreferenceController.AVAILABLE;
+        return AVAILABLE;
     }
 
     @Override
