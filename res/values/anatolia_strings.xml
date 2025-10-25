@@ -57,5 +57,6 @@
     <string name="aboutus_link_summary">Customer chat group</string>
     <string name="aboutus_link_title">Customer support</string>
 
-
+    <string name="about_us_info_system_title">System information</string>
+    <string name="about_us_info_system_title_summary">find out more about your device</string>
 </resources>
