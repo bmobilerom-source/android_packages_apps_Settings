@@ -7,6 +7,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.widget.RelativeLayout
 
 import com.google.android.material.card.MaterialCardView
@@ -28,9 +29,12 @@ open class AboutBaseCard : MaterialCardView {
 
     init {
         defaultRadius = resources.getDimensionPixelSize(R.dimen.contextual_card_corner_radius)
-        layoutParams = LayoutParams(resources.getDimensionPixelSize(R.dimen.storage_card_min_width), resources.getDimensionPixelSize(R.dimen.storage_card_min_height))
+        layoutParams = LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, 
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         layout = RelativeLayout(context)
-        layout.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+        layout.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
         layout.setPadding(defaultPadding, (defaultPadding * 1.5).toInt(), defaultPadding, (defaultPadding * 1.5).toInt())
         layout.setBackgroundColor(resources.getColor(R.color.contextual_card_background, context.theme))
         addView(layout)
@@ -39,7 +43,9 @@ open class AboutBaseCard : MaterialCardView {
         cardElevation = 0f
         strokeColor = resources.getColor(R.color.contextual_card_stroke_color, context.theme)
         strokeWidth = resources.getDimensionPixelSize(R.dimen.contextual_card_stroke_width)
-        setTouchListener(layout)
+        // Cards are not clickable - removed setTouchListener
+        layout.isClickable = false
+        isClickable = false
     }
 
     fun setTouchListener(view: View) {
