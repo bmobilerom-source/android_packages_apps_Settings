@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C)  2025 the-jekts
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License. thanks  EpicROM-AOSP for base code.
+-->
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title=" ">
+    
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="onthegomode_anim"
+        settings:searchable="false"
+        android:order="-999"
+        app:lottie_rawRes="@raw/onthegomode"/>
+
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="On the Go mode"
+        android:order="-998"
+        android:layout="@layout/settings_title_header">
+  </PreferenceCategory>
+      
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="onthegomode_bubbles_desc1"
+            android:order="-997"
+            android:title="@string/onthegomode_bubble_setting_description"/>
+            <com.android.settingslib.widget.TopIntroPreference
+            android:key="onthegomode_bubbles_desc2"
+            android:order="-995"
+            android:title="@string/onthegomode_bubble_setting_description2"/>
+
+  <!-- Main OnTheGo Toggle -->
+  <SwitchPreferenceCompat
+    android:key="global_actions_onthego"
+    android:title="@string/onthegomode_title"
+    android:summary="@string/onthegomode_summary"
+    android:defaultValue="false"
+    android:order="-990"
+    settings:controller="com.android.settings.power.OnTheGoPreferenceController" />
+
+  <!-- Transparency Control -->
+  <com.android.settings.widget.SeekBarPreference
+    android:key="onthego_alpha"
+    android:title="@string/onthego_transparency"
+    android:summary="@string/onthego_transparency_summary"
+    android:defaultValue="50"
+    android:max="75"
+    android:min="10"
+    android:order="-985"
+    settings:controller="com.android.settings.power.OnTheGoAlphaPreferenceController" />
+
+  <!-- Camera Selection -->
+  <SwitchPreferenceCompat
+    android:key="onthego_camera"
+    android:title="@string/onthego_front_camera"
+    android:summary="@string/onthego_front_camera_summary"
+    android:defaultValue="false"
+    android:order="-980"
+    settings:controller="com.android.settings.power.OnTheGoCameraPreferenceController" />
+
+  <!-- Service Restart Option -->
+  <SwitchPreferenceCompat
+    android:key="onthego_service_restart"
+    android:title="@string/onthego_service_toggle"
+    android:summary="@string/onthego_service_toggle_summary"
+    android:defaultValue="false"
+    android:order="-975"
+    settings:controller="com.android.settings.power.OnTheGoServiceRestartPreferenceController" />
+    
+    <com.android.settingslib.widget.TopIntroPreference
+            android:key="onthegomode_bubbles_desc4"
+            android:order="-965"
+            android:title="@string/onthegomode_bubble_setting_description4"/>
+
+</PreferenceScreen>
