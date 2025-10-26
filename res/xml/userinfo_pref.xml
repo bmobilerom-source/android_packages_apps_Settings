@@ -60,4 +60,10 @@
             android:title="@string/emergency_settings_title"
             android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
         
+ <com.android.settingslib.widget.LayoutPreference
+        android:key="battery_stats_view"
+        android:selectable="true"
+        android:enabled="true"
+        android:order="60"
+        android:layout="@layout/atomichub" />
 </PreferenceScreen>
