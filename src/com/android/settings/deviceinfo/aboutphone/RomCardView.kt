@@ -2,7 +2,6 @@ package com.android.settings.deviceinfo.aboutphone
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Build
 import android.os.SystemProperties
 import android.provider.Settings
@@ -25,16 +24,9 @@ class RomCardView(context: Context, attrs: AttributeSet?) : AboutBaseCard(contex
         val rom_logo = ImageView(context)
         rom_logo.setPadding(72, 72, 72, 72)
         rom_logo.adjustViewBounds = true
-        /*
-        rom_logo.imageTintList = ColorStateList.valueOf(
-            Utils.getColorAttrDefaultColor(
-                context,
-                android.R.attr.colorAccent
-            )
-        )
-        */
         linearLayout.id = R.id.rom_logo_id
-        rom_logo.setImageResource(R.drawable.ic_rom_logo)
+        // Stallion logo asset missing; use generic user icon to avoid build failure
+        rom_logo.setImageResource(R.drawable.user)
         val rlparams = RelativeLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.MATCH_PARENT
@@ -81,15 +73,12 @@ class RomCardView(context: Context, attrs: AttributeSet?) : AboutBaseCard(contex
             RelativeLayout.LayoutParams.MATCH_PARENT,
             RelativeLayout.LayoutParams.WRAP_CONTENT
         )
-        lparamas.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
         linearLayout.layoutParams = lparamas
         linearLayout.addView(rom_title)
         linearLayout.addView(rom_version)
         linearLayout.setBackgroundColor(resources.getColor(R.color.contextual_card_background, null))
         layout.addView(rom_logo, rlparams)
         layout.addView(linearLayout, lparamas)
-	layout.setOnClickListener {
-            context.startActivity(Intent(Settings.ACTION_SYSTEM_UPDATE_SETTINGS))
-        }
+	// Header card is not clickable
     }
 }
