@@ -23,62 +23,29 @@
                 android:layout="@layout/device_info_header"
                 settings:isPreferenceVisible="false" />
 
-
-    <!-- Top category -->
-    <!-- Device name -->
-    <com.android.settings.widget.ValidatedEditTextPreference
-        android:icon="@drawable/ic_settings_display_acc"
-        android:key="device_name"
-        android:summary="@string/summary_placeholder"
-        android:title="@string/my_device_info_device_name_preference_title"
-        settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
-        settings:enableCopying="true" />
-
-    <!-- Build number -->
-    <Preference
-        android:icon="@drawable/ic_build_acc"
-        android:key="build_number"
-        android:summary="@string/summary_placeholder"
-        android:title="@string/build_number"
-        settings:controller="com.android.settings.deviceinfo.BuildNumberPreferenceController"
-        settings:enableCopying="true" />
-
-    <!-- Model & hardware -->
-    <Preference
-        android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
-        android:icon="@drawable/ic_settings_system_dashboard_acc"
-        android:key="device_model"
-        android:summary="@string/model_summary"
-        android:title="@string/model_name"
-        settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"
-        settings:enableCopying="true"
-        settings:keywords="@string/keywords_model_and_hardware"/>
-
-    <!-- Android version -->
-    <Preference
-        android:fragment="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings"
-        android:icon="@drawable/ic_android_acc"
-        android:key="firmware_version"
-        android:summary="@string/summary_placeholder"
-        android:title="@string/firmware_version"
-        settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController" />
-
-    <!-- Bottom category -->
-    <!-- Device up time -->
-    <Preference
-        android:icon="@drawable/ic_uptime"
-        android:key="up_time"
+    <PreferenceCategory
+        android:key="basic_info_category"
         android:selectable="false"
         android:summary="@string/summary_placeholder"
         android:title="@string/status_up_time"/>
 
-    <!-- Legal information -->
-    <Preference
-        android:fragment="com.android.settings.LegalSettings"
-        android:icon="@drawable/ic_doc"
-        android:key="legal_container"
-        android:summary="@string/legal_summary"
-        android:title="@string/legal_information"/>
+        <!-- Device name -->
+        <com.android.settings.widget.ValidatedEditTextPreference
+            android:key="device_name"
+            android:order="1"
+            android:title="@string/my_device_info_device_name_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
+            settings:enableCopying="true"/>
+
+        <!-- Account name -->
+        <Preference
+            android:key="branded_account"
+            android:order="2"
+            android:title="@string/my_device_info_account_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:enableCopying="true"
+            settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
 
 
     <!-- Prefs below are usually hidden -->

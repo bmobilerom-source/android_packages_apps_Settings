@@ -19,17 +19,131 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/navbar_title">
  
-           <com.android.settingslib.widget.LayoutPreference
-        android:key="orchidosrom_grid"
-        android:layout="@layout/about"
-        android:selectable="false"/>
+   <Preference
+            android:key="virtual_keyboard_pref"
+            android:title="@string/keyboard_settings"
+            android:summary="@string/keyboard_settings_summary"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"
+            settings:layout="@layout/preference_card"/>
 
-    <!-- Statusbar Settings -->
-    <Preference
-            settings:layout="@layout/dot_preference_middle_card"
-        android:key="statusbar_settings"
-        android:title="@string/status_bar_title"
-        android:icon="@drawable/ic_settings_statusbar"
-        android:order="-248"
-        android:fragment="com.android.settings.custom.statusbar.StatusBarSettings" />
+   <!-- Test XD Card Middle -->
+   <Preference
+            android:key="test_card_mid"
+            android:title="Test Card Middle"
+            android:summary="XD Middle Card"
+            settings:layout="@layout/preference_card"/>
+
+   <!-- Test XD Card Bottom -->
+   <Preference
+            android:key="test_card_bot"
+            android:title="Test Card Bottom"
+            android:summary="XD Bottom Card"
+            settings:layout="@layout/preference_card_xd"/>
+
+   <!-- Test DOT Card Top -->
+   <Preference
+            android:key="test_dot_top"
+            android:title="Test DOT Top"
+            android:summary="DOT Top Card"
+            settings:layout="@layout/dot_preference_top_card"/>
+
+   <!-- Test AfterLife Card Top -->
+   <Preference
+            android:key="test_afterlife"
+            android:title="Test AfterLife"
+            android:summary="AfterLife Card"
+            settings:layout="@layout/afterlife_cardview_top"/>
+
+   <!-- Test Top Level Top Card -->
+   <Preference
+            android:key="test_top_level_top"
+            android:title="Test Top Level Top"
+            android:summary="Top Level Top Card"
+            settings:layout="@layout/top_level_preference_top_card"/>
+
+   <!-- Test Top Level Solo Card -->
+   <Preference
+            android:key="test_top_level_solo"
+            android:title="Test Top Level Solo"
+            android:summary="Top Level Solo Card"
+            settings:layout="@layout/top_level_preference_solo_card"/>
+
+   <!-- Test Top Level Middle Card -->
+   <Preference
+            android:key="test_top_level_middle"
+            android:title="Test Top Level Middle"
+            android:summary="Top Level Middle Card"
+            settings:layout="@layout/top_level_preference_middle_card"/>
+
+   <!-- Test AfterLife Homepage Top -->
+   <Preference
+            android:key="test_afterlife_homepage_top"
+            android:title="Test AfterLife Homepage"
+            android:summary="AfterLife Homepage Card"
+            settings:layout="@layout/afterlife_card_homepage_top"/>
+
+   <!-- Test AfterLife Homepage Middle -->
+   <Preference
+            android:key="test_afterlife_homepage_middle"
+            android:title="Test AfterLife Homepage Middle"
+            android:summary="AfterLife Homepage Middle Card"
+            settings:layout="@layout/afterlife_card_homepage_middle"/>
+
+   <!-- Test DOT Card Middle -->
+   <Preference
+            android:key="test_dot_middle"
+            android:title="Test DOT Middle"
+            android:summary="DOT Middle Card"
+            settings:layout="@layout/dot_preference_middle_card"/>
+
+   <!-- Test DOT Card Bottom -->
+   <Preference
+            android:key="test_dot_bottom"
+            android:title="Test DOT Bottom"
+            android:summary="DOT Bottom Card"
+            settings:layout="@layout/dot_preference_bottom_card"/>
+
+   <!-- Test AfterLife Middle -->
+   <Preference
+            android:key="test_afterlife_middle"
+            android:title="Test AfterLife Middle"
+            android:summary="AfterLife Middle Card"
+            settings:layout="@layout/afterlife_cardview_middle"/>
+
+   <!-- Test AfterLife Bottom -->
+   <Preference
+            android:key="test_afterlife_bottom"
+            android:title="Test AfterLife Bottom"
+            android:summary="AfterLife Bottom Card"
+            settings:layout="@layout/afterlife_cardview_bottom"/>
+
+   <!-- Test Top Level Bottom -->
+   <Preference
+            android:key="test_top_level_bottom"
+            android:title="Test Top Level Bottom"
+            android:summary="Top Level Bottom Card"
+            settings:layout="@layout/top_level_preference_bottom_card"/>
+
+   <!-- Test AfterLife Single Left -->
+   <Preference
+            android:key="test_afterlife_single_left"
+            android:title="Test AfterLife Single Left"
+            android:summary="AfterLife Single Left Card"
+            settings:layout="@layout/afterlife_cardview_single_left"/>
+
+   <!-- Test AfterLife Single Right -->
+   <Preference
+            android:key="test_afterlife_single_right"
+            android:title="Test AfterLife Single Right"
+            android:summary="AfterLife Single Right Card"
+            settings:layout="@layout/afterlife_cardview_single_right"/>
+
+   <!-- Test AfterLife Homepage Bottom -->
+   <Preference
+            android:key="test_afterlife_homepage_bottom"
+            android:title="Test AfterLife Homepage Bottom"
+            android:summary="AfterLife Homepage Bottom Card"
+            settings:layout="@layout/afterlife_card_homepage_bottom"/>
+
 </PreferenceScreen>

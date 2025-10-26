@@ -20,13 +20,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" ">
 
-
-           <!-- Header -->
-  <PreferenceCategory
-        android:title="Special Access"
-        android:order="-1001"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
         
     <Preference
         android:key="manage_external_storage"
