@@ -37,10 +37,14 @@
         android:title="@string/automatic_storage_manager_preference_title"
         android:icon="@drawable/ic_storage"
         android:order="3"
+        settings:isPreferenceVisible="false"
         settings:controller="com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController"/>
     <com.android.settings.widget.CardPreference
         android:key="free_up_space"
         android:order="4"
+        settings:isPreferenceVisible="false"
+        android:selectable="false"
+        android:layout="@layout/preference_hidden"
         android:title="@string/storage_free_up_space_title"
         android:summary="@string/storage_free_up_space_summary"
         settings:controller="com.android.settings.deviceinfo.storage.ManageStoragePreferenceController"/>
@@ -101,11 +105,13 @@
             android:key="pref_system"
             android:title="@string/storage_os_name"
             android:icon="@drawable/ic_android_vd_theme_24"
+            settings:layout="@layout/system_advice_preference_card"
             android:order="202"
             settings:searchable="false"/>
         <com.android.settings.deviceinfo.StorageItemPreference
             android:key="temporary_files"
             android:title="@string/storage_temporary_files"
+            settings:layout="@layout/system_advice_preference_card"
             android:icon="@drawable/ic_database_vd_theme_24"
             android:order="203"/>
     </PreferenceCategory>
