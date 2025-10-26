@@ -30,11 +30,11 @@ open class AboutBaseCard : MaterialCardView {
     init {
         defaultRadius = resources.getDimensionPixelSize(R.dimen.contextual_card_corner_radius)
         layoutParams = LayoutParams(
-            resources.getDimensionPixelSize(R.dimen.storage_card_min_width), 
-            ViewGroup.LayoutParams.MATCH_PARENT
+            ViewGroup.LayoutParams.MATCH_PARENT, 
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
         layout = RelativeLayout(context)
-        layout.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+        layout.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
         layout.setPadding(defaultPadding, (defaultPadding * 1.5).toInt(), defaultPadding, (defaultPadding * 1.5).toInt())
         layout.setBackgroundColor(resources.getColor(R.color.contextual_card_background, context.theme))
         addView(layout)
