@@ -14,34 +14,28 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen        xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title=" ">
 
 
     <Preference
-        android:key="display_customization"
-        android:title="@string/display_customization"
-        android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations"
-        android:summary="@string/display_customization"/>   
-        
-    <Preference
-        android:key="display_customization"
+        android:key="display_customization_2"
         android:title="@string/display_customization"
         android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations2"
         android:summary="@string/display_customization"/>   
         
     <Preference
-        android:key="display_customization"
+        android:key="display_customization_3"
         android:title="@string/display_customization"
         android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations3"
         android:summary="@string/display_customization"/>   
         
     <Preference
-        android:key="display_customization"
+        android:key="display_customization_4"
         android:title="@string/display_customization"
         android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations4"
-        android:summary="@string/display_customization"/>   
+        android:summary="@string/display_customization"/>
 
 </PreferenceScreen>
