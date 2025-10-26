@@ -20,6 +20,8 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -63,7 +65,14 @@ public class OnTheGoPreferenceController extends AbstractPreferenceController
         if (preference instanceof SwitchPreferenceCompat) {
             SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) preference;
             boolean isEnabled = isOnTheGoServiceRunning();
+            Log.d(TAG, "updateState called - service running: " + isEnabled);
             switchPreference.setChecked(isEnabled);
+            
+            // Also check Settings.System value
+            int systemValue = android.provider.Settings.System.getInt(
+                    mContext.getContentResolver(),
+                    android.provider.Settings.System.ON_THE_GO_ENABLED, 0);
+            Log.d(TAG, "Settings.System.ON_THE_GO_ENABLED value: " + systemValue);
         }
     }
 
@@ -104,23 +113,38 @@ public class OnTheGoPreferenceController extends AbstractPreferenceController
 
     /**
      * Start or stop the OnTheGo service
+     * 
+     * Uses EXACT same code as Power Menu and QS Tile (which both work).
+     * Copied from GlobalActionsDialogLite.java:1649-1674
      */
     private void toggleOnTheGoService(boolean enabled) {
+        Log.e(TAG, "========================================");
+        Log.e(TAG, "Starting OnTheGo service (method identical to power menu)");
+        Log.e(TAG, "========================================");
+        
+        // SAME CODE AS POWER MENU (GlobalActionsDialogLite line 1658-1663)
+        ComponentName cn = new ComponentName("com.android.systemui",
+                "com.android.systemui.epic.onthego.OnTheGoService");
+        Intent serviceIntent = new Intent();
+        serviceIntent.setComponent(cn);
+        serviceIntent.setAction(enabled ? "start" : "stop");
+        
+        Log.e(TAG, "Calling mContext.startService()...");
         try {
-            Intent serviceIntent = new Intent();
-            serviceIntent.setComponent(ONTHEGO_SERVICE);
-            
-            if (enabled) {
-                serviceIntent.setAction("start");
-                Log.d(TAG, "Starting OnTheGo service");
+            ComponentName result = mContext.startService(serviceIntent);
+            if (result != null) {
+                Log.e(TAG, "✓✓✓ SUCCESS! Service started: " + result);
             } else {
-                serviceIntent.setAction("stop");
-                Log.d(TAG, "Stopping OnTheGo service");
+                Log.e(TAG, "⚠️ startService returned null (service might be starting)");
             }
-            
-            mContext.startService(serviceIntent);
-        } catch (Exception e) {
-            Log.e(TAG, "Error toggling OnTheGo service: " + e.getMessage());
+        } catch (SecurityException e) {
+            Log.e(TAG, "✗✗✗ SECURITY EXCEPTION: " + e.getMessage());
+            // Use broadcast fallback
+            Intent broadcastIntent = new Intent();
+            broadcastIntent.setAction(enabled ? "com.android.systemui.epic.onthego.START" : "com.android.systemui.epic.onthego.STOP");
+            broadcastIntent.setPackage("com.android.systemui");
+            mContext.sendBroadcast(broadcastIntent);
+            Log.e(TAG, "✓ Sent broadcast as fallback");
         }
     }
 }

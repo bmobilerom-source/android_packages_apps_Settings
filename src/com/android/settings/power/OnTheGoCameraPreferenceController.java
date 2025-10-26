@@ -80,10 +80,9 @@ public class OnTheGoCameraPreferenceController extends AbstractPreferenceControl
 
     private void sendCameraBroadcast() {
         try {
-            Intent cameraBroadcast = new Intent();
-            cameraBroadcast.setAction("toggle_camera");
+            Intent cameraBroadcast = new Intent("toggle_camera");
             mContext.sendBroadcast(cameraBroadcast);
-            Log.d(TAG, "Sent camera broadcast");
+            Log.e(TAG, "Sent camera broadcast");
         } catch (Exception e) {
             Log.e(TAG, "Error sending camera broadcast: " + e.getMessage());
         }

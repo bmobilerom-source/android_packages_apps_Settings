@@ -73,11 +73,10 @@ public class OnTheGoAlphaPreferenceController extends SliderPreferenceController
 
     private void sendAlphaBroadcast(float alpha) {
         try {
-            Intent alphaBroadcast = new Intent();
-            alphaBroadcast.setAction("toggle_alpha");
+            Intent alphaBroadcast = new Intent("toggle_alpha");
             alphaBroadcast.putExtra("extra_alpha", alpha);
             mContext.sendBroadcast(alphaBroadcast);
-            Log.d(TAG, "Sent alpha broadcast: " + alpha);
+            Log.e(TAG, "Sent alpha broadcast: " + alpha);
         } catch (Exception e) {
             Log.e(TAG, "Error sending alpha broadcast: " + e.getMessage());
         }
