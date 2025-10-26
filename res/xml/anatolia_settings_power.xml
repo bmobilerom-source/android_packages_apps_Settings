@@ -32,4 +32,12 @@
             android:title="@string/taptap_title"
             android:summary="@string/taptap_summary"
             android:fragment="com.epic.fragments.SystemSettingsTaptap" />
+
+     
+   <!-- taptap menu -->
+        <PreferenceScreen
+            android:key="aboutus_category"
+            android:title="@string/aboutus_title"
+            android:summary="@string/aboutus_summary"
+            android:fragment="com.epic.fragments.SystemSettingsAboutus" />       
 </PreferenceScreen>
