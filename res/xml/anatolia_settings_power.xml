@@ -18,11 +18,56 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title=" ">
-        <com.android.settingslib.widget.LayoutPreference
-                android:key="device_name"
-                android:order="-1"
-                android:selectable="false"
-                android:layout="@layout/atomichub"
-                settings:isPreferenceVisible="false" />
+      <com.android.settingslib.RestrictedSwitchPreference
+        android:key="airplane_mode_on"
+        android:title="@string/airplane_mode"
+        android:icon="@drawable/ic_airplanemode_active"
+        android:order="-5"
+        settings:layout="@layout/preference_card_aosp_top_switch"
+        settings:controller="com.android.settings.network.AirplaneModePreferenceController"
+        settings:userRestriction="no_airplane_mode"/>
+     <Preference
+            android:key="virtual_keyboa_pref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlife_cardview_top"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
+    <Preference
+            android:key="virtual_keyboard_pref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlife_cardview_bottom"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
+ <Preference
+            android:key="virtual_keyboa_pref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/system_features_preference_card"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
+    <Preference
+            android:key="virtual_keyboard_pref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/system_warning_preference_card"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
 
+    <Preference
+            android:key="battry_pref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlab_interface_single"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
+    
+    <Preference
+            android:key="battry_ref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlab_interface_single_right"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
+    <Preference
+            android:key="battrdy_ref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlab_interface_single_left"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
 </PreferenceScreen>

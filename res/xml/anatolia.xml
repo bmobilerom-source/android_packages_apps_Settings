@@ -89,21 +89,21 @@
             android:summary="@string/extras_summary"
             android:fragment="com.epic.fragments.ExtraSettings"
             android:icon="@drawable/ic_anatolia_extras" />
+
+
+
     <Preference
-        android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
-        android:key="device_model"
-        android:summary="@string/extras_title"
-        android:title="@string/extras_summary"
-        settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"
-        settings:enableCopying="true"
-        settings:keywords="@string/keywords_model_and_hardware"/>
+        android:key="display_customization"
+        android:title="@string/display_customization"
+        android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations"
+        android:summary="@string/display_customization"/>   
+            <!-- Quick settings -->
+              
 
-
+        <!-- System Grid (two-column cards) -->
         <PreferenceScreen
-        android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
-        android:key="top_level_about_device"
-        android:order="20"
-        android:title="@string/about_settings"
-        android:summary="@string/summary_placeholder" />
-
+            android:key="system_grid_category"
+            android:title="@string/category_system_title"
+            android:summary="@string/system_summary"
+            android:fragment="com.epic.fragments.SystemGrid" />
 </PreferenceScreen>

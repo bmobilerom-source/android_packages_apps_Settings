@@ -46,7 +46,6 @@ import java.util.List;
 @SearchIndexable
 public class CustomizeDashboard extends SettingsPreferenceFragment { 
 	
-	private PreferenceCategory mThemesCategory, mSystemCategory, mGeneralCategory;
 	private PreferenceScreen mPreferenceScreen;
 	private LayoutPreference mTabPreference;
 	private TabLayout mTabLayout;
@@ -56,10 +55,9 @@ public class CustomizeDashboard extends SettingsPreferenceFragment {
 		super.onCreate(icicle);
 		if (afterLabsStyle() == 1) {
 			addPreferencesFromResource(R.xml.customize_dashboard_grid);
-			//Category Pref//
-			mThemesCategory = findPreference("ui_category");
-			mSystemCategory = findPreference("system_category");
-			mGeneralCategory = findPreference("general_category");
+			
+			mPreferenceScreen = getPreferenceScreen();
+			
 			//Tab Pref//
 			mTabPreference = findPreference("declan_tab_layout");
 			mTabLayout = mTabPreference.findViewById(R.id.afterlifexdeclan_tab_layout);
@@ -72,26 +70,82 @@ public class CustomizeDashboard extends SettingsPreferenceFragment {
 			mTabLayout.addTab(uiTab, 0);
 			mTabLayout.addTab(systemTab, 1);
 			mTabLayout.addTab(generalTab, 2);
-			//Remove Screen//
-			mPreferenceScreen = getPreferenceScreen();
-			mPreferenceScreen.removePreference(mSystemCategory);
-			mPreferenceScreen.removePreference(mGeneralCategory);
+			
+			// Find all preferences in each section
+			Preference uiHeader = findPreference("ui_header");
+			Preference statusbar = findPreference("statusbar_category");
+			Preference quickSettings = findPreference("quick_settings_category");
+			Preference battery = findPreference("battery_category");
+			Preference lockscreen = findPreference("lockscreen_category");
+			
+			Preference systemHeader = findPreference("system_header");
+			Preference notifications = findPreference("notifications_category");
+			Preference buttons = findPreference("buttons_category");
+			Preference gesture = findPreference("gesture_category");
+			Preference powermenu = findPreference("powermenu_category");
+			
+			Preference generalHeader = findPreference("general_header");
+			Preference misc = findPreference("misc_category");
+			Preference system = findPreference("system_category");
+			
+			// Initially hide system and general sections
+			hidePreference(systemHeader);
+			hidePreference(notifications);
+			hidePreference(buttons);
+			hidePreference(gesture);
+			hidePreference(powermenu);
+			hidePreference(generalHeader);
+			hidePreference(misc);
+			hidePreference(system);
 			
 			TabLayout.OnTabSelectedListener onTabSelectedListener = new TabLayout.OnTabSelectedListener() {
 				@Override
 				public void onTabSelected(Tab tab) {
 					if (tab.getPosition() == 0) {
-						mPreferenceScreen.addPreference(mThemesCategory);
-						mPreferenceScreen.removePreference(mSystemCategory);
-						mPreferenceScreen.removePreference(mGeneralCategory);
+						// Themes tab
+						showPreference(uiHeader);
+						showPreference(statusbar);
+						showPreference(quickSettings);
+						showPreference(battery);
+						showPreference(lockscreen);
+						hidePreference(systemHeader);
+						hidePreference(notifications);
+						hidePreference(buttons);
+						hidePreference(gesture);
+						hidePreference(powermenu);
+						hidePreference(generalHeader);
+						hidePreference(misc);
+						hidePreference(system);
 					} else if (tab.getPosition() == 1) {
-						mPreferenceScreen.removePreference(mThemesCategory);
-						mPreferenceScreen.addPreference(mSystemCategory);
-						mPreferenceScreen.removePreference(mGeneralCategory);
+						// System tab
+						hidePreference(uiHeader);
+						hidePreference(statusbar);
+						hidePreference(quickSettings);
+						hidePreference(battery);
+						hidePreference(lockscreen);
+						showPreference(systemHeader);
+						showPreference(notifications);
+						showPreference(buttons);
+						showPreference(gesture);
+						showPreference(powermenu);
+						hidePreference(generalHeader);
+						hidePreference(misc);
+						hidePreference(system);
 					} else if (tab.getPosition() == 2) {
-						mPreferenceScreen.removePreference(mThemesCategory);
-						mPreferenceScreen.removePreference(mSystemCategory);
-						mPreferenceScreen.addPreference(mGeneralCategory);
+						// General tab
+						hidePreference(uiHeader);
+						hidePreference(statusbar);
+						hidePreference(quickSettings);
+						hidePreference(battery);
+						hidePreference(lockscreen);
+						hidePreference(systemHeader);
+						hidePreference(notifications);
+						hidePreference(buttons);
+						hidePreference(gesture);
+						hidePreference(powermenu);
+						showPreference(generalHeader);
+						showPreference(misc);
+						showPreference(system);
 					}
 				}
 				
@@ -104,7 +158,7 @@ public class CustomizeDashboard extends SettingsPreferenceFragment {
 				}
 			};
 			
-			onTabSelectedListener.onTabSelected(mTabLayout.getTabAt(mTabLayout.getSelectedTabPosition()));
+			onTabSelectedListener.onTabSelected(mTabLayout.getTabAt(0));
 			mTabLayout.addOnTabSelectedListener(onTabSelectedListener);
 		} else {
 			addPreferencesFromResource(R.xml.customize_dashboard);
@@ -118,6 +172,18 @@ public class CustomizeDashboard extends SettingsPreferenceFragment {
 	
 	private int afterLabsStyle() {
 		return Settings.System.getInt(getContentResolver(), "declanxafterlab_style", 0);
+	}
+	
+	private void showPreference(Preference preference) {
+		if (preference != null && mPreferenceScreen.findPreference(preference.getKey()) == null) {
+			mPreferenceScreen.addPreference(preference);
+		}
+	}
+	
+	private void hidePreference(Preference preference) {
+		if (preference != null && mPreferenceScreen.findPreference(preference.getKey()) != null) {
+			mPreferenceScreen.removePreference(preference);
+		}
 	}
 
     @Override
@@ -149,9 +215,11 @@ public class CustomizeDashboard extends SettingsPreferenceFragment {
 	class AfterlifeSpanSizeSG extends GridLayoutManager.SpanSizeLookup {
 		@Override
 		public int getSpanSize(int position) {
-		    if (position == 0 || position == 1 || position == 2) {
+			// Full span (2 columns): header (0), tabs (1), section headers (2, 7, 12)
+			if (position == 0 || position == 1 || position == 2 || position == 7 || position == 12) {
 				return 2;
 			} else {
+				// Cards: span 1 (one column each)
 				return 1;
 			}
 		}
