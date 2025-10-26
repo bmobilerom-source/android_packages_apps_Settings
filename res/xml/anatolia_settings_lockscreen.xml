@@ -38,6 +38,20 @@
         android:shouldDisableView="false"
         android:layout="@layout/about_phone_info" />
 
+  <Preference
+            android:key="virtual_keyboard_pref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlife_interface_single"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
+
+             <Preference
+            android:key="virtual_keyboard_pref2"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlife_content_cardview"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
+
 
 
 </PreferenceScreen>
