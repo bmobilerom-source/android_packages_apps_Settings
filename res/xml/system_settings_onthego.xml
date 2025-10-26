@@ -79,10 +79,6 @@
     settings:controller="com.android.settings.power.OnTheGoServiceRestartPreferenceController" />
     
     <com.android.settingslib.widget.TopIntroPreference
-            android:key="onthegomode_bubbles_desc3"
-            android:order="-970"
-            android:title="@string/onthegomode_bubble_setting_description3"/>
-    <com.android.settingslib.widget.TopIntroPreference
             android:key="onthegomode_bubbles_desc4"
             android:order="-965"
             android:title="@string/onthegomode_bubble_setting_description4"/>
