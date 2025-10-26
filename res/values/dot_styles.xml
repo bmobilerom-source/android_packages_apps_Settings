@@ -16,7 +16,7 @@
     </style>
 
     <style name="DotPreferenceTopCard">
-        <item name="android:layout_marginBottom">-1dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
         <item name="android:layout_marginTop">4dp</item>
@@ -25,8 +25,8 @@
     </style>
 
     <style name="DotPreferenceMiddleCard">
-        <item name="android:layout_marginTop">-1dp</item>
-        <item name="android:layout_marginBottom">-1dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
         <item name="android:background">@drawable/dot_pref_middle</item>
@@ -34,7 +34,7 @@
     </style>
 
     <style name="DotPreferenceBottomCard">
-        <item name="android:layout_marginTop">-1dp</item>
+        <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">4dp</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>

@@ -18,19 +18,34 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/notifications_title">
-        <com.android.settingslib.widget.LayoutPreference
-                android:key="device_name"
-                android:order="-1"
-                android:selectable="false"
-                android:layout="@layout/top_level_about"
-                settings:isPreferenceVisible="false" />
-    <!-- Statusbar Settings -->
-    <Preference
-            android:layout="@layout/dot_preference_bottom_card"
-        android:key="statusbar_settings"
-        android:title="@string/status_bar_title"
-        android:icon="@drawable/ic_settings_statusbar"
-        android:order="-248"
-        android:fragment="com.android.settings.custom.statusbar.StatusBarSettings" />
 
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header7" android:layout="@layout/xd_about_desc" android:selectable="false"/>
+
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="smart_5g"
+            android:title="@string/smart_5g_title"
+            android:persistent="false"
+            android:summary="@string/smart_5g_summary"
+            settings:controller="com.android.settings.network.telephony.Smart5gPreferenceController"/>
+   <!-- Power menu -->
+        <PreferenceScreen
+            android:key="powermenu_category"
+            android:title="@string/onthegomode_title"
+            android:summary="@string/onthegomode_summary"
+            android:fragment="com.epic.fragments.SystemSettingsOnthego" />
+
+   <!-- taptap menu -->
+        <PreferenceScreen
+            android:key="taptap_category"
+            android:title="@string/taptap_title"
+            android:summary="@string/taptap_summary"
+            android:fragment="com.epic.fragments.SystemSettingsTaptap" />
+
+     
+   <!-- taptap menu -->
+        <PreferenceScreen
+            android:key="aboutus_category"
+            android:title="@string/aboutus_title"
+            android:summary="@string/aboutus_summary"
+            android:fragment="com.epic.fragments.SystemSettingsAboutus" /> 
 </PreferenceScreen>

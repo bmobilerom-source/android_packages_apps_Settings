@@ -248,10 +248,10 @@
     <bool name="config_show_emergency_info_in_device_info">false</bool>
 
     <!-- Whether or not branded account info tile should display in device info page -->
-    <bool name="config_show_branded_account_in_device_info">true</bool>
+    <bool name="config_show_branded_account_in_device_info">false</bool>
 
     <!-- Whether or not device header widget tile should display in device info page -->
-    <bool name="config_show_device_header_in_device_info">true</bool>
+    <bool name="config_show_device_header_in_device_info">false</bool>
 
     <!-- Whether or not TopLevelSettings should force rounded icon for injected tiles -->
     <bool name="config_force_rounded_icon_TopLevelSettings">false</bool>
@@ -336,7 +336,7 @@
     <bool name="config_face_intro_show_require_eyes">true</bool>
 
     <!-- Whether to use the Lottie animation for the face education enrollment screen -->
-    <bool name="config_face_education_use_lottie">false</bool>
+    <bool name="config_face_education_use_lottie">true</bool>
 
     <!-- Whether to support enrollment during setup wizard flow -->
     <bool name="config_suw_support_face_enroll">true</bool>
@@ -436,7 +436,7 @@
     <bool name="config_show_data_saver">true</bool>
 
     <!-- Whether enabled_vr_listeners should be shown or not. -->
-    <bool name="config_show_enabled_vr_listeners">true</bool>
+    <bool name="config_show_enabled_vr_listeners">false</bool>
 
     <!-- Whether phone_language should be shown or not. -->
     <bool name="config_show_phone_language">true</bool>
@@ -496,13 +496,13 @@
     <bool name="config_show_top_level_accessibility">true</bool>
 
     <!-- Whether top_level_battery should be shown or not. -->
-    <bool name="config_show_top_level_battery">true</bool>
+    <bool name="config_show_top_level_battery">false</bool>
 
     <!-- Whether to use compact battery status string. -->
     <bool name="config_use_compact_battery_status">false</bool>
 
     <!-- Whether top_level_connected_devices should be shown or not. -->
-    <bool name="config_show_top_level_connected_devices">true</bool>
+    <bool name="config_show_top_level_connected_devices">false</bool>
 
     <!-- Whether top_level_display should be shown or not. -->
     <bool name="config_show_top_level_display">true</bool>
@@ -580,7 +580,7 @@
     <string name="emergency_gesture_settings_package"></string>
 
     <!-- Whether to show the Preference for Adaptive connectivity -->
-    <bool name="config_show_adaptive_connectivity">false</bool>
+    <bool name="config_show_adaptive_connectivity">true</bool>
 
     <!-- Authority of advanced device battery prediction -->
     <string name="config_battery_prediction_authority" translatable="false"></string>
@@ -731,7 +731,7 @@
     </string-array>
 
     <!-- The default value for RedactionInterstitial in SUW -->
-    <bool name="default_allow_sensitive_lockscreen_content">true</bool>
+    <bool name="default_allow_sensitive_lockscreen_content">false</bool>
 
     <!-- Whether to enable the app battery usage list page feature. -->
     <bool name="config_app_battery_usage_list_enabled">true</bool>

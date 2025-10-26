@@ -18,28 +18,30 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title=" ">
-    <com.android.settingslib.widget.LayoutPreference
+
+
+
+ <com.android.settingslib.widget.LayoutPreference
         android:key="battery_stats_view"
-            android:title="@string/qs_brightness_slider_haptic_title"
+        android:selectable="false"
+        android:enabled="true"
+        android:shouldDisableView="false"
+        android:layout="@layout/stallion_header" />
+
+
+
+
+ <com.android.settingslib.widget.LayoutPreference
+        android:key="battery_stats_view"
         android:selectable="false"
         android:enabled="false"
         android:shouldDisableView="false"
-        android:layout="@layout/dot_battery_stats_pref" />
-    <com.android.settingslib.widget.LayoutPreference
-            android:title="@string/qs_brightness_slider_haptic_title"
-        android:selectable="false"
-        android:enabled="false"
-        android:shouldDisableView="false"
-        android:layout="@layout/dot_battery_opt" />
-    <com.android.settings.widget.CardPreference
-        android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
-        android:key="battery_saver_summary"
-            android:title="@string/qs_brightness_slider_haptic_title"
-        android:layout="@layout/card_preference_layout_bm"/>
+        android:layout="@layout/about_phone_info" />
 
-  <com.android.settingslib.widget.LayoutPreference
-        android:key="orchidosrom_grid"
-        android:layout="@layout/afterlab_dashboard_header"
-        android:selectable="false"/>
-
+<com.android.settings.preferences.ui.AdaptivePreference
+            android:key="battry_ref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlab_interface_single_right"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
 </PreferenceScreen>
