@@ -28,7 +28,10 @@ open class AboutBaseCard : MaterialCardView {
 
     init {
         defaultRadius = resources.getDimensionPixelSize(R.dimen.contextual_card_corner_radius)
-        layoutParams = LayoutParams(resources.getDimensionPixelSize(R.dimen.storage_card_min_width), resources.getDimensionPixelSize(R.dimen.storage_card_min_height))
+        layoutParams = LayoutParams(
+            resources.getDimensionPixelSize(R.dimen.storage_card_min_width), 
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         layout = RelativeLayout(context)
         layout.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
         layout.setPadding(defaultPadding, (defaultPadding * 1.5).toInt(), defaultPadding, (defaultPadding * 1.5).toInt())
@@ -39,7 +42,9 @@ open class AboutBaseCard : MaterialCardView {
         cardElevation = 0f
         strokeColor = resources.getColor(R.color.contextual_card_stroke_color, context.theme)
         strokeWidth = resources.getDimensionPixelSize(R.dimen.contextual_card_stroke_width)
-        setTouchListener(layout)
+        // Cards are not clickable - removed setTouchListener
+        layout.isClickable = false
+        isClickable = false
     }
 
     fun setTouchListener(view: View) {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/entity_header"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/dot_edit_background">
 
@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -31,20 +31,13 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.android.settings.deviceinfo.aboutphone.DeviceCardView
-                android:id="@+id/deviceNameCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:extra_title="@string/bluetooth_device_name" />
-
             <com.android.settings.deviceinfo.aboutphone.StorageCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
