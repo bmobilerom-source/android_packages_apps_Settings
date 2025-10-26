@@ -21,6 +21,13 @@
     android:key="top_level_settings"
     android:title="Settings">
 
+    <!-- Tati Header -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="tati_header"
+        android:selectable="false"
+        android:layout="@layout/tati_header"
+        android:order="-2000" />
+
     <!-- Classic Style - All preferences from top_level_settings_v2.xml except: location, anatolia, security, storage, system, modes, accounts -->
     <!-- Main user info is hidden -->
     

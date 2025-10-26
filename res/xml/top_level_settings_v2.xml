@@ -19,8 +19,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
-   
-  
+
+    <!-- Maps Header -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="mals_header"
+        android:selectable="false"
+        android:layout="@layout/mals_header"
+        android:order="-2000" />
+
     <!-- About phone hidden in V2 -->
     <!-- <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/mainuser_profile_card"
@@ -224,7 +230,7 @@
             settings:highlightableMenuKey="@string/menu_key_privacy"/>
 
         <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
+            android:fragment="com.android.settings.privacy.PrivacyControlsFragment"
             android:icon="@drawable/ic_settings_privacy_filled"
             android:key="top_level_privacy"
             android:order="-30"

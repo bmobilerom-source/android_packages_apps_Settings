@@ -152,19 +152,19 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     null));
             
             // Last 10 cards (ordered as specified):
-            // 1. Adaptive brightness
+            // 1. Display customizations (replaces adaptive brightness)
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.auto_brightness_title,
-                    R.string.auto_brightness_description,
-                    "com.android.settings.display.AutoBrightnessSettings",
+                    R.string.display_customizations3_title,
+                    R.string.display_customizations_summary,
+                    "com.android.settings.awaken.fragments.DisplayCustomizations3",
                     null));
-            // 2. Extra dim
+            // 2. Monet Color Settings (replaces extra dim)
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.even_dimmer_display_title,
-                    R.string.even_dimmer_display_summary,
-                    "com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment",
+                    R.string.display_page_grid_monet_color_title,
+                    R.string.display_page_grid_monet_color_summary,
+                    "com.android.settings.display.MonetColorSettings",
                     null));
             // 3. Text and size
             items.add(new DisplayPageGridAdapter.CardItem(
@@ -173,12 +173,12 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.accessibility_text_reading_options_summary,
                     "com.android.settings.accessibility.TextReadingPreferenceFragment",
                     null));
-            // Display Rotation (LineageParts)
+            // QS Header Image (from display_customizations5.xml)
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.display_rotation_title,
-                    R.string.display_rotation_summary,
-                    "org.lineageos.lineageparts.hardware.DisplayRotation",
+                    R.string.qs_header_title,
+                    R.string.qs_header_summary,
+                    "com.android.settings.awaken.fragments.QsHeader",
                     null));
             // 4. Custom Themes (replaces first Anatolia settings card)
             items.add(new DisplayPageGridAdapter.CardItem(

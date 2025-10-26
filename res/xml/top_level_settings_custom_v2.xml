@@ -245,7 +245,7 @@
             settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 
         <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
+            android:fragment="com.android.settings.privacy.PrivacyControlsFragment"
             android:icon="@drawable/ic_settings_privacy_filled"
             android:key="top_level_privacy"
             android:order="-30"

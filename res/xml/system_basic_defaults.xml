@@ -23,7 +23,7 @@
         android:enabled="true"
         android:shouldDisableView="false"
         android:fragment="com.epic.fragments.SystemSettingsAboutus" 
-        android:layout="@layout/CustomerOS_header"
+        android:layout="@layout/stallion_header"
         android:order="-2000" />
 
     <com.android.settingslib.widget.LayoutPreference
