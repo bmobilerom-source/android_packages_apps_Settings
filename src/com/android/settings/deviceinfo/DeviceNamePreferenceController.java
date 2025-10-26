@@ -72,13 +72,8 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        mDeviceCard = mPreference.findViewById(R.id.deviceNameCard);
-        final CharSequence deviceName = getSummary();
-        mDeviceCard.setDeviceName(deviceName.toString(), mWifiDeviceNameTextValidator.isTextValid(deviceName.toString()));
-        mDeviceCard.setListener(s -> {
-            setDeviceName(s);
-            return Unit.INSTANCE;
-        });
+        // DeviceCardView was removed from device_info_header.xml
+        // Device name functionality is no longer available in the header
     }
 
     private void initializeDeviceName() {
@@ -126,7 +121,7 @@ public class DeviceNamePreferenceController extends BasePreferenceController
             setSettingsGlobalDeviceName(deviceName);
             setBluetoothDeviceName(deviceName);
             setTetherSsidName(deviceName);
-            mDeviceCard.setDeviceName(deviceName);
+            // DeviceCard removed, no longer setting device name on card
         }
     }
 
