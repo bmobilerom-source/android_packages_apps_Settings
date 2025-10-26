@@ -18,20 +18,71 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/gestures_title">
-     <Preference
-            android:key="virtual_keyboard_pref"
-            android:title="@string/virtual_keyboard_category"
-            settings:layout="@layout/afterlife_card_homepage_content"
-            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
-            settings:keywords="@string/keywords_virtual_keyboard"/>
 
-             <Preference
-            android:key="virtual_keyboard_pref2"
-            android:title="@string/virtual_keyboard_category"
-            settings:layout="@layout/afterlife_content_cardview"
-            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
-            settings:keywords="@string/keywords_virtual_keyboard"/>
-
-
-
+    <!-- Test 1: XD Firmware Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header1" android:layout="@layout/xd_firmware_header" android:selectable="false"/>
+    
+    <!-- Test 2: Stallion Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header2" android:layout="@layout/stallion_header" android:selectable="false"/>
+    
+    <!-- Test 3: XD About Phone Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header3" android:layout="@layout/xd_about_phone_header" android:selectable="false"/>
+    
+    <!-- Test 4: AfterLab Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header4" android:layout="@layout/afterlab_header" android:selectable="false"/>
+    
+    <!-- Test 5: AfterLab Dashboard Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header5" android:layout="@layout/afterlab_dashboard_header" android:selectable="false"/>
+    
+    <!-- Test 6: XD About Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header6" android:layout="@layout/xd_about_header" android:selectable="false"/>
+    
+    <!-- Test 7: XD About Desc -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header7" android:layout="@layout/xd_about_desc" android:selectable="false"/>
+    
+    <!-- Test 8: Settings Title Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header8" android:layout="@layout/settings_title_header" android:selectable="false"/>
+    
+    <!-- Test 9: Device Info Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header9" android:layout="@layout/device_info_header" android:selectable="false"/>
+    
+    <!-- Test 10: Conditional Card Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header10" android:layout="@layout/conditional_card_header" android:selectable="false"/>
+    
+    <!-- Test 11: Conditional Card Header Icon -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header11" android:layout="@layout/conditional_card_header_icon" android:selectable="false"/>
+    
+    <!-- Test 12: General Bluetooth Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header12" android:layout="@layout/general_bt_entity_header" android:selectable="false"/>
+    
+    <!-- Test 13: Advanced Bluetooth Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header13" android:layout="@layout/advanced_bt_entity_header" android:selectable="false"/>
+    
+    <!-- Test 14: LE Audio Bluetooth Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header14" android:layout="@layout/le_audio_bt_entity_header" android:selectable="false"/>
+    
+    <!-- Test 15: Bluetooth Broadcast Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header15" android:layout="@layout/bluetooth_broadcast_entity_header" android:selectable="false"/>
+    
+    <!-- Test 16: Time Zone Search Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header16" android:layout="@layout/time_zone_search_header" android:selectable="false"/>
+    
+    <!-- Test 17: Running Processes Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header17" android:layout="@layout/running_processes_header" android:selectable="false"/>
+    
+    <!-- Test 18: Request Manage Credentials Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header18" android:layout="@layout/request_manage_credentials_header" android:selectable="false"/>
+    
+    <!-- Test 19: Preference Battery Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header19" android:layout="@layout/preference_battery_header_text" android:selectable="false"/>
+    
+    <!-- Test 20: Choose Lock Biometric Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header20" android:layout="@layout/choose_lock_generic_biometric_header" android:selectable="false"/>
+    
+    <!-- Test 21: Preference App Header Animation -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header21" android:layout="@layout/preference_app_header_animation" android:selectable="false"/>
+    
+    <!-- Test 22: Accessibility Magnification Header -->
+    <com.android.settingslib.widget.LayoutPreference android:key="test_header22" android:layout="@layout/accessibility_magnification_mode_header" android:selectable="false"/>
+    
 </PreferenceScreen>
