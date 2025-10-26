@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2025  The-jekts
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+      <!--  about us -->
+    <string name="taptap_title">System TapTap</string>
+    <string name="taptap_summary">Extended functionality for back gestures</string>
+    <string name="taptap_bubble_setting_description">TapTap allows you to perform actions by tapping on the back of your device.</string>
+    <string name="taptap_info">TapTap Website</string>
+    <string name="taptap_info_summary">Get more info about TapTap</string>
+    <string name="taptapmode_bubble_setting_description">The TapTap mode is a extended feature that allows you to customize the tap tap gestures to perform different actions based on your preferences.</string>
+
+</resources>
