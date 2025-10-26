@@ -32,7 +32,6 @@
    <Preference
             android:key="test_card_mid"
             android:title="Test Card Middle"
-            android:icon="@drawable/ic_settings"
             android:summary="XD Middle Card"
             settings:layout="@layout/xd_pref_card_mid"/>
 
@@ -40,7 +39,6 @@
    <Preference
             android:key="test_card_bot"
             android:title="Test Card Bottom"
-            android:icon="@drawable/ic_settings"
             android:summary="XD Bottom Card"
             settings:layout="@layout/xd_pref_card_bot"/>
 
@@ -48,7 +46,6 @@
    <Preference
             android:key="test_dot_top"
             android:title="Test DOT Top"
-            android:icon="@drawable/ic_settings"
             android:summary="DOT Top Card"
             settings:layout="@layout/dot_preference_top_card"/>
 
@@ -56,7 +53,6 @@
    <Preference
             android:key="test_afterlife"
             android:title="Test AfterLife"
-            android:icon="@drawable/ic_settings"
             android:summary="AfterLife Card"
             settings:layout="@layout/afterlife_cardview_top"/>
 
@@ -64,7 +60,6 @@
    <Preference
             android:key="test_top_level_top"
             android:title="Test Top Level Top"
-            android:icon="@drawable/ic_settings"
             android:summary="Top Level Top Card"
             settings:layout="@layout/top_level_preference_top_card"/>
 
@@ -72,7 +67,6 @@
    <Preference
             android:key="test_top_level_solo"
             android:title="Test Top Level Solo"
-            android:icon="@drawable/ic_settings"
             android:summary="Top Level Solo Card"
             settings:layout="@layout/top_level_preference_solo_card"/>
 
@@ -80,7 +74,6 @@
    <Preference
             android:key="test_top_level_middle"
             android:title="Test Top Level Middle"
-            android:icon="@drawable/ic_settings"
             android:summary="Top Level Middle Card"
             settings:layout="@layout/top_level_preference_middle_card"/>
 
@@ -88,7 +81,6 @@
    <Preference
             android:key="test_afterlife_homepage_top"
             android:title="Test AfterLife Homepage"
-            android:icon="@drawable/ic_settings"
             android:summary="AfterLife Homepage Card"
             settings:layout="@layout/afterlife_card_homepage_top"/>
 
@@ -96,7 +88,6 @@
    <Preference
             android:key="test_afterlife_homepage_middle"
             android:title="Test AfterLife Homepage Middle"
-            android:icon="@drawable/ic_settings"
             android:summary="AfterLife Homepage Middle Card"
             settings:layout="@layout/afterlife_card_homepage_middle"/>
 
@@ -104,7 +95,6 @@
    <Preference
             android:key="test_dot_middle"
             android:title="Test DOT Middle"
-            android:icon="@drawable/ic_settings"
             android:summary="DOT Middle Card"
             settings:layout="@layout/dot_preference_middle_card"/>
 
@@ -112,7 +102,6 @@
    <Preference
             android:key="test_dot_bottom"
             android:title="Test DOT Bottom"
-            android:icon="@drawable/ic_settings"
             android:summary="DOT Bottom Card"
             settings:layout="@layout/dot_preference_bottom_card"/>
 
@@ -120,7 +109,6 @@
    <Preference
             android:key="test_afterlife_middle"
             android:title="Test AfterLife Middle"
-            android:icon="@drawable/ic_settings"
             android:summary="AfterLife Middle Card"
             settings:layout="@layout/afterlife_cardview_middle"/>
 
@@ -128,7 +116,6 @@
    <Preference
             android:key="test_afterlife_bottom"
             android:title="Test AfterLife Bottom"
-            android:icon="@drawable/ic_settings"
             android:summary="AfterLife Bottom Card"
             settings:layout="@layout/afterlife_cardview_bottom"/>
 
@@ -136,7 +123,6 @@
    <Preference
             android:key="test_top_level_bottom"
             android:title="Test Top Level Bottom"
-            android:icon="@drawable/ic_settings"
             android:summary="Top Level Bottom Card"
             settings:layout="@layout/top_level_preference_bottom_card"/>
 
@@ -144,7 +130,6 @@
    <Preference
             android:key="test_afterlife_single_left"
             android:title="Test AfterLife Single Left"
-            android:icon="@drawable/ic_settings"
             android:summary="AfterLife Single Left Card"
             settings:layout="@layout/afterlife_cardview_single_left"/>
 
@@ -152,7 +137,6 @@
    <Preference
             android:key="test_afterlife_single_right"
             android:title="Test AfterLife Single Right"
-            android:icon="@drawable/ic_settings"
             android:summary="AfterLife Single Right Card"
             settings:layout="@layout/afterlife_cardview_single_right"/>
 
@@ -160,7 +144,6 @@
    <Preference
             android:key="test_afterlife_homepage_bottom"
             android:title="Test AfterLife Homepage Bottom"
-            android:icon="@drawable/ic_settings"
             android:summary="AfterLife Homepage Bottom Card"
             settings:layout="@layout/afterlife_card_homepage_bottom"/>
 
