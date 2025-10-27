@@ -21,32 +21,71 @@
  
    <Preference
             android:key="virtual_keyboard_pref"
-            android:title="@string/keyboard_settings"
-            android:summary="@string/keyboard_settings_summary"
+            android:title="Test Card main"
+            android:summary="test card main"
             android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
             settings:keywords="@string/keywords_virtual_keyboard"
-            settings:layout="@layout/preference_card"/>
+            settings:layout="@layout/preference_card_main"/>
 
    <!-- Test XD Card Middle -->
    <Preference
-            android:key="test_card_mid"
-            android:title="Test Card Middle"
-            android:summary="XD Middle Card"
-            settings:layout="@layout/preference_card"/>
+            android:key="test_card_top"
+            android:title="Test aosp Card top"
+            android:summary="test aosp card top"
+            settings:layout="@layout/preference_card_aosp_top"/>
 
    <!-- Test XD Card Bottom -->
    <Preference
-            android:key="test_card_bot"
-            android:title="Test Card Bottom"
-            android:summary="XD Bottom Card"
-            settings:layout="@layout/preference_card_xd"/>
+            android:key="test_card_middle"
+            android:title="Test Card aosp middle"
+            android:summary="Test Card aosp middle"
+            settings:layout="@layout/preference_card_aosp_middle"/>
+
+   <Preference
+            android:key="test_card_bottom"
+            android:title="Test Card aosp bottom"
+            android:summary="Test Card aosp bottom"
+            settings:layout="@layout/preference_card_aosp_bottom"/>
 
    <!-- Test DOT Card Top -->
    <Preference
-            android:key="test_dot_top"
-            android:title="Test DOT Top"
-            android:summary="DOT Top Card"
-            settings:layout="@layout/dot_preference_top_card"/>
+            android:key="test_preference_card_top"
+            android:title="Test Preference Card Top"
+            android:summary="Preference Card Top"
+            settings:layout="@layout/preference_card_top"/>
+
+   <Preference
+            android:key="test_preference_card_middle"
+            android:title="Test Preference Card Middle"
+            android:summary="Preference Card Middle"
+            settings:layout="@layout/preference_card_middle"/>
+
+   <Preference
+            android:key="test_preference_card_bottom"
+            android:title="Test Preference Card Bottom"
+            android:summary="Preference Card Bottom"
+            settings:layout="@layout/preference_card_bottom"/>
+
+ <Preference
+            android:key="test_preference_card_witharrow_test_top"
+            android:title="Test Preference Card with arrow  top"
+            android:summary="Preference Card with arrow  top"
+            settings:layout="@layout/preference_card_witharrow_top"/>
+
+
+ <Preference
+            android:key="test_preference_card_witharrow_test_middle"
+            android:title="Test Preference Card with arrow  middle"
+            android:summary="Preference Card with arrow  middle"
+            settings:layout="@layout/preference_card_witharrow_middle"/>
+
+ <Preference
+            android:key="test_preference_card_witharrow_test_bottom"
+            android:title="Test Preference Card with arrow  bottom"
+            android:summary="Preference Card with arrow  bottom"
+            settings:layout="@layout/preference_card_witharrow_bottom"/>
+
+
 
    <!-- Test AfterLife Card Top -->
    <Preference
