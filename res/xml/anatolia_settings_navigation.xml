@@ -26,21 +26,21 @@
             android:summary="@string/virtual_keyboard_category_summary"
             android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
             settings:keywords="@string/keywords_virtual_keyboard"
-            settings:layout="@layout/xd_pref_card_top"/>
+            settings:layout="@layout/preference_card"/>
 
    <!-- Test XD Card Middle -->
    <Preference
             android:key="test_card_mid"
             android:title="Test Card Middle"
             android:summary="XD Middle Card"
-            settings:layout="@layout/xd_pref_card_mid"/>
+            settings:layout="@layout/preference_card"/>
 
    <!-- Test XD Card Bottom -->
    <Preference
             android:key="test_card_bot"
             android:title="Test Card Bottom"
             android:summary="XD Bottom Card"
-            settings:layout="@layout/xd_pref_card_bot"/>
+            settings:layout="@layout/preference_card_xd"/>
 
    <!-- Test DOT Card Top -->
    <Preference

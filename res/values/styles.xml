@@ -1115,4 +1115,20 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/settingslib_text_color_primary_device_default</item>
     </style>
+    
+    <!-- Universal Preference Card Style -->
+    <style name="PreferenceCardStyle">
+        <item name="android:layout_marginHorizontal">16dp</item>
+        <item name="android:layout_marginVertical">4dp</item>
+        <item name="android:background">@drawable/custom_preference_background</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+    
+    <!-- XD Style Preference Card Style -->
+    <style name="PreferenceCardXDStyle">
+        <item name="android:layout_marginHorizontal">@dimen/xd_pref_card_horizontal_padding</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:background">@drawable/xd_pref_card_bot</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
 </resources>
