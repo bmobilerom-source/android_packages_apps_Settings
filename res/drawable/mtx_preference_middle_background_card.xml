@@ -24,6 +24,9 @@
             android:shape="rectangle">
 
             <solid android:color="@color/user_crd_bg" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/card_outline_color"/>
             <corners android:bottomRightRadius="0dp" android:bottomLeftRadius="0dp" 
                 android:topLeftRadius="0dp" android:topRightRadius="0dp"/> 
         </shape>

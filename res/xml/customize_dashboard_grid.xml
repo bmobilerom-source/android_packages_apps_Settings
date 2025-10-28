@@ -28,86 +28,86 @@
     <PreferenceCategory
         android:title="Base UI Theme"
         android:key="ui_category"
-        settings:layout="@layout/afterlab_preference_category">
+        app:layout="@layout/afterlab_preference_category">
         <Preference
             android:icon="@drawable/ic_interface_sb"
             android:title="@string/category_statusbar_title"
             android:key="statusbar_category"
             android:summary="@string/statusbar_summary"
             android:fragment="com.afterlife.afterlab.StatusBar"
-            settings:layout="@layout/preference_card_aosp_grid_left" />
+            app:layout="@layout/preference_card_aosp_grid_left" />
         <Preference
             android:icon="@drawable/ic_interface_qs"
             android:title="@string/category_quicksettings_title"
             android:key="quick_settings_category"
             android:summary="@string/quicksetting_summary"
             android:fragment="com.afterlife.afterlab.QuickSettings"
-            settings:layout="@layout/preference_card_aosp_grid_right" />
+            app:layout="@layout/preference_card_aosp_grid_right" />
         <Preference
             android:icon="@drawable/ic_interface_battery"
             android:title="@string/category_battery_title"
             android:key="battery_category"
             android:summary="@string/battery_summary"
             android:fragment="com.afterlife.afterlab.Battery"
-            settings:layout="@layout/preference_card_aosp_grid_left" />
+            app:layout="@layout/preference_card_aosp_grid_left" />
         <Preference
             android:icon="@drawable/ic_interface_ls"
             android:title="@string/category_lockscreen_title"
             android:key="lockscreen_category"
             android:summary="@string/lockscreen_summary"
             android:fragment="com.afterlife.afterlab.LockScreen"
-            settings:layout="@layout/preference_card_aosp_grid_right" />
+            app:layout="@layout/preference_card_aosp_grid_right" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="System Features"
         android:key="system_category"
-        settings:layout="@layout/afterlab_preference_category">
+        app:layout="@layout/afterlab_preference_category">
         <Preference
             android:icon="@drawable/ic_interface_notif"
             android:title="@string/category_notifications_title"
             android:key="notifications_category"
             android:summary="@string/notification_summary"
             android:fragment="com.afterlife.afterlab.Notifications"
-            settings:layout="@layout/preference_card_aosp_grid_left" />
+            app:layout="@layout/preference_card_aosp_grid_left" />
         <Preference
             android:icon="@drawable/ic_interface_buttons"
             android:title="@string/category_buttons_title"
             android:key="buttons_category"
             android:summary="@string/button_summary"
             android:fragment="com.afterlife.afterlab.Buttons"
-            settings:layout="@layout/preference_card_aosp_grid_right" />
+            app:layout="@layout/preference_card_aosp_grid_right" />
         <Preference
             android:icon="@drawable/ic_interface_gesture"
             android:title="@string/category_gestures_title"
             android:key="gesture_category"
             android:summary="@string/gestures_summary"
             android:fragment="com.afterlife.afterlab.Gesture"
-            settings:layout="@layout/preference_card_aosp_grid_left" />
+            app:layout="@layout/preference_card_aosp_grid_left" />
         <Preference
             android:icon="@drawable/ic_interface_power"
             android:title="@string/category_powermenu_title"
             android:key="powermenu_category"
             android:summary="@string/power_summary"
             android:fragment="com.afterlife.afterlab.PowerMenu"
-            settings:layout="@layout/preference_card_aosp_grid_right" />
+            app:layout="@layout/preference_card_aosp_grid_right" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="Misc and General"
         android:key="general_category"
-        settings:layout="@layout/afterlab_preference_category">
+        app:layout="@layout/afterlab_preference_category">
         <Preference
             android:icon="@drawable/ic_interface_misc"
             android:title="@string/category_misc_title"
             android:key="misc_category"
             android:summary="@string/misc_summary"
             android:fragment="com.afterlife.afterlab.Misc"
-            settings:layout="@layout/preference_card_aosp_grid_left" />
+            app:layout="@layout/preference_card_aosp_grid_left" />
         <Preference
             android:icon="@drawable/ic_interface_system"
             android:title="@string/category_system_title"
             android:key="system_category"
             android:summary="@string/system_summary"
             android:fragment="com.afterlife.afterlab.System"
-            settings:layout="@layout/preference_card_aosp_grid_right" />
+            app:layout="@layout/preference_card_aosp_grid_right" />
     </PreferenceCategory>
 </PreferenceScreen>

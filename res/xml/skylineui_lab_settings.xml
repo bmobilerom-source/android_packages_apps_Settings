@@ -82,7 +82,7 @@
     
     <com.android.settings.custom.preference.SystemSettingSeekBarPreference
         android:key="qs_transparency"
-                    settings:layout="@layout/dot_preference_top_card"
+                    app:layout="@layout/dot_preference_top_card"
         android:title="@string/qs_transparency_title"
         android:summary="@string/qs_transparency_summary"
         android:defaultValue="100"
@@ -93,7 +93,7 @@
             android:min="1" />
      <com.android.settings.custom.preference.SystemSettingSwitchPreference
             android:key="brightness_slider_haptic_feedback"
-            settings:layout="@layout/dot_preference_top_card"
+            app:layout="@layout/dot_preference_top_card"
             android:title="@string/qs_brightness_haptic_feedback_title"
             android:summary="@string/qs_brightness_haptic_feedback_summary"
             android:defaultValue="false" />

@@ -22,13 +22,13 @@
     <!-- xd. About Header -->
     <Preference
         android:key="xd_about_header"
-        settings:layout="@layout/xd_about_header"
+        app:layout="@layout/xd_about_header"
         android:selectable="false"/>
 
     <!-- xd. Desc -->
     <Preference
         android:key="xd_about_desc"
-        settings:layout="@layout/xd_about_desc"
+        app:layout="@layout/xd_about_desc"
         android:selectable="false"/>
 
     <!-- Core Team Category -->
@@ -39,7 +39,7 @@
         <!-- xyzuan -->
         <Preference
             android:key="xd_about_xyzuan"
-            settings:layout="@layout/xd_about_core_pref"
+            app:layout="@layout/xd_about_core_pref"
             android:icon="@drawable/xd_about_xyzuan"
             android:title="@string/xd_about_core_xyzuan"
             android:summary="@string/xd_about_core_xyzuan_role">
@@ -54,7 +54,7 @@
         <Preference
             android:key="xd_about_friction"
             android:icon="@drawable/xd_about_friction"
-            settings:layout="@layout/xd_about_core_pref"
+            app:layout="@layout/xd_about_core_pref"
             android:title="@string/xd_about_core_friction"
             android:summary="@string/xd_about_core_friction_role">
 
@@ -68,7 +68,7 @@
         <Preference
             android:key="xd_about_eky"
             android:icon="@drawable/xd_about_eky"
-            settings:layout="@layout/xd_about_core_pref"
+            app:layout="@layout/xd_about_core_pref"
             android:title="@string/xd_about_core_eky"
             android:summary="@string/xd_about_core_eky_role">
 
@@ -82,7 +82,7 @@
         <Preference
             android:key="xd_about_waxaranai"
             android:icon="@drawable/xd_about_waxaranai"
-            settings:layout="@layout/xd_about_core_pref"
+            app:layout="@layout/xd_about_core_pref"
             android:title="@string/xd_about_core_waxaranai"
             android:summary="@string/xd_about_core_waxaranai_role">
 
@@ -96,7 +96,7 @@
         <Preference
             android:key="xd_about_basokuahenakrasanya"
             android:icon="@drawable/xd_about_basokuahenakrasanya"
-            settings:layout="@layout/xd_about_core_pref"
+            app:layout="@layout/xd_about_core_pref"
             android:title="@string/xd_about_core_basokuahenakrasanya"
             android:summary="@string/xd_about_core_basokuahenakrasanya_role">
 

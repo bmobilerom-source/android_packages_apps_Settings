@@ -70,7 +70,7 @@
     <string name="gesture_double_twist_sensor_vendor" translatable="false"></string>
 
     <!-- If the Storage Manager settings are enabled. -->
-    <bool name="config_storage_manager_settings_enabled">false</bool>
+    <bool name="config_storage_manager_settings_enabled">true</bool>
 
     <!-- If the support features are enabled. -->
     <bool name="config_support_enabled">false</bool>
@@ -611,7 +611,7 @@
     <string name="config_other_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/others_root</string>
 
     <!-- Whether to show Smart Storage toggle -->
-    <bool name="config_show_smart_storage_toggle">false</bool>
+    <bool name="config_show_smart_storage_toggle">true</bool>
 
     <!-- Display settings screen, Color mode options. Must be the same length and order as
          config_color_mode_options_values below. Only the values that also appear in
