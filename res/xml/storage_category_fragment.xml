@@ -23,6 +23,7 @@
         android:key="free_up_space"
         android:order="4"
         android:title="@string/storage_free_up_space_title"
+        settings:isPreferenceVisible="false"
         android:summary="@string/storage_free_up_space_summary"
         settings:controller="com.android.settings.deviceinfo.storage.ManageStoragePreferenceController"/>
     <!-- Preference order 100~200 are 'ONLY' for storage category preferences below. -->
