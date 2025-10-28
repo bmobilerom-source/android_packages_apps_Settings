@@ -13,7 +13,8 @@
 <PreferenceScreen
     android:title="AfterLabs"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto">
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/afterlab_dashboard_header"
         android:key="afterlabs_header">

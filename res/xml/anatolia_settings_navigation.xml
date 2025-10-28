@@ -25,34 +25,34 @@
             android:summary="test card main"
             android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
             settings:keywords="@string/keywords_virtual_keyboard"
-            settings:layout="@layout/preference_card_main"/>
+            app:layout="@layout/preference_card_main"/>
 
    <!-- Test XD Card Middle -->
    <Preference
             android:key="test_card_top"
             android:title="Test aosp Card top"
             android:summary="test aosp card top"
-            settings:layout="@layout/preference_card_aosp_top"/>
+            app:layout="@layout/preference_card_aosp_top"/>
 
    <!-- Test XD Card Bottom -->
    <Preference
             android:key="test_card_middle"
             android:title="Test Card aosp middle"
             android:summary="Test Card aosp middle"
-            settings:layout="@layout/preference_card_aosp_middle"/>
+            app:layout="@layout/preference_card_aosp_middle"/>
 
    <Preference
             android:key="test_card_bottom"
             android:title="Test Card aosp bottom"
             android:summary="Test Card aosp bottom"
-            settings:layout="@layout/preference_card_aosp_bottom"/>
+            app:layout="@layout/preference_card_aosp_bottom"/>
 
    <!-- Test DOT Card Top -->
    <Preference
             android:key="test_preference_card_top"
             android:title="Test Preference Card Top"
             android:summary="Preference Card Top"
-            settings:layout="@layout/preference_card_top"/>
+            app:layout="@layout/preference_card_top"/>
 
    <Preference
             android:key="test_preference_card_middle"
