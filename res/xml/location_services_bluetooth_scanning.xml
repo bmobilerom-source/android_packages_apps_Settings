@@ -16,8 +16,13 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
         android:title="@string/location_scanning_bluetooth_always_scanning_title">
-
+  <com.android.settingslib.widget.IllustrationPreference
+        android:key="location"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/location"/>
         <com.android.settingslib.widget.MainSwitchPreference
             android:key="bluetooth_always_scanning_switch"
             android:title="@string/location_scanning_bluetooth_always_scanning_title"
@@ -25,6 +30,7 @@
 
         <com.android.settingslib.widget.FooterPreference
             android:key="bluetooth_always_scanning_footer"
+          settings:layout="@layout/system_advice_preference_card"
             android:title="@string/location_scanning_bluetooth_always_scanning_description"
             android:selectable="false"
             settings:searchable="false"/>

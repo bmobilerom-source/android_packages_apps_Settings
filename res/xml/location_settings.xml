@@ -78,6 +78,7 @@
         <Preference
             android:key="app_level_permissions"
             android:title="@string/location_app_level_permissions"
+            settings:layout="@layout/system_warning_preference_card"
             settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController"/>
 
         <Preference
@@ -92,5 +93,6 @@
         android:title="@string/location_settings_footer_general"
         android:key="location_footer"
         settings:searchable="false"
+        settings:layout="@layout/system_advice_preference_card"
         settings:controller="com.android.settings.location.LocationSettingsFooterPreferenceController"/>
 </PreferenceScreen>
