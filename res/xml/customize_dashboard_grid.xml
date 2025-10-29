@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- AfterLabs dashboard: flattened two-column grid using card layouts -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="AfterLabs">
 
-    <!-- Top banner/header -->
     <com.android.settingslib.widget.LayoutPreference
         android:key="afterlabs_header"
         android:layout="@layout/afterlab_dashboard_header"
         android:selectable="false" />
 
-    <!-- Tabs -->
     <com.android.settingslib.widget.LayoutPreference
         android:key="declan_tab_layout"
         android:layout="@layout/declan_afterlabs_tab_layout"
         android:selectable="false" />
 
-    <!-- Section: Base UI Theme (header row, full span) -->
-    <com.android.settingslib.widget.LayoutPreference
+    <Preference
         android:key="ui_header"
-        android:layout="@layout/settings_title_header"
         android:title="Base UI Theme"
-        android:selectable="false" />
+        android:selectable="false"
+        android:layout="@layout/settings_title_header" />
 
-    <!-- Cards (alternate left/right) -->
     <Preference
         android:key="statusbar_category"
         android:icon="@drawable/ic_interface_sb"
         android:title="@string/category_statusbar_title"
         android:summary="@string/statusbar_summary"
         android:fragment="com.afterlife.afterlab.StatusBar"
-        settings:layout="@layout/afterlab_card_interface_grid" />
+        settings:layout="@layout/grid_card_left" />
 
     <Preference
         android:key="quick_settings_category"
@@ -40,7 +35,7 @@
         android:title="@string/category_quicksettings_title"
         android:summary="@string/quicksetting_summary"
         android:fragment="com.afterlife.afterlab.QuickSettings"
-        settings:layout="@layout/afterlab_card_interface_grid_right" />
+        settings:layout="@layout/grid_card_right" />
 
     <Preference
         android:key="battery_category"
@@ -48,7 +43,7 @@
         android:title="@string/category_battery_title"
         android:summary="@string/battery_summary"
         android:fragment="com.afterlife.afterlab.Battery"
-        settings:layout="@layout/afterlab_card_interface_grid" />
+        settings:layout="@layout/grid_card_left" />
 
     <Preference
         android:key="lockscreen_category"
@@ -56,14 +51,13 @@
         android:title="@string/category_lockscreen_title"
         android:summary="@string/lockscreen_summary"
         android:fragment="com.afterlife.afterlab.LockScreen"
-        settings:layout="@layout/afterlab_card_interface_grid_right" />
+        settings:layout="@layout/grid_card_right" />
 
-    <!-- Section: System Features -->
-    <com.android.settingslib.widget.LayoutPreference
+    <Preference
         android:key="system_header"
-        android:layout="@layout/settings_title_header"
         android:title="System Features"
-        android:selectable="false" />
+        android:selectable="false"
+        android:layout="@layout/settings_title_header" />
 
     <Preference
         android:key="notifications_category"
@@ -71,7 +65,7 @@
         android:title="@string/category_notifications_title"
         android:summary="@string/notification_summary"
         android:fragment="com.afterlife.afterlab.Notifications"
-        settings:layout="@layout/afterlab_card_interface_grid" />
+        settings:layout="@layout/grid_card_left" />
 
     <Preference
         android:key="buttons_category"
@@ -79,7 +73,7 @@
         android:title="@string/category_buttons_title"
         android:summary="@string/button_summary"
         android:fragment="com.afterlife.afterlab.Buttons"
-        settings:layout="@layout/afterlab_card_interface_grid_right" />
+        settings:layout="@layout/grid_card_right" />
 
     <Preference
         android:key="gesture_category"
@@ -87,7 +81,7 @@
         android:title="@string/category_gestures_title"
         android:summary="@string/gestures_summary"
         android:fragment="com.afterlife.afterlab.Gesture"
-        settings:layout="@layout/afterlab_card_interface_grid" />
+        settings:layout="@layout/grid_card_left" />
 
     <Preference
         android:key="powermenu_category"
@@ -95,14 +89,13 @@
         android:title="@string/category_powermenu_title"
         android:summary="@string/power_summary"
         android:fragment="com.afterlife.afterlab.PowerMenu"
-        settings:layout="@layout/afterlab_card_interface_grid_right" />
+        settings:layout="@layout/grid_card_right" />
 
-    <!-- Section: Misc and General -->
-    <com.android.settingslib.widget.LayoutPreference
+    <Preference
         android:key="general_header"
-        android:layout="@layout/settings_title_header"
         android:title="Misc and General"
-        android:selectable="false" />
+        android:selectable="false"
+        android:layout="@layout/settings_title_header" />
 
     <Preference
         android:key="misc_category"
@@ -110,7 +103,7 @@
         android:title="@string/category_misc_title"
         android:summary="@string/misc_summary"
         android:fragment="com.afterlife.afterlab.Misc"
-        settings:layout="@layout/afterlab_card_interface_grid" />
+        settings:layout="@layout/grid_card_left" />
 
     <Preference
         android:key="system_category"
@@ -118,6 +111,6 @@
         android:title="@string/category_system_title"
         android:summary="@string/system_summary"
         android:fragment="com.afterlife.afterlab.System"
-        settings:layout="@layout/afterlab_card_interface_grid_right" />
+        settings:layout="@layout/grid_card_right" />
 
 </PreferenceScreen>
