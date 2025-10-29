@@ -40,6 +40,7 @@
 
  <Preference
         android:key="tap_tap_gestures"
+        settings:layout="@layout/system_features_preference_card"
         android:summary="@string/taptap_summary"
         android:title="@string/taptap_title">
         <intent
