@@ -53,6 +53,7 @@
     <Preference
         android:key="taptap_info"
         android:title="@string/taptap_info"
+        settings:layout="@layout/system_advice_preference_card"
         android:summary="@string/taptap_info_summary">
         <intent
             android:action="android.intent.action.VIEW"
