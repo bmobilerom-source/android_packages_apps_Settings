@@ -78,11 +78,13 @@
         <Preference
             android:key="app_level_permissions"
             android:title="@string/location_app_level_permissions"
+            settings:layout="@layout/system_warning_preference_card"
             settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController"/>
 
         <Preference
             android:fragment="com.android.settings.location.LocationServices"
             android:key="location_services"
+            settings:layout="@layout/system_warning_preference_card"
             android:title="@string/location_services_preference_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 

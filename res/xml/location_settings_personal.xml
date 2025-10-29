@@ -55,6 +55,7 @@
     <Preference
         android:key="app_level_permissions_personal"
         android:title="@string/location_app_level_permissions"
+        settings:layout="@layout/system_warning_preference_card"
         settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController"/>
 
     <Preference
