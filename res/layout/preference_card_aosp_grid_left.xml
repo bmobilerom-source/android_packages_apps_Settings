@@ -14,73 +14,89 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/custom_preference_background"
-    android:padding="16dp"
+    android:layout_weight="1"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginBottom="16dp"
-    android:minHeight="160dp"
-    android:gravity="center_vertical">
+    android:layout_marginBottom="16dp">
 
-    <!-- Icon Row -->
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="space_between"
-        android:layout_marginBottom="12dp">
+        android:background="@drawable/custom_preference_background"
+        android:minHeight="160dp">
 
-        <ImageView
-            android:id="@android:id/icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/custom_surface_color"
-            android:padding="12dp"
-            android:scaleType="fitCenter"
-            android:tint="?android:attr/colorAccent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_chevron_right_24dp"
-            android:tint="?android:attr/textColorSecondary"
-            android:contentDescription="@null" />
+            <!-- Icon Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:weightSum="1"
+                android:layout_marginBottom="12dp">
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@android:id/icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/custom_surface_color"
+                    android:padding="12dp"
+                    android:scaleType="fitCenter"
+                    android:tint="?android:attr/colorAccent" />
 
-    <!-- Title -->
-    <TextView
-        android:id="@android:id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textAlignment="viewStart"
-        android:layout_marginBottom="4dp" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_chevron_right_24dp"
+                    android:tint="?android:attr/textColorSecondary"
+                    android:contentDescription="@null" />
 
-    <!-- Summary -->
-    <TextView
-        android:id="@android:id/summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="?android:attr/textColorSecondary"
-        android:alpha="0.7"
-        android:maxLines="4"
-        android:textAlignment="viewStart" />
+            </LinearLayout>
 
-    <!-- Widget Frame -->
-    <LinearLayout
-        android:id="@android:id/widget_frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="start"
-        android:orientation="horizontal" />
+            <!-- Title -->
+            <TextView
+                android:id="@android:id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textAlignment="viewStart"
+                android:layout_marginBottom="4dp" />
 
-</LinearLayout>
+            <!-- Summary -->
+            <TextView
+                android:id="@android:id/summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:alpha="0.7"
+                android:maxLines="4"
+                android:textAlignment="viewStart" />
+
+            <!-- Widget Frame -->
+            <LinearLayout
+                android:id="@android:id/widget_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
 

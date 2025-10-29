@@ -5,5 +5,10 @@
     <color name="card_text">#FCFCFC</color>
     <color name="bottom_navigation_ripple">#13FFFFFF</color>
     <color name="teambackground">#6c6c6c</color>
-</resources> 
 
+    <!-- System Warning Background Color (same for light and dark mode) -->
+    <color name="system_warning_bg">#99C58181</color>
+
+    <!-- System Features Background Color (same for light and dark mode) -->
+    <color name="system_features_bg">#9922B5AD</color>
+</resources>

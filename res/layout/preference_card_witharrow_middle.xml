@@ -16,7 +16,7 @@
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
-    android:background="@drawable/cardview_middle"
+    android:background="@drawable/custom_preference_background"
     android:clipToPadding="false"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

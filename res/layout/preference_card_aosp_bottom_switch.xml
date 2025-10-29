@@ -21,57 +21,64 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/custom_preference_background"
     android:clipToPadding="false">
 
-    <LinearLayout
+    <!-- Card Container -->
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:background="@drawable/custom_preference_background">
 
-        <!-- Content -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginEnd="16dp">
+            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-            <!-- Title -->
-            <TextView
-                android:id="@android:id/title"
-                android:layout_width="wrap_content"
+            <!-- Content -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceListItem"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="16sp"
-                android:ellipsize="marquee"
-                android:singleLine="true" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="16dp">
 
-            <!-- Summary -->
-            <TextView
-                android:id="@android:id/summary"
+                <!-- Title -->
+                <TextView
+                    android:id="@android:id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp"
+                    android:ellipsize="marquee"
+                    android:singleLine="true" />
+
+                <!-- Summary -->
+                <TextView
+                    android:id="@android:id/summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:maxLines="3" />
+
+            </LinearLayout>
+
+            <!-- Switch Widget -->
+            <LinearLayout
+                android:id="@android:id/widget_frame"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-                android:textColor="?android:attr/textColorSecondary"
-                android:maxLines="3" />
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical" />
 
         </LinearLayout>
 
-        <!-- Switch Widget -->
-        <LinearLayout
-            android:id="@android:id/widget_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical" />
-
-    </LinearLayout>
+    </FrameLayout>
 
 </FrameLayout>
-
