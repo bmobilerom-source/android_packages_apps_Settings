@@ -33,7 +33,7 @@
             android:key="bluetooth_always_scanning_footer"
             android:title="@string/location_scanning_bluetooth_always_scanning_description"
             android:selectable="false"
-            android:order="-800"
+            android:order="800"
             settings:searchable="false"/>
 
 </PreferenceScreen>

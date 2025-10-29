@@ -26,6 +26,7 @@
         app:lottie_rawRes="@raw/location"/>
         <com.android.settingslib.widget.MainSwitchPreference
             android:key="wifi_always_scanning_switch"
+             android:order="-900"
             android:title="@string/location_scanning_wifi_always_scanning_title"
             settings:controller="com.android.settings.location.WifiScanningMainSwitchPreferenceController"/>
 
@@ -34,6 +35,7 @@
           settings:layout="@layout/system_advice_preference_card"
             android:title="@string/location_scanning_wifi_always_scanning_description"
             android:selectable="false"
+             android:order="800"
             settings:searchable="false"/>
 
 </PreferenceScreen>
