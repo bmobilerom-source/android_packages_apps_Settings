@@ -100,6 +100,7 @@
     <!-- Media output switcher -->
     <Preference
         android:key="media_output"
+        settings:layout="@layout/system_features_preference_card"
         android:title="@string/media_output_title"
         android:dialogTitle="@string/media_output_title"
         android:order="-135"
@@ -166,9 +167,9 @@
 
     <!-- Media controls -->
     <Preference
-        android:key="media_controls_summary"
-        android:title="@string/media_controls_title"
-        settings:layout="@layout/afterlife_cardview_top"
+        android:key="media_controls_page_summary"
+        android:title="@string/media_controls_page_title"
+        settings:layout="@layout/system_features_preference_card"
         android:fragment="com.android.settings.sound.MediaControlsSettings"
         android:order="-90"
         settings:controller="com.android.settings.sound.MediaControlsParentPreferenceController"

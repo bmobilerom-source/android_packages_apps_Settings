@@ -46,4 +46,7 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
 
+
+    <string name="media_controls_page_summary">Additional media player features</string>
+    <string name="media_controls_page_title">System Media Controls</string>
 </resources>
