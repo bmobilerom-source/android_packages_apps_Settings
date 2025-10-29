@@ -25,14 +25,15 @@
         app:lottie_rawRes="@raw/location"/>
         <com.android.settingslib.widget.MainSwitchPreference
             android:key="bluetooth_always_scanning_switch"
+             android:order="-900"
             android:title="@string/location_scanning_bluetooth_always_scanning_title"
             settings:controller="com.android.settings.location.BluetoothScanningMainSwitchPreferenceController"/>
 
         <com.android.settingslib.widget.FooterPreference
             android:key="bluetooth_always_scanning_footer"
-          settings:layout="@layout/system_advice_preference_card"
             android:title="@string/location_scanning_bluetooth_always_scanning_description"
             android:selectable="false"
+            android:order="-800"
             settings:searchable="false"/>
 
 </PreferenceScreen>
