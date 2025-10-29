@@ -16,17 +16,31 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
         android:title="@string/location_scanning_bluetooth_always_scanning_title">
+  <com.android.settingslib.widget.IllustrationPreference
+        android:key="bluetooth_scan"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/blue_scan"/>
+
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="@string/location_scanning_bluetooth_always_scanning_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
+
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="bluetooth_always_scanning_top_info"
+            android:title="@string/location_scanning_bluetooth_always_scanning_description"
+            android:order="-999"
+            settings:searchable="false"/>
 
         <com.android.settingslib.widget.MainSwitchPreference
             android:key="bluetooth_always_scanning_switch"
+            android:order="200"
             android:title="@string/location_scanning_bluetooth_always_scanning_title"
             settings:controller="com.android.settings.location.BluetoothScanningMainSwitchPreferenceController"/>
-
-        <com.android.settingslib.widget.FooterPreference
-            android:key="bluetooth_always_scanning_footer"
-            android:title="@string/location_scanning_bluetooth_always_scanning_description"
-            android:selectable="false"
-            settings:searchable="false"/>
 
 </PreferenceScreen>
