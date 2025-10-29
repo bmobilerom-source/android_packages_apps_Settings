@@ -80,6 +80,7 @@
     
     <com.android.settingslib.widget.TopIntroPreference
             android:key="onthegomode_bubbles_desc4"
+            settings:layout="@layout/system_advice_preference_card"
             android:order="-965"
             android:title="@string/onthegomode_bubble_setting_description4"/>
 
