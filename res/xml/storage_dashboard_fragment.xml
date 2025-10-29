@@ -42,6 +42,8 @@
         android:key="free_up_space"
         android:order="4"
         settings:isPreferenceVisible="false"
+        android:selectable="false"
+        android:layout="@layout/preference_hidden"
         android:title="@string/storage_free_up_space_title"
         android:summary="@string/storage_free_up_space_summary"
         settings:controller="com.android.settings.deviceinfo.storage.ManageStoragePreferenceController"/>
