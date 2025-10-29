@@ -11,4 +11,7 @@
 
     <!-- System Features Background Color (same for light and dark mode) -->
     <color name="system_features_bg">#9922B5AD</color>
+
+    <!-- System Advice Background Color (night) -->
+    <color name="system_advice_bg">#5f626b</color>
 </resources>

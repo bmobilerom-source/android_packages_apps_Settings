@@ -21,4 +21,7 @@
 
     <!-- System Help Background Color -->
     <color name="system_help_bg">#99d5eb34</color>
+
+    <!-- System Advice Background Color -->
+    <color name="system_advice_bg">#5f626b</color>
 </resources>

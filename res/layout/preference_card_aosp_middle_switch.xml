@@ -68,7 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:background="@drawable/custom_surface_color"
+            android:padding="6dp" />
 
     </LinearLayout>
 
