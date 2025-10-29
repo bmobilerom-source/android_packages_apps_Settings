@@ -50,13 +50,13 @@
         android:order="-994"
         android:title="@string/media_controls_bubbles_description3" />
 
-    <!-- ambient music -->
+    <!-- ambient music -->  
     <Preference
         android:key="ambient_music_info"
         android:title="@string/ambient_music_info_title"
         android:summary="@string/ambient_music_info_summary"
         android:order="-990"
-        android:layout="@layout/dot_preference_top_card">
+        settings:layout="@layout/system_features_preference_card">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.sourajitk.ambient_music"
