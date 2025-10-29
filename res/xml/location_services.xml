@@ -16,22 +16,39 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
                   android:key="location_services"
                   android:title="@string/location_services_preference_title"
                   settings:controller="com.android.settings.location.LocationInjectedServicesPreferenceController">
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="location"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/location"/>
 
-        <com.android.settingslib.RestrictedPreference
-            android:fragment="com.android.settings.location.WifiScanningFragment"
-            android:order="1000"
-            android:key="location_services_wifi_scanning"
-            android:title="@string/location_scanning_wifi_always_scanning_title"
-            settings:controller="com.android.settings.location.LocationServicesWifiScanningPreferenceController"/>
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="@string/location_services_preference_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
 
-        <com.android.settingslib.RestrictedPreference
-            android:fragment="com.android.settings.location.BluetoothScanningFragment"
-            android:order="1001"
-            android:key="location_services_bluetooth_scanning"
-            android:title="@string/location_scanning_bluetooth_always_scanning_title"
-            settings:controller="com.android.settings.location.LocationServicesBluetoothScanningPreferenceController"/>
+    <Preference
+        android:fragment="com.android.settings.location.WifiScanningFragment"
+        android:order="0"
+        android:key="location_services_wifi_scanning"
+        settings:layout="@layout/system_warning_preference_card"
+        android:title="@string/location_scanning_wifi_always_scanning_title"
+        android:selectable="true"
+        android:enabled="true"/>
+
+    <Preference
+        android:fragment="com.android.settings.location.BluetoothScanningFragment"
+        android:order="1"
+        android:key="location_services_bluetooth_scanning"
+        settings:layout="@layout/system_warning_preference_card"
+        android:title="@string/location_scanning_bluetooth_always_scanning_title"
+        android:selectable="true"
+        android:enabled="true"/>
 
 </PreferenceScreen>
