@@ -168,7 +168,7 @@
     <Preference
         android:key="media_controls_summary"
         android:title="@string/media_controls_title"
-        settings:layout="@layout/aftelife_cardview_top"
+        settings:layout="@layout/afterlife_cardview_top"
         android:fragment="com.android.settings.sound.MediaControlsSettings"
         android:order="-90"
         settings:controller="com.android.settings.sound.MediaControlsParentPreferenceController"
