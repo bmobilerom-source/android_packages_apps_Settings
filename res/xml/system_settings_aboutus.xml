@@ -43,7 +43,7 @@
         android:title="@string/about_us_info_system_title"
         android:summary="@string/about_us_info_system_title_summary"
         android:order="-990"
-        android:layout="@layout/dot_preference_full_alone_card">
+        settings:layout="@layout/system_features_preference_card">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="dev.sebaubuntu.athena"
@@ -54,6 +54,7 @@
     <Preference
         android:key="about_us_info"
         android:title="@string/about_us_info"
+        settings:layout="@layout/system_help_preference_card"
         android:summary="@string/about_us_info_summary">
         <intent
             android:action="android.intent.action.VIEW"
@@ -64,6 +65,7 @@
     <Preference
         android:key="aboutus_link"
         android:title="@string/aboutus_link_title"
+        settings:layout="@layout/system_help_preference_card"
         android:summary="@string/aboutus_link_summary">
         <intent
             android:action="android.intent.action.VIEW"
