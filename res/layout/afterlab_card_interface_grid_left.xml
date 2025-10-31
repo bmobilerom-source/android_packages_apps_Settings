@@ -23,9 +23,11 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="fill_parent"
         android:layout_height="180dp"
-        app:cardBackgroundColor="?android:attr/colorSurface"
+        app:cardBackgroundColor="@color/card_bg"
         app:cardCornerRadius="26.0dip"
-        app:cardElevation="0.0dip"
+        app:cardElevation="2.0dip"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/disabled_text_color"
         app:rippleColor="?android:attr/colorControlHighlight">
         <RelativeLayout
             android:padding="16.0dip"
@@ -40,13 +42,8 @@
                 android:layout_width="55.0dip"
                 android:layout_height="55.0dip"
                 android:backgroundTint="?android:attr/colorAccent"
-                android:tint="?android:attr/colorOnAccent"
+                android:tint="?android:attr/textColorPrimary"
                 android:layout_alignParentTop="true"/>
-            <View
-                android:id="@+id/spacer"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_below="@android:id/icon" />
             <TextView
                 android:layout_gravity="start"
                 android:textSize="18.0sp"
@@ -55,10 +52,11 @@
                 android:id="@android:id/title"
                 android:layout_width="wrap_content"
                 android:layout_marginBottom="5dp"
+                android:layout_marginTop="8dp"
                 android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:layout_above="@android:id/summary"
-                android:layout_below="@android:id/spacer"/>
+                android:layout_below="@android:id/icon"/>
             <TextView
                 android:layout_gravity="start|center"
                 android:textSize="14.0sp"
