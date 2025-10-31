@@ -1,0 +1,46 @@
+<resources>
+    <!-- Gesture Settings -->
+    <string name="system_grid_gesture_summary">Configure touch gestures and shortcuts</string>
+    
+    <!-- System Navigation -->
+    <string name="system_grid_navigation_summary">Choose navigation style: buttons or gestures</string>
+    
+    <!-- Battery Manager -->
+    <string name="system_grid_power_usage_summary">View battery usage and manage power settings</string>
+    
+    <!-- Languages -->
+    <string name="languages_setting_summary">Change system language and regional preferences</string>
+    
+    <!-- Date and Time -->
+    <string name="date_and_time_summary">Set date, time, and time zone</string>
+    
+    <!-- Buttons -->
+    <string name="button_summary">Customize hardware button behavior</string>
+    
+    <!-- Status Bar -->
+    <string name="system_grid_statusbar_summary">Customize status bar icons and indicators</string>
+    
+    <!-- Keyboard -->
+    <string name="keyboard_settings_summary">Manage keyboards and input methods</string>
+    
+    <!-- Backup Transport -->
+    <string name="system_grid_backup_transport_summary">Select backup provider (Seed Vault, microG, etc.)</string>
+    
+    <!-- Emergency Settings -->
+    <string name="system_grid_emergency_summary">Configure emergency contacts and SOS features</string>
+    
+    <!-- About -->
+    <string name="aboutus_summary">View device information and system details</string>
+    
+    <!-- Reset -->
+    <string name="system_reset_summary">Reset network, apps, or factory reset device</string>
+    
+    <!-- System Tuner -->
+    <string name="system_tuner_title">System tuner</string>
+    <string name="system_grid_tuner_summary">Advanced system UI customization</string>
+    <string name="system_tuner_not_available">System tuner is not available</string>
+    
+    <!-- Backup (legacy) -->
+    <string name="system_grid_backup_summary">Backup and restore your data</string>
+
+</resources>

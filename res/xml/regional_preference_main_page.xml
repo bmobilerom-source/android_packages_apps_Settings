@@ -16,21 +16,54 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/regional_preferences_title"
     android:key="regional_preferences">
 
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="regional_preferences_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/language_settings"/>
+
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="@string/regional_preferences_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- MainSwitch -->
+    <!-- Note: No MainSwitch present in this page -->
+
+    <!-- TopIntro -->
     <com.android.settingslib.widget.TopIntroPreference
         android:key="regional_pref_intro"
         android:title="@string/regional_preferences_main_page_sub_title"
-        android:persistent="false"/>
+        android:persistent="false"
+        android:order="-900"/>
 
+    <!-- Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="regional_pref_footer"
+        android:title="@string/title_regional_pref_footer"
+        android:order="-888"
+        settings:isPreferenceVisible="false"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.regionalpreferences.RegionalFooterPreferenceController"/>
+
+    <!-- Other Preferences -->
     <PreferenceCategory
         android:key="regional_preferences_category"
-        android:layout="@layout/settingslib_preference_category_no_title">
+        android:layout="@layout/settingslib_preference_category_no_title"
+        android:order="0">
         <Preference
             android:key="key_temperature_unit"
             android:title="@string/temperature_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
+            android:order="0"
             settings:controller="com.android.settings.regionalpreferences.TemperatureUnitController"
             settings:fragment="com.android.settings.regionalpreferences.TemperatureUnitFragment">
             <extra
@@ -42,6 +75,7 @@
             android:key="key_first_day_of_week"
             android:title="@string/first_day_of_week_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
+            android:order="1"
             settings:controller="com.android.settings.regionalpreferences.FirstDayOfWeekController"
             settings:fragment="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment">
             <extra
@@ -53,6 +87,7 @@
             android:key="key_numbering_system"
             android:title="@string/numbers_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
+            android:order="2"
             settings:controller="com.android.settings.regionalpreferences.NumberingSystemController"
             settings:fragment="com.android.settings.regionalpreferences.NumberingPreferencesFragment">
             <extra
@@ -61,11 +96,10 @@
         </Preference>
     </PreferenceCategory>
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="regional_pref_footer"
-        android:title="@string/title_regional_pref_footer"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.regionalpreferences.RegionalFooterPreferenceController"/>
+    <!-- Switches -->
+    <!-- Note: No Switches present in this page -->
+
+    <!-- SeekBars -->
+    <!-- Note: No SeekBars present in this page -->
 
 </PreferenceScreen>

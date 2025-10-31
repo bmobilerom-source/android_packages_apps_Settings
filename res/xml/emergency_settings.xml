@@ -31,30 +31,29 @@
    <!-- Header -->
   <PreferenceCategory
         android:title="Emergency settings"
-        android:order="-997"
-        android:layout="@layout/settings_title_header">
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="more_emergency_settings"
         android:layout="@layout/more_settings_button"
         android:order="0"
+        settings:isPreferenceVisible="false"
         android:selectable="false"
         settings:controller="com.android.settings.emergency.MoreSettingsPreferenceController" />
 
     <Preference
         android:key="gesture_emergency_summary"
         android:title="@string/emergency_gesture_screen_title"
-        android:icon="@drawable/ic_emergency_gesture_24dp"
-        android:order="100"
+        android:order="1"
         android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
         settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"
-        android:icon="@drawable/ic_broadcast"
-        android:order="200"
+        android:order="100"
         settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"

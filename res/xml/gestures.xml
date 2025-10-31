@@ -15,34 +15,18 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" " >
-
-
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="gestures"
-        settings:searchable="false"
-        android:order="-999"
-        app:lottie_rawRes="@raw/lottie_system_nav_fully_gestural"/>
-
-  
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="Gestures features"
-        android:order="-995"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
 
     <lineageos.preference.LineagePartsPreference
         android:key="touchscreen_gesture_settings"
         settings:requiresFeature="lineagehardware:FEATURE_TOUCHSCREEN_GESTURES" />
 
     <lineageos.preference.RemotePreference
-            android:key="device_touchscreen_gesture_settings"
-            android:title="@string/touchscreen_gesture_settings_title"
-            android:summary="@string/touchscreen_gesture_settings_summary"
-            settings:replacesKey="touchscreen_gesture_settings"
-            settings:requiresFeature="lineagehardware:FEATURE_TOUCHSCREEN_GESTURES">
+        android:key="device_touchscreen_gesture_settings"
+        android:title="@string/touchscreen_gesture_settings_title"
+        android:summary="@string/touchscreen_gesture_settings_summary"
+        settings:replacesKey="touchscreen_gesture_settings"
+        settings:requiresFeature="lineagehardware:FEATURE_TOUCHSCREEN_GESTURES">
         <intent android:action="org.lineageos.settings.device.GESTURE_SETTINGS" />
     </lineageos.preference.RemotePreference>
 
@@ -90,6 +74,7 @@
     <Preference
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
+        settings:isPreferenceVisible="false"
         android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
@@ -106,10 +91,18 @@
         android:title="@string/power_menu_setting_name"
         android:fragment="com.android.settings.gestures.PowerMenuSettings"
         settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
+    
+    <Preference
+        android:key="taptap_category"
+        android:title="@string/taptap_title"
+        android:summary="@string/taptap_summary" 
+        settings:layout="@layout/system_features_preference_card"
+        android:fragment="com.epic.fragments.SystemSettingsTaptap" />
 
     <com.android.settingslib.PrimarySwitchPreference
         android:key="gesture_prevent_ringing_summary"
         android:title="@string/gesture_prevent_ringing_screen_title"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
+
 </PreferenceScreen>
