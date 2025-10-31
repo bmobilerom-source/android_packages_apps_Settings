@@ -18,40 +18,67 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="smart_battery_detail"
     android:title="@string/smart_battery_manager_title"
     settings:keywords="@string/keywords_battery_adaptive_preferences">
 
+    <!-- Illustration -->
     <com.android.settingslib.widget.IllustrationPreference
         android:key="auto_awesome_battery"
-        settings:lottie_rawRes="@raw/auto_awesome_battery_lottie" />
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/auto_awesome_battery_lottie" />
 
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="@string/smart_battery_manager_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- MainSwitch -->
     <SwitchPreferenceCompat
         android:key="smart_battery"
+        android:order="-998"
         android:title="@string/smart_battery_title"
         android:summary="@string/smart_battery_summary"
         settings:controller="com.android.settings.fuelgauge.SmartBatteryPreferenceController"/>
 
-    <SwitchPreferenceCompat
-        android:key="auto_restriction"
-        android:title="@string/battery_auto_restriction_title"
-        android:summary="@string/battery_auto_restriction_summary"
-        settings:controller="com.android.settings.fuelgauge.AutoRestrictionPreferenceController"/>
+    <!-- TopIntro -->
+    <!-- Note: No TopIntro present in this page -->
 
-    <Preference
-        android:key="restricted_app"
-        android:title="@string/restricted_app_title"/>
+    <!-- Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="smart_battery_detail_footer"
+        android:order="-997"
+        settings:isPreferenceVisible="false"
+        android:title="@string/smart_battery_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 
+    <!-- Other Preferences -->
     <Preference
         android:key="high_power_apps"
+        android:order="0"
         android:title="@string/high_power_apps"
         android:summary="@string/high_power_apps_summary">
         <intent android:action="android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS" />
     </Preference>
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="smart_battery_detail_footer"
-        android:title="@string/smart_battery_footer"
-        android:selectable="false"
-        settings:searchable="false"/>
+    <Preference
+        android:key="restricted_app"
+        android:order="1"
+        android:title="@string/restricted_app_title"/>
+
+    <!-- Switches -->
+    <SwitchPreferenceCompat
+        android:key="auto_restriction"
+        android:order="100"
+        android:title="@string/battery_auto_restriction_title"
+        android:summary="@string/battery_auto_restriction_summary"
+        settings:controller="com.android.settings.fuelgauge.AutoRestrictionPreferenceController"/>
+
+    <!-- SeekBars -->
+    <!-- Note: No SeekBars present in this page -->
 </PreferenceScreen>
