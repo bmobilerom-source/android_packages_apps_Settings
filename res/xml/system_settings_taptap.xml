@@ -29,7 +29,7 @@
   <PreferenceCategory
         android:title="Tap gesture options "
         android:order="-998"
-        android:layout="@layout/settings_title_header">
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
       
         <com.android.settingslib.widget.TopIntroPreference
