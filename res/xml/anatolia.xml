@@ -23,6 +23,7 @@
             android:key="statusbar_category"
             android:title="@string/statusbar_title"
             android:summary="@string/statusbar_summary"
+            settings:layout="@layout/system_warning_preference_card"
             android:fragment="com.epic.fragments.StatusBarSettings"
             android:icon="@drawable/ic_anatolia_statusbar" />
 
@@ -39,6 +40,7 @@
             android:key="lockscreen_category"
             android:title="@string/lockscreen_title"
             android:summary="@string/lockscreen_summary"
+            settings:layout="@layout/system_features_preference_card"
    	        android:fragment="com.epic.fragments.LockScreenSettings"
    	        android:icon="@drawable/ic_anatolia_lockscreen" />	
 		
@@ -122,4 +124,11 @@
             android:summary="@string/quicksettings_summary"
             android:fragment="com.afterlife.afterlab.CustomizeDashboard"
             android:icon="@drawable/ic_anatolia_quicksettings" />     
+
+        <!-- System Grid (two-column cards) -->
+        <PreferenceScreen
+            android:key="system_grid_category"
+            android:title="@string/category_system_title"
+            android:summary="@string/system_summary"
+            android:fragment="com.epic.fragments.SystemGrid" />
 </PreferenceScreen>
