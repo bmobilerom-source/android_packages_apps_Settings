@@ -23,19 +23,25 @@
         android:key="location"
         settings:searchable="false"
         android:order="-1001"
-        app:lottie_rawRes="@raw/location"/>
+        app:lottie_rawRes="@raw/wifi_scan"/>
+
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="@string/location_scanning_wifi_always_scanning_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
+
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="wifi_always_scanning_top_info"
+            android:title="@string/location_scanning_wifi_always_scanning_description"
+            android:order="-999"
+            settings:searchable="false"/>
+
         <com.android.settingslib.widget.MainSwitchPreference
             android:key="wifi_always_scanning_switch"
-             android:order="-900"
+            android:order="200"
             android:title="@string/location_scanning_wifi_always_scanning_title"
             settings:controller="com.android.settings.location.WifiScanningMainSwitchPreferenceController"/>
-
-        <com.android.settingslib.widget.FooterPreference
-            android:key="wifi_always_scanning_footer"
-          settings:layout="@layout/system_advice_preference_card"
-            android:title="@string/location_scanning_wifi_always_scanning_description"
-            android:selectable="false"
-             android:order="800"
-            settings:searchable="false"/>
 
 </PreferenceScreen>
