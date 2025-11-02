@@ -17,42 +17,53 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" ">
- <com.android.settingslib.widget.IllustrationPreference
-        android:key="flash_notifications_illustration"
-        settings:searchable="false"
-        settings:lottie_rawRes="@drawable/flash_notifications_illustration"
-        settings:controller="com.android.settings.accessibility.FlashNotificationIllustrationPreferenceController"/>
 
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="flash_notifications_intro"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.FlashNotificationsIntroPreferenceController" />
 
+    <!-- MainSwitch -->
+    <!-- Note: No MainSwitch present in this page -->
+
+    <!-- TopIntro -->
+    <!-- Note: No TopIntro present in this page -->
+
+    <!-- Footer -->
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="flash_notifications_footer"
         android:title="@string/flash_notifications_note"
         android:selectable="false"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsFooterPreferenceController"/>
-   
-    <SwitchPreferenceCompat
+
+    <!-- Other Preferences -->
+    <!-- Note: FlashNotificationsPreviewPreference moved to after switches -->
+
+    <!-- Switches -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="camera_flash_notification_preference"
         android:persistent="false"
+        android:order="100"
         android:title="@string/camera_flash_notification_title"
+        app:position="top"
         settings:controller="com.android.settings.accessibility.CameraFlashNotificationPreferenceController" />
 
     <com.android.settingslib.PrimarySwitchPreference
         android:key="screen_flash_notification_preference"
         android:persistent="false"
+        android:order="101"
         android:title="@string/screen_flash_notification_title"
         settings:controller="com.android.settings.accessibility.ScreenFlashNotificationPreferenceController" />
 
+    <!-- Other Preferences -->
     <com.android.settings.accessibility.FlashNotificationsPreviewPreference
         android:key="flash_notifications_preview"
         android:title="@string/flash_notifications_preview"
+        android:order="200"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsPreviewPreferenceController" />
+
+    <!-- SeekBars -->
+    <!-- Note: No SeekBars present in this page -->
 
 
 </PreferenceScreen>

@@ -18,51 +18,67 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
     android:title=" ">
->
 
+
+  
     <com.android.settingslib.widget.IllustrationPreference
         android:key="captions_preview"
         android:persistent="false"
-        android:order="-999"
+        android:order="-1001"
         android:selectable="false"
+        settings:isPreferenceVisible="false"
         settings:lottie_rawRes="@drawable/a11y_captioning_banner"
         settings:searchable="false" />
 
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="Caption options"
-        android:order="-996"
-        android:layout="@layout/settings_title_header">
-  </PreferenceCategory>
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="captioning_settings_footer"
-        android:title="@string/accessibility_captioning_preference_summary"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="captioning_intro"
-        android:order="-992"
-        android:title="@string/accessibility_captioning_preference_intro"
-        settings:searchable="false"/>
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="Caption options"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- MainSwitch -->
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="captioning_preference_switch"
+        android:order="-998"
         android:title="@string/accessibility_captioning_primary_switch_title"
         settings:controller="com.android.settings.accessibility.CaptioningTogglePreferenceController"/>
 
-    <Preference
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="captioning_intro"
+        android:order="-999"
+        android:title="@string/accessibility_captioning_preference_summary"
+        android:persistent="false"
+        settings:isPreferenceVisible="false"
+        settings:searchable="false"/>
+
+    <!-- Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="captioning_footer"
+        android:order="-997"
+        settings:isPreferenceVisible="false"
+        settings:searchable="false" />
+
+    <!-- Preferences -->
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:fragment="com.android.settings.accessibility.CaptioningAppearanceFragment"
         android:key="captioning_appearance"
+        android:order="0"
         android:title="@string/captioning_appearance_title"
+        app:position="top"
         settings:controller="com.android.settings.accessibility.CaptioningAppearancePreferenceController" />
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:fragment="com.android.settings.accessibility.CaptioningMoreOptionsFragment"
         android:key="captioning_more_options"
+        android:order="1"
         android:title="@string/captioning_more_options_title"
+        app:position="bottom"
         settings:searchable="false" />
 
 

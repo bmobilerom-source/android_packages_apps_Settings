@@ -18,15 +18,25 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
     android:title=" ">
 
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Text reading"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
+
     <com.android.settings.accessibility.TextReadingPreviewPreference
         android:key="preview"
+        android:order="0"
         android:selectable="false"/>
 
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="font_size"
+        android:order="100"
         android:summary="@string/short_summary_font_size"
         android:title="@string/title_font_size"
         settings:iconEnd="@drawable/ic_add_24dp"
@@ -37,6 +47,7 @@
 
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="display_size"
+        android:order="101"
         android:summary="@string/screen_zoom_short_summary"
         android:title="@string/screen_zoom_title"
         settings:iconEnd="@drawable/ic_add_24dp"
@@ -45,22 +56,27 @@
         settings:iconStartContentDescription="@string/screen_zoom_make_smaller_desc"
         settings:keywords="@string/keywords_display_size" />
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="toggle_force_bold_text"
         android:persistent="false"
+        android:order="200"
         android:title="@string/force_bold_text"
+        app:position="top"
         settings:controller=
             "com.android.settings.accessibility.FontWeightAdjustmentPreferenceController"
         settings:keywords="@string/keywords_bold_text" />
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="toggle_high_text_contrast_preference"
         android:persistent="false"
+        android:order="201"
         android:summary="@string/accessibility_toggle_high_text_contrast_preference_summary"
-        android:title="@string/accessibility_toggle_high_text_contrast_preference_title" />
+        android:title="@string/accessibility_toggle_high_text_contrast_preference_title"
+        app:position="bottom" />
 
     <com.android.settings.accessibility.TextReadingResetPreference
         android:key="reset"
         android:persistent="false"
+        android:order="202"
         android:selectable="false" />
 </PreferenceScreen>

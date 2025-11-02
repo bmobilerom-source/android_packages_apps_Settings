@@ -15,26 +15,53 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto">
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
 
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="accessibility_button_intro"
-        android:persistent="false"
-        android:title="@string/accessibility_button_intro_text"
-        settings:searchable="false" />
-
+    <!-- Illustration -->
     <com.android.settingslib.widget.IllustrationPreference
         android:key="accessibility_button_preview"
+        android:order="-1001"
         android:persistent="false"
         android:selectable="false"
         settings:controller="com.android.settings.accessibility.AccessibilityButtonPreviewPreferenceController"
         settings:searchable="false" />
 
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="Accessibility button"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- MainSwitch -->
+    <!-- Note: No MainSwitch present in this page -->
+
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="accessibility_button_intro"
+        android:order="-999"
+        android:persistent="false"
+        android:title="@string/accessibility_button_intro_text"
+        settings:searchable="false" />
+
+    <!-- Footer -->
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="accessibility_button_footer"
+        android:persistent="false"
+        android:order="-997"
+        android:selectable="false"
+        settings:controller="com.android.settings.accessibility.AccessibilityButtonFooterPreferenceController"
+        settings:searchable="false" />
+
+    <!-- Other Preferences -->
     <ListPreference
         android:entries="@array/accessibility_button_location_selector_titles"
         android:entryValues="@array/accessibility_button_location_selector_values"
         android:key="accessibility_button_location"
         android:persistent="false"
+        android:order="0"
         android:summary="%s"
         android:title="@string/accessibility_button_location_title"
         settings:controller="com.android.settings.accessibility.AccessibilityButtonLocationPreferenceController" />
@@ -44,6 +71,7 @@
         android:entryValues="@array/accessibility_button_gesture_selector_values"
         android:key="accessibility_button_or_gesture"
         android:persistent="false"
+        android:order="1"
         android:summary="%s"
         android:title="@string/accessibility_button_or_gesture_title"
         settings:controller="com.android.settings.accessibility.AccessibilityButtonGesturePreferenceController" />
@@ -53,27 +81,26 @@
         android:entryValues="@array/accessibility_button_size_selector_values"
         android:key="accessibility_button_size"
         android:persistent="false"
+        android:order="2"
         android:summary="%s"
         android:title="@string/accessibility_button_size_title"
         settings:controller="com.android.settings.accessibility.FloatingMenuSizePreferenceController" />
 
-    <SwitchPreferenceCompat
+    <!-- Switches -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="accessibility_button_fade"
         android:persistent="false"
+        android:order="100"
         android:summary="@string/accessibility_button_fade_summary"
         android:title="@string/accessibility_button_fade_title"
+        app:position="solo"
         settings:controller="com.android.settings.accessibility.FloatingMenuFadePreferenceController" />
 
+    <!-- SeekBars -->
     <com.android.settings.widget.SeekBarPreference
         android:key="accessibility_button_opacity"
         android:persistent="false"
+        android:order="200"
         android:title="@string/accessibility_button_opacity_title"
         settings:controller="com.android.settings.accessibility.FloatingMenuTransparencyPreferenceController" />
-
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="accessibility_button_footer"
-        android:persistent="false"
-        android:selectable="false"
-        settings:controller="com.android.settings.accessibility.AccessibilityButtonFooterPreferenceController"
-        settings:searchable="false" />
 </PreferenceScreen>

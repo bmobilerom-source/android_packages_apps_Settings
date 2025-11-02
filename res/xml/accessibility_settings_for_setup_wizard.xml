@@ -25,15 +25,15 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="configure_notification_settings_animation"
         settings:searchable="false"
-        android:order="-999"
+        android:order="-1001"
         app:lottie_rawRes="@raw/display_accessibility"/>
 
         
    <!-- Header -->
   <PreferenceCategory
         android:title="Accessibility"
-        android:order="-997"
-        android:layout="@layout/settings_title_header">
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
 
     <Preference
@@ -41,6 +41,7 @@
         android:icon="@drawable/ic_adaptive_font_download"
         android:key="text_reading_options"
         android:persistent="false"
+        android:order="0"
         android:title="@string/accessibility_text_reading_options_title"
         settings:keywords="text_reading_options"
         settings:controller="com.android.settings.accessibility.TextReadingFragmentForSuwController"/>
@@ -48,23 +49,17 @@
     <com.android.settingslib.RestrictedPreference
         android:key="@string/preference_key_brightness_level"
         android:icon="@drawable/ic_suw_brightness_level"
+        android:order="1"
         android:title="@string/brightness"
         settings:keywords="@string/keywords_display_brightness_level"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_brightness"/>
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="@string/preference_key_auto_brightness"
-        android:icon="@drawable/ic_suw_brightness_auto"
-        android:title="@string/auto_brightness_title"
-        settings:useAdminDisabledSummary="true"
-        settings:userRestriction="no_config_brightness"
-        settings:controller="com.android.settings.display.AutoBrightnessPreferenceControllerForSetupWizard"/>
-
     <Preference
         android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragmentForSetupWizard"
         android:key="screen_magnification_preference"
         android:icon="@drawable/ic_accessibility_magnification"
+        android:order="2"
         android:summary="@string/accessibility_preference_magnification_summary"
         android:title="@string/accessibility_screen_magnification_title" />
 
@@ -72,12 +67,23 @@
         android:fragment="com.android.settings.accessibility.ToggleSelectToSpeakPreferenceFragmentForSetupWizard"
         android:key="select_to_speak_preference"
         android:persistent="true"
+        android:order="3"
         android:summary="@string/select_to_speak_summary"/>
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.accessibility.ToggleScreenReaderPreferenceFragmentForSetupWizard"
         android:key="screen_reader_preference"
         android:persistent="true"
+        android:order="4"
         android:summary="@string/talkback_summary"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="@string/preference_key_auto_brightness"
+        android:icon="@drawable/ic_suw_brightness_auto"
+        android:order="200"
+        android:title="@string/auto_brightness_title"
+        settings:useAdminDisabledSummary="true"
+        settings:userRestriction="no_config_brightness"
+        settings:controller="com.android.settings.display.AutoBrightnessPreferenceControllerForSetupWizard"/>
 
 </PreferenceScreen>
