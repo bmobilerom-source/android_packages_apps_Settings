@@ -19,23 +19,30 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" " >
+    
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="acces_illustration"
+        settings:lottie_rawRes="@raw/acces_illustration"
+        android:order="-1001" />
 
    <!-- Header -->
   <PreferenceCategory
         android:title="Audio adjustment"
-        android:order="-998"
-        android:layout="@layout/settings_title_header">
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
-
-    <SwitchPreferenceCompat
-        android:key="toggle_primary_mono"
-        android:persistent="false"
-        android:summary="@string/accessibility_toggle_primary_mono_summary"
-        android:title="@string/accessibility_toggle_primary_mono_title"
-        settings:controller="com.android.settings.accessibility.PrimaryMonoPreferenceController"/>
 
     <com.android.settings.accessibility.BalanceSeekBarPreference
         android:key="seekbar_primary_balance"
         android:persistent="false"
+        android:order="100"
         android:title="@string/accessibility_toggle_primary_balance_title"/>
+
+    <SwitchPreferenceCompat
+        android:key="toggle_primary_mono"
+        android:persistent="false"
+        android:order="200"
+        android:summary="@string/accessibility_toggle_primary_mono_summary"
+        android:title="@string/accessibility_toggle_primary_mono_title"
+        settings:controller="com.android.settings.accessibility.PrimaryMonoPreferenceController"/>
 </PreferenceScreen>

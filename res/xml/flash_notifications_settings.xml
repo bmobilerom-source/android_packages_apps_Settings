@@ -17,18 +17,33 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" ">
- <com.android.settingslib.widget.IllustrationPreference
+
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="flash_notifications_illustration"
         settings:searchable="false"
         settings:lottie_rawRes="@drawable/flash_notifications_illustration"
         settings:controller="com.android.settings.accessibility.FlashNotificationIllustrationPreferenceController"/>
 
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="@string/flash_notifications_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- TopIntro -->
     <com.android.settingslib.widget.TopIntroPreference
         android:key="flash_notifications_intro"
+        android:title="@string/flash_notifications_title"
+        android:persistent="false"
+        android:order="-999"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsIntroPreferenceController" />
 
+    <!-- Footer -->
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="flash_notifications_footer"
         android:title="@string/flash_notifications_note"
@@ -36,6 +51,15 @@
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsFooterPreferenceController"/>
    
+    <!-- Preferences -->
+    <com.android.settings.accessibility.FlashNotificationsPreviewPreference
+        android:key="flash_notifications_preview"
+        android:title="@string/flash_notifications_preview"
+        android:order="0"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.FlashNotificationsPreviewPreferenceController" />
+
+    <!-- Switches -->
     <SwitchPreferenceCompat
         android:key="camera_flash_notification_preference"
         android:persistent="false"

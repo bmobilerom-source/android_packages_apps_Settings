@@ -16,9 +16,22 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_system_controls"
     android:persistent="false"
     android:title=" ">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="accessibility"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/sys_con"/>
+    <!-- Header -->
+  <PreferenceCategory
+        android:title="System Controls"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>    
 
     <!-- The item is not specific to Accessibility.
         The same entry is under System, which is unlikely to be removed,
@@ -27,6 +40,7 @@
         android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
         android:key="gesture_system_navigation_input_summary_accessibility"
         android:persistent="false"
+        android:order="0"
         android:title="@string/system_navigation_title"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"/>
@@ -38,39 +52,38 @@
         android:fragment="com.android.settings.gestures.OneHandedSettings"
         android:key="gesture_system_navigation_one_handed_accessibility"
         android:persistent="false"
+        android:order="1"
         android:title="@string/one_handed_title"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController"/>
-
-    <SwitchPreferenceCompat
-        android:key="toggle_power_button_ends_call_preference"
-        android:persistent="false"
-        android:title="@string/accessibility_power_button_ends_call_prerefence_title"
-        settings:controller="com.android.settings.accessibility.PowerButtonEndsCallPreferenceController"/>
 
     <!-- Standard auto-rotation preference that will be shown when device state based auto-rotation
          settings are NOT available.
          The item is not specific to Accessibility.
          The same entry is under Display & touch, which is unlikely to be removed,
          so this is not searchable.-->
-    <SwitchPreferenceCompat
-        android:key="toggle_lock_screen_rotation_preference"
-        android:persistent="false"
-        android:title="@string/accelerometer_title"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.LockScreenRotationPreferenceController"/>
-
-    <!-- Auto-rotation preference that will be shown when device state based auto-rotation settings
-         are available.
-         The item is not specific to Accessibility.
-         The same entry is under Display & touch, which is unlikely to be removed,
-         so this is not searchable. -->
     <Preference
         android:key="device_state_auto_rotate_accessibility"
         android:persistent="false"
+        android:order="2"
         android:title="@string/accelerometer_title"
         android:fragment="com.android.settings.display.DeviceStateAutoRotateDetailsFragment"
         settings:searchable="false"
         settings:controller="com.android.settings.display.DeviceStateAutoRotateOverviewController"/>
+
+    <SwitchPreferenceCompat
+        android:key="toggle_lock_screen_rotation_preference"
+        android:persistent="false"
+        android:order="200"
+        android:title="@string/accelerometer_title"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.LockScreenRotationPreferenceController"/>
+
+    <SwitchPreferenceCompat
+        android:key="toggle_power_button_ends_call_preference"
+        android:persistent="false"
+        android:order="201"
+        android:title="@string/accessibility_power_button_ends_call_prerefence_title"
+        settings:controller="com.android.settings.accessibility.PowerButtonEndsCallPreferenceController"/>
 
 </PreferenceScreen>

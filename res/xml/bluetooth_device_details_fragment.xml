@@ -27,12 +27,11 @@
         android:order="-999"
         app:lottie_rawRes="@raw/bluetooth_pair"/>
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="device_details_footer"
-        android:selectable="false"
-        settings:searchable="false"
-        android:order="-994"
-        settings:controller="com.android.settings.bluetooth.BluetoothDetailsMacAddressController"/>
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="device_details_top_info"
+        android:order="-998"
+        android:title="@string/bluetooth_device_mac_address"
+        settings:searchable="false"/>
 
 
 

@@ -20,9 +20,17 @@
     android:persistent="false"
     android:title=" ">
 
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Color correction"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
+
     <com.android.settings.accessibility.PaletteListPreference
         android:key="daltonizer_preview"
         android:persistent="false"
+        android:order="0"
         android:selectable="false"
         android:title="@string/summary_placeholder"
         settings:allowDividerBelow="true"
@@ -31,6 +39,7 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="daltonizer_mode_deuteranomaly"
         android:persistent="false"
+        android:order="1"
         android:summary="@string/daltonizer_mode_deuteranomaly_summary"
         android:title="@string/daltonizer_mode_deuteranomaly_title"
         settings:titleMaxLines="@integer/max_integer"
@@ -39,6 +48,7 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="daltonizer_mode_protanomaly"
         android:persistent="false"
+        android:order="2"
         android:summary="@string/daltonizer_mode_protanomaly_summary"
         android:title="@string/daltonizer_mode_protanomaly_title"
         settings:titleMaxLines="@integer/max_integer"
@@ -47,6 +57,7 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="daltonizer_mode_tritanomaly"
         android:persistent="false"
+        android:order="3"
         android:summary="@string/daltonizer_mode_tritanomaly_summary"
         android:title="@string/daltonizer_mode_tritanomaly_title"
         settings:titleMaxLines="@integer/max_integer"
@@ -55,6 +66,7 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="daltonizer_mode_grayscale"
         android:persistent="false"
+        android:order="4"
         android:title="@string/daltonizer_mode_grayscale_title"
         settings:titleMaxLines="@integer/max_integer"
         settings:controller="com.android.settings.accessibility.DaltonizerRadioButtonPreferenceController" />
@@ -62,6 +74,7 @@
     <com.android.settings.widget.SeekBarPreference
         android:key="daltonizer_saturation"
         android:persistent="false"
+        android:order="100"
         android:title="@string/daltonizer_saturation_title"
         settings:controller="com.android.settings.accessibility.DaltonizerSaturationSeekbarPreferenceController"
         />

@@ -19,24 +19,18 @@
     android:persistent="false"
     android:title=" "
     settings:keywords="@string/keywords_accessibility">
-    
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="acces_illustration"
-        settings:lottie_rawRes="@raw/acces_illustration"
-        android:order="-1001" />
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="accessibility"
         settings:searchable="false"
-        android:order="-999"
+        android:order="-1001"
         app:lottie_rawRes="@raw/accessibility"/>
 
- 
    <!-- Header -->
   <PreferenceCategory
         android:title="Accessibility"
-        android:order="-996"
-        android:layout="@layout/settings_title_header">
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
 
     <PreferenceCategory
@@ -59,6 +53,7 @@
             android:icon="@drawable/ic_adaptive_font_download"
             android:key="text_reading_options"
             android:persistent="false"
+            android:order="0"
             android:title="@string/accessibility_text_reading_options_title"
             settings:controller="com.android.settings.accessibility.TextReadingFragmentForA11ySettingsController"/>
 
@@ -67,46 +62,37 @@
             android:key="accessibility_color_and_motion"
             android:icon="@drawable/ic_color_and_motion"
             android:persistent="false"
+            android:order="1"
             android:title="@string/accessibility_color_and_motion_title"
             settings:searchable="true"/>
-
-        <com.android.settingslib.PrimarySwitchPreference
-            android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment"
-            android:key="reduce_bright_colors_preference"
-            android:icon="@drawable/ic_reduce_bright_colors"
-            android:persistent="false"
-            android:title="@string/reduce_bright_colors_preference_title"
-            settings:keywords="@string/keywords_reduce_bright_colors"
-            settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
-
-        <SwitchPreferenceCompat
-            android:key="even_dimmer_activated"
-            android:title="@string/even_dimmer_display_title"
-            android:summary="@string/even_dimmer_display_summary"
-            android:icon="@drawable/ic_reduce_bright_colors"
-            settings:controller="com.android.settings.display.EvenDimmerPreferenceController"/>
-<!--
-        <com.android.settings.display.darkmode.DarkModePreference
-            android:key="dark_ui_mode_accessibility"
-            android:icon="@drawable/ic_dark_ui"
-            android:title="@string/dark_ui_mode"
-            android:visibility="invisible"
-            android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
-            android:widgetLayout="@null"
-            settings:widgetLayout="@null"
-            settings:controller="com.android.settings.display.DarkUIPreferenceController"
-            settings:searchable="false"/>
--->
 
         <Preference
             android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
             android:icon="@drawable/ic_accessibility_magnification"
             android:persistent="false"
+            android:order="2"
             android:title="@string/accessibility_screen_magnification_title"
             settings:keywords="@string/keywords_magnification"
             settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"/>
 
+        <com.android.settingslib.PrimarySwitchPreference
+            android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment"
+            android:key="reduce_bright_colors_preference"
+            android:icon="@drawable/ic_reduce_bright_colors"
+            android:persistent="false"
+            android:order="200"
+            android:title="@string/reduce_bright_colors_preference_title"
+            settings:keywords="@string/keywords_reduce_bright_colors"
+            settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
+
+        <SwitchPreferenceCompat
+            android:key="even_dimmer_activated"
+            android:order="201"
+            android:title="@string/even_dimmer_display_title"
+            android:summary="@string/even_dimmer_display_summary"
+            android:icon="@drawable/ic_reduce_bright_colors"
+            settings:controller="com.android.settings.display.EvenDimmerPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -119,22 +105,16 @@
             android:key="tap_assistance_preference_screen"
             android:icon="@drawable/ic_tap_assistance"
             android:persistent="false"
+            android:order="0"
             android:title="@string/accessibility_tap_assistance_title"
             settings:searchable="true"/>
-<!--
-        <Preference
-            android:fragment="com.android.settings.accessibility.SystemControlsFragment"
-            android:key="system_controls_preference_screen"
-            android:visibility="invisible"
-            android:icon="@drawable/ic_system_controls"
-            android:title="@string/accessibility_system_controls_title"
-            settings:searchable="true"/>
--->
+
         <Preference
             android:fragment="com.android.settings.accessibility.VibrationSettings"
             android:key="vibration_preference_screen"
             android:icon="@drawable/ic_vibration"
             android:persistent="false"
+            android:order="1"
             android:title="@string/accessibility_vibration_settings_title"
             settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
             settings:keywords="@string/keywords_vibration"
@@ -145,6 +125,7 @@
             android:key="pointer_and_touchpad"
             android:icon="@drawable/ic_pointer_and_touchpad"
             android:persistent="false"
+            android:order="2"
             android:title="@string/accessibility_pointer_and_touchpad_title"
             android:summary="@string/accessibility_pointer_and_touchpad_summary"
             settings:controller="com.android.settings.inputmethod.PointerTouchpadPreferenceController"
@@ -153,6 +134,7 @@
         <Preference
             android:icon="@drawable/ic_sticky_keys"
             android:key="physical_keyboard_a11y"
+            android:order="3"
             android:title="@string/keyboard_a11y_settings"
             android:summary="@string/keyboard_a11y_settings_summary"
             android:persistent="false"
@@ -169,6 +151,7 @@
             android:key="live_caption"
             android:icon="@drawable/ic_live_caption"
             android:persistent="false"
+            android:order="0"
             android:summary="@string/live_caption_summary"
             android:title="@string/live_caption_title"
             settings:keywords="@string/keywords_live_caption"
@@ -178,12 +161,14 @@
             android:fragment="com.android.settings.accessibility.CaptioningPropertiesFragment"
             android:key="captioning_preference_screen"
             android:icon="@drawable/ic_captioning"
+            android:order="1"
             android:title="@string/accessibility_captioning_title"
             settings:controller="com.android.settings.accessibility.CaptioningPreferenceController"/>
 
         <Preference
             android:key="rtt_setting"
             android:icon="@drawable/ic_rtt_settings"
+            android:order="2"
             android:summary="@string/summary_placeholder"
             android:title="@string/rtt_settings_title"
             settings:keywords="@string/keywords_rtt"
@@ -196,21 +181,12 @@
         android:persistent="false"
         android:title="@string/audio_category_title">
 
-        <SwitchPreferenceCompat
-            android:key="toggle_audio_description"
-            android:persistent="false"
-            android:icon="@drawable/ic_audio_description"
-            android:summary="@string/accessibility_audio_description_summary"
-            android:title="@string/accessibility_toggle_audio_description_preference_title"
-            settings:keywords="@string/keywords_audio_description"
-            settings:searchable="true"
-            settings:controller="com.android.settings.accessibility.AudioDescriptionPreferenceController"/>
-
         <Preference
             android:fragment="com.android.settings.accessibility.FlashNotificationsPreferenceFragment"
             android:key="flash_notifications_preference_accessibility"
             android:icon="@drawable/ic_flash_notification"
             android:persistent="false"
+            android:order="0"
             android:title="@string/flash_notifications_title"
             settings:keywords="@string/flash_notifications_keywords"
             settings:searchable="true"
@@ -220,6 +196,7 @@
             android:key="hearing_aid_preference"
             android:icon="@drawable/ic_hearing_aid"
             android:persistent="false"
+            android:order="1"
             android:summary="@string/accessibility_hearingaid_not_connected_summary"
             android:title="@string/accessibility_hearingaid_title"
             settings:keywords="@string/keywords_hearing_aids"
@@ -230,8 +207,20 @@
             android:key="audio_adjustment_preference_screen"
             android:icon="@drawable/ic_audio_adjustment"
             android:persistent="false"
+            android:order="2"
             android:title="@string/accessibility_audio_adjustment_title"
             settings:searchable="true"/>
+
+        <SwitchPreferenceCompat
+            android:key="toggle_audio_description"
+            android:persistent="false"
+            android:icon="@drawable/ic_audio_description"
+            android:order="200"
+            android:summary="@string/accessibility_audio_description_summary"
+            android:title="@string/accessibility_toggle_audio_description_preference_title"
+            settings:keywords="@string/keywords_audio_description"
+            settings:searchable="true"
+            settings:controller="com.android.settings.accessibility.AudioDescriptionPreferenceController"/>
 
     </PreferenceCategory>
 
@@ -248,6 +237,7 @@
             android:fragment="com.android.settings.accessibility.ShortcutsSettingsFragment"
             android:key="accessibility_shortcuts_preference_screen"
             android:persistent="false"
+            android:order="0"
             android:title="@string/accessibility_shortcuts_settings_title"
             settings:searchable="true"/>
 
@@ -255,6 +245,7 @@
             android:fragment="com.android.settings.tts.TextToSpeechSettings"
             android:key="tts_settings_preference"
             android:persistent="false"
+            android:order="1"
             android:title="@string/tts_settings_title"
             settings:controller="com.android.settings.language.TtsPreferenceController"/>
 

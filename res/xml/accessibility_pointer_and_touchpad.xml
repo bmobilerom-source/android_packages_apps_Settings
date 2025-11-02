@@ -17,12 +17,43 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_pointer_and_touchpad"
     android:persistent="false"
     android:title=" ">
 
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="accessibility"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/pointer"/>
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Pointer and Touchpad"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>    
+  
+    <Preference
+        android:fragment="com.android.settings.inputmethod.PointerColorCustomizationFragment"
+        android:key="pointer_color_customization_preference"
+        android:persistent="false"
+        android:order="0"
+        android:title="@string/accessibility_pointer_color_customization_title"/>
+
+    <Preference
+        android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
+        android:key="autoclick_preference"
+        android:persistent="false"
+        android:order="1"
+        android:title="@string/accessibility_autoclick_preference_title"
+        settings:keywords="@string/keywords_auto_click"
+        settings:controller="com.android.settings.accessibility.AutoclickPreferenceController"/>
+
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="pointer_scale_preference"
+        android:order="100"
         android:title="@string/pointer_scale"
         android:max="@integer/pointer_scale_seek_bar_end"
         settings:iconStart="@drawable/ic_remove_24dp"
@@ -32,27 +63,15 @@
         settings:keywords="@string/pointer_scale_keywords"
         settings:controller="com.android.settings.inputmethod.PointerScaleSeekBarController" />
 
-    <Preference
-        android:fragment="com.android.settings.inputmethod.PointerColorCustomizationFragment"
-        android:key="pointer_color_customization_preference"
-        android:persistent="false"
-        android:title="@string/accessibility_pointer_color_customization_title"/>
-
-    <Preference
-        android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
-        android:key="autoclick_preference"
-        android:persistent="false"
-        android:title="@string/accessibility_autoclick_preference_title"
-        settings:keywords="@string/keywords_auto_click"
-        settings:controller="com.android.settings.accessibility.AutoclickPreferenceController"/>
-
     <PreferenceCategory
         android:key="touchpad_category"
         android:persistent="false"
+        android:order="2"
         android:title="@string/accessibility_touchpad_title">
 
         <SwitchPreferenceCompat
             android:key="touchpad_system_gestures_enable"
+            android:order="200"
             android:title="@string/accessibility_touchpad_system_gestures_enable_title"
             android:summary="@string/accessibility_touchpad_system_gestures_enable_summary"
             settings:keywords="@string/keywords_accessibility_touchpad_system_gestures_enable"/>

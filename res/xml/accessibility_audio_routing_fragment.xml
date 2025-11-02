@@ -19,8 +19,16 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title=" ">
 
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Audio routing"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
+
     <com.android.settingslib.widget.TopIntroPreference
         android:key="bluetooth_audio_routing_top_intro"
+        android:order="-999"
         android:title="@string/bluetooth_audio_routing_summary"
         settings:searchable="false"/>
 
@@ -30,6 +38,7 @@
         android:summary="%s"
         android:key="audio_routing_ringtone"
         android:persistent="false"
+        android:order="0"
         android:title="@string/bluetooth_ringtone_title"
         settings:controller="com.android.settings.accessibility.HearingDeviceRingtoneRoutingPreferenceController" />
 
@@ -39,6 +48,7 @@
         android:summary="%s"
         android:key="audio_routing_call"
         android:persistent="false"
+        android:order="1"
         android:title="@string/bluetooth_call_title"
         settings:controller="com.android.settings.accessibility.HearingDeviceCallRoutingPreferenceController" />
 
@@ -48,6 +58,7 @@
         android:summary="%s"
         android:key="audio_routing_notification"
         android:persistent="false"
+        android:order="2"
         android:title="@string/bluetooth_notification_title"
         settings:controller="com.android.settings.accessibility.HearingDeviceNotificationRoutingPreferenceController" />
 
@@ -56,6 +67,7 @@
         android:title="@string/bluetooth_audio_routing_footer_summary"
         android:selectable="false"
         settings:searchable="false"
+        android:order="3"
         settings:controller="com.android.settings.bluetooth.BluetoothDetailsAudioRoutingFooterPreferenceController"/>
 
 </PreferenceScreen>

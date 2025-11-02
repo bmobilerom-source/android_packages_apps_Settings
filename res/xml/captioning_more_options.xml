@@ -21,17 +21,36 @@
     android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title=" " >
 
-    <com.android.settings.accessibility.LocalePreference
-        android:key="captioning_locale"
-        android:summary="%s"
-        android:title="@string/captioning_locale"
-        settings:controller="com.android.settings.accessibility.CaptioningLocalePreferenceController"/>
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Caption options"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
 
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="captioning_more_options_intro"
+        android:order="-999"
+        android:title="@string/captioning_more_options_title"
+        android:persistent="false"
+        settings:searchable="false"/>
+
+    <!-- Footer -->
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="captioning_more_options_footer"
+        android:order="-998"
         android:title="@string/accessibility_captioning_preference_summary"
         android:selectable="false"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
+
+    <!-- Preferences -->
+    <com.android.settings.accessibility.LocalePreference
+        android:key="captioning_locale"
+        android:order="0"
+        android:summary="%s"
+        android:title="@string/captioning_locale"
+        settings:controller="com.android.settings.accessibility.CaptioningLocalePreferenceController"/>
 
 </PreferenceScreen>

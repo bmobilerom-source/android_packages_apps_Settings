@@ -21,29 +21,39 @@
     android:persistent="false"
     android:title=" ">
 
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Color contrast"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
+
     <com.android.settingslib.widget.TopIntroPreference
+        android:order="-999"
         android:title="@string/accessibility_color_contrast_intro" />
-
-
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="color_contrast_footer"
-        android:title="@string/color_contrast_note"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.display.ColorContrastFooterPreferenceController" />
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="color_contrast_selector"
-        android:selectable="false"
+        android:selectable="false"  
+        android:order="0"
         android:layout="@layout/accessibility_color_contrast_selector"
         settings:controller="com.android.settings.display.ContrastSelectorPreferenceController" />
 
     <SwitchPreferenceCompat
         android:key="toggle_high_text_contrast_preference"
         android:persistent="false"
+        android:order="200"
         android:summary="@string/accessibility_toggle_high_text_contrast_preference_summary"
         android:title="@string/accessibility_toggle_high_text_contrast_preference_title"
         settings:controller=
             "com.android.settings.accessibility.HighTextContrastPreferenceController" />
+
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="color_contrast_footer"
+        android:order="1"
+        android:title="@string/color_contrast_note"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.display.ColorContrastFooterPreferenceController" />
 
 </PreferenceScreen>

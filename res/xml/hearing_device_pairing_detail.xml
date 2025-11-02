@@ -20,15 +20,25 @@
          android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/bluetooth_pairing_pref_title">
 
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Hearing devices"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
+
     <com.android.settings.bluetooth.BluetoothProgressCategory
         android:key="available_hearing_devices"
+        android:order="0"
         android:title="@string/accessibility_found_hearing_devices" />
 
     <PreferenceCategory
         android:key="device_control_category"
+        android:order="1"
         android:title="@string/accessibility_found_all_devices">
         <com.android.settingslib.RestrictedPreference
             android:key="list_bt_devices"
+            android:order="0"
             android:title="@string/accessibility_list_all_devices_title"
             settings:userRestriction="no_config_bluetooth"
             settings:useAdminDisabledSummary="true"

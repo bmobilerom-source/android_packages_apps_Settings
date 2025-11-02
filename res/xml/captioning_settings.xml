@@ -20,12 +20,12 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
     android:title=" ">
->
+
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="captions_preview"
         android:persistent="false"
-        android:order="-999"
+        android:order="-1001"
         android:selectable="false"
         settings:lottie_rawRes="@drawable/a11y_captioning_banner"
         settings:searchable="false" />
@@ -33,35 +33,43 @@
    <!-- Header -->
   <PreferenceCategory
         android:title="Caption options"
-        android:order="-996"
-        android:layout="@layout/settings_title_header">
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="captioning_settings_footer"
-        android:title="@string/accessibility_captioning_preference_summary"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
+    <!-- TopIntro -->
     <com.android.settingslib.widget.TopIntroPreference
         android:key="captioning_intro"
-        android:order="-992"
-        android:title="@string/accessibility_captioning_preference_intro"
+        android:order="-999"
+        android:title="@string/accessibility_captioning_preference_summary"
+        android:persistent="false"
         settings:searchable="false"/>
+
+    <!-- Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="captioning_footer"
+        android:order="-998"
+        settings:searchable="false" />
+
+    <!-- MainSwitch (after Footer) -->
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="captioning_preference_switch"
+        android:order="-997"
         android:title="@string/accessibility_captioning_primary_switch_title"
         settings:controller="com.android.settings.accessibility.CaptioningTogglePreferenceController"/>
 
+    <!-- Preferences -->
     <Preference
         android:fragment="com.android.settings.accessibility.CaptioningAppearanceFragment"
         android:key="captioning_appearance"
+        android:order="0"
         android:title="@string/captioning_appearance_title"
         settings:controller="com.android.settings.accessibility.CaptioningAppearancePreferenceController" />
 
     <Preference
         android:fragment="com.android.settings.accessibility.CaptioningMoreOptionsFragment"
         android:key="captioning_more_options"
+        android:order="1"
         android:title="@string/captioning_more_options_title"
         settings:searchable="false" />
 

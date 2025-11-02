@@ -16,31 +16,37 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_hearing_devices_screen"
     android:title=" ">
+
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="accessibility"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/hearing_aids"/>
 
    <!-- Header -->
   <PreferenceCategory
         android:title="Hearing Aids"
-        android:layout="@layout/settings_title_header">
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>    
     <com.android.settingslib.widget.TopIntroPreference
-        android:title="@string/accessibility_hearingaid_intro"
-        settings:searchable="false" />
-
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="hearing_device_footer"
+        android:key="hearing_device_top_info"
         android:title="@string/accessibility_hearing_device_footer_summary"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.HearingDeviceFooterPreferenceController"/>
+        android:order="-999"
+        settings:searchable="false"/>
     <PreferenceCategory
         android:key="available_hearing_devices"
+        android:order="0"
         android:title="@string/accessibility_hearing_device_connected_title"
         settings:controller="com.android.settings.accessibility.AvailableHearingDevicePreferenceController"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="hearing_device_add_bt_devices"
+        android:order="1"
         android:title="@string/bluetooth_pairing_pref_title"
         android:icon="@drawable/ic_add_24dp"
         android:summary="@string/connected_device_add_device_summary"
@@ -51,15 +57,18 @@
 
     <PreferenceCategory
         android:key="previously_connected_hearing_devices"
+        android:order="2"
         android:title="@string/accessibility_hearing_device_saved_title"
         settings:controller="com.android.settings.accessibility.SavedHearingDevicePreferenceController"/>
 
     <PreferenceCategory
         android:key="hearing_options_category"
+        android:order="3"
         android:title="@string/accessibility_screen_option">
 
         <Preference
             android:key="audio_routing"
+            android:order="0"
             android:title="@string/bluetooth_audio_routing_title"
             android:summary="@string/bluetooth_audio_routing_summary"
             android:fragment="com.android.settings.accessibility.AccessibilityAudioRoutingFragment"
@@ -67,7 +76,7 @@
 
         <SwitchPreferenceCompat
             android:key="hearing_aid_compatibility"
-            android:order="30"
+            android:order="200"
             android:title="@string/accessibility_hac_mode_title"
             android:summary="@string/accessibility_hac_mode_summary"
             settings:searchable="true"
