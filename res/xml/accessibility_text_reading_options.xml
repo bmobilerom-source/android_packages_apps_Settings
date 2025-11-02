@@ -26,6 +26,11 @@
         android:key="preview"
         android:selectable="false"/>
 
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Text reading"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="font_size"
         android:summary="@string/short_summary_font_size"

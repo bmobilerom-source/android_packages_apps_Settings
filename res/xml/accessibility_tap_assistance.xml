@@ -27,6 +27,12 @@
         android:order="-1000"
         app:lottie_rawRes="@raw/accessibility_shortcut_type_tripletap"/>
         
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="tap_assistance"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/tap_assistance"/>
+
     <ListPreference
         android:entries="@array/long_press_timeout_selector_list_titles"
         android:entryValues="@array/long_press_timeout_selector_values"

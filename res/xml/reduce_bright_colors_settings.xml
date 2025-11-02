@@ -18,24 +18,65 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
     android:title="@string/reduce_bright_colors_preference_title">
 
-    <com.android.settings.widget.LabeledSeekBarPreference
-        android:key="rbc_intensity"
-        android:persistent="false"
-        android:title="@string/reduce_bright_colors_intensity_preference_title"
-        settings:textStart="@string/reduce_bright_colors_intensity_start_label"
-        settings:textEnd="@string/reduce_bright_colors_intensity_end_label"
-        settings:tickMark="@android:color/transparent"
-    />
 
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="@string/reduce_bright_colors_preference_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- TopIntro - Commented out (empty preference removed)
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="reduce_bright_colors_top_intro"
+        android:title="@string/reduce_bright_colors_preference_title"
+        android:persistent="false"
+        android:order="-999"/>
+    -->
+
+    <!-- Footer -->
+    <!-- Footer - Commented out (empty preference removed)
+    <com.android.settingslib.widget.FooterPreference
+        android:key="reduce_bright_colors_footer"
+        android:order="-998"
+        settings:searchable="false" />
+    -->
+
+    <!-- MainSwitch -->
+    <!-- Note: No MainSwitch present in this page -->
+
+    <!-- TopIntro -->
+    <!-- Note: No TopIntro present in this page -->
+
+    <!-- Footer -->
+    <!-- Note: No Footer present in this page -->
+
+    <!-- Other Preferences -->
+    <!-- Note: No Other Preferences present in this page -->
+
+    <!-- Switches -->
     <!-- The term `restarts` is usually used for indicating restarting devices.
          Therefore, We wouldn't want `Keep on after device restarts` preference in the Extra Dim
          shows up as the search result when the user searches `restart`-->
     <SwitchPreferenceCompat
         android:key="rbc_persist"
         android:persistent="false"
+        android:order="100"
         android:title="@string/reduce_bright_colors_persist_preference_title"
         settings:searchable="false"/>
+
+    <!-- SeekBars -->
+    <com.android.settings.widget.LabeledSeekBarPreference
+        android:key="rbc_intensity"
+        android:persistent="false"
+        android:order="200"
+        android:title="@string/reduce_bright_colors_intensity_preference_title"
+        settings:textStart="@string/reduce_bright_colors_intensity_start_label"
+        settings:textEnd="@string/reduce_bright_colors_intensity_end_label"
+        settings:tickMark="@android:color/transparent"
+    />
 </PreferenceScreen>

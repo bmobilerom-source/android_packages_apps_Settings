@@ -23,9 +23,14 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="access_illust_video"
         app:searchable="false"
-        android:order="-1000"
+        android:order="-1900"
         app:lottie_rawRes="@raw/vibrate"/>
-
+  <!-- Header -->
+  <PreferenceCategory
+        android:title="Vibration Intensity"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="vibrate_on"
         android:title="@string/accessibility_vibration_primary_switch_title"
