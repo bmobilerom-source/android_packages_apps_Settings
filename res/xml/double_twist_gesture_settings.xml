@@ -20,19 +20,27 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="double_twist_gesture_settings"
-    android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/double_twist_for_camera_mode_title">
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="gesture_double_twist_video"
         settings:searchable="false"
+        android:order="-1001"
         settings:lottie_rawRes="@raw/flip_camera_for_selfie_lottie"
         settings:dynamicColor="true"/>
+
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="@string/double_twist_for_camera_mode_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
 
     <SwitchPreferenceCompat
         android:key="gesture_double_twist"
         android:title="@string/double_twist_for_camera_mode_title"
         android:summary="@string/double_twist_for_camera_mode_summary"
+        android:order="200"
         app:keywords="@string/keywords_gesture"
         app:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 

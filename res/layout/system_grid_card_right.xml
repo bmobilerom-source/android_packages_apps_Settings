@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="16dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
+    android:minHeight="153dp"
     app:cardBackgroundColor="@color/card_bg"
     app:cardCornerRadius="24dp"
     app:cardElevation="2dp"
@@ -34,18 +35,6 @@
                 android:padding="12dp"
                 android:scaleType="fitCenter"
                 android:tint="?android:attr/colorAccent" />
-            
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-                
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_chevron_right_24dp"
-                android:tint="?android:attr/textColorSecondary"
-                android:contentDescription="@null" />
         </LinearLayout>
         
         <TextView
@@ -65,8 +54,8 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textColor="?android:attr/textColorSecondary"
-            android:maxLines="2"
-            android:ellipsize="end" />
+            android:maxLines="10"
+            android:ellipsize="none" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
 

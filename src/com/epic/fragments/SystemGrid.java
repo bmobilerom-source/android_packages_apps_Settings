@@ -73,56 +73,66 @@ public class SystemGrid extends SettingsPreferenceFragment implements
                 // Base UI Theme
                 items.add(new SystemGridAdapter.CardItem(
                         R.drawable.ic_interface_sb,
-                        R.string.category_statusbar_title,
-                        R.string.statusbar_summary,
-                        "com.afterlife.afterlab.StatusBar"));
+                        R.string.gesture_preference_title,
+                        R.string.system_grid_gesture_summary,
+                        "com.android.settings.gestures.GestureSettings"));
                 items.add(new SystemGridAdapter.CardItem(
                         R.drawable.ic_interface_qs,
-                        R.string.category_quicksettings_title,
-                        R.string.quicksetting_summary,
-                        "com.afterlife.afterlab.QuickSettings"));
+                        R.string.system_navigation_title,
+                        R.string.system_grid_navigation_summary,
+                        "com.android.settings.gestures.SystemNavigationGestureSettings"));
                 items.add(new SystemGridAdapter.CardItem(
                         R.drawable.ic_interface_battery,
-                        R.string.category_battery_title,
-                        R.string.battery_summary,
-                        "com.afterlife.afterlab.Battery"));
+                        R.string.power_usage_summary_title,
+                        R.string.system_grid_power_usage_summary,
+                        "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"));
                 items.add(new SystemGridAdapter.CardItem(
                         R.drawable.ic_interface_ls,
-                        R.string.category_lockscreen_title,
-                        R.string.lockscreen_summary,
-                        "com.afterlife.afterlab.LockScreen"));
+                        R.string.languages_settings,
+                        R.string.languages_setting_summary,
+                        "com.android.settings.language.LanguageSettings"));
                 // System Features
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_notif,
-                        R.string.category_notifications_title,
-                        R.string.notification_summary,
-                        "com.afterlife.afterlab.Notifications"));
+                        R.drawable.ic_interface_misc,
+                        R.string.date_and_time,
+                        R.string.date_and_time_summary,
+                        "com.android.settings.datetime.DateTimeSettings"));
                 items.add(new SystemGridAdapter.CardItem(
                         R.drawable.ic_interface_buttons,
                         R.string.category_buttons_title,
                         R.string.button_summary,
-                        "com.afterlife.afterlab.Buttons"));
+                        "org.lineageos.lineageparts.input.ButtonSettings"));
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_gesture,
-                        R.string.category_gestures_title,
-                        R.string.gestures_summary,
-                        "com.afterlife.afterlab.Gesture"));
+                        R.drawable.ic_settings_statusbar,
+                        R.string.statusbar_title,
+                        R.string.system_grid_statusbar_summary,
+                        "org.lineageos.lineageparts.statusbar.StatusBarSettings"));
                 items.add(new SystemGridAdapter.CardItem(
                         R.drawable.ic_interface_power,
-                        R.string.category_powermenu_title,
-                        R.string.power_summary,
-                        "com.afterlife.afterlab.PowerMenu"));
+                        R.string.keyboard_settings,
+                        R.string.keyboard_settings_summary,
+                        "com.android.settings.inputmethod.KeyboardSettings"));
+                items.add(new SystemGridAdapter.CardItem(
+                        R.drawable.ic_settings_backup,
+                        R.string.backup_transport_title,
+                        R.string.system_grid_backup_transport_summary,
+                        "com.android.settings.backup.transport.TransportActivity"));
+                items.add(new SystemGridAdapter.CardItem(
+                        R.drawable.ic_emergency_gesture_24dp,
+                        R.string.emergency_settings_preference_title,
+                        R.string.system_grid_emergency_summary,
+                        "com.android.settings.emergency.EmergencyDashboardFragment"));
                 // Misc and General
                 items.add(new SystemGridAdapter.CardItem(
                         R.drawable.ic_interface_misc,
-                        R.string.category_misc_title,
-                        R.string.misc_summary,
-                        "com.afterlife.afterlab.Misc"));
+                        R.string.aboutus_title,
+                        R.string.aboutus_summary,
+                        "com.epic.fragments.SystemSettingsAboutus"));
                 items.add(new SystemGridAdapter.CardItem(
                         R.drawable.ic_interface_system,
-                        R.string.category_system_title,
-                        R.string.system_summary,
-                        "com.afterlife.afterlab.System"));
+                        R.string.reset_dashboard_title,
+                        R.string.system_reset_summary,
+                        "com.android.settings.system.ResetDashboardFragment"));
 
                 rv.setAdapter(new SystemGridAdapter(getContext(), items, getMetricsCategory()));
             }

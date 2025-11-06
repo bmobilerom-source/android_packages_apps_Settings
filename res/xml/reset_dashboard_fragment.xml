@@ -25,20 +25,35 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="privacy"
         settings:searchable="false"
-        android:order="-999"
+        android:order="-1001"
         app:lottie_rawRes="@raw/privacy"/> 
 
    <!-- Header -->
   <PreferenceCategory
-        android:title="reset options"
-        android:order="-996"
-        android:layout="@layout/settings_title_header">
+        android:title="Reset options"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
+
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="reset_options_top_intro"
+        android:title="Reset options"
+        android:persistent="false"
+        android:order="-999"/>
+
+    <!-- Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="reset_options_footer"
+        android:order="-998"
+        settings:searchable="false" />
 
     <!-- Mobile Network reset -->
     <com.android.settingslib.RestrictedPreference
         android:key="network_reset_mobile_network_settings_pref"
         android:title="@string/reset_mobile_network_settings_title"
+        android:order="0"
+        settings:layout="@layout/system_warning_preference_card"
         settings:userRestriction="no_network_reset"
         settings:useAdminDisabledSummary="true"
         settings:isPreferenceVisible="@bool/config_show_sim_info"
@@ -47,32 +62,42 @@
     <!-- Bluetooth and WiFi reset -->
     <com.android.settings.spa.preference.ComposePreference
         android:key="network_reset_bluetooth_wifi_pref"
+        settings:layout="@layout/system_warning_preference_card"
         android:title="@string/reset_bluetooth_wifi_title"
+        android:order="1"
         settings:controller="com.android.settings.network.BluetoothWiFiResetPreferenceController" />
 
     <!-- Reset app preferences -->
     <com.android.settingslib.RestrictedPreference
         android:key="reset_app_prefs"
         android:title="@string/reset_app_preferences"
+        settings:layout="@layout/system_warning_preference_card"
+        android:order="2"
         settings:userRestriction="no_control_apps" />
 
     <!-- Erase Euicc data -->
     <Preference
         android:key="erase_euicc_data"
+        settings:layout="@layout/system_warning_preference_card"
         android:title="@string/reset_esim_title"
+        android:order="3"
         settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.network.EraseEuiccDataController" />
 
     <!-- Delete private space -->
     <Preference
         android:key="reset_delete_private_space"
+        settings:layout="@layout/system_warning_preference_card"        
         android:title="@string/reset_private_space_delete_title"
+        android:order="4"
         settings:controller="com.android.settings.privatespace.delete.ResetOptionsDeletePrivateSpaceController" />
 
     <!-- Factory reset -->
     <com.android.settingslib.RestrictedPreference
         android:key="factory_reset"
         android:title="@string/main_clear_title"
+        android:order="5"
+        settings:layout="@layout/system_warning_preference_card"
         settings:keywords="@string/keywords_factory_data_reset"
         settings:userRestriction="no_factory_reset"
         settings:useAdminDisabledSummary="true"
@@ -81,7 +106,9 @@
 
     <Preference
         android:key="factory_reset_demo_user"
+        settings:layout="@layout/system_warning_preference_card"
         android:title="@string/main_clear_title"
+        android:order="6"
         settings:keywords="@string/keywords_factory_data_reset"
         settings:controller="com.android.settings.system.FactoryResetDemoUserPreferenceController"
         android:fragment="com.android.settings.MainClear" />

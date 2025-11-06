@@ -32,7 +32,7 @@
   <PreferenceCategory
         android:title="time settings"
         android:order="-997"
-        android:layout="@layout/settings_title_header">
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
         
 

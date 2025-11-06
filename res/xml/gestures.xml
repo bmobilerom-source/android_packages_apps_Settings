@@ -22,25 +22,26 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="gestures"
         settings:searchable="false"
-        android:order="-999"
+        android:order="-1001"
         app:lottie_rawRes="@raw/lottie_system_nav_fully_gestural"/>
 
-  
    <!-- Header -->
   <PreferenceCategory
         android:title="Gestures features"
-        android:order="-995"
-        android:layout="@layout/settings_title_header">
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
 
     <lineageos.preference.LineagePartsPreference
         android:key="touchscreen_gesture_settings"
+        android:order="0"
         settings:requiresFeature="lineagehardware:FEATURE_TOUCHSCREEN_GESTURES" />
 
     <lineageos.preference.RemotePreference
             android:key="device_touchscreen_gesture_settings"
             android:title="@string/touchscreen_gesture_settings_title"
             android:summary="@string/touchscreen_gesture_settings_summary"
+            android:order="1"
             settings:replacesKey="touchscreen_gesture_settings"
             settings:requiresFeature="lineagehardware:FEATURE_TOUCHSCREEN_GESTURES">
         <intent android:action="org.lineageos.settings.device.GESTURE_SETTINGS" />
@@ -50,6 +51,7 @@
         android:key="gesture_swipe_down_fingerprint_input_summary"
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"
+        android:order="2"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
@@ -57,6 +59,7 @@
         android:key="gesture_double_tap_power_input_summary"
         android:title="@string/double_tap_power_title"
         android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
+        android:order="3"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController" />
 
@@ -64,6 +67,7 @@
         android:key="gesture_double_twist_input_summary"
         android:title="@string/double_twist_for_camera_mode_title"
         android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings"
+        android:order="4"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 
@@ -71,6 +75,7 @@
         android:key="gesture_system_navigation_input_summary"
         android:title="@string/system_navigation_title"
         android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
+        android:order="5"
         settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"
         settings:keywords="@string/keywords_system_navigation" />
 
@@ -78,12 +83,14 @@
         android:key="gesture_one_handed"
         android:title="@string/one_handed_title"
         android:fragment="com.android.settings.gestures.OneHandedSettings"
+        android:order="6"
         settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController" />
 
     <Preference
         android:key="gesture_tap_screen_input_summary"
         android:title="@string/ambient_display_tap_screen_title"
         android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
+        android:order="7"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
 
@@ -91,6 +98,7 @@
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
         android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
+        android:order="8"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
 
@@ -98,6 +106,7 @@
         android:key="gesture_pick_up_input_summary"
         android:title="@string/ambient_display_pickup_title"
         android:fragment="com.android.settings.gestures.PickupGestureSettings"
+        android:order="9"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
@@ -105,11 +114,21 @@
         android:key="gesture_power_menu_summary"
         android:title="@string/power_menu_setting_name"
         android:fragment="com.android.settings.gestures.PowerMenuSettings"
+        android:order="10"
         settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
-
+    
+    <Preference
+        android:key="taptap_category"
+        android:title="@string/taptap_title"
+        android:summary="@string/taptap_summary" 
+        settings:layout="@layout/system_features_preference_card"
+        android:order="11"
+        android:fragment="com.epic.fragments.SystemSettingsTaptap" />
+        
     <com.android.settingslib.PrimarySwitchPreference
         android:key="gesture_prevent_ringing_summary"
         android:title="@string/gesture_prevent_ringing_screen_title"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
+        android:order="200"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 </PreferenceScreen>

@@ -26,34 +26,41 @@
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="gesture_settings" 
-        android:order="-999"
+        android:order="-1001"
         android:layout="@layout/gesture_settings_animation"/>
-    <lineageos.preference.LineageSystemSettingSwitchPreference
-        android:key="navigation_bar_hint"
-        android:title="@string/show_navbar_hint_title"
-        android:order="-990"
-        android:summary="@string/show_navbar_hint_summary"
-        android:defaultValue="true" />
+
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="@string/system_navigation_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="gesture_navigation_settings_footer"
-        android:order="-980"
+        android:order="-998"
         android:title="@string/back_sensitivity_dialog_message"
         android:selectable="false"
         settings:searchable="false"/>
 
-
-    
+    <lineageos.preference.LineageSystemSettingSwitchPreference
+        android:key="navigation_bar_hint"
+        android:title="@string/show_navbar_hint_title"
+        android:order="200"
+        android:summary="@string/show_navbar_hint_summary"
+        android:defaultValue="true" />
 
     <PreferenceCategory
         android:key="assistant_gesture_category"
         android:persistent="false"
-        android:title="@string/assistant_gesture_category_title">
+        android:title="@string/assistant_gesture_category_title"
+        android:order="0">
 
         <SwitchPreferenceCompat
             android:key="assistant_gesture_corner_swipe"
             android:title="@string/assistant_corner_gesture_title"
             android:summary="@string/assistant_corner_gesture_summary"
+            android:order="200"
             settings:controller="com.android.settings.gestures.GestureNavigationSettingsAssistController"
         />
 
@@ -62,12 +69,14 @@
     <PreferenceCategory
         android:key="back_sensitivity_category"
         android:persistent="false"
-        android:title="@string/back_sensitivity_dialog_title">
+        android:title="@string/back_sensitivity_dialog_title"
+        android:order="1">
 
         <com.android.settings.widget.LabeledSeekBarPreference
             android:key="gesture_left_back_sensitivity"
             android:title="@string/left_edge"
             android:max="2"
+            android:order="100"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
 
@@ -75,6 +84,7 @@
             android:key="gesture_right_back_sensitivity"
             android:title="@string/right_edge"
             android:max="2"
+            android:order="101"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
     </PreferenceCategory>
