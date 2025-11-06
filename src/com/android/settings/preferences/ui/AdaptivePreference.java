@@ -28,7 +28,8 @@ public class AdaptivePreference extends Preference {
     public AdaptivePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         if ("device_model".equals(getKey()) && !SubscriptionUtil.isSimHardwareVisible(context)) {
-            setLayoutResource(R.layout.top_level_preference_top_card);
+            setLayoutResource(R.layout.adaptive_preference_card_top);
+            return;
         }
         setLayoutResource(AdaptivePreferenceUtils.getLayoutResourceId(context, attrs));
     }

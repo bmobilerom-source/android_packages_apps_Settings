@@ -34,6 +34,6 @@ public class AdaptivePrimarySwitchPreference extends PrimarySwitchPreference {
 
     public AdaptivePrimarySwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(AdaptivePreferenceUtils.getLayoutResourceId(context, attrs));
+        setLayoutResource(AdaptivePreferenceUtils.getSwitchLayoutResourceId(context, attrs));
     }
 }

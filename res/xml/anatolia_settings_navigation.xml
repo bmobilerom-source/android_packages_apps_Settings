@@ -90,6 +90,13 @@
             android:summary="AfterLife Homepage Middle Card"
             settings:layout="@layout/afterlife_card_homepage_middle"/>
 
+   <!-- System Midsize Preference Card -->
+   <Preference
+            android:key="systemmidsize_preference_card"
+            android:title="System Midsize Preference Card"
+            android:summary="System Midsize Preference Card"
+            settings:layout="@layout/systemmidsize_preference_card"/>
+
    <!-- Test DOT Card Middle -->
    <Preference
             android:key="test_dot_middle"
