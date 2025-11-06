@@ -29,7 +29,8 @@ public class AdaptiveVolumeSeekBarPreference extends VolumeSeekBarPreference {
 
     public AdaptiveVolumeSeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(AdaptivePreferenceUtils.getLayoutResourceId(context, attrs));
+        // Use a seekbar-capable layout to ensure the slider renders correctly.
+        setLayoutResource(R.layout.preference_system_seekbar);
     }
 }
 

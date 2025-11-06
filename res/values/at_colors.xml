@@ -20,7 +20,7 @@
     <color name="system_features_bg">#9922B5AD</color>
 
     <!-- System Help Background Color -->
-    <color name="system_help_bg">#99d5eb34</color>
+    <color name="system_help_bg">#99FDFD96</color>
 
     <!-- System Advice Background Color -->
     <color name="system_advice_bg">#5f626b</color>
