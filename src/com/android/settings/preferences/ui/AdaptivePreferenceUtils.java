@@ -34,19 +34,39 @@ public class AdaptivePreferenceUtils {
         Position position = getPosition(context, attrs);
         
         if (position == null) {
-            return R.layout.top_level_preference_middle_card;
+            return R.layout.adaptive_preference_card_middle;
         }
 
         switch (position) {
             case TOP:
-                return R.layout.top_level_preference_top_card;
+                return R.layout.adaptive_preference_card_top;
             case BOTTOM:
-                return R.layout.top_level_preference_bottom_card;
+                return R.layout.adaptive_preference_card_bottom;
             case MIDDLE:
-                return R.layout.top_level_preference_middle_card;
+                return R.layout.adaptive_preference_card_middle;
             case SOLO:
             default:
-                return R.layout.settings_preference_solo_card;
+                return R.layout.adaptive_preference_card;
+        }
+    }
+
+    public static int getSwitchLayoutResourceId(Context context, AttributeSet attrs) {
+        Position position = getPosition(context, attrs);
+        
+        if (position == null) {
+            return R.layout.adaptive_preference_card_middle_switch;
+        }
+
+        switch (position) {
+            case TOP:
+                return R.layout.adaptive_preference_card_top_switch;
+            case BOTTOM:
+                return R.layout.adaptive_preference_card_bottom_switch;
+            case MIDDLE:
+                return R.layout.adaptive_preference_card_middle_switch;
+            case SOLO:
+            default:
+                return R.layout.adaptive_preference_card;
         }
     }
 

@@ -28,6 +28,6 @@ public class AdaptiveRestrictedSwitchPreference extends RestrictedSwitchPreferen
 
     public AdaptiveRestrictedSwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(AdaptivePreferenceUtils.getLayoutResourceId(context, attrs));
+        setLayoutResource(AdaptivePreferenceUtils.getSwitchLayoutResourceId(context, attrs));
     }
 }
