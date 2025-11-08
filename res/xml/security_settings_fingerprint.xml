@@ -17,21 +17,51 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/security_settings_fingerprint_preference_title">
+
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="fingerprint_illustration"
+        settings:lottie_rawRes="@raw/security"
+        android:order="-1001" />
+
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="@string/security_settings_fingerprint_preference_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="fingerprint_top_intro"
+        android:title="@string/security_settings_fingerprint_preference_title"
+        android:persistent="false"
+        android:order="-999"/>
+
+    <!-- Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="fingerprint_footer"
+        android:order="-998"
+        settings:searchable="false" />
 
     <PreferenceCategory
         android:key="security_settings_fingerprints_enrolled"
+        android:order="0"
         settings:controller="com.android.settings.biometrics.fingerprint.FingerprintsEnrolledCategoryPreferenceController">
     </PreferenceCategory>
 
     <androidx.preference.Preference
         android:key="key_fingerprint_add"
         android:title="@string/fingerprint_add_title"
-        android:icon="@drawable/ic_add_24dp"/>
+        android:icon="@drawable/ic_add_24dp"
+        android:order="1"/>
 
     <PreferenceCategory
         android:key="security_settings_fingerprint_unlock_category"
         android:title="@string/security_settings_fingerprint_settings_preferences_category"
+        android:order="2"
         settings:controller="com.android.settings.biometrics.fingerprint.FingerprintUnlockCategoryController"
         settings:isPreferenceVisible="false">
 
@@ -39,6 +69,7 @@
             android:key="@string/security_settings_require_screen_on_to_auth_key"
             android:title="@string/security_settings_require_screen_on_to_auth_title"
             android:summary="@string/security_settings_require_screen_on_to_auth_description"
+            android:order="200"
             settings:keywords="@string/security_settings_require_screen_on_to_auth_keywords"
             settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsRequireScreenOnToAuthPreferenceController"
             settings:isPreferenceVisible="false"/>
@@ -47,13 +78,10 @@
             android:key="@string/security_settings_screen_off_unlock_udfps_key"
             android:title="@string/security_settings_screen_off_unlock_udfps_title"
             android:summary="@string/security_settings_screen_off_unlock_udfps_description"
+            android:order="201"
             settings:keywords="@string/security_settings_screen_off_unlock_udfps_keywords"
             settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsScreenOffUnlockUdfpsPreferenceController"
             settings:isPreferenceVisible="false"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="security_settings_fingerprint_footer">
     </PreferenceCategory>
 
 </PreferenceScreen>

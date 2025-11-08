@@ -93,6 +93,7 @@
         android:key="show_password"
         android:title="@string/show_password"
         android:summary="@string/show_password_summary"
+        settings:layout="@layout/system_warning_preference_card"
         settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
 
     <!-- On lock screen notifications -->
