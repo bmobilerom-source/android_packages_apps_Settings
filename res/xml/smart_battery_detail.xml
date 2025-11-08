@@ -30,7 +30,7 @@
 
     <!-- Header -->
     <PreferenceCategory
-        android:title="@string/battery_optimization_title"
+        android:title="@string/smart_battery_manager_title"
         android:order="-1000"
         android:layout="@layout/settings_title_header_small">
     </PreferenceCategory>
