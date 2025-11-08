@@ -35,39 +35,39 @@
             settings:layout="@layout/preference_card"/>
 
    <!-- Test XD Card Bottom -->
-   <Preference
+  <Preference
             android:key="test_card_bot"
             android:title="Test Card Bottom"
             android:summary="XD Bottom Card"
-            settings:layout="@layout/preference_card_xd"/>
+            settings:layout="@layout/preference_card"/>
 
    <!-- Test DOT Card Top -->
    <Preference
             android:key="test_dot_top"
-            android:title="Test DOT Top"
-            android:summary="DOT Top Card"
-            settings:layout="@layout/dot_preference_top_card"/>
+            android:title="Aosp Top Card"
+            android:summary="Aosp Top Card"
+            settings:layout="@layout/preference_card_aosp_top"/>
 
    <!-- Test AfterLife Card Top -->
    <Preference
             android:key="test_afterlife"
-            android:title="Test AfterLife"
-            android:summary="AfterLife Card"
-            settings:layout="@layout/afterlife_cardview_top"/>
+            android:title="wi with arrow top card"
+            android:summary="with arrow top card"
+            settings:layout="@layout/preference_card_witharrow_top"/>
 
    <!-- Test Top Level Top Card -->
    <Preference
             android:key="test_top_level_top"
-            android:title="Test Top Level Top"
-            android:summary="Top Level Top Card"
-            settings:layout="@layout/top_level_preference_top_card"/>
+            android:title="Main Card"
+            android:summary="Main Card"
+            settings:layout="@layout/preference_card_main"/>
 
    <!-- Test Top Level Solo Card -->
    <Preference
             android:key="test_top_level_solo"
-            android:title="Test Top Level Solo"
-            android:summary="Top Level Solo Card"
-            settings:layout="@layout/top_level_preference_solo_card"/>
+            android:title="Solo Card"
+            android:summary="Solo Card"
+            settings:layout="@layout/preference_card_aosp_solo"/>
 
    <!-- Test Top Level Middle Card -->
    <Preference
@@ -131,7 +131,10 @@
             android:title="Test AfterLife Single Left"
             android:summary="AfterLife Single Left Card"
             settings:layout="@layout/afterlife_cardview_single_left"/>
-
+<Preference
+    android:title="Help Title"
+    android:summary="Help summary text"
+    settings:layout="@layout/system_help_preference_card" />
    <!-- Test AfterLife Single Right -->
    <Preference
             android:key="test_afterlife_single_right"
@@ -145,5 +148,4 @@
             android:title="Test AfterLife Homepage Bottom"
             android:summary="AfterLife Homepage Bottom Card"
             settings:layout="@layout/afterlife_card_homepage_bottom"/>
-
 </PreferenceScreen>

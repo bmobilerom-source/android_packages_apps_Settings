@@ -38,5 +38,10 @@
         android:shouldDisableView="false"
         android:layout="@layout/about_phone_info" />
 
-
+<com.android.settings.preferences.ui.AdaptivePreference
+            android:key="battry_ref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlab_interface_single_right"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
 </PreferenceScreen>

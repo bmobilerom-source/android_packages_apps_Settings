@@ -34,6 +34,12 @@
         android:layout="@layout/settings_title_header">
   </PreferenceCategory>
 
+<com.android.settings.preferences.ui.AdaptivePreference
+            android:key="battry_ref"
+            android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/afterlab_interface_single_right"
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
     <Preference
         android:key="phone_language"
         android:title="@string/phone_language"
@@ -72,6 +78,7 @@
             android:key="key_user_dictionary_settings"
             android:title="@string/user_dict_settings_title"
             android:summary="@string/user_dict_settings_summary"
+            settings:layout="@layout/system_warning_preference_card"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
             settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
     </PreferenceCategory>
@@ -88,6 +95,7 @@
         <Preference
             android:key="tts_settings_summary"
             android:title="@string/tts_settings_title"
+            settings:layout="@layout/system_features_preference_card"
             android:fragment="com.android.settings.tts.TextToSpeechSettings"
             settings:searchable="false"/>
 
@@ -96,6 +104,7 @@
     <SwitchPreference
         android:key="vibrate_input_devices"
         android:title="@string/vibrate_input_devices"
+        settings:layout="@layout/preference_card_top_switch"
         android:summary="@string/vibrate_input_devices_summary"
         settings:controller="com.android.settings.inputmethod.GameControllerPreferenceController" />
 
@@ -107,6 +116,7 @@
         <Preference
             android:key="virtual_keyboards_for_work_pref"
             android:title="@string/virtual_keyboards_for_work_title"
+            settings:layout="@layout/system_features_preference_card"
             android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
             settings:forWork="true"
             settings:controller="com.android.settings.inputmethod.VirtualKeyboardForWorkPreferenceController" />

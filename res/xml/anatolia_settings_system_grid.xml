@@ -15,13 +15,14 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
-    <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/systemgrid_dashboard_header"
-        android:key="systemgrid_header" />
-    <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/systemgrid_tab_layout"
-        android:selectable="false"
-        android:key="systemgrid_tab_layout" />
+
+     <!-- Header -->
+  <PreferenceCategory
+        android:title="System Settings"
+        android:order="-1001"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>    
+  
     <com.android.settingslib.widget.LayoutPreference
         android:key="system_grid"
         android:selectable="false"

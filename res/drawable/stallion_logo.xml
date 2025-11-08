@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="625dp"
+    android:height="100dp"
+    android:viewportWidth="625"
+    android:viewportHeight="100">
+
+    <!-- Stylized stallion head silhouette with flowing mane (monochrome, neutral) -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="nonZero"
+        android:pathData="M110,80
+            C95,78 82,70 74,58
+            C66,46 65,31 72,20
+            C79,9 95,4 111,7
+            C127,9 141,20 148,34
+            C153,43 155,52 154,60
+            C162,64 170,70 176,78
+            C179,82 178,87 173,89
+            C168,90 159,87 153,82
+            C148,89 141,94 133,96
+            C123,98 114,96 110,90
+            Z
+
+            M118,27
+            C113,27 109,31 109,36
+            C109,41 113,45 118,45
+            C123,45 127,41 127,36
+            C127,31 123,27 118,27
+            Z
+
+            M148,34
+            C160,30 172,30 183,34
+            C196,39 205,48 212,59
+            C217,68 219,75 219,83
+            C219,88 215,92 210,92
+            C203,92 198,86 196,79
+            C193,69 188,60 180,54
+            C174,50 167,48 159,48
+            C156,48 153,49 150,50
+            C151,45 150,39 148,34
+            Z
+
+            M95,22
+            C86,24 78,30 73,38
+            C67,47 65,58 68,68
+            C70,75 74,81 79,86
+            C83,90 82,96 76,97
+            C65,98 54,90 48,79
+            C39,63 39,43 49,28
+            C60,12 80,3 99,5
+            C104,6 105,10 101,14
+            C99,17 97,19 95,22
+            Z"/>
+
+    <!-- Simple baseline to balance composition -->
+    <path
+        android:fillColor="#66FFFFFF"
+        android:pathData="M20,95 L600,95 L600,98 L20,98 Z"/>
+</vector>
+
+
+
