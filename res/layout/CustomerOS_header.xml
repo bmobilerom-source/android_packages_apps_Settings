@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2006 The Android Open Source Project
+     Copyright (C) 2022 The xdroidOSS, xyzprjkt
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/stallion_banner_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/customer_header_banner_height">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/stallion_banner_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/customer_header_banner_margin_top"
+        android:layout_marginHorizontal="@dimen/customer_header_card_horizontal_padding"
+        android:clipToPadding="false"
+        app:cardBackgroundColor="@color/customer_header_card_background"
+        app:cardElevation="@dimen/customer_header_card_elevation"
+        app:cardCornerRadius="@dimen/customer_header_card_radius">
+
+        <FrameLayout
+            android:layout_height="@dimen/customer_header_banner_height"
+            android:layout_width="match_parent"
+            android:background="@drawable/customer_header">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end|center"
+                android:paddingTop="@dimen/customer_header_text_padding_top"
+                android:text="CustomerOs"
+                android:textColor="?android:attr/colorAccent"
+                android:textSize="@dimen/customer_header_text_size"
+                android:fontFamily="@font/Poppins-ExtraBoldItalic"
+                android:letterSpacing="@dimen/customer_header_text_letter_spacing" />
+
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+    
+</FrameLayout>
