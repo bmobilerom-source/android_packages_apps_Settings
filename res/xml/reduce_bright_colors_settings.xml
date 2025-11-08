@@ -22,11 +22,12 @@
     android:persistent="false"
     android:title="@string/reduce_bright_colors_preference_title">
 
-    <!-- Illustration -->
+    <!-- Illustration - Commented out (removed)
     <com.android.settingslib.widget.IllustrationPreference
         android:key="reduce_bright_colors_illustration"
         settings:lottie_rawRes="@raw/security"
         android:order="-1001" />
+    -->
 
     <!-- Header -->
     <PreferenceCategory
@@ -35,12 +36,13 @@
         android:layout="@layout/settings_title_header_small">
     </PreferenceCategory>
 
-    <!-- TopIntro -->
+    <!-- TopIntro - Commented out (empty preference removed)
     <com.android.settingslib.widget.TopIntroPreference
         android:key="reduce_bright_colors_top_intro"
         android:title="@string/reduce_bright_colors_preference_title"
         android:persistent="false"
         android:order="-999"/>
+    -->
 
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference

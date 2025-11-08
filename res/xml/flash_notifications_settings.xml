@@ -35,6 +35,9 @@
         android:layout="@layout/settings_title_header_small">
     </PreferenceCategory>
 
+    <!-- MainSwitch -->
+    <!-- Note: No MainSwitch present in this page -->
+
     <!-- TopIntro -->
     <com.android.settingslib.widget.TopIntroPreference
         android:key="flash_notifications_intro"
@@ -53,7 +56,7 @@
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsFooterPreferenceController"/>
    
-    <!-- Preferences -->
+    <!-- Other Preferences -->
     <com.android.settings.accessibility.FlashNotificationsPreviewPreference
         android:key="flash_notifications_preview"
         android:title="@string/flash_notifications_preview"
@@ -65,16 +68,19 @@
     <SwitchPreferenceCompat
         android:key="camera_flash_notification_preference"
         android:persistent="false"
-        android:order="200"
+        android:order="100"
         android:title="@string/camera_flash_notification_title"
         settings:controller="com.android.settings.accessibility.CameraFlashNotificationPreferenceController" />
 
     <com.android.settingslib.PrimarySwitchPreference
         android:key="screen_flash_notification_preference"
         android:persistent="false"
-        android:order="201"
+        android:order="101"
         android:title="@string/screen_flash_notification_title"
         settings:controller="com.android.settings.accessibility.ScreenFlashNotificationPreferenceController" />
+
+    <!-- SeekBars -->
+    <!-- Note: No SeekBars present in this page -->
 
 
 </PreferenceScreen>

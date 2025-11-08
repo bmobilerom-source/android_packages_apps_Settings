@@ -22,6 +22,7 @@
     android:title=" ">
 
 
+    <!-- Illustration -->
     <com.android.settingslib.widget.IllustrationPreference
         android:key="captions_preview"
         android:persistent="false"
@@ -30,12 +31,19 @@
         settings:lottie_rawRes="@drawable/a11y_captioning_banner"
         settings:searchable="false" />
 
-   <!-- Header -->
-  <PreferenceCategory
+    <!-- Header -->
+    <PreferenceCategory
         android:title="Caption options"
         android:order="-1000"
         android:layout="@layout/settings_title_header_small">
-  </PreferenceCategory>
+    </PreferenceCategory>
+
+    <!-- MainSwitch -->
+    <com.android.settings.widget.SettingsMainSwitchPreference
+        android:key="captioning_preference_switch"
+        android:order="-997"
+        android:title="@string/accessibility_captioning_primary_switch_title"
+        settings:controller="com.android.settings.accessibility.CaptioningTogglePreferenceController"/>
 
     <!-- TopIntro -->
     <com.android.settingslib.widget.TopIntroPreference
@@ -50,13 +58,6 @@
         android:key="captioning_footer"
         android:order="-998"
         settings:searchable="false" />
-
-    <!-- MainSwitch (after Footer) -->
-    <com.android.settings.widget.SettingsMainSwitchPreference
-        android:key="captioning_preference_switch"
-        android:order="-997"
-        android:title="@string/accessibility_captioning_primary_switch_title"
-        settings:controller="com.android.settings.accessibility.CaptioningTogglePreferenceController"/>
 
     <!-- Preferences -->
     <Preference
