@@ -18,20 +18,47 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/security_advanced_settings">
 
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="security_advanced_illustration"
+        settings:lottie_rawRes="@raw/security"
+        android:order="-1001" />
+
+    <!-- Header -->
     <PreferenceCategory
-        android:order="1"
+        android:title="@string/security_advanced_settings"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="security_advanced_top_intro"
+        android:title="@string/security_advanced_settings"
+        android:persistent="false"
+        android:order="-999"/>
+
+    <!-- Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="security_advanced_footer"
+        android:order="-998"
+        settings:searchable="false" />
+
+    <PreferenceCategory
+        android:order="0"
         android:key="dashboard_tile_placeholder" />
 
     <!-- Main security section - for trust agents added in code. -->
     <PreferenceCategory
-        android:order="210"
+        android:order="1"
         android:key="security_category"
         android:layout="@layout/preference_category_no_label" />
 
     <PreferenceCategory
-        android:order="240"
+        android:order="2"
         android:key="security_settings_device_admin_category"
         android:layout="@layout/preference_category_no_label">
 
@@ -39,6 +66,7 @@
             android:key="manage_device_admin"
             android:title="@string/manage_device_admin"
             android:summary="@string/summary_placeholder"
+            android:order="0"
             android:fragment=
                 "com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
             settings:controller=
@@ -48,6 +76,7 @@
             android:key="enterprise_privacy"
             android:title="@string/enterprise_privacy_settings"
             android:summary="@string/summary_placeholder"
+            android:order="1"
             android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
             settings:controller="com.android.settings.enterprise.EnterprisePrivacyPreferenceController"/>
 
@@ -55,6 +84,7 @@
             android:key="financed_privacy"
             android:title="@string/financed_privacy_settings"
             android:summary="@string/summary_placeholder"
+            android:order="2"
             android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
             settings:controller="com.android.settings.enterprise.FinancedPrivacyPreferenceController"/>
 
@@ -62,13 +92,14 @@
             android:key="financed_device_info"
             android:title="@string/financed_device_info"
             android:summary="@string/summary_placeholder"
+            android:order="3"
             settings:controller="com.android.settings.devicelock.DeviceLockPreferenceController">
             <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"/>
         </Preference>
     </PreferenceCategory>
 
     <Preference
-        android:order="250"
+        android:order="4"
         android:key="sim_lock_settings"
         android:title="@string/sim_lock_settings_category"
         settings:isPreferenceVisible="@bool/config_show_sim_info"
@@ -82,7 +113,7 @@
     </Preference>
 
     <Preference
-        android:order="260"
+        android:order="5"
         android:key="encryption_and_credential"
         android:title="@string/encryption_and_credential_settings_title"
         android:summary="@string/encryption_and_credential_settings_summary"
@@ -90,7 +121,7 @@
         settings:controller="com.android.settings.security.EncryptionStatusPreferenceController" />
 
     <Preference
-        android:order="270"
+        android:order="6"
         android:key="manage_trust_agents"
         android:title="@string/manage_trust_agents"
         android:summary="@string/summary_placeholder"
@@ -98,7 +129,7 @@
         settings:controller="com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController" />
 
     <Preference
-        android:order="280"
+        android:order="7"
         android:key="screen_pinning_settings"
         android:title="@string/screen_pinning_title"
         android:summary="@string/summary_placeholder"
@@ -107,7 +138,7 @@
         settings:controller="com.android.settings.security.ScreenPinningPreferenceController" />
 
   <com.android.settingslib.RestrictedPreference
-        android:order="300"
+        android:order="8"
         android:id="@+id/memtag_page"
         android:key="memtag_page"
         android:title="@string/memtag_title"
@@ -117,7 +148,7 @@
 
     <!-- work profile security section -->
     <PreferenceCategory
-        android:order="310"
+        android:order="9"
         android:key="work_profile_category"
         android:title="@string/lock_settings_profile_title">
 
@@ -126,33 +157,39 @@
             android:key="unification"
             android:title="@string/lock_settings_profile_unification_title"
             android:summary="@string/lock_settings_profile_unification_summary"
+            android:order="200"
             settings:keywords="@string/keywords_unification" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_or_change_profile"
             android:title="@string/unlock_set_unlock_launch_picker_title_profile"
             android:summary="@string/unlock_set_unlock_mode_pattern"
+            android:order="0"
             settings:keywords="@string/keywords_lockscreen" />
 
         <SwitchPreferenceCompat
             android:key="visiblepattern_profile"
             android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
+            android:order="201"
             settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="face_settings_profile"
             android:title="@string/security_settings_face_profile_preference_title"
-            android:summary="@string/summary_placeholder" />
+            android:summary="@string/summary_placeholder"
+            android:order="1" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="fingerprint_settings_profile"
             android:title="@string/security_settings_work_fingerprint_preference_title"
-            android:summary="@string/summary_placeholder" />
+            android:summary="@string/summary_placeholder"
+            android:order="2" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings_profile"
             android:title="@string/security_settings_work_biometric_preference_title"
-            android:summary="@string/summary_placeholder" />
+            android:summary="@string/summary_placeholder"
+            android:order="3" />
 
     </PreferenceCategory>
 

@@ -16,60 +16,92 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
         android:key="lock_settings_picker">
+
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="lock_picker_illustration"
+        settings:lottie_rawRes="@raw/security"
+        android:order="-1001" />
+
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="@string/lock_settings_picker_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="lock_picker_top_intro"
+        android:title="@string/lock_settings_picker_title"
+        android:persistent="false"
+        android:order="-999"/>
+
+    <!-- Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="lock_settings_footer"
+        android:order="-998"
+        android:selectable="false"
+        settings:searchable="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_off"
             android:title="@string/unlock_set_unlock_off_title"
             android:icon="@drawable/ic_lock_none"
+            android:order="0"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_none"
             android:title="@string/unlock_set_unlock_none_title"
             android:icon="@drawable/ic_lock_swipe"
+            android:order="1"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_pattern"
             android:title="@string/unlock_set_unlock_pattern_title"
             android:icon="@drawable/ic_pattern"
+            android:order="2"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_pin"
             android:title="@string/unlock_set_unlock_pin_title"
             android:icon="@drawable/ic_lock_pin"
+            android:order="3"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_password"
             android:title="@string/unlock_set_unlock_password_title"
             android:icon="@drawable/ic_password"
+            android:order="4"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_managed"
+            android:order="5"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_skip_fingerprint"
             android:title="@string/fingerprint_unlock_skip_fingerprint"
+            android:order="6"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_skip_face"
             android:title="@string/face_unlock_skip_face"
+            android:order="7"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
         android:key="unlock_skip_biometrics"
         android:title="@string/biometrics_unlock_skip_biometrics"
+        android:order="8"
         android:persistent="false"/>
-
-    <com.android.settingslib.widget.FooterPreference
-            android:key="lock_settings_footer"
-            android:selectable="false"
-            settings:searchable="false"/>
 
 </PreferenceScreen>
