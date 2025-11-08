@@ -25,19 +25,21 @@
         settings:lottie_rawRes="@raw/security"
         android:order="-1001" />
 
-    <!-- Header -->
+    <!-- Header - Commented out
     <PreferenceCategory
         android:title="@string/unlock_set_unlock_pattern_title"
         android:order="-1000"
         android:layout="@layout/settings_title_header_small">
     </PreferenceCategory>
+    -->
 
-    <!-- TopIntro -->
+    <!-- TopIntro - Commented out
     <com.android.settingslib.widget.TopIntroPreference
         android:key="pattern_size_top_intro"
         android:title="@string/unlock_set_unlock_pattern_title"
         android:persistent="false"
         android:order="-999"/>
+    -->
 
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference

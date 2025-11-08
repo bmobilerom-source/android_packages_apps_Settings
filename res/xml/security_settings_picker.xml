@@ -32,12 +32,13 @@
         android:layout="@layout/settings_title_header_small">
     </PreferenceCategory>
 
-    <!-- TopIntro -->
+    <!-- TopIntro - Commented out (Choose your backup screen lock method)
     <com.android.settingslib.widget.TopIntroPreference
         android:key="lock_picker_top_intro"
         android:title="@string/lock_settings_picker_title"
         android:persistent="false"
         android:order="-999"/>
+    -->
 
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
