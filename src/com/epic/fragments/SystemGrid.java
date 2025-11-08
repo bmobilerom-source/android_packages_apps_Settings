@@ -116,7 +116,7 @@ public class SystemGrid extends SettingsPreferenceFragment implements
                         R.drawable.ic_settings_backup,
                         R.string.backup_transport_title,
                         R.string.system_grid_backup_transport_summary,
-                        "com.android.settings.backup.transport.TransportActivity"));
+                        "com.android.settings.backup.UserBackupSettingsActivity"));
                 items.add(new SystemGridAdapter.CardItem(
                         R.drawable.ic_emergency_gesture_24dp,
                         R.string.emergency_settings_preference_title,

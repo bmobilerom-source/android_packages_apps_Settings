@@ -18,7 +18,14 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/keyboard_settings">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="keyboard_illustration"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/system" />
+
    <!-- Header -->
   <PreferenceCategory
         android:title="@string/keyboard_settings"

@@ -94,6 +94,7 @@
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
 
+    <!-- Double-tap to check phone - Commented out
     <Preference
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
@@ -101,6 +102,7 @@
         android:order="8"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
+    -->
 
     <Preference
         android:key="gesture_pick_up_input_summary"

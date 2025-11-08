@@ -17,8 +17,14 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" "
     settings:keywords="@string/keywords_date_and_time">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="date_time_illustration"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/system" />
 
    <!-- Header -->
   <PreferenceCategory

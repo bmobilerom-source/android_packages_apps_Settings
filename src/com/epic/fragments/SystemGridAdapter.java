@@ -61,9 +61,15 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
     @NonNull
     @Override
     public CardVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        int layoutRes = (viewType == 0) 
-            ? R.layout.system_grid_card_left 
-            : R.layout.system_grid_card_right;
+        int layoutRes;
+        if (viewType == 2) {
+            // Pastel red card for reset setting
+            layoutRes = R.layout.reset_options_pastel_red_card;
+        } else {
+            layoutRes = (viewType == 0) 
+                ? R.layout.system_grid_card_left 
+                : R.layout.system_grid_card_right;
+        }
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(layoutRes, parent, false);
         return new CardVH(view);
@@ -72,7 +78,10 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
     @Override
     public void onBindViewHolder(@NonNull CardVH holder, int position) {
         CardItem item = items.get(position);
-        holder.iconView.setVisibility(View.GONE);
+        if (holder.iconView != null) {
+            holder.iconView.setImageResource(item.iconResId);
+            holder.iconView.setVisibility(View.VISIBLE);
+        }
         holder.titleView.setText(item.titleResId);
         holder.summaryView.setText(item.summaryResId);
         holder.itemView.setOnClickListener(v -> {
@@ -175,7 +184,12 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
 
     @Override
     public int getItemViewType(int position) {
-        return position % 2;
+        CardItem item = items.get(position);
+        // Check if this is the reset setting
+        if (item.destFragment != null && item.destFragment.contains("ResetDashboardFragment")) {
+            return 2; // Pastel red card
+        }
+        return position % 2; // 0 for left, 1 for right
     }
 
     @Override

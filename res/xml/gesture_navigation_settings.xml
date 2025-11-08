@@ -38,7 +38,7 @@
 
     <com.android.settingslib.widget.FooterPreference
         android:key="gesture_navigation_settings_footer"
-        android:order="-998"
+        android:order="-999"
         android:title="@string/back_sensitivity_dialog_message"
         android:selectable="false"
         settings:searchable="false"/>
@@ -70,7 +70,7 @@
         android:key="back_sensitivity_category"
         android:persistent="false"
         android:title="@string/back_sensitivity_dialog_title"
-        android:order="1">
+        android:order="-998">
 
         <com.android.settings.widget.LabeledSeekBarPreference
             android:key="gesture_left_back_sensitivity"

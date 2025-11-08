@@ -18,8 +18,14 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/language_picker_title"
     android:key="system_languages">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="languages_illustration"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/language_settings" />
 
    <!-- Header -->
   <PreferenceCategory
@@ -60,7 +66,7 @@
         android:key="footer_languages_picker"
         android:title="@string/desc_notice_of_language_picker"
         android:persistent="false"
-        android:order="-998"
+        android:order="100"
         android:selectable="false"
         settings:controller="com.android.settings.localepicker.LocaleHelperPreferenceController"/>
 
