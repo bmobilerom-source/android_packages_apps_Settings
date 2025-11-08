@@ -35,7 +35,10 @@
             android:src="@drawable/dot_bg"
             android:scaleType="centerCrop"/>
         <RelativeLayout
-            android:padding="16.0dip"
+            android:paddingStart="16.0dip"
+            android:paddingEnd="16.0dip"
+            android:paddingTop="8.0dip"
+            android:paddingBottom="16.0dip"
             android:layout_width="wrap_content"
             android:layout_height="180.0dip">
             <ImageView
@@ -53,21 +56,26 @@
                 android:layout_gravity="start"
                 android:textSize="18.0sp"
                 android:textStyle="bold"
-                android:textColor="@color/text_tint"
+                android:textColor="?android:attr/colorAccent"
                 android:id="@android:id/title"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="4dp"
                 android:singleLine="true"
                 android:layout_height="wrap_content"
-                android:layout_above="@android:id/summary"/>
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"/>
             <TextView
                 android:layout_gravity="start|center"
                 android:textSize="14.0sp"
-                android:textColor="@color/text_tint"
+                android:textColor="?android:attr/colorAccent"
                 android:id="@android:id/summary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"/>
+                android:maxLines="10"
+                android:ellipsize="none"
+                android:layout_below="@android:id/title"
+                android:layout_alignParentStart="true"/>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

@@ -66,6 +66,7 @@
         android:key="default_apps"
         android:title="@string/app_default_dashboard_title"
         android:order="-996"
+        settings:layout="@layout/systemmidsize_preference_card_tall"
         settings:controller="com.android.settings.applications.DefaultAppsPreferenceController"/>
 
     <Preference
