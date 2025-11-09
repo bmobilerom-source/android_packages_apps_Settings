@@ -45,7 +45,7 @@
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
         android:key="gesture_navigation_settings_footer"
-        android:order="-998"
+        android:order="-997"
         android:title="@string/back_sensitivity_dialog_message"
         android:selectable="false"
         settings:searchable="false"/>
