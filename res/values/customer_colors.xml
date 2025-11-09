@@ -16,7 +16,7 @@
     <!-- Customer Header Colors -->
     <color name="customer_header_card_background">#00000000</color>
     <color name="customer_header_image_tint">@android:color/transparent</color>
-    <!-- Note: customer_header_text_color uses theme attribute ?android:attr/colorAccent directly in layout -->
+    <!-- customer_header_text_color uses theme attribute ?android:attr/colorAccent directly in style -->
 
 </resources>
 

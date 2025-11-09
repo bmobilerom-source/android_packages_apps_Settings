@@ -14,7 +14,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Customer Header Container Style -->
-    <style name="CustomerHeaderContainer" parent="@android:style/Widget.FrameLayout">
+    <style name="CustomerHeaderContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/customer_header_banner_height</item>
     </style>
@@ -32,7 +32,7 @@
     </style>
 
     <!-- Customer Header Image Style -->
-    <style name="CustomerHeaderImage" parent="@android:style/Widget.ImageView">
+    <style name="CustomerHeaderImage">
         <item name="android:layout_width">@dimen/customer_header_image_width</item>
         <item name="android:layout_height">@dimen/customer_header_image_height</item>
         <item name="android:layout_marginTop">@dimen/customer_header_image_margin_top</item>
@@ -47,7 +47,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">end|center</item>
         <item name="android:paddingTop">@dimen/customer_header_text_padding_top</item>
-        <item name="android:textColor">@color/customer_header_text_color</item>
+        <item name="android:textColor">?android:attr/colorAccent</item>
         <item name="android:textSize">@dimen/customer_header_text_size</item>
         <item name="android:fontFamily">@font/Poppins-ExtraBoldItalic</item>
         <item name="android:letterSpacing">@dimen/customer_header_text_letter_spacing</item>
