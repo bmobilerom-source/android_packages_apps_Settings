@@ -15,15 +15,22 @@
  */
 package com.android.settings.applications.specialaccess;
 
+import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.R;
+
+import java.util.List;
 
 /**
  * Controller for toggling the install app whitelist restriction.
@@ -52,8 +59,68 @@ public class InstallAppWhitelistController extends TogglePreferenceController {
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(), SETTINGS_KEY,
+        boolean result = Settings.Secure.putInt(mContext.getContentResolver(), SETTINGS_KEY,
                 isChecked ? 1 : 0);
+        if (result && isChecked) {
+            // When enabling whitelist, revoke permissions for all non-whitelisted apps
+            enforceWhitelist();
+        }
+        return result;
+    }
+
+    /**
+     * Enforce the whitelist by revoking permissions for all non-whitelisted apps.
+     * This is called when the whitelist toggle is enabled.
+     */
+    private void enforceWhitelist() {
+        try {
+            final AppOpsManager appOpsManager = mContext.getSystemService(AppOpsManager.class);
+            final PackageManager packageManager = mContext.getPackageManager();
+            final Resources res = mContext.getResources();
+            final String[] allowedPackages = res.getStringArray(
+                    R.array.config_allowed_install_app_packages);
+
+            if (allowedPackages == null || allowedPackages.length == 0) {
+                return; // No whitelist defined
+            }
+
+            // Get all installed packages
+            final List<ApplicationInfo> apps = packageManager.getInstalledApplications(
+                    PackageManager.MATCH_ALL);
+
+            for (ApplicationInfo appInfo : apps) {
+                final String packageName = appInfo.packageName;
+                // Skip whitelisted packages
+                boolean isWhitelisted = false;
+                for (String allowedPackage : allowedPackages) {
+                    if (TextUtils.equals(packageName, allowedPackage)) {
+                        isWhitelisted = true;
+                        break;
+                    }
+                }
+                if (isWhitelisted) {
+                    continue; // Keep permission for whitelisted apps
+                }
+
+                // Check if app has the permission
+                final int mode = appOpsManager.checkOpNoThrow(
+                        AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
+                        appInfo.uid,
+                        packageName);
+
+                // If app has permission (MODE_ALLOWED), revoke it
+                if (mode == AppOpsManager.MODE_ALLOWED) {
+                    appOpsManager.setMode(
+                            AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
+                            appInfo.uid,
+                            packageName,
+                            AppOpsManager.MODE_ERRORED);
+                    Log.d("InstallAppWhitelist", "Revoked install permission for: " + packageName);
+                }
+            }
+        } catch (Exception e) {
+            Log.e("InstallAppWhitelist", "Error enforcing whitelist", e);
+        }
     }
 
     @Override

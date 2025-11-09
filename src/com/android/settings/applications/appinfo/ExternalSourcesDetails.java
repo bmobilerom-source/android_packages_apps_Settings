@@ -136,6 +136,13 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     }
 
     private void setCanInstallApps(boolean newState) {
+        // Block granting permission if whitelist is enabled and package is not whitelisted
+        if (newState && InstallAppWhitelistController.isWhitelistEnabled(getActivity())) {
+            if (!isPackageAllowedToInstallApps()) {
+                // Don't grant permission for non-whitelisted apps
+                return;
+            }
+        }
         mAppOpsManager.setMode(AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
                 mPackageInfo.applicationInfo.uid, mPackageName,
                 newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
