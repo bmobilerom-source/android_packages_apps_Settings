@@ -223,6 +223,14 @@
         android:order="-100"
         settings:controller="com.android.settings.applications.specialaccess.MoreSpecialAccessPreferenceController" />
 
+    <SwitchPreferenceCompat
+        android:key="install_app_whitelist_toggle"
+        android:title="@string/install_app_whitelist_toggle_title"
+        android:summary="@string/install_app_whitelist_toggle_summary"
+        android:order="-50"
+        settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController"
+        settings:isPreferenceVisible="@bool/config_show_install_app_whitelist_toggle" />
+
     <Preference
         android:key="change_nfc_tag_apps_state"
         android:title="@string/change_nfc_tag_apps_title"

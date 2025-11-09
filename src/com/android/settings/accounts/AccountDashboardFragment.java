@@ -77,6 +77,17 @@ public class AccountDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        
+        // Block Account Dashboard access if blocked
+        if (com.android.settings.applications.specialaccess.BlockAccountDashboardController
+                .isBlocked(context)) {
+            // Account Dashboard access is blocked, finish this activity
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
+        
         if (CredentialManager.isServiceEnabled(context)) {
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);

@@ -79,9 +79,10 @@ public class DefaultAppsPreferenceController extends BasePreferenceController {
             defaultAppLabels.add(defaultSmsLabel);
         }
         if (defaultAppLabels.isEmpty()) {
-            return null;
+            return mContext.getString(R.string.default_apps_summary_more_applications);
         }
-        return ListFormatter.getInstance().format(defaultAppLabels);
+        final CharSequence formattedApps = ListFormatter.getInstance().format(defaultAppLabels);
+        return mContext.getString(R.string.default_apps_summary_with_more, formattedApps);
     }
 
     private CharSequence getDefaultAppLabel(String roleName) {

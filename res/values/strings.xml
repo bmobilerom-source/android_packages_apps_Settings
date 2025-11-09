@@ -7836,6 +7836,10 @@
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
+    <!-- Summary text for default apps preference when no apps are set [CHAR LIMIT=NONE] -->
+    <string name="default_apps_summary_more_applications">More applications</string>
+    <!-- Summary text for default apps preference with app list and more applications [CHAR LIMIT=NONE] -->
+    <string name="default_apps_summary_with_more">%1$s, more applications</string>
     <!-- Title for setting tile leading to App Clones menu under the Apps page [CHAR LIMIT=40] -->
     <string name="cloned_apps_dashboard_title">Cloned Apps</string>
     <!-- Description for introduction of the cloned apps page [CHAR LIMIT=NONE]-->
@@ -10554,6 +10558,35 @@
     <string name="write_settings_description">This permission allows an app to modify system settings.</string>
     <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
     <string name="external_source_switch_title">Allow from this source</string>
+    <!-- Summary text shown when an app is not allowed to install apps from unknown sources due to whitelist restriction [CHAR LIMIT=NONE] -->
+    <string name="install_app_permission_restricted_summary">Only approved app stores can install apps</string>
+    <!-- Title for toggle to enable/disable install app whitelist restriction [CHAR LIMIT=50] -->
+    <string name="install_app_whitelist_toggle_title">Restrict app installations</string>
+    <!-- Summary for toggle to enable/disable install app whitelist restriction [CHAR LIMIT=NONE] -->
+    <string name="install_app_whitelist_toggle_summary">Only allow approved app stores (Aurora Store, Google Play) to install apps</string>
+
+    <!-- Title for app security category [CHAR LIMIT=50] -->
+    <string name="app_security_category_title">App Security</string>
+    <!-- Title for toggle to block Apps settings page access [CHAR LIMIT=50] -->
+    <string name="block_app_dashboard_toggle_title">Block Apps settings page</string>
+    <!-- Summary for toggle to block Apps settings page access [CHAR LIMIT=NONE] -->
+    <string name="block_app_dashboard_toggle_summary">Prevent access to the Apps settings page</string>
+    <!-- Title for toggle to block USB popup page access [CHAR LIMIT=50] -->
+    <string name="block_usb_popup_toggle_title">Block USB popup page</string>
+    <!-- Summary for toggle to block USB popup page access [CHAR LIMIT=NONE] -->
+    <string name="block_usb_popup_toggle_summary">Prevent USB popup/dialog page from appearing</string>
+    <!-- Title for toggle to block Location Settings access [CHAR LIMIT=50] -->
+    <string name="block_location_settings_toggle_title">Block Location settings page</string>
+    <!-- Summary for toggle to block Location Settings access [CHAR LIMIT=NONE] -->
+    <string name="block_location_settings_toggle_summary">Prevent access to the Location settings page</string>
+    <!-- Title for toggle to block Account Dashboard access [CHAR LIMIT=50] -->
+    <string name="block_account_dashboard_toggle_title">Block Accounts settings page</string>
+    <!-- Summary for toggle to block Account Dashboard access [CHAR LIMIT=NONE] -->
+    <string name="block_account_dashboard_toggle_summary">Prevent access to the Accounts settings page</string>
+    <!-- Title for toggle to block Safety Center access [CHAR LIMIT=50] -->
+    <string name="block_safety_center_toggle_title">Block Safety Center</string>
+    <!-- Summary for toggle to block Safety Center access [CHAR LIMIT=NONE] -->
+    <string name="block_safety_center_toggle_summary">Prevent access to Safety Center</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>

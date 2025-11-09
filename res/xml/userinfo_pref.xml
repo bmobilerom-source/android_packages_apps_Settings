@@ -66,4 +66,51 @@
         android:enabled="true"
         android:order="60"
         android:layout="@layout/atomichub" />
+
+    <PreferenceCategory
+            android:key="app_security_category"
+            android:title="@string/app_security_category_title"
+            android:order="70" />
+
+    <SwitchPreference
+            android:key="block_app_dashboard_toggle"
+            android:title="@string/block_app_dashboard_toggle_title"
+            android:summary="@string/block_app_dashboard_toggle_summary"
+            android:order="71"
+            settings:controller="com.android.settings.applications.specialaccess.BlockAppDashboardController" />
+
+    <SwitchPreference
+            android:key="install_app_whitelist_toggle"
+            android:title="@string/install_app_whitelist_toggle_title"
+            android:summary="@string/install_app_whitelist_toggle_summary"
+            android:order="72"
+            settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController" />
+
+    <SwitchPreference
+            android:key="block_usb_popup_toggle"
+            android:title="@string/block_usb_popup_toggle_title"
+            android:summary="@string/block_usb_popup_toggle_summary"
+            android:order="73"
+            settings:controller="com.android.settings.applications.specialaccess.BlockUsbPopupController" />
+
+    <SwitchPreference
+            android:key="block_location_settings_toggle"
+            android:title="@string/block_location_settings_toggle_title"
+            android:summary="@string/block_location_settings_toggle_summary"
+            android:order="74"
+            settings:controller="com.android.settings.applications.specialaccess.BlockLocationSettingsController" />
+
+    <SwitchPreference
+            android:key="block_account_dashboard_toggle"
+            android:title="@string/block_account_dashboard_toggle_title"
+            android:summary="@string/block_account_dashboard_toggle_summary"
+            android:order="75"
+            settings:controller="com.android.settings.applications.specialaccess.BlockAccountDashboardController" />
+
+    <SwitchPreference
+            android:key="block_safety_center_toggle"
+            android:title="@string/block_safety_center_toggle_title"
+            android:summary="@string/block_safety_center_toggle_summary"
+            android:order="76"
+            settings:controller="com.android.settings.applications.specialaccess.BlockSafetyCenterController" />
 </PreferenceScreen>
