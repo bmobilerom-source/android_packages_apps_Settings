@@ -45,18 +45,13 @@
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="flash_notifications_footer"
         android:title="@string/flash_notifications_note"
-        android:order="-800"
+        android:order="-997"
         android:selectable="false"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsFooterPreferenceController"/>
-   
+
     <!-- Other Preferences -->
-    <com.android.settings.accessibility.FlashNotificationsPreviewPreference
-        android:key="flash_notifications_preview"
-        android:title="@string/flash_notifications_preview"
-        android:order="0"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.FlashNotificationsPreviewPreferenceController" />
+    <!-- Note: FlashNotificationsPreviewPreference moved to after switches -->
 
     <!-- Switches -->
     <SwitchPreferenceCompat
@@ -72,6 +67,14 @@
         android:order="101"
         android:title="@string/screen_flash_notification_title"
         settings:controller="com.android.settings.accessibility.ScreenFlashNotificationPreferenceController" />
+
+    <!-- Other Preferences -->
+    <com.android.settings.accessibility.FlashNotificationsPreviewPreference
+        android:key="flash_notifications_preview"
+        android:title="@string/flash_notifications_preview"
+        android:order="200"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.FlashNotificationsPreviewPreferenceController" />
 
     <!-- SeekBars -->
     <!-- Note: No SeekBars present in this page -->
