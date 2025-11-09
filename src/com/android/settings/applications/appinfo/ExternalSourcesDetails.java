@@ -23,9 +23,11 @@ import static android.os.UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY;
 import android.app.AppOpsManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -75,6 +77,11 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean checked = (Boolean) newValue;
         if (preference == mSwitchPref) {
+            // Block granting permission if package is not in whitelist
+            if (checked && !isPackageAllowedToInstallApps()) {
+                // Don't allow granting permission for non-whitelisted apps
+                return false;
+            }
             if (mInstallAppsState != null && checked != mInstallAppsState.canInstallApps()) {
                 if (Settings.ManageAppExternalSourcesActivity.class.getName().equals(
                         getIntent().getComponent().getClassName())) {
@@ -160,6 +167,24 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
             mSwitchPref.setEnabled(false);
             return true;
         }
+        // Check if package is in whitelist - disable switch if not allowed
+        if (!isPackageAllowedToInstallApps()) {
+            mSwitchPref.setEnabled(false);
+            mSwitchPref.setSummary(R.string.install_app_permission_restricted_summary);
+            // If already granted, revoke it
+            if (mInstallAppsState.canInstallApps()) {
+                setCanInstallApps(false);
+                mSwitchPref.setChecked(false);
+            }
+            return true;
+        }
+        // Auto-enable Aurora Store if it's in whitelist and doesn't have permission yet
+        if (isPackageAllowedToInstallApps() && !mInstallAppsState.canInstallApps()) {
+            setCanInstallApps(true);
+            // Refresh state after granting permission
+            mInstallAppsState = mAppBridge.createInstallAppsStateFor(mPackageName,
+                    mPackageInfo.applicationInfo.uid);
+        }
         mSwitchPref.setChecked(mInstallAppsState.canInstallApps());
         return true;
     }
@@ -167,6 +192,40 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     @Override
     protected AlertDialog createDialog(int id, int errorCode) {
         return null;
+    }
+
+    /**
+     * Check if the current package is allowed to install apps from unknown sources.
+     * Only packages in the whitelist (config_allowed_install_app_packages) are allowed.
+     * If the whitelist is empty, all packages are allowed (backward compatibility).
+     */
+    private boolean isPackageAllowedToInstallApps() {
+        if (mPackageName == null) {
+            return false;
+        }
+        try {
+            final Context context = getActivity();
+            if (context == null) {
+                return true; // If no context, allow (backward compatibility)
+            }
+            final Resources res = context.getResources();
+            final String[] allowedPackages = res.getStringArray(
+                    R.array.config_allowed_install_app_packages);
+            // If whitelist is empty, allow all (backward compatibility)
+            if (allowedPackages == null || allowedPackages.length == 0) {
+                return true;
+            }
+            // Check if current package is in whitelist
+            for (String allowedPackage : allowedPackages) {
+                if (TextUtils.equals(mPackageName, allowedPackage)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Resources.NotFoundException e) {
+            // If resource not found, allow all (backward compatibility)
+            return true;
+        }
     }
 
     @Override

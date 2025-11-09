@@ -10554,6 +10554,8 @@
     <string name="write_settings_description">This permission allows an app to modify system settings.</string>
     <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
     <string name="external_source_switch_title">Allow from this source</string>
+    <!-- Summary text shown when an app is not allowed to install apps from unknown sources due to whitelist restriction [CHAR LIMIT=NONE] -->
+    <string name="install_app_permission_restricted_summary">Only approved app stores can install apps</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>
