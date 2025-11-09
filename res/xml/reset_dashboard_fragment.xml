@@ -87,6 +87,7 @@
         <com.android.settings.spa.preference.ComposePreference
             android:key="network_reset_bluetooth_wifi_pref"
             android:title="@string/reset_bluetooth_wifi_title"
+            settings:layout="@layout/dot_preference_top_card"
             android:order="10"
             settings:controller="com.android.settings.network.BluetoothWiFiResetPreferenceController" />
 
@@ -113,7 +114,7 @@
             android:key="factory_reset_demo_user"
             android:title="@string/main_clear_title"
             android:order="22"
-            settings:layout="@layout/preference_card"           
+            settings:layout="@layout/dot_preference_top_card"
             settings:keywords="@string/keywords_factory_data_reset"
             settings:controller="com.android.settings.system.FactoryResetDemoUserPreferenceController"
             android:fragment="com.android.settings.MainClear" />
@@ -122,7 +123,7 @@
         <Preference
             android:key="remove_items"
             android:title="Remove items"
-            settings:layout="@layout/preference_card"
+            settings:layout="@layout/dot_preference_top_card"
             android:summary="Remove unnecessary files and free up space"
             android:order="23">
             <intent

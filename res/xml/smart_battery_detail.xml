@@ -18,6 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="smart_battery_detail"
     android:title="@string/smart_battery_manager_title"
     settings:keywords="@string/keywords_battery_adaptive_preferences">
@@ -26,7 +27,8 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="auto_awesome_battery"
         android:order="-1001"
-        settings:lottie_rawRes="@raw/auto_awesome_battery_lottie" />
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/auto_awesome_battery_lottie" />
 
     <!-- Header -->
     <PreferenceCategory
