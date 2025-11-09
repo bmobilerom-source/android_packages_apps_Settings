@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="104dp">
+    android:minHeight="109dp">
     <LinearLayout
         android:gravity="center_vertical"
         android:layout_width="match_parent"

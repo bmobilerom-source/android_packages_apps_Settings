@@ -22,9 +22,12 @@ import android.app.AppOpsManager
 import android.app.AppOpsManager.MODE_DEFAULT
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.res.Resources
 import android.os.UserManager
+import android.text.TextUtils
 import androidx.compose.runtime.Composable
 import com.android.settings.R
+import com.android.settings.applications.specialaccess.InstallAppWhitelistController
 import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
 import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
@@ -72,32 +75,84 @@ class InstallUnknownAppsListModel(private val context: Context) :
         userIdFlow.map(::getPotentialPackageNames).combine(recordListFlow) {
             potentialPackageNames,
             recordList ->
-            recordList.filter { record -> isChangeable(record, potentialPackageNames) }
+            // Show all apps, but non-whitelisted ones will be disabled via isChangeable()
+            recordList.filter { record ->
+                // Only show apps that are potential app sources (have REQUEST_INSTALL_PACKAGES permission)
+                record.appOpsController.getMode() != MODE_DEFAULT ||
+                    record.app.packageName in potentialPackageNames
+            }
         }
 
     @Composable
     override fun isAllowed(record: InstallUnknownAppsRecord) =
         record.appOpsController.isAllowed.collectAsCallbackWithLifecycle()
 
-    override fun isChangeable(record: InstallUnknownAppsRecord) =
-        isChangeable(record, getPotentialPackageNames(record.app.userId))
+    override fun isChangeable(record: InstallUnknownAppsRecord): Boolean {
+        val potentialPackageNames = getPotentialPackageNames(record.app.userId)
+        // First check if app is a potential app source
+        val isPotentialSource = record.appOpsController.getMode() != MODE_DEFAULT ||
+            record.app.packageName in potentialPackageNames
+        if (!isPotentialSource) {
+            return false
+        }
+        // If whitelist is enabled, check if package is whitelisted
+        if (InstallAppWhitelistController.isWhitelistEnabled(context)) {
+            return isPackageAllowedToInstallApps(record.app.packageName)
+        }
+        return true
+    }
 
     override fun setAllowed(record: InstallUnknownAppsRecord, newAllowed: Boolean) {
+        // Block granting permission if whitelist is enabled and package is not whitelisted
+        if (newAllowed && InstallAppWhitelistController.isWhitelistEnabled(context)) {
+            if (!isPackageAllowedToInstallApps(record.app.packageName)) {
+                // Don't grant permission for non-whitelisted apps
+                return
+            }
+        }
         record.appOpsController.setAllowed(newAllowed)
     }
 
     companion object {
         private val APP_OPS = AppOps(AppOpsManager.OP_REQUEST_INSTALL_PACKAGES)
 
-        private fun isChangeable(
-            record: InstallUnknownAppsRecord,
-            potentialPackageNames: Set<String>,
-        ) = record.appOpsController.getMode() != MODE_DEFAULT ||
-            record.app.packageName in potentialPackageNames
-
         private fun getPotentialPackageNames(userId: Int): Set<String> =
             AppGlobals.getPackageManager()
                 .getAppOpPermissionPackages(Manifest.permission.REQUEST_INSTALL_PACKAGES, userId)
                 .toSet()
+    }
+
+    /**
+     * Check if the package is allowed to install apps from unknown sources.
+     * Only packages in the whitelist (config_allowed_install_app_packages) are allowed.
+     * If the whitelist is empty or the toggle is disabled, all packages are allowed (backward compatibility).
+     */
+    private fun isPackageAllowedToInstallApps(packageName: String): Boolean {
+        if (packageName.isEmpty()) {
+            return false
+        }
+        try {
+            // Check if whitelist restriction is enabled
+            if (!InstallAppWhitelistController.isWhitelistEnabled(context)) {
+                // If toggle is disabled, allow all (backward compatibility)
+                return true
+            }
+            val res: Resources = context.resources
+            val allowedPackages = res.getStringArray(R.array.config_allowed_install_app_packages)
+            // If whitelist is empty, allow all (backward compatibility)
+            if (allowedPackages == null || allowedPackages.isEmpty()) {
+                return true
+            }
+            // Check if current package is in whitelist
+            for (allowedPackage in allowedPackages) {
+                if (TextUtils.equals(packageName, allowedPackage)) {
+                    return true
+                }
+            }
+            return false
+        } catch (e: Resources.NotFoundException) {
+            // If resource not found, allow all (backward compatibility)
+            return true
+        }
     }
 }

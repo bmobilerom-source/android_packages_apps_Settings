@@ -109,6 +109,14 @@ object ManageApplicationsUtil {
         if (!FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA)) {
             return null
         }
+        // Block Install Unknown Apps page when whitelist is enabled
+        if (listType == LIST_TYPE_MANAGE_SOURCES) {
+            if (com.android.settings.applications.specialaccess.InstallAppWhitelistController
+                    .isWhitelistEnabled(context)) {
+                // Whitelist is enabled, don't allow access to this page
+                return null
+            }
+        }
         return when (listType) {
             LIST_TYPE_OVERLAY -> DisplayOverOtherAppsAppListProvider.getAppListRoute()
             LIST_TYPE_WRITE_SETTINGS -> ModifySystemSettingsAppListProvider.getAppListRoute()

@@ -307,6 +307,17 @@ public class ManageApplications extends InstrumentedFragment
         super.onAttach(context);
 
         mListType = getListType();
+        
+        // Block Install Unknown Apps page when whitelist is enabled
+        if (mListType == LIST_TYPE_MANAGE_SOURCES) {
+            if (com.android.settings.applications.specialaccess.InstallAppWhitelistController
+                    .isWhitelistEnabled(context)) {
+                // Whitelist is enabled, don't allow access to this page
+                getActivity().finish();
+                return;
+            }
+        }
+        
         final String spaDestination = ManageApplicationsUtil.getSpaDestination(context, mListType);
         if (spaDestination != null) {
             SpaActivity.startSpaActivity(context, spaDestination);

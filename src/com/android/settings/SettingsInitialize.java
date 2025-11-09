@@ -71,6 +71,9 @@ public class SettingsInitialize extends BroadcastReceiver {
         ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
         enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
         storeSuwCompleteTimestamp(context, broadcast);
+        // Initialize install app whitelist restriction on first boot
+        com.android.settings.applications.specialaccess.InstallAppWhitelistController
+                .initializeIfNeeded(context);
     }
 
     private void managedProfileSetup(Context context, final PackageManager pm, Intent broadcast,

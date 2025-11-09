@@ -22,7 +22,7 @@
     <com.android.settingslib.widget.TopIntroPreference
         android:key="app_locale_disclaimer"
         android:title="@string/desc_app_locale_disclaimer"
-        android:order="1"/>
+        android:order="9999"/>
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="app_locale_description"
@@ -30,7 +30,7 @@
         android:layout="@layout/app_locale_details_description"
         android:selectable="false"
         android:visibility="gone"
-        settings:allowDividerBelow="true"
+        settings:allowDividerBelow="false"
         settings:searchable="false"/>
 
 </PreferenceScreen>
