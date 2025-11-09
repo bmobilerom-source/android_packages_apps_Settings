@@ -38,15 +38,7 @@
     <!-- MainSwitch -->
     <!-- Note: No MainSwitch present in this page -->
 
-    <!-- TopIntro -->
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="flash_notifications_intro"
-        android:title="@string/flash_notifications_title"
-        android:persistent="false"
-        android:order="-999"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.FlashNotificationsIntroPreferenceController" />
-
+   
     <!-- Footer -->
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="flash_notifications_footer"

@@ -22,12 +22,13 @@
     android:persistent="false"
     android:title="@string/reduce_bright_colors_preference_title">
 
-    <!-- Illustration - Commented out (removed)
+    <!-- Illustration -->
+    <!-- IllustrationPreference added programmatically by parent class - hidden to prevent empty display -->
     <com.android.settingslib.widget.IllustrationPreference
-        android:key="reduce_bright_colors_illustration"
-        settings:lottie_rawRes="@raw/security"
-        android:order="-1001" />
-    -->
+        android:key="animated_image"
+        android:order="-1001"
+        settings:isPreferenceVisible="false"
+        settings:searchable="false" />
 
     <!-- Header -->
     <PreferenceCategory
@@ -45,10 +46,12 @@
     -->
 
     <!-- Footer -->
+    <!-- Footer - Commented out (empty preference removed)
     <com.android.settingslib.widget.FooterPreference
         android:key="reduce_bright_colors_footer"
         android:order="-998"
         settings:searchable="false" />
+    -->
 
     <!-- Preferences -->
     <com.android.settings.widget.LabeledSeekBarPreference

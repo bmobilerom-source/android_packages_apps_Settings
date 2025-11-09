@@ -23,11 +23,13 @@
 
 
     <!-- Illustration -->
+    <!-- IllustrationPreference hidden to prevent empty display -->
     <com.android.settingslib.widget.IllustrationPreference
         android:key="captions_preview"
         android:persistent="false"
         android:order="-1001"
         android:selectable="false"
+        settings:isPreferenceVisible="false"
         settings:lottie_rawRes="@drawable/a11y_captioning_banner"
         settings:searchable="false" />
 
