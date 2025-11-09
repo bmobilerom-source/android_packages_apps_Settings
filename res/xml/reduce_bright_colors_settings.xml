@@ -22,12 +22,6 @@
     android:persistent="false"
     android:title="@string/reduce_bright_colors_preference_title">
 
-    <!-- Illustration -->
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="reduce_bright_colors_illustration"
-        android:order="-1001"
-        settings:searchable="false"
-        app:lottie_rawRes="@raw/extra_dim_banner" />
 
     <!-- Header -->
     <PreferenceCategory
@@ -52,16 +46,17 @@
         settings:searchable="false" />
     -->
 
-    <!-- Preferences -->
-    <com.android.settings.widget.LabeledSeekBarPreference
-        android:key="rbc_intensity"
-        android:persistent="false"
-        android:order="0"
-        android:title="@string/reduce_bright_colors_intensity_preference_title"
-        settings:textStart="@string/reduce_bright_colors_intensity_start_label"
-        settings:textEnd="@string/reduce_bright_colors_intensity_end_label"
-        settings:tickMark="@android:color/transparent"
-    />
+    <!-- MainSwitch -->
+    <!-- Note: No MainSwitch present in this page -->
+
+    <!-- TopIntro -->
+    <!-- Note: No TopIntro present in this page -->
+
+    <!-- Footer -->
+    <!-- Note: No Footer present in this page -->
+
+    <!-- Other Preferences -->
+    <!-- Note: No Other Preferences present in this page -->
 
     <!-- Switches -->
     <!-- The term `restarts` is usually used for indicating restarting devices.
@@ -70,7 +65,18 @@
     <SwitchPreferenceCompat
         android:key="rbc_persist"
         android:persistent="false"
-        android:order="200"
+        android:order="100"
         android:title="@string/reduce_bright_colors_persist_preference_title"
         settings:searchable="false"/>
+
+    <!-- SeekBars -->
+    <com.android.settings.widget.LabeledSeekBarPreference
+        android:key="rbc_intensity"
+        android:persistent="false"
+        android:order="200"
+        android:title="@string/reduce_bright_colors_intensity_preference_title"
+        settings:textStart="@string/reduce_bright_colors_intensity_start_label"
+        settings:textEnd="@string/reduce_bright_colors_intensity_end_label"
+        settings:tickMark="@android:color/transparent"
+    />
 </PreferenceScreen>

@@ -23,7 +23,8 @@
 
 
     <!-- Illustration -->
-    <!-- IllustrationPreference hidden to prevent empty display -->
+    <!-- IllustrationPreference commented out (blank/hidden preference) -->
+    <!--
     <com.android.settingslib.widget.IllustrationPreference
         android:key="captions_preview"
         android:persistent="false"
@@ -32,6 +33,7 @@
         settings:isPreferenceVisible="false"
         settings:lottie_rawRes="@drawable/a11y_captioning_banner"
         settings:searchable="false" />
+    -->
 
     <!-- Header -->
     <PreferenceCategory
@@ -43,7 +45,7 @@
     <!-- MainSwitch -->
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="captioning_preference_switch"
-        android:order="-997"
+        android:order="-998"
         android:title="@string/accessibility_captioning_primary_switch_title"
         settings:controller="com.android.settings.accessibility.CaptioningTogglePreferenceController"/>
 
@@ -58,7 +60,7 @@
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
         android:key="captioning_footer"
-        android:order="-998"
+        android:order="-997"
         settings:searchable="false" />
 
     <!-- Preferences -->

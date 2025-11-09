@@ -50,7 +50,7 @@
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="accessibility_button_footer"
         android:persistent="false"
-        android:order="-998"
+        android:order="-997"
         android:selectable="false"
         settings:controller="com.android.settings.accessibility.AccessibilityButtonFooterPreferenceController"
         settings:searchable="false" />
@@ -102,13 +102,4 @@
         android:order="200"
         android:title="@string/accessibility_button_opacity_title"
         settings:controller="com.android.settings.accessibility.FloatingMenuTransparencyPreferenceController" />
-
-    <!-- Footer -->
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="accessibility_button_footer"
-        android:persistent="false"
-        android:order="300"
-        android:selectable="false"
-        settings:controller="com.android.settings.accessibility.AccessibilityButtonFooterPreferenceController"
-        settings:searchable="false" />
 </PreferenceScreen>
