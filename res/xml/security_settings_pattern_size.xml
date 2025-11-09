@@ -44,7 +44,7 @@
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
         android:key="pattern_size_footer"
-        android:order="-998"
+        android:order="-997"
         settings:searchable="false" />
 
     <Preference
