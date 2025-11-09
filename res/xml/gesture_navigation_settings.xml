@@ -42,6 +42,13 @@
         android:title="@string/back_sensitivity_dialog_message"
         android:selectable="false"
         settings:searchable="false"/>
+ <Preference
+        android:key="taptap_category"
+        android:title="@string/taptap_title"
+        android:summary="@string/taptap_summary" 
+        settings:layout="@layout/system_features_preference_card"
+        android:order="100"
+        android:fragment="com.epic.fragments.SystemSettingsTaptap" />
 
     <lineageos.preference.LineageSystemSettingSwitchPreference
         android:key="navigation_bar_hint"
