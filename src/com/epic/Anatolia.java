@@ -21,22 +21,44 @@ package com.epic;
 import com.android.internal.logging.nano.MetricsProto;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Surface;
 import android.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 import com.android.settings.R;
 
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.specialaccess.InstallAppWhitelistController;
 
 public class Anatolia extends SettingsPreferenceFragment {
+
+    private InstallAppWhitelistController mInstallAppWhitelistController;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.anatolia);
+
+        // Initialize the install app whitelist controller
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+        final Context context = getActivity();
+        if (context != null && prefScreen != null) {
+            mInstallAppWhitelistController = new InstallAppWhitelistController(
+                    context, "install_app_whitelist_toggle");
+            if (mInstallAppWhitelistController.isAvailable()) {
+                final SwitchPreferenceCompat togglePref = 
+                        prefScreen.findPreference("install_app_whitelist_toggle");
+                if (togglePref != null) {
+                    mInstallAppWhitelistController.updateState(togglePref);
+                    togglePref.setOnPreferenceChangeListener(mInstallAppWhitelistController);
+                }
+            }
+        }
     }
 
     @Override

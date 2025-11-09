@@ -16,6 +16,7 @@
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:title="@string/anatolia_settings_title">
 		
 		<!-- Status bar -->
@@ -92,7 +93,13 @@
             android:fragment="com.epic.fragments.ExtraSettings"
             android:icon="@drawable/ic_anatolia_extras" />
 
-
+        <!-- Install App Whitelist Toggle -->
+        <SwitchPreferenceCompat
+            android:key="install_app_whitelist_toggle"
+            android:title="@string/install_app_whitelist_toggle_title"
+            android:summary="@string/install_app_whitelist_toggle_summary"
+            android:order="50"
+            settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController" />
 
     <Preference
         android:key="display_customization"

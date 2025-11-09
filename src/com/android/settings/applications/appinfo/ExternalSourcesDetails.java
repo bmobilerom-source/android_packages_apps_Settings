@@ -38,6 +38,7 @@ import com.android.settings.Settings;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
+import com.android.settings.applications.specialaccess.InstallAppWhitelistController;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -197,7 +198,7 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     /**
      * Check if the current package is allowed to install apps from unknown sources.
      * Only packages in the whitelist (config_allowed_install_app_packages) are allowed.
-     * If the whitelist is empty, all packages are allowed (backward compatibility).
+     * If the whitelist is empty or the toggle is disabled, all packages are allowed (backward compatibility).
      */
     private boolean isPackageAllowedToInstallApps() {
         if (mPackageName == null) {
@@ -207,6 +208,11 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
             final Context context = getActivity();
             if (context == null) {
                 return true; // If no context, allow (backward compatibility)
+            }
+            // Check if whitelist restriction is enabled
+            if (!InstallAppWhitelistController.isWhitelistEnabled(context)) {
+                // If toggle is disabled, allow all (backward compatibility)
+                return true;
             }
             final Resources res = context.getResources();
             final String[] allowedPackages = res.getStringArray(

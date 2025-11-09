@@ -738,6 +738,10 @@
         <item>com.android.vending</item>
     </string-array>
 
+    <!-- Whether to show the toggle to enable/disable install app whitelist restriction.
+         Set to true to show the toggle in Special app access settings. -->
+    <bool name="config_show_install_app_whitelist_toggle">false</bool>
+
     <!-- The default value for RedactionInterstitial in SUW -->
     <bool name="default_allow_sensitive_lockscreen_content">false</bool>
 

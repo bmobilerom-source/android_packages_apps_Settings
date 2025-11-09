@@ -10556,6 +10556,10 @@
     <string name="external_source_switch_title">Allow from this source</string>
     <!-- Summary text shown when an app is not allowed to install apps from unknown sources due to whitelist restriction [CHAR LIMIT=NONE] -->
     <string name="install_app_permission_restricted_summary">Only approved app stores can install apps</string>
+    <!-- Title for toggle to enable/disable install app whitelist restriction [CHAR LIMIT=50] -->
+    <string name="install_app_whitelist_toggle_title">Restrict app installations</string>
+    <!-- Summary for toggle to enable/disable install app whitelist restriction [CHAR LIMIT=NONE] -->
+    <string name="install_app_whitelist_toggle_summary">Only allow approved app stores (Aurora Store, Google Play) to install apps</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>
