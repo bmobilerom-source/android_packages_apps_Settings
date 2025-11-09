@@ -124,7 +124,6 @@
             android:title="Remove items"
             settings:layout="@layout/preference_card"
             android:summary="Remove unnecessary files and free up space"
-            android:icon="@drawable/ic_device_info_storage"
             android:order="23">
             <intent
                 android:action="android.intent.action.MAIN"

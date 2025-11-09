@@ -30,7 +30,7 @@
 
     <!-- MainSwitch -->
     <com.android.settingslib.widget.MainSwitchPreference
-        android:order="-997"
+        android:order="-998"
         android:key="battery_saver"
         android:title="@string/battery_saver_master_switch_title"
         settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverButtonPreferenceController"/>
@@ -40,7 +40,7 @@
 
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
-        android:order="-998"
+        android:order="-997"
         android:key="battery_saver_footer_preference"
         android:title="@*android:string/battery_saver_description"
         settings:searchable="false"/>

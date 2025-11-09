@@ -54,7 +54,7 @@
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"
         android:icon="@drawable/ic_broadcast"
-        android:order="2"
+        android:order="100"
         settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"

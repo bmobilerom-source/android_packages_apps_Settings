@@ -110,6 +110,30 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
                     Toast.makeText(context, R.string.system_tuner_not_available, 
                         Toast.LENGTH_SHORT).show();
                 }
+            } else if (item.destFragment.contains("UserBackupSettingsActivity")) {
+                // Launch UserBackupSettingsActivity via Intent
+                try {
+                    ComponentName component = new ComponentName("com.android.settings", 
+                        "com.android.settings.backup.UserBackupSettingsActivity");
+                    PackageManager pm = context.getPackageManager();
+                    pm.getActivityInfo(component, 0);
+                    Intent intent = new Intent();
+                    intent.setComponent(component);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.e("SystemGridAdapter", "UserBackupSettingsActivity not found", e);
+                    Toast.makeText(context, R.string.system_tuner_not_available, 
+                        Toast.LENGTH_SHORT).show();
+                } catch (SecurityException e) {
+                    Log.e("SystemGridAdapter", "Permission denied to launch UserBackupSettingsActivity", e);
+                    Toast.makeText(context, R.string.system_tuner_not_available, 
+                        Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Log.e("SystemGridAdapter", "Failed to launch UserBackupSettingsActivity", e);
+                    Toast.makeText(context, R.string.system_tuner_not_available, 
+                        Toast.LENGTH_SHORT).show();
+                }
             } else if (item.destFragment.contains("TransportActivity")) {
                 // Launch TransportFragment via SubSettingLauncher (proper Settings flow)
                 try {

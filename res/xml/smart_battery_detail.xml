@@ -38,7 +38,7 @@
     <!-- MainSwitch -->
     <SwitchPreferenceCompat
         android:key="smart_battery"
-        android:order="-997"
+        android:order="-998"
         android:title="@string/smart_battery_title"
         android:summary="@string/smart_battery_summary"
         settings:controller="com.android.settings.fuelgauge.SmartBatteryPreferenceController"/>
@@ -49,7 +49,7 @@
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
         android:key="smart_battery_detail_footer"
-        android:order="-998"
+        android:order="-997"
         android:title="@string/smart_battery_footer"
         android:selectable="false"
         settings:searchable="false"/>
