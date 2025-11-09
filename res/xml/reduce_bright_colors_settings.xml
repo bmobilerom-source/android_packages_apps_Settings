@@ -23,12 +23,11 @@
     android:title="@string/reduce_bright_colors_preference_title">
 
     <!-- Illustration -->
-    <!-- IllustrationPreference added programmatically by parent class - hidden to prevent empty display -->
     <com.android.settingslib.widget.IllustrationPreference
-        android:key="animated_image"
+        android:key="reduce_bright_colors_illustration"
         android:order="-1001"
-        settings:isPreferenceVisible="false"
-        settings:searchable="false" />
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/extra_dim_banner" />
 
     <!-- Header -->
     <PreferenceCategory

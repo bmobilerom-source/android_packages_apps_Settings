@@ -25,7 +25,7 @@
         android:key="flash_notifications_illustration"
         settings:searchable="false"
         android:order="-1001"
-        settings:lottie_rawRes="@drawable/flash_notifications_illustration"
+        app:lottie_rawRes="@raw/accessibility"
         settings:controller="com.android.settings.accessibility.FlashNotificationIllustrationPreferenceController"/>
 
     <!-- Header -->
@@ -38,7 +38,9 @@
     <!-- MainSwitch -->
     <!-- Note: No MainSwitch present in this page -->
 
-   
+    <!-- TopIntro -->
+    <!-- Note: No TopIntro present in this page -->
+
     <!-- Footer -->
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="flash_notifications_footer"
