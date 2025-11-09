@@ -101,6 +101,7 @@
         android:key="security_advanced_settings"
         android:title="@string/security_advanced_settings"
         android:summary="@string/summary_placeholder"
+        settings:layout="@layout/system_warning_preference_card"        
         android:fragment="com.android.settings.security.SecurityAdvancedSettings"
         settings:controller="com.android.settings.security.SecurityAdvancedSettingsController"
         settings:keywords="@string/security_advanced_settings_keywords" />
