@@ -15,24 +15,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" " >
 
-    <!-- Illustration -->
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="gestures"
-        settings:searchable="false"
-        android:order="-1001"
-        app:lottie_rawRes="@raw/lottie_system_nav_fully_gestural"/>
-
-    <!-- Header -->
-    <PreferenceCategory
-        android:title="Gestures features"
-        android:order="-1000"
-        android:layout="@layout/settings_title_header_small">
-    </PreferenceCategory>
-
-    <!-- Other Preferences -->
     <lineageos.preference.LineagePartsPreference
         android:key="touchscreen_gesture_settings"
         settings:requiresFeature="lineagehardware:FEATURE_TOUCHSCREEN_GESTURES" />
@@ -87,14 +71,12 @@
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
 
-    <!-- Double-tap to check phone - Commented out
     <Preference
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
         android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
-    -->
 
     <Preference
         android:key="gesture_pick_up_input_summary"
@@ -116,7 +98,6 @@
         settings:layout="@layout/system_features_preference_card"
         android:fragment="com.epic.fragments.SystemSettingsTaptap" />
 
-    <!-- Switches -->
     <com.android.settingslib.PrimarySwitchPreference
         android:key="gesture_prevent_ringing_summary"
         android:title="@string/gesture_prevent_ringing_screen_title"
