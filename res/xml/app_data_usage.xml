@@ -24,7 +24,7 @@
   <PreferenceCategory
         android:title="App usage"
         android:order="-997"
-        android:layout="@layout/settings_title_header">
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
 
     <com.android.settings.datausage.SpinnerPreference
