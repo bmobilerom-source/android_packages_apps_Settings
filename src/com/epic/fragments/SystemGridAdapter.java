@@ -79,8 +79,7 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
     public void onBindViewHolder(@NonNull CardVH holder, int position) {
         CardItem item = items.get(position);
         if (holder.iconView != null) {
-            holder.iconView.setImageResource(item.iconResId);
-            holder.iconView.setVisibility(View.VISIBLE);
+            holder.iconView.setVisibility(View.GONE);
         }
         holder.titleView.setText(item.titleResId);
         holder.summaryView.setText(item.summaryResId);
