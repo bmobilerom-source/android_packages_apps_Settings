@@ -153,20 +153,33 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         if (mPackageInfo == null || mPackageInfo.applicationInfo == null) {
             return false;
         }
+        // Check if whitelist is enabled and package is whitelisted - allow bypassing restriction
+        final boolean isWhitelisted = InstallAppWhitelistController.isWhitelistEnabled(getActivity()) 
+                && isPackageAllowedToInstallApps();
+        
         if (mUserManager.hasBaseUserRestriction(DISALLOW_INSTALL_UNKNOWN_SOURCES,
                 UserHandle.of(UserHandle.myUserId()))) {
-            mSwitchPref.setChecked(false);
-            mSwitchPref.setSummary(com.android.settingslib.R.string.disabled);
-            mSwitchPref.setEnabled(false);
-            return true;
+            // If whitelisted, allow enabling even with base restriction
+            if (isWhitelisted) {
+                // Whitelisted apps can bypass base restriction
+            } else {
+                mSwitchPref.setChecked(false);
+                mSwitchPref.setSummary(com.android.settingslib.R.string.disabled);
+                mSwitchPref.setEnabled(false);
+                return true;
+            }
         }
-        mSwitchPref.checkRestrictionAndSetDisabled(DISALLOW_INSTALL_UNKNOWN_SOURCES);
-        if (!mSwitchPref.isDisabledByAdmin()) {
-            mSwitchPref.checkRestrictionAndSetDisabled(
-                    UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY);
-        }
-        if (mSwitchPref.isDisabledByAdmin()) {
-            return true;
+        
+        // Check restriction, but allow whitelisted apps to bypass
+        if (!isWhitelisted) {
+            mSwitchPref.checkRestrictionAndSetDisabled(DISALLOW_INSTALL_UNKNOWN_SOURCES);
+            if (!mSwitchPref.isDisabledByAdmin()) {
+                mSwitchPref.checkRestrictionAndSetDisabled(
+                        UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY);
+            }
+            if (mSwitchPref.isDisabledByAdmin()) {
+                return true;
+            }
         }
         mInstallAppsState = mAppBridge.createInstallAppsStateFor(mPackageName,
                 mPackageInfo.applicationInfo.uid);
