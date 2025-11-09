@@ -87,8 +87,10 @@
         <com.android.settings.spa.preference.ComposePreference
             android:key="network_reset_bluetooth_wifi_pref"
             android:title="@string/reset_bluetooth_wifi_title"
-            settings:layout="@layout/system_preference_independant"
+            android:persistent="false"
             android:order="10"
+            android:layout="@layout/preference_compose_top_intro"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.BluetoothWiFiResetPreferenceController" />
 
         <!-- Preference items -->
@@ -122,9 +124,9 @@
         <!-- Remove items -->
         <Preference
             android:key="remove_items"
-            android:title="Remove items"
+            android:title="File Deletion"
             settings:layout="@layout/system_preference_independant"
-            android:summary="Remove unnecessary files and free up space"
+            android:summary="Delete unnecessary files and free up space"
             android:order="23">
             <intent
                 android:action="android.intent.action.MAIN"
