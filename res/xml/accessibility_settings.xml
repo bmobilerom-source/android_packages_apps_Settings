@@ -101,20 +101,11 @@
         android:title="@string/interaction_control_category_title">
 
         <Preference
-            android:fragment="com.android.settings.accessibility.TapAssistanceFragment"
-            android:key="tap_assistance_preference_screen"
-            android:icon="@drawable/ic_tap_assistance"
-            android:persistent="false"
-            android:order="0"
-            android:title="@string/accessibility_tap_assistance_title"
-            settings:searchable="true"/>
-
-        <Preference
             android:fragment="com.android.settings.accessibility.VibrationSettings"
             android:key="vibration_preference_screen"
             android:icon="@drawable/ic_vibration"
             android:persistent="false"
-            android:order="1"
+            android:order="0"
             android:title="@string/accessibility_vibration_settings_title"
             settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
             settings:keywords="@string/keywords_vibration"
@@ -125,7 +116,7 @@
             android:key="pointer_and_touchpad"
             android:icon="@drawable/ic_pointer_and_touchpad"
             android:persistent="false"
-            android:order="2"
+            android:order="1"
             android:title="@string/accessibility_pointer_and_touchpad_title"
             android:summary="@string/accessibility_pointer_and_touchpad_summary"
             settings:controller="com.android.settings.inputmethod.PointerTouchpadPreferenceController"
@@ -134,12 +125,22 @@
         <Preference
             android:icon="@drawable/ic_sticky_keys"
             android:key="physical_keyboard_a11y"
-            android:order="3"
+            android:order="2"
             android:title="@string/keyboard_a11y_settings"
             android:summary="@string/keyboard_a11y_settings_summary"
             android:persistent="false"
             android:fragment="com.android.settings.inputmethod.PhysicalKeyboardA11yFragment"
             settings:controller="com.android.settings.inputmethod.PhysicalKeyboardA11yPreferenceController" />
+
+          <Preference
+            android:fragment="com.android.settings.accessibility.TapAssistanceFragment"
+            android:key="tap_assistance_preference_screen"
+            android:icon="@drawable/ic_tap_assistance"
+            android:persistent="false"
+            android:order="3"
+            android:title="@string/accessibility_tap_assistance_title"
+            settings:searchable="true"/>
+   
     </PreferenceCategory>
 
     <PreferenceCategory

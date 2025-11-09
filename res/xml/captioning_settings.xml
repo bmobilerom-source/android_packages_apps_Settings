@@ -22,9 +22,7 @@
     android:title=" ">
 
 
-    <!-- Illustration -->
-    <!-- IllustrationPreference commented out (blank/hidden preference) -->
-    <!--
+  
     <com.android.settingslib.widget.IllustrationPreference
         android:key="captions_preview"
         android:persistent="false"
@@ -33,7 +31,7 @@
         settings:isPreferenceVisible="false"
         settings:lottie_rawRes="@drawable/a11y_captioning_banner"
         settings:searchable="false" />
-    -->
+
 
     <!-- Header -->
     <PreferenceCategory
@@ -55,12 +53,14 @@
         android:order="-999"
         android:title="@string/accessibility_captioning_preference_summary"
         android:persistent="false"
+        settings:isPreferenceVisible="false"
         settings:searchable="false"/>
 
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
         android:key="captioning_footer"
         android:order="-997"
+        settings:isPreferenceVisible="false"
         settings:searchable="false" />
 
     <!-- Preferences -->
