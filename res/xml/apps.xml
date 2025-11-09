@@ -33,14 +33,14 @@
         android:key="all_app_infos"
         android:title="@string/all_apps"
         android:summary="@string/summary_placeholder"
-        android:order="-997"
+        android:order="-980"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_applications_settings"/>
 
     <PreferenceCategory
         android:key="recent_apps_category"
         android:title="@string/recent_app_category_title"
-        android:order="-996"
+        android:order="-950"
         settings:searchable="false">
         <!-- Placeholder for a list of recent apps -->
 
