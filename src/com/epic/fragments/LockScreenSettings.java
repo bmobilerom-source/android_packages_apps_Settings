@@ -54,6 +54,55 @@ public class LockScreenSettings extends SettingsPreferenceFragment implements
 
     }
 
+    @Override
+    public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        PreferenceScreen screen = getPreferenceScreen();
+        androidx.preference.Preference layoutPref = screen.findPreference("quick_access_grid");
+        if (layoutPref instanceof com.android.settingslib.widget.LayoutPreference) {
+            com.android.settingslib.widget.LayoutPreference lp =
+                    (com.android.settingslib.widget.LayoutPreference) layoutPref;
+            androidx.recyclerview.widget.RecyclerView rv =
+                    lp.findViewById(R.id.quick_access_grid_recycler);
+            if (rv != null) {
+                rv.setLayoutManager(new androidx.recyclerview.widget.GridLayoutManager(
+                        getContext(), 2));
+
+                java.util.List<QuickAccessGridAdapter.CardItem> items = new java.util.ArrayList<>();
+                
+                // SecurityHub
+                items.add(new QuickAccessGridAdapter.CardItem(
+                        R.string.quick_access_security_title,
+                        R.string.quick_access_security_summary,
+                        R.drawable.ic_quick_access_security,
+                        "com.android.settings.security.SecuritySettings"));
+                
+                // Location Settings
+                items.add(new QuickAccessGridAdapter.CardItem(
+                        R.string.quick_access_location_title,
+                        R.string.quick_access_location_summary,
+                        R.drawable.ic_quick_access_location,
+                        "com.android.settings.location.LocationSettings"));
+                
+                // Connected Devices
+                items.add(new QuickAccessGridAdapter.CardItem(
+                        R.string.quick_access_connected_devices_title,
+                        R.string.quick_access_connected_devices_summary,
+                        R.drawable.ic_quick_access_connected_devices,
+                        "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"));
+                
+                // Notifications
+                items.add(new QuickAccessGridAdapter.CardItem(
+                        R.string.quick_access_notifications_title,
+                        R.string.quick_access_notifications_summary,
+                        R.drawable.ic_quick_access_notifications,
+                        "com.epic.fragments.NotificationSettings"));
+
+                rv.setAdapter(new QuickAccessGridAdapter(getContext(), items, getMetricsCategory()));
+            }
+        }
+    }
+
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
         return false;
