@@ -20,8 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="apps_screen"
-    android:title=" "
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:title=" ">
 
 
    
