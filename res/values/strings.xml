@@ -10575,6 +10575,18 @@
     <string name="block_usb_popup_toggle_title">Block USB popup page</string>
     <!-- Summary for toggle to block USB popup page access [CHAR LIMIT=NONE] -->
     <string name="block_usb_popup_toggle_summary">Prevent USB popup/dialog page from appearing</string>
+    <!-- Title for toggle to block Location Settings access [CHAR LIMIT=50] -->
+    <string name="block_location_settings_toggle_title">Block Location settings page</string>
+    <!-- Summary for toggle to block Location Settings access [CHAR LIMIT=NONE] -->
+    <string name="block_location_settings_toggle_summary">Prevent access to the Location settings page</string>
+    <!-- Title for toggle to block Account Dashboard access [CHAR LIMIT=50] -->
+    <string name="block_account_dashboard_toggle_title">Block Accounts settings page</string>
+    <!-- Summary for toggle to block Account Dashboard access [CHAR LIMIT=NONE] -->
+    <string name="block_account_dashboard_toggle_summary">Prevent access to the Accounts settings page</string>
+    <!-- Title for toggle to block Safety Center access [CHAR LIMIT=50] -->
+    <string name="block_safety_center_toggle_title">Block Safety Center</string>
+    <!-- Summary for toggle to block Safety Center access [CHAR LIMIT=NONE] -->
+    <string name="block_safety_center_toggle_summary">Prevent access to Safety Center</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>

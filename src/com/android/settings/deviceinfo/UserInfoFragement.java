@@ -65,6 +65,9 @@ import java.io.FileNotFoundException;
 import com.android.settings.applications.specialaccess.BlockAppDashboardController;
 import com.android.settings.applications.specialaccess.InstallAppWhitelistController;
 import com.android.settings.applications.specialaccess.BlockUsbPopupController;
+import com.android.settings.applications.specialaccess.BlockLocationSettingsController;
+import com.android.settings.applications.specialaccess.BlockAccountDashboardController;
+import com.android.settings.applications.specialaccess.BlockSafetyCenterController;
 
 public class UserInfoFragement extends SettingsPreferenceFragment {
 
@@ -74,6 +77,9 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
     private BlockAppDashboardController mBlockAppDashboardController;
     private InstallAppWhitelistController mInstallAppWhitelistController;
     private BlockUsbPopupController mBlockUsbPopupController;
+    private BlockLocationSettingsController mBlockLocationSettingsController;
+    private BlockAccountDashboardController mBlockAccountDashboardController;
+    private BlockSafetyCenterController mBlockSafetyCenterController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +124,42 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
                 if (usbPopupPref != null) {
                     mBlockUsbPopupController.updateState(usbPopupPref);
                     usbPopupPref.setOnPreferenceChangeListener(mBlockUsbPopupController);
+                }
+            }
+            
+            // Initialize Block Location Settings controller
+            mBlockLocationSettingsController = new BlockLocationSettingsController(
+                    context, "block_location_settings_toggle");
+            if (mBlockLocationSettingsController.getAvailabilityStatus() == 
+                    com.android.settings.core.BasePreferenceController.AVAILABLE) {
+                SwitchPreference locationPref = prefScreen.findPreference("block_location_settings_toggle");
+                if (locationPref != null) {
+                    mBlockLocationSettingsController.updateState(locationPref);
+                    locationPref.setOnPreferenceChangeListener(mBlockLocationSettingsController);
+                }
+            }
+            
+            // Initialize Block Account Dashboard controller
+            mBlockAccountDashboardController = new BlockAccountDashboardController(
+                    context, "block_account_dashboard_toggle");
+            if (mBlockAccountDashboardController.getAvailabilityStatus() == 
+                    com.android.settings.core.BasePreferenceController.AVAILABLE) {
+                SwitchPreference accountPref = prefScreen.findPreference("block_account_dashboard_toggle");
+                if (accountPref != null) {
+                    mBlockAccountDashboardController.updateState(accountPref);
+                    accountPref.setOnPreferenceChangeListener(mBlockAccountDashboardController);
+                }
+            }
+            
+            // Initialize Block Safety Center controller
+            mBlockSafetyCenterController = new BlockSafetyCenterController(
+                    context, "block_safety_center_toggle");
+            if (mBlockSafetyCenterController.getAvailabilityStatus() == 
+                    com.android.settings.core.BasePreferenceController.AVAILABLE) {
+                SwitchPreference safetyCenterPref = prefScreen.findPreference("block_safety_center_toggle");
+                if (safetyCenterPref != null) {
+                    mBlockSafetyCenterController.updateState(safetyCenterPref);
+                    safetyCenterPref.setOnPreferenceChangeListener(mBlockSafetyCenterController);
                 }
             }
         }
