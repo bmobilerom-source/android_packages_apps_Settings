@@ -18,6 +18,14 @@
     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
 
     <color name="card_bg">#FFFFFF</color>
+    <color name="theme_pack_button_light_blue">#81D4FA</color>
+    <color name="quick_access_icon_bg">#9C27B0</color>
+    <color name="display_grid_card_border">#81D4FA</color>
+    <color name="display_grid_toggle_on">#81D4FA</color>
+    <color name="display_grid_icon_bg">#81D4FA</color>
+    <color name="display_grid_circular_button_bg">#81D4FA</color>
+    <color name="display_grid_circular_button_border">#1976D2</color>
+    <color name="display_grid_circular_button_icon">#1976D2</color>
     <color name="setup_wizard_wifi_color_dark">#89ffffff</color>
     <color name="setup_wizard_wifi_color_light">#89000000</color>
 

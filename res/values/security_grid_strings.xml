@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="security_grid_title">Security Grid</string>
+    <string name="security_grid_summary">Customize security and system settings</string>
+    
+    <!-- Monet Color Card -->
+    <string name="security_grid_monet_color_title">Monet Color</string>
+    <string name="security_grid_monet_color_summary">Customize system colors</string>
+    
+    <!-- LockScreen Card -->
+    <string name="security_grid_lockscreen_title">LockScreen</string>
+    <string name="security_grid_lockscreen_summary">Customize lock screen</string>
+    
+    <!-- Wallpapers Card -->
+    <string name="security_grid_wallpapers_title">Wallpapers</string>
+    <string name="security_grid_wallpapers_summary">Change wallpaper</string>
+    
+    <!-- Theme Packs Card -->
+    <string name="security_grid_theme_packs_title">Theme Packs</string>
+    <string name="security_grid_theme_packs_summary">Apply theme packs</string>
+    
+    <!-- Statusbar Card -->
+    <string name="security_grid_statusbar_title">Statusbar</string>
+    <string name="security_grid_statusbar_summary">Customize status bar</string>
+    
+    <!-- QS Panel Card -->
+    <string name="security_grid_qs_panel_title">QS Panel</string>
+    <string name="security_grid_qs_panel_summary">Quick settings panel</string>
+    
+    <!-- AOD Customizations Card -->
+    <string name="security_grid_aod_title">AOD Customizations</string>
+    <string name="security_grid_aod_summary">Always on display settings</string>
+    
+    <!-- Bottom Row Cards -->
+    <string name="security_grid_buttons_title">Buttons</string>
+    <string name="security_grid_buttons_summary">Button settings</string>
+    
+    <string name="security_grid_powermenu_title">Powermenu</string>
+    <string name="security_grid_powermenu_summary">Power menu settings</string>
+    
+    <string name="security_grid_notification_title">Notification</string>
+    <string name="security_grid_notification_summary">Notification settings</string>
+    
+    <string name="security_grid_navigation_title">Navigation</string>
+    <string name="security_grid_navigation_summary">Navigation settings</string>
+    
+    <string name="security_grid_miscellaneous_title">Miscellaneous</string>
+    <string name="security_grid_miscellaneous_summary">Other settings</string>
+    
+    <string name="security_grid_team_title">Team</string>
+    <string name="security_grid_team_summary">Team information</string>
+</resources>
+
