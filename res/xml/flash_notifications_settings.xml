@@ -45,6 +45,7 @@
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="flash_notifications_footer"
         android:title="@string/flash_notifications_note"
+        settings:isPreferenceVisible="false"
         android:order="-997"
         android:selectable="false"
         settings:searchable="false"

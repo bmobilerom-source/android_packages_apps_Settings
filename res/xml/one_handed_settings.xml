@@ -56,6 +56,7 @@
         android:key="one_handed_mode_footer"
         android:title="@string/one_handed_mode_footer_text"
         android:order="-998"
+        settings:isPreferenceVisible="false"
         android:selectable="false"
         settings:searchable="false"/>
 

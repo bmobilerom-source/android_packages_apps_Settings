@@ -39,6 +39,7 @@
         android:key="more_emergency_settings"
         android:layout="@layout/more_settings_button"
         android:order="0"
+        settings:isPreferenceVisible="false"
         android:selectable="false"
         settings:controller="com.android.settings.emergency.MoreSettingsPreferenceController" />
 

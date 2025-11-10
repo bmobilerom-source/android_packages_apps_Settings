@@ -66,6 +66,7 @@
         android:key="footer_languages_picker"
         android:title="@string/desc_notice_of_language_picker"
         android:persistent="false"
+        settings:isPreferenceVisible="false"
         android:order="100"
         android:selectable="false"
         settings:controller="com.android.settings.localepicker.LocaleHelperPreferenceController"/>

@@ -47,6 +47,7 @@
         android:key="gesture_navigation_settings_footer"
         android:order="-997"
         android:title="@string/back_sensitivity_dialog_message"
+        settings:isPreferenceVisible="false"
         android:selectable="false"
         settings:searchable="false"/>
 
