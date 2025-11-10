@@ -20,9 +20,9 @@
 	android:title=" ">
 
  <com.android.settingslib.widget.LayoutPreference
-        android:key="quick_access_grid"
+        android:key="display_grid"
         android:selectable="false"
-        android:layout="@layout/quick_access_grid_2x2" />
+        android:layout="@layout/display_grid_layout" />
 
  <com.android.settingslib.widget.LayoutPreference
         android:key="battery_stats_view"
