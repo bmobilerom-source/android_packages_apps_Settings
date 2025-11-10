@@ -52,121 +52,155 @@ public class SecurityGrid extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.security_grid);
+        try {
+            addPreferencesFromResource(R.xml.security_grid);
+        } catch (Exception e) {
+            android.util.Log.e("SecurityGrid", "Error in onCreate", e);
+        }
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        PreferenceScreen screen = getPreferenceScreen();
-        androidx.preference.Preference layoutPref = screen.findPreference("security_grid");
-        if (layoutPref instanceof com.android.settingslib.widget.LayoutPreference) {
+        try {
+            PreferenceScreen screen = getPreferenceScreen();
+            if (screen == null) {
+                return;
+            }
+            
+            androidx.preference.Preference layoutPref = screen.findPreference("security_grid");
+            if (layoutPref == null || !(layoutPref instanceof com.android.settingslib.widget.LayoutPreference)) {
+                return;
+            }
+            
             com.android.settingslib.widget.LayoutPreference lp =
                     (com.android.settingslib.widget.LayoutPreference) layoutPref;
             androidx.recyclerview.widget.RecyclerView rv =
                     lp.findViewById(R.id.security_grid_recycler);
-            if (rv != null) {
-                rv.setLayoutManager(new androidx.recyclerview.widget.GridLayoutManager(
-                        getContext(), 2));
-
-                java.util.List<SecurityGridAdapter.CardItem> items = new java.util.ArrayList<>();
-                
-                // Row 1: Monet Color (wide) and LockScreen (tall)
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_MONET_COLOR,
-                        R.string.security_grid_monet_color_title,
-                        R.string.security_grid_monet_color_summary,
-                        "com.android.settings.display.ThemeSettings",
-                        null));
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_LOCKSCREEN,
-                        R.string.security_grid_lockscreen_title,
-                        R.string.security_grid_lockscreen_summary,
-                        "com.android.settings.security.LockScreenSettings",
-                        null));
-                
-                // Row 2: Wallpapers and Theme Packs
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_STANDARD,
-                        R.string.security_grid_wallpapers_title,
-                        R.string.security_grid_wallpapers_summary,
-                        "com.android.settings.display.WallpaperSettings",
-                        R.drawable.ic_wallpaper));
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_THEME_PACKS,
-                        R.string.security_grid_theme_packs_title,
-                        R.string.security_grid_theme_packs_summary,
-                        "com.android.settings.display.ThemePacksSettings",
-                        null));
-                
-                // Row 3: Statusbar and QS Panel
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_STANDARD,
-                        R.string.security_grid_statusbar_title,
-                        R.string.security_grid_statusbar_summary,
-                        "org.lineageos.lineageparts.statusbar.StatusBarSettings",
-                        R.drawable.ic_settings_statusbar));
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_STANDARD,
-                        R.string.security_grid_qs_panel_title,
-                        R.string.security_grid_qs_panel_summary,
-                        "org.lineageos.lineageparts.quicksettings.QuickSettingsSettings",
-                        R.drawable.ic_interface_qs));
-                
-                // Row 4: AOD Customizations (wide)
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_WIDE,
-                        R.string.security_grid_aod_title,
-                        R.string.security_grid_aod_summary,
-                        "com.android.settings.display.AODSettings",
-                        null));
-                
-                // Row 5: Bottom row - 6 small cards
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_SMALL,
-                        R.string.security_grid_buttons_title,
-                        R.string.security_grid_buttons_summary,
-                        "org.lineageos.lineageparts.input.ButtonSettings",
-                        R.drawable.ic_anatolia_buttons));
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_SMALL,
-                        R.string.security_grid_powermenu_title,
-                        R.string.security_grid_powermenu_summary,
-                        "org.lineageos.lineageparts.powermenu.PowerMenuSettings",
-                        R.drawable.ic_anatolia_powermenu));
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_SMALL,
-                        R.string.security_grid_notification_title,
-                        R.string.security_grid_notification_summary,
-                        "org.lineageos.lineageparts.notifications.NotificationSettings",
-                        R.drawable.ic_anatolia_notifications));
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_SMALL,
-                        R.string.security_grid_navigation_title,
-                        R.string.security_grid_navigation_summary,
-                        "org.lineageos.lineageparts.navigation.NavigationSettings",
-                        R.drawable.ic_anatolia_navbar));
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_SMALL,
-                        R.string.security_grid_miscellaneous_title,
-                        R.string.security_grid_miscellaneous_summary,
-                        "com.epic.fragments.MiscellaneousSettings",
-                        R.drawable.ic_anatolia_extras));
-                items.add(new SecurityGridAdapter.CardItem(
-                        SecurityGridAdapter.CARD_TYPE_SMALL,
-                        R.string.security_grid_team_title,
-                        R.string.security_grid_team_summary,
-                        "com.epic.fragments.TeamSettings",
-                        R.drawable.ic_team));
-
-                rv.setAdapter(new SecurityGridAdapter(getContext(), items, getMetricsCategory()));
+            if (rv == null) {
+                return;
             }
+            
+            Context context = getContext();
+            if (context == null) {
+                return;
+            }
+            
+            // Ensure we have an Activity context for SubSettingLauncher
+            android.app.Activity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
+            
+            androidx.recyclerview.widget.GridLayoutManager layoutManager = 
+                    new androidx.recyclerview.widget.GridLayoutManager(context, 2);
+            rv.setLayoutManager(layoutManager);
+
+            java.util.List<SecurityGridAdapter.CardItem> items = new java.util.ArrayList<>();
+            
+            // Row 1: Monet Color (wide) and LockScreen (tall)
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_MONET_COLOR,
+                    R.string.security_grid_monet_color_title,
+                    R.string.security_grid_monet_color_summary,
+                    "com.android.settings.display.ThemeSettings",
+                    null));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_LOCKSCREEN,
+                    R.string.security_grid_lockscreen_title,
+                    R.string.security_grid_lockscreen_summary,
+                    "com.epic.fragments.LockScreenSettings",
+                    null));
+            
+            // Row 2: Wallpapers and Theme Packs
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_STANDARD,
+                    R.string.security_grid_wallpapers_title,
+                    R.string.security_grid_wallpapers_summary,
+                    "com.android.settings.display.WallpaperSettings",
+                    R.drawable.ic_wallpaper));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_THEME_PACKS,
+                    R.string.security_grid_theme_packs_title,
+                    R.string.security_grid_theme_packs_summary,
+                    "com.epic.fragments.ThemePacksSettings",
+                    null));
+            
+            // Row 3: Statusbar and QS Panel
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_STANDARD,
+                    R.string.security_grid_statusbar_title,
+                    R.string.security_grid_statusbar_summary,
+                    "com.epic.fragments.StatusBarSettings",
+                    R.drawable.ic_settings_statusbar));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_STANDARD,
+                    R.string.security_grid_qs_panel_title,
+                    R.string.security_grid_qs_panel_summary,
+                    "com.epic.fragments.QuickSettings",
+                    R.drawable.ic_quick_settings));
+            
+            // Row 4: AOD Customizations (wide)
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_WIDE,
+                    R.string.security_grid_aod_title,
+                    R.string.security_grid_aod_summary,
+                    "com.android.settings.display.AmbientDisplaySettings",
+                    R.drawable.ic_aod));
+            
+            // Row 5: Bottom row - 6 small cards
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_grid_buttons_title,
+                    R.string.security_grid_buttons_summary,
+                    "com.epic.fragments.ButtonSettings",
+                    R.drawable.ic_buttons));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_grid_powermenu_title,
+                    R.string.security_grid_powermenu_summary,
+                    "com.epic.fragments.PowerMenuSettings",
+                    R.drawable.ic_power_menu));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_grid_notification_title,
+                    R.string.security_grid_notification_summary,
+                    "com.epic.fragments.NotificationSettings",
+                    R.drawable.ic_notifications));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_grid_navigation_title,
+                    R.string.security_grid_navigation_summary,
+                    "com.epic.fragments.NavbarSettings",
+                    R.drawable.ic_navigation));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_grid_miscellaneous_title,
+                    R.string.security_grid_miscellaneous_summary,
+                    "com.epic.fragments.ExtraSettings",
+                    R.drawable.ic_miscellaneous));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_grid_team_title,
+                    R.string.security_grid_team_summary,
+                    "com.epic.fragments.AboutUsSettings",
+                    R.drawable.ic_team));
+
+            rv.setAdapter(new SecurityGridAdapter(activity, items, getMetricsCategory()));
+        } catch (Exception e) {
+            android.util.Log.e("SecurityGrid", "Error setting up SecurityGrid", e);
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        ContentResolver resolver = getActivity().getContentResolver();
+        try {
+            if (getActivity() != null) {
+                ContentResolver resolver = getActivity().getContentResolver();
+            }
+        } catch (Exception e) {
+            android.util.Log.e("SecurityGrid", "Error in onPreferenceChange", e);
+        }
         return false;
     }
 

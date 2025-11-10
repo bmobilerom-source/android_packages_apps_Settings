@@ -58,12 +58,16 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
         
         CardVH(@NonNull View itemView) {
             super(itemView);
-            this.iconView = itemView.findViewById(android.R.id.icon);
-            this.titleView = itemView.findViewById(android.R.id.title);
-            this.summaryView = itemView.findViewById(android.R.id.summary);
-            this.colorSwatchesLayout = itemView.findViewById(R.id.color_swatches_layout);
-            this.timeDisplay = itemView.findViewById(R.id.time_display);
-            this.themePacksButtons = itemView.findViewById(R.id.theme_packs_buttons);
+            try {
+                this.iconView = itemView.findViewById(android.R.id.icon);
+                this.titleView = itemView.findViewById(android.R.id.title);
+                this.summaryView = itemView.findViewById(android.R.id.summary);
+                this.colorSwatchesLayout = itemView.findViewById(R.id.color_swatches_layout);
+                this.timeDisplay = itemView.findViewById(R.id.time_display);
+                this.themePacksButtons = itemView.findViewById(R.id.theme_pack_buttons_layout);
+            } catch (Exception e) {
+                Log.e("SecurityGridAdapter", "Error initializing CardVH", e);
+            }
         }
     }
 
@@ -108,110 +112,144 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
 
     @Override
     public void onBindViewHolder(@NonNull CardVH holder, int position) {
-        CardItem item = items.get(position);
-        
-        // Set title and summary
-        if (holder.titleView != null) {
-            holder.titleView.setText(item.titleResId);
-        }
-        if (holder.summaryView != null) {
-            holder.summaryView.setText(item.summaryResId);
-        }
-        
-        // Handle icon
-        if (holder.iconView != null) {
-            if (item.iconResId != null) {
-                holder.iconView.setImageResource(item.iconResId);
-                holder.iconView.setVisibility(View.VISIBLE);
-            } else {
-                holder.iconView.setVisibility(View.GONE);
-            }
-        }
-        
-        // Handle special card types
-        if (item.cardType == CARD_TYPE_MONET_COLOR && holder.colorSwatchesLayout != null) {
-            // Color swatches are already in layout
-            holder.colorSwatchesLayout.setVisibility(View.VISIBLE);
-        }
-        
-        if (item.cardType == CARD_TYPE_LOCKSCREEN && holder.timeDisplay != null) {
-            // Set time display - you can update this dynamically
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault());
-            String time = sdf.format(new java.util.Date());
-            holder.timeDisplay.setText(time);
-            // Also update hour and minute if available
-            TextView timeHour = holder.itemView.findViewById(R.id.time_hour);
-            TextView timeMinute = holder.itemView.findViewById(R.id.time_minute);
-            if (timeHour != null && timeMinute != null) {
-                String[] parts = time.split(":");
-                if (parts.length == 2) {
-                    timeHour.setText(parts[0]);
-                    timeMinute.setText(parts[1]);
-                }
-            }
-        }
-        
-        // Set click listener
-        holder.itemView.setOnClickListener(v -> {
-            if (item.destFragment == null || item.destFragment.isEmpty()) {
+        try {
+            if (position < 0 || position >= items.size()) {
                 return;
             }
             
-            // Handle LineageParts activities
-            if (item.destFragment.startsWith("org.lineageos.lineageparts.")) {
-                try {
-                    ComponentName component = new ComponentName("org.lineageos.lineageparts", 
-                        item.destFragment);
-                    PackageManager pm = context.getPackageManager();
-                    pm.getActivityInfo(component, 0);
-                    Intent intent = new Intent();
-                    intent.setComponent(component);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                } catch (Exception e) {
-                    Log.e("SecurityGridAdapter", "Failed to launch: " + item.destFragment, e);
-                    Toast.makeText(context, R.string.system_tuner_not_available, 
-                        Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                // Launch fragment via SubSettingLauncher
-                try {
-                    new SubSettingLauncher(context)
-                        .setDestination(item.destFragment)
-                        .setTitleRes(item.titleResId)
-                        .setArguments(new Bundle())
-                        .setSourceMetricsCategory(sourceMetrics)
-                        .launch();
-                } catch (Exception e) {
-                    Log.e("SecurityGridAdapter", "Failed to launch fragment: " + item.destFragment, e);
-                    Toast.makeText(context, R.string.system_tuner_not_available, 
-                        Toast.LENGTH_SHORT).show();
+            CardItem item = items.get(position);
+            if (item == null) {
+                return;
+            }
+            
+            // Set title and summary
+            if (holder.titleView != null) {
+                holder.titleView.setText(item.titleResId);
+            }
+            if (holder.summaryView != null) {
+                holder.summaryView.setText(item.summaryResId);
+            }
+            
+            // Handle icon
+            if (holder.iconView != null) {
+                if (item.iconResId != null) {
+                    holder.iconView.setImageResource(item.iconResId);
+                    holder.iconView.setVisibility(View.VISIBLE);
+                } else {
+                    holder.iconView.setVisibility(View.GONE);
                 }
             }
-        });
+            
+            // Handle special card types
+            if (item.cardType == CARD_TYPE_MONET_COLOR && holder.colorSwatchesLayout != null) {
+                // Color swatches are already in layout
+                holder.colorSwatchesLayout.setVisibility(View.VISIBLE);
+            }
+            
+            if (item.cardType == CARD_TYPE_LOCKSCREEN && holder.timeDisplay != null) {
+                // Set time display - you can update this dynamically
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault());
+                String time = sdf.format(new java.util.Date());
+                holder.timeDisplay.setText(time);
+                // Also update hour and minute if available
+                TextView timeHour = holder.itemView.findViewById(R.id.time_hour);
+                TextView timeMinute = holder.itemView.findViewById(R.id.time_minute);
+                if (timeHour != null && timeMinute != null) {
+                    String[] parts = time.split(":");
+                    if (parts.length == 2) {
+                        timeHour.setText(parts[0]);
+                        timeMinute.setText(parts[1]);
+                    }
+                }
+            }
+            
+            // Set click listener
+            holder.itemView.setOnClickListener(v -> {
+                if (item.destFragment == null || item.destFragment.isEmpty()) {
+                    return;
+                }
+                
+                // Handle LineageParts activities
+                if (item.destFragment.startsWith("org.lineageos.lineageparts.")) {
+                    try {
+                        ComponentName component = new ComponentName("org.lineageos.lineageparts", 
+                            item.destFragment);
+                        PackageManager pm = context.getPackageManager();
+                        pm.getActivityInfo(component, 0);
+                        Intent intent = new Intent();
+                        intent.setComponent(component);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    } catch (Exception e) {
+                        Log.e("SecurityGridAdapter", "Failed to launch: " + item.destFragment, e);
+                        Toast.makeText(context, R.string.system_tuner_not_available, 
+                            Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Launch fragment via SubSettingLauncher
+                    try {
+                        new SubSettingLauncher(context)
+                            .setDestination(item.destFragment)
+                            .setTitleRes(item.titleResId)
+                            .setArguments(new Bundle())
+                            .setSourceMetricsCategory(sourceMetrics)
+                            .launch();
+                    } catch (Exception e) {
+                        Log.e("SecurityGridAdapter", "Failed to launch fragment: " + item.destFragment, e);
+                        Toast.makeText(context, R.string.system_tuner_not_available, 
+                            Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } catch (Exception e) {
+            Log.e("SecurityGridAdapter", "Error in onBindViewHolder at position " + position, e);
+        }
     }
 
     @Override
     public int getItemViewType(int position) {
-        return items.get(position).cardType;
+        try {
+            if (position >= 0 && position < items.size()) {
+                CardItem item = items.get(position);
+                if (item != null) {
+                    return item.cardType;
+                }
+            }
+        } catch (Exception e) {
+            Log.e("SecurityGridAdapter", "Error in getItemViewType", e);
+        }
+        return CARD_TYPE_STANDARD;
     }
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
-        if (layoutManager != null) {
-            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    int cardType = items.get(position).cardType;
-                    // Wide cards span 2 columns, others span 1
-                    if (cardType == CARD_TYPE_WIDE || cardType == CARD_TYPE_MONET_COLOR) {
-                        return 2;
+        try {
+            GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+            if (layoutManager != null) {
+                layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        try {
+                            if (position >= 0 && position < items.size()) {
+                                CardItem item = items.get(position);
+                                if (item != null) {
+                                    int cardType = item.cardType;
+                                    // Wide cards span 2 columns, others span 1
+                                    if (cardType == CARD_TYPE_WIDE || cardType == CARD_TYPE_MONET_COLOR) {
+                                        return 2;
+                                    }
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("SecurityGridAdapter", "Error in getSpanSize", e);
+                        }
+                        return 1;
                     }
-                    return 1;
-                }
-            });
+                });
+            }
+        } catch (Exception e) {
+            Log.e("SecurityGridAdapter", "Error in onAttachedToRecyclerView", e);
         }
     }
 
