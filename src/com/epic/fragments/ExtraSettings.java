@@ -60,6 +60,21 @@ public class ExtraSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
+    public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Setup card navigation using standalone initializer
+        // This works on any page and is completely independent
+        CardNavigationInitializer.initialize(
+                this,
+                "display_grid",  // Preference key in anatolia_settings_extras.xml
+                new CardNavigationConfig(R.id.card_1, "com.epic.fragments.GestureSettings", R.string.gestures_title),
+                new CardNavigationConfig(R.id.card_2, "com.epic.fragments.ExtraSettings", R.string.extras_title),
+                new CardNavigationConfig(R.id.card_3, "com.epic.fragments.QuickSettings", R.string.quicksettings_title),
+                new CardNavigationConfig(R.id.card_4, "com.epic.fragments.StatusBarSettings", R.string.statusbar_title)
+        );
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
         return false;

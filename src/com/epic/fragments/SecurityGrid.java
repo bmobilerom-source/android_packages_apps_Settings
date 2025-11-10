@@ -98,93 +98,118 @@ public class SecurityGrid extends SettingsPreferenceFragment implements
 
             java.util.List<SecurityGridAdapter.CardItem> items = new java.util.ArrayList<>();
             
-            // Row 1: Monet Color (wide) and LockScreen (tall)
+            // Row 1: Dark mode (Monet/Dark UI) and Wallpapers (tall with live wallpaper preview)
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_MONET_COLOR,
-                    R.string.security_grid_monet_color_title,
-                    R.string.security_grid_monet_color_summary,
-                    "com.android.settings.display.ThemeSettings",
+                    R.string.dark_ui_mode,
+                    R.string.summary_placeholder,
+                    "com.android.settings.display.darkmode.DarkModeSettingsFragment",
                     null));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_LOCKSCREEN,
-                    R.string.security_grid_lockscreen_title,
-                    R.string.security_grid_lockscreen_summary,
-                    "com.epic.fragments.LockScreenSettings",
+                    R.string.wallpaper_settings_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.display.WallpaperSettings",
                     null));
             
-            // Row 2: Wallpapers and Theme Packs
+            // Row 2: Wallpapers and Text reading options
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.security_grid_wallpapers_title,
-                    R.string.security_grid_wallpapers_summary,
+                    R.string.wallpaper_settings_title,
+                    R.string.summary_placeholder,
                     "com.android.settings.display.WallpaperSettings",
-                    R.drawable.ic_wallpaper));
+                    null));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_THEME_PACKS,
-                    R.string.security_grid_theme_packs_title,
-                    R.string.security_grid_theme_packs_summary,
-                    "com.epic.fragments.ThemePacksSettings",
+                    R.string.accessibility_text_reading_options_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.accessibility.TextReadingPreferenceFragment",
                     null));
             
-            // Row 3: Statusbar and QS Panel
+            // Row 3: Night display and Auto-rotate (device state based)
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.security_grid_statusbar_title,
-                    R.string.security_grid_statusbar_summary,
-                    "com.epic.fragments.StatusBarSettings",
-                    R.drawable.ic_settings_statusbar));
+                    R.string.night_display_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.display.NightDisplaySettings",
+                    null));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.security_grid_qs_panel_title,
-                    R.string.security_grid_qs_panel_summary,
-                    "com.epic.fragments.QuickSettings",
+                    R.string.accelerometer_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.display.DeviceStateAutoRotateDetailsFragment",
                     null));
             
             // Row 4: AOD Customizations (wide)
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_WIDE,
-                    R.string.security_grid_aod_title,
-                    R.string.security_grid_aod_summary,
+                    R.string.ambient_display_screen_title,
+                    R.string.summary_placeholder,
                     "com.android.settings.display.AmbientDisplaySettings",
                     null));
             
-            // Row 5: Bottom row - 6 small cards
+            // Row 5: Bottom row - 6 small cards mapped to display settings
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_grid_buttons_title,
-                    R.string.security_grid_buttons_summary,
+                    R.string.color_mode_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.display.ColorModePreferenceFragment",
+                    null));
+            // Additional Anatolia small cards (safe destinations, safe strings)
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.anatolia_settings_title,
+                    R.string.summary_placeholder,
                     "com.epic.fragments.ButtonSettings",
-                    R.drawable.ic_button));
+                    null));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_grid_powermenu_title,
-                    R.string.security_grid_powermenu_summary,
+                    R.string.anatolia_settings_title,
+                    R.string.summary_placeholder,
                     "com.epic.fragments.PowerMenuSettings",
-                    R.drawable.ic_powermenu));
+                    null));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_grid_notification_title,
-                    R.string.security_grid_notification_summary,
-                    "com.epic.fragments.NotificationSettings",
-                    R.drawable.ic_notification));
-            items.add(new SecurityGridAdapter.CardItem(
-                    SecurityGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_grid_navigation_title,
-                    R.string.security_grid_navigation_summary,
+                    R.string.anatolia_settings_title,
+                    R.string.summary_placeholder,
                     "com.epic.fragments.NavbarSettings",
-                    R.drawable.ic_navigation));
+                    null));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_grid_miscellaneous_title,
-                    R.string.security_grid_miscellaneous_summary,
+                    R.string.anatolia_settings_title,
+                    R.string.summary_placeholder,
                     "com.epic.fragments.ExtraSettings",
-                    R.drawable.ic_misc));
+                    null));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_grid_team_title,
-                    R.string.security_grid_team_summary,
-                    "com.epic.fragments.AboutUsSettings",
-                    R.drawable.ic_team));
+                    R.string.accessibility_color_contrast_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.display.ColorContrastFragment",
+                    null));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.auto_brightness_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.display.AutoBrightnessSettings",
+                    null));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.screensaver_settings_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.dream.DreamSettings",
+                    null));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.even_dimmer_display_title,
+                    R.string.even_dimmer_display_summary,
+                    "com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment",
+                    null));
+            items.add(new SecurityGridAdapter.CardItem(
+                    SecurityGridAdapter.CARD_TYPE_SMALL,
+                    R.string.color_mode_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.display.ColorModePreferenceFragment",
+                    null));
 
             rv.setAdapter(new SecurityGridAdapter(activity, items, getMetricsCategory()));
         } catch (Exception e) {
