@@ -54,6 +54,14 @@ public class LockScreenSettings extends SettingsPreferenceFragment implements
 
     }
 
+    @Override
+    public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Setup DisplayGrid using helper
+        DisplayGridHelper.setupDisplayGrid(getContext(), getPreferenceScreen(), 
+                "display_grid", getMetricsCategory());
+    }
+
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
         return false;
