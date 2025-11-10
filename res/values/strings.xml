@@ -10565,6 +10565,17 @@
     <!-- Summary for toggle to enable/disable install app whitelist restriction [CHAR LIMIT=NONE] -->
     <string name="install_app_whitelist_toggle_summary">Only allow approved app stores (Aurora Store, Google Play) to install apps</string>
 
+    <!-- Title for app security category [CHAR LIMIT=50] -->
+    <string name="app_security_category_title">App Security</string>
+    <!-- Title for toggle to block Apps settings page access [CHAR LIMIT=50] -->
+    <string name="block_app_dashboard_toggle_title">Block Apps settings page</string>
+    <!-- Summary for toggle to block Apps settings page access [CHAR LIMIT=NONE] -->
+    <string name="block_app_dashboard_toggle_summary">Prevent access to the Apps settings page</string>
+    <!-- Title for toggle to block USB popup page access [CHAR LIMIT=50] -->
+    <string name="block_usb_popup_toggle_title">Block USB popup page</string>
+    <!-- Summary for toggle to block USB popup page access [CHAR LIMIT=NONE] -->
+    <string name="block_usb_popup_toggle_summary">Prevent USB popup/dialog page from appearing</string>
+
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>
 
