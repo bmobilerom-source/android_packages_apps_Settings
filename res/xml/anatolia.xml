@@ -115,4 +115,12 @@
             android:title="@string/category_system_title"
             android:summary="@string/system_summary"
             android:fragment="com.epic.fragments.SystemGrid" />
+
+        <!-- Security Grid (two-column cards) -->
+        <PreferenceScreen
+            android:key="security_grid_category"
+            android:title="@string/security_grid_title"
+            android:summary="@string/security_grid_summary"
+            android:fragment="com.epic.fragments.SecurityGrid"
+            android:icon="@drawable/ic_security_grid" />
 </PreferenceScreen>
