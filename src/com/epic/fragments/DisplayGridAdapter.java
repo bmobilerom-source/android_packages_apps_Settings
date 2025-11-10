@@ -241,9 +241,13 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
             layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    int cardType = items.get(position).cardType;
-                    // Large left card spans 1 column (but visually takes 2 rows)
-                    // All other cards span 1 column
+                    // Grid has 3 columns:
+                    // - Large left card spans 2 columns
+                    // - All other cards (including circular buttons) span 1 column
+                    int viewType = getItemViewType(position);
+                    if (viewType == CARD_TYPE_LARGE_LEFT) {
+                        return 2;
+                    }
                     return 1;
                 }
             });

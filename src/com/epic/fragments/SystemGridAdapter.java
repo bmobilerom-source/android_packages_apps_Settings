@@ -78,6 +78,7 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
     @Override
     public void onBindViewHolder(@NonNull CardVH holder, int position) {
         CardItem item = items.get(position);
+        // Hide icons as requested
         if (holder.iconView != null) {
             holder.iconView.setVisibility(View.GONE);
         }

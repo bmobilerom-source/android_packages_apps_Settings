@@ -119,6 +119,14 @@ public class DisplayGrid extends SettingsPreferenceFragment implements
                     R.drawable.ic_display_grid_about_us,
                     "com.epic.fragments.AboutUsSettings"));
             
+            // Status bar card
+            items.add(new DisplayGridAdapter.CardItem(
+                    DisplayGridAdapter.CARD_TYPE_STATUS_BAR,
+                    R.string.display_grid_status_bar_title,
+                    R.string.display_grid_status_bar_summary,
+                    R.drawable.ic_display_grid_status_bar,
+                    "com.epic.fragments.StatusBarSettings"));
+            
             // Circular buttons (6 buttons)
             items.add(new DisplayGridAdapter.CardItem(
                     DisplayGridAdapter.CARD_TYPE_CIRCULAR_BUTTON,

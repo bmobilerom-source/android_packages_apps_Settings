@@ -414,7 +414,8 @@ public class SettingsGateway {
             ContactsStorageSettings.class.getName(),
             LabSettings.class.getName(),            
             // Anatolia Additions
-            Anatolia.class.getName()
+            Anatolia.class.getName(),
+            com.epic.fragments.DisplayGrid.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

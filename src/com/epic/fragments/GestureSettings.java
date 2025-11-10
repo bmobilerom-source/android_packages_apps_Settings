@@ -37,6 +37,9 @@ import com.android.settings.SettingsPreferenceFragment;
 public class GestureSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
+    private static final String SAFETY_STATUS_KEY = "safety_status";
+    private static final String QUICK_ACCESS_KEY = "quick_access_grid";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,17 @@ public class GestureSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.anatolia_settings_gestures);
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
+    }
+
+    @Override
+    public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Setup the quick access grid (2x2) using the helper
+        QuickAccessGrid2x2Helper.setupQuickAccessGrid(
+                getContext(), 
+                getPreferenceScreen(), 
+                getActivity(), 
+                getMetricsCategory());
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
