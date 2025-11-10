@@ -56,7 +56,7 @@
 
     <!-- Switches -->
     <SwitchPreferenceCompat
-        android:order="100"
+        android:order="1"
         android:key="battery_saver_sticky"
         android:title="@string/battery_saver_sticky_title_new"
         android:summary="@string/summary_placeholder"
