@@ -60,10 +60,14 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
         final TextView titleView;
         final TextView summaryView;
         final LinearLayout colorSwatchesLayout;
+        final android.widget.TextClock lockscreenClock;
         final TextView timeDisplay;
         final TextView timeHour;
         final TextView timeMinute;
         final LinearLayout themePacksButtons;
+        final View themePackButtonLeft;
+        final View themePackButtonRight;
+        final android.widget.TextClock aodClock;
         
         CardVH(@NonNull View itemView) {
             super(itemView);
@@ -71,19 +75,23 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
             this.titleView = itemView.findViewById(android.R.id.title);
             this.summaryView = itemView.findViewById(android.R.id.summary);
             this.colorSwatchesLayout = itemView.findViewById(R.id.color_swatches_layout);
+            this.lockscreenClock = itemView.findViewById(R.id.lockscreen_clock_preview);
             this.timeDisplay = itemView.findViewById(R.id.time_display);
             this.timeHour = itemView.findViewById(R.id.time_hour);
             this.timeMinute = itemView.findViewById(R.id.time_minute);
             this.themePacksButtons = itemView.findViewById(R.id.theme_pack_buttons_layout);
+            this.themePackButtonLeft = itemView.findViewById(R.id.theme_pack_button_left);
+            this.themePackButtonRight = itemView.findViewById(R.id.theme_pack_button_right);
+            this.aodClock = itemView.findViewById(R.id.card_clock);
         }
     }
 
-    private final Context context;
+    private final android.app.Activity activity;
     private final List<CardItem> items;
     private final int sourceMetrics;
 
-    SecurityPrivacyGridAdapter(Context context, List<CardItem> items, int sourceMetrics) {
-        this.context = context;
+    SecurityPrivacyGridAdapter(android.app.Activity activity, List<CardItem> items, int sourceMetrics) {
+        this.activity = activity;
         this.items = items;
         this.sourceMetrics = sourceMetrics;
     }
@@ -162,26 +170,42 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                 holder.colorSwatchesLayout.setVisibility(View.VISIBLE);
             }
             
-            if (item.cardType == CARD_TYPE_LOCKSCREEN && holder.timeDisplay != null) {
-                // Set time display dynamically
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
-                String time = sdf.format(new Date());
-                holder.timeDisplay.setText(time);
-                // Also update hour and minute if available
-                if (holder.timeHour != null && holder.timeMinute != null) {
-                    String[] parts = time.split(":");
-                    if (parts.length == 2) {
-                        holder.timeHour.setText(parts[0]);
-                        holder.timeMinute.setText(parts[1]);
-                    }
-                }
+            // Handle LockScreen card - TextClock handles time automatically
+            if (item.cardType == CARD_TYPE_LOCKSCREEN && holder.lockscreenClock != null) {
+                // TextClock will automatically update, no manual setting needed
+                holder.lockscreenClock.setVisibility(View.VISIBLE);
             }
             
+            // Handle Theme Packs buttons - make them independently clickable
+            if (item.cardType == CARD_TYPE_THEME_PACKS) {
+                if (holder.themePackButtonLeft != null) {
+                    holder.themePackButtonLeft.setOnClickListener(v -> {
+                        // Launch left button action (e.g., icon pack)
+                        launchDestination(item.destFragment, item.titleResId);
+                    });
+                }
+                if (holder.themePackButtonRight != null) {
+                    holder.themePackButtonRight.setOnClickListener(v -> {
+                        // Launch right button action (e.g., font pack)
+                        launchDestination(item.destFragment, item.titleResId);
+                    });
+                }
+                
+                // Make the card itself non-clickable since buttons handle clicks
+                holder.itemView.setClickable(false);
+                holder.itemView.setFocusable(false);
+            }
+            
+            // Handle AOD card - TextClock handles time automatically
+            if (item.cardType == CARD_TYPE_WIDE && holder.aodClock != null) {
+                // TextClock will automatically update, no manual setting needed
+                holder.aodClock.setVisibility(View.VISIBLE);
+            }
+            
+            // Handle Time Display card
             if (item.cardType == CARD_TYPE_TIME_DISPLAY && holder.timeDisplay != null) {
-                // Set time display for time display card
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
-                String time = sdf.format(new Date());
-                holder.timeDisplay.setText(time);
+                // For time display card, we can use TextClock or update manually
+                // TextClock is already in the layout, it will update automatically
             }
             
             // Skip placeholder cards
@@ -191,60 +215,8 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                 return;
             }
             
-            // Set click listener
-            holder.itemView.setOnClickListener(v -> {
-                if (item.destFragment == null || item.destFragment.isEmpty()) {
-                    return;
-                }
-                
-                // Handle LineageParts activities
-                if (item.destFragment.startsWith("org.lineageos.lineageparts.")) {
-                    try {
-                        ComponentName component = new ComponentName("org.lineageos.lineageparts", 
-                            item.destFragment);
-                        PackageManager pm = context.getPackageManager();
-                        pm.getActivityInfo(component, 0);
-                        Intent intent = new Intent();
-                        intent.setComponent(component);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(intent);
-                    } catch (Exception e) {
-                        Log.e("SecurityPrivacyGridAdapter", "Failed to launch: " + item.destFragment, e);
-                        Toast.makeText(context, R.string.system_tuner_not_available, 
-                            Toast.LENGTH_SHORT).show();
-                    }
-                } else if (item.destFragment.contains("UserBackupSettingsActivity")) {
-                    // Launch UserBackupSettingsActivity via Intent
-                    try {
-                        ComponentName component = new ComponentName("com.android.settings", 
-                            "com.android.settings.backup.UserBackupSettingsActivity");
-                        PackageManager pm = context.getPackageManager();
-                        pm.getActivityInfo(component, 0);
-                        Intent intent = new Intent();
-                        intent.setComponent(component);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(intent);
-                    } catch (Exception e) {
-                        Log.e("SecurityPrivacyGridAdapter", "Failed to launch UserBackupSettingsActivity", e);
-                        Toast.makeText(context, R.string.system_tuner_not_available, 
-                            Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    // Launch fragment via SubSettingLauncher
-                    try {
-                        new SubSettingLauncher(context)
-                            .setDestination(item.destFragment)
-                            .setTitleRes(item.titleResId)
-                            .setArguments(new Bundle())
-                            .setSourceMetricsCategory(sourceMetrics)
-                            .launch();
-                    } catch (Exception e) {
-                        Log.e("SecurityPrivacyGridAdapter", "Failed to launch fragment: " + item.destFragment, e);
-                        Toast.makeText(context, R.string.system_tuner_not_available, 
-                            Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            // Set click listener - following InfinitySuite pattern with proper error handling
+            holder.itemView.setOnClickListener(v -> launchDestination(item.destFragment, item.titleResId));
         } catch (Exception e) {
             Log.e("SecurityPrivacyGridAdapter", "Error in onBindViewHolder at position " + position, e);
         }
@@ -306,5 +278,66 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
     @Override
     public int getItemCount() { 
         return items.size(); 
+    }
+    
+    /**
+     * Launch destination fragment or activity - following InfinitySuite pattern
+     * Adapted for Settings app using SubSettingLauncher
+     */
+    private void launchDestination(String destFragment, int titleResId) {
+        if (destFragment == null || destFragment.isEmpty()) {
+            Log.w("SecurityPrivacyGridAdapter", "Empty destination fragment");
+            return;
+        }
+        
+        try {
+            // Handle LineageParts activities
+            if (destFragment.startsWith("org.lineageos.lineageparts.")) {
+                launchLineagePartsActivity(destFragment);
+            } else if (destFragment.contains("UserBackupSettingsActivity")) {
+                launchUserBackupActivity();
+            } else {
+                // Launch fragment via SubSettingLauncher (Settings app standard)
+                launchSettingsFragment(destFragment, titleResId);
+            }
+        } catch (Exception e) {
+            Log.e("SecurityPrivacyGridAdapter", "Failed to launch: " + destFragment, e);
+            showErrorToast();
+        }
+    }
+    
+    private void launchLineagePartsActivity(String className) throws Exception {
+        ComponentName component = new ComponentName("org.lineageos.lineageparts", className);
+        PackageManager pm = activity.getPackageManager();
+        pm.getActivityInfo(component, 0);
+        Intent intent = new Intent();
+        intent.setComponent(component);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
+    
+    private void launchUserBackupActivity() throws Exception {
+        ComponentName component = new ComponentName("com.android.settings", 
+            "com.android.settings.backup.UserBackupSettingsActivity");
+        PackageManager pm = activity.getPackageManager();
+        pm.getActivityInfo(component, 0);
+        Intent intent = new Intent();
+        intent.setComponent(component);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
+    
+    private void launchSettingsFragment(String destFragment, int titleResId) {
+        new SubSettingLauncher(activity)
+            .setDestination(destFragment)
+            .setTitleRes(titleResId)
+            .setArguments(new Bundle())
+            .setSourceMetricsCategory(sourceMetrics)
+            .launch();
+    }
+    
+    private void showErrorToast() {
+        Toast.makeText(activity, R.string.system_tuner_not_available, 
+            Toast.LENGTH_SHORT).show();
     }
 }
