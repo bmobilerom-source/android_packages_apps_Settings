@@ -136,9 +136,20 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
                 holder.summaryView.setText(item.summaryResId);
             }
             
-            // Handle icon - hide icons for InfinitySuite-style cards
+            // Handle icon - show icons for small cards, hide for others
+            // Hide icons if not available to prevent crashes
             if (holder.iconView != null) {
-                holder.iconView.setVisibility(View.GONE);
+                if (item.cardType == CARD_TYPE_SMALL && item.iconResId != null) {
+                    try {
+                        holder.iconView.setImageResource(item.iconResId);
+                        holder.iconView.setVisibility(View.VISIBLE);
+                    } catch (android.content.res.Resources.NotFoundException e) {
+                        Log.w("SecurityGridAdapter", "Icon not found: " + item.iconResId, e);
+                        holder.iconView.setVisibility(View.GONE);
+                    }
+                } else {
+                    holder.iconView.setVisibility(View.GONE);
+                }
             }
             
             // Handle special card types
@@ -239,21 +250,57 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
      * Adapted for Settings app using SubSettingLauncher
      */
     private void launchDestination(String destFragment, int titleResId) {
+        // If no destination, use Anatolia main page as fallback
         if (destFragment == null || destFragment.isEmpty()) {
-            Log.w("SecurityGridAdapter", "Empty destination fragment");
-            return;
+            Log.w("SecurityGridAdapter", "Empty destination fragment, using Anatolia as fallback");
+            destFragment = "com.epic.Anatolia";
         }
         
         try {
+            // Handle Wallpaper picker activity (like InfinitySuite)
+            if (destFragment.contains("WallpaperSettings") || destFragment.contains("wallpaper")) {
+                launchWallpaperPickerActivity();
+                return;
+            }
+            
             // Handle LineageParts activities
             if (destFragment.startsWith("org.lineageos.lineageparts.")) {
                 launchLineagePartsActivity(destFragment);
             } else {
                 // Launch fragment via SubSettingLauncher (Settings app standard)
-                launchSettingsFragment(destFragment, titleResId);
+                // If fragment doesn't exist, it will fall back to Anatolia
+                try {
+                    launchSettingsFragment(destFragment, titleResId);
+                } catch (Exception e) {
+                    Log.w("SecurityGridAdapter", "Fragment not found: " + destFragment + ", using Anatolia fallback", e);
+                    // Fallback to Anatolia main page
+                    try {
+                        launchSettingsFragment("com.epic.Anatolia", R.string.anatolia_settings_title);
+                    } catch (Exception ex) {
+                        // If even Anatolia fails, show error
+                        showErrorToast();
+                    }
+                }
             }
         } catch (Exception e) {
             Log.e("SecurityGridAdapter", "Failed to launch: " + destFragment, e);
+            // Final fallback to Anatolia
+            try {
+                launchSettingsFragment("com.epic.Anatolia", R.string.anatolia_settings_title);
+            } catch (Exception fallbackException) {
+                showErrorToast();
+            }
+        }
+    }
+    
+    private void launchWallpaperPickerActivity() {
+        try {
+            Intent intent = new Intent();
+            intent.setClassName("com.android.wallpaper", 
+                "com.android.customization.picker.CustomizationPickerActivity");
+            activity.startActivity(intent);
+        } catch (Exception e) {
+            Log.e("SecurityGridAdapter", "Failed to launch wallpaper picker", e);
             showErrorToast();
         }
     }

@@ -138,7 +138,7 @@ public class SecurityGrid extends SettingsPreferenceFragment implements
                     R.string.security_grid_qs_panel_title,
                     R.string.security_grid_qs_panel_summary,
                     "com.epic.fragments.QuickSettings",
-                    R.drawable.ic_quick_settings));
+                    null));
             
             // Row 4: AOD Customizations (wide)
             items.add(new SecurityGridAdapter.CardItem(
@@ -146,7 +146,7 @@ public class SecurityGrid extends SettingsPreferenceFragment implements
                     R.string.security_grid_aod_title,
                     R.string.security_grid_aod_summary,
                     "com.android.settings.display.AmbientDisplaySettings",
-                    R.drawable.ic_aod));
+                    null));
             
             // Row 5: Bottom row - 6 small cards
             items.add(new SecurityGridAdapter.CardItem(
@@ -154,19 +154,19 @@ public class SecurityGrid extends SettingsPreferenceFragment implements
                     R.string.security_grid_buttons_title,
                     R.string.security_grid_buttons_summary,
                     "com.epic.fragments.ButtonSettings",
-                    R.drawable.ic_buttons));
+                    R.drawable.ic_button));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_SMALL,
                     R.string.security_grid_powermenu_title,
                     R.string.security_grid_powermenu_summary,
                     "com.epic.fragments.PowerMenuSettings",
-                    R.drawable.ic_power_menu));
+                    R.drawable.ic_powermenu));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_SMALL,
                     R.string.security_grid_notification_title,
                     R.string.security_grid_notification_summary,
                     "com.epic.fragments.NotificationSettings",
-                    R.drawable.ic_notifications));
+                    R.drawable.ic_notification));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_SMALL,
                     R.string.security_grid_navigation_title,
@@ -178,7 +178,7 @@ public class SecurityGrid extends SettingsPreferenceFragment implements
                     R.string.security_grid_miscellaneous_title,
                     R.string.security_grid_miscellaneous_summary,
                     "com.epic.fragments.ExtraSettings",
-                    R.drawable.ic_miscellaneous));
+                    R.drawable.ic_misc));
             items.add(new SecurityGridAdapter.CardItem(
                     SecurityGridAdapter.CARD_TYPE_SMALL,
                     R.string.security_grid_team_title,

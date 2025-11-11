@@ -56,7 +56,7 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_team"
+                android:src="@drawable/con"
                 android:layout_gravity="center"
                 android:padding="6dp" />
         </LinearLayout>
