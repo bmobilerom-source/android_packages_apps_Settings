@@ -18,8 +18,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="4dp">
+    android:layout_marginHorizontal="15dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginVertical="0dp">
 
     <FrameLayout
         android:id="@+id/container"
@@ -27,8 +29,8 @@
         android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp">
 
@@ -36,33 +38,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:paddingTop="13dp"
+            android:paddingBottom="14dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
             android:minHeight="?android:attr/listPreferredItemHeightSmall">
-
-            <!-- Icon (Optional) -->
-            <LinearLayout
-                android:id="@*android:id/icon_frame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@*android:id/icon"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter" />
-            </LinearLayout>
 
             <!-- Title -->
             <TextView
                 android:id="@*android:id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/xd_text_primary" />
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textColor="?android:attr/textColorPrimary" />
 
             <!-- Summary -->
             <TextView
@@ -70,7 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                style="@style/xd_text_secondary"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                android:textColor="?android:attr/textColorSecondary"
                 android:maxLines="4"
                 tools:text="Summary text goes here" />
 
