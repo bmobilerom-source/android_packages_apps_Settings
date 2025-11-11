@@ -22,7 +22,9 @@
     android:minHeight="330dp"
     app:cardCornerRadius="28dp"
     app:cardElevation="0dp"
-    android:background="@drawable/lockscreen_card_gradient"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardUseCompatPadding="false"
+    app:cardPreventCornerOverlap="false"
     android:clickable="true"
     android:focusable="true">
 
@@ -31,6 +33,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
+
+        <com.android.utils.aboutWallpaperView
+            android:id="@+id/wallpaper_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="@null" />
 
         <TextView
             android:id="@android:id/title"
