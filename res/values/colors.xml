@@ -32,6 +32,10 @@
     <color name="wallpapers_card_bg">#1E3A5F</color>
     <color name="setup_wizard_wifi_color_dark">#89ffffff</color>
     <color name="setup_wizard_wifi_color_light">#89000000</color>
+    
+    <!-- InfinitySuite colors -->
+    <color name="crd_bg">?android:attr/materialColorSurfaceContainer</color>
+    <color name="card_outline_light">?android:attr/colorOutline</color>
 
     <color name="running_processes_system_ram">#ff384248</color>
     <color name="running_processes_free_ram">#ffced7db</color>
