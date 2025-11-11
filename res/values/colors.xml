@@ -34,8 +34,8 @@
     <color name="setup_wizard_wifi_color_light">#89000000</color>
     
     <!-- InfinitySuite colors -->
-    <color name="crd_bg">?android:attr/materialColorSurfaceContainer</color>
-    <color name="card_outline_light">?android:attr/colorOutline</color>
+    <color name="crd_bg">?android:attr/colorBackground</color>
+    <color name="card_outline_light">#1F000000</color>
 
     <color name="running_processes_system_ram">#ff384248</color>
     <color name="running_processes_free_ram">#ffced7db</color>
