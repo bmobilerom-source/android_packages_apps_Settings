@@ -19,21 +19,17 @@
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
             <solid android:color="#FFFFFFFF" />
-            <corners
-                android:topLeftRadius="12dp"
-                android:topRightRadius="12dp"
-                android:bottomLeftRadius="12dp"
-                android:bottomRightRadius="12dp" />
+            <corners android:bottomRightRadius="12dp" android:bottomLeftRadius="12dp" 
+                android:topLeftRadius="0dp" android:topRightRadius="0dp" />
         </shape>
     </item>
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
-            <solid android:color="@android:color/system_neutral1_100" />
-            <corners
-                android:topLeftRadius="12dp"
-                android:topRightRadius="12dp"
-                android:bottomLeftRadius="12dp"
-                android:bottomRightRadius="12dp" />
+            <!-- Darkened by 30%: system_neutral1_100 in dark mode is typically ~#1C1C1E,
+                 darkened by 30% = multiply RGB by 0.7, resulting in ~#141416 for better contrast -->
+            <solid android:color="#141416" />
+            <corners android:bottomRightRadius="12dp" android:bottomLeftRadius="12dp" 
+                android:topLeftRadius="0dp" android:topRightRadius="0dp" />
         </shape>
     </item>
 </ripple>
