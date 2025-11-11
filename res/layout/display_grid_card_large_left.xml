@@ -15,46 +15,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="320dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="8dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-    android:background="@drawable/rect3"
+    android:background="@drawable/rect_bordered_light_blue"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="12dp">
 
-    <TextView
-        android:id="@android:id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="?android:textColorPrimary"
-        android:layout_marginBottom="12dp" />
-
-    <TextView
-        android:id="@android:id/summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="?android:textColorSecondary"
-        android:layout_marginBottom="16dp" />
-
-    <View
-        android:id="@+id/placeholder_area"
+    <!-- Placeholder rectangles area -->
+    <LinearLayout
+        android:id="@+id/toggles_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:minHeight="80dp"
-        android:background="@drawable/rect3"
-        android:layout_marginBottom="16dp" />
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+        
+        <!-- Two small light blue rectangles at top -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/placeholder_rect_light_blue" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/placeholder_rect_light_blue" />
+        </LinearLayout>
+        
+        <!-- Two small dark gray rectangles -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/placeholder_rect_dark_gray" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/placeholder_rect_dark_gray" />
+        </LinearLayout>
+        
+        <!-- Larger dark gray rectangle in middle -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/placeholder_rect_dark_gray" />
+        
+        <!-- Another large dark gray rectangle -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@drawable/placeholder_rect_dark_gray" />
+    </LinearLayout>
 
+    <!-- Quick Settings Button - light blue oval -->
     <LinearLayout
         android:id="@+id/quick_settings_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:background="@drawable/rect4"
+        android:background="@drawable/button_oval_light_blue"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
@@ -66,7 +104,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="?android:textColorPrimary"
             android:gravity="center" />
     </LinearLayout>
 </LinearLayout>

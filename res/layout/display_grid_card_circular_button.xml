@@ -18,7 +18,7 @@
     android:layout_marginEnd="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-    android:background="@drawable/rect6"
+    android:background="@drawable/circle_icon_bg_light_blue"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="12dp">
@@ -30,6 +30,7 @@
         android:layout_gravity="center"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
+        android:tint="?android:textColorPrimary"
         android:visibility="visible" />
 
     <TextView
@@ -41,5 +42,6 @@
         android:textColor="?android:textColorPrimary"
         android:gravity="center"
         android:maxLines="2"
-        android:ellipsize="end" />
+        android:ellipsize="end"
+        android:visibility="gone" />
 </LinearLayout>

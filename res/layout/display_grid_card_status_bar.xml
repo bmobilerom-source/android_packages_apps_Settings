@@ -14,8 +14,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="16dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
     android:background="@drawable/rect3"
@@ -42,11 +42,22 @@
         android:ellipsize="end"
         android:layout_marginBottom="12dp" />
 
-    <ImageView
-        android:id="@android:id/icon"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_gravity="center"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true" />
+    <!-- Icon at bottom with light blue background -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <View
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/circle_icon_bg_light_blue" />
+        <ImageView
+            android:id="@android:id/icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:tint="?android:textColorPrimary" />
+    </FrameLayout>
 </LinearLayout>
