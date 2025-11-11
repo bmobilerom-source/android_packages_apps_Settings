@@ -62,7 +62,6 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
         final TextView titleView;
         final TextView summaryView;
         final TextView buttonTextView;
-        final LinearLayout togglesLayout;
         final View placeholderView;
         final View buttonContainer;
         
@@ -72,7 +71,6 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
             this.titleView = itemView.findViewById(android.R.id.title);
             this.summaryView = itemView.findViewById(android.R.id.summary);
             this.buttonTextView = itemView.findViewById(R.id.quick_settings_button);
-            this.togglesLayout = itemView.findViewById(R.id.toggles_layout);
             this.placeholderView = itemView.findViewById(R.id.placeholder_area);
             this.buttonContainer = itemView.findViewById(R.id.quick_settings_button_container);
         }
@@ -127,10 +125,16 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
         }
         
         // Handle icon - hide icons for InfinitySuite-style cards (except where needed)
+        // Hide icons if not available to prevent crashes
         if (holder.iconView != null) {
             if (item.iconResId != null && (item.cardType == CARD_TYPE_ABOUT_US || item.cardType == CARD_TYPE_STATUS_BAR || item.cardType == CARD_TYPE_CIRCULAR_BUTTON)) {
-                holder.iconView.setImageResource(item.iconResId);
-                holder.iconView.setVisibility(View.VISIBLE);
+                try {
+                    holder.iconView.setImageResource(item.iconResId);
+                    holder.iconView.setVisibility(View.VISIBLE);
+                } catch (android.content.res.Resources.NotFoundException e) {
+                    Log.w("DisplayGridAdapter", "Icon not found: " + item.iconResId, e);
+                    holder.iconView.setVisibility(View.GONE);
+                }
             } else {
                 holder.iconView.setVisibility(View.GONE);
             }
@@ -165,9 +169,10 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
      * Adapted for Settings app using SubSettingLauncher
      */
     private void launchDestination(String destFragment, int titleResId) {
+        // If no destination, use Anatolia main page as fallback
         if (destFragment == null || destFragment.isEmpty()) {
-            Log.w("DisplayGridAdapter", "Empty destination fragment");
-            return;
+            Log.w("DisplayGridAdapter", "Empty destination fragment, using Anatolia as fallback");
+            destFragment = "com.epic.Anatolia";
         }
         
         try {
@@ -176,11 +181,28 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
                 launchLineagePartsActivity(destFragment);
             } else {
                 // Launch fragment via SubSettingLauncher (Settings app standard)
-                launchSettingsFragment(destFragment, titleResId);
+                // If fragment doesn't exist, it will fall back to Anatolia
+                try {
+                    launchSettingsFragment(destFragment, titleResId);
+                } catch (Exception e) {
+                    Log.w("DisplayGridAdapter", "Fragment not found: " + destFragment + ", using Anatolia fallback", e);
+                    // Fallback to Anatolia main page
+                    try {
+                        launchSettingsFragment("com.epic.Anatolia", R.string.anatolia_settings_title);
+                    } catch (Exception ex) {
+                        // If even Anatolia fails, show error
+                        showErrorToast();
+                    }
+                }
             }
         } catch (Exception e) {
             Log.e("DisplayGridAdapter", "Failed to launch: " + destFragment, e);
-            showErrorToast();
+            // Final fallback to Anatolia
+            try {
+                launchSettingsFragment("com.epic.Anatolia", R.string.anatolia_settings_title);
+            } catch (Exception fallbackException) {
+                showErrorToast();
+            }
         }
     }
     

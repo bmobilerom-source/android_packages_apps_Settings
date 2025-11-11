@@ -29,7 +29,8 @@
         android:layout_height="32dp"
         android:layout_gravity="center"
         android:scaleType="fitCenter"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:visibility="visible" />
 
     <TextView
         android:id="@android:id/title"
