@@ -61,19 +61,16 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
         
         CardVH(@NonNull View itemView) {
             super(itemView);
-            try {
-                this.iconView = itemView.findViewById(android.R.id.icon);
-                this.titleView = itemView.findViewById(android.R.id.title);
-                this.summaryView = itemView.findViewById(android.R.id.summary);
-                this.colorSwatchesLayout = itemView.findViewById(R.id.color_swatches_layout);
-                this.lockscreenClock = itemView.findViewById(R.id.lockscreen_clock_preview);
-                this.aodClock = itemView.findViewById(R.id.aod_clock);
-                this.themePacksButtons = itemView.findViewById(R.id.theme_pack_buttons_layout);
-                this.themePackButtonLeft = itemView.findViewById(R.id.theme_pack_button_left);
-                this.themePackButtonRight = itemView.findViewById(R.id.theme_pack_button_right);
-            } catch (Exception e) {
-                Log.e("SecurityGridAdapter", "Error initializing CardVH", e);
-            }
+            // Initialize all fields - findViewById returns null if not found, which is safe
+            this.iconView = itemView.findViewById(android.R.id.icon);
+            this.titleView = itemView.findViewById(android.R.id.title);
+            this.summaryView = itemView.findViewById(android.R.id.summary);
+            this.colorSwatchesLayout = itemView.findViewById(R.id.color_swatches_layout);
+            this.lockscreenClock = itemView.findViewById(R.id.lockscreen_clock_preview);
+            this.aodClock = itemView.findViewById(R.id.aod_clock);
+            this.themePacksButtons = itemView.findViewById(R.id.theme_pack_buttons_layout);
+            this.themePackButtonLeft = itemView.findViewById(R.id.theme_pack_button_left);
+            this.themePackButtonRight = itemView.findViewById(R.id.theme_pack_button_right);
         }
     }
 
@@ -158,36 +155,43 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
                 holder.colorSwatchesLayout.setVisibility(View.VISIBLE);
             }
             
-            // Lockscreen and AOD cards use TextClock - no manual update needed
+            // Handle LockScreen card - TextClock handles time automatically
             if (item.cardType == CARD_TYPE_LOCKSCREEN && holder.lockscreenClock != null) {
-                // TextClock updates automatically
+                // TextClock will automatically update, no manual setting needed
                 holder.lockscreenClock.setVisibility(View.VISIBLE);
-            }
-            
-            if (item.cardType == CARD_TYPE_WIDE && holder.aodClock != null) {
-                // TextClock updates automatically
-                holder.aodClock.setVisibility(View.VISIBLE);
             }
             
             // Handle Theme Packs buttons - make them independently clickable
             if (item.cardType == CARD_TYPE_THEME_PACKS) {
                 if (holder.themePackButtonLeft != null) {
                     holder.themePackButtonLeft.setOnClickListener(v -> {
+                        // Launch left button action (e.g., icon pack)
                         launchDestination(item.destFragment, item.titleResId);
                     });
                 }
                 if (holder.themePackButtonRight != null) {
                     holder.themePackButtonRight.setOnClickListener(v -> {
+                        // Launch right button action (e.g., font pack)
                         launchDestination(item.destFragment, item.titleResId);
                     });
                 }
-                // Make the card itself non-clickable
+                
+                // Make the card itself non-clickable since buttons handle clicks
                 holder.itemView.setClickable(false);
                 holder.itemView.setFocusable(false);
-            } else {
-                // Set click listener for other cards
-                holder.itemView.setOnClickListener(v -> launchDestination(item.destFragment, item.titleResId));
             }
+            
+            // Handle AOD card - TextClock handles time automatically
+            if (item.cardType == CARD_TYPE_WIDE && holder.aodClock != null) {
+                // TextClock will automatically update, no manual setting needed
+                holder.aodClock.setVisibility(View.VISIBLE);
+            }
+            
+            // Ensure all cards are visible (no placeholder cards)
+            holder.itemView.setVisibility(View.VISIBLE);
+            
+            // Set click listener - following InfinitySuite pattern with proper error handling
+            holder.itemView.setOnClickListener(v -> launchDestination(item.destFragment, item.titleResId));
         } catch (Exception e) {
             Log.e("SecurityGridAdapter", "Error in onBindViewHolder at position " + position, e);
         }
@@ -222,10 +226,12 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
                                 CardItem item = items.get(position);
                                 if (item != null) {
                                     int cardType = item.cardType;
-                                    // Wide cards span 2 columns, others span 1
-                                    if (cardType == CARD_TYPE_WIDE || cardType == CARD_TYPE_MONET_COLOR) {
+                                    // Wide cards span 2 columns
+                                    if (cardType == CARD_TYPE_WIDE) {
                                         return 2;
                                     }
+                                    // LockScreen card spans 2 rows visually (but still 1 column)
+                                    // This is handled by making it tall, not by span size
                                 }
                             }
                         } catch (Exception e) {
@@ -266,6 +272,8 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
             // Handle LineageParts activities
             if (destFragment.startsWith("org.lineageos.lineageparts.")) {
                 launchLineagePartsActivity(destFragment);
+            } else if (destFragment.contains("UserBackupSettingsActivity")) {
+                launchUserBackupActivity();
             } else {
                 // Launch fragment via SubSettingLauncher (Settings app standard)
                 // If fragment doesn't exist, it will fall back to Anatolia
@@ -307,6 +315,17 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
     
     private void launchLineagePartsActivity(String className) throws Exception {
         ComponentName component = new ComponentName("org.lineageos.lineageparts", className);
+        PackageManager pm = activity.getPackageManager();
+        pm.getActivityInfo(component, 0);
+        Intent intent = new Intent();
+        intent.setComponent(component);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
+    
+    private void launchUserBackupActivity() throws Exception {
+        ComponentName component = new ComponentName("com.android.settings", 
+            "com.android.settings.backup.UserBackupSettingsActivity");
         PackageManager pm = activity.getPackageManager();
         pm.getActivityInfo(component, 0);
         Intent intent = new Intent();
