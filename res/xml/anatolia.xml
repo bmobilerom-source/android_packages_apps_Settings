@@ -131,4 +131,12 @@
             android:summary="@string/security_privacy_grid_summary"
             android:fragment="com.epic.fragments.SecurityPrivacyGrid"
             android:icon="@drawable/ic_security_grid" />
+
+        <!-- Display Grid (two-column cards) -->
+        <PreferenceScreen
+            android:key="display_grid_category"
+            android:title="@string/display_grid_title"
+            android:summary="@string/display_grid_summary"
+            android:fragment="com.epic.fragments.DisplayGrid"
+            android:icon="@drawable/ic_display_grid" />
 </PreferenceScreen>

@@ -11,6 +11,10 @@
      limitations under the License.
 -->
 <resources>
+    <!-- Display Grid Title -->
+    <string name="display_grid_title">Display Grid</string>
+    <string name="display_grid_summary">Display customization options</string>
+    
     <!-- Large Left Card -->
     <string name="display_grid_quick_settings_title">Quick Settings</string>
     <string name="display_grid_quick_settings_summary">Quick settings customization</string>
