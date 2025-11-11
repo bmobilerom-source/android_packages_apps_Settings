@@ -165,14 +165,14 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
                     R.string.security_privacy_grid_buttons_title,
                     R.string.security_privacy_grid_buttons_summary,
                     "com.epic.fragments.ButtonSettings",
-                    null));
+                    R.drawable.ic_button));
             
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
                     R.string.security_privacy_grid_powermenu_title,
                     R.string.security_privacy_grid_powermenu_summary,
                     "com.epic.fragments.PowerMenuSettings",
-                    null));
+                    R.drawable.ic_powermenu));
             
             // Row 7: Navigation (left), Miscellaneous (right)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
@@ -180,21 +180,21 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
                     R.string.security_privacy_grid_navigation_title,
                     R.string.security_privacy_grid_navigation_summary,
                     "com.epic.fragments.NavbarSettings",
-                    null));
+                    R.drawable.ic_navigation));
             
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
                     R.string.security_privacy_grid_miscellaneous_title,
                     R.string.security_privacy_grid_miscellaneous_summary,
                     "com.epic.fragments.ExtraSettings",
-                    null));
+                    R.drawable.ic_misc));
             
-            // Row 8: Placeholder (left), Notification (right)
+            // Row 8: Gestures (left), Notification (right)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_PLACEHOLDER,
-                    R.string.security_privacy_grid_notification_title,
-                    R.string.security_privacy_grid_notification_summary,
-                    "",
+                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_privacy_grid_gestures_title,
+                    R.string.security_privacy_grid_gestures_summary,
+                    "com.epic.fragments.GestureSettings",
                     null));
             
             items.add(new SecurityPrivacyGridAdapter.CardItem(
@@ -202,14 +202,14 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
                     R.string.security_privacy_grid_notification_title,
                     R.string.security_privacy_grid_notification_summary,
                     "com.epic.fragments.NotificationSettings",
-                    null));
+                    R.drawable.ic_notification));
             
-            // Row 9: Placeholder (left), Team (right)
+            // Row 9: About Us (left), Team (right)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_PLACEHOLDER,
-                    R.string.security_privacy_grid_team_title,
-                    R.string.security_privacy_grid_team_summary,
-                    "",
+                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_privacy_grid_about_us_title,
+                    R.string.security_privacy_grid_about_us_summary,
+                    "com.epic.fragments.AboutUsSettings",
                     null));
             
             items.add(new SecurityPrivacyGridAdapter.CardItem(
@@ -217,7 +217,7 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
                     R.string.security_privacy_grid_team_title,
                     R.string.security_privacy_grid_team_summary,
                     "com.epic.fragments.AboutUsSettings",
-                    null));
+                    R.drawable.ic_team));
 
             rv.setAdapter(new SecurityPrivacyGridAdapter(activity, items, getMetricsCategory()));
         } catch (Exception e) {

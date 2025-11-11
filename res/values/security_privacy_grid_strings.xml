@@ -59,6 +59,14 @@
     <string name="security_privacy_grid_team_title">Team</string>
     <string name="security_privacy_grid_team_summary">Team information</string>
     
+    <!-- Gestures -->
+    <string name="security_privacy_grid_gestures_title">Gestures</string>
+    <string name="security_privacy_grid_gestures_summary">Gesture settings</string>
+    
+    <!-- About Us -->
+    <string name="security_privacy_grid_about_us_title">About Us</string>
+    <string name="security_privacy_grid_about_us_summary">About information</string>
+    
     <!-- System Tuner -->
     <string name="system_tuner_not_available">System tuner is not available</string>
 

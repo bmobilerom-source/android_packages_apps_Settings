@@ -62,8 +62,6 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
         final LinearLayout colorSwatchesLayout;
         final android.widget.TextClock lockscreenClock;
         final TextView timeDisplay;
-        final TextView timeHour;
-        final TextView timeMinute;
         final LinearLayout themePacksButtons;
         final View themePackButtonLeft;
         final View themePackButtonRight;
@@ -77,8 +75,6 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
             this.colorSwatchesLayout = itemView.findViewById(R.id.color_swatches_layout);
             this.lockscreenClock = itemView.findViewById(R.id.lockscreen_clock_preview);
             this.timeDisplay = itemView.findViewById(R.id.time_display);
-            this.timeHour = itemView.findViewById(R.id.time_hour);
-            this.timeMinute = itemView.findViewById(R.id.time_minute);
             this.themePacksButtons = itemView.findViewById(R.id.theme_pack_buttons_layout);
             this.themePackButtonLeft = itemView.findViewById(R.id.theme_pack_button_left);
             this.themePackButtonRight = itemView.findViewById(R.id.theme_pack_button_right);
@@ -160,9 +156,20 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                 holder.summaryView.setText(item.summaryResId);
             }
             
-            // Handle icon - hide for all cards (no icons in image)
+            // Handle icon - show icons for small cards, hide for others
+            // Hide icons if not available to prevent crashes
             if (holder.iconView != null) {
-                holder.iconView.setVisibility(View.GONE);
+                if (item.cardType == CARD_TYPE_SMALL && item.iconResId != null) {
+                    try {
+                        holder.iconView.setImageResource(item.iconResId);
+                        holder.iconView.setVisibility(View.VISIBLE);
+                    } catch (android.content.res.Resources.NotFoundException e) {
+                        Log.w("SecurityPrivacyGridAdapter", "Icon not found: " + item.iconResId, e);
+                        holder.iconView.setVisibility(View.GONE);
+                    }
+                } else {
+                    holder.iconView.setVisibility(View.GONE);
+                }
             }
             
             // Handle special card types
@@ -208,12 +215,8 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                 // TextClock is already in the layout, it will update automatically
             }
             
-            // Skip placeholder cards
-            if (item.cardType == CARD_TYPE_PLACEHOLDER) {
-                holder.itemView.setVisibility(View.INVISIBLE);
-                holder.itemView.setClickable(false);
-                return;
-            }
+            // Ensure all cards are visible (no placeholder cards)
+            holder.itemView.setVisibility(View.VISIBLE);
             
             // Set click listener - following InfinitySuite pattern with proper error handling
             holder.itemView.setOnClickListener(v -> launchDestination(item.destFragment, item.titleResId));
@@ -285,12 +288,19 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
      * Adapted for Settings app using SubSettingLauncher
      */
     private void launchDestination(String destFragment, int titleResId) {
+        // If no destination, use Anatolia main page as fallback
         if (destFragment == null || destFragment.isEmpty()) {
-            Log.w("SecurityPrivacyGridAdapter", "Empty destination fragment");
-            return;
+            Log.w("SecurityPrivacyGridAdapter", "Empty destination fragment, using Anatolia as fallback");
+            destFragment = "com.epic.Anatolia";
         }
         
         try {
+            // Handle Wallpaper picker activity (like InfinitySuite)
+            if (destFragment.contains("WallpaperSettings") || destFragment.contains("wallpaper")) {
+                launchWallpaperPickerActivity();
+                return;
+            }
+            
             // Handle LineageParts activities
             if (destFragment.startsWith("org.lineageos.lineageparts.")) {
                 launchLineagePartsActivity(destFragment);
@@ -298,10 +308,39 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                 launchUserBackupActivity();
             } else {
                 // Launch fragment via SubSettingLauncher (Settings app standard)
-                launchSettingsFragment(destFragment, titleResId);
+                // If fragment doesn't exist, it will fall back to Anatolia
+                try {
+                    launchSettingsFragment(destFragment, titleResId);
+                } catch (Exception e) {
+                    Log.w("SecurityPrivacyGridAdapter", "Fragment not found: " + destFragment + ", using Anatolia fallback", e);
+                    // Fallback to Anatolia main page
+                    try {
+                        launchSettingsFragment("com.epic.Anatolia", R.string.anatolia_settings_title);
+                    } catch (Exception ex) {
+                        // If even Anatolia fails, show error
+                        showErrorToast();
+                    }
+                }
             }
         } catch (Exception e) {
             Log.e("SecurityPrivacyGridAdapter", "Failed to launch: " + destFragment, e);
+            // Final fallback to Anatolia
+            try {
+                launchSettingsFragment("com.epic.Anatolia", R.string.anatolia_settings_title);
+            } catch (Exception fallbackException) {
+                showErrorToast();
+            }
+        }
+    }
+    
+    private void launchWallpaperPickerActivity() {
+        try {
+            Intent intent = new Intent();
+            intent.setClassName("com.android.wallpaper", 
+                "com.android.customization.picker.CustomizationPickerActivity");
+            activity.startActivity(intent);
+        } catch (Exception e) {
+            Log.e("SecurityPrivacyGridAdapter", "Failed to launch wallpaper picker", e);
             showErrorToast();
         }
     }
