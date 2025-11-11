@@ -1,6 +1,7 @@
 package com.epic.fragments;
 
 import android.content.Context;
+import android.app.Activity;
 import android.view.View;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.Preference;
@@ -19,7 +20,7 @@ public class DisplayGridHelper {
     /**
      * Initialize and setup DisplayGrid in a preference screen
      * 
-     * @param context The context
+     * @param context The context (should be Activity context for SubSettingLauncher)
      * @param screen The preference screen
      * @param preferenceKey The key of the LayoutPreference (default: "display_grid")
      * @param sourceMetrics The metrics category for tracking
@@ -30,6 +31,17 @@ public class DisplayGridHelper {
             preferenceKey = "display_grid";
         }
         
+        // Ensure we have an Activity context for SubSettingLauncher
+        Activity activity = null;
+        if (context instanceof Activity) {
+            activity = (Activity) context;
+        }
+        
+        if (activity == null) {
+            android.util.Log.e("DisplayGridHelper", "Context must be an Activity for SubSettingLauncher");
+            return;
+        }
+        
         Preference layoutPref = screen.findPreference(preferenceKey);
         if (layoutPref instanceof LayoutPreference) {
             LayoutPreference lp = (LayoutPreference) layoutPref;
@@ -38,7 +50,7 @@ public class DisplayGridHelper {
                 rv.setLayoutManager(new GridLayoutManager(context, 2));
                 
                 List<DisplayGridAdapter.CardItem> items = createDefaultItems();
-                rv.setAdapter(new DisplayGridAdapter(context, items, sourceMetrics));
+                rv.setAdapter(new DisplayGridAdapter(activity, items, sourceMetrics));
             }
         }
     }

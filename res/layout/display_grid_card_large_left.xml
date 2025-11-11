@@ -10,126 +10,63 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.google.android.material.card.MaterialCardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="320dp"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:minHeight="320dp"
-    app:cardBackgroundColor="@color/card_bg"
-    app:cardCornerRadius="24dp"
-    app:cardElevation="0dp"
-    app:strokeWidth="2dp"
-    app:strokeColor="@color/display_grid_card_border">
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-        
-        <!-- Toggle Switches Grid (2x2) -->
-        <LinearLayout
-            android:id="@+id/toggles_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="16dp">
-            
-            <!-- Top Row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
-                
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    app:cardBackgroundColor="@color/display_grid_toggle_on"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="0dp" />
-                
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    app:cardBackgroundColor="@color/card_bg"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="0dp" />
-            </LinearLayout>
-            
-            <!-- Bottom Row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    app:cardBackgroundColor="@color/card_bg"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="0dp" />
-                
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    app:cardBackgroundColor="@color/display_grid_toggle_on"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="0dp" />
-            </LinearLayout>
-        </LinearLayout>
-        
-        <!-- Placeholder Area -->
-        <View
-            android:id="@+id/placeholder_area"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:minHeight="80dp"
-            android:background="@color/card_bg"
-            android:layout_marginBottom="16dp" />
-        
-        <!-- Quick Settings Button -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/quick_settings_button_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            app:cardBackgroundColor="@color/display_grid_toggle_on"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-            
-            <TextView
-                android:id="@+id/quick_settings_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:padding="12dp" />
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/rect3"
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <TextView
+        android:id="@android:id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="?android:textColorPrimary"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="?android:textColorSecondary"
+        android:layout_marginBottom="16dp" />
+
+    <View
+        android:id="@+id/placeholder_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="80dp"
+        android:background="@drawable/rect3"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:id="@+id/quick_settings_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:background="@drawable/rect4"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/quick_settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:gravity="center" />
+    </LinearLayout>
+</LinearLayout>

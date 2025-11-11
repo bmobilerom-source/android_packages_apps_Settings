@@ -78,12 +78,12 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
         }
     }
 
-    private final Context context;
+    private final android.app.Activity activity;
     private final List<CardItem> items;
     private final int sourceMetrics;
 
-    DisplayGridAdapter(Context context, List<CardItem> items, int sourceMetrics) {
-        this.context = context;
+    DisplayGridAdapter(android.app.Activity activity, List<CardItem> items, int sourceMetrics) {
+        this.activity = activity;
         this.items = items;
         this.sourceMetrics = sourceMetrics;
     }
@@ -126,10 +126,14 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
             holder.summaryView.setText(item.summaryResId);
         }
         
-        // Handle icon
-        if (holder.iconView != null && item.iconResId != null) {
-            holder.iconView.setImageResource(item.iconResId);
-            holder.iconView.setVisibility(View.VISIBLE);
+        // Handle icon - hide icons for InfinitySuite-style cards (except where needed)
+        if (holder.iconView != null) {
+            if (item.iconResId != null && (item.cardType == CARD_TYPE_ABOUT_US || item.cardType == CARD_TYPE_STATUS_BAR || item.cardType == CARD_TYPE_CIRCULAR_BUTTON)) {
+                holder.iconView.setImageResource(item.iconResId);
+                holder.iconView.setVisibility(View.VISIBLE);
+            } else {
+                holder.iconView.setVisibility(View.GONE);
+            }
         }
         
         // Handle button text for large left card
@@ -141,20 +145,14 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
                 holder.buttonContainer.setClickable(true);
                 holder.buttonContainer.setFocusable(true);
                 holder.buttonContainer.setOnClickListener(v -> {
-                    if (item.destFragment != null && !item.destFragment.isEmpty()) {
-                        launchFragment(item.destFragment, item.titleResId);
-                    }
+                    launchDestination(item.destFragment, item.titleResId);
                 });
             }
         }
         
         // Set click listener for the entire card (except large left card which has button)
         if (item.cardType != CARD_TYPE_LARGE_LEFT || item.buttonText == null) {
-            holder.itemView.setOnClickListener(v -> {
-                if (item.destFragment != null && !item.destFragment.isEmpty()) {
-                    launchFragment(item.destFragment, item.titleResId);
-                }
-            });
+            holder.itemView.setOnClickListener(v -> launchDestination(item.destFragment, item.titleResId));
         } else {
             // Large left card - make it non-clickable, only button is clickable
             holder.itemView.setClickable(false);
@@ -162,36 +160,52 @@ class DisplayGridAdapter extends RecyclerView.Adapter<DisplayGridAdapter.CardVH>
         }
     }
     
-    private void launchFragment(String destFragment, int titleResId) {
+    /**
+     * Launch destination fragment or activity - following InfinitySuite pattern
+     * Adapted for Settings app using SubSettingLauncher
+     */
+    private void launchDestination(String destFragment, int titleResId) {
         if (destFragment == null || destFragment.isEmpty()) {
+            Log.w("DisplayGridAdapter", "Empty destination fragment");
             return;
         }
         
         try {
             // Handle LineageParts activities
             if (destFragment.startsWith("org.lineageos.lineageparts.")) {
-                ComponentName component = new ComponentName("org.lineageos.lineageparts", 
-                    destFragment);
-                PackageManager pm = context.getPackageManager();
-                pm.getActivityInfo(component, 0);
-                Intent intent = new Intent();
-                intent.setComponent(component);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                launchLineagePartsActivity(destFragment);
             } else {
-                // Launch fragment via SubSettingLauncher
-                new SubSettingLauncher(context)
-                    .setDestination(destFragment)
-                    .setTitleRes(titleResId)
-                    .setArguments(new Bundle())
-                    .setSourceMetricsCategory(sourceMetrics)
-                    .launch();
+                // Launch fragment via SubSettingLauncher (Settings app standard)
+                launchSettingsFragment(destFragment, titleResId);
             }
         } catch (Exception e) {
             Log.e("DisplayGridAdapter", "Failed to launch: " + destFragment, e);
-            Toast.makeText(context, R.string.system_tuner_not_available, 
-                Toast.LENGTH_SHORT).show();
+            showErrorToast();
         }
+    }
+    
+    private void launchLineagePartsActivity(String className) throws Exception {
+        ComponentName component = new ComponentName("org.lineageos.lineageparts", className);
+        PackageManager pm = activity.getPackageManager();
+        pm.getActivityInfo(component, 0);
+        Intent intent = new Intent();
+        intent.setComponent(component);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
+    
+    private void launchSettingsFragment(String destFragment, int titleResId) {
+        new SubSettingLauncher(activity)
+            .setDestination(destFragment)
+            .setTitleRes(titleResId)
+            .setArguments(new Bundle())
+            .setSourceMetricsCategory(sourceMetrics)
+            .launch();
+    }
+    
+    private void showErrorToast() {
+        Toast.makeText(activity, R.string.system_tuner_not_available, 
+            Toast.LENGTH_SHORT).show();
     }
 
     @Override
