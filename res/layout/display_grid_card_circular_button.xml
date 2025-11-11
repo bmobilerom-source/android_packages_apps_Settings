@@ -22,10 +22,11 @@
     android:gravity="center">
 
     <!-- Fixed-size circular container to avoid stretching in GridLayoutManager -->
+    <!-- Use adaptive preference card styling with custom_surface_color_circle for system color adaptation -->
     <FrameLayout
         android:layout_width="115dp"
         android:layout_height="115dp"
-        android:background="@drawable/circle_icon_bg_light_blue"
+        android:background="@drawable/custom_surface_color_circle"
         android:foregroundGravity="center">
 
         <ImageView
@@ -35,7 +36,7 @@
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            android:tint="?android:textColorPrimary"
+            android:tint="?android:attr/colorAccent"
             android:visibility="visible" />
     </FrameLayout>
 
