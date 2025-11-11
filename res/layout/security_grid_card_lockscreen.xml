@@ -14,87 +14,68 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="330dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:minHeight="240dp"
-    app:cardBackgroundColor="@drawable/lockscreen_card_gradient"
-    app:cardCornerRadius="24dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    app:cardCornerRadius="28dp"
     app:cardElevation="0dp"
-    app:strokeWidth="0dp">
-    
-    <LinearLayout
+    app:cardBackgroundColor="@drawable/lockscreen_card_gradient">
+
+    <RelativeLayout
+        android:id="@+id/themes_clock_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
         android:gravity="center">
-        
+
         <TextView
             android:id="@android:id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_marginBottom="16dp"
-            android:gravity="center" />
-        
-        <LinearLayout
+            android:textSize="15sp"
+            android:layout_above="@+id/lockscreen_clock_preview"
+            android:textColor="@*android:color/system_accent1_100"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="8dp">
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextClock
+            android:id="@+id/lockscreen_clock_preview"
+            android:textSize="60sp"
+            android:textColor="@*android:color/system_accent1_100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="google-sans-medium"
+            android:textStyle="bold"
+            android:format12Hour="hh\nmm"
+            android:format24Hour="hh\nmm"
+            android:textFontWeight="700"
+            android:textAlignment="center"
+            android:layout_centerInParent="true" />
             
-            <TextView
-                android:id="@+id/time_hour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="10" />
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="Infinity X"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp" />
-            
-            <TextView
-                android:id="@+id/time_minute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="08" />
-        </LinearLayout>
-        
         <TextView
             android:id="@+id/time_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:textColor="@android:color/white"
-            android:text="10:08" />
-        
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_lock_24dp"
-            android:tint="@android:color/white"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@null" />
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+            android:textColor="@*android:color/system_accent1_100"
+            android:layout_below="@+id/lockscreen_clock_preview"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
 
+        <ImageView
+            android:id="@+id/lock_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_lock_24dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:tint="#FFFFFFFF"
+            android:layout_below="@+id/lockscreen_clock_preview"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="24dp" />
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

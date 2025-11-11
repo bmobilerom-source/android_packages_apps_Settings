@@ -53,8 +53,11 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
         final TextView titleView;
         final TextView summaryView;
         final LinearLayout colorSwatchesLayout;
-        final TextView timeDisplay;
+        final android.widget.TextClock lockscreenClock;
+        final android.widget.TextClock aodClock;
         final LinearLayout themePacksButtons;
+        final View themePackButtonLeft;
+        final View themePackButtonRight;
         
         CardVH(@NonNull View itemView) {
             super(itemView);
@@ -63,20 +66,23 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
                 this.titleView = itemView.findViewById(android.R.id.title);
                 this.summaryView = itemView.findViewById(android.R.id.summary);
                 this.colorSwatchesLayout = itemView.findViewById(R.id.color_swatches_layout);
-                this.timeDisplay = itemView.findViewById(R.id.time_display);
+                this.lockscreenClock = itemView.findViewById(R.id.lockscreen_clock_preview);
+                this.aodClock = itemView.findViewById(R.id.aod_clock);
                 this.themePacksButtons = itemView.findViewById(R.id.theme_pack_buttons_layout);
+                this.themePackButtonLeft = itemView.findViewById(R.id.theme_pack_button_left);
+                this.themePackButtonRight = itemView.findViewById(R.id.theme_pack_button_right);
             } catch (Exception e) {
                 Log.e("SecurityGridAdapter", "Error initializing CardVH", e);
             }
         }
     }
 
-    private final Context context;
+    private final android.app.Activity activity;
     private final List<CardItem> items;
     private final int sourceMetrics;
 
-    SecurityGridAdapter(Context context, List<CardItem> items, int sourceMetrics) {
-        this.context = context;
+    SecurityGridAdapter(android.app.Activity activity, List<CardItem> items, int sourceMetrics) {
+        this.activity = activity;
         this.items = items;
         this.sourceMetrics = sourceMetrics;
     }
@@ -130,14 +136,9 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
                 holder.summaryView.setText(item.summaryResId);
             }
             
-            // Handle icon
+            // Handle icon - hide icons for InfinitySuite-style cards
             if (holder.iconView != null) {
-                if (item.iconResId != null) {
-                    holder.iconView.setImageResource(item.iconResId);
-                    holder.iconView.setVisibility(View.VISIBLE);
-                } else {
-                    holder.iconView.setVisibility(View.GONE);
-                }
+                holder.iconView.setVisibility(View.GONE);
             }
             
             // Handle special card types
@@ -146,61 +147,36 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
                 holder.colorSwatchesLayout.setVisibility(View.VISIBLE);
             }
             
-            if (item.cardType == CARD_TYPE_LOCKSCREEN && holder.timeDisplay != null) {
-                // Set time display - you can update this dynamically
-                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault());
-                String time = sdf.format(new java.util.Date());
-                holder.timeDisplay.setText(time);
-                // Also update hour and minute if available
-                TextView timeHour = holder.itemView.findViewById(R.id.time_hour);
-                TextView timeMinute = holder.itemView.findViewById(R.id.time_minute);
-                if (timeHour != null && timeMinute != null) {
-                    String[] parts = time.split(":");
-                    if (parts.length == 2) {
-                        timeHour.setText(parts[0]);
-                        timeMinute.setText(parts[1]);
-                    }
-                }
+            // Lockscreen and AOD cards use TextClock - no manual update needed
+            if (item.cardType == CARD_TYPE_LOCKSCREEN && holder.lockscreenClock != null) {
+                // TextClock updates automatically
+                holder.lockscreenClock.setVisibility(View.VISIBLE);
             }
             
-            // Set click listener
-            holder.itemView.setOnClickListener(v -> {
-                if (item.destFragment == null || item.destFragment.isEmpty()) {
-                    return;
+            if (item.cardType == CARD_TYPE_WIDE && holder.aodClock != null) {
+                // TextClock updates automatically
+                holder.aodClock.setVisibility(View.VISIBLE);
+            }
+            
+            // Handle Theme Packs buttons - make them independently clickable
+            if (item.cardType == CARD_TYPE_THEME_PACKS) {
+                if (holder.themePackButtonLeft != null) {
+                    holder.themePackButtonLeft.setOnClickListener(v -> {
+                        launchDestination(item.destFragment, item.titleResId);
+                    });
                 }
-                
-                // Handle LineageParts activities
-                if (item.destFragment.startsWith("org.lineageos.lineageparts.")) {
-                    try {
-                        ComponentName component = new ComponentName("org.lineageos.lineageparts", 
-                            item.destFragment);
-                        PackageManager pm = context.getPackageManager();
-                        pm.getActivityInfo(component, 0);
-                        Intent intent = new Intent();
-                        intent.setComponent(component);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(intent);
-                    } catch (Exception e) {
-                        Log.e("SecurityGridAdapter", "Failed to launch: " + item.destFragment, e);
-                        Toast.makeText(context, R.string.system_tuner_not_available, 
-                            Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    // Launch fragment via SubSettingLauncher
-                    try {
-                        new SubSettingLauncher(context)
-                            .setDestination(item.destFragment)
-                            .setTitleRes(item.titleResId)
-                            .setArguments(new Bundle())
-                            .setSourceMetricsCategory(sourceMetrics)
-                            .launch();
-                    } catch (Exception e) {
-                        Log.e("SecurityGridAdapter", "Failed to launch fragment: " + item.destFragment, e);
-                        Toast.makeText(context, R.string.system_tuner_not_available, 
-                            Toast.LENGTH_SHORT).show();
-                    }
+                if (holder.themePackButtonRight != null) {
+                    holder.themePackButtonRight.setOnClickListener(v -> {
+                        launchDestination(item.destFragment, item.titleResId);
+                    });
                 }
-            });
+                // Make the card itself non-clickable
+                holder.itemView.setClickable(false);
+                holder.itemView.setFocusable(false);
+            } else {
+                // Set click listener for other cards
+                holder.itemView.setOnClickListener(v -> launchDestination(item.destFragment, item.titleResId));
+            }
         } catch (Exception e) {
             Log.e("SecurityGridAdapter", "Error in onBindViewHolder at position " + position, e);
         }
@@ -256,6 +232,54 @@ class SecurityGridAdapter extends RecyclerView.Adapter<SecurityGridAdapter.CardV
     @Override
     public int getItemCount() { 
         return items.size(); 
+    }
+    
+    /**
+     * Launch destination fragment or activity - following InfinitySuite pattern
+     * Adapted for Settings app using SubSettingLauncher
+     */
+    private void launchDestination(String destFragment, int titleResId) {
+        if (destFragment == null || destFragment.isEmpty()) {
+            Log.w("SecurityGridAdapter", "Empty destination fragment");
+            return;
+        }
+        
+        try {
+            // Handle LineageParts activities
+            if (destFragment.startsWith("org.lineageos.lineageparts.")) {
+                launchLineagePartsActivity(destFragment);
+            } else {
+                // Launch fragment via SubSettingLauncher (Settings app standard)
+                launchSettingsFragment(destFragment, titleResId);
+            }
+        } catch (Exception e) {
+            Log.e("SecurityGridAdapter", "Failed to launch: " + destFragment, e);
+            showErrorToast();
+        }
+    }
+    
+    private void launchLineagePartsActivity(String className) throws Exception {
+        ComponentName component = new ComponentName("org.lineageos.lineageparts", className);
+        PackageManager pm = activity.getPackageManager();
+        pm.getActivityInfo(component, 0);
+        Intent intent = new Intent();
+        intent.setComponent(component);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
+    
+    private void launchSettingsFragment(String destFragment, int titleResId) {
+        new SubSettingLauncher(activity)
+            .setDestination(destFragment)
+            .setTitleRes(titleResId)
+            .setArguments(new Bundle())
+            .setSourceMetricsCategory(sourceMetrics)
+            .launch();
+    }
+    
+    private void showErrorToast() {
+        Toast.makeText(activity, R.string.system_tuner_not_available, 
+            Toast.LENGTH_SHORT).show();
     }
 }
 
