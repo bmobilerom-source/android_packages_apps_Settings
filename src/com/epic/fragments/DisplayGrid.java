@@ -92,8 +92,12 @@ public class DisplayGrid extends SettingsPreferenceFragment implements
                 return;
             }
             
-            androidx.recyclerview.widget.GridLayoutManager layoutManager = 
-                    new androidx.recyclerview.widget.GridLayoutManager(context, 2);
+            // Use 3 columns:
+            // - Large left card spans 2 columns (visually 2 rows tall via its own height)
+            // - Right-side cards each take 1 column stacked vertically
+            // - Circular buttons take 1 column each -> 3 per row as in the desired design
+            androidx.recyclerview.widget.GridLayoutManager layoutManager =
+                    new androidx.recyclerview.widget.GridLayoutManager(context, 3);
             rv.setLayoutManager(layoutManager);
 
             java.util.List<DisplayGridAdapter.CardItem> items = new java.util.ArrayList<>();
