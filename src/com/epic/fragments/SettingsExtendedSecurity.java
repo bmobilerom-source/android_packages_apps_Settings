@@ -42,12 +42,15 @@
 package com.epic.fragments;
 
 import android.content.ContentResolver;
+import android.content.Context;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -65,6 +68,9 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
 
     private static final String TAG = "SettingsExtendedSecurity";
     private static final String KEY_AUTH_RIPPLE_ENABLED = "auth_ripple_enabled";
+    private static final String KEY_FINGERPRINT_CATEGORY = "extended_security_fingerprint_category";
+    private static final String KEY_FP_SUCCESS_VIBRATE = "fp_success_vibrate";
+    private static final String KEY_FP_ERROR_VIBRATE = "fp_error_vibrate";
     private static final String KEY_SHOW_CLIPBOARD_OVERLAY = "show_clipboard_overlay";
     private static final String KEY_NO_STORAGE_RESTRICT = "no_storage_restrict";
     private static final String KEY_WINDOW_IGNORE_SECURE = "window_ignore_secure";
@@ -78,6 +84,17 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final ContentResolver resolver = getActivity().getContentResolver();
+        final Context context = getActivity();
+
+        // Check fingerprint hardware and hide category if not available
+        PreferenceCategory fingerprintCategory = (PreferenceCategory) findPreference(KEY_FINGERPRINT_CATEGORY);
+        if (fingerprintCategory != null) {
+            FingerprintManager fingerprintManager = (FingerprintManager)
+                    context.getSystemService(Context.FINGERPRINT_SERVICE);
+            if (fingerprintManager == null || !fingerprintManager.isHardwareDetected()) {
+                prefScreen.removePreference(fingerprintCategory);
+            }
+        }
 
         // Initialize preference states
         updatePreferenceStates(resolver);
@@ -93,6 +110,16 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                 boolean enabled = (Boolean) newValue;
                 Settings.System.putInt(resolver, KEY_AUTH_RIPPLE_ENABLED, enabled ? 1 : 0);
                 Log.d(TAG, "auth_ripple_enabled set to: " + enabled);
+                return true;
+            } else if (KEY_FP_SUCCESS_VIBRATE.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.System.putInt(resolver, KEY_FP_SUCCESS_VIBRATE, enabled ? 1 : 0);
+                Log.d(TAG, "fp_success_vibrate set to: " + enabled);
+                return true;
+            } else if (KEY_FP_ERROR_VIBRATE.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.System.putInt(resolver, KEY_FP_ERROR_VIBRATE, enabled ? 1 : 0);
+                Log.d(TAG, "fp_error_vibrate set to: " + enabled);
                 return true;
             } else if (KEY_SHOW_CLIPBOARD_OVERLAY.equals(key)) {
                 boolean enabled = (Boolean) newValue;
@@ -136,6 +163,28 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                             .setChecked(rippleEnabled != 0);
                 }
                 authRipplePref.setOnPreferenceChangeListener(this);
+            }
+
+            // Update fingerprint success vibration preference
+            Preference fpSuccessVibratePref = findPreference(KEY_FP_SUCCESS_VIBRATE);
+            if (fpSuccessVibratePref != null) {
+                int fpSuccessVibrate = Settings.System.getInt(resolver, KEY_FP_SUCCESS_VIBRATE, 1);
+                if (fpSuccessVibratePref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) fpSuccessVibratePref)
+                            .setChecked(fpSuccessVibrate != 0);
+                }
+                fpSuccessVibratePref.setOnPreferenceChangeListener(this);
+            }
+
+            // Update fingerprint error vibration preference
+            Preference fpErrorVibratePref = findPreference(KEY_FP_ERROR_VIBRATE);
+            if (fpErrorVibratePref != null) {
+                int fpErrorVibrate = Settings.System.getInt(resolver, KEY_FP_ERROR_VIBRATE, 1);
+                if (fpErrorVibratePref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) fpErrorVibratePref)
+                            .setChecked(fpErrorVibrate != 0);
+                }
+                fpErrorVibratePref.setOnPreferenceChangeListener(this);
             }
 
             // Update show clipboard overlay preference
