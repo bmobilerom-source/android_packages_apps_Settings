@@ -67,5 +67,20 @@
 
     </PreferenceCategory>
 
+    <!-- Privacy & Interface Category -->
+    <PreferenceCategory
+        android:title="@string/extended_security_privacy_category"
+        android:order="1"
+        android:layout="@layout/settingslib_preference_category_no_title">
+
+        <!-- Show Clipboard Overlay -->
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+            android:key="show_clipboard_overlay"
+            android:title="@string/show_clipboard_overlay_title"
+            android:summary="@string/show_clipboard_overlay_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
 
