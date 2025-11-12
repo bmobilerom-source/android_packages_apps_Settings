@@ -129,52 +129,12 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     @Override
     public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Wire up the quick access grid (2x2) so it becomes visible and populated
-        try {
-            PreferenceScreen screen = getPreferenceScreen();
-            if (screen == null) return;
-            androidx.preference.Preference layoutPref = screen.findPreference(QUICK_ACCESS_KEY);
-            if (layoutPref instanceof com.android.settingslib.widget.LayoutPreference) {
-                com.android.settingslib.widget.LayoutPreference lp =
-                        (com.android.settingslib.widget.LayoutPreference) layoutPref;
-                androidx.recyclerview.widget.RecyclerView rv =
-                        lp.findViewById(R.id.quick_access_grid_recycler);
-                if (rv != null && getContext() != null && getActivity() != null) {
-                    androidx.recyclerview.widget.GridLayoutManager lm =
-                            new androidx.recyclerview.widget.GridLayoutManager(getContext(), 2);
-                    rv.setLayoutManager(lm);
-
-                    java.util.List<DisplayGridAdapter.CardItem> items = new java.util.ArrayList<>();
-                    // Reuse circular button card + adapter from DisplayGrid for consistency
-                    items.add(new DisplayGridAdapter.CardItem(
-                            DisplayGridAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                            R.string.display_grid_lock_title,
-                            R.string.display_grid_lock_summary,
-                            R.drawable.ic_display_grid_lock,
-                            "com.android.settings.security.SecuritySettings"));
-                    items.add(new DisplayGridAdapter.CardItem(
-                            DisplayGridAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                            R.string.display_grid_messages_title,
-                            R.string.display_grid_messages_summary,
-                            R.drawable.ic_display_grid_messages,
-                            "com.android.settings.notification.ConfigureNotificationSettings"));
-                    items.add(new DisplayGridAdapter.CardItem(
-                            DisplayGridAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                            R.string.display_grid_edit_title,
-                            R.string.display_grid_edit_summary,
-                            R.drawable.ic_display_grid_edit,
-                            "com.android.settings.display.DisplaySettings"));
-                    items.add(new DisplayGridAdapter.CardItem(
-                            DisplayGridAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                            R.string.display_grid_location_title,
-                            R.string.display_grid_location_summary,
-                            R.drawable.ic_display_grid_location,
-                            "com.android.settings.location.LocationSettings"));
-
-                    rv.setAdapter(new DisplayGridAdapter(getActivity(), items, getMetricsCategory()));
-                }
-            }
-        } catch (Exception ignored) { }
+        // Setup the quick access grid (2x2) using the helper
+        QuickAccessGrid2x2Helper.setupQuickAccessGrid(
+                getContext(), 
+                getPreferenceScreen(), 
+                getActivity(), 
+                getMetricsCategory());
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
