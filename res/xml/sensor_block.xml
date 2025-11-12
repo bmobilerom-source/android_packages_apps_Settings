@@ -26,6 +26,14 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/sensor_block_title">
 
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="sensor_block_illustration"
+        android:selectable="false"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/sec_illustration" />
+
     <!-- Master switch -->
     <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="sensor_block"
@@ -39,6 +47,21 @@
         android:dependency="sensor_block"
         android:key="sensor_block_applications">
 
+        <!-- Summary showing blocked app count -->
+        <Preference
+            android:key="sensor_block_app_count"
+            android:title="@string/sensor_block_app_count_title"
+            android:summary="@string/sensor_block_app_count_summary_default"
+            android:selectable="false"
+            android:persistent="false" />
+
+        <!-- List of blocked sensors -->
+        <Preference
+            android:key="sensor_block_sensors_info"
+            android:title="@string/sensor_block_sensors_list"
+            android:selectable="false"
+            android:persistent="false" />
+
         <Preference
             android:key="add_sensor_block_packages"
             android:title="@string/add_sensor_block_package_title"
@@ -49,6 +72,7 @@
 
     <com.android.settingslib.widget.FooterPreference
         android:key="sensor_block_footer"
+        android:title="@string/sensor_block_footer"
         android:selectable="false"
         settings:searchable="false"
         android:dependency="sensor_block" />

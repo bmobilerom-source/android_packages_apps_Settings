@@ -31,6 +31,7 @@ package com.epic.fragments;
 import android.content.ContentResolver;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -51,6 +52,8 @@ public class SensorBlockSettings extends SettingsPreferenceFragment implements
 
     private static final String TAG = "SensorBlockSettings";
     private static final String KEY_SENSOR_BLOCK = "sensor_block";
+    private static final String KEY_APP_COUNT = "sensor_block_app_count";
+    private static final String SETTING_KEY = "sensor_block_packages";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,48 @@ public class SensorBlockSettings extends SettingsPreferenceFragment implements
                         .setChecked(sensorBlockEnabled != 0);
             }
             sensorBlockPref.setOnPreferenceChangeListener(this);
+        }
+
+        // Update app count summary
+        updateAppCountSummary();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Update app count when returning to this page
+        updateAppCountSummary();
+    }
+
+    private void updateAppCountSummary() {
+        Preference appCountPref = findPreference(KEY_APP_COUNT);
+        if (appCountPref == null) {
+            return;
+        }
+
+        try {
+            ContentResolver resolver = getActivity().getContentResolver();
+            String packages = Settings.Secure.getString(resolver, SETTING_KEY);
+            int count = 0;
+
+            if (packages != null && !packages.isEmpty()) {
+                String[] packageArray = packages.split(",");
+                for (String pkg : packageArray) {
+                    if (!pkg.trim().isEmpty()) {
+                        count++;
+                    }
+                }
+            }
+
+            if (count == 0) {
+                appCountPref.setSummary(R.string.sensor_block_app_count_summary_default);
+            } else {
+                String summary = getString(R.string.sensor_block_app_count_summary, count);
+                appCountPref.setSummary(summary);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error updating app count summary", e);
+            appCountPref.setSummary(R.string.sensor_block_app_count_summary_default);
         }
     }
 

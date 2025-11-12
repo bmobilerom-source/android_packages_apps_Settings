@@ -47,6 +47,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -85,27 +86,60 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        loadSelectedPackages();
-        loadApps();
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.hide_developer_status_layout, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if (getActivity() == null) {
+            Log.e(TAG, "Activity is null in onViewCreated");
+            return;
+        }
+
         mRecyclerView = view.findViewById(R.id.apps_list);
+        if (mRecyclerView == null) {
+            Log.e(TAG, "RecyclerView not found in layout");
+            return;
+        }
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // Load selected packages first (before loading apps)
+        loadSelectedPackages();
+        Log.d(TAG, "Selected packages loaded: " + mSelectedPackages.size());
+        
+        // Load apps after view is ready
+        loadApps();
+        
+        // Setup adapter after apps are loaded
         mAdapter = new AppAdapter();
         mRecyclerView.setAdapter(mAdapter);
         
+        // Filter and display apps
         filterApps();
+        
+        Log.d(TAG, "App list initialized. Total apps: " + mAppList.size() + 
+              ", Filtered: " + mFilteredList.size() + 
+              ", Selected: " + mSelectedPackages.size());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Reload selected packages in case they were changed elsewhere
+        loadSelectedPackages();
+        // Refresh the adapter to show updated switch states
+        if (mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
+        }
+        Log.d(TAG, "onResume: Reloaded " + mSelectedPackages.size() + " selected packages");
     }
 
     @Override
@@ -161,28 +195,70 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
     }
 
     private void loadApps() {
-        PackageManager pm = getActivity().getPackageManager();
-        List<ApplicationInfo> installedApps = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-        
-        mAppList.clear();
-        for (ApplicationInfo info : installedApps) {
-            mAppList.add(new AppInfo(info, pm));
+        if (getActivity() == null) {
+            Log.e(TAG, "Activity is null, cannot load apps");
+            return;
         }
-        
-        // Sort alphabetically
-        Collections.sort(mAppList, Comparator.comparing(app -> app.label.toString()));
+
+        try {
+            PackageManager pm = getActivity().getPackageManager();
+            if (pm == null) {
+                Log.e(TAG, "PackageManager is null");
+                return;
+            }
+
+            List<ApplicationInfo> installedApps = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+            if (installedApps == null || installedApps.isEmpty()) {
+                Log.w(TAG, "No installed apps found");
+                return;
+            }
+            
+            mAppList.clear();
+            for (ApplicationInfo info : installedApps) {
+                try {
+                    if (info != null) {
+                        mAppList.add(new AppInfo(info, pm));
+                    }
+                } catch (Exception e) {
+                    Log.w(TAG, "Error loading app: " + (info != null ? info.packageName : "null"), e);
+                }
+            }
+            
+            // Sort alphabetically
+            Collections.sort(mAppList, Comparator.comparing(app -> app.label.toString()));
+            
+            Log.d(TAG, "Loaded " + mAppList.size() + " apps");
+        } catch (Exception e) {
+            Log.e(TAG, "Error loading apps", e);
+        }
     }
 
     private void loadSelectedPackages() {
+        if (getActivity() == null) {
+            Log.e(TAG, "Activity is null, cannot load selected packages");
+            return;
+        }
+
         mSelectedPackages.clear();
-        String packages = Settings.Secure.getString(getActivity().getContentResolver(), SETTING_KEY);
-        if (packages != null && !packages.isEmpty()) {
-            String[] packageArray = packages.split(",");
-            for (String pkg : packageArray) {
-                if (!pkg.trim().isEmpty()) {
-                    mSelectedPackages.add(pkg.trim());
+        try {
+            String packages = Settings.Secure.getString(getActivity().getContentResolver(), SETTING_KEY);
+            Log.d(TAG, "Raw packages string from Settings: " + (packages != null ? packages : "null"));
+            
+            if (packages != null && !packages.isEmpty()) {
+                String[] packageArray = packages.split(",");
+                for (String pkg : packageArray) {
+                    String trimmed = pkg.trim();
+                    if (!trimmed.isEmpty()) {
+                        mSelectedPackages.add(trimmed);
+                        Log.v(TAG, "Added package to selection: " + trimmed);
+                    }
                 }
+                Log.d(TAG, "Loaded " + mSelectedPackages.size() + " selected packages: " + mSelectedPackages);
+            } else {
+                Log.d(TAG, "No packages found in Settings.Secure for key: " + SETTING_KEY);
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Error loading selected packages", e);
         }
     }
 
@@ -195,19 +271,28 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
     private void filterApps() {
         mFilteredList.clear();
         for (AppInfo app : mAppList) {
-            boolean matchesSearch = TextUtils.isEmpty(mSearchQuery) ||
-                                    app.label.toLowerCase().contains(mSearchQuery) ||
-                                    app.packageName.toLowerCase().contains(mSearchQuery);
-            
-            boolean isSystemApp = (app.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
-            boolean matchesSystemFilter = mShowSystemApps || !isSystemApp;
+            try {
+                boolean matchesSearch = TextUtils.isEmpty(mSearchQuery) ||
+                                        app.label.toString().toLowerCase().contains(mSearchQuery) ||
+                                        app.packageName.toLowerCase().contains(mSearchQuery);
+                
+                boolean isSystemApp = (app.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+                boolean matchesSystemFilter = mShowSystemApps || !isSystemApp;
 
-            if (matchesSearch && matchesSystemFilter) {
-                mFilteredList.add(app);
+                if (matchesSearch && matchesSystemFilter) {
+                    mFilteredList.add(app);
+                }
+            } catch (Exception e) {
+                Log.w(TAG, "Error filtering app: " + app.packageName, e);
             }
         }
+        
+        Log.d(TAG, "Filtered apps: " + mFilteredList.size() + " out of " + mAppList.size() + " total");
+        
         if (mAdapter != null) {
             mAdapter.notifyDataSetChanged();
+        } else {
+            Log.w(TAG, "Adapter is null, cannot notify data set changed");
         }
     }
 
@@ -233,19 +318,38 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            if (position < 0 || position >= mFilteredList.size()) {
+                Log.w(TAG, "Invalid position in onBindViewHolder: " + position);
+                return;
+            }
+            
             AppInfo app = mFilteredList.get(position);
+            if (app == null) {
+                Log.w(TAG, "AppInfo is null at position: " + position);
+                return;
+            }
+            
             holder.icon.setImageDrawable(app.icon);
             holder.title.setText(app.label);
             holder.summary.setText(app.packageName);
-            holder.switchWidget.setChecked(mSelectedPackages.contains(app.packageName));
+            
+            // Check if this app is in the selected packages set
+            boolean isSelected = mSelectedPackages.contains(app.packageName);
+            holder.switchWidget.setChecked(isSelected);
+            
+            Log.v(TAG, "Binding app: " + app.packageName + ", Selected: " + isSelected);
 
             holder.itemView.setOnClickListener(v -> {
-                boolean isChecked = holder.switchWidget.isChecked();
-                holder.switchWidget.setChecked(!isChecked);
-                if (!isChecked) {
+                boolean currentState = holder.switchWidget.isChecked();
+                boolean newState = !currentState;
+                holder.switchWidget.setChecked(newState);
+                
+                if (newState) {
                     mSelectedPackages.add(app.packageName);
+                    Log.d(TAG, "Added to selection: " + app.packageName);
                 } else {
                     mSelectedPackages.remove(app.packageName);
+                    Log.d(TAG, "Removed from selection: " + app.packageName);
                 }
                 // No need to save immediately, onPause will handle it
             });
