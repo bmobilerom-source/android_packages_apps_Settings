@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * TRANSFER TO OTHER ROMS:
+ * =======================
+ * This is a completely independent extended security settings page.
+ * To transfer to other ROMs, copy:
+ * - anatolia_settings_extended_security.xml (this file)
+ * - SettingsExtendedSecurity.java
+ * - res/values/extended_security_strings.xml
+ * - Any referenced drawables/layouts
+ *
+ * Update package names and preference classes as needed for target ROM.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/extended_security_title">
+
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="extended_security_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/security" />
+
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="@string/extended_security_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="extended_security_top_intro"
+        android:title="@string/extended_security_intro"
+        android:persistent="false"
+        android:order="-999"/>
+
+    <!-- Authentication Category -->
+    <PreferenceCategory
+        android:title="@string/extended_security_authentication_category"
+        android:order="0"
+        android:layout="@layout/settingslib_preference_category_no_title">
+
+        <!-- Fingerprint Ripple Effect -->
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+            android:key="auth_ripple_enabled"
+            android:title="@string/enable_fingerprint_ripple_effect_title"
+            android:summary="@string/enable_fingerprint_ripple_effect_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
+
