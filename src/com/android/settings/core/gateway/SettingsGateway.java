@@ -416,7 +416,8 @@ public class SettingsGateway {
             // Anatolia Additions
             Anatolia.class.getName(),
             com.epic.fragments.DisplayGrid.class.getName(),
-            com.epic.fragments.SettingsExtendedSecurity.class.getName()
+            com.epic.fragments.SettingsExtendedSecurity.class.getName(),
+            com.epic.fragments.HideDeveloperStatusSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
