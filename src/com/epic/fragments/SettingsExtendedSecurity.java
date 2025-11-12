@@ -66,6 +66,7 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
     private static final String TAG = "SettingsExtendedSecurity";
     private static final String KEY_AUTH_RIPPLE_ENABLED = "auth_ripple_enabled";
     private static final String KEY_SHOW_CLIPBOARD_OVERLAY = "show_clipboard_overlay";
+    private static final String KEY_SECURE_LOCKSCREEN_QS_DISABLED = "secure_lockscreen_qs_disabled";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,11 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                 boolean enabled = (Boolean) newValue;
                 Settings.Secure.putInt(resolver, KEY_SHOW_CLIPBOARD_OVERLAY, enabled ? 1 : 0);
                 Log.d(TAG, "show_clipboard_overlay set to: " + enabled);
+                return true;
+            } else if (KEY_SECURE_LOCKSCREEN_QS_DISABLED.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.System.putInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, enabled ? 1 : 0);
+                Log.d(TAG, "secure_lockscreen_qs_disabled set to: " + enabled);
                 return true;
             }
         } catch (Exception e) {
@@ -129,6 +135,17 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                             .setChecked(overlayEnabled != 0);
                 }
                 clipboardOverlayPref.setOnPreferenceChangeListener(this);
+            }
+
+            // Update secure lockscreen qs disabled preference
+            Preference secureLockscreenQsPref = findPreference(KEY_SECURE_LOCKSCREEN_QS_DISABLED);
+            if (secureLockscreenQsPref != null) {
+                int qsDisabled = Settings.System.getInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, 0);
+                if (secureLockscreenQsPref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) secureLockscreenQsPref)
+                            .setChecked(qsDisabled != 0);
+                }
+                secureLockscreenQsPref.setOnPreferenceChangeListener(this);
             }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference states", e);
