@@ -93,6 +93,22 @@
             android:fragment="com.epic.fragments.ExtraSettings"
             android:icon="@drawable/ic_anatolia_extras" />
 
+        <!-- Sensor Block -->
+        <PreferenceScreen
+            android:key="sensor_block_category"
+            android:title="@string/sensor_block_title"
+            android:summary="@string/sensor_block_summary"
+            android:fragment="com.epic.fragments.SensorBlockSettings"
+            android:icon="@drawable/ic_settings_battery_filled" />
+
+        <!-- Extended Security -->
+        <PreferenceScreen
+            android:key="extended_security_category"
+            android:title="@string/extended_security_title"
+            android:summary="@string/extended_security_summary"
+            android:fragment="com.epic.fragments.SettingsExtendedSecurity"
+            android:icon="@drawable/ic_settings_security_filled" />
+
         <!-- Install App Whitelist Toggle -->
         <SwitchPreferenceCompat
             android:key="install_app_whitelist_toggle"
