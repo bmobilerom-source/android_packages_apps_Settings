@@ -14,25 +14,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     android:orientation="vertical"
     android:gravity="center">
 
     <!-- Fixed-size circular container to avoid stretching in GridLayoutManager -->
     <!-- Use adaptive preference card styling with custom_surface_color_circle for system color adaptation -->
     <FrameLayout
-        android:layout_width="115dp"
-        android:layout_height="115dp"
+        android:layout_width="81dp"
+        android:layout_height="81dp"
         android:background="@drawable/custom_surface_color_circle"
         android:foregroundGravity="center">
 
         <ImageView
             android:id="@android:id/icon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
@@ -44,8 +44,8 @@
         android:id="@android:id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textSize="12sp"
+        android:layout_marginTop="6dp"
+        android:textSize="8sp"
         android:textColor="?android:textColorPrimary"
         android:gravity="center"
         android:maxLines="2"
