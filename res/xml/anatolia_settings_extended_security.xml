@@ -62,6 +62,29 @@
 
     </PreferenceCategory>
 
+    <!-- Fingerprint Category -->
+    <PreferenceCategory
+        android:key="extended_security_fingerprint_category"
+        android:title="@string/extended_security_fingerprint_category"
+        android:order="0"
+        android:layout="@layout/settingslib_preference_category_no_title">
+
+        <!-- Authentication Success Vibration -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="fp_success_vibrate"
+            android:title="@string/fingerprint_success_vibration_title"
+            android:summary="@string/fingerprint_success_vibration_summary"
+            android:defaultValue="true" />
+
+        <!-- Authentication Error Vibration -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="fp_error_vibrate"
+            android:title="@string/fingerprint_error_vibration_title"
+            android:summary="@string/fingerprint_error_vibration_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
     <!-- Privacy & Interface Category -->
     <PreferenceCategory
         android:title="@string/extended_security_privacy_category"

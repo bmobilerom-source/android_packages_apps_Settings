@@ -32,6 +32,15 @@
     <string name="enable_fingerprint_ripple_effect_title">Unlock animation</string>
     <string name="enable_fingerprint_ripple_effect_summary">Show ripple effect on unlock with fingerprint</string>
 
+    <!-- Fingerprint Category -->
+    <string name="extended_security_fingerprint_category">Fingerprint</string>
+
+    <!-- Fingerprint Authentication Vibration -->
+    <string name="fingerprint_success_vibration_title">Authentication success vibration</string>
+    <string name="fingerprint_success_vibration_summary">Vibrate when fingerprint authentication is successful</string>
+    <string name="fingerprint_error_vibration_title">Authentication error vibration</string>
+    <string name="fingerprint_error_vibration_summary">Vibrate when fingerprint authentication fails</string>
+
     <!-- Privacy & Interface Category -->
     <string name="extended_security_privacy_category">Privacy &amp; Interface</string>
 
