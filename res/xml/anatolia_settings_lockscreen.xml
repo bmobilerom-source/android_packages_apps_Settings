@@ -31,6 +31,10 @@
         android:shouldDisableView="false"
         android:layout="@layout/stallion_header" />
 
+<com.android.settingslib.widget.LayoutPreference
+        android:key="display_grid"
+        android:selectable="false"
+        android:layout="@layout/top_level_settings_grid_layout" />
 
 
 

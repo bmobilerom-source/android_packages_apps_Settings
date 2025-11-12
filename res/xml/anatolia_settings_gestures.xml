@@ -33,4 +33,12 @@
         android:key="quick_access_grid"
         android:selectable="false"
         android:layout="@layout/quick_access_grid_2x2" />
+
+        
+<com.android.settingslib.widget.LayoutPreference
+        android:key="display_grid"
+        android:selectable="false"
+        android:layout="@layout/top_level_settings_grid_layout" />
+
+
 </PreferenceScreen>
