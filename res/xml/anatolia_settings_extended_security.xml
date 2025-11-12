@@ -134,10 +134,25 @@
 
     </PreferenceCategory>
 
+    <!-- Battery Saving Category -->
+    <PreferenceCategory
+        android:title="@string/extended_security_battery_saving_category"
+        android:order="3"
+        android:layout="@layout/settingslib_preference_category_no_title">
+
+        <!-- Sensor Block -->
+        <Preference
+            android:key="sensor_block_settings"
+            android:title="@string/sensor_block_title"
+            android:summary="@string/sensor_block_summary"
+            android:fragment="com.epic.fragments.SensorBlockSettings" />
+
+    </PreferenceCategory>
+
     <!-- Developer Options Category -->
     <PreferenceCategory
         android:title="@string/extended_security_developer_category"
-        android:order="3"
+        android:order="4"
         android:layout="@layout/settingslib_preference_category_no_title">
 
         <!-- Hide Developer Status -->
