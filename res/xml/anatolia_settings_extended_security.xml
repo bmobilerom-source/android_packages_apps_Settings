@@ -97,5 +97,20 @@
 
     </PreferenceCategory>
 
+    <!-- Developer Options Category -->
+    <PreferenceCategory
+        android:title="@string/extended_security_developer_category"
+        android:order="3"
+        android:layout="@layout/settingslib_preference_category_no_title">
+
+        <!-- Hide Developer Status -->
+        <Preference
+            android:key="hide_developer_status_settings"
+            android:title="@string/hide_developer_status_title"
+            android:summary="@string/hide_developer_status_summary"
+            android:fragment="com.epic.fragments.HideDeveloperStatusSettings" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
 
