@@ -72,6 +72,8 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
     private SecurityInfoHeaderController mSecurityInfoHeaderController;
     private static final String KEY_AUTH_RIPPLE_ENABLED = "auth_ripple_enabled";
     private static final String KEY_SHOW_CLIPBOARD_OVERLAY = "show_clipboard_overlay";
+    private static final String KEY_NO_STORAGE_RESTRICT = "no_storage_restrict";
+    private static final String KEY_WINDOW_IGNORE_SECURE = "window_ignore_secure";
     private static final String KEY_SECURE_LOCKSCREEN_QS_DISABLED = "secure_lockscreen_qs_disabled";
 
     @Override
@@ -107,6 +109,16 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
                 boolean enabled = (Boolean) newValue;
                 Settings.Secure.putInt(resolver, KEY_SHOW_CLIPBOARD_OVERLAY, enabled ? 1 : 0);
                 Log.d(TAG, "show_clipboard_overlay set to: " + enabled);
+                return true;
+            } else if (KEY_NO_STORAGE_RESTRICT.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.Global.putInt(resolver, KEY_NO_STORAGE_RESTRICT, enabled ? 1 : 0);
+                Log.d(TAG, "no_storage_restrict set to: " + enabled);
+                return true;
+            } else if (KEY_WINDOW_IGNORE_SECURE.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.Global.putInt(resolver, KEY_WINDOW_IGNORE_SECURE, enabled ? 1 : 0);
+                Log.d(TAG, "window_ignore_secure set to: " + enabled);
                 return true;
             } else if (KEY_SECURE_LOCKSCREEN_QS_DISABLED.equals(key)) {
                 boolean enabled = (Boolean) newValue;
@@ -146,6 +158,28 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
                             .setChecked(overlayEnabled != 0);
                 }
                 clipboardOverlayPref.setOnPreferenceChangeListener(this);
+            }
+
+            // Update no storage restrict preference
+            Preference noStorageRestrictPref = findPreference(KEY_NO_STORAGE_RESTRICT);
+            if (noStorageRestrictPref != null) {
+                int storageRestrictEnabled = Settings.Global.getInt(resolver, KEY_NO_STORAGE_RESTRICT, 0);
+                if (noStorageRestrictPref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) noStorageRestrictPref)
+                            .setChecked(storageRestrictEnabled != 0);
+                }
+                noStorageRestrictPref.setOnPreferenceChangeListener(this);
+            }
+
+            // Update window ignore secure preference
+            Preference windowIgnoreSecurePref = findPreference(KEY_WINDOW_IGNORE_SECURE);
+            if (windowIgnoreSecurePref != null) {
+                int windowIgnoreSecureEnabled = Settings.Global.getInt(resolver, KEY_WINDOW_IGNORE_SECURE, 0);
+                if (windowIgnoreSecurePref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) windowIgnoreSecurePref)
+                            .setChecked(windowIgnoreSecureEnabled != 0);
+                }
+                windowIgnoreSecurePref.setOnPreferenceChangeListener(this);
             }
 
             // Update secure lockscreen qs disabled preference
