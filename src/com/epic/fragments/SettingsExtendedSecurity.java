@@ -65,6 +65,7 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
 
     private static final String TAG = "SettingsExtendedSecurity";
     private static final String KEY_AUTH_RIPPLE_ENABLED = "auth_ripple_enabled";
+    private static final String KEY_SHOW_CLIPBOARD_OVERLAY = "show_clipboard_overlay";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,11 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                 Settings.System.putInt(resolver, KEY_AUTH_RIPPLE_ENABLED, enabled ? 1 : 0);
                 Log.d(TAG, "auth_ripple_enabled set to: " + enabled);
                 return true;
+            } else if (KEY_SHOW_CLIPBOARD_OVERLAY.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.Secure.putInt(resolver, KEY_SHOW_CLIPBOARD_OVERLAY, enabled ? 1 : 0);
+                Log.d(TAG, "show_clipboard_overlay set to: " + enabled);
+                return true;
             }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference: " + key, e);
@@ -112,6 +118,17 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                             .setChecked(rippleEnabled != 0);
                 }
                 authRipplePref.setOnPreferenceChangeListener(this);
+            }
+
+            // Update show clipboard overlay preference
+            Preference clipboardOverlayPref = findPreference(KEY_SHOW_CLIPBOARD_OVERLAY);
+            if (clipboardOverlayPref != null) {
+                int overlayEnabled = Settings.Secure.getInt(resolver, KEY_SHOW_CLIPBOARD_OVERLAY, 1);
+                if (clipboardOverlayPref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) clipboardOverlayPref)
+                            .setChecked(overlayEnabled != 0);
+                }
+                clipboardOverlayPref.setOnPreferenceChangeListener(this);
             }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference states", e);
