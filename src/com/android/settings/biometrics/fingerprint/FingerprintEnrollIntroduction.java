@@ -156,10 +156,17 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
                 mSensorId = sensorId;
                 mChallenge = challenge;
-                final GatekeeperPasswordProvider provider = getGatekeeperPasswordProvider();
-                mToken = provider.requestGatekeeperHat(intent, challenge, mUserId);
-                provider.removeGatekeeperPasswordHandle(intent, true);
-                getNextButton().setEnabled(true);
+                try {
+                    final GatekeeperPasswordProvider provider = getGatekeeperPasswordProvider();
+                    mToken = provider.requestGatekeeperHat(intent, challenge, mUserId);
+                    provider.removeGatekeeperPasswordHandle(intent, true);
+                    getNextButton().setEnabled(true);
+                } catch (IllegalStateException e) {
+                    Log.e(TAG, "Failed to request gatekeeper HAT", e);
+                    // If gatekeeper HAT request fails, finish the activity to go back to password page
+                    setResult(RESULT_CANCELED);
+                    finish();
+                }
             }));
         }
 

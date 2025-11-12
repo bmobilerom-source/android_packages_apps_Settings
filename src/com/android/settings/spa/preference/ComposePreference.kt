@@ -54,7 +54,10 @@ open class ComposePreference @JvmOverloads constructor(
     }
 
     init {
-        layoutResource = R.layout.preference_compose
+        // Only set default layout if not specified in XML attributes
+        if (layoutResource == 0) {
+            layoutResource = R.layout.preference_compose
+        }
         isSelectable = false
     }
 
@@ -63,7 +66,15 @@ open class ComposePreference @JvmOverloads constructor(
         holder.isDividerAllowedAbove = false
         holder.isDividerAllowedBelow = false
 
-        (holder.itemView as ComposeView).apply {
+        // Find ComposeView in the layout hierarchy
+        val composeView = if (holder.itemView is ComposeView) {
+            holder.itemView as ComposeView
+        } else {
+            holder.itemView.findViewById<ComposeView>(R.id.compose_view)
+                ?: findComposeView(holder.itemView)
+        }
+
+        composeView?.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 SettingsTheme {
@@ -71,5 +82,17 @@ open class ComposePreference @JvmOverloads constructor(
                 }
             }
         }
+    }
+
+    private fun findComposeView(view: android.view.View): ComposeView? {
+        if (view is ComposeView) {
+            return view
+        }
+        if (view is android.view.ViewGroup) {
+            for (i in 0 until view.childCount) {
+                findComposeView(view.getChildAt(i))?.let { return it }
+            }
+        }
+        return null
     }
 }

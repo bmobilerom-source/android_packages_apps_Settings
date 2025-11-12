@@ -77,69 +77,153 @@ public class ZenModeBackend {
 
     public ZenModeBackend(Context context) {
         mContext = context;
-        mNotificationManager = (NotificationManager) context.getSystemService(
-                Context.NOTIFICATION_SERVICE);
+        if (context != null) {
+            mNotificationManager = (NotificationManager) context.getSystemService(
+                    Context.NOTIFICATION_SERVICE);
+        } else {
+            mNotificationManager = null;
+            Log.e(TAG, "ZenModeBackend initialized with null context");
+        }
         updateZenMode();
         updatePolicy();
     }
 
     protected void updatePolicy() {
         if (mNotificationManager != null) {
-            mPolicy = mNotificationManager.getNotificationPolicy();
+            try {
+                mPolicy = mNotificationManager.getNotificationPolicy();
+            } catch (Exception e) {
+                Log.e(TAG, "Error getting notification policy", e);
+                // Initialize with default policy if service unavailable
+                mPolicy = new NotificationManager.Policy(0, 0, 0, 0, 0);
+            }
+        } else {
+            // Initialize with default policy if NotificationManager is null
+            mPolicy = new NotificationManager.Policy(0, 0, 0, 0, 0);
         }
     }
 
     protected void updateZenMode() {
-        mZenMode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ZEN_MODE, mZenMode);
+        if (mContext == null) {
+            Log.e(TAG, "Cannot update zen mode: Context is null");
+            return;
+        }
+        try {
+            mZenMode = Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.ZEN_MODE, mZenMode);
+        } catch (Exception e) {
+            Log.e(TAG, "Error updating zen mode", e);
+            // Keep existing mZenMode value on error
+        }
     }
 
     protected boolean updateZenRule(String id, AutomaticZenRule rule) {
-        if (android.app.Flags.modesApi()) {
-            return mNotificationManager.updateAutomaticZenRule(id, rule, /* fromUser= */ true);
-        } else {
+        if (mNotificationManager == null && mContext == null) {
+            Log.e(TAG, "Cannot update zen rule: NotificationManager and Context are null");
+            return false;
+        }
+        try {
+            if (android.app.Flags.modesApi()) {
+                if (mNotificationManager != null) {
+                    return mNotificationManager.updateAutomaticZenRule(id, rule, /* fromUser= */ true);
+                }
+            }
             return NotificationManager.from(mContext).updateAutomaticZenRule(id, rule);
+        } catch (Exception e) {
+            Log.e(TAG, "Error updating zen rule", e);
+            return false;
         }
     }
 
     protected void setZenMode(int zenMode) {
-        if (android.app.Flags.modesApi()) {
-            mNotificationManager.setZenMode(zenMode, null, TAG, /* fromUser= */ true);
-        } else {
-            NotificationManager.from(mContext).setZenMode(zenMode, null, TAG);
+        if (mNotificationManager == null && mContext == null) {
+            Log.e(TAG, "Cannot set zen mode: NotificationManager and Context are null");
+            return;
         }
-        mZenMode = getZenMode();
+        try {
+            if (android.app.Flags.modesApi()) {
+                if (mNotificationManager != null) {
+                    mNotificationManager.setZenMode(zenMode, null, TAG, /* fromUser= */ true);
+                } else {
+                    NotificationManager.from(mContext).setZenMode(zenMode, null, TAG);
+                }
+            } else {
+                NotificationManager.from(mContext).setZenMode(zenMode, null, TAG);
+            }
+            mZenMode = getZenMode();
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting zen mode", e);
+            // Don't update mZenMode on error to prevent inconsistent state
+        }
     }
 
     protected void setZenModeForDuration(int minutes) {
-        Uri conditionId = ZenModeConfig.toTimeCondition(mContext, minutes,
-                ActivityManager.getCurrentUser(), true).id;
-        if (android.app.Flags.modesApi()) {
-            mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
-                    conditionId, TAG, /* fromUser= */ true);
-        } else {
-            mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
-                    conditionId, TAG);
+        if (mContext == null) {
+            Log.e(TAG, "Cannot set zen mode for duration: Context is null");
+            return;
         }
-        mZenMode = getZenMode();
+        if (mNotificationManager == null && mContext == null) {
+            Log.e(TAG, "Cannot set zen mode for duration: NotificationManager and Context are null");
+            return;
+        }
+        try {
+            Uri conditionId = ZenModeConfig.toTimeCondition(mContext, minutes,
+                    ActivityManager.getCurrentUser(), true).id;
+            if (android.app.Flags.modesApi()) {
+                if (mNotificationManager != null) {
+                    mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
+                            conditionId, TAG, /* fromUser= */ true);
+                } else {
+                    NotificationManager.from(mContext).setZenMode(
+                            Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, conditionId, TAG);
+                }
+            } else {
+                if (mNotificationManager != null) {
+                    mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
+                            conditionId, TAG);
+                } else {
+                    NotificationManager.from(mContext).setZenMode(
+                            Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, conditionId, TAG);
+                }
+            }
+            mZenMode = getZenMode();
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting zen mode for duration", e);
+            // Don't update mZenMode on error to prevent inconsistent state
+        }
     }
 
     protected int getZenMode() {
-        mZenMode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ZEN_MODE, mZenMode);
-        return mZenMode;
+        if (mContext == null) {
+            Log.e(TAG, "Cannot get zen mode: Context is null");
+            return mZenMode; // Return cached value if context is null
+        }
+        try {
+            mZenMode = Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.ZEN_MODE, mZenMode);
+            return mZenMode;
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting zen mode", e);
+            return mZenMode; // Return cached value on error
+        }
     }
 
     protected boolean isVisualEffectSuppressed(int visualEffect) {
+        if (mPolicy == null) {
+            return false;
+        }
         return (mPolicy.suppressedVisualEffects & visualEffect) != 0;
     }
 
     protected boolean isPriorityCategoryEnabled(int categoryType) {
+        if (mPolicy == null) {
+            return false;
+        }
         return (mPolicy.priorityCategories & categoryType) != 0;
     }
 
     protected int getNewDefaultPriorityCategories(boolean allow, int categoryType) {
-        int priorityCategories = mPolicy.priorityCategories;
+        int priorityCategories = (mPolicy != null) ? mPolicy.priorityCategories : 0;
         if (allow) {
             priorityCategories |= categoryType;
         } else {
@@ -149,6 +233,9 @@ public class ZenModeBackend {
     }
 
     protected int getPriorityCallSenders() {
+        if (mPolicy == null) {
+            return SOURCE_NONE;
+        }
         if (isPriorityCategoryEnabled(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS)) {
             return mPolicy.priorityCallSenders;
         }
@@ -157,6 +244,9 @@ public class ZenModeBackend {
     }
 
     protected int getPriorityMessageSenders() {
+        if (mPolicy == null) {
+            return SOURCE_NONE;
+        }
         if (isPriorityCategoryEnabled(
                 NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES)) {
             return mPolicy.priorityMessageSenders;
@@ -165,6 +255,9 @@ public class ZenModeBackend {
     }
 
     protected int getPriorityConversationSenders() {
+        if (mPolicy == null) {
+            return CONVERSATION_SENDERS_NONE;
+        }
         if (isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)) {
             return mPolicy.priorityConversationSenders;
         }
@@ -172,6 +265,10 @@ public class ZenModeBackend {
     }
 
     protected void saveVisualEffectsPolicy(int category, boolean suppress) {
+        if (mPolicy == null) {
+            Log.e(TAG, "Cannot save visual effects policy: mPolicy is null");
+            return;
+        }
         int suppressedEffects = getNewSuppressedEffects(suppress, category);
         savePolicy(mPolicy.priorityCategories, mPolicy.priorityCallSenders,
                 mPolicy.priorityMessageSenders, suppressedEffects,
@@ -179,6 +276,10 @@ public class ZenModeBackend {
     }
 
     protected void saveSoundPolicy(int category, boolean allow) {
+        if (mPolicy == null) {
+            Log.e(TAG, "Cannot save sound policy: mPolicy is null");
+            return;
+        }
         int priorityCategories = getNewDefaultPriorityCategories(allow, category);
         savePolicy(priorityCategories, mPolicy.priorityCallSenders,
                 mPolicy.priorityMessageSenders, mPolicy.suppressedVisualEffects,
@@ -188,18 +289,36 @@ public class ZenModeBackend {
     protected void savePolicy(int priorityCategories, int priorityCallSenders,
             int priorityMessageSenders, int suppressedVisualEffects,
             int priorityConversationSenders) {
-        mPolicy = new NotificationManager.Policy(priorityCategories, priorityCallSenders,
-                priorityMessageSenders, suppressedVisualEffects, priorityConversationSenders);
-        if (android.app.Flags.modesApi()) {
-            mNotificationManager.setNotificationPolicy(mPolicy, /* fromUser= */ true);
-        } else {
-            mNotificationManager.setNotificationPolicy(mPolicy);
+        if (mNotificationManager == null && mContext == null) {
+            Log.e(TAG, "Cannot save policy: NotificationManager and Context are null");
+            return;
+        }
+        try {
+            mPolicy = new NotificationManager.Policy(priorityCategories, priorityCallSenders,
+                    priorityMessageSenders, suppressedVisualEffects, priorityConversationSenders);
+            if (android.app.Flags.modesApi()) {
+                if (mNotificationManager != null) {
+                    mNotificationManager.setNotificationPolicy(mPolicy, /* fromUser= */ true);
+                } else {
+                    NotificationManager.from(mContext).setNotificationPolicy(mPolicy);
+                }
+            } else {
+                if (mNotificationManager != null) {
+                    mNotificationManager.setNotificationPolicy(mPolicy);
+                } else {
+                    NotificationManager.from(mContext).setNotificationPolicy(mPolicy);
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error saving notification policy", e);
+            // Revert policy to previous state on error
+            updatePolicy();
         }
     }
 
 
     private int getNewSuppressedEffects(boolean suppress, int effectType) {
-        int effects = mPolicy.suppressedVisualEffects;
+        int effects = (mPolicy != null) ? mPolicy.suppressedVisualEffects : 0;
 
         if (suppress) {
             effects |= effectType;
@@ -215,10 +334,17 @@ public class ZenModeBackend {
     }
 
     protected boolean isEffectAllowed(int effect) {
+        if (mPolicy == null) {
+            return true; // Default to allowing effects if policy is null
+        }
         return (mPolicy.suppressedVisualEffects & effect) == 0;
     }
 
     protected void saveSenders(int category, int val) {
+        if (mPolicy == null) {
+            Log.e(TAG, "Cannot save senders: mPolicy is null");
+            return;
+        }
         int priorityCallSenders = getPriorityCallSenders();
         int priorityMessagesSenders = getPriorityMessageSenders();
         int categorySenders = getPrioritySenders(category);
@@ -249,6 +375,10 @@ public class ZenModeBackend {
     }
 
     protected void saveConversationSenders(int val) {
+        if (mPolicy == null) {
+            Log.e(TAG, "Cannot save conversation senders: mPolicy is null");
+            return;
+        }
         final boolean allowSenders = val != CONVERSATION_SENDERS_NONE;
 
         savePolicy(getNewDefaultPriorityCategories(allowSenders, PRIORITY_CATEGORY_CONVERSATIONS),
@@ -373,30 +503,59 @@ public class ZenModeBackend {
     }
 
     public boolean removeZenRule(String ruleId) {
-        if (android.app.Flags.modesApi()) {
-            return mNotificationManager.removeAutomaticZenRule(ruleId, /* fromUser= */ true);
-        } else {
+        if (mNotificationManager == null && mContext == null) {
+            Log.e(TAG, "Cannot remove zen rule: NotificationManager and Context are null");
+            return false;
+        }
+        try {
+            if (android.app.Flags.modesApi()) {
+                if (mNotificationManager != null) {
+                    return mNotificationManager.removeAutomaticZenRule(ruleId, /* fromUser= */ true);
+                }
+            }
             return NotificationManager.from(mContext).removeAutomaticZenRule(ruleId);
+        } catch (Exception e) {
+            Log.e(TAG, "Error removing zen rule", e);
+            return false;
         }
     }
 
     public NotificationManager.Policy getConsolidatedPolicy() {
-        return NotificationManager.from(mContext).getConsolidatedNotificationPolicy();
+        if (mContext == null) {
+            Log.e(TAG, "Cannot get consolidated policy: Context is null");
+            return new NotificationManager.Policy(0, 0, 0, 0, 0);
+        }
+        try {
+            return NotificationManager.from(mContext).getConsolidatedNotificationPolicy();
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting consolidated policy", e);
+            return new NotificationManager.Policy(0, 0, 0, 0, 0);
+        }
     }
 
     protected String addZenRule(AutomaticZenRule rule) {
+        if (mNotificationManager == null && mContext == null) {
+            Log.e(TAG, "Cannot add zen rule: NotificationManager and Context are null");
+            return null;
+        }
         try {
             if (android.app.Flags.modesApi()) {
-                return mNotificationManager.addAutomaticZenRule(rule, /* fromUser= */ true);
-            } else {
-                return NotificationManager.from(mContext).addAutomaticZenRule(rule);
+                if (mNotificationManager != null) {
+                    return mNotificationManager.addAutomaticZenRule(rule, /* fromUser= */ true);
+                }
             }
+            return NotificationManager.from(mContext).addAutomaticZenRule(rule);
         } catch (Exception e) {
+            Log.e(TAG, "Error adding zen rule", e);
             return null;
         }
     }
 
     ZenPolicy setDefaultZenPolicy(ZenPolicy zenPolicy) {
+        if (mPolicy == null) {
+            Log.e(TAG, "Cannot set default zen policy: mPolicy is null");
+            return zenPolicy; // Return unchanged policy if mPolicy is null
+        }
         int calls;
         if (mPolicy.allowCalls()) {
             calls = ZenAdapters.prioritySendersToPeopleType(
@@ -442,16 +601,34 @@ public class ZenModeBackend {
     }
 
     protected Map.Entry<String, AutomaticZenRule>[] getAutomaticZenRules() {
-        Map<String, AutomaticZenRule> ruleMap =
-                NotificationManager.from(mContext).getAutomaticZenRules();
-        final Map.Entry<String, AutomaticZenRule>[] rt = ruleMap.entrySet().toArray(
-                new Map.Entry[ruleMap.size()]);
-        Arrays.sort(rt, RULE_COMPARATOR);
-        return rt;
+        if (mContext == null) {
+            Log.e(TAG, "Cannot get automatic zen rules: Context is null");
+            return new Map.Entry[0];
+        }
+        try {
+            Map<String, AutomaticZenRule> ruleMap =
+                    NotificationManager.from(mContext).getAutomaticZenRules();
+            final Map.Entry<String, AutomaticZenRule>[] rt = ruleMap.entrySet().toArray(
+                    new Map.Entry[ruleMap.size()]);
+            Arrays.sort(rt, RULE_COMPARATOR);
+            return rt;
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting automatic zen rules", e);
+            return new Map.Entry[0];
+        }
     }
 
     protected AutomaticZenRule getAutomaticZenRule(String id) {
-        return NotificationManager.from(mContext).getAutomaticZenRule(id);
+        if (mContext == null) {
+            Log.e(TAG, "Cannot get automatic zen rule: Context is null");
+            return null;
+        }
+        try {
+            return NotificationManager.from(mContext).getAutomaticZenRule(id);
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting automatic zen rule", e);
+            return null;
+        }
     }
 
     private static List<String> getDefaultRuleIds() {
