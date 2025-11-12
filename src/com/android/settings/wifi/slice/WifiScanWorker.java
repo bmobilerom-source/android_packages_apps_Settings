@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi.slice;
 
-import static com.android.settings.wifi.slice.WifiSlice.DEFAULT_EXPANDED_ROW_COUNT;
-
 import android.content.Context;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
@@ -47,6 +45,7 @@ public class WifiScanWorker extends SliceBackgroundWorker<WifiSliceItem> impleme
         WifiPickerTracker.WifiPickerTrackerCallback, LifecycleOwner, WifiEntryCallback {
 
     private static final String TAG = "WifiScanWorker";
+    private static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
 
     @VisibleForTesting
     final LifecycleRegistry mLifecycleRegistry;

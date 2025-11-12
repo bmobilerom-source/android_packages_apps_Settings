@@ -1640,4 +1640,118 @@
     <!-- Packages that will not show Display over other apps permission -->
     <string-array name="display_over_apps_permission_change_exempt">
     </string-array>
+
+    <!-- Sensor block level entries -->
+    <string-array name="sensor_block_level_entries">
+        <item>@string/sensor_block_level_minimum</item>
+        <item>@string/sensor_block_level_extreme</item>
+    </string-array>
+
+    <!-- Sensor block level values -->
+    <string-array name="sensor_block_level_values" translatable="false">
+        <item>0</item> <!-- Minimum: 3 sensors -->
+        <item>1</item> <!-- Extreme: 17 sensors -->
+    </string-array>
+
+    <!-- Settings dashboard styles -->
+    <string-array name="settings_dashboard_style_entries">
+        <item>@string/dashboard_style_aosp</item>
+        <item>@string/dashboard_style_epic</item>
+        <item>@string/dashboard_style_v2</item>
+        <item>@string/dashboard_style_compact</item>
+        <item>@string/dashboard_style_material</item>
+        <item>@string/dashboard_style_classic</item>
+        <item>@string/dashboard_style_custom_v2</item>
+        <item>@string/dashboard_style_fun_display</item>
+        <item>@string/dashboard_style_bmobile_expressive</item>
+        <item>@string/dashboard_style_securityextended</item>
+    </string-array>
+
+    <string-array name="settings_dashboard_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <!-- Settings Blockable Pages -->
+    <string-array name="settings_blockable_pages_entries">
+        <item>Developer Options</item>
+        <item>System Updates</item>
+        <item>Factory Reset</item>
+        <item>Backup &amp; Reset</item>
+        <item>Accounts</item>
+        <item>Location Services</item>
+        <item>App Permissions</item>
+        <item>USB Debugging</item>
+    </string-array>
+
+    <string-array name="settings_blockable_pages_values" translatable="false">
+        <item>developer_options</item>
+        <item>system_updates</item>
+        <item>factory_reset</item>
+        <item>backup_reset</item>
+        <item>accounts</item>
+        <item>location_services</item>
+        <item>app_permissions</item>
+        <item>usb_debugging</item>
+    </string-array>
+
+    <!-- Settings Backup Categories -->
+    <string-array name="settings_backup_categories_entries">
+        <item>Dashboard Style</item>
+        <item>Custom Theme</item>
+        <item>Wallpaper Background</item>
+        <item>Blocked Pages</item>
+        <item>Security Features</item>
+    </string-array>
+
+    <string-array name="settings_backup_categories_values" translatable="false">
+        <item>dashboard_style</item>
+        <item>custom_theme</item>
+        <item>wallpaper_background</item>
+        <item>blocked_pages</item>
+        <item>security_features</item>
+    </string-array>
+
+    <string-array name="settings_backup_categories_default" translatable="false">
+        <item>dashboard_style</item>
+        <item>custom_theme</item>
+        <item>wallpaper_background</item>
+        <item>blocked_pages</item>
+        <item>security_features</item>
+    </string-array>
+
+    <!-- Custom System Theme Arrays -->
+    <string-array name="custom_theme_entries">
+        <item>@string/default_string</item>
+        <item>@string/custom_theme_black</item>
+        <item>@string/custom_theme_transparent</item>
+        <item>@string/custom_theme_snowpaint</item>
+        <item>@string/custom_theme_espresso</item>
+        <item>@string/custom_theme_custom_blue</item>
+        <item>@string/custom_theme_animated</item>
+        <item>@string/custom_theme_expressive</item>
+        <item>@string/custom_theme_animated_wallpaper_blur</item>
+        <item>@string/custom_theme_custom_picture</item>
+    </string-array>
+
+    <string-array name="custom_theme_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
 </resources>

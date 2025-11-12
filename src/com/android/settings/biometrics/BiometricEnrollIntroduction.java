@@ -404,12 +404,24 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                             com.google.android.setupdesign.R.anim.sud_slide_next_out);
                     getNextButton().setEnabled(false);
                     getChallenge(((sensorId, userId, challenge) -> {
+                        if (isFinishing()) {
+                            // Do nothing if activity is finishing
+                            Log.w(TAG, "activity finished before challenge callback launched.");
+                            return;
+                        }
                         mSensorId = sensorId;
                         mChallenge = challenge;
-                        mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId,
-                                challenge);
-                        BiometricUtils.removeGatekeeperPasswordHandle(this, data);
-                        getNextButton().setEnabled(true);
+                        try {
+                            mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId,
+                                    challenge);
+                            BiometricUtils.removeGatekeeperPasswordHandle(this, data);
+                            getNextButton().setEnabled(true);
+                        } catch (IllegalStateException e) {
+                            Log.e(TAG, "Failed to request gatekeeper HAT", e);
+                            // If gatekeeper HAT request fails, finish the activity to go back to password page
+                            setResult(RESULT_CANCELED);
+                            finish();
+                        }
                     }));
                 }
             } else {
@@ -426,12 +438,24 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                             com.google.android.setupdesign.R.anim.sud_slide_next_out);
                     getNextButton().setEnabled(false);
                     getChallenge(((sensorId, userId, challenge) -> {
+                        if (isFinishing()) {
+                            // Do nothing if activity is finishing
+                            Log.w(TAG, "activity finished before challenge callback launched.");
+                            return;
+                        }
                         mSensorId = sensorId;
                         mChallenge = challenge;
-                        mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId,
-                                challenge);
-                        BiometricUtils.removeGatekeeperPasswordHandle(this, data);
-                        getNextButton().setEnabled(true);
+                        try {
+                            mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId,
+                                    challenge);
+                            BiometricUtils.removeGatekeeperPasswordHandle(this, data);
+                            getNextButton().setEnabled(true);
+                        } catch (IllegalStateException e) {
+                            Log.e(TAG, "Failed to request gatekeeper HAT", e);
+                            // If gatekeeper HAT request fails, finish the activity to go back to password page
+                            setResult(RESULT_CANCELED);
+                            finish();
+                        }
                     }));
                 }
                 final Utils.BiometricStatus biometricStatus =
@@ -445,7 +469,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                             .showBiometricErrorDialogAndFinishActivityOnDismiss(this,
                                     biometricStatus);
                 }
+            } else if (resultCode == RESULT_CANCELED) {
+                // User cancelled password verification - don't finish, allow them to try again
+                // This prevents the loop where cancelling would finish and restart the activity
+                mConfirmingCredentials = false;
+                // Stay on the intro screen to allow user to try again
             } else {
+                // Password verification failed or other error - finish the activity
                 setResult(resultCode, data);
                 finish();
             }

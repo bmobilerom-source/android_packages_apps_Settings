@@ -41,11 +41,13 @@
         android:order="-999"/>
     -->
 
-    <!-- Footer -->
+    <!-- Footer - Hidden -->
+    <!--
     <com.android.settingslib.widget.FooterPreference
         android:key="pattern_size_footer"
         android:order="-997"
         settings:searchable="false" />
+    -->
 
     <Preference
         android:icon="@drawable/ic_security_pattern_3x3"

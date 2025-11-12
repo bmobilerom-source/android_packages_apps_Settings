@@ -39,6 +39,10 @@
     <string name="quicksettings_summary">Quick settings options</string>
     <string name="statusbar_summary">Status bar customizations</string>
     <string name="extras_summary">Some extra options</string>
+    <string name="sensor_block_title">Sensor block per-package</string>
+    <string name="sensor_block_summary">Block access to certain sensors for some apps to save battery</string>
+    <string name="extended_security_title">Extended Security</string>
+    <string name="extended_security_summary">Additional granular security options and features</string>
 
     <!-- General strings -->
     <string name="ok">OK</string>
@@ -49,4 +53,166 @@
 
     <string name="media_controls_page_summary">Additional media player features</string>
     <string name="media_controls_page_title">System Media Controls</string>
+
+    <!-- Dashboard Style -->
+    <string name="dashboard_style_title">Settings Dashboard Style</string>
+    <string name="dashboard_style_summary">Choose the style of the Settings dashboard</string>
+    <string name="dashboard_style_category_title">Dashboard Style</string>
+    <string name="dashboard_style_aosp">AOSP Style</string>
+    <string name="dashboard_style_epic">Epic Style</string>
+    <string name="dashboard_style_fun_display">BMobile Home Settings</string>
+    <string name="dashboard_style_v2">V2 Style</string>
+    <string name="dashboard_style_compact">Compact Style</string>
+    <string name="dashboard_style_material">Material Style</string>
+    <string name="dashboard_style_classic">Classic Style</string>
+    <string name="dashboard_style_custom_v2">Custom V2 Style</string>
+    <string name="dashboard_style_securityextended">Security Extended Style</string>
+    <string name="epic_style_header_title">Epic Style</string>
+    <string name="epic_style_header_summary">Customized Settings Experience</string>
+    <string name="compact_style_header_title">Compact Style</string>
+    <string name="compact_style_header_summary">Minimal layout for quick access</string>
+    <string name="material_style_header_title">Material Style</string>
+    <string name="material_style_header_summary">Material Design 3 inspired interface</string>
+    <string name="classic_style_header_title">Classic Style</string>
+    <string name="classic_style_header_summary">Traditional categorized layout</string>
+    <string name="dashboard_style_applied">Dashboard style changed to %1$s</string>
+    
+    <!-- Settings Page Blocking -->
+    <string name="settings_page_blocking_title">Settings Page Blocking</string>
+    <string name="settings_page_blocking_summary">Hide or restrict access to specific Settings pages</string>
+    <string name="settings_page_blocking_summary_none">No pages blocked</string>
+    <string name="settings_page_blocking_summary_count">%d pages blocked</string>
+    <string name="settings_page_blocking_category_title">Block Settings Pages</string>
+    <string name="settings_page_blocking_intro_title">Privacy &amp; Access Control</string>
+    <string name="settings_page_blocking_intro_summary">Hide or restrict access to specific Settings pages for privacy, security, or parental control purposes. Blocked pages will not appear in the Settings menu.</string>
+    <string name="settings_page_blocking_saved">%d page(s) blocked</string>
+    <string name="settings_page_blocked_message">This page is blocked</string>
+    
+    <!-- Settings Backup & Restore -->
+    <string name="settings_backup_restore_title">Settings Backup &amp; Restore</string>
+    <string name="settings_backup_restore_category_title">Backup &amp; Restore</string>
+    <string name="settings_backup_restore_intro_title">Save Your Configuration</string>
+    <string name="settings_backup_restore_intro_summary">Backup your Settings preferences to a file and restore them later. Useful when switching devices or after a factory reset.</string>
+    <string name="settings_backup_title">Backup Settings</string>
+    <string name="settings_backup_summary">Save current Settings configuration to file</string>
+    <string name="settings_restore_title">Restore Settings</string>
+    <string name="settings_restore_summary">Restore Settings from backup file</string>
+    <string name="settings_backup_success">Settings backed up to:\n%s</string>
+    <string name="settings_backup_error">Failed to backup settings</string>
+    <string name="settings_restore_success">Restored %d settings successfully</string>
+    <string name="settings_restore_error">Failed to restore settings</string>
+    <string name="settings_restore_file_not_found">Backup file not found</string>
+    <string name="dashboard_style_features_intro_title">Custom Dashboard Features</string>
+    <string name="dashboard_style_features_intro_summary">Choose from multiple dashboard styles to personalize your Settings experience. Each style offers a unique layout and organization of settings categories.</string>
+    <string name="dashboard_style_reset_category_title">Reset</string>
+    <string name="dashboard_style_reset_title">Reset to Default</string>
+    <string name="dashboard_style_reset_summary">Reset Settings dashboard to default V2 style</string>
+    <string name="compact_dashboard_title">Compact Dashboard</string>
+    <string name="compact_dashboard_summary">Enable compact grid layout for dashboard (independent of dashboard style)</string>
+    <string name="systemui_reset_intro_title">SystemUI Reset</string>
+    <string name="systemui_reset_intro_summary">Reload SystemUI to apply dashboard style changes immediately. This restarts the system interface without rebooting your device.</string>
+    <string name="systemui_reset_title">Reload SystemUI</string>
+    <string name="systemui_reset_summary">Restart SystemUI to apply dashboard changes</string>
+    <string name="systemui_reset_success">SystemUI restarted successfully</string>
+    <string name="systemui_reset_failed">Failed to restart SystemUI</string>
+
+    <!-- Custom Theme -->
+    <string name="custom_theme_title">Custom System Theme</string>
+    <string name="custom_theme_summary">Choose a custom theme for system UI</string>
+    <string name="custom_theme_intro_title">Custom System Themes</string>
+    <string name="custom_theme_intro_summary">Select from various custom themes to personalize your system appearance. Themes work in both light and dark mode. Each theme offers a unique color palette and visual style that applies directly to Settings pages.</string>
+    <string name="custom_theme_descriptions_title">Theme Descriptions</string>
+    <string name="custom_theme_black">Black</string>
+    <string name="custom_theme_transparent">Transparent</string>
+    <string name="custom_theme_snowpaint">Paint in the Snow</string>
+    <string name="custom_theme_espresso">Espresso</string>
+    <string name="custom_theme_custom_blue">Custom Blue</string>
+    <string name="custom_theme_animated">Animated</string>
+    <string name="default_string">Default</string>
+    <string name="custom_theme_default">Default Theme</string>
+    <string name="custom_theme_default_desc">Uses the standard system theme with Material You dynamic colors based on your wallpaper. This is the default Android theme that adapts to your device wallpaper.</string>
+    <string name="custom_theme_black_desc">Pure black backgrounds with depth effects using your wallpaper. Provides deep black surfaces for maximum contrast and battery savings on OLED displays. Works in both light and dark mode with adaptive tinting.</string>
+    <string name="custom_theme_transparent_desc">Transparent Settings pages with 70% blur effect behind content. Creates a modern, glass-like appearance that shows your wallpaper through the Settings interface. Works in both light and dark mode with adaptive transparency.</string>
+    <string name="custom_theme_snowpaint_desc">Light gray and white tones (#1E1E1E) creating a soft, snow-like appearance. Offers a subtle, elegant look with reduced eye strain. Perfect for users who prefer lighter backgrounds.</string>
+    <string name="custom_theme_espresso_desc">Warm brown and coffee tones with gradient. Provides a cozy, inviting aesthetic reminiscent of espresso coffee. Features rich brown gradients (#3E2723, #5D4037, #6D4C41) that create a comfortable atmosphere in Settings. Works in both light and dark mode.</string>
+    <string name="custom_theme_custom_blue_desc">Beautiful blue gradient background that transitions from dark to light blue. Creates a modern, vibrant appearance with smooth color transitions. Works in both light and dark mode.</string>
+    <string name="custom_theme_animated_desc">Animated background using Lottie animations or video files. Creates a dynamic, living background that plays continuously. Currently uses Lottie animations from the raw folder, with MP4 video support coming soon.</string>
+    <string name="custom_theme_expressive">Expressive Mode</string>
+    <string name="custom_theme_expressive_desc">Dynamic pastel colors that change per page. Each Settings page gets a unique pastel color (amber, blue, green, orange, or purple) with a blur mask effect. Colors are carefully chosen for high contrast and accessibility, ensuring text and cards remain readable in both light and dark mode. Inspired by Android 16 expressive material themes.</string>
+    <string name="custom_theme_animated_wallpaper_blur">Animated Wallpaper Blur</string>
+    <string name="custom_theme_animated_wallpaper_blur_desc">Uses your system wallpaper with a fast-moving animated blur effect. The blur radius animates continuously, creating a dynamic, living background that\'s fast enough to see the animation. Works with any wallpaper and provides a unique animated experience.</string>
+    <string name="custom_theme_custom_picture">Custom Picture</string>
+    <string name="custom_theme_custom_picture_desc">Choose a custom image from your files as the background with a blur effect. Select any image from your device storage to use as the Settings background. The image will be displayed with a blur effect for better readability.</string>
+    <string name="animated_theme_video_picker_title">Choose Video File</string>
+    <string name="animated_theme_video_picker_summary">Select a video file to use as the animated background</string>
+    <string name="custom_picture_theme_picker_title">Choose Image File</string>
+    <string name="custom_picture_theme_picker_summary">Select an image file to use as the custom picture background</string>
+    <string name="file_picker_error">Error launching file picker</string>
+    <string name="video_selected">Video selected successfully</string>
+    <string name="image_selected">Image selected successfully</string>
+    <string name="file_selection_error">Error selecting file</string>
+    <string name="custom_theme_applied">Theme changed to %1$s</string>
+    <string name="custom_theme_overlay_failed">Theme overlay not found. Please install theme overlay packages.</string>
+    <string name="custom_theme_night_mode_required">Custom themes only work in dark mode. Please enable dark mode to use custom themes.</string>
+    <string name="custom_theme_overlay_not_found">Theme overlay not found. The selected theme may not be installed on this device.</string>
+    
+    <!-- Security Features -->
+    <string name="security_features_title">Security Features</string>
+    <string name="security_features_summary">Advanced privacy and security controls</string>
+    <string name="security_features_intro_title">Privacy &amp; Security Controls</string>
+    <string name="security_features_intro_summary">Control data collection, tracking, and system services. Enable these features to enhance your privacy and security.</string>
+    <string name="security_features_category_data">Data Collection</string>
+    <string name="security_features_category_services">Services</string>
+    <string name="security_features_category_updates">Updates &amp; Installation</string>
+    
+    <!-- Security Feature Strings -->
+    <string name="block_analytics_title">Block Analytics</string>
+    <string name="block_analytics_summary">Prevent system analytics and telemetry collection. When enabled, blocks all analytics services from collecting usage data, crash reports, and performance metrics. This helps protect your privacy by preventing data collection about how you use your device.</string>
+    <string name="block_diagnostic_data_title">Block Diagnostic Data</string>
+    <string name="block_diagnostic_data_summary">Prevent diagnostic and usage data collection. When enabled, stops the system from sending diagnostic information, error reports, and usage statistics to Google and other services. This includes crash reports and device health data.</string>
+    <string name="block_personalization_title">Block Personalization</string>
+    <string name="block_personalization_summary">Disable personalized recommendations and suggestions. When enabled, prevents the system from using your data to provide personalized content, app suggestions, and adaptive features. All recommendations will be generic and not based on your usage patterns.</string>
+    <string name="block_android_intelligence_title">Block Android Intelligence</string>
+    <string name="block_android_intelligence_summary">Disable AI/ML features that may collect data. When enabled, blocks Android Intelligence services including smart suggestions, adaptive features, and machine learning-based optimizations. This prevents AI services from accessing your data for learning and personalization.</string>
+    <string name="block_ad_services_title">Block Ad Services</string>
+    <string name="block_ad_services_summary">Prevent ad-related services and tracking. When enabled, blocks advertising ID services, ad personalization, and ad-related data collection. This prevents apps and services from tracking you for advertising purposes and using your advertising ID.</string>
+    <string name="block_cloud_backup_title">Block Cloud Backup</string>
+    <string name="block_cloud_backup_summary">Prevent automatic cloud backup of device data. When enabled, stops automatic backup of your app data, settings, and device configuration to cloud services. Your data will remain only on your device. Note: Manual backups may still be possible.</string>
+    <string name="block_location_services_title">Block Location Services</string>
+    <string name="block_location_services_summary">Prevent system-level location services and tracking. When enabled, disables system-wide location services, preventing apps and services from accessing your location data. This includes GPS, network-based location, and location history. Apps requesting location will be denied access.</string>
+    <string name="block_network_scanning_title">Block Network Scanning</string>
+    <string name="block_network_scanning_summary">Prevent background network and Wi-Fi scanning. When enabled, stops the system from performing background Wi-Fi and Bluetooth scans to improve location accuracy and network discovery. This reduces battery usage and prevents passive location tracking through network scanning.</string>
+    <string name="block_webview_updates_title">Block WebView Updates</string>
+    <string name="block_webview_updates_summary">Prevent automatic WebView updates. When enabled, stops automatic updates to the Android System WebView component. This prevents the system from downloading and installing WebView updates, which may be used for security patches. Use with caution as this may leave your device vulnerable to web-based security issues.</string>
+    <string name="block_system_updates_title">Block System Updates</string>
+    <string name="block_system_updates_summary">Prevent automatic system and security updates. When enabled, blocks automatic download and installation of system updates, security patches, and OTA updates. This gives you full control over when to update, but may leave your device vulnerable to security issues. Manual updates may still be possible.</string>
+    <string name="block_app_installation_title">Block App Installation</string>
+    <string name="block_app_installation_summary">Prevent installation of apps from unknown sources. When enabled, blocks installation of apps from sources other than the Play Store or approved app stores. This prevents sideloading of APK files and installation from unknown sources, improving security but limiting app installation flexibility.</string>
+    
+    <!-- Backup & Restore Improved -->
+    <string name="settings_backup_restore_intro_summary_improved">Backup your Settings preferences with selective categories. Choose which settings to include in your backup for more control.</string>
+    <string name="settings_backup_selection_title">Select Backup Categories</string>
+    <string name="settings_backup_selection_summary">%d categories selected</string>
+    <string name="settings_backup_summary_improved">Save selected Settings categories to file</string>
+    <string name="settings_restore_summary_improved">Restore Settings from backup file</string>
+    <string name="settings_backup_success_detailed">Backed up %1$d settings to:\n%2$s</string>
+    <string name="settings_backup_no_selection">Please select at least one category to backup</string>
+    
+    <!-- System Optimization -->
+    <string name="system_optimization_title">System Optimization</string>
+    <string name="system_optimization_summary">Performance tuning and optimization options</string>
+    
+    <!-- Developer Tools -->
+    <string name="developer_tools_title">Developer Tools</string>
+    <string name="developer_tools_summary">Advanced tools for developers and power users</string>
+    <string name="developer_options_title">Developer Options</string>
+    <string name="developer_options_summary">Advanced settings for app development and debugging</string>
+    
+    <!-- Gesture Security Bottom Sheet -->
+    <string name="gesture_security_options_title">Security Options</string>
+    <string name="gesture_security_options_summary">Quick access to security toggles</string>
+    
+    <!-- BMobile Expressive Settings -->
+    <string name="dashboard_style_bmobile_expressive">BMobile Expressive Settings</string>
+    <string name="bmobile_expressive_settings_title">BMobile Expressive Settings</string>
 </resources>

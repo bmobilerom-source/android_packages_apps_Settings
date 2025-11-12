@@ -49,8 +49,9 @@ public class FingerprintStatusUtils {
      * Returns whether the fingerprint settings entity should be shown.
      */
     public boolean isAvailable() {
-        return !Utils.isMultipleBiometricsSupported(mContext)
-                && Utils.hasFingerprintHardware(mContext);
+        // Always show fingerprint settings if fingerprint hardware exists
+        // This allows users to access fingerprint settings even when multiple biometrics are supported
+        return Utils.hasFingerprintHardware(mContext);
     }
 
     /**
@@ -85,7 +86,7 @@ public class FingerprintStatusUtils {
             return mContext.getString(
                     com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
         }
-        if (hasEnrolled()) {
+        if (mFingerprintManager != null && hasEnrolled()) {
             final int numEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
             return StringUtil.getIcuPluralsString(mContext, numEnrolled,
                     R.string.security_settings_fingerprint_preference_summary);
@@ -106,7 +107,7 @@ public class FingerprintStatusUtils {
      * Returns whether at least one fingerprint has been enrolled.
      */
     public boolean hasEnrolled() {
-        return mFingerprintManager.hasEnrolledFingerprints(mUserId);
+        return mFingerprintManager != null && mFingerprintManager.hasEnrolledFingerprints(mUserId);
     }
 
     /**
