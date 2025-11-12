@@ -25,5 +25,11 @@
     <string name="extended_security_title">Extended Security</string>
     <string name="extended_security_intro">This page provides additional granular security options beyond the standard security settings. Customize authentication behaviors and security features to your preference.</string>
 
+    <!-- Categories -->
+    <string name="extended_security_authentication_category">Authentication</string>
+
+    <!-- Fingerprint Ripple Effect -->
+    <string name="enable_fingerprint_ripple_effect_title">Unlock animation</string>
+    <string name="enable_fingerprint_ripple_effect_summary">Show ripple effect on unlock with fingerprint</string>
 </resources>
 

@@ -42,11 +42,13 @@
 package com.epic.fragments;
 
 import android.content.Context;
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
 import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -68,6 +70,7 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
 
     private static final String TAG = "SettingsExtendedSecurity";
     private SecurityInfoHeaderController mSecurityInfoHeaderController;
+    private static final String KEY_AUTH_RIPPLE_ENABLED = "auth_ripple_enabled";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,49 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
         PreferenceScreen screen = getPreferenceScreen();
         if (screen != null) {
             mSecurityInfoHeaderController.displayPreference(screen);
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+        final ContentResolver resolver = getActivity().getContentResolver();
+
+        // Initialize preference states
+        updatePreferenceStates(resolver);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
+        String key = preference.getKey();
+
+        try {
+            if (KEY_AUTH_RIPPLE_ENABLED.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.System.putInt(resolver, KEY_AUTH_RIPPLE_ENABLED, enabled ? 1 : 0);
+                Log.d(TAG, "auth_ripple_enabled set to: " + enabled);
+                return true;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error updating preference: " + key, e);
+        }
+
+        return false;
+    }
+
+    /**
+     * Update all preference states based on current system settings
+     */
+    private void updatePreferenceStates(ContentResolver resolver) {
+        try {
+            // Update auth ripple enabled preference
+            Preference authRipplePref = findPreference(KEY_AUTH_RIPPLE_ENABLED);
+            if (authRipplePref != null) {
+                int rippleEnabled = Settings.System.getInt(resolver, KEY_AUTH_RIPPLE_ENABLED, 1);
+                if (authRipplePref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) authRipplePref)
+                            .setChecked(rippleEnabled != 0);
+                }
+                authRipplePref.setOnPreferenceChangeListener(this);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error updating preference states", e);
         }
     }
 

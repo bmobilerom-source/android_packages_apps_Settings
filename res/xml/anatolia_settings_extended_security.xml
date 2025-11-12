@@ -31,17 +31,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/extended_security_title">
 
-  
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="epic_toplevel_card_navigation_lock"
-        android:selectable="false"
-        android:layout="@layout/xd_about_phone_header" />
-    <!-- Header -->
-    <PreferenceCategory
-        android:title="@string/extended_security_title"
-        android:order="-1000"
-        android:layout="@layout/settings_title_header_small">
-    </PreferenceCategory>
+
 
     <!-- TopIntro -->
     <com.android.settingslib.widget.TopIntroPreference
@@ -57,6 +47,20 @@
         android:fragment="com.android.settings.IccLockSettings"
         android:order="10"
         settings:layout="@layout/adaptive_preference_card"/>
+    <!-- Authentication Category -->
+  <PreferenceCategory
+        android:title="@string/extended_security_authentication_category"
+        android:order="0"
+        android:layout="@layout/settingslib_preference_category_no_title">
+
+        <!-- Fingerprint Ripple Effect -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="auth_ripple_enabled"
+            android:title="@string/enable_fingerprint_ripple_effect_title"
+            android:summary="@string/enable_fingerprint_ripple_effect_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
 
