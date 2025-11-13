@@ -17,14 +17,26 @@
 */
 -->
 
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:id="@+id/container_material"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+    android:layout_height="match_parent">
+
+    <!-- Wallpaper Background (behind everything) -->
+    <com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView
+        android:id="@+id/wallpaper_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <!-- Main Content -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
 
     <FrameLayout android:id="@+id/pinned_header"
         android:layout_width="match_parent"
@@ -74,5 +86,7 @@
         </androidx.viewpager2.widget.ViewPager2>
     </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
 

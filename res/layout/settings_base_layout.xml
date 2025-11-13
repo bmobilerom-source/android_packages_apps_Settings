@@ -15,12 +15,24 @@
     limitations under the License.
 -->
 <!-- The main content view -->
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/content_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:transitionGroup="true">
+    android:layout_height="match_parent">
+
+    <!-- Wallpaper Background (behind everything) -->
+    <com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView
+        android:id="@+id/wallpaper_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/content_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:transitionGroup="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/baseAppBar"
@@ -56,3 +68,5 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</FrameLayout>

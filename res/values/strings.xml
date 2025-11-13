@@ -7891,6 +7891,8 @@
     <string name="keywords_display_brightness_level">dim screen, touchscreen, battery, bright</string>
     <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
+    <string name="settings_wallpaper_background_title">Wallpaper background</string>
+    <string name="settings_wallpaper_background_summary">Use device wallpaper as background for settings pages with adaptive tinting</string>
     <string name="keywords_display_font_size">text size</string>
     <!-- Search keyword for "Cast" settings [CHAR_LIMIT=NONE]-->
     <string name="keywords_display_cast_screen">project, cast, Screen mirroring, Screen sharing, mirroring, share screen, screen casting</string>

@@ -140,6 +140,8 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
                                         .build()));
             }
             autoSetCollapsingToolbarLayoutScrolling();
+            // Add wallpaper background for collapsing toolbar layouts
+            addWallpaperBackground();
         } else {
             super.setContentView(R.layout.settings_base_layout);
         }
@@ -316,6 +318,30 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
                 findViewById(com.android.internal.R.id.action_bar_container);
         if (actionBarContainer != null) {
             actionBarContainer.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Add wallpaper background view programmatically for collapsing toolbar layouts.
+     * This ensures the wallpaper appears behind all content even when using settingslib layouts.
+     */
+    private void addWallpaperBackground() {
+        View rootView = findViewById(android.R.id.content);
+        if (rootView instanceof ViewGroup) {
+            ViewGroup rootGroup = (ViewGroup) rootView;
+            // Check if wallpaper background already exists
+            if (rootGroup.findViewById(R.id.wallpaper_background) != null) {
+                return;
+            }
+            // Create wallpaper background view
+            com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView wallpaperView =
+                    new com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView(this);
+            wallpaperView.setId(R.id.wallpaper_background);
+            wallpaperView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+            // Insert at the beginning so it's behind everything
+            rootGroup.addView(wallpaperView, 0, new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
         }
     }
 }
