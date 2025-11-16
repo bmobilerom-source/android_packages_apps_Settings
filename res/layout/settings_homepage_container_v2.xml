@@ -61,6 +61,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         app:elevation="0dp"
         android:touchscreenBlocksFocus="false"
         android:keyboardNavigationCluster="false">
@@ -75,7 +76,7 @@
             android:paddingBottom="8dp"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:background="?android:attr/colorBackground">
+            android:background="@android:color/transparent">
             
                <TextView
                    android:id="@+id/user_title"
