@@ -109,22 +109,24 @@
     <PreferenceCategory
         android:key="bluetooth_related_tools"
         android:title="@string/bluetooth_screen_related">
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="live_caption"
             android:icon="@drawable/ic_live_caption"
             android:persistent="false"
             android:summary="@string/live_caption_summary"
             android:title="@string/live_caption_title"
+            app:position="solo"
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="data_sync_group"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="keyboard_settings"
         android:persistent="false"
         android:title="@string/bluetooth_device_keyboard_settings_preference_title"
+        app:position="solo"
         settings:controller="com.android.settings.inputmethod.KeyboardSettingsPreferenceController"/>
 
 </PreferenceScreen>

@@ -17,6 +17,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_block_settings_page"
     android:title="@string/zen_mode_restrict_notifications_title">
 
@@ -24,36 +25,43 @@
        android:title="@string/zen_mode_block_effects_screen_off"
        android:key="zen_mode_block_screen_off">
 
-       <SwitchPreferenceCompat
+       <com.android.settings.preferences.ui.AdaptiveSwitchPreference
            android:key="zen_effect_intent"
-           android:title="@string/zen_mode_block_effect_intent" />
+           android:title="@string/zen_mode_block_effect_intent"
+           app:position="top" />
 
-       <SwitchPreferenceCompat
+       <com.android.settings.preferences.ui.AdaptiveSwitchPreference
            android:key="zen_effect_light"
-           android:title="@string/zen_mode_block_effect_light" />
+           android:title="@string/zen_mode_block_effect_light"
+           app:position="middle" />
 
-       <SwitchPreferenceCompat
+       <com.android.settings.preferences.ui.AdaptiveSwitchPreference
            android:key="zen_effect_ambient"
-           android:title="@string/zen_mode_block_effect_ambient" />
+           android:title="@string/zen_mode_block_effect_ambient"
+           app:position="bottom" />
 
    </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/zen_mode_block_effects_screen_on"
         android:key="zen_mode_block_screen_on">
-       <SwitchPreferenceCompat
+       <com.android.settings.preferences.ui.AdaptiveSwitchPreference
            android:key="zen_effect_badge"
-           android:title="@string/zen_mode_block_effect_badge" />
+           android:title="@string/zen_mode_block_effect_badge"
+           app:position="top" />
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="zen_effect_status"
-            android:title="@string/zen_mode_block_effect_status" />
+            android:title="@string/zen_mode_block_effect_status"
+            app:position="middle" />
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="zen_effect_peek"
-            android:title="@string/zen_mode_block_effect_peek" />
+            android:title="@string/zen_mode_block_effect_peek"
+            app:position="middle" />
 
-       <SwitchPreferenceCompat
+       <com.android.settings.preferences.ui.AdaptiveSwitchPreference
            android:key="zen_effect_list"
-           android:title="@string/zen_mode_block_effect_list" />
+           android:title="@string/zen_mode_block_effect_list"
+           app:position="bottom" />
    </PreferenceCategory>
 </PreferenceScreen>

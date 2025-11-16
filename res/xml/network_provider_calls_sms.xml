@@ -29,22 +29,24 @@
         app:lottie_rawRes="@raw/call_sms"/>
 
   
-    <ListPreference
+    <com.android.settings.preferences.ui.AdaptiveListPreference
         android:key="provider_model_calls_preference"
         android:title="@string/calls_preference_title"
         settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
         android:order="10"
         android:icon="@drawable/ic_phone"
         android:enabled="false"
+        app:position="top"
         />
 
-    <ListPreference
+    <com.android.settings.preferences.ui.AdaptiveListPreference
         android:key="provider_model_sms_preference"
         android:title="@string/sms_preference_title"
         settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"
         android:order="15"
         android:icon="@drawable/ic_sms"
         android:enabled="false"
+        app:position="bottom"
         />
 
     <PreferenceCategory

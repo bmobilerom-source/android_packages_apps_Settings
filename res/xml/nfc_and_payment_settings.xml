@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 <PreferenceScreen
-   xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" ">
@@ -39,16 +39,18 @@
         settings:lottie_rawRes="@drawable/nfc_detection_point"
         settings:controller="com.android.settings.nfc.NfcDetectionPointController"/>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="nfc_secure_settings"
         android:title="@string/nfc_secure_settings_title"
+        app:position="top"
         settings:controller="com.android.settings.nfc.SecureNfcPreferenceController"
         android:summary="@string/nfc_secure_toggle_summary"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="default_payment_app"
         android:title="@string/nfc_payment_settings_title"
         android:fragment="com.android.settings.nfc.PaymentSettings"
+        app:position="bottom"
         settings:keywords="@string/keywords_default_payment_app"
         settings:controller="com.android.settings.applications.specialaccess.DefaultPaymentSettingsPreferenceController"/>
 </PreferenceScreen>

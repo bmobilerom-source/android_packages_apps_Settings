@@ -36,7 +36,7 @@
         android:order="20"
         settings:controller="com.android.settings.network.NetworkProviderSimListController"/>
 
-    <com.android.settingslib.RestrictedPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
         android:key="add_sim"
         settings:isPreferenceVisible="false"
         settings:userRestriction="no_config_mobile_networks"
@@ -44,11 +44,12 @@
         settings:searchable="false"
         android:title="@string/mobile_network_list_add_more"
         android:icon="@drawable/ic_menu_add_activated_tint"
-        android:order="100">
+        android:order="100"
+        app:position="solo">
         <intent android:action="android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION"
                 android:targetPackage="com.android.phone">
             <extra android:name="android.telephony.euicc.extra.FORCE_PROVISION"
                    android:value="true"/>
         </intent>
-    </com.android.settingslib.RestrictedPreference>
+    </com.android.settings.preferences.ui.AdaptiveRestrictedPreference>
 </PreferenceScreen>
