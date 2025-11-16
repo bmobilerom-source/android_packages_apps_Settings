@@ -16,9 +16,9 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/lock_screen_notifs_title"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/lock_screen_notifs_title">
 
    <!-- Header -->
   <PreferenceCategory
@@ -55,30 +55,34 @@
         android:layout="@layout/notification_ls_minimalism_selector"
         settings:controller="com.android.settings.notification.lockscreen.MinimalismPreferenceController" />
 
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="lock_screen_notification_show_sensitive_toggle"
         android:title="@string/lock_screen_notifications_summary_hide"
         android:order="200"
+        app:position="top"
         settings:controller="com.android.settings.notification.LockScreenNotificationShowSensitiveToggleController" />
 
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="work_profile_show_sensitive_notif_toggle"
         android:title="@string/lock_screen_notifications_summary_hide_profile"
         android:order="201"
+        app:position="middle"
         settings:controller="com.android.settings.notification.LockScreenNotificationShowSensitiveToggleController" />
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="lock_screen_notification_hide_seen_toggle"
         android:title="@string/lock_screen_notification_hide_seen_title"
         android:summary="@string/lock_screen_notification_hide_seen_summary"
         android:order="202"
+        app:position="middle"
         settings:controller="com.android.settings.notification.LockScreenNotificationHideSeenToggleController" />
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="lock_screen_notification_hide_silent_toggle"
         android:title="@string/lock_screen_notification_hide_silent_title"
         android:summary="@string/lock_screen_notification_hide_silent_summary"
         android:order="203"
+        app:position="bottom"
         settings:controller="com.android.settings.notification.LockScreenNotificationHideSilentToggleController" />
 
 </PreferenceScreen>

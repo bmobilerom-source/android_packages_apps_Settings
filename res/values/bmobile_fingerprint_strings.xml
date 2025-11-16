@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 BashaMobile
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY or FITNESS FOR
+  A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+  TRANSFER TO OTHER ROMS:
+  =======================
+  This file contains all string resources for the BMobile Fingerprint settings page.
+  Copy this file along with the other component files when transferring to other ROMs.
+-->
+<resources>
+    <!-- BMobile Fingerprint Page -->
+    <string name="bmobile_fingerprint_title">Fingerprint</string>
+    <string name="bmobile_fingerprint_summary">Manage fingerprint authentication and enrollment</string>
+    <string name="bmobile_fingerprint_intro">Manage your fingerprint authentication settings. Enroll new fingerprints, manage existing ones, and configure fingerprint unlock options.</string>
+    <string name="bmobile_fingerprint_category">Fingerprint Management</string>
+
+    <!-- Enroll Fingerprint -->
+    <string name="bmobile_fingerprint_enroll_title">Enroll fingerprint</string>
+    <string name="bmobile_fingerprint_enroll_summary_new">Add a new fingerprint to unlock your device</string>
+    <string name="bmobile_fingerprint_enroll_summary_existing">Add another fingerprint to your device</string>
+
+    <!-- Manage Fingerprints -->
+    <string name="bmobile_fingerprint_manage_title">Manage fingerprints</string>
+    <string name="bmobile_fingerprint_manage_summary">View and manage %d enrolled fingerprint(s)</string>
+
+    <!-- Fingerprint Unlock -->
+    <string name="bmobile_fingerprint_unlock_title">Fingerprint unlock</string>
+    <string name="bmobile_fingerprint_unlock_summary">Configure fingerprint unlock settings and options</string>
+
+    <!-- Fingerprint Tools -->
+    <string name="fingerprint_tools_title">Fingerprint Tools</string>
+    <string name="fingerprint_tools_summary">Configure fingerprint authentication effects and vibrations</string>
+</resources>
+

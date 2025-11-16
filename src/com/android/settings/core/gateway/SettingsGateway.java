@@ -187,6 +187,7 @@ import com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment;
 import com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment;
 import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
+import com.android.settings.safetycenter.SecurityJuniorFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.MemtagPage;
 import com.android.settings.security.SecurityAdvancedSettings;
@@ -262,6 +263,7 @@ public class SettingsGateway {
             SecuritySettings.class.getName(),
             SecurityAdvancedSettings.class.getName(),
             MoreSecurityPrivacyFragment.class.getName(),
+            SecurityJuniorFragment.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
             DeviceAdminSettings.class.getName(),
@@ -419,7 +421,9 @@ public class SettingsGateway {
             com.epic.fragments.SettingsExtendedSecurity.class.getName(),
             com.epic.fragments.HideDeveloperStatusSettings.class.getName(),
             com.epic.fragments.SensorBlockSettings.class.getName(),
-            com.epic.fragments.SensorBlockAppPicker.class.getName()
+            com.epic.fragments.SensorBlockAppPicker.class.getName(),
+            com.epic.fragments.FunDisplaySettings.class.getName(),
+            com.epic.fragments.BMobileExpressiveSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

@@ -59,6 +59,9 @@
     <!-- Lock Screen Category -->
     <string name="extended_security_lockscreen_category">Lock Screen</string>
 
+    <!-- System Controls Category -->
+    <string name="extended_security_system_category">System Controls</string>
+
     <!-- Hide on Secure Lock Screen -->
     <string name="quick_settings_secure_lock_screen_title">Hide on secure lock screen</string>
     <string name="quick_settings_secure_lock_screen_summary">Hide all quick settings in the notification shade while the device is locked</string>
@@ -95,5 +98,26 @@
     <string name="search_apps">Search apps</string>
     <string name="menu_show_system">Show system apps</string>
     <string name="menu_hide_system">Hide system apps</string>
+
+    <!-- Password Protection for Settings Pages -->
+    <string name="settings_password_protection_title">Password Protect Settings Pages</string>
+    <string name="settings_password_protection_summary">Require password/biometric authentication to access selected settings pages</string>
+    <string name="settings_password_protection_confirm_title">Confirm Password</string>
+    <string name="settings_password_protection_confirm_summary">Enter your password to access this settings page</string>
+    <string name="settings_password_protected_fragments_title">Select protected pages</string>
+    <string name="settings_password_protected_fragments_summary">Choose which settings pages require password authentication</string>
+    <string name="settings_password_protected_fragments_summary_selected">%d page(s) selected</string>
+    <string name="settings_password_protected_fragments_intro">Select the settings pages that should require password/biometric authentication when accessed. Only pages with a lock screen password set will be protected.</string>
+    <string name="settings_password_protected_fragments_category">Protected Pages</string>
+    
+    <!-- Protected Fragment Names -->
+    <string name="password_protected_fragment_apps">Apps</string>
+    <string name="password_protected_fragment_modes">Modes</string>
+    <string name="password_protected_fragment_mainuser">User Info</string>
+    <string name="password_protected_fragment_system">System</string>
+    <string name="password_protected_fragment_battery">Battery</string>
+    <string name="password_protected_fragment_storage">Storage</string>
+    <string name="password_protected_fragment_security">Security</string>
+    <string name="password_protected_fragment_privacy">Privacy</string>
 </resources>
 

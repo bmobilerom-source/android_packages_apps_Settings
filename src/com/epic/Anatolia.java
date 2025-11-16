@@ -26,13 +26,14 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Surface;
-import android.preference.Preference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 import com.android.settings.R;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.specialaccess.InstallAppWhitelistController;
+import com.android.settings.applications.specialaccess.BlockExtendedSecurityController;
 
 public class Anatolia extends SettingsPreferenceFragment {
 
@@ -48,6 +49,12 @@ public class Anatolia extends SettingsPreferenceFragment {
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final Context context = getActivity();
         if (context != null && prefScreen != null) {
+            // Hide Extended Security preference if blocked
+            Preference extendedSecurityPref = prefScreen.findPreference("extended_security_category");
+            if (extendedSecurityPref != null && BlockExtendedSecurityController.isBlocked(context)) {
+                prefScreen.removePreference(extendedSecurityPref);
+            }
+
             mInstallAppWhitelistController = new InstallAppWhitelistController(
                     context, "install_app_whitelist_toggle");
             if (mInstallAppWhitelistController.isAvailable()) {

@@ -120,13 +120,14 @@
         android:fragment="com.android.settings.security.EncryptionAndCredential"
         settings:controller="com.android.settings.security.EncryptionStatusPreferenceController" />
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:order="6"
         android:key="manage_trust_agents"
         android:title="@string/manage_trust_agents"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.trustagent.TrustAgentSettings"
-        settings:controller="com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController" />
+        settings:controller="com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController"
+        app:position="middle" />
 
     <Preference
         android:order="7"

@@ -45,7 +45,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -56,6 +58,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.specialaccess.BlockExtendedSecurityController;
 
 /**
  * Extended Security Settings Page
@@ -75,16 +78,27 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
     private static final String KEY_NO_STORAGE_RESTRICT = "no_storage_restrict";
     private static final String KEY_WINDOW_IGNORE_SECURE = "window_ignore_secure";
     private static final String KEY_SECURE_LOCKSCREEN_QS_DISABLED = "secure_lockscreen_qs_disabled";
+    private static final String KEY_SETTINGS_PASSWORD_PROTECTION_ENABLED = 
+            "settings_password_protection_enabled";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Check if Extended Security Settings is blocked
+        Context context = getActivity();
+        if (context != null && BlockExtendedSecurityController.isBlocked(context)) {
+            Log.d(TAG, "Extended Security Settings access is blocked, finishing activity");
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
+
         addPreferencesFromResource(R.xml.anatolia_settings_extended_security);
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final ContentResolver resolver = getActivity().getContentResolver();
-        final Context context = getActivity();
 
         // Check fingerprint hardware and hide category if not available
         PreferenceCategory fingerprintCategory = (PreferenceCategory) findPreference(KEY_FINGERPRINT_CATEGORY);
@@ -140,6 +154,34 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                 boolean enabled = (Boolean) newValue;
                 Settings.System.putInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, enabled ? 1 : 0);
                 Log.d(TAG, "secure_lockscreen_qs_disabled set to: " + enabled);
+                return true;
+            } else if (KEY_SETTINGS_PASSWORD_PROTECTION_ENABLED.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.Secure.putInt(resolver, 
+                        com.android.settings.core.PasswordProtectionHelper.SETTINGS_PASSWORD_PROTECTION_ENABLED, 
+                        enabled ? 1 : 0);
+                Log.d(TAG, "settings_password_protection_enabled set to: " + enabled);
+                
+                // Initialize default protected fragments if enabling for the first time
+                if (enabled) {
+                    String currentFragments = Settings.Secure.getStringForUser(resolver,
+                            com.android.settings.core.PasswordProtectionHelper.SETTINGS_PASSWORD_PROTECTED_FRAGMENTS,
+                            android.os.UserHandle.USER_CURRENT);
+                    if (TextUtils.isEmpty(currentFragments)) {
+                        // Set default protected fragments
+                        java.util.Set<String> defaultFragments = 
+                                com.android.settings.core.PasswordProtectionHelper.getProtectedFragments(getContext());
+                        com.android.settings.core.PasswordProtectionHelper.setProtectedFragments(
+                                getContext(), defaultFragments);
+                    }
+                }
+                
+                // Update protected fragments preference visibility
+                Preference protectedFragmentsPref = findPreference("settings_password_protected_fragments");
+                if (protectedFragmentsPref != null) {
+                    protectedFragmentsPref.setVisible(enabled);
+                }
+                
                 return true;
             }
         } catch (Exception e) {
@@ -229,6 +271,28 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                             .setChecked(qsDisabled != 0);
                 }
                 secureLockscreenQsPref.setOnPreferenceChangeListener(this);
+            }
+            
+            // Update password protection enabled preference
+            Preference passwordProtectionPref = findPreference(KEY_SETTINGS_PASSWORD_PROTECTION_ENABLED);
+            if (passwordProtectionPref != null) {
+                int protectionEnabled = Settings.Secure.getIntForUser(resolver,
+                        com.android.settings.core.PasswordProtectionHelper.SETTINGS_PASSWORD_PROTECTION_ENABLED,
+                        0, UserHandle.USER_CURRENT);
+                if (passwordProtectionPref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) passwordProtectionPref)
+                            .setChecked(protectionEnabled != 0);
+                }
+                passwordProtectionPref.setOnPreferenceChangeListener(this);
+            }
+            
+            // Update protected fragments preference visibility
+            Preference protectedFragmentsPref = findPreference("settings_password_protected_fragments");
+            if (protectedFragmentsPref != null) {
+                int protectionEnabled = Settings.Secure.getIntForUser(resolver,
+                        com.android.settings.core.PasswordProtectionHelper.SETTINGS_PASSWORD_PROTECTION_ENABLED,
+                        0, UserHandle.USER_CURRENT);
+                protectedFragmentsPref.setVisible(protectionEnabled != 0);
             }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference states", e);
