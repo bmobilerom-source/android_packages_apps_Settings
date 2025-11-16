@@ -42,6 +42,7 @@ import com.android.settings.security.LockUnificationPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.safetycenter.ExtendedSecurityPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,8 @@ public final class SafetyCenterUtils {
         controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY)
                 .setChildren(profileSecurityControllers));
         controllers.addAll(profileSecurityControllers);
+        // Add Extended Security controller
+        controllers.add(new ExtendedSecurityPreferenceController(context));
         return controllers;
     }
 

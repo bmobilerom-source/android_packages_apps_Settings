@@ -105,6 +105,7 @@
     <Preference
         android:key="privacy_lock_screen_notifications_page"
         android:title="@string/lock_screen_notifs_title"
+        settings:layout="@layout/system_warning_preference_card"
         android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
         settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
 
@@ -113,6 +114,7 @@
         android:key="privacy_media_controls_lockscreen"
         android:title="@string/media_controls_lockscreen_title"
         android:summary="@string/media_controls_lockscreen_description"
+        settings:layout="@layout/system_warning_preference_card"
         settings:controller=
             "com.android.settings.sound.MediaControlsLockScreenPreferenceController" />
 

@@ -109,6 +109,77 @@
             android:fragment="com.epic.fragments.SettingsExtendedSecurity"
             android:icon="@drawable/ic_settings_security_filled" />
 
+        <!-- BMobile Fingerprint -->
+        <PreferenceScreen
+            android:key="bmobile_fingerprint_category"
+            android:title="@string/bmobile_fingerprint_title"
+            android:summary="@string/bmobile_fingerprint_summary"
+            android:fragment="com.epic.fragments.BMobileFingerprintSettings"
+            android:icon="@drawable/ic_bmobile_fingerprint" />
+
+        <!-- Dashboard Style -->
+        <PreferenceScreen
+            android:key="dashboard_style_category"
+            android:title="@string/dashboard_style_title"
+            android:summary="@string/dashboard_style_summary"
+            android:fragment="com.epic.fragments.DashboardStyleSettings"
+            android:icon="@drawable/ic_settings_display_white" />
+
+        <!-- Custom System Theme -->
+        <PreferenceScreen
+            android:key="custom_theme_category"
+            android:title="@string/custom_theme_title"
+            android:summary="@string/custom_theme_summary"
+            android:fragment="com.android.settings.theme.CustomThemeSettings"
+            android:icon="@drawable/ic_settings_display_white" />
+
+        <!-- Settings Page Blocking -->
+        <PreferenceScreen
+            android:key="settings_page_blocking_category"
+            android:title="@string/settings_page_blocking_title"
+            android:summary="@string/settings_page_blocking_summary"
+            android:fragment="com.epic.fragments.SettingsPageBlocking"
+            android:icon="@drawable/ic_settings_security_filled" />
+
+        <!-- Settings Backup & Restore -->
+        <PreferenceScreen
+            android:key="settings_backup_restore_category"
+            android:title="@string/settings_backup_restore_title"
+            android:summary="@string/settings_backup_summary"
+            android:fragment="com.epic.fragments.SettingsBackupRestoreImproved" />
+
+        <!-- Security Features -->
+        <PreferenceScreen
+            android:key="security_features_category"
+            android:title="@string/security_features_title"
+            android:summary="@string/security_features_summary"
+            android:fragment="com.epic.fragments.SecurityFeaturesSettings"
+            android:icon="@drawable/ic_security" />
+
+        <!-- System Optimization -->
+        <PreferenceScreen
+            android:key="system_optimization_category"
+            android:title="@string/system_optimization_title"
+            android:summary="@string/system_optimization_summary"
+            android:fragment="com.epic.fragments.SystemOptimizationSettings"
+            android:icon="@drawable/ic_tune" />
+
+        <!-- Developer Tools -->
+        <PreferenceScreen
+            android:key="developer_tools_category"
+            android:title="@string/developer_tools_title"
+            android:summary="@string/developer_tools_summary"
+            android:fragment="com.epic.fragments.DeveloperToolsSettings"
+            android:icon="@drawable/ic_build" />
+
+        <!-- Developer Options -->
+        <PreferenceScreen
+            android:key="developer_options_category"
+            android:title="@string/developer_options_title"
+            android:summary="@string/developer_options_summary"
+            android:fragment="com.android.settings.development.DevelopmentSettings"
+            android:icon="@drawable/ic_build" />
+
         <!-- Install App Whitelist Toggle -->
         <SwitchPreferenceCompat
             android:key="install_app_whitelist_toggle"
@@ -163,6 +234,14 @@
             android:summary="@string/display_grid_summary"
             android:fragment="com.epic.fragments.DisplayGrid"
             android:icon="@drawable/ic_display_grid" />
+
+        <!-- System Basic Defaults (independent copy of DisplayGrid) -->
+        <PreferenceScreen
+            android:key="system_basic_defaults_category"
+            android:title="@string/system_basic_defaults_title"
+            android:summary="@string/system_basic_defaults_title"
+            android:fragment="com.epic.fragments.SystemBasicDefaults"
+            android:icon="@drawable/ic_settings_display_white" />
 
                     <!-- Display Page Grid (two-column cards) -->
         <PreferenceScreen

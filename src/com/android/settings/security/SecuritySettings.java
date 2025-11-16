@@ -117,6 +117,8 @@ public class SecuritySettings extends DashboardFragment {
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
                 .setChildren(securityPreferenceControllers));
         controllers.addAll(securityPreferenceControllers);
+        // Add Extended Security controller
+        controllers.add(new com.android.settings.security.ExtendedSecurityPreferenceController(context));
 
         return controllers;
     }

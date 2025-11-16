@@ -33,13 +33,12 @@
     </PreferenceCategory>
     -->
 
-    <!-- TopIntro - Commented out
+    <!-- TopIntro -->
     <com.android.settingslib.widget.TopIntroPreference
         android:key="pattern_size_top_intro"
         android:title="@string/unlock_set_unlock_pattern_title"
         android:persistent="false"
         android:order="-999"/>
-    -->
 
     <!-- Footer - Hidden -->
     <!--
@@ -49,32 +48,36 @@
         settings:searchable="false" />
     -->
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:icon="@drawable/ic_security_pattern_3x3"
         android:key="lock_pattern_size_3"
         android:title="@string/lock_pattern_size_3"
         android:order="0"
-        android:persistent="false"/>
+        android:persistent="false"
+        app:position="top"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:icon="@drawable/ic_security_pattern_4x4"
         android:key="lock_pattern_size_4"
         android:title="@string/lock_pattern_size_4"
         android:order="1"
-        android:persistent="false"/>
+        android:persistent="false"
+        app:position="middle"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:icon="@drawable/ic_security_pattern_5x5"
         android:key="lock_pattern_size_5"
         android:title="@string/lock_pattern_size_5"
         android:order="2"
-        android:persistent="false"/>
+        android:persistent="false"
+        app:position="middle"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:icon="@drawable/ic_security_pattern_6x6"
         android:key="lock_pattern_size_6"
         android:title="@string/lock_pattern_size_6"
         android:order="3"
-        android:persistent="false"/>
+        android:persistent="false"
+        app:position="bottom"/>
 
 </PreferenceScreen>

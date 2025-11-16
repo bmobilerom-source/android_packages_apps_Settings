@@ -52,18 +52,46 @@
         android:persistent="false"
         android:order="-999"/>
 
+    <!-- Sensor Block Per Package - Moved to top -->
+    <com.android.settings.preferences.ui.AdaptivePreference
+        android:key="sensor_block_settings"
+        android:title="@string/sensor_block_title"
+        android:summary="@string/sensor_block_summary"
+        android:fragment="com.epic.fragments.SensorBlockSettings"
+        android:order="-998"
+        app:position="top" />
+
+    <!-- Password Protection for Settings Pages - Moved to top -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="settings_password_protection_enabled"
+        android:title="@string/settings_password_protection_title"
+        android:summary="@string/settings_password_protection_summary"
+        android:defaultValue="false"
+        android:order="-997"
+        app:position="bottom" />
+
     <!-- Authentication Category -->
     <PreferenceCategory
         android:title="@string/extended_security_authentication_category"
         android:order="0"
         android:layout="@layout/settingslib_preference_category_no_title">
 
+        <!-- Protected Fragments Selection -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="settings_password_protected_fragments"
+            android:title="@string/settings_password_protected_fragments_title"
+            android:summary="@string/settings_password_protected_fragments_summary"
+            android:fragment="com.epic.fragments.PasswordProtectedFragmentsSettings"
+            app:position="middle"
+            android:visible="false" />
+
         <!-- Fingerprint Ripple Effect -->
         <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="auth_ripple_enabled"
             android:title="@string/enable_fingerprint_ripple_effect_title"
             android:summary="@string/enable_fingerprint_ripple_effect_summary"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:position="bottom" />
 
     </PreferenceCategory>
 
@@ -79,14 +107,16 @@
             android:key="fp_success_vibrate"
             android:title="@string/fingerprint_success_vibration_title"
             android:summary="@string/fingerprint_success_vibration_summary"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:position="top" />
 
         <!-- Authentication Error Vibration -->
         <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="fp_error_vibrate"
             android:title="@string/fingerprint_error_vibration_title"
             android:summary="@string/fingerprint_error_vibration_summary"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:position="bottom" />
 
     </PreferenceCategory>
 
@@ -101,21 +131,24 @@
             android:key="show_clipboard_overlay"
             android:title="@string/show_clipboard_overlay_title"
             android:summary="@string/show_clipboard_overlay_summary"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:position="top" />
 
         <!-- No Storage Restrict -->
         <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="no_storage_restrict"
             android:title="@string/no_storage_restrict_title"
             android:summary="@string/no_storage_restrict_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:position="middle" />
 
         <!-- Ignore Window Secure Flags -->
         <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="window_ignore_secure"
             android:title="@string/ignore_window_secure_title"
             android:summary="@string/ignore_window_secure_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:position="bottom" />
 
     </PreferenceCategory>
 
@@ -130,7 +163,8 @@
             android:key="secure_lockscreen_qs_disabled"
             android:title="@string/quick_settings_secure_lock_screen_title"
             android:summary="@string/quick_settings_secure_lock_screen_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:position="solo" />
 
     </PreferenceCategory>
 
@@ -139,30 +173,8 @@
         android:title="@string/extended_security_battery_saving_category"
         android:order="3"
         android:layout="@layout/settingslib_preference_category_no_title">
-
-        <!-- Sensor Block -->
-        <Preference
-            android:key="sensor_block_settings"
-            android:title="@string/sensor_block_title"
-            android:summary="@string/sensor_block_summary"
-            android:fragment="com.epic.fragments.SensorBlockSettings" />
-
     </PreferenceCategory>
 
-    <!-- Developer Options Category -->
-    <PreferenceCategory
-        android:title="@string/extended_security_developer_category"
-        android:order="4"
-        android:layout="@layout/settingslib_preference_category_no_title">
-
-        <!-- Hide Developer Status -->
-        <Preference
-            android:key="hide_developer_status_settings"
-            android:title="@string/hide_developer_status_title"
-            android:summary="@string/hide_developer_status_summary"
-            android:fragment="com.epic.fragments.HideDeveloperStatusSettings" />
-
-    </PreferenceCategory>
 
 </PreferenceScreen>
 
