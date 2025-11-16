@@ -16,20 +16,70 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- Custom Dashboard page -->
+    <string name="custom_dashboard_title">Custom Dashboard</string>
+    <string name="custom_dashboard_summary">Choose the Settings home page layout</string>
+    <string name="custom_dashboard_current_style_title">Active layout</string>
+    <string name="custom_dashboard_load_error">Could not open Custom Dashboard: %1$s</string>
+    <string name="compact_dashboard_enabled_toast">Compact dashboard enabled</string>
+    <string name="compact_dashboard_disabled_toast">Compact dashboard disabled</string>
 
+    <!-- Dashboard style picker -->
+    <string name="dashboard_style_title">Dashboard style</string>
+    <string name="dashboard_style_summary">Applies when you open Settings home</string>
+    <string name="dashboard_style_aosp">AOSP Style</string>
+    <string name="dashboard_style_epic">Epic Style</string>
+    <string name="dashboard_style_v2">V2 Style</string>
+    <string name="dashboard_style_compact">Compact Style</string>
+    <string name="dashboard_style_material">Material Style</string>
+    <string name="dashboard_style_classic">Classic Style</string>
+    <string name="dashboard_style_custom_v2">Custom V2 Style</string>
+    <string name="dashboard_style_fun_display">BMobile Home Settings</string>
+    <string name="dashboard_style_bmobile_expressive">BMobile Expressive Style</string>
+    <string name="dashboard_style_securityextended">Security Extended Style</string>
+    <string name="dashboard_style_arcana_aosp">Arcana AOSP Style</string>
+    <string name="dashboard_style_arcana_oos11">Arcana OOS11 Style</string>
+    <string name="dashboard_style_afterlabs_tab">AfterLabs Tab (V2)</string>
+    <string name="dashboard_style_afterlabs_grid">AfterLabs Grid</string>
+    <string name="dashboard_style_infinity_home">Infinity Home</string>
+    <string name="afterlabs_tab_connectivity">Connect</string>
+    <string name="afterlabs_tab_personalize">Personal</string>
+    <string name="afterlabs_tab_system">System</string>
+    <string name="afterlabs_tab_security">Security</string>
+    <string name="compact_dashboard_title">Compact dashboard overlay</string>
+    <string name="compact_dashboard_summary">Extra compact grid (Compact layout only)</string>
+    <string name="dashboard_style_reset_title">Reset dashboard style</string>
+    <string name="dashboard_style_reset_summary">Restore default layout</string>
+    <string name="systemui_reset_title">Restart SystemUI</string>
+    <string name="systemui_reset_summary">Apply SystemUI changes</string>
+    <string name="systemui_reset_success">SystemUI restarted</string>
+    <string name="systemui_reset_failed">Could not restart SystemUI</string>
+    <string name="dashboard_style_applied">Dashboard style changed to %1$s</string>
 
-    <!-- System Basic Defaults -->
-    <string name="system_basic_defaults_aurora_store_title">Aurora Store</string>
-    <string name="system_basic_defaults_aurora_store_summary">Alternative app store</string>
-    <string name="system_basic_defaults_default_apps_title">Default Apps</string>
-    <string name="system_basic_defaults_default_apps_summary">Set your default applications</string>
-    <string name="system_basic_defaults_gesture_navigation_title">Gesture Navigation</string>
-    <string name="system_basic_defaults_gesture_navigation_summary">Modern navigation gestures</string>
-    <string name="system_basic_defaults_one_handed_title">One-handed Mode</string>
-    <string name="system_basic_defaults_one_handed_summary">Easy one-handed operation</string>
-    <string name="dark_ui_mode_summary">Dark theme for your eyes</string>
-    <string name="monet_color_settings_title">Monet Colors</string>
-    <string name="monet_color_settings_summary">Customize system colors</string>
+    <!-- AfterLab declanxafterlab_style → layout mode (Secure) -->
+    <string name="customize_layout_mode_title">AfterLabs layout mode</string>
+    <string name="customize_layout_mode_summary">Grid cards or tabbed categories (styles 12 / 13)</string>
+    <string name="customize_layout_mode_grid">Grid (wide cards)</string>
+    <string name="customize_layout_mode_tabbed">Tabbed categories</string>
+    <string name="customize_layout_mode_applied">Layout mode set to %1$s</string>
+    <string name="custom_dashboard_nav_styles">Styles</string>
+    <string name="custom_dashboard_nav_layout">Layout</string>
+    <string name="custom_dashboard_nav_apply">Apply &amp; home</string>
+    <string name="custom_dashboard_nav_styles_hint">Scroll to dashboard style</string>
+    <string name="custom_dashboard_nav_layout_hint">Scroll to layout mode</string>
+    <string name="custom_dashboard_access_title">Open this page</string>
+    <string name="custom_dashboard_access_summary">Settings tile, Infinity Suite, or: adb shell am start -a com.android.settings.CUSTOM_DASHBOARD_SETTINGS -p com.android.settings</string>
 
+    <!-- Per-layout settings screens -->
+    <string name="fun_display_settings_title">BMobile Home Settings</string>
+    <string name="bmobile_expressive_settings_title">BMobile Expressive Settings</string>
+    <string name="epic_style_header_title">Epic Style</string>
+    <string name="epic_style_header_summary">Customized Settings Experience</string>
+    <string name="compact_style_header_title">Compact Style</string>
+    <string name="compact_style_header_summary">Minimal layout for quick access</string>
+    <string name="material_style_header_title">Material Style</string>
+    <string name="material_style_header_summary">Material Design 3 inspired interface</string>
+    <string name="classic_style_header_title">Classic Style</string>
+    <string name="classic_style_header_summary">Traditional categorized layout</string>
 
 </resources>

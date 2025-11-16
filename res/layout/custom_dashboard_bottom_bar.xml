@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ExpandableBottomBar on Custom Dashboard (AfterlifeOS / st235 pattern).
+  Material BottomNavigationView is a fallback if the AAR view fails to inflate.
+
+  Copyright (C) 2025 BashaMobile
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <github.com.st235.lib_expandablebottombar.ExpandableBottomBar
+        android:id="@+id/custom_dashboard_expandable_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="8dp"
+        app:exb_backgroundColor="?android:attr/colorBackgroundFloating"
+        app:exb_backgroundCornerRadius="24dp"
+        app:exb_itemInactiveColor="?android:attr/textColorSecondary"
+        app:exb_itemBackgroundCornerRadius="20dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/custom_dashboard_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/custom_dashboard_bottom_nav" />
+
+</FrameLayout>

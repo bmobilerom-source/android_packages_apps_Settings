@@ -211,6 +211,13 @@ import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settings.wifi.tether.WifiTetherSettings;
 
+import com.epic.fragments.BMobileExpressiveSettings;
+import com.epic.fragments.CustomDashboardSettings;
+import com.epic.fragments.DashboardStyleSettings;
+import com.epic.fragments.ExtendedHomepageWidgetsFragment;
+import com.epic.fragments.FunDisplaySettings;
+import com.epic.fragments.HomepageWidgetsFragment;
+
 public class SettingsGateway {
 
     /**
@@ -409,7 +416,14 @@ public class SettingsGateway {
             HearingDevicePairingFragment.class.getName(),
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
-            ContactsStorageSettings.class.getName()
+            ContactsStorageSettings.class.getName(),
+            // Custom dashboard (BMobile / Epic)
+            CustomDashboardSettings.class.getName(),
+            DashboardStyleSettings.class.getName(),
+            FunDisplaySettings.class.getName(),
+            BMobileExpressiveSettings.class.getName(),
+            HomepageWidgetsFragment.class.getName(),
+            ExtendedHomepageWidgetsFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

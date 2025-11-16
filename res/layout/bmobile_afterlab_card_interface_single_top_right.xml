@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2023 AfterLife Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<LinearLayout
+    android:background="@android:color/transparent"
+    android:layout_width="fill_parent"
+    android:layout_height="160.0dip"
+    android:layout_marginTop="8.0dip"
+    android:layout_marginBottom="10.0dip"
+    android:layout_marginStart="7.0dip"
+    android:layout_marginEnd="16.0dip"
+    android:minHeight="?android:listPreferredItemHeightSmall"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="fill_parent"
+        android:layout_height="160.0dip"
+        app:cardBackgroundColor="@color/card_bg"
+        app:cardCornerRadius="26.0dip"
+        app:cardElevation="0.0dip"
+        app:rippleColor="@color/ripple">
+        <RelativeLayout
+            android:padding="16.0dip"
+            android:layout_width="wrap_content"
+            android:layout_height="160.0dip">
+            <TextView
+                android:textSize="18.0sp"
+                android:textStyle="bold"
+                android:textColor="?android:textColorPrimary"
+                android:layout_gravity="start"
+                android:id="@android:id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5.0dip"
+                android:singleLine="true"
+                android:layout_alignParentTop="true"/>
+            <TextView
+                android:textSize="14.0sp"
+                android:textColor="?android:textColorSecondary"
+                android:layout_gravity="start|center"
+                android:id="@android:id/summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@android:id/title"/>
+            <ImageView
+                android:gravity="start"
+                android:layout_gravity="start"
+                android:id="@android:id/icon"
+                android:background="@drawable/bg_icon"
+                android:padding="4.0dip"
+                android:layout_width="55.0dip"
+                android:layout_height="35.0dip"
+                android:tint="@android:color/system_accent1_900"
+                android:layout_alignParentBottom="true"
+                android:backgroundTint="@android:color/system_accent1_100"/>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

@@ -68,3 +68,9 @@
 
 # Keep the com.android.settings.media_drm.FakeFeatureFlagsImpl
 -keep class com.android.settings.media_drm.FakeFeatureFlagsImpl { *; }
+
+# ExpandableBottomBar (AfterlifeOS / Custom Dashboard)
+-keep class github.com.st235.lib_expandablebottombar.ExpandableBottomBar { *; }
+-keep class github.com.st235.lib_expandablebottombar.behavior.ExpandableBottomBarBehavior { *; }
+-keep class github.com.st235.lib_expandablebottombar.ExpandableBottomBarMenuItem** { *; }
+-keep class github.com.st235.lib_expandablebottombar.ExpandableBottomBarScrollableBehavior { *; }

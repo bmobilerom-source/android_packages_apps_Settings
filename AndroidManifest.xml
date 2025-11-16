@@ -1553,6 +1553,19 @@
         </activity>
 
         <activity
+            android:name="Settings$CustomDashboardActivity"
+            android:label="@string/custom_dashboard_title"
+            android:exported="true"
+            android:icon="@drawable/ic_custom_dashboard">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.CUSTOM_DASHBOARD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.epic.fragments.CustomDashboardSettings" />
+        </activity>
+
+        <activity
             android:name="Settings$DisplaySettingsActivity"
             android:label="@string/display_settings"
             android:exported="true"
