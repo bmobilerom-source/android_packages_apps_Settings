@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Tab strip inspired by AfterlifeOS AfterLab declan_afterlabs_tab_layout.xml
+  https://github.com/AfterlifeOS/packages_apps_AfterLab/blob/14/res/layout/declan_afterlabs_tab_layout.xml
+
+  Copyright (C) 2025 BashaMobile
+  Licensed under the Apache License, Version 2.0 (the "License");
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/bmobile_afterlabs_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="?android:attr/listPreferredItemPaddingStart"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/bmobile_afterlabs_tabs_card_background"
+        app:tabBackground="@null"
+        app:tabGravity="fill"
+        app:tabIndicator="@drawable/bmobile_afterlabs_tabs_indicator_background"
+        app:tabIndicatorAnimationDuration="400"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorColor="?android:attr/colorAccent"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorGravity="stretch"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        app:tabRippleColor="@null"
+        app:tabTextAppearance="@style/TextAppearance.Material3.TitleSmall"
+        app:tabTextColor="?android:attr/textColorPrimary" />
+
+</LinearLayout>

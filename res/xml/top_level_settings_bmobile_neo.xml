@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  HOMEPAGE: style 15 | @string/dashboard_style_top_level_bmobile_neo (BMobile Neo)
+
+  Copyright (C) 2025 BashaMobile
+  Licensed under the Apache License, Version 2.0 (the "License");
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="top_level_settings"
+    android:title="Settings">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="top_level_homepage_widgets"
+        android:selectable="false"
+        android:layout="@layout/homepage_widgets"
+        android:order="-2000" />
+
+    <PreferenceCategory
+        android:order="-120"
+        android:key="top_level_personalize_category"
+        android:title="@string/header_category_apps"
+        android:layout="@layout/settingslib_preference_category_no_title">
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"
+            android:icon="@drawable/ic_settings_battery_filled"
+            android:key="top_level_battery"
+            android:order="-60"
+            android:title="@string/power_usage_summary_title"
+            android:summary="@string/summary_placeholder"
+            settings:highlightableMenuKey="@string/menu_key_battery"
+            settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
+            android:icon="@drawable/ic_devices_other_filled"
+            android:key="top_level_connected_devices"
+            android:order="-55"
+            android:title="@string/connected_devices_dashboard_title"
+            android:summary="@string/connected_devices_dashboard_default_summary"
+            settings:highlightableMenuKey="@string/menu_key_connected_devices"
+            settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
+            android:icon="@drawable/ic_notifications_filled"
+            android:key="top_level_notifications"
+            android:order="-50"
+            android:title="@string/configure_notification_settings"
+            android:summary="@string/notification_dashboard_summary"
+            settings:highlightableMenuKey="@string/menu_key_notifications"/>
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.notification.SoundSettings"
+            android:icon="@drawable/ic_volume_up_filled"
+            android:key="top_level_sound"
+            android:order="-40"
+            android:title="@string/sound_settings"
+            android:summary="@string/sound_dashboard_summary_with_dnd"
+            settings:highlightableMenuKey="@string/menu_key_sound"
+            settings:controller="com.android.settings.sound.TopLevelSoundPreferenceController"/>
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.epic.fragments.BMobileDashboardSettings"
+            android:icon="@drawable/ic_custom_dashboard"
+            android:key="top_level_bmobile_dashboard"
+            android:order="-20"
+            android:title="@string/bmobile_dashboard_title"
+            android:summary="@string/bmobile_dashboard_summary"
+            settings:highlightableMenuKey="@string/menu_key_system"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:order="-100"
+        android:key="top_level_security_privacy_category"
+        android:title="@string/header_category_security"
+        android:layout="@layout/settingslib_preference_category_no_title">
+
+        <com.android.settings.widget.HomepagePreference
+            android:key="top_level_emergency"
+            android:title="@string/emergency_settings_preference_title"
+            android:summary="@string/emergency_dashboard_summary"
+            android:icon="@drawable/ic_settings_emergency_filled"
+            android:order="10"
+            android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"
+            settings:isPreferenceVisible="@bool/config_show_emergency_settings"
+            settings:highlightableMenuKey="@string/menu_key_emergency"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:order="100"
+        android:key="top_level_support_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.accessibility.AccessibilitySettings"
+            android:icon="@drawable/ic_settings_accessibility_filled"
+            android:key="top_level_accessibility"
+            android:order="-20"
+            android:title="@string/accessibility_settings"
+            android:summary="@string/accessibility_settings_summary"
+            settings:highlightableMenuKey="@string/menu_key_accessibility"
+            settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

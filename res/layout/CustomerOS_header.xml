@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customer OS"
+        android:text="@string/customeros_header_title"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="?android:attr/textColorPrimary"
@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customized Android Experience"
+        android:text="@string/customeros_header_summary"
         android:textSize="14sp"
         android:textColor="?android:attr/textColorSecondary" />
 

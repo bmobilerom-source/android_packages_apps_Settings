@@ -1,0 +1,148 @@
+/*
+ * Copyright (C) 2025 BashaMobile
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
+package com.android.settings.homepage;
+
+import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.settings.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import github.com.st235.lib_expandablebottombar.ExpandableBottomBar;
+import github.com.st235.lib_expandablebottombar.MenuItem;
+import github.com.st235.lib_expandablebottombar.MenuItemDescriptor;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function3;
+
+/**
+ * Wires the Custom Dashboard bottom bar (ExpandableBottomBar with Material fallback).
+ */
+public final class CustomDashboardBottomBarHelper {
+
+    private static final String TAG = "CustomDashboardBottomBar";
+
+    public interface Listener {
+        void onResetDashboardStyle();
+
+        void onResetSystemUi();
+
+        void onDisplaySelected();
+    }
+
+    private CustomDashboardBottomBarHelper() {}
+
+    /**
+     * Inflates the bottom bar, falling back to Material {@link BottomNavigationView} if the
+     * ExpandableBottomBar AAR view fails to inflate.
+     */
+    @Nullable
+    public static View inflate(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
+        try {
+            return inflater.inflate(R.layout.dashboard_expandable_bottom_bar, parent, false);
+        } catch (Throwable t) {
+            Log.e(TAG, "ExpandableBottomBar layout failed, using material fallback", t);
+        }
+        try {
+            return inflater.inflate(R.layout.dashboard_expandable_bottom_bar_material, parent, false);
+        } catch (Throwable t) {
+            Log.e(TAG, "Material bottom bar layout failed", t);
+            return null;
+        }
+    }
+
+    public static void bind(@NonNull View root, @NonNull Context context,
+            @NonNull Listener listener) {
+        final ExpandableBottomBar expandable = root.findViewById(R.id.dashboard_expandable_bottom_bar);
+        final BottomNavigationView material = root.findViewById(R.id.dashboard_bottom_nav);
+        if (expandable != null && bindExpandableBar(expandable, context, listener)) {
+            return;
+        }
+        if (expandable != null) {
+            expandable.setVisibility(View.GONE);
+        }
+        if (material != null) {
+            bindMaterialBar(material, listener);
+            return;
+        }
+        Log.w(TAG, "No bottom bar view found in layout");
+    }
+
+    private static boolean bindExpandableBar(@NonNull ExpandableBottomBar bar,
+            @NonNull Context context, @NonNull Listener listener) {
+        try {
+            final int resetColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 0);
+            final int systemUiColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 1);
+            final int displayColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 2);
+            bar.getMenu().add(new MenuItemDescriptor.Builder(context)
+                    .id(R.id.custom_dashboard_nav_reset)
+                    .icon(R.drawable.ic_restore)
+                    .textRes(R.string.dashboard_style_reset_title)
+                    .color(resetColor)
+                    .build());
+            bar.getMenu().add(new MenuItemDescriptor.Builder(context)
+                    .id(R.id.custom_dashboard_nav_systemui)
+                    .icon(R.drawable.ic_settings_system_dashboard_filled)
+                    .textRes(R.string.systemui_reset_title)
+                    .color(systemUiColor)
+                    .build());
+            bar.getMenu().add(new MenuItemDescriptor.Builder(context)
+                    .id(R.id.custom_dashboard_nav_display)
+                    .icon(R.drawable.ic_settings_display_filled)
+                    .textRes(R.string.display_settings)
+                    .color(displayColor)
+                    .build());
+            bar.setOnItemSelectedListener(
+                    (Function3<View, MenuItem, Boolean, Unit>) (view, menuItem, reselected) -> {
+                        dispatchSelection(menuItem.getId(), listener);
+                        return Unit.INSTANCE;
+                    });
+            // Library crashes in onSaveInstanceState when no item was ever selected.
+            bar.setSaveEnabled(false);
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to configure ExpandableBottomBar", e);
+            return false;
+        }
+    }
+
+    private static void bindMaterialBar(@NonNull BottomNavigationView nav,
+            @NonNull Listener listener) {
+        nav.setVisibility(View.VISIBLE);
+        nav.getMenu().clear();
+        nav.inflateMenu(R.menu.custom_dashboard_bottom_nav);
+        DashboardExpandableBottomBarUi.applyMaterialNavColors(nav);
+        nav.setOnItemSelectedListener(item -> {
+            dispatchSelection(item.getItemId(), listener);
+            return true;
+        });
+    }
+
+    private static void dispatchSelection(int itemId, @NonNull Listener listener) {
+        if (itemId == R.id.custom_dashboard_nav_reset) {
+            listener.onResetDashboardStyle();
+        } else if (itemId == R.id.custom_dashboard_nav_systemui) {
+            listener.onResetSystemUi();
+        } else if (itemId == R.id.custom_dashboard_nav_display) {
+            listener.onDisplaySelected();
+        }
+    }
+
+    @Nullable
+    public static View findBottomBar(@NonNull View root) {
+        View expandable = root.findViewById(R.id.dashboard_expandable_bottom_bar);
+        if (expandable != null) {
+            return expandable;
+        }
+        return root.findViewById(R.id.dashboard_bottom_nav);
+    }
+}

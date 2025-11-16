@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/top_level_dashboard_nav_network"
+        android:icon="@drawable/ic_homepage_network"
+        android:title="@string/top_level_dashboard_nav_network" />
+    <item
+        android:id="@+id/top_level_dashboard_nav_display"
+        android:icon="@drawable/ic_homepage_display"
+        android:title="@string/top_level_dashboard_nav_display" />
+    <item
+        android:id="@+id/top_level_dashboard_nav_system"
+        android:icon="@drawable/ic_homepage_system_dashboard"
+        android:title="@string/top_level_dashboard_nav_system" />
+    <item
+        android:id="@+id/top_level_dashboard_nav_wallpaper"
+        android:icon="@drawable/ic_settings_wallpaper_filled"
+        android:title="@string/top_level_dashboard_nav_wallpaper" />
+</menu>

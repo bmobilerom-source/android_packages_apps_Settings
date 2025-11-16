@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  HOMEPAGE: style 13 | @string/dashboard_style_top_level_afterlabs_grid (YR Social)
+  AfterLabs grid — 2-column cards via TopLevelSettings.populateAfterlabsGridItems().
+
+  Copyright (C) 2025 BashaMobile
+  Licensed under the Apache License, Version 2.0 (the "License");
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="top_level_settings">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/mainuser_profile_card"
+        android:key="about_device_info"
+        android:order="-2000"
+        android:selectable="true"
+        android:fragment="com.android.settings.deviceinfo.UserInfoFragement" />
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="afterlabs_grid"
+        android:layout="@layout/afterlabs_grid_two_column_grid"
+        android:order="-1990"
+        android:selectable="false" />
+
+</PreferenceScreen>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 BashaMobile
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/custom_dashboard_nav_reset"
+        android:icon="@drawable/ic_restore"
+        android:title="@string/dashboard_style_reset_title" />
+    <item
+        android:id="@+id/custom_dashboard_nav_systemui"
+        android:icon="@drawable/ic_settings_system_dashboard_white"
+        android:title="@string/systemui_reset_title" />
+    <item
+        android:id="@+id/custom_dashboard_nav_display"
+        android:icon="@drawable/ic_settings_display_filled"
+        android:title="@string/display_settings" />
+</menu>

@@ -74,6 +74,15 @@
             settings:controller="com.android.settings.display.ScreenTimeoutPreferenceController"/>
     </PreferenceCategory>
 
+        <Preference
+        android:fragment="com.epic.fragments.CustomDashboardSettings"
+        android:icon="@drawable/ic_custom_dashboard"
+        android:key="top_level_custom_dashboard"
+        android:order="92"
+        android:title="@string/custom_dashboard_title"
+        android:summary="@string/custom_dashboard_summary"
+        settings:highlightableMenuKey="@string/menu_key_system"/>
+
     <PreferenceCategory
         android:title="@string/category_name_appearance"
         android:order="-180">

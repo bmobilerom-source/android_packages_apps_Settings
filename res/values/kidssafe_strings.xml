@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  KidsSafe module strings — independent of dashboard style picker wiring.
+-->
+<resources>
+    <string name="kidssafe_userinfo_summary">Your KidsSafe profile and quick settings.</string>
+</resources>

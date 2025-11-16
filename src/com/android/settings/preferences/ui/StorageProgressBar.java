@@ -70,11 +70,18 @@ public class StorageProgressBar extends ProgressBar {
     }
 
     private int getOccupiedStoragePercentage() {
-        StatFs statFs = new StatFs(Environment.getDataDirectory().getPath());
-        long totalBytes = statFs.getTotalBytes();
-        long freeBytes = statFs.getAvailableBytes();
-        long usedBytes = totalBytes - freeBytes;
-        return (int) ((usedBytes * 100) / totalBytes);
+        try {
+            StatFs statFs = new StatFs(Environment.getDataDirectory().getPath());
+            long totalBytes = statFs.getTotalBytes();
+            if (totalBytes <= 0) {
+                return 0;
+            }
+            long freeBytes = statFs.getAvailableBytes();
+            long usedBytes = totalBytes - freeBytes;
+            return (int) ((usedBytes * 100) / totalBytes);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     private void setStorageLevel(int level) {
@@ -97,6 +104,9 @@ public class StorageProgressBar extends ProgressBar {
 
     private void setProgressBarColor(int storageLevel) {
         Drawable progressDrawable = getProgressDrawable();
+        if (progressDrawable == null) {
+            return;
+        }
         if (progressDrawable instanceof LayerDrawable) {
             LayerDrawable layerDrawable = (LayerDrawable) progressDrawable;
             int alpha = 255;

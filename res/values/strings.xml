@@ -51,6 +51,9 @@
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
     <string name="header_category_system">System</string>
+    <string name="header_category_network">Network</string>
+    <string name="header_category_apps">Apps &amp; Services</string>
+    <string name="header_category_security">Security &amp; Privacy</string>
 
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_service_in">In Service</string>

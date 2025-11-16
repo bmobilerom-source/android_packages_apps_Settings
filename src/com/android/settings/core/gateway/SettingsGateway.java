@@ -211,6 +211,17 @@ import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settings.wifi.tether.WifiTetherSettings;
 
+import com.android.settings.kidssafe.KidsSafeUserInfoFragment;
+import com.epic.fragments.BMobileExpressiveSettings;
+import com.epic.fragments.BMobileDashboardSettings;
+import com.epic.fragments.CustomDashboardSettings;
+import com.epic.fragments.KidsSafeDashboardSettings;
+import com.epic.fragments.YrCustomDashboardSettings;
+import com.epic.fragments.DashboardStyleSettings;
+import com.epic.fragments.ExtendedHomepageWidgetsFragment;
+import com.epic.fragments.FunDisplaySettings;
+import com.epic.fragments.HomepageWidgetsFragment;
+
 public class SettingsGateway {
 
     /**
@@ -409,7 +420,18 @@ public class SettingsGateway {
             HearingDevicePairingFragment.class.getName(),
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
-            ContactsStorageSettings.class.getName()
+            ContactsStorageSettings.class.getName(),
+            // Custom dashboard (BMobile / Epic)
+            CustomDashboardSettings.class.getName(),
+            YrCustomDashboardSettings.class.getName(),
+            KidsSafeDashboardSettings.class.getName(),
+            BMobileDashboardSettings.class.getName(),
+            DashboardStyleSettings.class.getName(),
+            FunDisplaySettings.class.getName(),
+            BMobileExpressiveSettings.class.getName(),
+            KidsSafeUserInfoFragment.class.getName(),
+            HomepageWidgetsFragment.class.getName(),
+            ExtendedHomepageWidgetsFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

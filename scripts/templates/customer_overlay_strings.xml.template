@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Vendor overlay — packages/apps/Settings/res/values/customer_strings.xml
+  Copy this file into your ROM tree, e.g.:
+    vendor/<customer>/overlay/packages/apps/Settings/res/values/customer_strings.xml
+
+  Only override strings that differ from defaults in system_basic_strings.xml.
+  Rebuild Settings after changes: m Settings
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Customer OS header (BMobile Cards homepage, style 6) -->
+    <string name="customeros_header_title">CUSTOMER_NAME OS</string>
+    <string name="customeros_header_summary">CUSTOMER_TAGLINE</string>
+
+    <!-- Brand dashboard picker page -->
+    <!-- Pick one set: kidssafe / bmobile / yr / custom -->
+    <string name="kidssafe_dashboard_title">CUSTOMER_NAME Layouts</string>
+    <string name="kidssafe_dashboard_summary">Choose your CUSTOMER_NAME Settings home screen</string>
+
+    <!-- Style names shown in picker dropdowns -->
+    <string name="dashboard_style_top_level_classic">CUSTOMER_NAME Standard</string>
+    <string name="dashboard_style_top_level_ks_fun">CUSTOMER_NAME Fun</string>
+    <!-- <string name="dashboard_style_top_level_fun_display">CUSTOMER_NAME Home</string> -->
+    <!-- <string name="dashboard_style_top_level_custom_v2">CUSTOMER_NAME Cards</string> -->
+
+    <!-- User profile intro (optional — from banana_strings.xml in base) -->
+    <!-- <string name="userinfo_bubble_setting_description">Welcome to CUSTOMER_NAME Control Center.</string> -->
+
+</resources>
