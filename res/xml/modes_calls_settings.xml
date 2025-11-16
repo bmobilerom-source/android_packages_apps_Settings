@@ -18,6 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_calls_settings_page"
     settings:searchable="false"
     android:title="@string/zen_mode_calls_title">
@@ -32,9 +33,10 @@
         android:layout_height="16dp"/>
 
     <!-- Repeat callers -->
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="zen_mode_repeat_callers"
-        android:title="@string/zen_mode_repeat_callers_title" />
+        android:title="@string/zen_mode_repeat_callers_title"
+        app:position="solo" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="info_footer"

@@ -17,33 +17,39 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/zen_category_exceptions" >
 
     <!-- Alarms -->
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="modes_category_alarm"
-        android:title="@string/zen_mode_alarms"/>
+        android:title="@string/zen_mode_alarms"
+        app:position="top"/>
 
     <!-- Media -->
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="modes_category_media"
         android:title="@string/zen_mode_media"
-        android:summary="@string/zen_mode_media_summary"/>
+        android:summary="@string/zen_mode_media_summary"
+        app:position="middle"/>
 
     <!-- System -->
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="modes_category_system"
         android:title="@string/zen_mode_system"
-        android:summary="@string/zen_mode_system_summary"/>
+        android:summary="@string/zen_mode_system_summary"
+        app:position="middle"/>
 
     <!-- Reminders -->
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="modes_category_reminders"
-        android:title="@string/zen_mode_reminders"/>
+        android:title="@string/zen_mode_reminders"
+        app:position="middle"/>
 
     <!-- Events -->
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="modes_category_events"
-        android:title="@string/zen_mode_events"/>
+        android:title="@string/zen_mode_events"
+        app:position="bottom"/>
 
 </PreferenceScreen>

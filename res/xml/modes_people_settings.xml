@@ -18,6 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/zen_category_people" >
 
    <!-- Calls & Messages -->
@@ -25,15 +26,17 @@
        android:key="zen_mode_people_calls_messages_section"
        android:title="@string/zen_mode_people_calls_messages_section_title">
 
-      <Preference
+      <com.android.settings.preferences.ui.AdaptivePreference
           android:key="zen_mode_people_messages"
           android:title="@string/zen_mode_messages_title"
-          android:icon="@drawable/ic_zen_mode_people_messages" />
+          android:icon="@drawable/ic_zen_mode_people_messages"
+          app:position="top" />
 
-      <Preference
+      <com.android.settings.preferences.ui.AdaptivePreference
           android:key="zen_mode_people_calls"
           android:title="@string/zen_mode_calls_title"
-          android:icon="@drawable/ic_zen_mode_people_calls" />
+          android:icon="@drawable/ic_zen_mode_people_calls"
+          app:position="bottom" />
    </PreferenceCategory>
 
    <com.android.settingslib.widget.FooterPreference

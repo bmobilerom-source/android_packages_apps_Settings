@@ -17,6 +17,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
                   android:title="@string/zen_modes_list_title" >
 
     <com.android.settingslib.widget.LayoutPreference
@@ -48,19 +49,21 @@
         <com.android.settingslib.PrimarySwitchPreference
             android:key="zen_automatic_trigger_settings" />
         <!-- For adding a trigger for custom manual modes (no switch). -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="zen_add_automatic_trigger"
             android:title="@string/zen_mode_select_schedule"
-            android:icon="@drawable/ic_add_24dp" />
+            android:icon="@drawable/ic_add_24dp"
+            app:position="solo" />
     </PreferenceCategory>
 
     <PreferenceCategory
             android:title="@string/mode_interruption_filter_title"
             android:key="modes_filters">
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="allow_all"
-            android:title="@string/zen_mode_allow_all_notifications"/>
+            android:title="@string/zen_mode_allow_all_notifications"
+            app:position="top"/>
 
         <com.android.settings.notification.modes.CircularIconsPreference
             android:key="zen_mode_people"
@@ -81,14 +84,16 @@
     <PreferenceCategory
             android:title="@string/mode_device_effects_title"
             android:key="modes_additional_actions">
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="mode_display_settings"
                 android:title="@string/mode_display_settings_title"
-                android:icon="@drawable/ic_zen_mode_category_display" />
+                android:icon="@drawable/ic_zen_mode_category_display"
+                app:position="top" />
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="mode_manual_duration"
                 android:title="@string/zen_category_duration"
-                android:icon="@drawable/ic_zen_mode_category_duration" />
+                android:icon="@drawable/ic_zen_mode_category_duration"
+                app:position="bottom" />
     </PreferenceCategory>
 </PreferenceScreen>

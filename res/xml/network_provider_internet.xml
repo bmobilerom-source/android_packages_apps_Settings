@@ -30,56 +30,61 @@
 
 
         
-    <com.android.settingslib.RestrictedPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
         android:fragment="com.android.settings.network.NetworkProviderSettings"
         android:key="internet_settings"
         android:title="@string/provider_internet_settings"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_settings_wireless"
         android:order="-30"
+        app:position="top"
         settings:keywords="@string/keywords_internet"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_wifi"
         settings:controller="com.android.settings.network.InternetPreferenceControllerV2" />
 
-    <com.android.settingslib.RestrictedPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
         android:key="calls_and_sms"
         android:title="@string/calls_and_sms"
         android:icon="@drawable/ic_calls_sms"
         android:order="-20"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.network.NetworkProviderCallsSmsFragment"
+        app:position="middle"
         settings:userRestriction="no_config_mobile_networks"
         settings:allowDividerBelow="true"
         settings:useAdminDisabledSummary="true"
         settings:controller="com.android.settings.network.NetworkProviderCallsSmsController" />
 
-    <com.android.settingslib.RestrictedPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
         android:key="mobile_network_list"
         android:title="@string/provider_network_settings_title"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_sim_card"
         android:order="-15"
+        app:position="middle"
         settings:keywords="@string/keywords_more_mobile_networks"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true"
         settings:controller="com.android.settings.network.MobileNetworkSummaryController" />
 
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="airplane_mode_on"
         android:title="@string/airplane_mode"
         android:icon="@drawable/ic_airplanemode_active"
         android:order="-5"
+        app:position="middle"
         settings:controller="com.android.settings.network.AirplaneModePreferenceController"
         settings:userRestriction="no_airplane_mode"/>
 
-    <com.android.settingslib.RestrictedPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
         android:fragment="com.android.settings.network.tether.TetherSettings"
         android:key="tether_settings"
         android:title="@string/tether_settings_title_all"
         android:icon="@drawable/ic_wifi_tethering"
         android:order="5"
         android:summary="@string/summary_placeholder"
+        app:position="middle"
         settings:controller="com.android.settings.network.TetherPreferenceController"
         settings:keywords="@string/keywords_hotspot_tethering"
         settings:userRestriction="no_config_tethering"
@@ -88,9 +93,9 @@
     <com.android.settings.datausage.DataSaverPreference
         android:key="restrict_background_parent_entry"
         android:title="@string/data_saver_title"
-        android:icon="@drawable/ic_settings_data_usage"
         android:order="10"
         android:persistent="false"
+        android:layout="@layout/adaptive_preference_card"
         settings:isPreferenceVisible="@bool/config_show_data_saver"
         android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 
@@ -98,34 +103,36 @@
         android:fragment="com.android.settings.vpn2.VpnSettings"
         android:key="vpn_settings"
         android:title="@string/vpn_settings_title"
-        android:icon="@drawable/ic_vpn_key"
         android:order="15"
         android:summary="@string/summary_placeholder"
+        android:layout="@layout/adaptive_preference_card"
         settings:userRestriction="no_config_vpn"
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settings.network.PrivateDnsModeDialogPreference
         android:key="private_dns_settings"
         android:title="@string/select_private_dns_configuration_title"
-        android:icon="@drawable/ic_settings_private_dns"
         android:order="20"
+        android:layout="@layout/adaptive_preference_card"
         android:dialogTitle="@string/select_private_dns_configuration_dialog_title"
         android:dialogLayout="@layout/private_dns_mode_dialog"
         android:positiveButtonText="@string/save"
         android:negativeButtonText="@android:string/cancel" />
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:fragment="com.android.settings.network.AdaptiveConnectivitySettings"
         android:key="adaptive_connectivity"
         android:title="@string/adaptive_connectivity_title"
         android:summary="@string/summary_placeholder"
         android:order="25"
+        app:position="middle"
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="cellular_security_network_internet"
         android:title="@string/cellular_security_title"
         android:summary="@string/cellular_security_summary"
         android:order="30"
+        app:position="bottom"
         settings:controller="com.android.settings.network.CellularSecurityPreferenceController"/>
 </PreferenceScreen>

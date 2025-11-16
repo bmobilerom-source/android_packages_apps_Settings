@@ -16,31 +16,35 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:titleTextAppearance="@style/PreferenceScreenTitle.Accent"
     android:title="@string/bluetooth_settings_title">
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="bluetooth_auto_on_settings_toggle"
         android:title="@string/bluetooth_screen_auto_on_title"
         android:summary="@string/bluetooth_screen_auto_on_summary"
+        app:position="top"
         settings:controller="com.android.settings.bluetooth.BluetoothAutoOnPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="bluetooth_screen_footer"
         android:selectable="false"
         settings:searchable="false"/>
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="bluetooth_screen_bt_pair_rename_devices"
         android:title="@string/bluetooth_device_name"
         android:summary="@string/summary_placeholder"
+        app:position="middle"
         settings:controller="com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController"/>
 
-    <com.android.settingslib.RestrictedPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
         android:key="bluetooth_screen_add_bt_devices"
         android:title="@string/bluetooth_pairing_pref_title"
         android:icon="@drawable/ic_add_24dp"
         android:summary="@string/connected_device_add_device_summary"
         android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
+        app:position="bottom"
         settings:allowDividerAbove="true"
         settings:userRestriction="no_config_bluetooth"
         settings:useAdminDisabledSummary="true"
