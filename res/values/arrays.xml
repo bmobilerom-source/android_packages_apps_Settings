@@ -1630,4 +1630,93 @@
     <!-- Packages that will not show Display over other apps permission -->
     <string-array name="display_over_apps_permission_change_exempt">
     </string-array>
+
+    <!-- Settings dashboard styles — entry order must match settings_dashboard_style_values -->
+    <string-array name="settings_dashboard_style_entries">
+        <item>@string/dashboard_style_top_level_settings</item>      <!-- 0 -->
+        <item>@string/dashboard_style_top_level_epic</item>          <!-- 1 -->
+        <item>@string/dashboard_style_top_level_v2</item>            <!-- 2 -->
+        <item>@string/dashboard_style_top_level_material</item>     <!-- 4 -->
+        <item>@string/dashboard_style_top_level_classic</item>      <!-- 5 -->
+        <item>@string/dashboard_style_top_level_custom_v2</item>     <!-- 6 -->
+        <item>@string/dashboard_style_top_level_fun_display</item>  <!-- 7 default -->
+        <item>@string/dashboard_style_top_level_bmobile_expressive</item> <!-- 8 -->
+        <item>@string/dashboard_style_top_level_aosp</item>         <!-- 10 -->
+        <item>@string/dashboard_style_top_level_oos11</item>        <!-- 11 -->
+        <item>@string/dashboard_style_top_level_afterlabs_tab</item><!-- 12 -->
+        <item>@string/dashboard_style_top_level_afterlabs_grid</item><!-- 13 -->
+        <item>@string/dashboard_style_top_level_yr_expressive</item><!-- 14 -->
+        <item>@string/dashboard_style_top_level_bmobile_neo</item><!-- 15 -->
+        <item>@string/dashboard_style_top_level_ks_fun</item><!-- 16 -->
+    </string-array>
+
+    <string-array name="settings_dashboard_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+    </string-array>
+
+    <!-- YR dashboard styles — ids 1, 11, 13, 14 -->
+    <string-array name="settings_dashboard_style_yr_entries">
+        <item>@string/dashboard_style_top_level_epic</item>
+        <item>@string/dashboard_style_top_level_oos11</item>
+        <item>@string/dashboard_style_top_level_afterlabs_grid</item>
+        <item>@string/dashboard_style_top_level_yr_expressive</item>
+    </string-array>
+    <string-array name="settings_dashboard_style_yr_values" translatable="false">
+        <item>1</item>
+        <item>11</item>
+        <item>13</item>
+        <item>14</item>
+    </string-array>
+
+    <!-- KidsSafe dashboard styles — ids 5, 16 -->
+    <string-array name="settings_dashboard_style_kidssafe_entries">
+        <item>@string/dashboard_style_top_level_classic</item>
+        <item>@string/dashboard_style_top_level_ks_fun</item>
+    </string-array>
+    <string-array name="settings_dashboard_style_kidssafe_values" translatable="false">
+        <item>5</item>
+        <item>16</item>
+    </string-array>
+
+    <!-- BMobile dashboard styles — ids 6, 7, 8, 10, 12, 15 -->
+    <string-array name="settings_dashboard_style_bmobile_entries">
+        <item>@string/dashboard_style_top_level_custom_v2</item>
+        <item>@string/dashboard_style_top_level_fun_display</item>
+        <item>@string/dashboard_style_top_level_bmobile_expressive</item>
+        <item>@string/dashboard_style_top_level_aosp</item>
+        <item>@string/dashboard_style_top_level_afterlabs_tab</item>
+        <item>@string/dashboard_style_top_level_bmobile_neo</item>
+    </string-array>
+    <string-array name="settings_dashboard_style_bmobile_values" translatable="false">
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
+        <item>15</item>
+    </string-array>
+
+    <string-array name="customize_layout_mode_entries">
+        <item>@string/customize_layout_mode_grid</item>
+        <item>@string/customize_layout_mode_tabbed</item>
+    </string-array>
+
+    <string-array name="customize_layout_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>

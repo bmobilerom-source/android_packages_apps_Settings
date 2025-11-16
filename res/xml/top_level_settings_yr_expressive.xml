@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  HOMEPAGE: style 14 | @string/dashboard_style_top_level_yr_expressive (YR Expressive)
+
+  Copyright (C) 2025 BashaMobile
+  Licensed under the Apache License, Version 2.0 (the "License");
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="top_level_settings">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="extended_homepage_widgets"
+        android:selectable="false"
+        android:layout="@layout/extended_homepage_widgets"
+        android:order="-1999" />
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="yr_expressive_grid"
+        android:selectable="false"
+        android:layout="@layout/yr_expressive_two_column_grid" />
+
+</PreferenceScreen>

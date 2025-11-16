@@ -16,7 +16,13 @@
 
 package com.android.settings.widget;
 
+import android.content.Context;
+import android.provider.Settings;
+import android.os.UserHandle;
 import android.view.View;
+import android.view.Gravity;
+import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -29,6 +35,8 @@ public class HomepagePreferenceLayoutHelper {
 
     private View mIcon;
     private View mText;
+    private TextView mTitle;
+    private TextView mSummary;
     private boolean mIconVisible = true;
     private int mIconPaddingStart = -1;
     private int mTextPaddingStart = -1;
@@ -75,8 +83,67 @@ public class HomepagePreferenceLayoutHelper {
     void onBindViewHolder(PreferenceViewHolder holder) {
         mIcon = holder.findViewById(R.id.icon_frame);
         mText = holder.findViewById(R.id.text_frame);
+        mTitle = (TextView) holder.findViewById(android.R.id.title);
+        mSummary = (TextView) holder.findViewById(android.R.id.summary);
+        
         setIconVisible(mIconVisible);
         setIconPaddingStart(mIconPaddingStart);
         setTextPaddingStart(mTextPaddingStart);
+        
+        // For epic style, ensure text is left-aligned (not centered)
+        if (isEpicStyle()) {
+            // Text should be left-aligned, not centered
+            if (mText != null && mText instanceof RelativeLayout) {
+                RelativeLayout textFrame = (RelativeLayout) mText;
+                textFrame.setGravity(Gravity.START);
+                
+                if (mTitle != null) {
+                    RelativeLayout.LayoutParams titleParams = 
+                        (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
+                    if (titleParams != null) {
+                        titleParams.addRule(RelativeLayout.ALIGN_PARENT_START);
+                        titleParams.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+                        mTitle.setLayoutParams(titleParams);
+                        mTitle.setGravity(Gravity.START);
+                        mTitle.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+                    }
+                }
+                
+                if (mSummary != null) {
+                    RelativeLayout.LayoutParams summaryParams = 
+                        (RelativeLayout.LayoutParams) mSummary.getLayoutParams();
+                    if (summaryParams != null) {
+                        summaryParams.addRule(RelativeLayout.ALIGN_START);
+                        summaryParams.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+                        mSummary.setLayoutParams(summaryParams);
+                        mSummary.setGravity(Gravity.START);
+                        mSummary.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+                    }
+                }
+            }
+        }
     }
+    
+    /**
+     * Checks if epic style dashboard is enabled.
+     */
+    private boolean isEpicStyle() {
+        try {
+            Context context = null;
+            if (mText != null) {
+                context = mText.getContext();
+            }
+            if (context == null) {
+                return false;
+            }
+            
+            int dashboardStyle = com.android.settings.homepage.DashboardSystemKeys
+                    .getDashboardStyle(context.getContentResolver(), 2);
+            
+            return dashboardStyle == 1; // Epic style = 1
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
 }

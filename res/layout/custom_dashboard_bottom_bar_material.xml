@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Deprecated: use dashboard_expandable_bottom_bar_material.xml -->
+<include layout="@layout/dashboard_expandable_bottom_bar_material" />

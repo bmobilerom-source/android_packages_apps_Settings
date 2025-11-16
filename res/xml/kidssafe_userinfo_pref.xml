@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/kidssafe_user_info_frag"
+        android:key="kidssafe_user_header"
+        android:selectable="false"
+        android:order="10" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="kidssafe_userinfo_desc"
+        android:order="20"
+        android:title="@string/kidssafe_userinfo_summary"/>
+
+</PreferenceScreen>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Material-only fallback when ExpandableBottomBar (AAR) cannot be inflated.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/dashboard_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@color/dashboard_bottom_nav_label"
+        app:itemTextColor="@color/dashboard_bottom_nav_label"
+        app:labelVisibilityMode="labeled" />
+
+</FrameLayout>
