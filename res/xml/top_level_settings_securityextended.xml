@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2024 The Android Open Source Project
+  Copyright (C) 2025 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -21,37 +21,71 @@
     android:key="top_level_settings">
    
   
-    <!-- About phone hidden in V2 -->
-    <!-- <com.android.settingslib.widget.LayoutPreference
+    <!-- Customer Header at the top -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="Branding_CustomerOS_view"
+        android:selectable="true"
+        android:enabled="true"
+        android:shouldDisableView="false"
+        android:fragment="com.epic.fragments.SystemSettingsAboutus" 
+        android:layout="@layout/CustomerOS_header"
+        android:order="-2000" />
+
+    <!-- Main User Profile Card -->
+    <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/mainuser_profile_card"
         android:key="about_device_info"
         android:selectable="true"
         android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
-        android:order="-2000"/> -->
+        android:order="-1999"/>
 
     <PreferenceCategory
         android:order="-130"
         android:key="top_level_connectivity_category"
         android:layout="@layout/settingslib_preference_category_no_title">
+        <!-- Network and Internet -->
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.network.NetworkDashboardFragment"
             android:icon="@drawable/ic_settings_wireless_filled"
             android:key="top_level_network"
-            android:order="-20"
+            android:order="-1998"
             android:title="@string/network_dashboard_title"
             android:summary="@string/summary_placeholder"
             settings:highlightableMenuKey="@string/menu_key_network"
             settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
 
+        <!-- System Basic Defaults -->
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.epic.fragments.SystemBasicDefaults"
             android:icon="@drawable/ic_settings_system_dashboard_filled"
             android:key="top_level_system_basic_defaults"
-            android:order="-19"
+            android:order="-1997"
             android:title="@string/system_basic_defaults_title"
             android:summary="@string/system_basic_defaults_summary"
             settings:highlightableMenuKey="@string/menu_key_system"/>
 
+        <!-- Homepage Widgets from anatolia_settings_statusbar.xml -->
+        <com.android.settingslib.widget.LayoutPreference
+            android:layout="@layout/homepage_widgets"
+            android:key="top_level_homepage_widgets"
+            android:selectable="false"
+            android:order="-1996" />
+
+        <!-- Toplevel Card Navigation -->
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="top_level_card_navigation"
+            android:selectable="false"
+            android:layout="@layout/toplevel_card_navigation"
+            android:order="-1995" />
+
+        <!-- Lockscreen Display Grid from anatolia_settings_lockscreen.xml -->
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="display_grid"
+            android:selectable="false"
+            android:layout="@layout/display_grid_layout"
+            android:order="-1994" />
+
+        <!-- Connected Devices -->
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
             android:icon="@drawable/ic_devices_other_filled"
@@ -61,27 +95,13 @@
             android:summary="@string/connected_devices_dashboard_default_summary"
             settings:highlightableMenuKey="@string/menu_key_connected_devices"
             settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
-
-        <!-- Extras Navigation Card from anatolia_settings_extras.xml -->
-        <com.android.settingslib.widget.LayoutPreference
-            android:key="top_level_extras_navigation"
-            android:selectable="false"
-            android:layout="@layout/toplevel_card_navigation"
-            android:order="-8" />
-
-        <!-- Homepage Widgets from anatolia_settings_statusbar.xml -->
-        <com.android.settingslib.widget.LayoutPreference
-            android:layout="@layout/homepage_widgets"
-            android:key="top_level_homepage_widgets"
-            android:selectable="false"
-            android:order="-7" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:order="-120"
         android:key="top_level_personalize_category"
         android:layout="@layout/settingslib_preference_category_no_title">
-        <!-- Apps hidden in V2 -->
+        <!-- Apps, Notifications, Modes hidden in Custom V2 -->
         <!-- <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.applications.AppDashboardFragment"
             android:icon="@drawable/ic_apps_filled"
@@ -91,14 +111,14 @@
             android:summary="@string/app_and_notification_dashboard_summary"
             settings:highlightableMenuKey="@string/menu_key_apps"/> -->
 
-        <com.android.settings.widget.HomepagePreference
+        <!-- <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
             android:icon="@drawable/ic_notifications_filled"
             android:key="top_level_notifications"
             android:order="-50"
             android:title="@string/configure_notification_settings"
             android:summary="@string/notification_dashboard_summary"
-            settings:highlightableMenuKey="@string/menu_key_notifications"/>
+            settings:highlightableMenuKey="@string/menu_key_notifications"/> -->
 
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.notification.SoundSettings"
@@ -110,7 +130,7 @@
             settings:highlightableMenuKey="@string/menu_key_sound"
             settings:controller="com.android.settings.sound.TopLevelSoundPreferenceController"/>
 
-        <!-- Modes hidden in V2 -->
+        <!-- Modes hidden in Custom V2 -->
         <!-- <com.android.settings.widget.RestrictedHomepagePreference
             android:fragment="com.android.settings.notification.modes.ZenModesListFragment"
             android:icon="@*android:drawable/ic_zen_priority_modes"
@@ -142,7 +162,7 @@
             settings:highlightableMenuKey="@string/menu_key_display"
             settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
-        <!-- Wallpaper hidden in V2 -->
+        <!-- Wallpaper hidden in Custom V2 -->
         <!-- <com.android.settings.widget.RestrictedHomepagePreference
             android:icon="@drawable/ic_settings_wallpaper_filled"
             android:key="top_level_wallpaper"
@@ -157,7 +177,8 @@
         android:order="-110"
         android:key="top_level_system_info_category"
         android:layout="@layout/settingslib_preference_category_no_title">
-        <com.android.settings.widget.HomepagePreference
+        <!-- Storage hidden in Custom V2 -->
+        <!-- <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.deviceinfo.StorageDashboardFragment"
             android:icon="@drawable/ic_storage_filled"
             android:key="top_level_storage"
@@ -165,7 +186,7 @@
             android:title="@string/storage_settings"
             android:summary="@string/summary_placeholder"
             settings:highlightableMenuKey="@string/menu_key_storage"
-            settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/>
+            settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/> -->
 
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"
@@ -177,16 +198,17 @@
             settings:highlightableMenuKey="@string/menu_key_battery"
             settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 
-        <com.android.settings.widget.HomepagePreference
+        <!-- System hidden in Custom V2 -->
+        <!-- <com.android.settings.widget.HomepagePreference
             android:fragment="com.epic.fragments.SystemGrid" 
             android:icon="@drawable/ic_settings_system_dashboard_filled"
             android:key="top_level_system"
             android:order="-20"
             android:title="@string/header_category_system"
             android:summary="@string/system_dashboard_summary"
-            settings:highlightableMenuKey="@string/menu_key_system"/>
+            settings:highlightableMenuKey="@string/menu_key_system"/> -->
 
-        <!-- About phone hidden in V2 -->
+        <!-- About phone hidden in Custom V2 -->
         <!-- <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
             android:icon="@drawable/ic_settings_about_device_filled"
@@ -202,8 +224,16 @@
         android:order="-100"
         android:key="top_level_security_privacy_category"
         android:layout="@layout/settingslib_preference_category_no_title">
-        <!-- Safety Center disabled and removed per user request -->
-        
+        <!-- Safety Center hidden in Custom V2 -->
+        <!-- <com.android.settings.widget.HomepagePreference
+            android:icon="@drawable/ic_settings_safety_center_filled"
+            android:key="top_level_safety_center"
+            android:order="-50"
+            android:title="@string/safety_center_title"
+            android:summary="@string/safety_center_summary"
+            settings:highlightableMenuKey="@string/menu_key_safety_center"
+            settings:controller="com.android.settings.safetycenter.TopLevelSafetyCenterEntryPreferenceController"/> -->
+
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.epic.fragments.SettingsExtendedSecurity"
             android:icon="@drawable/ic_settings_security_filled"
@@ -213,15 +243,6 @@
             android:summary="@string/security_dashboard_summary"
             settings:highlightableMenuKey="@string/menu_key_security"
             settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
-
-        <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.privacy.PrivacyControlsFragment"
-            android:icon="@drawable/ic_settings_privacy_filled"
-            android:key="top_level_privacy_controls"
-            android:order="-35"
-            android:title="@string/privacy_controls_title"
-            android:summary="@string/privacy_controls_summary"
-            settings:highlightableMenuKey="@string/menu_key_privacy"/>
 
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
@@ -243,7 +264,7 @@
             settings:highlightableMenuKey="@string/menu_key_location"
             settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"/>
 
-        <!-- Accounts hidden in V2 -->
+        <!-- Accounts hidden in Custom V2 -->
         <!-- <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.accounts.AccountDashboardFragment"
             android:icon="@drawable/ic_settings_passwords_filled"
@@ -298,3 +319,4 @@
     </PreferenceCategory>
 
 </PreferenceScreen>
+
