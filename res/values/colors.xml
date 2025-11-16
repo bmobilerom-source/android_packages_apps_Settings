@@ -18,6 +18,7 @@
     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
 
     <color name="card_bg">#FFFFFF</color>
+    <color name="fun_display_card_bg">@android:color/system_neutral1_100</color>
     <color name="theme_pack_button_light_blue">#81D4FA</color>
     <color name="quick_access_icon_bg">#9C27B0</color>
     <color name="display_grid_card_border">#81D4FA</color>
@@ -91,7 +92,7 @@
     <color name="homepage_dot_background">#AEAEAE</color>
 
     <color name="contextual_card_dismissal_background">@*android:color/material_grey_100</color>
-    <color name="contextual_card_background">#FFFFFF</color>
+    <color name="contextual_card_background">@android:color/system_neutral1_100</color>
     <!-- End of dashboard/homepage icon background colors -->
 
     <color name="battery_good_color_light">#43a047</color> <!-- Material Green 600 -->
