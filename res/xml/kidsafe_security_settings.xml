@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * TRANSFER TO OTHER ROMS:
+ * =======================
+ * This is a completely independent kidsafe security settings page.
+ * To transfer to other ROMs, copy:
+ * - kidsafe_security_settings.xml (this file)
+ * - KidsafeSecurity.java
+ * - res/values/kidsafe_security_strings.xml
+ * - Any referenced drawables/layouts
+ *
+ * Update package names and preference classes as needed for target ROM.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/kidsafe_security_title">
+
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="kidsafe_security_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/security" />
+
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="kidsafe_security_top_intro"
+        android:title="@string/kidsafe_security_intro"
+        android:persistent="false"
+        android:order="-999"/>
+
+    <!-- Fingerprint Category -->
+    <PreferenceCategory
+        android:key="kidsafe_security_fingerprint_category"
+        android:title="@string/kidsafe_fingerprint_category"
+        android:order="0">
+
+        <!-- Kidsafe Fingerprint -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="kidsafe_fingerprint_settings"
+            android:title="@string/kidsafe_fingerprint_title"
+            android:summary="@string/kidsafe_fingerprint_summary"
+            android:fragment="com.epic.fragments.KidsafeFingerprintSettings"
+            android:order="0"
+            app:position="solo" />
+
+    </PreferenceCategory>
+
+    <!-- Pocket Lock -->
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+        android:key="pocket_lock"
+        android:title="@string/pocket_lock_title"
+        android:summary="@string/pocket_lock_summary"
+        android:defaultValue="false"
+        android:order="1"
+        app:position="solo" />
+
+    <!-- Privacy & Protection Category -->
+    <PreferenceCategory
+        android:key="kidsafe_security_privacy_category"
+        android:title="@string/extended_security_privacy_category"
+        android:order="3">
+
+        <!-- Show Clipboard Overlay -->
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+            android:key="show_clipboard_overlay"
+            android:title="@string/show_clipboard_overlay_title"
+            android:summary="@string/show_clipboard_overlay_summary"
+            android:defaultValue="true"
+            android:order="1"
+            app:position="solo" />
+
+    </PreferenceCategory>
+
+    <!-- System Controls Category -->
+    <PreferenceCategory
+        android:key="kidsafe_security_system_category"
+        android:title="@string/extended_security_system_category"
+        android:order="4">
+
+        <!-- Ignore Window Secure Flags -->
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+            android:key="window_ignore_secure"
+            android:title="@string/ignore_window_secure_title"
+            android:summary="@string/ignore_window_secure_summary"
+            android:defaultValue="false"
+            android:order="2"
+            app:position="solo" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
+
