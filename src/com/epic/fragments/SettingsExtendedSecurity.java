@@ -59,6 +59,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.specialaccess.BlockExtendedSecurityController;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 /**
  * Extended Security Settings Page
@@ -80,6 +82,7 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
     private static final String KEY_SECURE_LOCKSCREEN_QS_DISABLED = "secure_lockscreen_qs_disabled";
     private static final String KEY_SETTINGS_PASSWORD_PROTECTION_ENABLED = 
             "settings_password_protection_enabled";
+    private static final String KEY_POCKET_LOCK = "pocket_lock";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,22 +123,7 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
         String key = preference.getKey();
 
         try {
-            if (KEY_AUTH_RIPPLE_ENABLED.equals(key)) {
-                boolean enabled = (Boolean) newValue;
-                Settings.System.putInt(resolver, KEY_AUTH_RIPPLE_ENABLED, enabled ? 1 : 0);
-                Log.d(TAG, "auth_ripple_enabled set to: " + enabled);
-                return true;
-            } else if (KEY_FP_SUCCESS_VIBRATE.equals(key)) {
-                boolean enabled = (Boolean) newValue;
-                Settings.System.putInt(resolver, KEY_FP_SUCCESS_VIBRATE, enabled ? 1 : 0);
-                Log.d(TAG, "fp_success_vibrate set to: " + enabled);
-                return true;
-            } else if (KEY_FP_ERROR_VIBRATE.equals(key)) {
-                boolean enabled = (Boolean) newValue;
-                Settings.System.putInt(resolver, KEY_FP_ERROR_VIBRATE, enabled ? 1 : 0);
-                Log.d(TAG, "fp_error_vibrate set to: " + enabled);
-                return true;
-            } else if (KEY_SHOW_CLIPBOARD_OVERLAY.equals(key)) {
+            if (KEY_SHOW_CLIPBOARD_OVERLAY.equals(key)) {
                 boolean enabled = (Boolean) newValue;
                 Settings.Secure.putInt(resolver, KEY_SHOW_CLIPBOARD_OVERLAY, enabled ? 1 : 0);
                 Log.d(TAG, "show_clipboard_overlay set to: " + enabled);
@@ -183,6 +171,14 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                 }
                 
                 return true;
+            } else if (KEY_POCKET_LOCK.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.Secure.putIntForUser(resolver, 
+                        "pocket_mode_enabled", 
+                        enabled ? 1 : 0,
+                        UserHandle.USER_CURRENT);
+                Log.d(TAG, "pocket_lock set to: " + enabled);
+                return true;
             }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference: " + key, e);
@@ -196,39 +192,6 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
      */
     private void updatePreferenceStates(ContentResolver resolver) {
         try {
-            // Update auth ripple enabled preference
-            Preference authRipplePref = findPreference(KEY_AUTH_RIPPLE_ENABLED);
-            if (authRipplePref != null) {
-                int rippleEnabled = Settings.System.getInt(resolver, KEY_AUTH_RIPPLE_ENABLED, 1);
-                if (authRipplePref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) authRipplePref)
-                            .setChecked(rippleEnabled != 0);
-                }
-                authRipplePref.setOnPreferenceChangeListener(this);
-            }
-
-            // Update fingerprint success vibration preference
-            Preference fpSuccessVibratePref = findPreference(KEY_FP_SUCCESS_VIBRATE);
-            if (fpSuccessVibratePref != null) {
-                int fpSuccessVibrate = Settings.System.getInt(resolver, KEY_FP_SUCCESS_VIBRATE, 1);
-                if (fpSuccessVibratePref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) fpSuccessVibratePref)
-                            .setChecked(fpSuccessVibrate != 0);
-                }
-                fpSuccessVibratePref.setOnPreferenceChangeListener(this);
-            }
-
-            // Update fingerprint error vibration preference
-            Preference fpErrorVibratePref = findPreference(KEY_FP_ERROR_VIBRATE);
-            if (fpErrorVibratePref != null) {
-                int fpErrorVibrate = Settings.System.getInt(resolver, KEY_FP_ERROR_VIBRATE, 1);
-                if (fpErrorVibratePref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) fpErrorVibratePref)
-                            .setChecked(fpErrorVibrate != 0);
-                }
-                fpErrorVibratePref.setOnPreferenceChangeListener(this);
-            }
-
             // Update show clipboard overlay preference
             Preference clipboardOverlayPref = findPreference(KEY_SHOW_CLIPBOARD_OVERLAY);
             if (clipboardOverlayPref != null) {
@@ -294,6 +257,20 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                         0, UserHandle.USER_CURRENT);
                 protectedFragmentsPref.setVisible(protectionEnabled != 0);
             }
+            
+            // Update pocket lock preference
+            Preference pocketLockPref = findPreference(KEY_POCKET_LOCK);
+            if (pocketLockPref != null) {
+                int pocketLockEnabled = Settings.Secure.getIntForUser(resolver, 
+                        "pocket_mode_enabled", 
+                        0, 
+                        UserHandle.USER_CURRENT);
+                if (pocketLockPref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) pocketLockPref)
+                            .setChecked(pocketLockEnabled != 0);
+                }
+                pocketLockPref.setOnPreferenceChangeListener(this);
+            }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference states", e);
         }
@@ -303,5 +280,56 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
     }
+    
+    /**
+     * Search index provider - completely blocks this page from search
+     */
+    @SearchIndexable
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.anatolia_settings_extended_security) {
+                @Override
+                public java.util.List<android.provider.SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    // Completely block extended security from search
+                    return null;
+                }
+                
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    // Always disable extended security from search
+                    return false;
+                }
+                
+                @Override
+                public java.util.List<String> getNonIndexableKeys(Context context) {
+                    // Hide all preferences from search
+                    java.util.List<String> keys = super.getNonIndexableKeys(context);
+                    if (keys == null) {
+                        keys = new java.util.ArrayList<>();
+                    }
+                    // Add all preference keys to block list
+                    keys.add("extended_security_illustration");
+                    keys.add("extended_security_top_intro");
+                    keys.add("extended_security_fingerprint_category");
+                    keys.add("bmobile_fingerprint_settings");
+                    keys.add("pocket_lock");
+                    keys.add("auth_ripple_enabled");
+                    keys.add("fp_success_vibrate");
+                    keys.add("fp_error_vibrate");
+                    keys.add("extended_security_lockscreen_category");
+                    keys.add("lock_screen_settings_extended");
+                    keys.add("lock_screen_notifications_extended");
+                    keys.add("secure_lockscreen_qs_disabled");
+                    keys.add("extended_security_privacy_category");
+                    keys.add("settings_password_protection_enabled");
+                    keys.add("show_clipboard_overlay");
+                    keys.add("extended_security_system_category");
+                    keys.add("sensor_block_settings");
+                    keys.add("no_storage_restrict");
+                    keys.add("window_ignore_secure");
+                    keys.add("device_security_features_settings");
+                    return keys;
+                }
+            };
 }
 

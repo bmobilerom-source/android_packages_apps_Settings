@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/pocket_mode_title">
+
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="pocket_mode_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/security" />
+
+    <!-- Header -->
+    <PreferenceCategory
+        android:title="@string/pocket_mode_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="pocket_mode_intro"
+        android:title="@string/pocket_mode_intro_title"
+        android:summary="@string/pocket_mode_intro_summary"
+        android:persistent="false"
+        android:order="-999"/>
+
+    <!-- Pocket Mode Main Toggle -->
+    <PreferenceCategory
+        android:key="pocket_mode_main_category"
+        android:title="@string/pocket_mode_main_category"
+        android:order="0">
+
+        <!-- Pocket Lock -->
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+            android:key="pocket_lock"
+            android:title="@string/pocket_lock_title"
+            android:summary="@string/pocket_lock_summary"
+            android:defaultValue="false"
+            android:order="0"
+            app:position="solo" />
+
+    </PreferenceCategory>
+
+    <!-- Advanced Options Category -->
+    <PreferenceCategory
+        android:key="pocket_mode_advanced_category"
+        android:title="@string/pocket_mode_advanced_category"
+        android:order="1">
+
+        <!-- Always-on Pocket Mode -->
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+            android:key="always_on_pocket_mode"
+            android:title="@string/always_on_pocket_mode_title"
+            android:summary="@string/always_on_pocket_mode_summary"
+            android:defaultValue="false"
+            android:order="0"
+            app:position="top" />
+
+        <!-- Disable Double Tap to Wake -->
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+            android:key="pocket_mode_disable_dt2w"
+            android:title="@string/pocket_mode_disable_dt2w_title"
+            android:summary="@string/pocket_mode_disable_dt2w_summary"
+            android:defaultValue="true"
+            android:order="1"
+            app:position="middle" />
+
+        <!-- Disable Fingerprint Sensor -->
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+            android:key="pocket_mode_disable_fingerprint"
+            android:title="@string/pocket_mode_disable_fingerprint_title"
+            android:summary="@string/pocket_mode_disable_fingerprint_summary"
+            android:defaultValue="true"
+            android:order="2"
+            app:position="middle" />
+
+        <!-- Disable Lift to Wake -->
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+            android:key="pocket_mode_disable_lift_to_wake"
+            android:title="@string/pocket_mode_disable_lift_to_wake_title"
+            android:summary="@string/pocket_mode_disable_lift_to_wake_summary"
+            android:defaultValue="true"
+            android:order="3"
+            app:position="bottom" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
+

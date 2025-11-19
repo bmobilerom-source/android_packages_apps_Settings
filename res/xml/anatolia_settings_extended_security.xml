@@ -52,79 +52,73 @@
         android:persistent="false"
         android:order="-999"/>
 
-    <!-- Sensor Block Per Package - Moved to top -->
-    <com.android.settings.preferences.ui.AdaptivePreference
-        android:key="sensor_block_settings"
-        android:title="@string/sensor_block_title"
-        android:summary="@string/sensor_block_summary"
-        android:fragment="com.epic.fragments.SensorBlockSettings"
-        android:order="-998"
-        app:position="top" />
-
-    <!-- Password Protection for Settings Pages - Moved to top -->
-    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
-        android:key="settings_password_protection_enabled"
-        android:title="@string/settings_password_protection_title"
-        android:summary="@string/settings_password_protection_summary"
-        android:defaultValue="false"
-        android:order="-997"
-        app:position="bottom" />
-
-    <!-- Authentication Category -->
-    <PreferenceCategory
-        android:title="@string/extended_security_authentication_category"
-        android:order="0"
-        android:layout="@layout/settingslib_preference_category_no_title">
-
-        <!-- Protected Fragments Selection -->
-        <com.android.settings.preferences.ui.AdaptivePreference
-            android:key="settings_password_protected_fragments"
-            android:title="@string/settings_password_protected_fragments_title"
-            android:summary="@string/settings_password_protected_fragments_summary"
-            android:fragment="com.epic.fragments.PasswordProtectedFragmentsSettings"
-            app:position="middle"
-            android:visible="false" />
-
-        <!-- Fingerprint Ripple Effect -->
-        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
-            android:key="auth_ripple_enabled"
-            android:title="@string/enable_fingerprint_ripple_effect_title"
-            android:summary="@string/enable_fingerprint_ripple_effect_summary"
-            android:defaultValue="true"
-            app:position="bottom" />
-
-    </PreferenceCategory>
-
     <!-- Fingerprint Category -->
     <PreferenceCategory
         android:key="extended_security_fingerprint_category"
         android:title="@string/extended_security_fingerprint_category"
-        android:order="0"
-        android:layout="@layout/settingslib_preference_category_no_title">
+        android:order="0">
 
-        <!-- Authentication Success Vibration -->
-        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
-            android:key="fp_success_vibrate"
-            android:title="@string/fingerprint_success_vibration_title"
-            android:summary="@string/fingerprint_success_vibration_summary"
-            android:defaultValue="true"
+        <!-- BMobile Fingerprint -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="bmobile_fingerprint_settings"
+            android:title="@string/bmobile_fingerprint_title"
+            android:summary="@string/bmobile_fingerprint_summary"
+            android:fragment="com.epic.fragments.BMobileFingerprintSettings"
+            android:order="0"
+            app:position="solo" />
+
+    </PreferenceCategory>
+
+    <!-- Pocket Lock -->
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+        android:key="pocket_lock"
+        android:title="@string/pocket_lock_title"
+        android:summary="@string/pocket_lock_summary"
+        android:defaultValue="false"
+        android:order="1"
+        app:position="solo" />
+
+    <!-- Lock Screen & Notifications Category -->
+    <PreferenceCategory
+        android:key="extended_security_lockscreen_category"
+        android:title="@string/extended_security_lockscreen_category"
+        android:order="2">
+
+        <!-- Lock Screen Settings -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:order="0"
+            android:key="lock_screen_settings_extended"
+            android:title="@string/lockscreen_settings_title"
+            android:summary="@string/lockscreen_settings_summary"
+            android:fragment="com.android.settings.security.LockscreenDashboardFragment"
             app:position="top" />
 
-        <!-- Authentication Error Vibration -->
+        <!-- Lock Screen Notifications -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:order="1"
+            android:key="lock_screen_notifications_extended"
+            android:title="@string/lock_screen_notifs_title"
+            android:summary="@string/lock_screen_notifications_summary"
+            android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
+            settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController"
+            app:position="middle" />
+
+        <!-- Hide on Secure Lock Screen -->
         <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
-            android:key="fp_error_vibrate"
-            android:title="@string/fingerprint_error_vibration_title"
-            android:summary="@string/fingerprint_error_vibration_summary"
-            android:defaultValue="true"
+            android:key="secure_lockscreen_qs_disabled"
+            android:title="@string/quick_settings_secure_lock_screen_title"
+            android:summary="@string/quick_settings_secure_lock_screen_summary"
+            android:defaultValue="false"
+            android:order="2"
             app:position="bottom" />
 
     </PreferenceCategory>
 
-    <!-- Privacy & Interface Category -->
+    <!-- Privacy & Protection Category -->
     <PreferenceCategory
+        android:key="extended_security_privacy_category"
         android:title="@string/extended_security_privacy_category"
-        android:order="1"
-        android:layout="@layout/settingslib_preference_category_no_title">
+        android:order="3">
 
         <!-- Show Clipboard Overlay -->
         <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
@@ -132,6 +126,24 @@
             android:title="@string/show_clipboard_overlay_title"
             android:summary="@string/show_clipboard_overlay_summary"
             android:defaultValue="true"
+            android:order="1"
+            app:position="bottom" />
+
+    </PreferenceCategory>
+
+    <!-- System Controls Category -->
+    <PreferenceCategory
+        android:key="extended_security_system_category"
+        android:title="@string/extended_security_system_category"
+        android:order="4">
+
+        <!-- Sensor Block Per Package -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="sensor_block_settings"
+            android:title="@string/sensor_block_title"
+            android:summary="@string/sensor_block_summary"
+            android:fragment="com.epic.fragments.SensorBlockSettings"
+            android:order="0"
             app:position="top" />
 
         <!-- No Storage Restrict -->
@@ -140,6 +152,7 @@
             android:title="@string/no_storage_restrict_title"
             android:summary="@string/no_storage_restrict_summary"
             android:defaultValue="false"
+            android:order="1"
             app:position="middle" />
 
         <!-- Ignore Window Secure Flags -->
@@ -148,33 +161,27 @@
             android:title="@string/ignore_window_secure_title"
             android:summary="@string/ignore_window_secure_summary"
             android:defaultValue="false"
+            android:order="2"
             app:position="bottom" />
 
     </PreferenceCategory>
 
-    <!-- Lock Screen Category -->
+    <!-- More Security Category -->
     <PreferenceCategory
-        android:title="@string/extended_security_lockscreen_category"
-        android:order="2"
-        android:layout="@layout/settingslib_preference_category_no_title">
+        android:key="extended_security_more_category"
+        android:title="@string/more_security_privacy_settings"
+        android:order="5">
 
-        <!-- Hide on Secure Lock Screen -->
-        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
-            android:key="secure_lockscreen_qs_disabled"
-            android:title="@string/quick_settings_secure_lock_screen_title"
-            android:summary="@string/quick_settings_secure_lock_screen_summary"
-            android:defaultValue="false"
+        <!-- Device Security Features Settings - At the bottom -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:order="0"
+            android:key="device_security_features_settings"
+            android:title="@string/device_security_features_settings_title"
+            android:summary="@string/device_security_features_settings_summary"
+            android:fragment="com.android.settings.safetycenter.DeviceSecurityFeaturesFragment"
             app:position="solo" />
 
     </PreferenceCategory>
-
-    <!-- Battery Saving Category -->
-    <PreferenceCategory
-        android:title="@string/extended_security_battery_saving_category"
-        android:order="3"
-        android:layout="@layout/settingslib_preference_category_no_title">
-    </PreferenceCategory>
-
 
 </PreferenceScreen>
 

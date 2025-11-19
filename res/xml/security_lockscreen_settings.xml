@@ -21,28 +21,6 @@
     android:key="lockscreen_from_display_settings"
     android:title="@string/lockscreen_settings_title">
 
-    <!-- Illustration - Hidden -->
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="unlock_illustration"
-        settings:lottie_rawRes="@raw/unlock_illustration"
-        android:order="-1001"
-        android:visible="false" />
-
-    <!-- TopIntro - Hidden -->
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="lockscreen_top_intro"
-        android:title="@string/lockscreen_settings_title"
-        android:persistent="false"
-        android:order="-999"
-        android:visible="false"/>
-
-    <!-- Footer - Hidden -->
-    <com.android.settingslib.widget.FooterPreference
-        android:key="lockscreen_footer"
-        android:order="-998"
-        android:visible="false"
-        settings:searchable="false" />
-
     <PreferenceCategory
         android:key="lockscreen_what_to_show"
         android:title="@string/lockscreen_settings_what_to_show_category"
@@ -58,20 +36,31 @@
             android:visible="false"
             settings:keywords="@string/keywords_lock_screen_notif"/>
 
-        <Preference
+    <!-- Pocket Lock -->
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+        android:key="pocket_lock"
+        android:title="@string/pocket_lock_title"
+        android:summary="@string/pocket_lock_summary"
+        android:defaultValue="false"
+        android:order="1"
+        app:position="top"
+        settings:controller="com.android.settings.security.PocketLockPreferenceController" />
+
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="security_lock_screen_notifications_page"
             android:title="@string/lock_screen_notifs_title"
             android:summary="@string/summary_placeholder"
-            android:order="1"
+            android:order="2"
             android:visible="false"
             android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
+            app:position="middle"
             settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
 
         <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="owner_info_settings"
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary"
-            android:order="2"
+            android:order="3"
             app:position="middle" />
 
         <!-- Shortcuts -->
@@ -79,7 +68,7 @@
             android:key="customizable_lock_screen_quick_affordances"
             android:title="@string/lockscreen_quick_affordances_title"
             android:summary="@string/summary_placeholder"
-            android:order="3"
+            android:order="4"
             app:position="middle"
             settings:controller="com.android.settings.display.CustomizableLockScreenQuickAffordancesPreferenceController" />
 
