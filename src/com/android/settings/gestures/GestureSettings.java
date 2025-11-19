@@ -57,6 +57,7 @@ public class GestureSettings extends DashboardFragment {
         use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
     }
 
+
     private AmbientDisplayConfiguration getConfig(Context context) {
         if (mAmbientDisplayConfig == null) {
             mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);

@@ -38,11 +38,12 @@
     </PreferenceCategory>
 
     <!-- MainSwitch -->
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="smart_battery"
         android:order="-998"
         android:title="@string/smart_battery_title"
         android:summary="@string/smart_battery_summary"
+        app:position="top"
         settings:controller="com.android.settings.fuelgauge.SmartBatteryPreferenceController"/>
 
     <!-- TopIntro -->
@@ -72,11 +73,12 @@
         android:title="@string/restricted_app_title"/>
 
     <!-- Switches -->
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="auto_restriction"
         android:order="100"
         android:title="@string/battery_auto_restriction_title"
         android:summary="@string/battery_auto_restriction_summary"
+        app:position="solo"
         settings:controller="com.android.settings.fuelgauge.AutoRestrictionPreferenceController"/>
 
     <!-- SeekBars -->

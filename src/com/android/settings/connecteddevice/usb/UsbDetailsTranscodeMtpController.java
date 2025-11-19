@@ -54,11 +54,16 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceCategory = screen.findPreference(getPreferenceKey());
-        mSwitchPreference = new SwitchPreferenceCompat(mPreferenceCategory.getContext());
+        // Use AdaptiveSwitchPreference for consistent styling
+        mSwitchPreference = new com.android.settings.preferences.ui.AdaptiveSwitchPreference(
+                mPreferenceCategory.getContext());
         mSwitchPreference.setTitle(R.string.usb_transcode_files);
         mSwitchPreference.setKey(KEY_USB_TRANSCODE_FILES);
         mSwitchPreference.setOnPreferenceClickListener(this);
         mSwitchPreference.setSummaryOn(R.string.usb_transcode_files_summary);
+        // Set position to solo for rounded corners
+        mSwitchPreference.setLayoutResource(com.android.settings.preferences.ui.AdaptivePreferenceUtils
+                .getSwitchLayoutResourceId(mPreferenceCategory.getContext(), null));
         mPreferenceCategory.addPreference(mSwitchPreference);
     }
 

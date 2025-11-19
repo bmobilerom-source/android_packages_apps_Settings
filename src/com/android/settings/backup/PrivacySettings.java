@@ -24,6 +24,8 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.List;
+
 @SearchIndexable
 public class PrivacySettings extends DashboardFragment {
     private static final String TAG = "PrivacySettings";
@@ -40,7 +42,8 @@ public class PrivacySettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.privacy_settings;
+        // Block this page - return empty preference screen
+        return R.xml.empty_preference_screen;
     }
 
     @Override
@@ -51,7 +54,10 @@ public class PrivacySettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        updatePrivacySettingsConfigData(context);
+        // Block this page - finish activity immediately
+        if (getActivity() != null) {
+            getActivity().finish();
+        }
     }
 
     @Override
@@ -71,10 +77,29 @@ public class PrivacySettings extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.privacy_settings) {
 
                 @Override
+                public List<android.provider.SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    // Completely block privacy settings from search
+                    return null;
+                }
+
+                @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    final BackupSettingsHelper backupHelper = new BackupSettingsHelper(context);
-                    return !backupHelper.isBackupProvidedByManufacturer() &&
-                            !backupHelper.isIntentProvidedByTransport();
+                    // Always disable privacy settings from search
+                    return false;
+                }
+                
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    // Hide all preferences from search
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    if (keys == null) {
+                        keys = new java.util.ArrayList<>();
+                    }
+                    // Block all privacy-related keys
+                    keys.add("privacy_settings");
+                    keys.add("privacy_dashboard");
+                    return keys;
                 }
             };
 }

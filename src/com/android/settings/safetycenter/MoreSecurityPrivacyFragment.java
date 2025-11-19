@@ -107,18 +107,13 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.more_security_privacy_settings) {
                 /**
-                 * If SafetyCenter is disabled, all of these entries will be in the More Security
-                 * Settings and the Privacy page, and we don't want to index these entries.
+                 * Completely block More Security & Privacy from search
                  */
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    // NOTE: This check likely should be moved to the super method. This is done
-                    // here to avoid potentially undesired side effects for existing implementors.
-                    if (!isPageSearchEnabled(context)) {
-                        return null;
-                    }
-                    return super.getXmlResourcesToIndex(context, enabled);
+                    // Completely block from search
+                    return null;
                 }
 
                 @Override
@@ -129,23 +124,23 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
+                    // Hide all preferences from search
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    final int profileUserId =
-                            Utils.getManagedProfileId(
-                                    UserManager.get(context), UserHandle.myUserId());
-                    // If work profile is supported, we should keep the search result.
-                    if (profileUserId != UserHandle.USER_NULL) {
-                        return keys;
+                    if (keys == null) {
+                        return new java.util.ArrayList<>();
                     }
-
-                    // Otherwise, we should hide the search result.
+                    // Block all more security & privacy keys
                     keys.add(KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS);
+                    keys.add("more_security_privacy");
+                    keys.add("more_security");
+                    keys.add("more_privacy");
                     return keys;
                 }
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SafetyCenterManagerWrapper.get().isEnabled(context);
+                    // Always disable More Security & Privacy from search
+                    return false;
                 }
             };
 }

@@ -16,7 +16,8 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto">
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="connection_header"
@@ -71,51 +72,59 @@
     </PreferenceCategory>
 
     <!-- General Details Preferences -->
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="signal_strength"
         android:title="@string/wifi_signal"
-        android:selectable="false"/>
+        android:selectable="false"
+        app:position="top"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="frequency"
         android:icon="@drawable/ic_frequency_antenna"
         android:title="@string/wifi_frequency"
-        android:selectable="false"/>
+        android:selectable="false"
+        app:position="middle"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="security"
         android:icon="@drawable/ic_security_lock_24dp"
         android:title="@string/wifi_security"
-        android:selectable="false"/>
+        android:selectable="false"
+        app:position="middle"/>
 
-    <ListPreference
+    <com.android.settings.preferences.ui.AdaptiveListPreference
         android:key="metered"
         android:icon="@drawable/ic_attach_money_black_24dp"
         android:title="@string/wifi_metered_title"
         android:entries="@array/wifi_metered_entries"
-        android:entryValues="@array/wifi_metered_values"/>
+        android:entryValues="@array/wifi_metered_values"
+        app:position="middle"/>
 
-    <ListPreference
+    <com.android.settings.preferences.ui.AdaptiveListPreference
         android:key="privacy"
         android:icon="@drawable/ic_wifi_privacy_24dp"
         android:title="@string/wifi_privacy_settings"
         android:entries="@array/wifi_privacy_entries"
-        android:entryValues="@array/wifi_privacy_values"/>
+        android:entryValues="@array/wifi_privacy_values"
+        app:position="middle"/>
 
-    <com.android.settings.spa.preference.ComposePreference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="privacy_settings"
         android:title="@string/wifi_privacy_settings"
+        app:position="middle"
         settings:controller="com.android.settings.wifi.details2.WifiPrivacyPreferenceController"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="subscription_detail"
         android:title="@string/wifi_subscription"
-        android:summary="@string/wifi_subscription_summary"/>
+        android:summary="@string/wifi_subscription_summary"
+        app:position="middle"/>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="auto_connect"
         android:title="@string/wifi_auto_connect_title"
-        android:summary="@string/wifi_auto_connect_summary"/>
+        android:summary="@string/wifi_auto_connect_summary"
+        app:position="bottom"/>
 
     <com.android.settings.spa.preference.ComposePreference
         android:key="certificate_details"
@@ -130,67 +139,80 @@
     <!-- Network Details -->
     <PreferenceCategory
             android:key="ip_details_category"
-            android:title="@string/wifi_setup_detail">
-        <com.android.settings.spa.preference.ComposePreference
+            android:title="@string/wifi_setup_detail"
+            android:layout="@layout/settingslib_preference_category_no_title">
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="server_name"
+            app:position="top"
             settings:controller="com.android.settings.wifi.details2.ServerNamePreferenceController"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="type"
                 android:title="@string/wifi_type_title"
                 android:selectable="false"
+                app:position="middle"
                 settings:enableCopying="true"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="ssid"
                 android:title="@string/wifi_advanced_ssid_title"
                 android:selectable="false"
+                app:position="middle"
                 settings:enableCopying="true"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="eap_sim_subscription"
                 android:title="@string/sim_card"
                 android:selectable="false"
+                app:position="middle"
                 settings:enableCopying="true"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="mac_address"
                 android:title="@string/wifi_advanced_randomized_mac_address_title"
                 android:selectable="false"
+                app:position="middle"
                 settings:enableCopying="true"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="ip_address"
                 android:title="@string/wifi_ip_address"
                 android:selectable="false"
+                app:position="middle"
                 settings:enableCopying="true"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="gateway"
                 android:title="@string/wifi_gateway"
                 android:selectable="false"
+                app:position="middle"
                 settings:enableCopying="true"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="subnet_mask"
                 android:title="@string/wifi_details_subnet_mask"
                 android:selectable="false"
+                app:position="middle"
                 settings:enableCopying="true"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="dns"
                 android:title="@string/wifi_details_dns"
                 android:selectable="false"
+                app:position="middle"
                 settings:enableCopying="true"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="tx_link_speed"
                 android:title="@string/tx_wifi_speed"
                 android:selectable="false"
+                app:position="middle"
                 settings:enableCopying="true"/>
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
                 android:key="rx_link_speed"
                 android:title="@string/rx_wifi_speed"
                 android:selectable="false"
+                app:position="bottom"
                 settings:enableCopying="true"/>
     </PreferenceCategory>
 
     <!-- IPv6 address -->
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:title="@string/wifi_details_ipv6_address_header"
         android:key="ipv6_addresses"
         android:selectable="false"
+        app:position="bottom"
         settings:enableCopying="true"/>
 
 </PreferenceScreen>

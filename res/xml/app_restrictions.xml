@@ -21,6 +21,7 @@
 
     <Preference
         android:key="user_info"
-        android:order="0"/>
+        android:order="0"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

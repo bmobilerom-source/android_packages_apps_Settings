@@ -35,32 +35,12 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Icon Row (optional) -->
-            <LinearLayout
-                android:id="@*android:id/icon_frame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp"
-                android:visibility="gone">
-
-                <com.android.internal.widget.PreferenceImageView
-                    android:id="@*android:id/icon"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:background="@drawable/custom_surface_color"
-                    android:tint="?android:attr/colorAccent" />
-            </LinearLayout>
-
             <!-- Title -->
             <TextView
                 android:id="@*android:id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
+                android:textAppearance="?android:attr/textAppearanceListItem"
                 android:textColor="?android:attr/textColorPrimary"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"
@@ -72,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body2"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
                 android:textColor="?android:attr/textColorSecondary"
                 android:maxLines="4"
                 tools:text="Summary text goes here" />

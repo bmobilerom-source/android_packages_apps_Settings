@@ -21,22 +21,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.settings.R;
-import com.android.settings.display.WallpaperBackgroundHelper;
-import com.airbnb.lottie.LottieAnimationView;
+import com.android.settings.awaken.fragments.DisplayCustomizationsAdapter;
+import com.android.settings.awaken.fragments.DisplayCustomizationsHelper;
+import com.android.settings.preferences.ui.AdaptiveSwitchPreference;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class WallpaperBackgroundBottomSheet extends BottomSheetDialogFragment {
-
-    private static final String KEY_WALLPAPER_BACKGROUND = "settings_wallpaper_background";
-    private SwitchMaterial mWallpaperBackgroundSwitch;
-    private LottieAnimationView mLottieAnimationView;
 
     public static WallpaperBackgroundBottomSheet newInstance() {
         return new WallpaperBackgroundBottomSheet();
@@ -65,42 +63,20 @@ public class WallpaperBackgroundBottomSheet extends BottomSheetDialogFragment {
             @Nullable Bundle savedInstanceState) {
         try {
             View view = inflater.inflate(R.layout.wallpaper_background_bottom_sheet, container, false);
-
-            Context context = getContext();
-            if (context == null) {
-                return view;
-            }
-
-            // Setup Lottie animation (yes, Lottie files can be added to bottom sheets!)
-            mLottieAnimationView = view.findViewById(R.id.illustration_lottie);
-            if (mLottieAnimationView != null) {
+            
+            if (savedInstanceState == null) {
                 try {
-                    // Lottie animation is already configured in XML with app:lottie_rawRes="@raw/display"
-                    // It will automatically load and play if the file exists
-                    // If the file doesn't exist, it will gracefully fail
+                    androidx.fragment.app.FragmentManager fragmentManager = getChildFragmentManager();
+                    if (fragmentManager != null && !fragmentManager.isStateSaved()) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.wallpaper_background_preference_container, new WallpaperBackgroundPreferenceFragment())
+                                .commitAllowingStateLoss();
+                    }
                 } catch (Exception e) {
-                    // If display.json doesn't exist, hide Lottie view
-                    mLottieAnimationView.setVisibility(View.GONE);
+                    android.util.Log.e("WallpaperBackgroundBottomSheet", "Error loading preference fragment", e);
                 }
             }
-
-            // Setup toggle switch
-            mWallpaperBackgroundSwitch = view.findViewById(R.id.toggle_wallpaper_background);
-            if (mWallpaperBackgroundSwitch != null) {
-                // Load current state
-                boolean enabled = WallpaperBackgroundHelper.isEnabled(context);
-                mWallpaperBackgroundSwitch.setChecked(enabled);
-                updateSummary(view, context, enabled);
-
-                // Setup listener
-                mWallpaperBackgroundSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    WallpaperBackgroundHelper.setEnabled(context, isChecked);
-                    updateSummary(view, context, isChecked);
-                });
-            }
-
-            // Info footer is already set up in XML with TextViews
-
+            
             return view;
         } catch (Exception e) {
             android.util.Log.e("WallpaperBackgroundBottomSheet", "Error in onCreateView", e);
@@ -112,13 +88,62 @@ public class WallpaperBackgroundBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    private void updateSummary(View view, Context context, boolean enabled) {
-        // Update summary TextView
-        TextView summaryView = view.findViewById(R.id.wallpaper_background_summary);
-        if (summaryView != null) {
-            int summaryResId = WallpaperBackgroundHelper.getSummaryResId(context);
-            summaryView.setText(summaryResId);
+    public static class WallpaperBackgroundPreferenceFragment extends PreferenceFragmentCompat {
+        private DisplayCustomizationsAdapter mAdapter;
+        private AdaptiveSwitchPreference mWallpaperBlurPreference;
+        private ListPreference mWallpaperBlurRadiusPreference;
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            try {
+                setPreferencesFromResource(R.xml.wallpaper_background_bottom_sheet, rootKey);
+                
+                Context context = getContext();
+                if (context == null) {
+                    return;
+                }
+                
+                mAdapter = new DisplayCustomizationsAdapter(context);
+                
+                // Setup wallpaper blur preferences using adapter
+                // Note: AdaptiveSwitchPreference extends SwitchPreference, so adapter methods work
+                Preference blurPref = findPreference("wallpaper_blur");
+                if (blurPref instanceof AdaptiveSwitchPreference) {
+                    mWallpaperBlurPreference = (AdaptiveSwitchPreference) blurPref;
+                }
+                mWallpaperBlurRadiusPreference = findPreference("wallpaper_blur_radius");
+                
+                if (mWallpaperBlurPreference != null && mWallpaperBlurRadiusPreference != null) {
+                    // Setup using adapter - this handles state persistence
+                    mAdapter.setupWallpaperBlurPreference(mWallpaperBlurPreference, mWallpaperBlurRadiusPreference);
+                    mAdapter.setupWallpaperBlurRadiusPreference(mWallpaperBlurRadiusPreference);
+                }
+            } catch (Exception e) {
+                android.util.Log.e("WallpaperBackgroundBottomSheet", "Error in onCreatePreferences", e);
+            }
+        }
+        
+        @Override
+        public void onResume() {
+            super.onResume();
+            // Refresh preference states when bottom sheet is shown
+            refreshPreferenceStates();
+        }
+        
+        private void refreshPreferenceStates() {
+            Context context = getContext();
+            if (context == null) {
+                return;
+            }
+            
+            // Refresh wallpaper blur preference state
+            if (mWallpaperBlurPreference != null) {
+                boolean blurEnabled = DisplayCustomizationsHelper.isWallpaperBlurEnabled(context);
+                mWallpaperBlurPreference.setChecked(blurEnabled);
+                if (mWallpaperBlurRadiusPreference != null) {
+                    mWallpaperBlurRadiusPreference.setEnabled(blurEnabled);
+                }
+            }
         }
     }
 }
-

@@ -15,6 +15,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" " >
 
     <lineageos.preference.LineagePartsPreference
@@ -40,6 +41,7 @@
     <Preference
         android:key="gesture_double_tap_power_input_summary"
         android:title="@string/double_tap_power_title"
+        android:visible="false"
         android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController" />
@@ -55,6 +57,7 @@
         android:key="gesture_system_navigation_input_summary"
         android:title="@string/system_navigation_title"
         android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
+        settings:layout="@layout/system_warning_preference_card"
         settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"
         settings:keywords="@string/keywords_system_navigation" />
 
@@ -62,6 +65,7 @@
         android:key="gesture_one_handed"
         android:title="@string/one_handed_title"
         android:fragment="com.android.settings.gestures.OneHandedSettings"
+        settings:layout="@layout/system_warning_preference_card"
         settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController" />
 
     <Preference
@@ -71,10 +75,11 @@
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
 
+    <!-- Double tap to check phone - Hidden -->
     <Preference
         android:key="gesture_double_tap_screen_input_summary"
         android:title="@string/ambient_display_title"
-        settings:isPreferenceVisible="false"
+        android:visible="false"
         android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
@@ -99,10 +104,11 @@
         settings:layout="@layout/system_features_preference_card"
         android:fragment="com.epic.fragments.SystemSettingsTaptap" />
 
-    <com.android.settingslib.PrimarySwitchPreference
+    <com.android.settings.preferences.ui.AdaptivePrimarySwitchPreference
         android:key="gesture_prevent_ringing_summary"
         android:title="@string/gesture_prevent_ringing_screen_title"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
+        app:position="solo"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
 </PreferenceScreen>

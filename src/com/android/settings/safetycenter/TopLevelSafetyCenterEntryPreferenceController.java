@@ -25,6 +25,7 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
 
 /** Controller for the SafetyCenter entry in top level Settings. */
 public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenceController {
@@ -37,6 +38,20 @@ public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenc
 
     @Override
     public int getAvailabilityStatus() {
+        // Check config flag first - if disabled in config, hide completely
+        if (!mContext.getResources().getBoolean(R.bool.config_safety_center_enabled)) {
+            Log.d(TAG, "Safety Center disabled via config");
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        
+        // Check if blocked by user toggle
+        if (com.android.settings.applications.specialaccess.BlockSafetyCenterController
+                .isBlocked(mContext)) {
+            Log.d(TAG, "Safety Center blocked by user");
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        
+        // Check if Safety Center is enabled by system
         if (SafetyCenterManagerWrapper.get().isEnabled(mContext)) {
             return AVAILABLE;
         }

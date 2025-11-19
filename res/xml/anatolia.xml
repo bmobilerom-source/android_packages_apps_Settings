@@ -172,6 +172,14 @@
             android:fragment="com.epic.fragments.SystemOptimizationSettings"
             android:icon="@drawable/ic_tune" />
 
+        <!-- Power Tweaks -->
+        <PreferenceScreen
+            android:key="power_tweaks_category"
+            android:title="@string/power_tweaks_title"
+            android:summary="@string/power_tweaks_summary"
+            android:fragment="com.epic.fragments.PowerTweaksSettings"
+            android:icon="@drawable/ic_tune" />
+
         <!-- Developer Tools -->
         <PreferenceScreen
             android:key="developer_tools_category"

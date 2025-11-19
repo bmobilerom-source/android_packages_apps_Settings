@@ -1754,4 +1754,27 @@
         <item>8</item>
         <item>9</item>
     </string-array>
+
+    <!-- Wallpaper Blur Radius -->
+    <string-array name="wallpaper_blur_radius_entries">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+    </string-array>
+
+    <string-array name="wallpaper_blur_radius_values" translatable="false">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+    </string-array>
 </resources>

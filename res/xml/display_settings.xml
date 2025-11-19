@@ -37,7 +37,8 @@
 
     <PreferenceCategory
         android:title="@string/category_name_brightness"
-        android:order="-200">
+        android:order="-200"
+        android:layout="@layout/settingslib_preference_category_no_title">
 
         <com.android.settingslib.RestrictedPreference
             android:key="@string/preference_key_brightness_level"
@@ -66,7 +67,8 @@
 
     <PreferenceCategory
         android:title="@string/category_name_lock_display"
-        android:order="-190">
+        android:order="-190"
+        android:layout="@layout/settingslib_preference_category_no_title">
         <!--
         <Preference
             android:key="lockscreen_from_display_settings"
@@ -93,7 +95,8 @@
 
     <PreferenceCategory
         android:title="@string/category_name_appearance"
-        android:order="-180">
+        android:order="-180"
+        android:layout="@layout/settingslib_preference_category_no_title">
 
         <com.android.settings.display.darkmode.DarkModePreference
             android:key="dark_ui_mode"
@@ -114,7 +117,8 @@
 
     <PreferenceCategory
         android:title="@string/category_name_color"
-        android:order="-170">
+        android:order="-170"
+        android:layout="@layout/settingslib_preference_category_no_title">
 
         <com.android.settingslib.PrimarySwitchPreference
             android:key="night_display"
@@ -145,7 +149,8 @@
 
     <PreferenceCategory
         android:title="@string/category_name_display_controls"
-        android:order="-150">
+        android:order="-150"
+        android:layout="@layout/settingslib_preference_category_no_title">
 
         <!--
             Standard auto-rotation preference that will be shown when device state based

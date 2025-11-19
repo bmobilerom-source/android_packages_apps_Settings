@@ -33,9 +33,8 @@
             android:id="@android:id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="?android:textColorPrimary"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_alignParentTop="true"
             android:layout_marginTop="4dp" />
 
@@ -45,8 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@android:id/title"
-            android:textSize="12sp"
-            android:textColor="?android:textColorSecondary"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:maxLines="2"
             android:ellipsize="end"
             android:layout_marginTop="2dp" />

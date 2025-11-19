@@ -24,6 +24,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.Vibrator;
+import android.view.View;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -47,6 +48,15 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.anatolia_settings_buttons);
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
+    }
+    
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Ensure wallpaper/theme background is applied
+        if (view != null) {
+            ensureWallpaperBackground(view);
+        }
     }
 
     @Override

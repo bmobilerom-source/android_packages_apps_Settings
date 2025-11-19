@@ -22,26 +22,34 @@
     android:key="privacy_dashboard_page"
     android:title=" ">
  
-
     <com.android.settingslib.widget.IllustrationPreference
         android:key="privacy"
         settings:searchable="false"
         android:order="-999"
         app:lottie_rawRes="@raw/privacy"/> 
 
-
+    <!-- TopIntro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="privacy_top_intro"
+        android:title="@string/privacy_dashboard_intro"
+        android:persistent="false"
+        android:order="-996"
+        settings:searchable="false"/>
 
     <!-- Work Policy info -->
     <Preference
         android:key="work_policy_info"
         android:title="@string/work_policy_privacy_settings"
+        settings:layout="@layout/system_warning_preference_card"
         android:summary="@string/work_policy_privacy_settings_summary"
-        settings:controller="com.android.settings.privacy.WorkPolicyInfoPreferenceController"/>
+        settings:controller="com.android.settings.privacy.WorkPolicyInfoPreferenceController"
+        settings:searchable="false"/>
 
     <!-- Connected work and personal apps -->
     <Preference
         android:key="interact_across_profiles_privacy"
         android:title="@string/interact_across_profiles_title"
+        settings:layout="@layout/system_warning_preference_card"
         android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
         settings:searchable="false"
         settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController" />
@@ -50,28 +58,36 @@
     <Preference
         android:key="privacy_accessibility_usage"
         android:title="@string/accessibility_usage_title"
-        settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController"/>
+        settings:layout="@layout/system_warning_preference_card"
+        settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController"
+        settings:searchable="false"/>
 
     <!-- Permissions usage -->
     <Preference
         android:key="privacy_permissions_usage"
+        settings:layout="@layout/system_warning_preference_card"
         android:title="@string/permissions_usage_title"
         android:summary="@string/permissions_usage_summary"
-        settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController"/>
+        settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController"
+        settings:searchable="false"/>
 
     <!-- App permissions -->
     <Preference
         android:key="privacy_manage_perms"
         android:title="@string/app_permissions"
         android:summary="@string/runtime_permissions_summary_control_app_access"
-        settings:controller="com.android.settings.privacy.ManagePermissionsPreferenceController"/>
+        settings:layout="@layout/system_warning_preference_card"
+        settings:controller="com.android.settings.privacy.ManagePermissionsPreferenceController"
+        settings:searchable="false"/>
 
     <!-- App Data Sharing Update -->
     <Preference
         android:key="privacy_app_data_sharing_updates"
+        settings:layout="@layout/system_warning_preference_card"
         android:title="@string/app_data_sharing_updates_title"
         android:summary="@string/app_data_sharing_updates_summary"
-        settings:controller="com.android.settings.privacy.AppDataSharingUpdatesPreferenceController"/>
+        settings:controller="com.android.settings.privacy.AppDataSharingUpdatesPreferenceController"
+        settings:searchable="false"/>
 
 
     <!-- Camera toggle -->
@@ -79,14 +95,18 @@
         android:key="privacy_camera_toggle"
         android:title="@string/camera_toggle_title"
         android:summary="@string/perm_toggle_description"
-        settings:controller="com.android.settings.privacy.CameraToggleController"/>
+        settings:layout="@layout/system_warning_preference_card"
+        settings:controller="com.android.settings.privacy.CameraToggleController"
+        settings:searchable="false"/>
 
     <!-- Microphone toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="privacy_mic_toggle"
+        settings:layout="@layout/system_warning_preference_card"
         android:title="@string/mic_toggle_title"
         android:summary="@string/mic_toggle_description"
-        settings:controller="com.android.settings.privacy.MicToggleController"/>
+        settings:controller="com.android.settings.privacy.MicToggleController"
+        settings:searchable="false"/>
 
     <!-- Show passwords -->
     <SwitchPreferenceCompat
@@ -94,20 +114,24 @@
         android:title="@string/show_password"
         android:summary="@string/show_password_summary"
         settings:layout="@layout/system_warning_preference_card"
-        settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
+        settings:controller="com.android.settings.security.ShowPasswordPreferenceController"
+        settings:searchable="false"/>
 
     <!-- On lock screen notifications -->
     <com.android.settings.RestrictedListPreference
         android:key="privacy_lock_screen_notifications"
         android:title="@string/lock_screen_notifs_title"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        settings:layout="@layout/system_warning_preference_card"
+        settings:searchable="false"/>
 
     <Preference
         android:key="privacy_lock_screen_notifications_page"
         android:title="@string/lock_screen_notifs_title"
         settings:layout="@layout/system_warning_preference_card"
         android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
-        settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
+        settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController"
+        settings:searchable="false" />
 
     <!-- Show media on lock screen -->
     <SwitchPreferenceCompat
@@ -116,15 +140,18 @@
         android:summary="@string/media_controls_lockscreen_description"
         settings:layout="@layout/system_warning_preference_card"
         settings:controller=
-            "com.android.settings.sound.MediaControlsLockScreenPreferenceController" />
+            "com.android.settings.sound.MediaControlsLockScreenPreferenceController"
+        settings:searchable="false" />
 
     <!-- Privacy Service -->
     <PreferenceCategory
         android:key="privacy_services"
-        android:layout="@layout/preference_category_no_label"/>
+        android:layout="@layout/preference_category_no_label"
+        settings:searchable="false"/>
 
     <PreferenceCategory
-        android:key="dashboard_tile_placeholder"/>
+        android:key="dashboard_tile_placeholder"
+        settings:searchable="false"/>
 
     <!-- Work profile settings are at the bottom with high order value to avoid users thinking that
          any of the above settings (including dynamic) are specific to the work profile. -->
@@ -138,7 +165,9 @@
             android:key="privacy_lock_screen_work_profile_notifications"
             android:title="@string/locked_work_profile_notification_title"
             android:summary="@string/summary_placeholder"
-            android:order="999"/>
+            android:order="999"
+            settings:layout="@layout/system_warning_preference_card"
+            settings:searchable="false"/>
     </PreferenceCategory>
 
     <!-- Content Capture -->
@@ -152,19 +181,25 @@
         android:key="content_capture"
         android:title="@string/content_capture"
         android:summary="@string/content_capture_summary"
-        settings:controller="com.android.settings.privacy.EnableContentCapturePreferenceController"/>
+        settings:layout="@layout/system_warning_preference_card"
+        settings:controller="com.android.settings.privacy.EnableContentCapturePreferenceController"
+        settings:searchable="false"/>
 
     <com.android.settingslib.PrimarySwitchPreference
         android:key="content_capture_custom_settings"
+        settings:layout="@layout/system_warning_preference_card"
         android:title="@string/content_capture"
         android:summary="@string/content_capture_summary"
-        settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController"/>
+        settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController"
+        settings:searchable="false"/>
 
     <!-- Clipboard access notifications -->
     <SwitchPreferenceCompat
         android:key="show_clip_access_notification"
+        settings:layout="@layout/system_warning_preference_card"
         android:title="@string/show_clip_access_notification"
         android:summary="@string/show_clip_access_notification_summary"
-        settings:controller="com.android.settings.privacy.ShowClipAccessNotificationPreferenceController"/>
+        settings:controller="com.android.settings.privacy.ShowClipAccessNotificationPreferenceController"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

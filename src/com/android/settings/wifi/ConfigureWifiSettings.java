@@ -30,6 +30,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -88,6 +89,62 @@ public class ConfigureWifiSettings extends DashboardFragment {
         } else {
             Log.d(TAG, "Can not find the preference.");
         }
+        
+        // Add Data Saver and Private DNS preferences dynamically
+        addDataSaverAndPrivateDnsPreferences();
+    }
+    
+    /**
+     * Adds Data Saver and Private DNS preferences dynamically to Wi-Fi configure settings
+     */
+    private void addDataSaverAndPrivateDnsPreferences() {
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
+        
+        Context context = getContext();
+        if (context == null) {
+            return;
+        }
+        
+        // Add Data Saver preference with adaptive styling
+        try {
+            com.android.settings.preferences.ui.AdaptivePreference dataSaverPref = 
+                    new com.android.settings.preferences.ui.AdaptivePreference(context);
+            dataSaverPref.setKey("data_saver_wifi");
+            dataSaverPref.setTitle(R.string.data_saver_title);
+            dataSaverPref.setIcon(R.drawable.ic_settings_data_usage);
+            dataSaverPref.setOrder(100);
+            dataSaverPref.setFragment("com.android.settings.datausage.DataSaverSummary");
+            // Set middle layout for adaptive styling
+            dataSaverPref.setLayoutResource(R.layout.adaptive_preference_card_middle);
+            dataSaverPref.setVisible(context.getResources().getBoolean(R.bool.config_show_data_saver));
+            screen.addPreference(dataSaverPref);
+        } catch (Exception e) {
+            Log.e(TAG, "Error adding Data Saver preference", e);
+        }
+        
+        // Add Private DNS preference with adaptive styling
+        // Note: Private DNS is already available in Network & Internet settings
+        // This is commented out to avoid compilation issues
+        /*
+        try {
+            com.android.settings.preferences.ui.AdaptivePreference privateDnsPref = 
+                    new com.android.settings.preferences.ui.AdaptivePreference(context);
+            privateDnsPref.setKey("private_dns_settings_wifi");
+            privateDnsPref.setTitle(R.string.select_private_dns_configuration_title);
+            privateDnsPref.setIcon(R.drawable.ic_settings_private_dns);
+            privateDnsPref.setOrder(101);
+            // Set bottom layout for adaptive styling
+            privateDnsPref.setLayoutResource(R.layout.adaptive_preference_card_bottom);
+            // Launch Private DNS settings fragment
+            privateDnsPref.setFragment("com.android.settings.network.PrivateDnsSettings");
+            screen.addPreference(privateDnsPref);
+        } catch (Exception e) {
+            Log.e(TAG, "Error adding Private DNS preference", e);
+        }
+        */
     }
 
     @Override

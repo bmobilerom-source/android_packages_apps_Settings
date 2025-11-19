@@ -16,17 +16,97 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/system_optimization_title">
 
+    <!-- Lottie Animation -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="system_optimization_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/display" />
+
+    <!-- Header -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="system_optimization_intro"
+        android:order="-1000"
+        android:title="@string/system_optimization_intro_title"
+        android:summary="@string/system_optimization_intro_summary"
+        android:persistent="false"
+        settings:searchable="false" />
+
+    <!-- Optimization Preferences -->
+    <!-- Only features that work out of the box without kernel/framework changes -->
+    
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="background_app_limits"
+        android:title="@string/background_app_limits_title"
+        android:summary="@string/background_app_limits_summary"
+        android:defaultValue="false"
+        app:position="top"
+        settings:controller="com.epic.fragments.BackgroundAppLimitsController"
+        settings:searchable="false" />
+
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="network_optimization"
+        android:title="@string/network_optimization_title"
+        android:summary="@string/network_optimization_summary"
+        android:defaultValue="false"
+        app:position="middle"
+        settings:controller="com.epic.fragments.NetworkOptimizationController"
+        settings:searchable="false" />
+
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="battery_optimization"
+        android:title="@string/battery_optimization_title"
+        android:summary="@string/battery_optimization_summary"
+        android:defaultValue="false"
+        app:position="middle"
+        settings:controller="com.epic.fragments.BatteryOptimizationController"
+        settings:searchable="false" />
+
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="storage_optimization"
+        android:title="@string/storage_optimization_title"
+        android:summary="@string/storage_optimization_summary"
+        android:defaultValue="false"
+        app:position="middle"
+        settings:controller="com.epic.fragments.StorageOptimizationController"
+        settings:searchable="false" />
+
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="thermal_throttling"
+        android:title="@string/thermal_throttling_title"
+        android:summary="@string/thermal_throttling_summary"
+        android:defaultValue="false"
+        app:position="bottom"
+        settings:controller="com.epic.fragments.ThermalThrottlingController"
+        settings:searchable="false" />
+    
+    <!-- Removed features (require kernel/framework):
+         - Memory Optimization (needs framework)
+         - CPU Governor Optimization (needs kernel)
+         - I/O Scheduler Optimization (needs kernel)
+         - ZRAM Optimization (needs kernel)
+         - Performance Mode (needs kernel)
+    -->
+
+    <!-- Status Summary -->
+    <Preference
+        android:key="optimization_status"
+        android:title="@string/optimization_status_title"
+        android:summary="@string/optimization_status_summary"
+        android:selectable="false"
+        android:order="50"
+        settings:controller="com.epic.fragments.OptimizationStatusController"
+        settings:searchable="false" />
+
+    <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
-        android:key="system_optimization_info"
-        android:title="@string/system_optimization_title"
-        android:summary="@string/system_optimization_summary"
-        android:order="100" />
+        android:key="system_optimization_footer"
+        android:order="100"
+        android:title="@string/system_optimization_info_title"
+        android:summary="@string/system_optimization_info_summary"
+        settings:searchable="false" />
 
 </PreferenceScreen>
-
-
-
-
-

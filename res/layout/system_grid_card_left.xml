@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="20dp"
-        android:minHeight="120dp">
+        android:padding="22dp"
+        android:minHeight="132dp">
         
         <ImageView
             android:id="@android:id/icon"
@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceListItemSecondary"
             android:textColor="?android:attr/textColorSecondary"
+            android:textSize="13.3sp"
             android:maxLines="2"
             android:ellipsize="end"
             android:gravity="center"

@@ -1010,6 +1010,10 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     @Nullable
     public static VolumeInfo maybeInitializeVolume(StorageManager sm, Bundle bundle) {
+        // Fix crash: bundle can be null, so check before using
+        if (bundle == null) {
+            return null;
+        }
         final String volumeId = bundle.getString(VolumeInfo.EXTRA_VOLUME_ID,
                 VolumeInfo.ID_PRIVATE_INTERNAL);
         final VolumeInfo volume = sm.findVolumeById(volumeId);

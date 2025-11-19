@@ -31,12 +31,13 @@
         android:title="@*android:string/data_saver_description"
         android:selectable="false"
         settings:searchable="false"/>
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="unrestricted_access"
         android:title="@string/unrestricted_data_saver"
         android:summary="@string/summary_two_lines_placeholder"
         android:order="-700"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
+        app:position="solo"
         settings:searchable="false"
         settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
 

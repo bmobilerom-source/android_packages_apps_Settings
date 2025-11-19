@@ -18,6 +18,7 @@ package com.android.settings.emergency;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -38,6 +39,7 @@ public class EmergencyDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "EmergencyDashboard";
     private static final String WEA_PREF_KEY = "app_and_notif_cell_broadcast_settings";
+    private static final String MORE_EMERGENCY_SETTINGS_KEY = "more_emergency_settings";
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -57,6 +59,19 @@ public class EmergencyDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        hideMoreEmergencySettingsButton();
+    }
+
+    private void hideMoreEmergencySettingsButton() {
+        Preference moreEmergencySettingsPref = findPreference(MORE_EMERGENCY_SETTINGS_KEY);
+        if (moreEmergencySettingsPref != null) {
+            moreEmergencySettingsPref.setVisible(false);
+        }
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {

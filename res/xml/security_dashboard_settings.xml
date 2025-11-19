@@ -33,7 +33,8 @@
     <PreferenceCategory
         android:title="@string/security_settings_title"
         android:order="-1000"
-        android:layout="@layout/settings_title_header_small">
+        android:layout="@layout/settings_title_header_small"
+        settings:searchable="false">
     </PreferenceCategory>
 
     <!-- TopIntro -->
@@ -41,7 +42,8 @@
         android:key="security_dashboard_top_intro"
         android:title="@string/security_settings_title"
         android:persistent="false"
-        android:order="-999"/>
+        android:order="-999"
+        settings:searchable="false"/>
 
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
@@ -53,17 +55,20 @@
     <PreferenceCategory
         android:order="0"
         android:key="security_status"
-        android:title="@string/security_status_title" />
+        android:title="@string/security_status_title"
+        settings:searchable="false" />
 
     <PreferenceCategory
         android:order="1"
-        android:key="dashboard_tile_placeholder" />
+        android:key="dashboard_tile_placeholder"
+        settings:searchable="false" />
 
     <!-- security section -->
     <PreferenceCategory
         android:order="2"
         android:key="security_category"
-        android:title="@string/lock_settings_title">
+        android:title="@string/lock_settings_title"
+        settings:searchable="false">
 
         <!-- Choose screen lock - Commented out
         <com.android.settings.widget.GearPreference
@@ -81,7 +86,8 @@
             android:summary="@string/summary_placeholder"
             android:order="1"
             android:visible="false"
-            settings:keywords="@string/keywords_fingerprint_settings" />
+            settings:keywords="@string/keywords_fingerprint_settings"
+            settings:searchable="false" />
         
         <!-- BMobile Fingerprint Implementation -->
         <Preference
@@ -90,21 +96,24 @@
             android:summary="@string/bmobile_fingerprint_summary"
             android:fragment="com.epic.fragments.BMobileFingerprintSettings"
             android:order="1"
-            settings:layout="@layout/system_warning_preference_card" />
+            settings:layout="@layout/system_warning_preference_card"
+            settings:searchable="false" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="face_settings"
             android:title="@string/security_settings_face_preference_title"
             android:summary="@string/summary_placeholder"
             android:order="2"
-            settings:keywords="@string/keywords_face_settings" />
+            settings:keywords="@string/keywords_face_settings"
+            settings:searchable="false" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings"
             android:title="@string/security_settings_biometric_preference_title"
             android:summary="@string/summary_placeholder"
             android:order="3"
-            settings:keywords="@string/keywords_biometric_settings" />
+            settings:keywords="@string/keywords_biometric_settings"
+            settings:searchable="false" />
     </PreferenceCategory>
 
     <Preference
@@ -115,6 +124,7 @@
         settings:layout="@layout/system_warning_preference_card"        
         android:fragment="com.android.settings.security.SecurityAdvancedSettings"
         settings:controller="com.android.settings.security.SecurityAdvancedSettingsController"
-        settings:keywords="@string/security_advanced_settings_keywords" />
+        settings:keywords="@string/security_advanced_settings_keywords"
+        settings:searchable="false" />
 
 </PreferenceScreen>

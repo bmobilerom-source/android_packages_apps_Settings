@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="app_data_usage_screen"
     android:title=" ">
 
@@ -39,44 +40,51 @@
         android:key="app_data_usage_settings_category"
         android:layout="@layout/preference_category_no_label">
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="app_settings"
             android:title="@string/data_usage_app_settings"
+            app:position="top"
             settings:controller="com.android.settings.datausage.AppDataUsageAppSettingsController" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="restrict_all"
             android:title="@string/data_usage_app_restrict_all"
-            android:summary="@string/data_usage_app_restrict_all_summary" />
+            android:summary="@string/data_usage_app_restrict_all_summary"
+            app:position="middle" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="restrict_wifi"
             android:title="@string/data_usage_app_restrict_wifi"
-            android:summary="@string/data_usage_app_restrict_wifi_summary" />
+            android:summary="@string/data_usage_app_restrict_wifi_summary"
+            app:position="middle" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="restrict_cellular"
             android:title="@string/data_usage_app_restrict_mobile"
             android:summary="@string/data_usage_app_restrict_mobile_summary"
+            app:position="middle"
             settings:isPreferenceVisible="@bool/config_show_sim_info" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="restrict_background"
             android:title="@string/data_usage_app_restrict_background"
             android:summary="@string/data_usage_app_restrict_background_summary"
+            app:position="middle"
             settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:useAdditionalSummary="true"
             settings:restrictedSwitchSummary="@string/disabled_by_admin" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="restrict_vpn"
             android:title="@string/data_usage_app_restrict_vpn"
-            android:summary="@string/data_usage_app_restrict_vpn_summary" />
+            android:summary="@string/data_usage_app_restrict_vpn_summary"
+            app:position="middle" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="unrestricted_data_saver"
             android:title="@string/unrestricted_app_title"
             android:summary="@string/unrestricted_app_summary"
+            app:position="bottom"
             settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:useAdditionalSummary="true"
             settings:restrictedSwitchSummary="@string/disabled_by_admin" />

@@ -18,10 +18,13 @@ package com.android.settings.privacy;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,7 @@ import java.util.List;
 /**
  * Fragment that shows several privacy toggle controls
  */
+@SearchIndexable
 public class PrivacyControlsFragment extends DashboardFragment {
     private static final String TAG = "PrivacyDashboardFrag";
     private static final String CAMERA_KEY = "privacy_camera_toggle";
@@ -57,4 +61,34 @@ public class PrivacyControlsFragment extends DashboardFragment {
     protected String getLogTag() {
         return TAG;
     }
+    
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.privacy_controls_settings) {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    // Completely block Privacy Controls from search
+                    return null;
+                }
+                
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    // Always disable Privacy Controls from search
+                    return false;
+                }
+                
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    // Hide all preferences from search
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    if (keys == null) {
+                        keys = new java.util.ArrayList<>();
+                    }
+                    // Block all privacy controls keys
+                    keys.add("privacy_controls");
+                    keys.add("privacy_camera_toggle");
+                    keys.add("privacy_mic_toggle");
+                    return keys;
+                }
+            };
 }

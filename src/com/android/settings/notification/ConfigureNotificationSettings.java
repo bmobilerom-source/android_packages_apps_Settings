@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -74,13 +75,61 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
 
     @Override
     public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        replaceEnterpriseStringTitle("lock_screen_work_redact",
-                WORK_PROFILE_LOCK_SCREEN_REDACT_NOTIFICATION_TITLE,
-                R.string.lock_screen_notifs_redact_work);
-        replaceEnterpriseStringSummary("lock_screen_work_redact",
-                WORK_PROFILE_LOCK_SCREEN_REDACT_NOTIFICATION_SUMMARY,
-                R.string.lock_screen_notifs_redact_work_summary);
+        try {
+            super.onCreate(icicle);
+            
+            // Ensure theme backgrounds are applied
+            ensureThemeBackgrounds();
+            
+            replaceEnterpriseStringTitle("lock_screen_work_redact",
+                    WORK_PROFILE_LOCK_SCREEN_REDACT_NOTIFICATION_TITLE,
+                    R.string.lock_screen_notifs_redact_work);
+            replaceEnterpriseStringSummary("lock_screen_work_redact",
+                    WORK_PROFILE_LOCK_SCREEN_REDACT_NOTIFICATION_SUMMARY,
+                    R.string.lock_screen_notifs_redact_work_summary);
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "Error in onCreate", e);
+            // Don't crash - continue with default behavior
+        }
+    }
+    
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        
+        // Ensure theme backgrounds are applied after view creation
+        ensureThemeBackgrounds();
+    }
+    
+    /**
+     * Ensures custom theme backgrounds are applied to this fragment.
+     */
+    private void ensureThemeBackgrounds() {
+        try {
+            android.app.Activity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
+            
+            android.view.View rootView = activity.findViewById(android.R.id.content);
+            if (rootView instanceof android.view.ViewGroup) {
+                android.view.ViewGroup rootGroup = (android.view.ViewGroup) rootView;
+                if (rootGroup.findViewById(R.id.theme_background) != null) {
+                    return;
+                }
+                
+                com.android.settings.preferences.ui.AdaptiveThemeBackgroundView themeView =
+                        new com.android.settings.preferences.ui.AdaptiveThemeBackgroundView(activity);
+                themeView.setId(R.id.theme_background);
+                themeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+                int insertIndex = (rootGroup.findViewById(R.id.wallpaper_background) != null) ? 1 : 0;
+                rootGroup.addView(themeView, insertIndex, new android.view.ViewGroup.LayoutParams(
+                        android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                        android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+            }
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "Error adding theme background", e);
+        }
     }
 
     @Override

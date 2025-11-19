@@ -62,18 +62,32 @@ public class SettingsInitialize extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent broadcast) {
-        final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        UserInfo userInfo = um.getUserInfo(UserHandle.myUserId());
-        final PackageManager pm = context.getPackageManager();
-        managedProfileSetup(context, pm, broadcast, userInfo);
-        cloneProfileSetup(context, pm, userInfo);
-        webviewSettingSetup(context, pm, userInfo);
-        ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
-        enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
-        storeSuwCompleteTimestamp(context, broadcast);
-        // Initialize install app whitelist restriction on first boot
-        com.android.settings.applications.specialaccess.InstallAppWhitelistController
-                .initializeIfNeeded(context);
+        try {
+            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+            UserInfo userInfo = um.getUserInfo(UserHandle.myUserId());
+            final PackageManager pm = context.getPackageManager();
+            managedProfileSetup(context, pm, broadcast, userInfo);
+            cloneProfileSetup(context, pm, userInfo);
+            webviewSettingSetup(context, pm, userInfo);
+            ThreadUtils.postOnBackgroundThread(() -> {
+                try {
+                    refreshExistingShortcuts(context);
+                } catch (Exception e) {
+                    Log.e(TAG, "Error refreshing shortcuts", e);
+                }
+            });
+            enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
+            storeSuwCompleteTimestamp(context, broadcast);
+            // Initialize install app whitelist restriction on first boot
+            try {
+                com.android.settings.applications.specialaccess.InstallAppWhitelistController
+                        .initializeIfNeeded(context);
+            } catch (Exception e) {
+                Log.e(TAG, "Error initializing install app whitelist", e);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in SettingsInitialize.onReceive", e);
+        }
     }
 
     private void managedProfileSetup(Context context, final PackageManager pm, Intent broadcast,

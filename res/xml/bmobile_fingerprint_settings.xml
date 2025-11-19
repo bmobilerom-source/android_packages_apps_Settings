@@ -75,11 +75,21 @@
             android:title="@string/bmobile_fingerprint_unlock_title"
             android:summary="@string/bmobile_fingerprint_unlock_summary"
             android:icon="@drawable/ic_bmobile_fingerprint_unlock"
-            app:position="bottom"
+            app:position="middle"
             android:visible="false" />
+
+        <!-- Fingerprint Tools - Bottom Sheet Trigger -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="fingerprint_tools"
+            android:title="@string/fingerprint_tools_title"
+            android:summary="@string/fingerprint_tools_summary"
+            android:icon="@drawable/ic_settings_security_filled"
+            app:position="bottom" />
 
     </PreferenceCategory>
 
 </PreferenceScreen>
+
+
 
 

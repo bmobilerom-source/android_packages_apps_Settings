@@ -28,7 +28,8 @@
         settings:searchable="false"/>
 
     <PreferenceCategory
-        android:title="@string/private_space_category_lock">
+        android:title="@string/private_space_category_lock"
+        settings:searchable="false">
 
         <Preference
             android:key="private_space_use_one_lock"
@@ -47,7 +48,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/private_space_category_hide">
+        android:title="@string/private_space_category_hide"
+        settings:searchable="false">
 
         <Preference
             android:key="private_space_hidden"
@@ -59,7 +61,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/private_space_category_system">
+        android:title="@string/private_space_category_system"
+        settings:searchable="false">
 
         <Preference
             android:key="private_space_delete"

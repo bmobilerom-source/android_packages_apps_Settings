@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2025 BashaMobile
+    Copyright (C) 2025 LineageOS
+    
+    Licensed under the GNU General Public License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.gnu.org/licenses/gpl-2.0.html
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/settings_wallpaper_background_title">
+
+    <!-- Lottie Animation Illustration - Always at top -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="wallpaper_background_illustration"
+        android:order="-1001"
+        android:title="@string/settings_wallpaper_background_title"
+        app:lottie_rawRes="@raw/display"
+        settings:searchable="false" />
+
+    <!-- Header -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="wallpaper_background_intro"
+        android:order="-1000"
+        android:title="@string/wallpaper_background_info_title"
+        android:summary="@string/wallpaper_background_info_summary" />
+
+    <!-- Wallpaper Background Toggle -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="settings_wallpaper_background"
+        android:title="@string/settings_wallpaper_background_title"
+        android:summary="@string/settings_wallpaper_background_summary"
+        android:defaultValue="false"
+        app:position="top"
+        settings:controller="com.android.settings.display.SettingsWallpaperBackgroundController" />
+
+    <!-- Wallpaper Blur Toggle -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="wallpaper_blur"
+        android:title="@string/wallpaper_blur_title"
+        android:summary="@string/wallpaper_blur_summary"
+        android:defaultValue="false"
+        app:position="middle" />
+
+    <!-- Wallpaper Blur Radius -->
+    <com.android.settings.preferences.ui.AdaptiveListPreference
+        android:key="wallpaper_blur_radius"
+        android:title="@string/wallpaper_blur_radius_title"
+        android:summary="@string/wallpaper_blur_radius_summary"
+        android:entries="@array/wallpaper_blur_radius_entries"
+        android:entryValues="@array/wallpaper_blur_radius_values"
+        android:defaultValue="20"
+        app:position="bottom" />
+
+</PreferenceScreen>

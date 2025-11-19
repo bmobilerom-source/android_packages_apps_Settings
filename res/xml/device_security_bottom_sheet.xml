@@ -19,38 +19,47 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="device_security_bottom_sheet"
     android:title="@string/device_security_title">
 
-    <Preference
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="device_security_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/security" />
+
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:order="0"
         android:key="sim_lock_settings"
         android:title="@string/sim_lock_settings_category"
-        settings:layout="@layout/system_warning_preference_card" />
+        android:summary="@string/summary_placeholder"
+        app:position="top" />
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:order="1"
         android:key="encryption_and_credential"
         android:title="@string/encryption_and_credential_settings_title"
-        settings:layout="@layout/system_warning_preference_card"
         android:summary="@string/encryption_and_credential_settings_summary"
-        android:fragment="com.android.settings.security.EncryptionAndCredential" />
+        android:fragment="com.android.settings.security.EncryptionAndCredential"
+        app:position="middle" />
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:order="2"
         android:key="manage_trust_agents"
         android:title="@string/manage_trust_agents"
-        settings:layout="@layout/system_warning_preference_card"
         android:summary="@string/summary_placeholder"
-        android:fragment="com.android.settings.security.trustagent.TrustAgentSettings" />
+        android:fragment="com.android.settings.security.trustagent.TrustAgentSettings"
+        app:position="middle" />
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:order="3"
         android:key="screen_pinning_settings"
         android:title="@string/screen_pinning_title"
-        settings:layout="@layout/system_warning_preference_card"
         android:summary="@string/summary_placeholder"
-        android:fragment="com.android.settings.security.ScreenPinningSettings" />
+        android:fragment="com.android.settings.security.ScreenPinningSettings"
+        app:position="bottom" />
 
 </PreferenceScreen>
 

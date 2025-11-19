@@ -59,41 +59,44 @@
         android:key="regional_preferences_category"
         android:layout="@layout/settingslib_preference_category_no_title"
         android:order="0">
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="key_temperature_unit"
             android:title="@string/temperature_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
             android:order="0"
+            app:position="top"
             settings:controller="com.android.settings.regionalpreferences.TemperatureUnitController"
             settings:fragment="com.android.settings.regionalpreferences.TemperatureUnitFragment">
             <extra
                 android:name="arg_key_regional_preference"
                 android:value="mu"/>
-        </Preference>
+        </com.android.settings.preferences.ui.AdaptivePreference>
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="key_first_day_of_week"
             android:title="@string/first_day_of_week_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
             android:order="1"
+            app:position="middle"
             settings:controller="com.android.settings.regionalpreferences.FirstDayOfWeekController"
             settings:fragment="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment">
             <extra
                 android:name="arg_key_regional_preference"
                 android:value="fw"/>
-        </Preference>
+        </com.android.settings.preferences.ui.AdaptivePreference>
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="key_numbering_system"
             android:title="@string/numbers_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
             android:order="2"
+            app:position="bottom"
             settings:controller="com.android.settings.regionalpreferences.NumberingSystemController"
             settings:fragment="com.android.settings.regionalpreferences.NumberingPreferencesFragment">
             <extra
                 android:name="arg_key_regional_preference"
                 android:value="arg_value_language_select"/>
-        </Preference>
+        </com.android.settings.preferences.ui.AdaptivePreference>
     </PreferenceCategory>
 
     <!-- Switches -->

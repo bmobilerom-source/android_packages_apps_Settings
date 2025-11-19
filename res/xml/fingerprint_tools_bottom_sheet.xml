@@ -23,6 +23,13 @@
     android:key="fingerprint_tools_bottom_sheet"
     android:title="@string/fingerprint_tools_title">
 
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="fingerprint_tools_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/fingerprint_edu_lottie" />
+
     <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:order="0"
         android:key="auth_ripple_enabled"

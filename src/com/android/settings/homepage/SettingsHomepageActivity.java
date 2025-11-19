@@ -37,6 +37,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -73,7 +74,6 @@ import androidx.window.embedding.SplitRule;
 import androidx.window.java.embedding.SplitControllerCallbackAdapter;
 
 import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsApplication;
 import com.android.settings.accounts.AvatarViewMixin;
@@ -282,6 +282,28 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         updateHomepageAppBar();
         updateHomepageBackground();
         mLoadedListeners = new ArraySet<>();
+        
+        // Add wallpaper background for all top-level dashboards
+        // Post to ensure view is fully inflated
+        View rootView = findViewById(android.R.id.content);
+        if (rootView != null) {
+            rootView.post(new Runnable() {
+                @Override
+                public void run() {
+                    addWallpaperBackground();
+                    addThemeBackground();
+                }
+            });
+        } else {
+            // Fallback if view not ready yet
+            getWindow().getDecorView().post(new Runnable() {
+                @Override
+                public void run() {
+                    addWallpaperBackground();
+                    addThemeBackground();
+                }
+            });
+        }
 
         initSearchBarView();
 
@@ -425,6 +447,17 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     protected void onStart() {
         ((SettingsApplication) getApplication()).setHomeActivity(this);
         super.onStart();
+        // Ensure wallpaper and theme backgrounds are applied
+        View rootView = findViewById(android.R.id.content);
+        if (rootView != null) {
+            rootView.post(new Runnable() {
+                @Override
+                public void run() {
+                    addWallpaperBackground();
+                    addThemeBackground();
+                }
+            });
+        }
         if (mIsEmbeddingActivityEnabled) {
             final SplitController splitController = SplitController.getInstance(this);
             mSplitControllerAdapter = new SplitControllerCallbackAdapter(splitController);
@@ -573,14 +606,33 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 ? getColor(R.color.settings_two_pane_background_color)
                 : Utils.getColorAttrDefaultColor(this, android.R.attr.colorBackground);
 
+        // Check if wallpaper background is enabled (using helper for independence)
+        boolean wallpaperBgEnabled = com.android.settings.display.WallpaperBackgroundHelper.isEnabled(this);
+
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // Update status bar color
         window.setStatusBarColor(color);
         // Update content background.
         findViewById(android.R.id.content).setBackgroundColor(color);
         if (Flags.homepageRevamp()) {
-            //Update search bar background
-            findViewById(R.id.app_bar_container).setBackgroundColor(color);
+            // Update search bar and contextual header background
+            // Only make transparent if wallpaper background is enabled
+            View appBarContainer = findViewById(R.id.app_bar_container);
+            View contextualHeader = findViewById(R.id.contextual_header);
+            View appBar = findViewById(R.id.app_bar);
+            
+            if (appBarContainer != null) {
+                appBarContainer.setBackgroundColor(wallpaperBgEnabled 
+                        ? android.graphics.Color.TRANSPARENT : color);
+            }
+            if (contextualHeader != null) {
+                contextualHeader.setBackgroundColor(wallpaperBgEnabled 
+                        ? android.graphics.Color.TRANSPARENT : color);
+            }
+            if (appBar != null) {
+                appBar.setBackgroundColor(wallpaperBgEnabled 
+                        ? android.graphics.Color.TRANSPARENT : color);
+            }
         }
     }
 
@@ -762,7 +814,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 SplitRule.FinishBehavior.ALWAYS,
                 true /* clearTop */);
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
-                new ComponentName(getApplicationContext(), Settings.class),
+                new ComponentName(getApplicationContext(), com.android.settings.Settings.class),
                 targetComponentName,
                 targetIntent.getAction(),
                 SplitRule.FinishBehavior.ALWAYS,
@@ -981,4 +1033,100 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                     UserHandle.of(UserHandle.myUserId()));
         return userInfo.name != null ? userInfo.name : getString(R.string.default_user);
         }
+    
+    /**
+     * Add wallpaper background view programmatically for top-level dashboards.
+     * This ensures the wallpaper appears behind all content on the homepage.
+     * The AdaptiveWallpaperBackgroundView uses WallpaperBackgroundHelper for independence
+     * and will automatically handle visibility based on the setting and only show
+     * when enabled and in dark mode.
+     */
+    private void addWallpaperBackground() {
+        View rootView = findViewById(android.R.id.content);
+        if (rootView instanceof android.view.ViewGroup) {
+            android.view.ViewGroup rootGroup = (android.view.ViewGroup) rootView;
+            // Check if wallpaper background already exists (from XML or previous call)
+            View existingWallpaperView = rootGroup.findViewById(R.id.wallpaper_background);
+            if (existingWallpaperView != null) {
+                // Check if view already has a parent and is in the correct position
+                android.view.ViewGroup parent = (android.view.ViewGroup) existingWallpaperView.getParent();
+                if (parent != null && parent == rootGroup) {
+                    // View is already in the correct parent, just ensure z-order
+                    existingWallpaperView.setZ(0.5f);
+                    return;
+                }
+                // View exists but is in wrong parent or position - remove and re-add
+                if (parent != null) {
+                    parent.removeView(existingWallpaperView);
+                }
+                int insertIndex = (rootGroup.findViewById(R.id.theme_background) != null) ? 1 : 0;
+                rootGroup.addView(existingWallpaperView, insertIndex, new android.view.ViewGroup.LayoutParams(
+                        android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                        android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+                // Set z-order to ensure it's behind content but on top of theme
+                existingWallpaperView.setZ(0.5f);
+                return;
+            }
+            
+            // Create wallpaper background view
+            // The view will automatically check the setting and only show when enabled
+            com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView wallpaperView =
+                    new com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView(this);
+            wallpaperView.setId(R.id.wallpaper_background);
+            wallpaperView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+            // Insert after theme background (if exists) so it's on top of theme but behind content
+            int insertIndex = (rootGroup.findViewById(R.id.theme_background) != null) ? 1 : 0;
+            rootGroup.addView(wallpaperView, insertIndex, new android.view.ViewGroup.LayoutParams(
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+            // Set z-order to ensure it's behind content but on top of theme
+            wallpaperView.setZ(0.5f);
+        }
+    }
+    
+    /**
+     * Add theme background view for custom themes (Black, Vivid, etc.).
+     * The AdaptiveThemeBackgroundView uses CustomThemeHelper for independence
+     * and applies theme-specific visual effects directly in Settings.
+     * This ensures all top-level dashboards respect the custom theme setting.
+     */
+    private void addThemeBackground() {
+        View rootView = findViewById(android.R.id.content);
+        if (rootView instanceof android.view.ViewGroup) {
+            android.view.ViewGroup rootGroup = (android.view.ViewGroup) rootView;
+            // Check if theme background already exists
+            View existingThemeView = rootGroup.findViewById(R.id.theme_background);
+            if (existingThemeView != null) {
+                // Ensure it's at the back
+                rootGroup.removeView(existingThemeView);
+                rootGroup.addView(existingThemeView, 0, new android.view.ViewGroup.LayoutParams(
+                        android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                        android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+                // Set z-order to ensure it's behind everything
+                existingThemeView.setZ(0f);
+                return;
+            }
+            
+            // Create theme background view
+            // The view will automatically check the theme and apply appropriate effects
+            com.android.settings.preferences.ui.AdaptiveThemeBackgroundView themeView =
+                    new com.android.settings.preferences.ui.AdaptiveThemeBackgroundView(this);
+            themeView.setId(R.id.theme_background);
+            themeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+            // Always insert at index 0 to ensure it's behind everything
+            // Wallpaper background will be at index 1 if it exists
+            rootGroup.addView(themeView, 0, new android.view.ViewGroup.LayoutParams(
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+            // Set z-order to ensure it's behind everything
+            themeView.setZ(0f);
+            // Ensure all other views are on top
+            for (int i = 1; i < rootGroup.getChildCount(); i++) {
+                View child = rootGroup.getChildAt(i);
+                if (child != null && child.getId() != R.id.wallpaper_background) {
+                    child.setZ(1f);
+                }
+            }
+        }
+    }
 }
