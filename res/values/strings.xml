@@ -13987,4 +13987,29 @@
     <!-- Display Customizations Fragment 1 to 5 -->
     <string name="display_customization">custom page</string>
     
+    <!-- Settings Page Blocking -->
+    <string name="settings_page_blocked_message">This page is blocked</string>
+    
+    <!-- System Basic Defaults -->
+    <string name="system_basic_defaults_title">System Basic Defaults</string>
+    <string name="system_basic_defaults_summary">Manage default apps and system settings</string>
+    <string name="system_basic_defaults_aurora_store_title">Aurora Store</string>
+    <string name="system_basic_defaults_aurora_store_summary">Open Aurora Store to download and manage apps</string>
+    <string name="system_basic_defaults_default_apps_title">Default Apps</string>
+    <string name="system_basic_defaults_default_apps_summary">Manage default applications for actions</string>
+    <string name="system_basic_defaults_gesture_navigation_title">Gesture Navigation</string>
+    <string name="system_basic_defaults_gesture_navigation_summary">Configure system navigation gestures</string>
+    <string name="system_basic_defaults_one_handed_title">One-handed Mode</string>
+    <string name="system_basic_defaults_one_handed_summary">Enable one-handed mode for easier use</string>
+    <string name="system_basic_defaults_more_title">More</string>
+    <string name="system_basic_defaults_more_summary">Additional settings</string>
+    
+    <!-- Display Rotation -->
+    <string name="display_rotation_title">Rotation settings</string>
+    <string name="display_rotation_summary">Configure display rotation angles and auto-rotation</string>
+    
+    <!-- Application Downgrade -->
+    <string name="app_downgrade_title">Allow application downgrade</string>
+    <string name="app_downgrade_summary">Allow downgrading system applications, which may result in crashes and data loss</string>
+    
 </resources>

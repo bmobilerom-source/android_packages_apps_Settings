@@ -68,16 +68,38 @@
         android:layout="@layout/atomichub" />
 
     <PreferenceCategory
+            android:key="recent_apps_category"
+            android:title="@string/recent_app_category_title"
+            android:order="65"
+            settings:searchable="false">
+        <!-- Placeholder for a list of recent apps -->
+
+        <!-- See all apps -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="see_all_apps"
+            android:title="@string/default_see_all_apps_title"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            android:order="5"
+            app:position="solo"
+            settings:searchable="false">
+        </com.android.settings.preferences.ui.AdaptivePreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
             android:key="app_security_category"
             android:title="@string/app_security_category_title"
             android:order="70" />
-
-    <SwitchPreference
-            android:key="block_app_dashboard_toggle"
-            android:title="@string/block_app_dashboard_toggle_title"
-            android:summary="@string/block_app_dashboard_toggle_summary"
-            android:order="71"
-            settings:controller="com.android.settings.applications.specialaccess.BlockAppDashboardController" />
+    
+    <!-- Trust Agents - Only available in User Info page -->
+    <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="manage_trust_agents"
+            android:order="69"
+            android:title="@string/manage_trust_agents"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.security.trustagent.TrustAgentSettings"
+            settings:controller="com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController"
+            app:position="middle" />
 
     <SwitchPreference
             android:key="install_app_whitelist_toggle"
@@ -121,12 +143,20 @@
             android:order="77"
             settings:controller="com.android.settings.applications.specialaccess.BlockExtendedSecurityController" />
 
+    <SwitchPreference
+            android:key="pm_downgrade_allowed"
+            android:title="@string/app_downgrade_title"
+            android:summary="@string/app_downgrade_summary"
+            android:defaultValue="true"
+            android:order="78"
+            settings:controller="com.android.settings.applications.AppDowngradePreferenceController" />
+
     <!-- Mobile Network Security -->
     <com.android.settings.preferences.ui.AdaptivePreference
             android:key="mobile_network_security"
             android:title="@string/cellular_security_title"
             android:summary="@string/cellular_security_summary"
-            android:order="78"
+            android:order="79"
             app:position="solo"
             android:fragment="com.android.settings.network.telephony.CellularSecuritySettingsFragment"
             settings:controller="com.android.settings.network.CellularSecurityPreferenceController" />
@@ -136,7 +166,7 @@
             android:key="hide_developer_status_settings"
             android:title="@string/hide_developer_status_title"
             android:summary="@string/hide_developer_status_summary"
-            android:order="79"
+            android:order="80"
             android:fragment="com.epic.fragments.HideDeveloperStatusSettings" />
 
     <!-- Password Protection for Settings Pages -->
@@ -145,6 +175,6 @@
             android:title="@string/settings_password_protection_title"
             android:summary="@string/settings_password_protection_summary"
             android:defaultValue="false"
-            android:order="80"
+            android:order="81"
             app:position="solo" />
 </PreferenceScreen>

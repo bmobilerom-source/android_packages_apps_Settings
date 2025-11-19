@@ -80,16 +80,6 @@ public class AppDashboardFragment extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         
-        // Block access if App Dashboard is blocked
-        if (com.android.settings.applications.specialaccess.BlockAppDashboardController
-                .isBlocked(context)) {
-            // App Dashboard access is blocked, finish this activity
-            if (getActivity() != null) {
-                getActivity().finish();
-            }
-            return;
-        }
-        
         mAppsPreferenceController = use(AppsPreferenceController.class);
         mAppsPreferenceController.setFragment(this /* fragment */);
         getSettingsLifecycle().addObserver(mAppsPreferenceController);

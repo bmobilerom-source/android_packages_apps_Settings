@@ -62,24 +62,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import java.io.FileNotFoundException;
 
-import com.android.settings.applications.specialaccess.BlockAppDashboardController;
 import com.android.settings.applications.specialaccess.InstallAppWhitelistController;
 import com.android.settings.applications.specialaccess.BlockUsbPopupController;
 import com.android.settings.applications.specialaccess.BlockLocationSettingsController;
 import com.android.settings.applications.specialaccess.BlockAccountDashboardController;
 import com.android.settings.applications.specialaccess.BlockSafetyCenterController;
+import com.android.settings.applications.AppDowngradePreferenceController;
 
 public class UserInfoFragement extends SettingsPreferenceFragment {
 
     UserManager mUserManager;
     Context context;
     private static final String KEY_USER_CARD = "user_header";
-    private BlockAppDashboardController mBlockAppDashboardController;
     private InstallAppWhitelistController mInstallAppWhitelistController;
     private BlockUsbPopupController mBlockUsbPopupController;
     private BlockLocationSettingsController mBlockLocationSettingsController;
     private BlockAccountDashboardController mBlockAccountDashboardController;
     private BlockSafetyCenterController mBlockSafetyCenterController;
+    private AppDowngradePreferenceController mAppDowngradeController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,18 +91,6 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
         // Initialize controllers
         final PreferenceScreen prefScreen = getPreferenceScreen();
         if (prefScreen != null) {
-            // Initialize Block App Dashboard controller
-            mBlockAppDashboardController = new BlockAppDashboardController(
-                    context, "block_app_dashboard_toggle");
-            if (mBlockAppDashboardController.getAvailabilityStatus() == 
-                    com.android.settings.core.BasePreferenceController.AVAILABLE) {
-                SwitchPreference blockPref = prefScreen.findPreference("block_app_dashboard_toggle");
-                if (blockPref != null) {
-                    mBlockAppDashboardController.updateState(blockPref);
-                    blockPref.setOnPreferenceChangeListener(mBlockAppDashboardController);
-                }
-            }
-            
             // Initialize Install App Whitelist controller
             mInstallAppWhitelistController = new InstallAppWhitelistController(
                     context, "install_app_whitelist_toggle");
@@ -160,6 +148,18 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
                 if (safetyCenterPref != null) {
                     mBlockSafetyCenterController.updateState(safetyCenterPref);
                     safetyCenterPref.setOnPreferenceChangeListener(mBlockSafetyCenterController);
+                }
+            }
+            
+            // Initialize App Downgrade controller
+            mAppDowngradeController = new AppDowngradePreferenceController(
+                    context, "pm_downgrade_allowed");
+            if (mAppDowngradeController.getAvailabilityStatus() == 
+                    com.android.settings.core.BasePreferenceController.AVAILABLE) {
+                SwitchPreference downgradePref = prefScreen.findPreference("pm_downgrade_allowed");
+                if (downgradePref != null) {
+                    mAppDowngradeController.updateState(downgradePref);
+                    downgradePref.setOnPreferenceChangeListener(mAppDowngradeController);
                 }
             }
         }
