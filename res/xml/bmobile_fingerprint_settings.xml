@@ -78,6 +78,15 @@
             app:position="middle"
             android:visible="false" />
 
+        <!-- Master Fingerprints -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="fingerprint_master"
+            android:title="@string/bmobile_fingerprint_master_title"
+            android:summary="@string/bmobile_fingerprint_master_summary"
+            android:icon="@drawable/ic_settings_security_filled"
+            app:position="middle"
+            android:visible="false" />
+
         <!-- Fingerprint Tools - Bottom Sheet Trigger -->
         <com.android.settings.preferences.ui.AdaptivePreference
             android:key="fingerprint_tools"

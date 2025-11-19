@@ -39,6 +39,12 @@
     <string name="bmobile_fingerprint_unlock_title">Fingerprint unlock</string>
     <string name="bmobile_fingerprint_unlock_summary">Configure fingerprint unlock settings and options</string>
 
+    <!-- Master Fingerprints -->
+    <string name="bmobile_fingerprint_master_title">Master fingerprints</string>
+    <string name="bmobile_fingerprint_master_summary">Select which fingerprints have master access (%d selected)</string>
+    <string name="bmobile_fingerprint_master_select_title">Select Master Fingerprints</string>
+    <string name="bmobile_fingerprint_master_intro">Master fingerprints have full access to all features and can override kidsafe restrictions. Select which enrolled fingerprints should be master.</string>
+
     <!-- Fingerprint Tools -->
     <string name="fingerprint_tools_title">Fingerprint Tools</string>
     <string name="fingerprint_tools_summary">Configure fingerprint authentication effects and vibrations</string>

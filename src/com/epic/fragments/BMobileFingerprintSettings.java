@@ -58,7 +58,9 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.core.SubSettingLauncher;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * BMobile Fingerprint Settings Page
@@ -78,12 +80,14 @@ public class BMobileFingerprintSettings extends SettingsPreferenceFragment imple
     private static final String KEY_FINGERPRINT_MANAGE = "fingerprint_manage";
     private static final String KEY_FINGERPRINT_UNLOCK = "fingerprint_unlock";
     private static final String KEY_FINGERPRINT_TOOLS = "fingerprint_tools";
+    private static final String KEY_FINGERPRINT_MASTER = "fingerprint_master";
     private static final String KEY_FINGERPRINT_CATEGORY = "fingerprint_category";
     
     private FingerprintManager mFingerprintManager;
     private Preference mEnrollPreference;
     private Preference mManagePreference;
     private Preference mUnlockPreference;
+    private Preference mMasterPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +121,7 @@ public class BMobileFingerprintSettings extends SettingsPreferenceFragment imple
         mEnrollPreference = findPreference(KEY_FINGERPRINT_ENROLL);
         mManagePreference = findPreference(KEY_FINGERPRINT_MANAGE);
         mUnlockPreference = findPreference(KEY_FINGERPRINT_UNLOCK);
+        mMasterPreference = findPreference(KEY_FINGERPRINT_MASTER);
         
         // Update preference states
         updatePreferenceStates();
@@ -159,6 +164,10 @@ public class BMobileFingerprintSettings extends SettingsPreferenceFragment imple
                 if (getFragmentManager() != null) {
                     bottomSheet.show(getFragmentManager(), "FingerprintToolsBottomSheet");
                 }
+                return true;
+            } else if (KEY_FINGERPRINT_MASTER.equals(key)) {
+                // Launch master fingerprint management
+                launchMasterFingerprintManagement();
                 return true;
             }
         } catch (Exception e) {
@@ -210,6 +219,19 @@ public class BMobileFingerprintSettings extends SettingsPreferenceFragment imple
             // Update unlock preference visibility
             if (mUnlockPreference != null) {
                 mUnlockPreference.setVisible(hasEnrolled);
+            }
+            
+            // Update master preference summary and visibility
+            if (mMasterPreference != null) {
+                List<Fingerprint> masterFingerprints = 
+                        KidsafeFingerprintHelper.getMasterFingerprints(getActivity());
+                int masterCount = masterFingerprints != null ? masterFingerprints.size() : 0;
+                if (hasEnrolled) {
+                    mMasterPreference.setSummary(getString(R.string.bmobile_fingerprint_master_summary, masterCount));
+                    mMasterPreference.setVisible(true);
+                } else {
+                    mMasterPreference.setVisible(false);
+                }
             }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference states", e);
@@ -313,6 +335,87 @@ public class BMobileFingerprintSettings extends SettingsPreferenceFragment imple
             } catch (Exception ex) {
                 Log.e(TAG, "Failed to launch fingerprint unlock via Intent", ex);
             }
+        }
+    }
+    
+    /**
+     * Launch master fingerprint management
+     * Shows a dialog/list to select which fingerprints should be master
+     */
+    private void launchMasterFingerprintManagement() {
+        try {
+            Context context = getActivity();
+            if (context == null) {
+                return;
+            }
+            
+            int userId = UserHandle.myUserId();
+            List<Fingerprint> allFingerprints = mFingerprintManager.getEnrolledFingerprints(userId);
+            
+            if (allFingerprints == null || allFingerprints.isEmpty()) {
+                Log.w(TAG, "No enrolled fingerprints for master selection");
+                return;
+            }
+            
+            // Get currently selected master fingerprints
+            Set<Integer> currentMasterIds = 
+                    KidsafeFingerprintHelper.getMasterFingerprintIds(context);
+            
+            // Show selection dialog
+            showMasterFingerprintSelectionDialog(allFingerprints, currentMasterIds);
+            
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to launch master fingerprint management", e);
+        }
+    }
+    
+    /**
+     * Show dialog to select which fingerprints should be master
+     */
+    private void showMasterFingerprintSelectionDialog(
+            List<Fingerprint> allFingerprints, Set<Integer> currentMasterIds) {
+        try {
+            Context context = getActivity();
+            if (context == null) {
+                return;
+            }
+            
+            // Create array of fingerprint names
+            CharSequence[] fingerprintNames = new CharSequence[allFingerprints.size()];
+            boolean[] checkedItems = new boolean[allFingerprints.size()];
+            
+            for (int i = 0; i < allFingerprints.size(); i++) {
+                Fingerprint fingerprint = allFingerprints.get(i);
+                fingerprintNames[i] = fingerprint.getName() != null ? 
+                        fingerprint.getName().toString() : 
+                        getString(R.string.fingerprint_default_name, i + 1);
+                checkedItems[i] = currentMasterIds.contains(fingerprint.getBiometricId());
+            }
+            
+            // Show multi-select dialog
+            new android.app.AlertDialog.Builder(context)
+                    .setTitle(R.string.bmobile_fingerprint_master_select_title)
+                    .setMultiChoiceItems(fingerprintNames, checkedItems, 
+                            (dialog, which, isChecked) -> {
+                                // Update checked state
+                                checkedItems[which] = isChecked;
+                            })
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        // Save selected fingerprints
+                        Set<Integer> selectedIds = new HashSet<>();
+                        for (int i = 0; i < allFingerprints.size(); i++) {
+                            if (checkedItems[i]) {
+                                selectedIds.add(allFingerprints.get(i).getBiometricId());
+                            }
+                        }
+                        KidsafeFingerprintHelper.setMasterFingerprintIds(context, selectedIds);
+                        updatePreferenceStates();
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+                    
+        } catch (Exception e) {
+            Log.e(TAG, "Error showing master fingerprint selection dialog", e);
         }
     }
     

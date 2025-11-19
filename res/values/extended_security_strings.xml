@@ -25,6 +25,26 @@
     <string name="extended_security_title">Extended Security</string>
     <string name="extended_security_intro">This page provides additional granular security options beyond the standard security settings. Customize authentication behaviors and security features to your preference.</string>
 
+    <!-- Kidsafe Security Page -->
+    <string name="kidsafe_security_title">Kidsafe Security</string>
+    <string name="kidsafe_security_intro">Security settings optimized for kid-safe environments. Simplified controls for parental peace of mind.</string>
+    <string name="kidsafe_security_summary">Kid-safe security settings and controls</string>
+
+    <!-- Kidsafe Fingerprint -->
+    <string name="kidsafe_fingerprint_title">Kidsafe Fingerprint</string>
+    <string name="kidsafe_fingerprint_summary">Manage fingerprints for kid-safe access. Master fingerprints set on Fingerprint page can override these.</string>
+    <string name="kidsafe_fingerprint_intro">Select which fingerprints can access kidsafe features. Master fingerprints (set on Fingerprint page) have full access and can override kidsafe restrictions.</string>
+    <string name="kidsafe_fingerprint_category">Kidsafe Fingerprint Management</string>
+    <string name="kidsafe_fingerprint_enroll_title">Enroll fingerprint</string>
+    <string name="kidsafe_fingerprint_enroll_summary">Add a new fingerprint to your device</string>
+    <string name="kidsafe_fingerprint_enroll_summary_new">Add a new fingerprint to unlock your device</string>
+    <string name="kidsafe_fingerprint_enroll_summary_existing">Add another fingerprint to your device</string>
+    <string name="kidsafe_fingerprint_enroll_summary_all_master">All enrolled fingerprints are master fingerprints. Enroll a new fingerprint to use as kidsafe.</string>
+    <string name="kidsafe_fingerprint_manage_title">Manage kidsafe fingerprints</string>
+    <string name="kidsafe_fingerprint_manage_summary">Select which fingerprints can access kidsafe features (%d selected)</string>
+    <string name="kidsafe_fingerprint_select_title">Select Kidsafe Fingerprints</string>
+    <string name="fingerprint_default_name">Fingerprint %d</string>
+
     <!-- Categories -->
     <string name="extended_security_authentication_category">Authentication</string>
 

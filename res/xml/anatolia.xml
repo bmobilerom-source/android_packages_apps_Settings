@@ -117,6 +117,14 @@
             android:fragment="com.epic.fragments.SettingsExtendedSecurity"
             android:icon="@drawable/ic_settings_security_filled" />
 
+        <!-- Kidsafe Security -->
+        <PreferenceScreen
+            android:key="kidsafe_security_category"
+            android:title="@string/kidsafe_security_title"
+            android:summary="@string/kidsafe_security_summary"
+            android:fragment="com.epic.fragments.KidsafeSecurity"
+            android:icon="@drawable/ic_settings_security_filled" />
+
         <!-- BMobile Fingerprint -->
         <PreferenceScreen
             android:key="bmobile_fingerprint_category"
