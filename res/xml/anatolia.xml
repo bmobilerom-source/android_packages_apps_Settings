@@ -124,6 +124,13 @@
             android:summary="@string/extras_summary"
             android:fragment="com.epic.fragments.ExtraSettings" />
   
+   <!-- Dashboard Style -->
+        <PreferenceScreen
+            android:key="dashboard_style_category"
+            android:title="@string/dashboard_style_title"
+            android:summary="@string/dashboard_style_summary"
+            android:fragment="com.epic.fragments.DashboardStyleSettings"
+            android:icon="@drawable/ic_settings_display_white" />
 
     <Preference
         android:key="system_basic_defaults_lock"

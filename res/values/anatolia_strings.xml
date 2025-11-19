@@ -51,5 +51,27 @@
     <string name="reset">Reset</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
-
+  <!-- Dashboard Style -->
+    <string name="dashboard_style_title">Settings Dashboard Style</string>
+    <string name="dashboard_style_summary">Choose the style of the Settings dashboard</string>
+    <string name="dashboard_style_category_title">Dashboard Style</string>
+    <string name="dashboard_style_aosp">AOSP Style</string>
+    <string name="dashboard_style_epic">Epic Style</string>
+    <string name="dashboard_style_fun_display">BMobile Home Settings</string>
+    <string name="dashboard_style_v2">V2 Style</string>
+    <string name="dashboard_style_compact">Compact Style</string>
+    <string name="dashboard_style_material">Material Style</string>
+    <string name="dashboard_style_classic">Classic Style</string>
+    <string name="dashboard_style_custom_v2">Custom V2 Style</string>
+    <string name="dashboard_style_securityextended">Security Extended Style</string>
+    <string name="epic_style_header_title">Epic Style</string>
+    <string name="epic_style_header_summary">Customized Settings Experience</string>
+    <string name="compact_style_header_title">Compact Style</string>
+    <string name="compact_style_header_summary">Minimal layout for quick access</string>
+    <string name="material_style_header_title">Material Style</string>
+    <string name="material_style_header_summary">Material Design 3 inspired interface</string>
+    <string name="classic_style_header_title">Classic Style</string>
+    <string name="classic_style_header_summary">Traditional categorized layout</string>
+    <string name="dashboard_style_applied">Dashboard style changed to %1$s</string>
+    
 </resources>

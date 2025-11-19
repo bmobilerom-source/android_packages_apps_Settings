@@ -1823,4 +1823,31 @@
         <item>1</item> <!-- Extreme: 17 sensors -->
     </string-array>
 
+    <!-- Settings dashboard styles -->
+    <string-array name="settings_dashboard_style_entries">
+        <item>@string/dashboard_style_aosp</item>
+        <item>@string/dashboard_style_epic</item>
+        <item>@string/dashboard_style_v2</item>
+        <item>@string/dashboard_style_compact</item>
+        <item>@string/dashboard_style_material</item>
+        <item>@string/dashboard_style_classic</item>
+        <item>@string/dashboard_style_custom_v2</item>
+        <item>@string/dashboard_style_fun_display</item>
+        <item>@string/dashboard_style_bmobile_expressive</item>
+        <item>@string/dashboard_style_securityextended</item>
+    </string-array>
+
+    <string-array name="settings_dashboard_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
 </resources>
