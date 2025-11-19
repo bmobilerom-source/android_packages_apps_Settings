@@ -43,6 +43,8 @@
     <string name="sensor_block_summary">Block access to certain sensors for some apps to save battery</string>
     <string name="extended_security_title">Extended Security</string>
     <string name="extended_security_summary">Additional granular security options and features</string>
+    <string name="pocket_mode_title">Pocket Mode</string>
+    <string name="pocket_mode_summary">Prevent accidental touches when device is in pocket or bag</string>
 
     <!-- General strings -->
     <string name="ok">OK</string>

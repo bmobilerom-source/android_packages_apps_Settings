@@ -66,8 +66,7 @@
     <PreferenceCategory
         android:key="extended_security_fingerprint_category"
         android:title="@string/extended_security_fingerprint_category"
-        android:order="0"
-        android:layout="@layout/settingslib_preference_category_no_title">
+        android:order="0">
 
         <!-- Authentication Success Vibration -->
         <com.android.settingslib.RestrictedSwitchPreference
@@ -85,11 +84,11 @@
 
     </PreferenceCategory>
 
-    <!-- Privacy & Interface Category -->
+    <!-- Privacy & Protection Category -->
     <PreferenceCategory
+        android:key="extended_security_privacy_category"
         android:title="@string/extended_security_privacy_category"
-        android:order="1"
-        android:layout="@layout/settingslib_preference_category_no_title">
+        android:order="3">
 
         <!-- Show Clipboard Overlay -->
         <com.android.settingslib.RestrictedSwitchPreference
@@ -114,11 +113,11 @@
 
     </PreferenceCategory>
 
-    <!-- Lock Screen Category -->
+    <!-- More Security Category -->
     <PreferenceCategory
-        android:title="@string/extended_security_lockscreen_category"
-        android:order="2"
-        android:layout="@layout/settingslib_preference_category_no_title">
+        android:key="extended_security_more_category"
+        android:title="@string/more_security_privacy_settings"
+        android:order="5">
 
         <!-- Hide on Secure Lock Screen -->
         <com.android.settingslib.RestrictedSwitchPreference
@@ -129,8 +128,14 @@
 
     </PreferenceCategory>
 
+    <!-- Pocket Lock -->
+        <com.android.settingslib.RestrictedSwitchPreference
+        android:key="pocket_lock"
+        android:title="@string/pocket_lock_title"
+        android:summary="@string/pocket_lock_summary"
+        android:defaultValue="false" />
         <!-- No Storage Restrict -->
-        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="no_storage_restrict"
             android:title="@string/no_storage_restrict_title"
             android:summary="@string/no_storage_restrict_summary"
