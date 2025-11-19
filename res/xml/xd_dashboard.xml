@@ -141,7 +141,7 @@
         android:order="-35"
         android:title="@string/xd_dashboard_security"
         settings:layout="@layout/xd_dashboard_pref_bot"
-        android:fragment="com.android.settings.security.SecuritySettings"
+        android:fragment="com.epic.fragments.SettingsExtendedSecurity"
         settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 
     <Preference

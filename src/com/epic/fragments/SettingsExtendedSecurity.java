@@ -80,8 +80,6 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
     private static final String KEY_NO_STORAGE_RESTRICT = "no_storage_restrict";
     private static final String KEY_WINDOW_IGNORE_SECURE = "window_ignore_secure";
     private static final String KEY_SECURE_LOCKSCREEN_QS_DISABLED = "secure_lockscreen_qs_disabled";
-    private static final String KEY_SETTINGS_PASSWORD_PROTECTION_ENABLED = 
-            "settings_password_protection_enabled";
     private static final String KEY_POCKET_LOCK = "pocket_lock";
 
     @Override
@@ -142,34 +140,6 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                 boolean enabled = (Boolean) newValue;
                 Settings.System.putInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, enabled ? 1 : 0);
                 Log.d(TAG, "secure_lockscreen_qs_disabled set to: " + enabled);
-                return true;
-            } else if (KEY_SETTINGS_PASSWORD_PROTECTION_ENABLED.equals(key)) {
-                boolean enabled = (Boolean) newValue;
-                Settings.Secure.putInt(resolver, 
-                        com.android.settings.core.PasswordProtectionHelper.SETTINGS_PASSWORD_PROTECTION_ENABLED, 
-                        enabled ? 1 : 0);
-                Log.d(TAG, "settings_password_protection_enabled set to: " + enabled);
-                
-                // Initialize default protected fragments if enabling for the first time
-                if (enabled) {
-                    String currentFragments = Settings.Secure.getStringForUser(resolver,
-                            com.android.settings.core.PasswordProtectionHelper.SETTINGS_PASSWORD_PROTECTED_FRAGMENTS,
-                            android.os.UserHandle.USER_CURRENT);
-                    if (TextUtils.isEmpty(currentFragments)) {
-                        // Set default protected fragments
-                        java.util.Set<String> defaultFragments = 
-                                com.android.settings.core.PasswordProtectionHelper.getProtectedFragments(getContext());
-                        com.android.settings.core.PasswordProtectionHelper.setProtectedFragments(
-                                getContext(), defaultFragments);
-                    }
-                }
-                
-                // Update protected fragments preference visibility
-                Preference protectedFragmentsPref = findPreference("settings_password_protected_fragments");
-                if (protectedFragmentsPref != null) {
-                    protectedFragmentsPref.setVisible(enabled);
-                }
-                
                 return true;
             } else if (KEY_POCKET_LOCK.equals(key)) {
                 boolean enabled = (Boolean) newValue;
@@ -237,27 +207,6 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
             }
             
             // Update password protection enabled preference
-            Preference passwordProtectionPref = findPreference(KEY_SETTINGS_PASSWORD_PROTECTION_ENABLED);
-            if (passwordProtectionPref != null) {
-                int protectionEnabled = Settings.Secure.getIntForUser(resolver,
-                        com.android.settings.core.PasswordProtectionHelper.SETTINGS_PASSWORD_PROTECTION_ENABLED,
-                        0, UserHandle.USER_CURRENT);
-                if (passwordProtectionPref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) passwordProtectionPref)
-                            .setChecked(protectionEnabled != 0);
-                }
-                passwordProtectionPref.setOnPreferenceChangeListener(this);
-            }
-            
-            // Update protected fragments preference visibility
-            Preference protectedFragmentsPref = findPreference("settings_password_protected_fragments");
-            if (protectedFragmentsPref != null) {
-                int protectionEnabled = Settings.Secure.getIntForUser(resolver,
-                        com.android.settings.core.PasswordProtectionHelper.SETTINGS_PASSWORD_PROTECTION_ENABLED,
-                        0, UserHandle.USER_CURRENT);
-                protectedFragmentsPref.setVisible(protectionEnabled != 0);
-            }
-            
             // Update pocket lock preference
             Preference pocketLockPref = findPreference(KEY_POCKET_LOCK);
             if (pocketLockPref != null) {

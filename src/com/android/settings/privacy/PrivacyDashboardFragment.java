@@ -80,18 +80,13 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.privacy_dashboard_settings) {
                 /**
-                 * If SafetyCenter is enabled, all of these entries will be in the More Settings
-                 * page, and we don't want to index these entries.
+                 * Completely block Privacy Dashboard from search
                  */
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    // NOTE: This check likely should be moved to the super method. This is done
-                    // here to avoid potentially undesired side effects for existing implementors.
-                    if (!isPageSearchEnabled(context)) {
-                        return null;
-                    }
-                    return super.getXmlResourcesToIndex(context, enabled);
+                    // Completely block Privacy Dashboard from search
+                    return null;
                 }
 
                 @Override
@@ -102,23 +97,22 @@ public class PrivacyDashboardFragment extends DashboardFragment {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
+                    // Hide all preferences from search
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    final int profileUserId =
-                            Utils.getManagedProfileId(
-                                    UserManager.get(context), UserHandle.myUserId());
-                    // If work profile is supported, we should keep the search result.
-                    if (profileUserId != UserHandle.USER_NULL) {
-                        return keys;
+                    if (keys == null) {
+                        return new java.util.ArrayList<>();
                     }
-
-                    // Otherwise, we should hide the search result.
+                    // Block all privacy dashboard keys
                     keys.add(KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS);
+                    keys.add("privacy_dashboard");
+                    keys.add("privacy");
                     return keys;
                 }
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return !SafetyCenterManagerWrapper.get().isEnabled(context);
+                    // Always disable Privacy Dashboard from search
+                    return false;
                 }
             };
 }

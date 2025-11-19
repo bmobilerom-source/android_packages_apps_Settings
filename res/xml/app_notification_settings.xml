@@ -16,6 +16,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:key="app_notifications"
         android:title=" ">
 
@@ -38,19 +39,22 @@
         android:visibility="gone">
 
     </PreferenceCategory>
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="invalid_conversation_switch"
-        android:title="@string/conversation_section_switch_title" />
-    <Preference
-        android:key="invalid_conversation_info"/>
+        android:title="@string/conversation_section_switch_title"
+        app:position="top" />
+    <com.android.settings.preferences.ui.AdaptivePreference
+        android:key="invalid_conversation_info"
+        app:position="middle"/>
 
     <!--Bubbles -->
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="bubble_pref_link"
         android:title="@string/notification_bubbles_title"
         android:icon="@drawable/ic_create_bubble"
+        app:position="middle"
         settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
-    </Preference>
+    </com.android.settings.preferences.ui.AdaptivePreference>
 
     <!-- Bundles added here -->
     <PreferenceCategory
@@ -69,10 +73,11 @@
         android:icon="@drawable/ic_expand"/>
 
     <!-- Importance toggle -->
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="allow_sound"
         android:title="@string/allow_interruption"
         android:summary="@string/allow_interruption_summary"
+        app:position="top"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
@@ -80,41 +85,46 @@
     <com.android.settings.RestrictedListPreference
         android:key="visibility_override"
         android:title="@string/app_notification_visibility_override_title"
+        app:position="middle"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
     <!-- Bypass DND -->
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="bypass_dnd"
         android:title="@string/app_notification_override_dnd_title"
         android:summary="@string/app_notification_override_dnd_summary"
+        app:position="middle"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
     <!-- Allow full-screen intents -->
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="fsi_permission"
         android:title="@string/app_notification_fsi_permission_title"
         android:summary="@string/app_notification_fsi_permission_summary"
+        app:position="middle"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
     <!-- Show badge -->
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="badge"
         android:title="@string/notification_badge_title"
         android:icon="@drawable/ic_notification_dot"
+        app:position="middle"
         settings:useAdditionalSummary="true"
         settings:restrictedSwitchSummary="@string/enabled_by_admin"
         android:order="1001"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="app_link"
         android:icon="@drawable/ic_settings_24dp"
         android:title="@string/app_settings_link"
         android:order="1003"
+        app:position="bottom"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 

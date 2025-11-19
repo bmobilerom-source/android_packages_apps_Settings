@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
      Copyright (C) 2020 Wave-OS
+     Copyright (C) 2025 LineageOS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,19 +15,72 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen        xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="display_customizations3"
-    android:title=" ">
-  <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/device_info"
-        android:key="top_level_homepage_widgets"
-        android:selectable="false"
-        android:order="-180" />
-    <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/xd_about_phone_header"
-        android:key="top_level_homepage_widgets"
-        android:selectable="false"
-        android:order="-18" />
+    android:title="@string/display_customizations3_title">
+
+    <!-- Lottie Animation -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="display_customizations3_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/display"/>
+
+    <!-- Header -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="display_customizations3_intro"
+        android:title="@string/display_customizations3_intro_title"
+        android:summary="@string/display_customizations3_intro_summary"
+        android:order="-1000" />
+
+    <!-- Display Effects Toggle -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="display_effects"
+        android:title="@string/display_effects_title"
+        android:summary="@string/display_effects_summary"
+        android:defaultValue="false"
+        app:position="top"
+        settings:controller="com.android.settings.display.DisplayEffectsController" />
+
+    <!-- Color Temperature Toggle -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="color_temperature"
+        android:title="@string/color_temperature"
+        android:summary="@string/color_temperature_desc"
+        android:defaultValue="false"
+        app:position="middle"
+        settings:controller="com.android.settings.display.ColorTemperatureController" />
+
+    <!-- Window Animation Scale -->
+    <com.android.settings.preferences.ui.AdaptiveListPreference
+        android:key="window_animation_scale"
+        android:title="@string/window_animation_scale_title"
+        android:entries="@array/window_animation_scale_entries"
+        android:entryValues="@array/window_animation_scale_values"
+        android:defaultValue="1"
+        app:position="middle"
+        settings:controller="com.android.settings.display.WindowAnimationScaleController" />
+
+    <!-- Transition Animation Scale -->
+    <com.android.settings.preferences.ui.AdaptiveListPreference
+        android:key="transition_animation_scale"
+        android:title="@string/transition_animation_scale_title"
+        android:entries="@array/transition_animation_scale_entries"
+        android:entryValues="@array/transition_animation_scale_values"
+        android:defaultValue="1"
+        app:position="middle"
+        settings:controller="com.android.settings.display.TransitionAnimationScaleController" />
+
+    <!-- Animator Duration Scale -->
+    <com.android.settings.preferences.ui.AdaptiveListPreference
+        android:key="animator_duration_scale"
+        android:title="@string/animator_duration_scale_title"
+        android:entries="@array/animator_duration_scale_entries"
+        android:entryValues="@array/animator_duration_scale_values"
+        android:defaultValue="1"
+        app:position="bottom"
+        settings:controller="com.android.settings.display.AnimatorDurationScaleController" />
+
 </PreferenceScreen>

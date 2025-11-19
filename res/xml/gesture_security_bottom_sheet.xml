@@ -23,6 +23,13 @@
     android:key="gesture_security_bottom_sheet"
     android:title="@string/gesture_security_options_title">
 
+    <!-- Illustration -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="gesture_security_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/gesture_settings" />
+
     <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:order="0"
         android:key="show_clipboard_overlay"

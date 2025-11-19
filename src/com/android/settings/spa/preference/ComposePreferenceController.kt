@@ -28,8 +28,14 @@ abstract class ComposePreferenceController(context: Context, preferenceKey: Stri
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
-        preference = screen.findPreference(preferenceKey)!!
-        preference.setContent { Content() }
+        val foundPreference = screen.findPreference<androidx.preference.Preference>(preferenceKey)
+        // Only proceed if the preference is actually a ComposePreference
+        // This prevents ClassCastException when other preference types (e.g., AdaptivePreference)
+        // have the same key
+        if (foundPreference is ComposePreference) {
+            preference = foundPreference
+            preference.setContent { Content() }
+        }
     }
 
     @Composable

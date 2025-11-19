@@ -133,7 +133,7 @@ public class DisplayGrid extends SettingsPreferenceFragment implements
                     R.string.display_grid_lock_title,
                     R.string.display_grid_lock_summary,
                     R.drawable.ic_display_grid_lock,
-                    "com.android.settings.security.SecuritySettings"));
+                    "com.epic.fragments.SettingsExtendedSecurity"));
             
             items.add(new DisplayGridAdapter.CardItem(
                     DisplayGridAdapter.CARD_TYPE_CIRCULAR_BUTTON,

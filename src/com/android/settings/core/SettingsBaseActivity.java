@@ -26,6 +26,7 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.text.LineBreakConfig;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -143,6 +144,31 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         } else {
             super.setContentView(R.layout.settings_base_layout);
         }
+        
+        // Pre-enable developer settings to allow About Phone page to load
+        // This is a workaround for devices where About Phone requires developer options
+        try {
+            android.content.ContentResolver resolver = getContentResolver();
+            if (resolver != null) {
+                int devEnabled = Settings.Global.getInt(resolver, 
+                        Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+                if (devEnabled == 0) {
+                    Settings.Global.putInt(resolver, 
+                            Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+                    Log.d(TAG, "Pre-enabled developer settings for About Phone access");
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Could not pre-enable developer settings", e);
+        }
+        
+        // Add wallpaper background for all layouts (only when setting is enabled)
+        // This ensures all Settings pages respect the wallpaper background setting
+        addWallpaperBackground();
+        
+        // Add theme background for custom themes (Black, Vivid, etc.)
+        // This applies theme-specific visual effects directly in Settings
+        addThemeBackground();
 
         // This is to hide the toolbar from those pages which don't need a toolbar originally.
         final Toolbar toolbar = findViewById(R.id.action_bar);

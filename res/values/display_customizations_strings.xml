@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Display Customizations - Main Page -->
+    <string name="display_customizations_title">Display Customizations</string>
+    <string name="display_customizations_summary">Customize display settings and visual features</string>
+    <string name="display_customizations_intro_title">Display Customizations</string>
+    <string name="display_customizations_intro_summary">Customize wallpaper blur, display effects, and visual enhancements</string>
+
+    <!-- Display Customizations 2 -->
+    <string name="display_customizations2_title">Display Customizations 2</string>
+    <string name="display_customizations2_summary">Additional display customization options</string>
+    <string name="display_customizations2_intro_title">Display Customizations 2</string>
+    <string name="display_customizations2_intro_summary">Advanced display settings and visual effects</string>
+
+    <!-- Display Customizations 3 -->
+    <string name="display_customizations3_title">Display Customizations 3</string>
+    <string name="display_customizations3_summary">More display customization options</string>
+    <string name="display_customizations3_intro_title">Display Customizations 3</string>
+    <string name="display_customizations3_intro_summary">Additional display settings and effects</string>
+
+    <!-- Display Customizations 4 -->
+    <string name="display_customizations4_title">Display Customizations 4</string>
+    <string name="display_customizations4_summary">Extended display customization options</string>
+    <string name="display_customizations4_intro_title">Display Customizations 4</string>
+    <string name="display_customizations4_intro_summary">Extended display settings and visual features</string>
+
+    <!-- Display Customizations 5 -->
+    <string name="display_customizations5_title">Display Customizations 5</string>
+    <string name="display_customizations5_summary">Advanced display customization options</string>
+    <string name="display_customizations5_intro_title">Display Customizations 5</string>
+    <string name="display_customizations5_intro_summary">Advanced display settings and customization features</string>
+
+    <!-- Wallpaper Background -->
+    <string name="wallpaper_background_title">Settings Wallpaper Background</string>
+    <string name="wallpaper_background_summary">Use device wallpaper as background for settings pages (dark mode only)</string>
+    <string name="wallpaper_background_summary_enabled">Enabled (visible in dark mode)</string>
+    <string name="wallpaper_background_summary_enabled_light_mode">Enabled (only visible in dark mode)</string>
+    <string name="wallpaper_background_info_title">About Wallpaper Background</string>
+    <string name="wallpaper_background_info_summary">This feature applies your current wallpaper as a blurred background to some settings pages, enhancing visual consistency. It is only active when dark mode is enabled to ensure readability and aesthetic appeal.</string>
+
+    <!-- Wallpaper Blur -->
+    <string name="wallpaper_blur_title">Wallpaper Blur</string>
+    <string name="wallpaper_blur_summary">Apply a blur effect to the wallpaper background in settings</string>
+    <string name="wallpaper_blur_radius_title">Blur Radius</string>
+    <string name="wallpaper_blur_radius_summary">Current blur radius: %1$d</string>
+
+    <!-- Display Effects -->
+    <string name="display_effects_title">Display Effects</string>
+    <string name="display_effects_summary">Enable additional visual display effects</string>
+</resources>
+

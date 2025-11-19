@@ -77,6 +77,7 @@ public class BMobileFingerprintSettings extends SettingsPreferenceFragment imple
     private static final String KEY_FINGERPRINT_ENROLL = "fingerprint_enroll";
     private static final String KEY_FINGERPRINT_MANAGE = "fingerprint_manage";
     private static final String KEY_FINGERPRINT_UNLOCK = "fingerprint_unlock";
+    private static final String KEY_FINGERPRINT_TOOLS = "fingerprint_tools";
     private static final String KEY_FINGERPRINT_CATEGORY = "fingerprint_category";
     
     private FingerprintManager mFingerprintManager;
@@ -151,6 +152,13 @@ public class BMobileFingerprintSettings extends SettingsPreferenceFragment imple
             } else if (KEY_FINGERPRINT_UNLOCK.equals(key)) {
                 // Launch fingerprint unlock settings
                 launchFingerprintUnlock();
+                return true;
+            } else if (KEY_FINGERPRINT_TOOLS.equals(key)) {
+                // Show fingerprint tools bottom sheet
+                FingerprintToolsBottomSheet bottomSheet = FingerprintToolsBottomSheet.newInstance();
+                if (getFragmentManager() != null) {
+                    bottomSheet.show(getFragmentManager(), "FingerprintToolsBottomSheet");
+                }
                 return true;
             }
         } catch (Exception e) {

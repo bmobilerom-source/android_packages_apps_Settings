@@ -125,6 +125,7 @@ import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
 import com.android.settings.gestures.GestureNavigationSettingsFragment;
+import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.OneHandedSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.PowerMenuSettings;
@@ -187,11 +188,12 @@ import com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment;
 import com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment;
 import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
-import com.android.settings.safetycenter.SecurityJuniorFragment;
+import com.android.settings.safetycenter.DeviceSecurityFeaturesFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.MemtagPage;
 import com.android.settings.security.SecurityAdvancedSettings;
 import com.android.settings.security.SecuritySettings;
+import com.android.settings.security.trustagent.TrustAgentSettings;
 import com.android.settings.shortcut.CreateShortcut;
 import com.android.settings.sound.MediaControlsSettings;
 import com.android.settings.support.SupportDashboardActivity;
@@ -262,8 +264,9 @@ public class SettingsGateway {
             LocationServices.class.getName(),
             SecuritySettings.class.getName(),
             SecurityAdvancedSettings.class.getName(),
+            TrustAgentSettings.class.getName(),
             MoreSecurityPrivacyFragment.class.getName(),
-            SecurityJuniorFragment.class.getName(),
+            DeviceSecurityFeaturesFragment.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
             DeviceAdminSettings.class.getName(),
@@ -299,6 +302,7 @@ public class SettingsGateway {
             PickupGestureSettings.class.getName(),
             DoubleTwistGestureSettings.class.getName(),
             SystemNavigationGestureSettings.class.getName(),
+            GestureSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),
             CommunalDashboardFragment.class.getName(),
@@ -423,7 +427,8 @@ public class SettingsGateway {
             com.epic.fragments.SensorBlockSettings.class.getName(),
             com.epic.fragments.SensorBlockAppPicker.class.getName(),
             com.epic.fragments.FunDisplaySettings.class.getName(),
-            com.epic.fragments.BMobileExpressiveSettings.class.getName()
+            com.epic.fragments.BMobileExpressiveSettings.class.getName(),
+            com.epic.fragments.GestureSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

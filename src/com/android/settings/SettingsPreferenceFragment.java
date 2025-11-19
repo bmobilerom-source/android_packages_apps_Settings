@@ -157,7 +157,47 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         mPinnedHeaderFrameLayout = root.findViewById(R.id.pinned_header);
         mAppBarLayout = getActivity().findViewById(R.id.app_bar);
+        // Ensure wallpaper background is added for all fragments
+        ensureWallpaperBackground(root);
         return root;
+    }
+    
+    /**
+     * Ensure wallpaper background is present for this fragment.
+     * This is called automatically in onCreateView, but can be called manually
+     * if a fragment overrides onCreateView with a custom layout.
+     */
+    protected void ensureWallpaperBackground(View rootView) {
+        if (rootView == null || getContext() == null) {
+            return;
+        }
+        
+        // Check if wallpaper background already exists
+        View existingWallpaper = rootView.findViewById(R.id.wallpaper_background);
+        if (existingWallpaper != null) {
+            return;
+        }
+        
+        // Find the root container (FrameLayout or ViewGroup)
+        ViewGroup rootContainer = null;
+        if (rootView instanceof ViewGroup) {
+            rootContainer = (ViewGroup) rootView;
+        } else if (rootView.getParent() instanceof ViewGroup) {
+            rootContainer = (ViewGroup) rootView.getParent();
+        }
+        
+        if (rootContainer != null) {
+            // Create wallpaper background view
+            // The view will automatically check the setting and only show when enabled
+            com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView wallpaperView =
+                    new com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView(getContext());
+            wallpaperView.setId(R.id.wallpaper_background);
+            wallpaperView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+            // Insert at the beginning so it's behind everything
+            rootContainer.addView(wallpaperView, 0, new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
+        }
     }
 
     @Override

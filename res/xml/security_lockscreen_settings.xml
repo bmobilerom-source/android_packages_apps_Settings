@@ -25,7 +25,8 @@
         android:key="lockscreen_what_to_show"
         android:title="@string/lockscreen_settings_what_to_show_category"
         android:order="0"
-        android:layout="@layout/settingslib_preference_category_no_title">
+        android:layout="@layout/settingslib_preference_category_no_title"
+        settings:searchable="false">
         <!-- Lock screen notifications - Hidden -->
         <com.android.settings.RestrictedListPreference
             android:key="security_setting_lock_screen_notif"
@@ -34,7 +35,8 @@
             settings:layout="@layout/system_warning_preference_card"
             android:order="0"
             android:visible="false"
-            settings:keywords="@string/keywords_lock_screen_notif"/>
+            settings:keywords="@string/keywords_lock_screen_notif"
+            settings:searchable="false"/>
 
     <!-- Pocket Lock -->
     <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
@@ -44,7 +46,8 @@
         android:defaultValue="false"
         android:order="1"
         app:position="top"
-        settings:controller="com.android.settings.security.PocketLockPreferenceController" />
+        settings:controller="com.android.settings.security.PocketLockPreferenceController"
+        settings:searchable="false" />
 
         <com.android.settings.preferences.ui.AdaptivePreference
             android:key="security_lock_screen_notifications_page"
@@ -54,14 +57,16 @@
             android:visible="false"
             android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
             app:position="middle"
-            settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
+            settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController"
+            settings:searchable="false" />
 
         <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="owner_info_settings"
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary"
             android:order="3"
-            app:position="middle" />
+            app:position="middle"
+            settings:searchable="false" />
 
         <!-- Shortcuts -->
         <com.android.settings.preferences.ui.AdaptivePreference
@@ -70,7 +75,8 @@
             android:summary="@string/summary_placeholder"
             android:order="4"
             app:position="middle"
-            settings:controller="com.android.settings.display.CustomizableLockScreenQuickAffordancesPreferenceController" />
+            settings:controller="com.android.settings.display.CustomizableLockScreenQuickAffordancesPreferenceController"
+            settings:searchable="false" />
 
         <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="security_display_lockscreen_bypass"
@@ -86,7 +92,8 @@
             android:title="@string/user_add_on_lockscreen_menu"
             android:order="201"
             app:position="middle"
-            settings:controller="com.android.settings.users.AddUserWhenLockedPreferenceController" />
+            settings:controller="com.android.settings.users.AddUserWhenLockedPreferenceController"
+            settings:searchable="false" />
 
         <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="lockscreen_privacy_wallet_switch"
@@ -94,7 +101,8 @@
             android:summary="@string/lockscreen_privacy_wallet_summary"
             android:order="202"
             app:position="middle"
-            settings:controller="com.android.settings.display.WalletPrivacyPreferenceController" />
+            settings:controller="com.android.settings.display.WalletPrivacyPreferenceController"
+            settings:searchable="false" />
 
         <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="lock_screen_show_qr_scanner"
@@ -102,7 +110,8 @@
             android:summary="@string/lockscreen_privacy_qr_code_scanner_summary"
             android:order="203"
             app:position="middle"
-            settings:controller="com.android.settings.display.QRCodeScannerPreferenceController" />
+            settings:controller="com.android.settings.display.QRCodeScannerPreferenceController"
+            settings:searchable="false" />
 
         <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="lockscreen_privacy_controls_switch"
@@ -110,7 +119,8 @@
             android:summary="@string/lockscreen_privacy_controls_summary"
             android:order="204"
             app:position="middle"
-            settings:controller="com.android.settings.display.ControlsPrivacyPreferenceController" />
+            settings:controller="com.android.settings.display.ControlsPrivacyPreferenceController"
+            settings:searchable="false" />
 
         <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="lockscreen_trivial_controls_switch"
@@ -118,7 +128,8 @@
             android:summary="@string/lockscreen_trivial_controls_summary"
             android:order="205"
             app:position="middle"
-            settings:controller="com.android.settings.display.ControlsTrivialPrivacyPreferenceController"/>
+            settings:controller="com.android.settings.display.ControlsTrivialPrivacyPreferenceController"
+            settings:searchable="false"/>
 
         <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="lockscreen_double_line_clock_switch"
@@ -127,14 +138,16 @@
             android:order="206"
             android:visible="false"
             app:position="bottom"
-            settings:controller="com.android.settings.display.LockscreenClockPreferenceController" />
+            settings:controller="com.android.settings.display.LockscreenClockPreferenceController"
+            settings:searchable="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="ambient_display_category_when_to_show"
         android:title="@string/ambient_display_category_triggers"
         settings:controller="com.android.settings.display.AmbientDisplayWhenToShowPreferenceController"
-        android:order="4">
+        android:order="4"
+        settings:searchable="false">
 
         <com.android.settings.preferences.ui.AdaptivePreference
             android:key="ambient_display_tap"
@@ -174,7 +187,8 @@
             app:position="top"
             settings:keywords="@string/keywords_always_show_time_info"
             settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController"
-            settings:userRestriction="no_ambient_display" />
+            settings:userRestriction="no_ambient_display"
+            settings:searchable="false" />
 
         <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="ambient_display_notification"
@@ -182,12 +196,14 @@
             android:summary="@string/doze_summary"
             android:order="201"
             app:position="bottom"
-            settings:controller="com.android.settings.display.AmbientDisplayNotificationsPreferenceController" />
+            settings:controller="com.android.settings.display.AmbientDisplayNotificationsPreferenceController"
+            settings:searchable="false" />
 
         <lineageos.preference.RemotePreference
             android:key="doze_device_settings"
             android:title="@string/ambient_display_screen_title"
-            settings:replacesKey="ambient_display_always_on|ambient_display_notification">
+            settings:replacesKey="ambient_display_always_on|ambient_display_notification"
+            settings:searchable="false">
             <intent android:action="org.lineageos.settings.device.DOZE_SETTINGS" />
         </lineageos.preference.RemotePreference>
 

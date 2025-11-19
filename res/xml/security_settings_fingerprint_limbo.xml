@@ -26,13 +26,15 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="fingerprint_limbo_illustration"
         settings:lottie_rawRes="@raw/security"
-        android:order="-1001" />
+        android:order="-1001"
+        settings:searchable="false" />
 
     <!-- Header -->
     <PreferenceCategory
         android:title="@string/security_settings_fingerprint_preference_title"
         android:order="-1000"
-        android:layout="@layout/settings_title_header_small">
+        android:layout="@layout/settings_title_header_small"
+        settings:searchable="false">
     </PreferenceCategory>
 
     <!-- TopIntro -->
@@ -40,7 +42,8 @@
         android:key="fingerprint_limbo_top_intro"
         android:title="@string/security_settings_fingerprint_preference_title"
         android:persistent="false"
-        android:order="-999"/>
+        android:order="-999"
+        settings:searchable="false"/>
 
     <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
@@ -51,20 +54,23 @@
     <PreferenceCategory
         android:key="security_settings_fingerprints_enrolled"
         android:order="0"
-        settings:controller="com.android.settings.biometrics.fingerprint.FingerprintsEnrolledCategoryPreferenceController">
+        settings:controller="com.android.settings.biometrics.fingerprint.FingerprintsEnrolledCategoryPreferenceController"
+        settings:searchable="false">
     </PreferenceCategory>
 
     <androidx.preference.Preference
         android:icon="@drawable/ic_add_24dp"
         android:key="key_fingerprint_add"
         android:title="@string/fingerprint_add_title"
-        android:order="1" />
+        android:order="1"
+        settings:searchable="false" />
 
     <PreferenceCategory
         android:key="security_settings_fingerprint_unlock_category"
         android:title="@string/security_settings_fingerprint_settings_preferences_category"
         android:order="2"
-        android:visibility="gone">
+        android:visibility="gone"
+        settings:searchable="false">
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="security_settings_require_screen_on_to_auth"
@@ -72,8 +78,8 @@
             android:summary="@string/security_settings_require_screen_on_to_auth_description"
             android:order="200"
             settings:keywords="@string/security_settings_require_screen_on_to_auth_keywords"
-            settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsRequireScreenOnToAuthPreferenceController" />
+            settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsRequireScreenOnToAuthPreferenceController"
+            settings:searchable="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>
-

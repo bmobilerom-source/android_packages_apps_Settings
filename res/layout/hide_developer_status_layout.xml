@@ -20,6 +20,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Wallpaper Background (behind everything) -->
+    <com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView
+        android:id="@+id/wallpaper_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/apps_list"
         android:layout_width="match_parent"

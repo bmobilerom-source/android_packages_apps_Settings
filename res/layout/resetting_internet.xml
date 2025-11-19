@@ -33,10 +33,12 @@
         android:orientation="horizontal">
 
         <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="@dimen/reset_internet_ring_progress_right_margin"
-            style="?android:attr/progressBarStyleSmallTitle"/>
+            android:indeterminateDrawable="@drawable/circular_progress_thick"
+            android:indeterminateOnly="true"
+            android:indeterminateTint="@color/settings_accent_color"/>
 
         <TextView
             android:layout_width="wrap_content"

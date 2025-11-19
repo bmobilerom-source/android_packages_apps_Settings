@@ -29,52 +29,57 @@
         android:key="general_notifications_category"
         android:title="@string/general_notification_header">
         <!-- See all apps button -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="all_notifications"
             android:order="10"
             android:title="@string/app_notification_field"
             android:summary="@string/app_notification_field_summary"
+            app:position="top"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
             <extra
                 android:name="classname"
                 android:value="com.android.settings.Settings$NotificationAppListActivity"/>
-        </Preference>
-        <Preference
+        </com.android.settings.preferences.ui.AdaptivePreference>
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="notification_history"
             android:order="11"
             android:title="@string/notification_history"
-            android:summary="@string/notification_history_summary">
+            android:summary="@string/notification_history_summary"
+            app:position="middle">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.notification.history.NotificationHistoryActivity" />
-        </Preference>
+        </com.android.settings.preferences.ui.AdaptivePreference>
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:fragment="com.android.settings.notification.BundlePreferenceFragment"
             android:key="bundle_notifications_preference"
             android:persistent="false"
             android:order="12"
             android:title="@string/notification_bundle_title"
+            app:position="bottom"
             settings:controller="com.android.settings.notification.BundlePreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="conversation_category"
         android:title="@string/conversation_notifs_category">
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="conversations"
             android:order="1"
             android:title="@string/conversations_category_title"
             android:summary=" "
+            app:position="top"
             settings:controller="com.android.settings.notification.ConversationListSummaryPreferenceController"
             android:fragment="com.android.settings.notification.app.ConversationListSettings"
         />
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="notification_bubbles"
             android:order="2"
             android:title="@string/notification_bubbles_title"
             android:summary="@string/notifications_bubble_setting_on_summary"
+            app:position="bottom"
             settings:controller="com.android.settings.notification.BubbleSummaryNotificationPreferenceController"
             android:fragment="com.android.settings.notification.BubbleNotificationSettings"
         />
@@ -83,48 +88,54 @@
     <PreferenceCategory
         android:key="configure_notifications_lock"
         android:title="@string/lock_screen_notifications_title">
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="notification_access"
             android:order="12"
             android:title="@string/manage_notification_access_title"
             android:summary="@string/manage_notification_access_summary"
+            app:position="top"
             android:fragment="com.android.settings.notification.NotificationAccessSettings"
             settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController" />
         <!-- When device is locked -->
-        <com.android.settings.RestrictedListPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="lock_screen_notifications"
             android:order="13"
             android:title="@string/lock_screen_notifs_title"
             android:singleLineTitle="false"
-            android:summary="@string/summary_placeholder" />
+            android:summary="@string/summary_placeholder"
+            app:position="middle" />
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="lock_screen_notifications_page"
             android:order="14"
             android:persistent="false"
             android:title="@string/lock_screen_notifs_title"
+            app:position="middle"
             android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
             settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="lock_screen_redact"
             android:order="15"
             android:title="@string/lock_screen_notifs_redact"
             android:summary="@string/lock_screen_notifs_redact_summary"
+            app:position="middle"
             settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
             android:key="lock_screen_work_redact"
             android:order="16"
             android:title="@string/lock_screen_notifs_redact_work"
             android:summary="@string/lock_screen_notifs_redact_work_summary"
+            app:position="middle"
             settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="notification_lockscreen_bypass"
             android:order="17"
             android:title="@string/lockscreen_bypass_title"
             android:summary="@string/lockscreen_bypass_summary"
+            app:position="bottom"
             settings:searchable="false"
             settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenBypassPreferenceController" />
 
@@ -140,102 +151,115 @@
         android:title="@string/advanced_section_header">
 
         <!--Adaptive Notifications-->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:fragment="com.android.settings.notification.PoliteNotificationsPreferenceFragment"
             android:key="polite_notifications_preference"
             android:order="18"
             android:persistent="false"
             android:title="@string/notification_polite_title"
+            app:position="top"
             settings:controller="com.android.settings.notification.PoliteNotificationsPreferenceController" />
 
-        <com.android.settingslib.RestrictedPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="zen_mode_notifications"
             android:order="19"
             android:title="@string/zen_mode_settings_title"
+            app:position="middle"
             settings:useAdminDisabledSummary="true"
             android:fragment="com.android.settings.notification.zen.ZenModeSettings"
             settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"
         />
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="lock_screen_notif_minimalism"
             android:order="20"
             android:title="@string/lock_screen_notif_minimalism"
             android:summary="@string/lock_screen_notif_minimalism_summary"
+            app:position="middle"
             settings:controller="com.android.settings.notification.LockscreenNotificationMinimalismPreferenceController"
             />
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="lock_screen_show_only_unseen_notifs"
             android:order="21"
             android:title="@string/unseen_notifs_lock_screen"
             android:summary="@string/unseen_notifs_lock_screen_summary"
+            app:position="middle"
             settings:controller="com.android.settings.notification.ShowOnlyUnseenNotificationsOnLockscreenPreferenceController"
         />
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:fragment="com.android.settings.accessibility.FlashNotificationsPreferenceFragment"
             android:key="flash_notifications_preference"
             android:order="22"
             android:persistent="false"
             android:title="@string/flash_notifications_title"
+            app:position="middle"
             settings:searchable="false"
             settings:controller="com.android.settings.accessibility.FlashNotificationsPreferenceController" />
 
-        <com.android.settingslib.RestrictedPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="app_and_notif_cell_broadcast_settings"
             android:order="23"
             android:title="@string/cell_broadcast_settings"
+            app:position="middle"
             settings:useAdminDisabledSummary="true">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="@string/config_cell_broadcast_receiver_package"
                 android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
-        </com.android.settingslib.RestrictedPreference>
+        </com.android.settings.preferences.ui.AdaptiveRestrictedPreference>
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
              android:key="silent_icons"
              android:order="24"
              android:title="@string/silent_notifications_status_bar"
+             app:position="middle"
              settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController"/>
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="show_snooze_options"
             android:order="25"
             android:title="@string/snooze_options_title"
+            app:position="middle"
             settings:controller="com.android.settings.notification.SnoozeNotificationPreferenceController" />
 
         <!-- Notification badging -->
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="notification_badging"
             android:order="26"
             android:title="@string/notification_badging_title"
+            app:position="middle"
             settings:controller="com.android.settings.notification.BadgingNotificationPreferenceController"/>
 
         <!-- Pulse notification light, on devices that support it -->
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="notification_pulse"
             android:order="27"
             android:title="@string/notification_pulse_title"
+            app:position="middle"
             settings:controller="com.android.settings.notification.PulseNotificationPreferenceController"/>
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="notification_assistant"
             android:order="28"
             android:title="@string/notification_assistant_title"
             android:summary="@string/notification_assistant_summary"
+            app:position="bottom"
             settings:controller="com.android.settings.notification.NotificationAssistantPreferenceController"/>
 
         <!-- Heads up -->
-        <lineageos.preference.GlobalSettingSwitchPreference
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="heads_up_notifications_enabled"
             android:order="24"
             android:title="@string/heads_up_notifications_enabled_title"
-            android:summary="@string/heads_up_notifications_enabled_summary" />
+            android:summary="@string/heads_up_notifications_enabled_summary"
+            app:position="middle" />
 
         <!-- Notification lights -->
         <lineageos.preference.LineagePartsPreference
             android:key="notification_lights"
+            android:order="25"
             settings:requiresConfig="@*android:bool/config_intrusiveNotificationLed"
             settings:replacesKey="notification_pulse" />
     </PreferenceCategory>

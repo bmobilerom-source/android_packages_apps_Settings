@@ -62,12 +62,22 @@ public class SecuritySettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.security_dashboard_settings;
+        // Block this page - return empty preference screen
+        return R.xml.empty_preference_screen;
     }
 
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // Block this page - finish activity immediately
+        if (getActivity() != null) {
+            getActivity().finish();
+        }
     }
 
     @Override
@@ -128,6 +138,38 @@ public class SecuritySettings extends DashboardFragment {
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.security_dashboard_settings) {
+                @Override
+                public List<android.provider.SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    // Completely disable security dashboard from search
+                    return null;
+                }
+                
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    // Hide all preferences from search - completely block security dashboard
+                    List<String> keys = new ArrayList<>();
+                    keys.add("security");
+                    keys.add("security_dashboard_top_intro");
+                    keys.add("security_dashboard_footer");
+                    keys.add("security_status");
+                    keys.add("dashboard_tile_placeholder");
+                    keys.add("security_category");
+                    keys.add("fingerprint_settings");
+                    keys.add("bmobile_fingerprint_settings");
+                    keys.add("face_settings");
+                    keys.add("biometric_settings");
+                    keys.add("security_advanced_settings");
+                    
+                    // Also hide hardware-specific preferences
+                    if (!isFingerprintHardwareDetected(context)) {
+                        keys.add(KEY_FINGERPRINT_SETTINGS);
+                    }
+                    if (!isFaceHardwareDetected(context)) {
+                       keys.add(KEY_FACE_SETTINGS);
+                    }
+                    return keys;
+                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
@@ -138,21 +180,8 @@ public class SecuritySettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return !FeatureFactory.getFeatureFactory().getSecuritySettingsFeatureProvider()
-                            .hasAlternativeSecuritySettingsFragment()
-                            && !SafetyCenterManagerWrapper.get().isEnabled(context);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    if (!isFingerprintHardwareDetected(context)) {
-                        keys.add(KEY_FINGERPRINT_SETTINGS);
-                    }
-                    if (!isFaceHardwareDetected(context)) {
-                       keys.add(KEY_FACE_SETTINGS);
-                    }
-                    return keys;
+                    // Always disable security dashboard from search
+                    return false;
                 }
             };
 

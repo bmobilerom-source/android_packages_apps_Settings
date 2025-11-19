@@ -158,7 +158,13 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                         ConfirmDeviceCredentialActivity.this);
             }
 
-            setResult(Activity.RESULT_OK);
+            // Return the protected intent if it exists
+            Intent resultIntent = new Intent();
+            Intent protectedIntent = getIntent().getParcelableExtra("com.android.settings.PASSWORD_PROTECTED_INTENT");
+            if (protectedIntent != null) {
+                resultIntent.putExtra("com.android.settings.PASSWORD_PROTECTED_INTENT", protectedIntent);
+            }
+            setResult(Activity.RESULT_OK, resultIntent);
             finish();
         }
 

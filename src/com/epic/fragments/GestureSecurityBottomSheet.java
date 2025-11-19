@@ -18,7 +18,6 @@ package com.epic.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +25,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
+import com.android.settings.preferences.ui.AdaptiveSwitchPreference;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class GestureSecurityBottomSheet extends BottomSheetDialogFragment {
@@ -84,6 +83,8 @@ public class GestureSecurityBottomSheet extends BottomSheetDialogFragment {
     }
 
     public static class GestureSecurityPreferenceFragment extends PreferenceFragmentCompat {
+        private GestureSecurityAdapter mAdapter;
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             try {
@@ -94,46 +95,65 @@ public class GestureSecurityBottomSheet extends BottomSheetDialogFragment {
                     return;
                 }
                 
-                android.content.ContentResolver resolver = context.getContentResolver();
+                mAdapter = new GestureSecurityAdapter(context);
                 
-                // Setup preferences with Settings providers
-                SwitchPreferenceCompat clipboardOverlay = findPreference("show_clipboard_overlay");
+                // Setup preferences using adapter - similar to wallpaper background
+                AdaptiveSwitchPreference clipboardOverlay = findPreference("show_clipboard_overlay");
                 if (clipboardOverlay != null) {
-                    clipboardOverlay.setChecked(Settings.Secure.getInt(resolver, "show_clipboard_overlay", 1) != 0);
-                    clipboardOverlay.setOnPreferenceChangeListener((preference, newValue) -> {
-                        Settings.Secure.putInt(resolver, "show_clipboard_overlay", (Boolean) newValue ? 1 : 0);
-                        return true;
-                    });
+                    mAdapter.setupClipboardOverlayPreference(clipboardOverlay);
                 }
                 
-                SwitchPreferenceCompat noStorageRestrict = findPreference("no_storage_restrict");
+                AdaptiveSwitchPreference noStorageRestrict = findPreference("no_storage_restrict");
                 if (noStorageRestrict != null) {
-                    noStorageRestrict.setChecked(Settings.Global.getInt(resolver, "no_storage_restrict", 0) != 0);
-                    noStorageRestrict.setOnPreferenceChangeListener((preference, newValue) -> {
-                        Settings.Global.putInt(resolver, "no_storage_restrict", (Boolean) newValue ? 1 : 0);
-                        return true;
-                    });
+                    mAdapter.setupNoStorageRestrictPreference(noStorageRestrict);
                 }
                 
-                SwitchPreferenceCompat windowIgnoreSecure = findPreference("window_ignore_secure");
+                AdaptiveSwitchPreference windowIgnoreSecure = findPreference("window_ignore_secure");
                 if (windowIgnoreSecure != null) {
-                    windowIgnoreSecure.setChecked(Settings.Global.getInt(resolver, "window_ignore_secure", 0) != 0);
-                    windowIgnoreSecure.setOnPreferenceChangeListener((preference, newValue) -> {
-                        Settings.Global.putInt(resolver, "window_ignore_secure", (Boolean) newValue ? 1 : 0);
-                        return true;
-                    });
+                    mAdapter.setupWindowIgnoreSecurePreference(windowIgnoreSecure);
                 }
                 
-                SwitchPreferenceCompat secureLockscreenQs = findPreference("secure_lockscreen_qs_disabled");
+                AdaptiveSwitchPreference secureLockscreenQs = findPreference("secure_lockscreen_qs_disabled");
                 if (secureLockscreenQs != null) {
-                    secureLockscreenQs.setChecked(Settings.System.getInt(resolver, "secure_lockscreen_qs_disabled", 0) != 0);
-                    secureLockscreenQs.setOnPreferenceChangeListener((preference, newValue) -> {
-                        Settings.System.putInt(resolver, "secure_lockscreen_qs_disabled", (Boolean) newValue ? 1 : 0);
-                        return true;
-                    });
+                    mAdapter.setupSecureLockscreenQsPreference(secureLockscreenQs);
                 }
             } catch (Exception e) {
                 android.util.Log.e("GestureSecurityBottomSheet", "Error in onCreatePreferences", e);
+            }
+        }
+        
+        @Override
+        public void onResume() {
+            super.onResume();
+            // Refresh preference states when bottom sheet is shown
+            refreshPreferenceStates();
+        }
+        
+        private void refreshPreferenceStates() {
+            Context context = getContext();
+            if (context == null || mAdapter == null) {
+                return;
+            }
+            
+            // Refresh all preference states to ensure they reflect current Settings values
+            AdaptiveSwitchPreference clipboardOverlay = findPreference("show_clipboard_overlay");
+            if (clipboardOverlay != null) {
+                clipboardOverlay.setChecked(GestureSecurityHelper.isClipboardOverlayEnabled(context));
+            }
+            
+            AdaptiveSwitchPreference noStorageRestrict = findPreference("no_storage_restrict");
+            if (noStorageRestrict != null) {
+                noStorageRestrict.setChecked(GestureSecurityHelper.isNoStorageRestrictEnabled(context));
+            }
+            
+            AdaptiveSwitchPreference windowIgnoreSecure = findPreference("window_ignore_secure");
+            if (windowIgnoreSecure != null) {
+                windowIgnoreSecure.setChecked(GestureSecurityHelper.isWindowIgnoreSecureEnabled(context));
+            }
+            
+            AdaptiveSwitchPreference secureLockscreenQs = findPreference("secure_lockscreen_qs_disabled");
+            if (secureLockscreenQs != null) {
+                secureLockscreenQs.setChecked(GestureSecurityHelper.isSecureLockscreenQsDisabled(context));
             }
         }
     }

@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.display.AmbientDisplayConfiguration;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -39,13 +40,31 @@ public class DoubleTapScreenSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        SuggestionFeatureProvider suggestionFeatureProvider =
-                FeatureFactory.getFeatureFactory().getSuggestionFeatureProvider();
-        SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
-        prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
+        try {
+            SuggestionFeatureProvider suggestionFeatureProvider =
+                    FeatureFactory.getFeatureFactory().getSuggestionFeatureProvider();
+            SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
+            prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
 
-        use(DoubleTapScreenPreferenceController.class)
-                .setConfig(new AmbientDisplayConfiguration(context));
+            use(DoubleTapScreenPreferenceController.class)
+                    .setConfig(new AmbientDisplayConfiguration(context));
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "Error in onAttach", e);
+        }
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            // Hide video illustration preference to prevent crashes
+            androidx.preference.Preference videoPref = findPreference("gesture_double_tap_screen_video");
+            if (videoPref != null) {
+                videoPref.setVisible(false);
+            }
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "Error hiding video preference", e);
+        }
     }
 
     @Override

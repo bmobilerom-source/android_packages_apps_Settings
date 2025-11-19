@@ -31,14 +31,9 @@
   <PreferenceCategory
         android:title="Media Controls"
         android:order="-999"
-        android:layout="@layout/settings_title_header">
+        android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
     <!-- intro -->
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="media_controls_bubbles_desc"
-        android:order="-996"
-        android:title="@string/media_controls_bubbles_description" />    
-
     <com.android.settingslib.widget.TopIntroPreference
         android:key="media_controls_bubbles_desc2"
         android:order="-995"
@@ -63,23 +58,26 @@
                 android:targetClass="com.sourajitk.ambient_music.MainActivity" />
     </Preference>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="media_controls_resume_switch"
         android:title="@string/media_controls_resume_title"
         android:summary="@string/media_controls_resume_description"
+        app:position="top"
         app:keywords="@string/keywords_media_controls"
         app:controller="com.android.settings.sound.MediaControlsPreferenceController" />
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="media_controls_lockscreen"
         android:title="@string/media_controls_lockscreen_title"
         android:summary="@string/media_controls_lockscreen_description"
+        app:position="middle"
         app:controller="com.android.settings.sound.MediaControlsLockScreenPreferenceController" />
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="media_controls_recommendations"
         android:title="@string/media_controls_recommendations_title"
         android:summary="@string/media_controls_recommendations_description"
+        app:position="bottom"
         app:controller="com.android.settings.sound.MediaControlsRecommendationController" />
 
 </PreferenceScreen>

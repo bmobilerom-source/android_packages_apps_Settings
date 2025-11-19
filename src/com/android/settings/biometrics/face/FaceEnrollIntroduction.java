@@ -234,6 +234,8 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     private void launchFaceSettingsActivity() {
         final Intent intent = new Intent(this, Settings.FaceSettingsInternalActivity.class);
+        // Add flag to allow navigation past max faces screen
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         final byte[] token = getIntent().getByteArrayExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
         if (token != null) {

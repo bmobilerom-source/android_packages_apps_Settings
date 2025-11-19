@@ -95,6 +95,19 @@ public class LockscreenDashboardFragment extends DashboardFragment
                 R.string.locked_work_profile_notification_title);
         replaceEnterpriseStringTitle("security_setting_lock_screen_notif_work_header",
                 WORK_PROFILE_NOTIFICATIONS_SECTION_HEADER, R.string.profile_section_header);
+        
+        // Hide illustration preference (black empty preference at top)
+        androidx.preference.Preference illustrationPref = findPreference("unlock_illustration");
+        if (illustrationPref != null) {
+            illustrationPref.setVisible(false);
+        }
+        
+        // Hide dynamic clock preference and disable it
+        androidx.preference.Preference clockPref = findPreference("lockscreen_double_line_clock_switch");
+        if (clockPref != null) {
+            clockPref.setVisible(false);
+            clockPref.setEnabled(false);
+        }
     }
 
     @Override
@@ -110,24 +123,55 @@ public class LockscreenDashboardFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (!isCatalystEnabled()) {
-            use(AmbientDisplayAlwaysOnPreferenceController.class).setConfig(getConfig(context));
-        }
-        use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
-        use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
-        use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
-
-        mControlsContentObserver = new ContentObserver(
-                new Handler(Looper.getMainLooper())) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                super.onChange(selfChange, uri);
-                updatePreferenceStates();
+        try {
+            if (!isCatalystEnabled()) {
+                use(AmbientDisplayAlwaysOnPreferenceController.class).setConfig(getConfig(context));
             }
-        };
-        context.getContentResolver().registerContentObserver(
-                Settings.Secure.getUriFor(Settings.Secure.LOCKSCREEN_SHOW_CONTROLS),
-                false /* notifyForDescendants */, mControlsContentObserver);
+            use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
+            use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
+            use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
+
+            mControlsContentObserver = new ContentObserver(
+                    new Handler(Looper.getMainLooper())) {
+                @Override
+                public void onChange(boolean selfChange, Uri uri) {
+                    super.onChange(selfChange, uri);
+                    updatePreferenceStates();
+                }
+            };
+            context.getContentResolver().registerContentObserver(
+                    Settings.Secure.getUriFor(Settings.Secure.LOCKSCREEN_SHOW_CONTROLS),
+                    false /* notifyForDescendants */, mControlsContentObserver);
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "Error in onAttach", e);
+        }
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            // Ensure illustration is hidden and dynamic clock is disabled
+            androidx.preference.Preference illustrationPref = findPreference("unlock_illustration");
+            if (illustrationPref != null) {
+                illustrationPref.setVisible(false);
+            }
+            
+            androidx.preference.Preference clockPref = findPreference("lockscreen_double_line_clock_switch");
+            if (clockPref != null) {
+                clockPref.setVisible(false);
+                clockPref.setEnabled(false);
+            }
+            
+            // Hide double tap preference to prevent crashes
+            androidx.preference.Preference doubleTapPref = findPreference("ambient_display_double_tap");
+            if (doubleTapPref != null) {
+                doubleTapPref.setVisible(false);
+                doubleTapPref.setEnabled(false);
+            }
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "Error in onResume", e);
+        }
     }
 
     @Override

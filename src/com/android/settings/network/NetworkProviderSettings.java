@@ -306,8 +306,19 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
             return;
         }
 
-        setPinnedHeaderView(com.android.settingslib.widget.progressbar.R.layout.progress_header);
+        View pinnedHeader = setPinnedHeaderView(
+                com.android.settingslib.widget.progressbar.R.layout.progress_header);
         setProgressBarVisible(false);
+        
+        // Set progress bar to 70% when it becomes visible during loading
+        if (pinnedHeader != null) {
+            // Find progress bar by searching for ProgressBar view
+            android.widget.ProgressBar progressBar = findProgressBar(pinnedHeader);
+            if (progressBar != null) {
+                progressBar.setMax(100);
+                // Progress will be set to 70% when setProgressBarVisible(true) is called
+            }
+        }
 
         if (hasWifiManager()) {
             setLoading(true, false);
@@ -1118,11 +1129,16 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         removeCachedPrefs(mWifiEntryPreferenceCategory);
 
         if (!hasAvailableWifiEntries) {
-            Preference pref = new Preference(getPrefContext());
+            // Use AdaptivePreference for consistent styling
+            com.android.settings.preferences.ui.AdaptivePreference pref = 
+                    new com.android.settings.preferences.ui.AdaptivePreference(getPrefContext());
             pref.setSelectable(false);
             pref.setSummary(R.string.wifi_empty_list_wifi_on);
             pref.setOrder(index++);
             pref.setKey(PREF_KEY_EMPTY_WIFI_LIST);
+            // Set position to solo for rounded corners
+            pref.setLayoutResource(com.android.settings.preferences.ui.AdaptivePreferenceUtils
+                    .getLayoutResourceId(getPrefContext(), null));
             mWifiEntryPreferenceCategory.addPreference(pref);
         }
 
@@ -1257,7 +1273,42 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     protected void setProgressBarVisible(boolean visible) {
         if (!mIsInSetupWizard) {
             showPinnedHeader(visible);
+            if (visible) {
+                // Set progress bar to 70% while loading
+                View view = getView();
+                if (view != null) {
+                    View pinnedHeaderFrame = view.findViewById(R.id.pinned_header);
+                    if (pinnedHeaderFrame != null && pinnedHeaderFrame instanceof android.view.ViewGroup) {
+                        android.view.ViewGroup viewGroup = (android.view.ViewGroup) pinnedHeaderFrame;
+                        if (viewGroup.getChildCount() > 0) {
+                            View pinnedHeader = viewGroup.getChildAt(0);
+                            if (pinnedHeader != null) {
+                                android.widget.ProgressBar progressBar = findProgressBar(pinnedHeader);
+                                if (progressBar != null) {
+                                    progressBar.setProgress(70);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
+    }
+    
+    private android.widget.ProgressBar findProgressBar(View view) {
+        if (view instanceof android.widget.ProgressBar) {
+            return (android.widget.ProgressBar) view;
+        }
+        if (view instanceof android.view.ViewGroup) {
+            android.view.ViewGroup viewGroup = (android.view.ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                android.widget.ProgressBar progressBar = findProgressBar(viewGroup.getChildAt(i));
+                if (progressBar != null) {
+                    return progressBar;
+                }
+            }
+        }
+        return null;
     }
 
     @VisibleForTesting

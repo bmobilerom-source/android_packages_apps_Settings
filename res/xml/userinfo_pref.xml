@@ -113,4 +113,38 @@
             android:summary="@string/block_safety_center_toggle_summary"
             android:order="76"
             settings:controller="com.android.settings.applications.specialaccess.BlockSafetyCenterController" />
+
+    <SwitchPreference
+            android:key="block_extended_security_toggle"
+            android:title="@string/block_extended_security_toggle_title"
+            android:summary="@string/block_extended_security_toggle_summary"
+            android:order="77"
+            settings:controller="com.android.settings.applications.specialaccess.BlockExtendedSecurityController" />
+
+    <!-- Mobile Network Security -->
+    <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="mobile_network_security"
+            android:title="@string/cellular_security_title"
+            android:summary="@string/cellular_security_summary"
+            android:order="78"
+            app:position="solo"
+            android:fragment="com.android.settings.network.telephony.CellularSecuritySettingsFragment"
+            settings:controller="com.android.settings.network.CellularSecurityPreferenceController" />
+
+    <!-- Hide Developer Status Settings -->
+    <Preference
+            android:key="hide_developer_status_settings"
+            android:title="@string/hide_developer_status_title"
+            android:summary="@string/hide_developer_status_summary"
+            android:order="79"
+            android:fragment="com.epic.fragments.HideDeveloperStatusSettings" />
+
+    <!-- Password Protection for Settings Pages -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="settings_password_protection_enabled"
+            android:title="@string/settings_password_protection_title"
+            android:summary="@string/settings_password_protection_summary"
+            android:defaultValue="false"
+            android:order="80"
+            app:position="solo" />
 </PreferenceScreen>

@@ -53,12 +53,14 @@
         android:key="key_category_terms_of_address"
         android:title="@string/category_title_terms_of_address"
         android:order="1"
+        android:layout="@layout/settingslib_preference_category_no_title"
         settings:controller="com.android.settings.localepicker.TermsOfAddressCategoryController">
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="key_terms_of_address"
             android:title="@string/terms_of_address_title"
             android:summary="@string/terms_of_address_summary"
             android:order="0"
+            app:position="solo"
             settings:controller="com.android.settings.localepicker.TermsOfAddressController"/>
     </PreferenceCategory>
 

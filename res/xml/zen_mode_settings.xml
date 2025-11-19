@@ -39,22 +39,25 @@
         android:key="zen_mode_settings_category_behavior"
         android:title="@string/zen_category_behavior">
         <!-- People -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="zen_mode_behavior_people"
             android:title="@string/zen_category_people"
+            app:position="top"
             android:fragment="com.android.settings.notification.zen.ZenModePeopleSettings" />
 
         <!-- Apps -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="zen_mode_behavior_apps"
             android:title="@string/zen_category_apps"
             android:summary=" "
+            app:position="middle"
             android:fragment="com.android.settings.notification.zen.ZenModeBypassingAppsSettings" />
 
         <!-- All sounds -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="zen_sound_vibration_settings"
             android:title="@string/zen_category_exceptions"
+            app:position="bottom"
             android:fragment="com.android.settings.notification.zen.ZenModeSoundVibrationSettings" />
     </PreferenceCategory>
 
@@ -63,9 +66,10 @@
         android:key="zen_mode_settings_advanced">
 
         <!-- Automatic rules -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="zen_mode_automation_settings"
             android:title="@string/zen_category_schedule"
+            app:position="top"
             android:fragment="com.android.settings.notification.zen.ZenModeAutomationSettings"/>
 
         <!-- DND duration settings -->
@@ -75,9 +79,10 @@
             android:widgetLayout="@null"/>
 
         <!-- What to block (effects) -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="zen_mode_block_effects_settings"
             android:title="@string/zen_mode_restrict_notifications_title"
+            app:position="bottom"
             android:fragment="com.android.settings.notification.zen.ZenModeRestrictNotificationsSettings" />
     </PreferenceCategory>
 

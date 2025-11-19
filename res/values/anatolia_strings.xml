@@ -123,6 +123,9 @@
     <string name="custom_theme_summary">Choose a custom theme for system UI</string>
     <string name="custom_theme_intro_title">Custom System Themes</string>
     <string name="custom_theme_intro_summary">Select from various custom themes to personalize your system appearance. Themes work in both light and dark mode. Each theme offers a unique color palette and visual style that applies directly to Settings pages.</string>
+    <string name="custom_theme_category_title">Custom Themes</string>
+    <string name="custom_theme_category_summary">Select a custom theme to personalize your Settings appearance. Themes work in both light and dark mode.</string>
+    <string name="wallpaper_background_category_title">Wallpaper Background</string>
     <string name="custom_theme_descriptions_title">Theme Descriptions</string>
     <string name="custom_theme_black">Black</string>
     <string name="custom_theme_transparent">Transparent</string>
@@ -166,6 +169,63 @@
     <string name="security_features_category_data">Data Collection</string>
     <string name="security_features_category_services">Services</string>
     <string name="security_features_category_updates">Updates &amp; Installation</string>
+    <string name="security_features_category_access_control">Access Control</string>
+    
+    <!-- Security Features - Access Control (GrapheneOS/CalyxOS based) -->
+    <string name="network_permission_control_title">Network Permission Control</string>
+    <string name="network_permission_control_summary">Control network access for apps. Based on GrapheneOS firewall implementation.</string>
+    <string name="network_permission_control_description">Implements a firewall-like system to control network access for individual apps. When enabled, apps must explicitly request network permissions, giving you granular control over which apps can access the internet.\n\nPros: Better privacy, prevents unauthorized data transmission, reduces data usage, blocks unwanted network access\n\nCons: Some apps may not work without network access, requires manual permission management\n\nVisible Changes: You\'ll see network permission requests from apps. Apps without network permission won\'t be able to access the internet. Check network usage in Settings to see which apps are accessing the network.</string>
+    
+    <string name="app_hardening_title">App Hardening</string>
+    <string name="app_hardening_summary">Enhanced security features for apps. Improves memory allocator and address space protection.</string>
+    <string name="app_hardening_description">App Hardening enhances the security of individual apps by improving memory protection mechanisms. This feature:\n\n1. Memory Allocator Hardening: Uses hardened memory allocators (like Scudo or GWP-ASAN) that detect and prevent memory corruption attacks, buffer overflows, and use-after-free vulnerabilities.\n\n2. Address Space Layout Randomization (ASLR): Randomizes memory addresses to make it harder for attackers to predict memory locations and exploit vulnerabilities.\n\n3. Stack Canaries: Adds protection values to detect stack buffer overflows before they can be exploited.\n\n4. Enhanced Memory Isolation: Improves isolation between app processes and system processes.\n\nHow it works: When enabled, the system applies these security enhancements to all apps, making them more resistant to memory-based attacks and exploits. The hardening is transparent to apps but provides significant security improvements.\n\nPros: Better security against memory exploits, protection against buffer overflows, reduced risk of privilege escalation, enhanced app isolation\n\nCons: Slight performance overhead (typically 1-3%), slightly higher memory usage, some very old apps may have compatibility issues\n\nVisible Changes: Apps will be more secure against memory-based attacks. You may notice a very slight performance impact (usually imperceptible). Security monitoring tools will show improved protection levels.</string>
+    
+    <string name="sensor_access_control_title">Sensor Access Control</string>
+    <string name="sensor_access_control_summary">Control sensor access for apps to enhance privacy. Based on CalyxOS sensor blocking.</string>
+    <string name="sensor_access_control_description">Provides granular control over which apps can access device sensors (accelerometer, gyroscope, magnetometer, etc.). When enabled, you can block sensor access for apps that don\'t need it.\n\nPros: Better privacy, prevents sensor-based tracking, reduces battery drain from sensor usage, more control over app permissions\n\nCons: Some apps may not function correctly without sensor access (games, fitness apps), requires manual permission management\n\nVisible Changes: Apps will request sensor permissions. You can see which apps are using sensors in Settings > Apps > Permissions. Blocked apps won\'t be able to access sensors, improving privacy.</string>
+    
+    <string name="location_access_control_title">Location Access Control</string>
+    <string name="location_access_control_summary">Enhanced location access control for better privacy protection.</string>
+    <string name="location_access_control_description">Provides enhanced location access controls beyond standard Android permissions. Includes features like approximate location only, location access logging, and stricter permission enforcement.\n\nPros: Better location privacy, prevents precise tracking, more granular location control, access logging for transparency\n\nCons: Some location-based features may be less accurate, requires understanding of location permissions\n\nVisible Changes: You\'ll have more options for location access (precise vs approximate). Location access will be logged and visible in settings. Apps requesting location will show enhanced permission dialogs.</string>
+    
+    <string name="microphone_access_control_title">Microphone Access Control</string>
+    <string name="microphone_access_control_summary">Enhanced microphone access control for better privacy protection.</string>
+    
+    <!-- Power Tweaks -->
+    <string name="power_tweaks_title">Power Tweaks</string>
+    <string name="power_tweaks_summary">Charging and power management options</string>
+    <string name="power_tweaks_intro_title">Power Tweaks</string>
+    <string name="power_tweaks_intro_summary">Customize charging behavior and power management features. Includes features from crDroid and Axion A16 ROMs.</string>
+    <string name="power_tweaks_info_title">About Power Tweaks</string>
+    <string name="power_tweaks_info_summary">These tweaks modify charging and power management behavior. Changes take effect immediately. Some features may require device reboot.</string>
+    <string name="power_tweaks_crdroid_category">crDroid Features</string>
+    <string name="power_tweaks_axion_category">Axion A16 Features</string>
+    
+    <!-- crDroid Power Tweaks -->
+    <string name="fast_charging_title">Fast Charging</string>
+    <string name="fast_charging_summary">Enable fast charging support</string>
+    <string name="charging_led_title">Charging LED</string>
+    <string name="charging_led_summary">Show LED indicator when charging</string>
+    <string name="battery_saver_auto_title">Auto Battery Saver</string>
+    <string name="battery_saver_auto_summary">Automatically enable battery saver at 15%</string>
+    <string name="wake_on_charge_title">Wake on Charge</string>
+    <string name="wake_on_charge_summary">Wake screen when charging starts</string>
+    <string name="charging_sound_title">Charging Sound</string>
+    <string name="charging_sound_summary">Play sound when charging starts</string>
+    
+    <!-- Axion A16 Power Tweaks -->
+    <string name="smart_charging_title">Smart Charging</string>
+    <string name="smart_charging_summary">Slow down charging above 80% to preserve battery</string>
+    <string name="battery_calibration_title">Battery Calibration</string>
+    <string name="battery_calibration_summary">Enable battery calibration mode</string>
+    <string name="power_efficient_mode_title">Power Efficient Mode</string>
+    <string name="power_efficient_mode_summary">Enable power-efficient processing mode</string>
+    <string name="screen_off_optimization_title">Screen Off Optimization</string>
+    <string name="screen_off_optimization_summary">Optimize power usage when screen is off</string>
+    <string name="charging_animation_title">Charging Animation</string>
+    <string name="charging_animation_summary">Show animation when charging</string>
+    <string name="microphone_access_control_description">Provides enhanced microphone access controls with features like access indicators, usage logging, and stricter permission enforcement. Shows when apps are accessing the microphone.\n\nPros: Better microphone privacy, prevents unauthorized audio recording, access indicators show when mic is in use, usage logging\n\nCons: Some voice-based apps may require manual permission grants, requires attention to permission requests\n\nVisible Changes: You\'ll see indicators when the microphone is in use. Microphone access will be logged. Apps requesting microphone access will show enhanced permission dialogs with clear explanations.</string>
+    
     
     <!-- Security Feature Strings -->
     <string name="block_analytics_title">Block Analytics</string>
@@ -203,6 +263,53 @@
     <!-- System Optimization -->
     <string name="system_optimization_title">System Optimization</string>
     <string name="system_optimization_summary">Performance tuning and optimization options</string>
+    <string name="system_optimization_intro_title">System Optimization</string>
+    <string name="system_optimization_intro_summary">Enable various system optimizations to improve performance, battery life, and overall device responsiveness. Each optimization can be toggled independently.</string>
+    <string name="system_optimization_info_title">About System Optimization</string>
+    <string name="system_optimization_info_summary">These optimizations adjust system-level settings to enhance device performance. Changes take effect immediately and are persistent across reboots. Monitor your device performance after enabling optimizations.</string>
+    <string name="optimization_status_title">Optimization Status</string>
+    <string name="optimization_status_summary">View current optimization status and system information</string>
+    
+    <!-- System Optimization Features - Detailed Descriptions -->
+    <string name="background_app_limits_title">Background App Limits</string>
+    <string name="background_app_limits_summary">Restrict background processes to improve performance and battery life • Shows running process count</string>
+    <string name="background_app_limits_description">Limits the number of background processes that can run simultaneously. When enabled, the system restricts background apps to 4 processes maximum, reducing RAM usage and improving battery life.\n\nPros: Better battery life, improved performance, less RAM usage, faster app switching\n\nCons: Background apps may close more frequently, delayed notifications from some apps, apps may need to restart more often\n\nVisible Changes: You\'ll notice fewer apps running in the background, faster system response, and improved battery endurance. Check running apps in Developer Options to see the difference.</string>
+    
+    <string name="memory_optimization_title">Memory Optimization</string>
+    <string name="memory_optimization_summary">Optimize memory management for better performance</string>
+    <string name="memory_optimization_description">Enhances the Low Memory Killer (LMK) to be more aggressive in freeing up memory. This helps prevent memory-related slowdowns and keeps the system responsive.\n\nPros: Better multitasking, reduced lag, fewer out-of-memory errors, smoother performance\n\nCons: Apps may be killed more aggressively, some apps may restart when switching back\n\nVisible Changes: You\'ll see more available RAM in system info, smoother app switching, and fewer system slowdowns. Monitor available memory in Settings > About phone to see improvements.</string>
+    
+    <string name="cpu_governor_optimization_title">CPU Governor Optimization</string>
+    <string name="cpu_governor_optimization_summary">Set CPU governor to schedutil for balanced performance</string>
+    <string name="cpu_governor_optimization_description">Sets the CPU frequency governor to schedutil, which is the modern, efficient governor that balances performance and battery life. It dynamically adjusts CPU frequency based on workload.\n\nPros: Better battery life, responsive performance, automatic frequency scaling, modern kernel scheduler integration\n\nCons: Slightly less aggressive than performance mode, may not be optimal for extreme gaming\n\nVisible Changes: You\'ll notice better battery life while maintaining smooth performance. CPU frequencies will scale more efficiently. Use CPU monitoring apps to see frequency changes.</string>
+    
+    <string name="io_scheduler_optimization_title">I/O Scheduler Optimization</string>
+    <string name="io_scheduler_optimization_summary">Optimize I/O scheduler for better storage performance</string>
+    <string name="io_scheduler_optimization_description">Sets the I/O scheduler to mq-deadline, which is optimized for modern storage devices (eMMC, UFS, NVMe). It provides better read/write performance and lower latency.\n\nPros: Faster app loading, quicker file operations, better storage performance, reduced I/O wait times\n\nCons: Slightly higher CPU usage during I/O operations (negligible)\n\nVisible Changes: Apps will load faster, file operations will be quicker, and overall storage performance improves. You\'ll notice faster app installs and smoother file browsing.</string>
+    
+    <string name="zram_optimization_title">ZRAM Optimization</string>
+    <string name="zram_optimization_summary">Enable and optimize ZRAM for better memory management</string>
+    <string name="zram_optimization_description">Enables ZRAM (compressed RAM) which uses a portion of RAM as compressed swap space. This effectively increases available memory without using slower storage.\n\nPros: More available memory, better multitasking, reduced app killing, improved performance on low-RAM devices\n\nCons: Slight CPU overhead for compression (minimal), may use more battery (negligible)\n\nVisible Changes: You\'ll see more available memory, better multitasking capability, and fewer apps being killed. Check memory stats to see ZRAM usage and compressed memory benefits.</string>
+    
+    <string name="network_optimization_title">Network Optimization</string>
+    <string name="network_optimization_summary">Optimize network usage to reduce power consumption • Shows current connection status</string>
+    <string name="network_optimization_description">Optimizes network stack settings to reduce power consumption while maintaining connectivity. Adjusts network polling intervals and connection management.\n\nPros: Better battery life, reduced network-related wakeups, more efficient data usage\n\nCons: Slightly delayed network responses in some cases, may affect real-time apps\n\nVisible Changes: You\'ll notice improved battery life, especially when using mobile data. Network-related battery drain will decrease. Monitor battery usage to see network optimization benefits. The summary shows your current network connection type (WiFi, Mobile, etc.).</string>
+    
+    <string name="battery_optimization_title">Battery Optimization</string>
+    <string name="battery_optimization_summary">Enable aggressive battery saving mode • Shows current battery level</string>
+    <string name="battery_optimization_description">Enables aggressive battery saving measures including reduced background activity, lower CPU frequencies, and optimized power management.\n\nPros: Significantly better battery life, reduced power consumption, longer device usage\n\nCons: Slightly reduced performance, delayed background sync, some features may be limited\n\nVisible Changes: Battery will last noticeably longer. You\'ll see reduced battery drain in battery stats. Performance may be slightly reduced, but battery endurance improves significantly.</string>
+    
+    <string name="storage_optimization_title">Storage Optimization</string>
+    <string name="storage_optimization_summary">Optimize storage access patterns for better performance • Shows available storage</string>
+    <string name="storage_optimization_description">Optimizes storage I/O patterns, read-ahead settings, and caching strategies to improve storage performance and reduce fragmentation.\n\nPros: Faster file operations, quicker app loading, better storage performance, reduced storage fragmentation\n\nCons: Slightly more RAM usage for caching (minimal)\n\nVisible Changes: File operations will be faster, apps will load quicker, and storage performance improves. You\'ll notice smoother file browsing and faster app installs.</string>
+    
+    <string name="performance_mode_title">Performance Mode</string>
+    <string name="performance_mode_summary">Enable high performance mode for maximum speed</string>
+    <string name="performance_mode_description">Enables maximum performance mode by setting CPU governor to performance, keeping CPU frequencies high for maximum speed.\n\nPros: Maximum performance, fastest app execution, best gaming performance, no CPU throttling\n\nCons: Significantly reduced battery life, increased heat generation, higher power consumption\n\nVisible Changes: Device will run at maximum speed. You\'ll notice faster app launches, smoother gaming, but battery will drain much faster. Device may get warmer during use.</string>
+    
+    <string name="thermal_throttling_title">Thermal Throttling Control</string>
+    <string name="thermal_throttling_summary">Monitor and control thermal throttling • Shows current thermal status</string>
+    <string name="thermal_throttling_description">Controls how aggressively the system throttles performance when the device gets hot. When enabled, provides better thermal management to prevent overheating.\n\nPros: Better temperature management, prevents overheating, protects device hardware, more stable performance\n\nCons: May reduce performance when device is hot, CPU frequencies may be lowered during heavy use\n\nVisible Changes: Device will manage temperature better. During heavy use, you may notice CPU frequencies being reduced to prevent overheating. Check thermal status in system info to monitor.</string>
     
     <!-- Developer Tools -->
     <string name="developer_tools_title">Developer Tools</string>

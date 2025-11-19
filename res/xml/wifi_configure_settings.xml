@@ -17,42 +17,49 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/wifi_configure_settings_preference_title">
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="enable_wifi_wakeup"
         android:title="@string/wifi_wakeup"
         android:icon="@drawable/ic_auto_wifi"
         android:summary="@string/wifi_wakeup_summary"
+        app:position="top"
         settings:controller="com.android.settings.wifi.WifiWakeupPreferenceController"/>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="notify_open_networks"
         android:title="@string/wifi_notify_open_networks"
         android:icon="@drawable/ic_open_wifi_notifications"
         android:summary="@string/wifi_notify_open_networks_summary"
+        app:position="middle"
         settings:keywords="@string/keywords_wifi_notify_open_networks"
         settings:controller="com.android.settings.wifi.NotifyOpenNetworksPreferenceController"/>
 
-    <com.android.settings.spa.preference.ComposePreference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="allow_wep_networks"
         android:title="@string/wifi_allow_wep_networks"
+        app:position="middle"
         settings:controller="com.android.settings.wifi.WepNetworksPreferenceController"/>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="wifi_cellular_data_fallback"
         android:title="@string/wifi_cellular_data_fallback_title"
         android:summary="@string/wifi_cellular_data_fallback_summary"
+        app:position="middle"
         settings:controller="com.android.settings.wifi.CellularFallbackPreferenceController" />
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="install_credentials"
         android:icon="@drawable/ic_certificate"
-        android:title="@string/wifi_install_credentials"/>
+        android:title="@string/wifi_install_credentials"
+        app:position="middle"/>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="wifi_direct"
         android:title="@string/wifi_menu_p2p"
-        android:fragment="com.android.settings.wifi.p2p.WifiP2pSettings" />
+        android:fragment="com.android.settings.wifi.p2p.WifiP2pSettings"
+        app:position="bottom" />
 
 </PreferenceScreen>

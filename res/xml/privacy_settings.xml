@@ -22,7 +22,8 @@
     <com.android.settingslib.widget.IllustrationPreference
             android:key="privacy_illustration"
             android:order="-1001"
-            settings:lottie_rawRes="@raw/privacy_illustration"/>
+            settings:lottie_rawRes="@raw/privacy_illustration"
+            settings:searchable="false"/>
 
     <!-- Backup settings -->
     <Preference
@@ -30,13 +31,15 @@
         android:title="@string/backup_data_title"
         android:persistent="false"
         android:fragment="com.android.settings.backup.ToggleBackupSettingFragment"
-        settings:controller="com.android.settings.backup.BackupDataPreferenceController" />
+        settings:controller="com.android.settings.backup.BackupDataPreferenceController"
+        settings:searchable="false" />
 
     <Preference
         android:key="configure_account"
         android:title="@string/backup_configure_account_title"
         android:persistent="false"
-        settings:controller="com.android.settings.backup.ConfigureAccountPreferenceController">
+        settings:controller="com.android.settings.backup.ConfigureAccountPreferenceController"
+        settings:searchable="false">
         <!-- the Intent declared here is always overwritten by a real one -->
         <intent android:action="placeholder" />
     </Preference>
@@ -44,19 +47,22 @@
     <Preference
         android:key="data_management"
         android:title="@string/backup_data_management_title"
-        settings:controller="com.android.settings.backup.DataManagementPreferenceController" />
+        settings:controller="com.android.settings.backup.DataManagementPreferenceController"
+        settings:searchable="false" />
 
     <SwitchPreference
         android:key="auto_restore"
         android:title="@string/auto_restore_title"
         android:summary="@string/auto_restore_summary"
-        settings:controller="com.android.settings.backup.AutoRestorePreferenceController" />
+        settings:controller="com.android.settings.backup.AutoRestorePreferenceController"
+        settings:searchable="false" />
 
     <Preference
         android:key="backup_inactive"
         android:title="@string/disabled_by_administrator_summary"
         android:enabled="false"
         android:selectable="false"
-        settings:controller="com.android.settings.backup.BackupInactivePreferenceController" />
+        settings:controller="com.android.settings.backup.BackupInactivePreferenceController"
+        settings:searchable="false" />
 
 </PreferenceScreen>

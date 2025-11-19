@@ -29,117 +29,64 @@
         android:order="-1000"
         android:title="@string/security_features_intro_title"
         android:summary="@string/security_features_intro_summary"
-        android:persistent="false" />
+        android:persistent="false"
+        settings:searchable="false" />
 
+    <!-- Note: Data Collection, Services, and Updates categories removed as controllers don't exist -->
+    <!-- These can be reimplemented in the future if needed -->
+
+    <!-- Access Control Features - Based on GrapheneOS and CalyxOS -->
     <PreferenceCategory
-        android:title="@string/security_features_category_data"
-        android:key="security_data_category"
-        android:order="10">
+        android:title="@string/security_features_category_access_control"
+        android:key="security_access_control_category"
+        android:order="40"
+        settings:searchable="false">
 
-        <SwitchPreference
-            android:key="block_analytics_toggle"
-            android:title="@string/block_analytics_title"
-            android:summary="@string/block_analytics_summary"
-            android:order="11"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockAnalyticsController" />
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="network_permission_control"
+            android:title="@string/network_permission_control_title"
+            android:summary="@string/network_permission_control_summary"
+            android:defaultValue="false"
+            app:position="top"
+            settings:controller="com.epic.fragments.NetworkPermissionControlController"
+            settings:searchable="false" />
 
-        <SwitchPreference
-            android:key="block_diagnostic_data_toggle"
-            android:title="@string/block_diagnostic_data_title"
-            android:summary="@string/block_diagnostic_data_summary"
-            android:order="12"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockDiagnosticDataController" />
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="app_hardening"
+            android:title="@string/app_hardening_title"
+            android:summary="@string/app_hardening_summary"
+            android:defaultValue="false"
+            app:position="middle"
+            settings:controller="com.epic.fragments.AppHardeningController"
+            settings:searchable="false" />
 
-        <SwitchPreference
-            android:key="block_personalization_toggle"
-            android:title="@string/block_personalization_title"
-            android:summary="@string/block_personalization_summary"
-            android:order="13"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockPersonalizationController" />
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="sensor_access_control"
+            android:title="@string/sensor_access_control_title"
+            android:summary="@string/sensor_access_control_summary"
+            android:defaultValue="false"
+            app:position="middle"
+            settings:controller="com.epic.fragments.SensorAccessControlController"
+            settings:searchable="false" />
 
-        <SwitchPreference
-            android:key="block_android_intelligence_toggle"
-            android:title="@string/block_android_intelligence_title"
-            android:summary="@string/block_android_intelligence_summary"
-            android:order="14"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockAndroidIntelligenceController" />
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="location_access_control"
+            android:title="@string/location_access_control_title"
+            android:summary="@string/location_access_control_summary"
+            android:defaultValue="false"
+            app:position="middle"
+            settings:controller="com.epic.fragments.LocationAccessControlController"
+            settings:searchable="false" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/security_features_category_services"
-        android:key="security_services_category"
-        android:order="20">
-
-        <SwitchPreference
-            android:key="block_ad_services_toggle"
-            android:title="@string/block_ad_services_title"
-            android:summary="@string/block_ad_services_summary"
-            android:order="21"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockAdServicesController" />
-
-        <SwitchPreference
-            android:key="block_cloud_backup_toggle"
-            android:title="@string/block_cloud_backup_title"
-            android:summary="@string/block_cloud_backup_summary"
-            android:order="22"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockCloudBackupController" />
-
-        <SwitchPreference
-            android:key="block_location_services_toggle"
-            android:title="@string/block_location_services_title"
-            android:summary="@string/block_location_services_summary"
-            android:order="23"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockLocationServicesController" />
-
-        <SwitchPreference
-            android:key="block_network_scanning_toggle"
-            android:title="@string/block_network_scanning_title"
-            android:summary="@string/block_network_scanning_summary"
-            android:order="24"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockNetworkScanningController" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/security_features_category_updates"
-        android:key="security_updates_category"
-        android:order="30">
-
-        <SwitchPreference
-            android:key="block_webview_updates_toggle"
-            android:title="@string/block_webview_updates_title"
-            android:summary="@string/block_webview_updates_summary"
-            android:order="31"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockWebViewUpdatesController" />
-
-        <SwitchPreference
-            android:key="block_system_updates_toggle"
-            android:title="@string/block_system_updates_title"
-            android:summary="@string/block_system_updates_summary"
-            android:order="32"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockSystemUpdatesController" />
-
-        <SwitchPreference
-            android:key="block_app_installation_toggle"
-            android:title="@string/block_app_installation_title"
-            android:summary="@string/block_app_installation_summary"
-            android:order="33"
-            android:persistent="false"
-            settings:controller="com.android.settings.applications.specialaccess.BlockAppInstallationController" />
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="microphone_access_control"
+            android:title="@string/microphone_access_control_title"
+            android:summary="@string/microphone_access_control_summary"
+            android:defaultValue="false"
+            app:position="bottom"
+            settings:controller="com.epic.fragments.MicrophoneAccessControlController"
+            settings:searchable="false" />
 
     </PreferenceCategory>
 
 </PreferenceScreen>
-
-

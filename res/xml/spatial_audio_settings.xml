@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/spatial_audio_title">
 
     <com.android.settingslib.widget.TopIntroPreference
@@ -24,14 +25,16 @@
         android:title="@string/spatial_audio_text"
         settings:searchable="false"/>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="spatial_audio"
         android:title="@string/spatial_audio_speaker"
+        app:position="top"
         settings:controller="com.android.settings.notification.SpatialAudioPreferenceController"/>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="spatial_audio_wired_headphones"
         android:title="@string/spatial_audio_wired_headphones"
+        app:position="bottom"
         settings:controller="com.android.settings.notification.SpatialAudioWiredHeadphonesController"/>
 
     <com.android.settingslib.widget.FooterPreference

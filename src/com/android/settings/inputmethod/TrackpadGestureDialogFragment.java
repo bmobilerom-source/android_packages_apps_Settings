@@ -78,6 +78,7 @@ public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, 0);
     }
 
     @Override
@@ -91,6 +92,8 @@ public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
         if (window == null) {
             return;
         }
+        // Set transparent background for the bottom sheet dialog container
+        window.setBackgroundDrawableResource(android.R.color.transparent);
         setLayoutEdgeToEdge(window);
         final Point size = getScreenSize();
         final WindowManager.LayoutParams attributes = window.getAttributes();

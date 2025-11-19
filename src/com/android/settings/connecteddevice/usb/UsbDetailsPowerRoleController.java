@@ -61,10 +61,15 @@ public class UsbDetailsPowerRoleController extends UsbDetailsController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceCategory = screen.findPreference(getPreferenceKey());
-        mSwitchPreference = new SwitchPreferenceCompat(mPreferenceCategory.getContext());
+        // Use AdaptiveSwitchPreference for consistent styling
+        mSwitchPreference = new com.android.settings.preferences.ui.AdaptiveSwitchPreference(
+                mPreferenceCategory.getContext());
         mSwitchPreference.setTitle(R.string.usb_use_power_only);
         mSwitchPreference.setKey(KEY_USB_USE_POWER_ONLY);
         mSwitchPreference.setOnPreferenceClickListener(this);
+        // Set position to solo for rounded corners
+        mSwitchPreference.setLayoutResource(com.android.settings.preferences.ui.AdaptivePreferenceUtils
+                .getSwitchLayoutResourceId(mPreferenceCategory.getContext(), null));
         mPreferenceCategory.addPreference(mSwitchPreference);
     }
 

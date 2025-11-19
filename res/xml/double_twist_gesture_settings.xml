@@ -36,11 +36,12 @@
         android:layout="@layout/settings_title_header_small">
   </PreferenceCategory>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="gesture_double_twist"
         android:title="@string/double_twist_for_camera_mode_title"
         android:summary="@string/double_twist_for_camera_mode_summary"
         android:order="200"
+        app:position="solo"
         app:keywords="@string/keywords_gesture"
         app:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 

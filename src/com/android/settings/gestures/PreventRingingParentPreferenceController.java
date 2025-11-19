@@ -58,8 +58,16 @@ public class PreventRingingParentPreferenceController extends TogglePreferenceCo
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
-        mSettingObserver = new SettingObserver(mPreference);
+        Preference foundPreference = screen.findPreference(getPreferenceKey());
+        // Only cast to PrimarySwitchPreference if it actually is one
+        // This prevents ClassCastException when XML uses regular Preference or AdaptivePreference
+        if (foundPreference instanceof PrimarySwitchPreference) {
+            mPreference = (PrimarySwitchPreference) foundPreference;
+        } else {
+            // If not a PrimarySwitchPreference, set to null and handle gracefully
+            mPreference = null;
+        }
+        mSettingObserver = new SettingObserver(foundPreference);
     }
 
     @Override
@@ -107,11 +115,15 @@ public class PreventRingingParentPreferenceController extends TogglePreferenceCo
                     summary = mContext.getText(R.string.switch_off_text);
             }
             preference.setEnabled(true);
-            mPreference.setSwitchEnabled(true);
+            if (mPreference != null) {
+                mPreference.setSwitchEnabled(true);
+            }
         } else {
             summary = mContext.getText(R.string.prevent_ringing_option_unavailable_lpp_summary);
             preference.setEnabled(false);
-            mPreference.setSwitchEnabled(false);
+            if (mPreference != null) {
+                mPreference.setSwitchEnabled(false);
+            }
         }
 
         preference.setSummary(summary);

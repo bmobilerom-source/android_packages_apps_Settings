@@ -69,6 +69,44 @@ public class DisplaySettings extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
     }
+    
+    @Override
+    public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        
+        // Add better spacing between cards/categories
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                android.view.View listView = view.findViewById(android.R.id.list);
+                if (listView instanceof androidx.recyclerview.widget.RecyclerView) {
+                    androidx.recyclerview.widget.RecyclerView recyclerView = 
+                            (androidx.recyclerview.widget.RecyclerView) listView;
+                    // Add item decoration for spacing between categories
+                    int spacing = (int) (16 * getResources().getDisplayMetrics().density); // 16dp spacing
+                    recyclerView.addItemDecoration(new androidx.recyclerview.widget.DividerItemDecoration(
+                            getContext(), androidx.recyclerview.widget.DividerItemDecoration.VERTICAL) {
+                        @Override
+                        public void getItemOffsets(android.graphics.Rect outRect, android.view.View view,
+                                androidx.recyclerview.widget.RecyclerView parent,
+                                androidx.recyclerview.widget.RecyclerView.State state) {
+                            int position = parent.getChildAdapterPosition(view);
+                            if (position != androidx.recyclerview.widget.RecyclerView.NO_POSITION) {
+                                androidx.preference.PreferenceScreen screen = getPreferenceScreen();
+                                if (screen != null && position < screen.getPreferenceCount()) {
+                                    androidx.preference.Preference pref = screen.getPreference(position);
+                                    if (pref instanceof androidx.preference.PreferenceCategory) {
+                                        // Add bottom spacing after each category
+                                        outRect.bottom = spacing;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {

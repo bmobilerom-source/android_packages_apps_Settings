@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
      Copyright (C) 2020 Wave-OS
+     Copyright (C) 2025 LineageOS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,14 +15,27 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen         xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="display_customizations4"
-    android:title=" ">
-    <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/homepage_widgets"
-        android:key="top_level_homepage_widgets"
-        android:selectable="false"
-        android:order="-180" />
+    android:title="@string/display_customizations4_title">
+
+    <!-- Lottie Animation -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="display_customizations4_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/display"/>
+
+    <!-- Header -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="display_customizations4_intro"
+        android:title="@string/display_customizations4_intro_title"
+        android:summary="@string/display_customizations4_intro_summary"
+        android:order="-1000" />
+
+    <!-- Placeholder for future preferences -->
+    <!-- This page can be expanded with additional display customization options -->
+
 </PreferenceScreen>

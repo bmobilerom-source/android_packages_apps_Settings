@@ -18,7 +18,6 @@ package com.epic.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +25,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
+import com.android.settings.preferences.ui.AdaptiveSwitchPreference;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class FingerprintToolsBottomSheet extends BottomSheetDialogFragment {
@@ -84,6 +83,8 @@ public class FingerprintToolsBottomSheet extends BottomSheetDialogFragment {
     }
 
     public static class FingerprintToolsPreferenceFragment extends PreferenceFragmentCompat {
+        private FingerprintToolsAdapter mAdapter;
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             try {
@@ -94,37 +95,55 @@ public class FingerprintToolsBottomSheet extends BottomSheetDialogFragment {
                     return;
                 }
                 
-                android.content.ContentResolver resolver = context.getContentResolver();
+                mAdapter = new FingerprintToolsAdapter(context);
                 
-                // Setup preferences with Settings.System
-                SwitchPreferenceCompat authRipple = findPreference("auth_ripple_enabled");
+                // Setup preferences using adapter - similar to wallpaper background
+                AdaptiveSwitchPreference authRipple = findPreference("auth_ripple_enabled");
                 if (authRipple != null) {
-                    authRipple.setChecked(Settings.System.getInt(resolver, "auth_ripple_enabled", 1) != 0);
-                    authRipple.setOnPreferenceChangeListener((preference, newValue) -> {
-                        Settings.System.putInt(resolver, "auth_ripple_enabled", (Boolean) newValue ? 1 : 0);
-                        return true;
-                    });
+                    mAdapter.setupAuthRipplePreference(authRipple);
                 }
                 
-                SwitchPreferenceCompat fpSuccessVibrate = findPreference("fp_success_vibrate");
+                AdaptiveSwitchPreference fpSuccessVibrate = findPreference("fp_success_vibrate");
                 if (fpSuccessVibrate != null) {
-                    fpSuccessVibrate.setChecked(Settings.System.getInt(resolver, "fp_success_vibrate", 1) != 0);
-                    fpSuccessVibrate.setOnPreferenceChangeListener((preference, newValue) -> {
-                        Settings.System.putInt(resolver, "fp_success_vibrate", (Boolean) newValue ? 1 : 0);
-                        return true;
-                    });
+                    mAdapter.setupFpSuccessVibratePreference(fpSuccessVibrate);
                 }
                 
-                SwitchPreferenceCompat fpErrorVibrate = findPreference("fp_error_vibrate");
+                AdaptiveSwitchPreference fpErrorVibrate = findPreference("fp_error_vibrate");
                 if (fpErrorVibrate != null) {
-                    fpErrorVibrate.setChecked(Settings.System.getInt(resolver, "fp_error_vibrate", 1) != 0);
-                    fpErrorVibrate.setOnPreferenceChangeListener((preference, newValue) -> {
-                        Settings.System.putInt(resolver, "fp_error_vibrate", (Boolean) newValue ? 1 : 0);
-                        return true;
-                    });
+                    mAdapter.setupFpErrorVibratePreference(fpErrorVibrate);
                 }
             } catch (Exception e) {
                 android.util.Log.e("FingerprintToolsBottomSheet", "Error in onCreatePreferences", e);
+            }
+        }
+        
+        @Override
+        public void onResume() {
+            super.onResume();
+            // Refresh preference states when bottom sheet is shown
+            refreshPreferenceStates();
+        }
+        
+        private void refreshPreferenceStates() {
+            Context context = getContext();
+            if (context == null || mAdapter == null) {
+                return;
+            }
+            
+            // Refresh all preference states to ensure they reflect current Settings values
+            AdaptiveSwitchPreference authRipple = findPreference("auth_ripple_enabled");
+            if (authRipple != null) {
+                authRipple.setChecked(FingerprintToolsHelper.isAuthRippleEnabled(context));
+            }
+            
+            AdaptiveSwitchPreference fpSuccessVibrate = findPreference("fp_success_vibrate");
+            if (fpSuccessVibrate != null) {
+                fpSuccessVibrate.setChecked(FingerprintToolsHelper.isFpSuccessVibrateEnabled(context));
+            }
+            
+            AdaptiveSwitchPreference fpErrorVibrate = findPreference("fp_error_vibrate");
+            if (fpErrorVibrate != null) {
+                fpErrorVibrate.setChecked(FingerprintToolsHelper.isFpErrorVibrateEnabled(context));
             }
         }
     }
