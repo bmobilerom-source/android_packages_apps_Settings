@@ -324,4 +324,12 @@
     <!-- BMobile Expressive Settings -->
     <string name="dashboard_style_bmobile_expressive">BMobile Expressive Settings</string>
     <string name="bmobile_expressive_settings_title">BMobile Expressive Settings</string>
+    
+    <!-- Mock Locations -->
+    <string name="mock_locations_title">Mock Locations</string>
+    <string name="mock_locations_summary">Select an app to provide mock location data</string>
+    <string name="mock_location_intro_title">Mock Location App</string>
+    <string name="mock_location_intro_summary">Choose an application to provide mock location data. This allows apps to receive fake GPS coordinates for testing purposes.</string>
+    <string name="mock_location_info_title">About Mock Locations</string>
+    <string name="mock_location_info_summary">Mock location allows you to test apps with fake GPS coordinates. Select an app that provides mock location functionality. This feature works independently of Developer Options.</string>
 </resources>
