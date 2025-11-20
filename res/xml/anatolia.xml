@@ -149,14 +149,6 @@
             android:fragment="com.android.settings.theme.CustomThemeSettings"
             android:icon="@drawable/ic_settings_display_white" />
 
-        <!-- Settings Page Blocking -->
-        <PreferenceScreen
-            android:key="settings_page_blocking_category"
-            android:title="@string/settings_page_blocking_title"
-            android:summary="@string/settings_page_blocking_summary"
-            android:fragment="com.epic.fragments.SettingsPageBlocking"
-            android:icon="@drawable/ic_settings_security_filled" />
-
         <!-- Settings Backup & Restore -->
         <PreferenceScreen
             android:key="settings_backup_restore_category"
@@ -212,11 +204,21 @@
             android:order="50"
             settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController" />
 
-    <Preference
+    <!-- Mock Locations -->
+    <PreferenceScreen
+        android:key="mock_locations_category"
+        android:title="@string/mock_locations_title"
+        android:summary="@string/mock_locations_summary"
+        android:fragment="com.android.settings.location.MockLocationsSettings"
+        android:icon="@drawable/ic_settings_location_filled" />
+
+    <!-- Display Customizations -->
+    <PreferenceScreen
         android:key="display_customization"
-        android:title="@string/display_customization"
+        android:title="@string/display_customizations_title"
+        android:summary="@string/display_customizations_summary"
         android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations"
-        android:summary="@string/display_customization"/>   
+        android:icon="@drawable/ic_settings_display_white" />   
             <!-- Quick settings -->
               
 
