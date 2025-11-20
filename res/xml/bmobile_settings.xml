@@ -15,26 +15,36 @@
         android:key="microg_pref"
         android:title="@string/bmobile_microg_title"
         android:summary="@string/bmobile_microg_summary"
-        settings:controller="com.epic.fragments.MicroGPreferenceController" />
+        settings:controller="com.epic.fragments.MicroGPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_top" />
 
     <Preference
         android:key="aurora_services_pref"
         android:title="@string/bmobile_aurora_services_title"
         android:summary="@string/bmobile_aurora_services_summary"
-        settings:controller="com.epic.fragments.AuroraServicesPreferenceController" />
+        settings:controller="com.epic.fragments.AuroraServicesPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="firewall_pref"
         android:title="@string/bmobile_firewall_title"
         android:summary="@string/bmobile_firewall_summary"
-        settings:controller="com.epic.fragments.FirewallPreferenceController" />
+        settings:controller="com.epic.fragments.FirewallPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="ad_services_pref"
         android:title="@string/bmobile_ad_services_title"
         android:summary="@string/bmobile_ad_services_summary"
         android:fragment="com.epic.fragments.AdServicesFragment"
-        settings:controller="com.epic.fragments.AdServicesPreferenceController" />
-
+        settings:controller="com.epic.fragments.AdServicesPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
+    <!-- Mock Locations -->
+    <PreferenceScreen
+        android:key="mock_locations_category"
+        android:title="@string/mock_locations_title"
+        android:summary="@string/mock_locations_summary"
+        android:fragment="com.android.settings.location.MockLocationsSettings"
+        settings:layout="@layout/adaptive_preference_card_bottom" />
 </PreferenceScreen>
 

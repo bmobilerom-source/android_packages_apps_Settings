@@ -26,15 +26,7 @@
         android:order="-1001"
         app:lottie_rawRes="@raw/optimise" />
 
-    <!-- Header -->
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="system_optimization_intro"
-        android:order="-1000"
-        android:title="@string/system_optimization_intro_title"
-        android:summary="@string/system_optimization_intro_summary"
-        android:persistent="false"
-        settings:searchable="false" />
-
+ 
     <!-- Status Summary -->
     <Preference
         android:key="optimization_status"
@@ -43,7 +35,8 @@
         android:selectable="false"
         android:order="-990"
         settings:controller="com.epic.fragments.OptimizationStatusController"
-        settings:searchable="false" />
+        settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card" />
 
     <!-- Optimization Preferences -->
     <!-- Only features that work out of the box without kernel/framework changes -->

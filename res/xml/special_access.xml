@@ -16,14 +16,22 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/special_access">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+     android:title="@string/special_access">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="auto_brightness_video"
+        settings:searchable="false"
+        android:order="-1001"
+        settings:lottie_rawRes="@raw/Permission"/>
 
     <Preference
         android:key="manage_external_storage"
         android:title="@string/manage_external_storage_title"
         android:order="-1900"
-        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:layout="@layout/adaptive_preference_card_top">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$ManageExternalStorageActivity" />
@@ -35,7 +43,8 @@
         android:order="-1800"
         android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
         settings:keywords="@string/interact_across_profiles_keywords"
-        settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController" />
+        settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="device_administrators"
@@ -44,7 +53,8 @@
         android:fragment="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
         android:summary="@string/summary_placeholder"
         settings:searchable="false"
-        settings:controller="com.android.settings.enterprise.ManageDeviceAdminPreferenceController" />
+        settings:controller="com.android.settings.enterprise.ManageDeviceAdminPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="system_alert_window_app_list"
@@ -52,7 +62,8 @@
         android:order="-1600"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_draw_overlay"
-        settings:controller="com.android.settings.applications.specialaccess.SystemAlertWindowPreferenceController">
+        settings:controller="com.android.settings.applications.specialaccess.SystemAlertWindowPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$OverlaySettingsActivity" />
@@ -63,14 +74,16 @@
         android:title="@string/manage_zen_modes_access_title"
         android:order="-1500"
         android:fragment="com.android.settings.notification.zen.ZenAccessSettings"
-        settings:controller="com.android.settings.applications.specialaccess.zenaccess.ZenAccessController" />
+        settings:controller="com.android.settings.applications.specialaccess.zenaccess.ZenAccessController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="media_management_apps"
         android:title="@string/media_management_apps_title"
         android:order="-1400"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_media_management_apps">
+        settings:keywords="@string/keywords_media_management_apps"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$MediaManagementAppsActivity" />
@@ -81,7 +94,8 @@
         android:title="@string/write_settings"
         android:order="-1300"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_write_settings">
+        settings:keywords="@string/keywords_write_settings"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$WriteSettingsActivity" />
@@ -92,24 +106,28 @@
         android:title="@string/manage_notification_access_title"
         android:order="-1200"
         android:fragment="com.android.settings.notification.NotificationAccessSettings"
-        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController" />
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="media_routing_control"
         android:title="@string/media_routing_control_title"
         android:order="-1100"
-        settings:controller="com.android.settings.applications.specialaccess.MediaRoutingControlPreferenceController" >
+        settings:controller="com.android.settings.applications.specialaccess.MediaRoutingControlPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle" >
     </Preference>
 
     <Preference
         android:key="use_full_screen_intent"
         android:title="@string/full_screen_intent_title"
-        settings:controller="com.android.settings.spa.app.specialaccess.UseFullScreenIntentPreferenceController" />
+        settings:controller="com.android.settings.spa.app.specialaccess.UseFullScreenIntentPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="write_system_preferences"
         android:title="@string/write_system_preferences_page_title"
-        settings:controller="com.android.settings.spa.app.specialaccess.WriteSystemPreferencesPreferenceController" />
+        settings:controller="com.android.settings.spa.app.specialaccess.WriteSystemPreferencesPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="picture_in_picture"
@@ -117,7 +135,8 @@
         android:order="-1100"
         android:fragment="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings"
         settings:keywords="@string/picture_in_picture_keywords"
-        settings:controller="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureController" />
+        settings:controller="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="premium_sms"
@@ -125,7 +144,8 @@
         android:order="-1000"
         android:fragment="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess"
         settings:isPreferenceVisible="@bool/config_show_premium_sms"
-        settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsController" />
+        settings:controller="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="data_saver"
@@ -133,7 +153,8 @@
         android:order="-900"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
         settings:isPreferenceVisible="@bool/config_show_data_saver"
-        settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
+        settings:controller="com.android.settings.applications.specialaccess.DataSaverController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="long_background_tasks"
@@ -143,7 +164,8 @@
         settings:isPreferenceVisible="false"
         settings:searchable="false"
         settings:keywords="@string/keywords_long_background_tasks"
-        settings:controller="com.android.settings.applications.specialaccess.applications.LongBackgroundTaskController">
+        settings:controller="com.android.settings.applications.specialaccess.applications.LongBackgroundTaskController"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$LongBackgroundTasksActivity" />
@@ -154,7 +176,8 @@
         android:title="@string/install_other_apps"
         android:order="-700"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_install_other_apps">
+        settings:keywords="@string/keywords_install_other_apps"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$ManageExternalSourcesActivity" />
@@ -165,7 +188,8 @@
         android:title="@string/alarms_and_reminders_title"
         android:order="-600"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_alarms_and_reminders">
+        settings:keywords="@string/keywords_alarms_and_reminders"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$AlarmsAndRemindersActivity" />
@@ -176,7 +200,8 @@
         android:title="@string/usage_access"
         android:order="-500"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_write_settings">
+        settings:keywords="@string/keywords_write_settings"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
@@ -188,7 +213,8 @@
         android:order="-400"
         android:fragment="com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings"
         settings:keywords="@string/keywords_vr_listener"
-        settings:controller="com.android.settings.applications.specialaccess.vrlistener.EnabledVrListenersController">
+        settings:controller="com.android.settings.applications.specialaccess.vrlistener.EnabledVrListenersController"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$VrListenersSettingsActivity" />
@@ -199,7 +225,8 @@
         android:title="@string/change_wifi_state_title"
         android:order="-300"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_change_wifi_state">
+        settings:keywords="@string/keywords_change_wifi_state"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$ChangeWifiStateActivity" />
@@ -209,7 +236,8 @@
         android:key="turn_screen_on"
         android:title="@string/turn_screen_on_title"
         android:order="-200"
-        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:layout="@layout/adaptive_preference_card_middle">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$TurnScreenOnSettingsActivity" />
@@ -219,14 +247,16 @@
         android:key="special_access_more"
         android:title="@string/special_access_more"
         android:order="-100"
-        settings:controller="com.android.settings.applications.specialaccess.MoreSpecialAccessPreferenceController" />
+        settings:controller="com.android.settings.applications.specialaccess.MoreSpecialAccessPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="change_nfc_tag_apps_state"
         android:title="@string/change_nfc_tag_apps_title"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         settings:keywords="@string/keywords_change_nfc_tag_apps_state"
-        settings:controller="com.android.settings.nfc.NfcTagAppsPreferenceController">
+        settings:controller="com.android.settings.nfc.NfcTagAppsPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_bottom">
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$ChangeNfcTagAppsActivity" />
