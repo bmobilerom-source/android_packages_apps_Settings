@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.display.SmartAutoRotatePreferenceFragment;
 
 import java.util.List;
 
@@ -338,31 +339,17 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
     
     private void launchAutoRotate() {
         try {
-            // Method 1: Try DisplaySettings directly (most reliable)
-            try {
-                new SubSettingLauncher(activity)
-                    .setDestination("com.android.settings.DisplaySettings")
-                    .setTitleRes(R.string.accelerometer_title)
-                    .setSourceMetricsCategory(sourceMetrics)
-                    .launch();
-                return;
-            } catch (Exception e) {
-                Log.d("DisplayPageGridAdapter", "DisplaySettings launch failed, trying alternatives", e);
-            }
-            
-            // Method 2: Try device state auto rotate (if available)
-            try {
-                new SubSettingLauncher(activity)
-                    .setDestination("com.android.settings.display.DeviceStateAutoRotateDetailsFragment")
-                    .setTitleRes(R.string.accelerometer_title)
-                    .setSourceMetricsCategory(sourceMetrics)
-                    .launch();
-                return;
-            } catch (Exception e) {
-                Log.d("DisplayPageGridAdapter", "DeviceStateAutoRotateDetailsFragment not available", e);
-            }
-            
-            // Method 3: Navigate to DisplaySettings with auto_rotate key
+            // Use the same pattern as launchSettingsFragment - this is the most reliable method
+            Log.d("DisplayPageGridAdapter", "Launching SmartAutoRotatePreferenceFragment");
+            new SubSettingLauncher(activity)
+                .setDestination("com.android.settings.display.SmartAutoRotatePreferenceFragment")
+                .setTitleRes(R.string.accelerometer_title)
+                .setSourceMetricsCategory(sourceMetrics)
+                .launch();
+            Log.d("DisplayPageGridAdapter", "Successfully launched SmartAutoRotatePreferenceFragment");
+        } catch (Exception e) {
+            Log.e("DisplayPageGridAdapter", "Failed to launch SmartAutoRotatePreferenceFragment", e);
+            // Fallback: Try DisplaySettings with auto_rotate key
             try {
                 Bundle args = new Bundle();
                 args.putString(":settings:fragment_args_key", "auto_rotate");
@@ -372,13 +359,11 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
                     .setArguments(args)
                     .setSourceMetricsCategory(sourceMetrics)
                     .launch();
-            } catch (Exception e) {
-                Log.e("DisplayPageGridAdapter", "All auto rotate launch methods failed", e);
+                Log.d("DisplayPageGridAdapter", "Fallback: Launched DisplaySettings with auto_rotate key");
+            } catch (Exception fallbackException) {
+                Log.e("DisplayPageGridAdapter", "All auto rotate launch methods failed", fallbackException);
                 showErrorToast();
             }
-        } catch (Exception e) {
-            Log.e("DisplayPageGridAdapter", "Failed to launch auto rotate", e);
-            showErrorToast();
         }
     }
     
@@ -412,12 +397,15 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
                     "org.lineageos.lineageparts.PartsActivity"));
                 intent.putExtra(":settings:show_fragment", 
                     "org.lineageos.lineageparts.livedisplay.LiveDisplaySettings");
-                intent.putExtra(":settings:show_fragment_title_resid", R.string.color_mode_title);
+                // Use string title instead of resource ID to avoid cross-package resource issues
+                intent.putExtra(":settings:show_fragment_title", 
+                    activity.getString(R.string.color_mode_title));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 
                 PackageManager pm = activity.getPackageManager();
                 if (pm.resolveActivity(intent, 0) != null) {
                     activity.startActivity(intent);
+                    Log.d("DisplayPageGridAdapter", "Successfully launched LiveDisplay via PartsActivity");
                     return;
                 }
             } catch (Exception e) {
@@ -435,6 +423,7 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
                 PackageManager pm = activity.getPackageManager();
                 if (pm.resolveActivity(intent, 0) != null) {
                     activity.startActivity(intent);
+                    Log.d("DisplayPageGridAdapter", "Successfully launched LiveDisplay via PART action");
                     return;
                 }
             } catch (Exception e) {
@@ -442,13 +431,17 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
             }
             
             // Method 3: Fallback to DisplaySettings (which has LineagePartsPreference for livedisplay)
-            // This will use the LineagePartsPreference which should handle launching LiveDisplay
+            // Navigate to DisplaySettings and let LineagePartsPreference handle the launch
             try {
+                Bundle args = new Bundle();
+                args.putString(":settings:fragment_args_key", "color_mode");
                 new SubSettingLauncher(activity)
                     .setDestination("com.android.settings.DisplaySettings")
                     .setTitleRes(R.string.color_mode_title)
+                    .setArguments(args)
                     .setSourceMetricsCategory(sourceMetrics)
                     .launch();
+                Log.d("DisplayPageGridAdapter", "Successfully launched DisplaySettings for LiveDisplay");
             } catch (Exception e) {
                 Log.e("DisplayPageGridAdapter", "All LiveDisplay launch methods failed", e);
                 showErrorToast();
