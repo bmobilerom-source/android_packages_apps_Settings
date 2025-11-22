@@ -19,11 +19,41 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/ambient_text_category_title">
 
+    <!-- Preview -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="ambient_preview"
+        android:layout="@layout/ambient_customization_preview"
+        android:order="-1"
+        settings:searchable="false" />
+
+    <!-- Master Switch -->
+    <SwitchPreference
+        android:key="ambient_customization_enable"
+        android:title="@string/ambient_master_title"
+        android:summary="@string/ambient_master_summary"
+        android:defaultValue="false"
+        android:order="0" />
+
+    <!-- Always On Display Switch -->
+    <SwitchPreference
+        android:key="doze_always_on"
+        android:title="@string/doze_always_on_title"
+        android:summary="@string/doze_always_on_summary"
+        android:defaultValue="false"
+        android:order="5" />
+
     <!-- Text Customization Category -->
     <PreferenceCategory
         android:key="ambient_text_category"
         android:title="@string/ambient_text_category"
         android:order="1">
+
+        <SwitchPreference
+            android:key="ambient_text_enable"
+            android:title="@string/ambient_text_enable_title"
+            android:summary="@string/ambient_text_enable_summary"
+            android:defaultValue="false"
+            android:order="5" />
 
         <!-- Ambient Text -->
         <com.android.settingslib.CustomEditTextPreferenceCompat
@@ -31,7 +61,26 @@
             android:title="@string/ambient_text_title"
             android:summary="@string/ambient_text_summary"
             android:dialogTitle="@string/ambient_text_title"
+            android:dependency="ambient_text_enable"
             android:order="10" />
+
+        <!-- Text Size -->
+        <SeekBarPreference
+            android:key="ambient_text_size"
+            android:title="@string/ambient_text_size_title"
+            android:summary="@string/ambient_text_size_summary"
+            android:defaultValue="30"
+            android:dependency="ambient_text_enable"
+            android:order="15" />
+
+        <!-- Text Animation -->
+        <SwitchPreference
+            android:key="ambient_text_animation"
+            android:title="@string/ambient_text_animation_title"
+            android:summary="@string/ambient_text_animation_summary"
+            android:defaultValue="false"
+            android:dependency="ambient_text_enable"
+            android:order="18" />
 
         <!-- Text Alignment -->
         <ListPreference
@@ -41,6 +90,7 @@
             android:entries="@array/ambient_text_alignment_entries"
             android:entryValues="@array/ambient_text_alignment_values"
             android:defaultValue="0"
+            android:dependency="ambient_text_enable"
             android:order="20" />
 
         <!-- Color Type -->
@@ -51,6 +101,7 @@
             android:entries="@array/ambient_text_type_color_entries"
             android:entryValues="@array/ambient_text_type_color_values"
             android:defaultValue="0"
+            android:dependency="ambient_text_enable"
             android:order="30" />
 
         <!-- Custom Color -->
@@ -58,6 +109,7 @@
             android:key="ambient_text_color"
             android:title="@string/ambient_text_color_title"
             android:summary="@string/default_string"
+            android:dependency="ambient_text_enable"
             android:order="40" />
 
     </PreferenceCategory>
@@ -68,11 +120,19 @@
         android:title="@string/ambient_image_category"
         android:order="2">
 
+        <SwitchPreference
+            android:key="ambient_image_enable"
+            android:title="@string/ambient_image_enable_title"
+            android:summary="@string/ambient_image_enable_summary"
+            android:defaultValue="false"
+            android:order="5" />
+
         <!-- Custom Image -->
         <Preference
             android:key="ambient_custom_image"
             android:title="@string/ambient_image_title"
             android:summary="@string/ambient_image_summary"
+            android:dependency="ambient_image_enable"
             android:order="10" />
 
     </PreferenceCategory>

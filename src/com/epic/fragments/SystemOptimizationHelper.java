@@ -18,6 +18,7 @@ package com.epic.fragments;
 
 import android.app.ActivityManager;
 import android.app.IActivityManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
@@ -54,9 +55,10 @@ public class SystemOptimizationHelper {
     }
 
     public static boolean setBackgroundAppLimitsEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(),
-                KEY_BACKGROUND_APP_LIMITS, enabled ? 1 : 0);
+        ContentResolver resolver = context.getContentResolver();
+        boolean result = Settings.System.putInt(resolver, KEY_BACKGROUND_APP_LIMITS, enabled ? 1 : 0);
         if (result) {
+            notifyOptimizationChange(resolver, KEY_BACKGROUND_APP_LIMITS);
             Log.d(TAG, "Background app limits " + (enabled ? "enabled" : "disabled"));
             // Apply optimization via ActivityManager if available
             applyBackgroundAppLimits(context, enabled);
@@ -88,12 +90,12 @@ public class SystemOptimizationHelper {
     }
 
     public static boolean setNetworkOptimizationEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(),
-                KEY_NETWORK_OPTIMIZATION, enabled ? 1 : 0);
+        ContentResolver resolver = context.getContentResolver();
+        boolean result = Settings.System.putInt(resolver, KEY_NETWORK_OPTIMIZATION, enabled ? 1 : 0);
         if (result) {
             // Enable network optimization settings
-            Settings.Global.putInt(context.getContentResolver(),
-                    "network_optimization_enabled", enabled ? 1 : 0);
+            Settings.Global.putInt(resolver, "network_optimization_enabled", enabled ? 1 : 0);
+            notifyOptimizationChange(resolver, KEY_NETWORK_OPTIMIZATION);
             Log.d(TAG, "Network optimization " + (enabled ? "enabled" : "disabled"));
         }
         return result;
@@ -108,12 +110,12 @@ public class SystemOptimizationHelper {
     }
 
     public static boolean setBatteryOptimizationEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(),
-                KEY_BATTERY_OPTIMIZATION, enabled ? 1 : 0);
+        ContentResolver resolver = context.getContentResolver();
+        boolean result = Settings.System.putInt(resolver, KEY_BATTERY_OPTIMIZATION, enabled ? 1 : 0);
         if (result) {
             // Enable aggressive battery saver mode
-            Settings.Global.putInt(context.getContentResolver(),
-                    "aggressive_battery_saver", enabled ? 1 : 0);
+            Settings.Global.putInt(resolver, "aggressive_battery_saver", enabled ? 1 : 0);
+            notifyOptimizationChange(resolver, KEY_BATTERY_OPTIMIZATION);
             Log.d(TAG, "Battery optimization " + (enabled ? "enabled" : "disabled"));
         }
         return result;
@@ -128,12 +130,12 @@ public class SystemOptimizationHelper {
     }
 
     public static boolean setStorageOptimizationEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(),
-                KEY_STORAGE_OPTIMIZATION, enabled ? 1 : 0);
+        ContentResolver resolver = context.getContentResolver();
+        boolean result = Settings.System.putInt(resolver, KEY_STORAGE_OPTIMIZATION, enabled ? 1 : 0);
         if (result) {
             // Enable storage optimization
-            Settings.Global.putInt(context.getContentResolver(),
-                    "storage_optimization_enabled", enabled ? 1 : 0);
+            Settings.Global.putInt(resolver, "storage_optimization_enabled", enabled ? 1 : 0);
+            notifyOptimizationChange(resolver, KEY_STORAGE_OPTIMIZATION);
             Log.d(TAG, "Storage optimization " + (enabled ? "enabled" : "disabled"));
         }
         return result;
@@ -149,12 +151,12 @@ public class SystemOptimizationHelper {
     }
 
     public static boolean setThermalThrottlingEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(),
-                KEY_THERMAL_THROTTLING, enabled ? 1 : 0);
+        ContentResolver resolver = context.getContentResolver();
+        boolean result = Settings.System.putInt(resolver, KEY_THERMAL_THROTTLING, enabled ? 1 : 0);
         if (result) {
             // Control thermal throttling
-            Settings.Global.putInt(context.getContentResolver(),
-                    "thermal_throttling_enabled", enabled ? 1 : 0);
+            Settings.Global.putInt(resolver, "thermal_throttling_enabled", enabled ? 1 : 0);
+            notifyOptimizationChange(resolver, KEY_THERMAL_THROTTLING);
             try {
                 PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
                 if (pm != null) {
@@ -315,6 +317,18 @@ public class SystemOptimizationHelper {
                 return "Shutdown";
             default:
                 return "Unknown";
+        }
+    }
+
+    /**
+     * Notify SystemUI of optimization changes
+     */
+    private static void notifyOptimizationChange(ContentResolver resolver, String key) {
+        try {
+            resolver.notifyChange(Settings.System.getUriFor(key), null, true);
+            Log.d(TAG, "Notified SystemUI of optimization change: " + key);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to notify optimization change: " + key, e);
         }
     }
 }

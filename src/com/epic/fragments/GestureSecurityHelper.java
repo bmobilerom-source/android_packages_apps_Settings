@@ -19,6 +19,7 @@ package com.epic.fragments;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
+import android.util.Log;
 
 /**
  * Helper class for Gesture Security Options.
@@ -45,7 +46,11 @@ public class GestureSecurityHelper {
             return false;
         }
         ContentResolver resolver = context.getContentResolver();
-        return Settings.Secure.putInt(resolver, "show_clipboard_overlay", enabled ? 1 : 0);
+        boolean success = Settings.Secure.putInt(resolver, "show_clipboard_overlay", enabled ? 1 : 0);
+        if (success) {
+            notifyGestureSecurityChange(resolver, Settings.Secure.getUriFor("show_clipboard_overlay"));
+        }
+        return success;
     }
 
     /**
@@ -111,7 +116,24 @@ public class GestureSecurityHelper {
             return false;
         }
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver, "secure_lockscreen_qs_disabled", enabled ? 1 : 0);
+        boolean success = Settings.System.putInt(resolver, "secure_lockscreen_qs_disabled", enabled ? 1 : 0);
+        if (success) {
+            notifyGestureSecurityChange(resolver, Settings.System.getUriFor("secure_lockscreen_qs_disabled"));
+        }
+        return success;
+    }
+
+    /**
+     * Notify SystemUI of gesture security changes
+     */
+    private static void notifyGestureSecurityChange(ContentResolver resolver, android.net.Uri uri) {
+        try {
+            resolver.notifyChange(uri, null, true);
+            Log.d("GestureSecurityHelper", "Notified SystemUI of gesture security change");
+        } catch (Exception e) {
+            Log.e("GestureSecurityHelper", "Failed to notify gesture security change", e);
+        }
     }
 }
+
 

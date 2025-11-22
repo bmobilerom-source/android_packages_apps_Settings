@@ -19,6 +19,7 @@ package com.epic.fragments;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
+import android.util.Log;
 
 /**
  * Helper class for Fingerprint Tools Options.
@@ -45,7 +46,11 @@ public class FingerprintToolsHelper {
             return false;
         }
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver, "auth_ripple_enabled", enabled ? 1 : 0);
+        boolean success = Settings.System.putInt(resolver, "auth_ripple_enabled", enabled ? 1 : 0);
+        if (success) {
+            notifyFingerprintChange(resolver, "auth_ripple_enabled");
+        }
+        return success;
     }
 
     /**
@@ -67,7 +72,11 @@ public class FingerprintToolsHelper {
             return false;
         }
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver, "fp_success_vibrate", enabled ? 1 : 0);
+        boolean success = Settings.System.putInt(resolver, "fp_success_vibrate", enabled ? 1 : 0);
+        if (success) {
+            notifyFingerprintChange(resolver, "fp_success_vibrate");
+        }
+        return success;
     }
 
     /**
@@ -89,7 +98,24 @@ public class FingerprintToolsHelper {
             return false;
         }
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver, "fp_error_vibrate", enabled ? 1 : 0);
+        boolean success = Settings.System.putInt(resolver, "fp_error_vibrate", enabled ? 1 : 0);
+        if (success) {
+            notifyFingerprintChange(resolver, "fp_error_vibrate");
+        }
+        return success;
+    }
+
+    /**
+     * Notify SystemUI of fingerprint settings changes
+     */
+    private static void notifyFingerprintChange(ContentResolver resolver, String key) {
+        try {
+            resolver.notifyChange(Settings.System.getUriFor(key), null, true);
+            Log.d("FingerprintToolsHelper", "Notified SystemUI of fingerprint setting change: " + key);
+        } catch (Exception e) {
+            Log.e("FingerprintToolsHelper", "Failed to notify fingerprint setting change: " + key, e);
+        }
     }
 }
+
 

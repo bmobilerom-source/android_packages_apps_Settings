@@ -159,9 +159,12 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                 return true;
             } else if (KEY_SECURE_LOCKSCREEN_QS_DISABLED.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.System.putInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, enabled ? 1 : 0);
+                boolean success = Settings.System.putInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, enabled ? 1 : 0);
+                if (success) {
+                    resolver.notifyChange(Settings.System.getUriFor(KEY_SECURE_LOCKSCREEN_QS_DISABLED), null, true);
+                }
                 Log.d(TAG, "secure_lockscreen_qs_disabled set to: " + enabled);
-                return true;
+                return success;
             } else if (KEY_POCKET_LOCK.equals(key)) {
                 boolean enabled = (Boolean) newValue;
                 Settings.Secure.putIntForUser(resolver, 
