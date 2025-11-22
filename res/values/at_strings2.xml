@@ -37,6 +37,21 @@
     <string name="Team_summary2">Spend time in knowing people behind this project !</string>
     <string name="button2">Buttons</string>
     <string name="team2">Team</string>
+
+    
+    <string name="auto_reboot_title">Auto Reboot</string>
+    <string name="auto_reboot_summary">Automatically reboot device after specified period</string>
+    <string name="auto_reboot_interval_title">Reboot Interval</string>
+    <string name="auto_reboot_interval_summary">Time between automatic reboots</string>
+    <string name="auto_reboot_footer">Device will automatically reboot after the selected time period. This helps maintain system performance and security.</string>
+    <string name="auto_reboot_interval_one_hour">1 hour</string>
+    <string name="auto_reboot_interval_hours">%1$d hours</string>
+    <string name="auto_reboot_interval_one_day">1 day</string>
+    <string name="auto_reboot_interval_days">%1$d days</string>
+    <string name="auto_reboot_interval_minutes">%1$d minutes</string>
+    <string name="auto_reboot_confirm_credential_title">Confirm PIN</string>
+    <string name="auto_reboot_confirm_credential_description">Enter your device PIN to change auto reboot settings</string>
+    
 </resources>
 
 
