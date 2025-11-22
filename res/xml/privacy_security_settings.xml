@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 LineageOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/privacy_security_title">
+
+    <!-- Intro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="privacy_security_intro"
+        android:title="@string/privacy_security_intro_title"
+        android:summary="@string/privacy_security_intro_summary_working"
+        android:selectable="false" />
+
+    <!-- Lock Screen Security -->
+    <PreferenceCategory
+        android:key="lockscreen_security_category"
+        android:title="@string/lockscreen_security_category_title">
+
+        <!-- PIN Scrambling -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="pin_scramble"
+            android:title="@string/pin_scramble_title"
+            android:summary="@string/pin_scramble_summary"
+            settings:controller="com.epic.fragments.PinScrambleController" />
+
+    </PreferenceCategory>
+
+    <!-- Network Privacy -->
+    <PreferenceCategory
+        android:key="network_privacy_category"
+        android:title="@string/network_privacy_category_title">
+
+        <!-- MAC Randomization -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="mac_randomization"
+            android:title="@string/mac_randomization_title"
+            android:summary="@string/mac_randomization_summary"
+            settings:controller="com.epic.fragments.MacRandomizationController" />
+
+        <!-- Private DNS -->
+        <Preference
+            android:key="private_dns"
+            android:title="@string/private_dns_title"
+            android:summary="@string/private_dns_summary"
+            settings:controller="com.epic.fragments.PrivateDnsController" />
+
+    </PreferenceCategory>
+
+    <!-- Auto Features -->
+    <PreferenceCategory
+        android:key="auto_features_category"
+        android:title="@string/auto_features_category_title">
+
+        <!-- Auto Reboot -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="auto_reboot"
+            android:title="@string/auto_reboot_title"
+            android:summary="@string/auto_reboot_summary"
+            android:fragment="com.epic.fragments.AutoRebootSettings"
+            app:position="solo"
+            settings:controller="com.epic.fragments.AutoRebootController" />
+
+    </PreferenceCategory>
+
+    <!-- Privacy Controls -->
+    <PreferenceCategory
+        android:key="privacy_controls_category"
+        android:title="@string/privacy_controls_category_title">
+
+        <!-- Clipboard Notifications -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="clipboard_notifications"
+            android:title="@string/clipboard_notifications_title"
+            android:summary="@string/clipboard_notifications_summary"
+            settings:controller="com.epic.fragments.ClipboardNotificationsController" />
+
+    </PreferenceCategory>
+
+    <!-- Security Controls -->
+    <PreferenceCategory
+        android:key="security_controls_category"
+        android:title="@string/security_controls_category_title">
+
+        <!-- USB Accessories -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="usb_accessories"
+            android:title="@string/usb_accessories_title"
+            android:summary="@string/usb_accessories_summary"
+            settings:controller="com.epic.fragments.UsbAccessoriesController" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
+

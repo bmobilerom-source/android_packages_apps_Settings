@@ -51,14 +51,15 @@
         app:position="top"
         settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
 
-    <com.android.settingslib.RestrictedPreference
+    <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"
         android:order="100"
+        app:position="bottom"
         settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="@string/config_cell_broadcast_receiver_package"
             android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
-    </com.android.settingslib.RestrictedPreference>
+    </com.android.settings.preferences.ui.AdaptiveRestrictedPreference>
 </PreferenceScreen>

@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="screensaver_settings_screen"
     android:title=" "
     settings:keywords="@string/keywords_screensaver">
@@ -35,21 +36,27 @@
             android:layout="@layout/dream_picker_layout"/>
     </PreferenceCategory>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="when_to_start"
         android:title="@string/screensaver_settings_when_to_dream"
+        android:order="10"
+        app:position="top"
         android:fragment="com.android.settings.dream.WhenToDreamPicker"/>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="dream_complications_toggle"
         android:title="@string/dream_complications_toggle_title"
         android:summary="@string/dream_complications_toggle_summary"
+        android:order="20"
+        app:position="middle"
         settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="dream_home_controls_toggle"
         android:title="@string/dream_home_controls_toggle_title"
-        android:summary="@string/dream_home_controls_toggle_summary" />
+        android:summary="@string/dream_home_controls_toggle_summary"
+        android:order="30"
+        app:position="bottom" />
 
     <com.android.settings.applications.SpacePreference
         android:layout_height="16dp" />

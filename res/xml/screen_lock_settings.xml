@@ -54,7 +54,7 @@
         android:summary="@string/summary_placeholder"
         android:entries="@array/lock_after_timeout_entries"
         android:entryValues="@array/lock_after_timeout_values"
-        android:order="0" />
+        android:order="10" />
 
     <!-- Switches -->
     <!-- available in pattern -->
@@ -67,13 +67,13 @@
     <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="visible_error_pattern"
         android:title="@string/lockpattern_settings_enable_error_path_title"
-        android:order="101"
+        android:order="110"
         app:position="middle" />
 
     <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="visibledots"
         android:title="@string/lockpattern_settings_enable_dots_title"
-        android:order="102"
+        android:order="120"
         app:position="middle" />
 
     <!-- available in pin -->
@@ -81,21 +81,21 @@
         android:key="auto_pin_confirm"
         android:title="@string/lock_screen_auto_pin_confirm_title"
         android:summary="@string/lock_screen_auto_pin_confirm_summary"
-        android:order="103"
+        android:order="130"
         app:position="middle" />
 
     <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="enhancedPinPrivacy"
         android:title="@string/lockpattern_settings_enhanced_pin_privacy_title"
         android:summary="@string/lockpattern_settings_enhanced_pin_privacy_summary"
-        android:order="104"
+        android:order="140"
         app:position="middle" />
 
     <!-- available in pin/pattern/password -->
     <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="power_button_instantly_locks"
         android:title="@string/lockpattern_settings_enable_power_button_instantly_locks"
-        android:order="105"
+        android:order="150"
         app:position="middle" />
 
     <!-- Lineage additions, available in pin -->
@@ -103,7 +103,7 @@
         android:key="lockscreen_scramble_pin_layout"
         android:title="@string/unlock_scramble_pin_layout_title"
         android:summary="@string/unlock_scramble_pin_layout_summary"
-        android:order="106"
+        android:order="160"
         app:position="bottom" />
 
     <!-- SeekBars -->

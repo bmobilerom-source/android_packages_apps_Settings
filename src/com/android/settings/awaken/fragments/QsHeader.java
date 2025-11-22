@@ -125,11 +125,12 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER,
                     provider, UserHandle.USER_CURRENT);
             if (success) {
-                // Notify SystemUI of the change
+                // Notify SystemUI of the change - use UserHandle.USER_ALL to notify all users
                 resolver.notifyChange(
                         Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER),
-                        null, false);
+                        null, true);
                 updateProviderSummary(provider);
+                Log.d(TAG, "QS Header provider changed to: " + provider);
             }
             return success;
         } else if (preference == mHeaderVisibility) {
@@ -138,11 +139,12 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
                     Settings.System.STATUS_BAR_CUSTOM_HEADER,
                     visibility, UserHandle.USER_CURRENT);
             if (success) {
-                // Notify SystemUI of the change
+                // Notify SystemUI of the change - use UserHandle.USER_ALL to notify all users
                 resolver.notifyChange(
                         Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER),
-                        null, false);
+                        null, true);
                 updateVisibilitySummary(visibility);
+                Log.d(TAG, "QS Header visibility changed to: " + visibility);
             }
             return success;
         } else if (preference == mHeaderImage) {
@@ -160,11 +162,12 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_IMAGE,
                     imageValue, UserHandle.USER_CURRENT);
             if (success) {
-                // Notify SystemUI of the change
+                // Notify SystemUI of the change - use UserHandle.USER_ALL to notify all users
                 resolver.notifyChange(
                         Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_IMAGE),
-                        null, false);
+                        null, true);
                 updateImageSummary(imageIndex);
+                Log.d(TAG, "QS Header image changed to: " + imageValue);
             }
             return success;
         }

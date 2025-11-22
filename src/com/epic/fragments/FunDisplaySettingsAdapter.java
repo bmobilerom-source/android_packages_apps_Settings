@@ -212,6 +212,12 @@ public class FunDisplaySettingsAdapter extends RecyclerView.Adapter<FunDisplaySe
             
             // Safety Center - launch SafetyCenterActivity
             if (title.equals(activity.getString(com.android.settings.R.string.safety_center_title))) {
+                // Check config flag first - if disabled, don't launch
+                if (!activity.getResources().getBoolean(com.android.settings.R.bool.config_safety_center_enabled)) {
+                    Log.d("FunDisplaySettingsAdapter", "Safety Center disabled via config_safety_center_enabled");
+                    Toast.makeText(activity, "Safety Center is disabled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent();
                 intent.setClassName("com.android.settings", 
                     "com.android.settings.safetycenter.SafetyCenterActivity");

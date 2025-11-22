@@ -27,8 +27,7 @@
         android:selectable="true"
         android:enabled="true"
         android:shouldDisableView="false"
-        android:fragment="com.epic.fragments.SystemSettingsAboutus" 
-        android:layout="@layout/CustomerOS_header"
+        android:fragment="com.epic.fragments.SystemSettingsAboutus"         android:layout="@layout/CustomerOS_header"
         android:order="-2000" />
 
     <!-- Main User Profile Card -->
@@ -200,8 +199,7 @@
 
         <!-- System hidden in Custom V2 -->
         <!-- <com.android.settings.widget.HomepagePreference
-            android:fragment="com.epic.fragments.SystemGrid" 
-            android:icon="@drawable/ic_settings_system_dashboard_filled"
+            android:fragment="com.epic.fragments.SystemGrid"         android:icon="@drawable/ic_settings_system_dashboard_filled"
             android:key="top_level_system"
             android:order="-20"
             android:title="@string/header_category_system"

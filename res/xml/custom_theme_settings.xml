@@ -88,17 +88,4 @@
         android:persistent="false"
         android:visible="false" />
 
-    <!-- Wallpaper Background Preference -->
-    <PreferenceCategory
-        android:key="wallpaper_background_category"
-        android:title="@string/wallpaper_background_category_title"
-        android:order="20" />
-
-    <Preference
-        android:key="wallpaper_background_preference"
-        android:title="@string/settings_wallpaper_background_title"
-        android:summary="@string/settings_wallpaper_background_summary"
-        android:order="21"
-        settings:layout="@layout/system_warning_preference_card" />
-
 </PreferenceScreen>

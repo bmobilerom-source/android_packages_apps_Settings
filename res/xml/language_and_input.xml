@@ -43,33 +43,36 @@
         android:key="languages_category"
         android:title="@string/locale_picker_category_title"
         android:order="0">
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="phone_language"
             android:title="@string/phone_language"
             android:order="0"
             android:fragment="com.android.settings.localepicker.LocaleListEditor"
+            app:position="top"
             settings:controller="com.android.settings.language.PhoneLanguagePreferenceController" />
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="apps_language"
             android:title="@string/app_locales_picker_menu_title"
             android:summary="@string/app_locale_picker_summary"
             android:order="1"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            app:position="middle"
             settings:controller="com.android.settings.applications.appinfo.ManageAppLocalePreferenceController">
             <extra
                 android:name="classname"
                 android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
-        </Preference>
+        </com.android.settings.preferences.ui.AdaptivePreference>
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="regional_preferences"
             android:title="@string/regional_preferences_title"
             android:summary="@string/regional_preferences_summary"
             android:order="2"
             android:fragment="com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment"
+            app:position="bottom"
             settings:controller="com.android.settings.regionalpreferences.RegionalPreferencesController">
-        </Preference>
+        </com.android.settings.preferences.ui.AdaptivePreference>
 
     </PreferenceCategory>
 
@@ -77,36 +80,40 @@
         android:key="keyboards_category"
         android:title="@string/keyboard_and_input_methods_category"
         android:order="1">
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="virtual_keyboard_pref"
             android:title="@string/virtual_keyboard_category"
             android:order="0"
             android:fragment="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment"
+            app:position="top"
             settings:keywords="@string/keywords_virtual_keyboard"/>
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
             android:summary="@string/summary_placeholder"
             android:order="1"
-            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"/>
+            android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"
+            app:position="bottom"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="speech_category"
         android:title="@string/speech_category_title"
         android:order="2">
-        <com.android.settings.widget.GearPreference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="voice_input_settings"
             android:title="@string/voice_input_settings_title"
             android:order="0"
-            android:fragment="com.android.settings.language.DefaultVoiceInputPicker" />
+            android:fragment="com.android.settings.language.DefaultVoiceInputPicker"
+            app:position="top" />
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="tts_settings_summary"
             android:title="@string/tts_settings_title"
             android:order="1"
             android:fragment="com.android.settings.tts.TextToSpeechSettings"
+            app:position="bottom"
             settings:searchable="false"/>
     </PreferenceCategory>
 
@@ -117,20 +124,22 @@
         <!-- Spell checker preference title, summary and fragment will be set programmatically. -->
         <!-- Note: Mark this as persistent="false" to remove unnecessarily saved shared preference.
              See: InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference. -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="spellcheckers_settings"
             android:title="@string/spellcheckers_settings_title"
             android:persistent="false"
             android:order="0"
-            android:fragment="com.android.settings.inputmethod.SpellCheckersSettings" />
+            android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
+            app:position="top" />
 
         <!-- User dictionary preference title and fragment will be set programmatically. -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="key_user_dictionary_settings"
             android:title="@string/user_dict_settings_title"
             android:summary="@string/user_dict_settings_summary"
             android:order="1"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
+            app:position="bottom"
             settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
     </PreferenceCategory>
 
@@ -145,11 +154,12 @@
             android:dialogTitle="@string/pointer_speed" />
     </PreferenceCategory>
 
-    <SwitchPreferenceCompat
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="vibrate_input_devices"
         android:title="@string/vibrate_input_devices"
         android:summary="@string/vibrate_input_devices_summary"
         android:order="200"
+        app:position="solo"
         settings:controller="com.android.settings.inputmethod.GameControllerPreferenceController" />
 
     <com.android.settings.widget.WorkOnlyCategory
@@ -158,19 +168,21 @@
         android:order="5"
         settings:searchable="false">
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="spellcheckers_settings_for_work_pref"
             android:title="@string/spellcheckers_settings_for_work_title"
             android:order="0"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
+            app:position="top"
             settings:forWork="true"
             settings:controller="com.android.settings.core.WorkPreferenceController" />
 
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="user_dictionary_settings_for_work_pref"
             android:title="@string/user_dict_settings_for_work_title"
             android:order="1"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
+            app:position="bottom"
             settings:forWork="true"
             settings:controller="com.android.settings.inputmethod.SpellCheckerForWorkPreferenceController" />
     </com.android.settings.widget.WorkOnlyCategory>

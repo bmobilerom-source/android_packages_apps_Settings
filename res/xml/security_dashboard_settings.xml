@@ -90,38 +90,40 @@
             settings:searchable="false" />
         
         <!-- BMobile Fingerprint Implementation -->
-        <Preference
+        <com.android.settings.preferences.ui.AdaptivePreference
             android:key="bmobile_fingerprint_settings"
             android:title="@string/bmobile_fingerprint_title"
             android:summary="@string/bmobile_fingerprint_summary"
             android:fragment="com.epic.fragments.BMobileFingerprintSettings"
             android:order="1"
-            settings:layout="@layout/system_warning_preference_card"
+            app:position="top"
             settings:searchable="false" />
 
-        <com.android.settingslib.RestrictedPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="face_settings"
             android:title="@string/security_settings_face_preference_title"
             android:summary="@string/summary_placeholder"
             android:order="2"
+            app:position="middle"
             settings:keywords="@string/keywords_face_settings"
             settings:searchable="false" />
 
-        <com.android.settingslib.RestrictedPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="biometric_settings"
             android:title="@string/security_settings_biometric_preference_title"
             android:summary="@string/summary_placeholder"
             android:order="3"
+            app:position="bottom"
             settings:keywords="@string/keywords_biometric_settings"
             settings:searchable="false" />
     </PreferenceCategory>
 
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:order="4"
         android:key="security_advanced_settings"
         android:title="@string/security_advanced_settings"
         android:summary="@string/summary_placeholder"
-        settings:layout="@layout/system_warning_preference_card"        
+        app:position="solo"
         android:fragment="com.android.settings.security.SecurityAdvancedSettings"
         settings:controller="com.android.settings.security.SecurityAdvancedSettingsController"
         settings:keywords="@string/security_advanced_settings_keywords"

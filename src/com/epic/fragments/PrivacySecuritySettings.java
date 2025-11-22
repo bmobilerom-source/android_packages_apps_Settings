@@ -13,44 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.epic.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoRebootSettings extends DashboardFragment {
+@SearchIndexable
+public class PrivacySecuritySettings extends DashboardFragment {
 
-    private static final String TAG = "AutoRebootSettings";
-    private static final String KEY_AUTO_REBOOT_INTERVAL = "auto_reboot_interval";
+    private static final String TAG = "PrivacySecuritySettings";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-    
-    @Override
-    public void onResume() {
-        super.onResume();
-        
-        // Refresh preference states when returning to the screen
-        Preference intervalPref = findPreference(KEY_AUTO_REBOOT_INTERVAL);
-        if (intervalPref != null) {
-            AutoRebootIntervalController controller = 
-                    (AutoRebootIntervalController) use(AutoRebootIntervalController.class);
-            if (controller != null) {
-                controller.updateState(intervalPref);
-            }
-        }
     }
 
     @Override
@@ -65,7 +50,7 @@ public class AutoRebootSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.auto_reboot_settings;
+        return R.xml.privacy_security_settings;
     }
 
     @Override
@@ -74,11 +59,25 @@ public class AutoRebootSettings extends DashboardFragment {
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context, Lifecycle lifecycle) {
+            Context context, com.android.settingslib.core.lifecycle.Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AutoRebootMainSwitchController(context, "auto_reboot_main_switch"));
-        controllers.add(new AutoRebootIntervalController(context, "auto_reboot_interval"));
+        // 6 Privacy & Security features that ACTUALLY WORK (framework reads these keys!)
+        controllers.add(new PinScrambleController(context, "pin_scramble"));
+        controllers.add(new AutoRebootController(context, "auto_reboot"));
+        controllers.add(new UsbAccessoriesController(context, "usb_accessories"));
+        controllers.add(new MacRandomizationController(context, "mac_randomization"));
+        controllers.add(new PrivateDnsController(context, "private_dns"));
+        controllers.add(new ClipboardNotificationsController(context, "clipboard_notifications"));
         return controllers;
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.privacy_security_settings) {
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    return keys;
+                }
+            };
 }
 

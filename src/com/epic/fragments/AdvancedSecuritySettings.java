@@ -13,42 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.epic.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoRebootSettings extends DashboardFragment {
+@SearchIndexable
+public class AdvancedSecuritySettings extends DashboardFragment {
 
-    private static final String TAG = "AutoRebootSettings";
-    private static final String KEY_AUTO_REBOOT_INTERVAL = "auto_reboot_interval";
+    private static final String TAG = "AdvancedSecuritySettings";
+    private AdvancedSecurityAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAdapter = new AdvancedSecurityAdapter(getContext());
     }
-    
+
     @Override
     public void onResume() {
         super.onResume();
-        
-        // Refresh preference states when returning to the screen
-        Preference intervalPref = findPreference(KEY_AUTO_REBOOT_INTERVAL);
-        if (intervalPref != null) {
-            AutoRebootIntervalController controller = 
-                    (AutoRebootIntervalController) use(AutoRebootIntervalController.class);
-            if (controller != null) {
-                controller.updateState(intervalPref);
+        if (mAdapter != null) {
+            PreferenceScreen screen = getPreferenceScreen();
+            if (screen != null) {
+                mAdapter.initialize(screen);
+                mAdapter.refresh();
             }
         }
     }
@@ -65,7 +65,7 @@ public class AutoRebootSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.auto_reboot_settings;
+        return R.xml.advanced_security_settings;
     }
 
     @Override
@@ -74,11 +74,20 @@ public class AutoRebootSettings extends DashboardFragment {
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context, Lifecycle lifecycle) {
+            Context context, com.android.settingslib.core.lifecycle.Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AutoRebootMainSwitchController(context, "auto_reboot_main_switch"));
-        controllers.add(new AutoRebootIntervalController(context, "auto_reboot_interval"));
+        // All controllers are defined in XML via settings:controller attribute
+        // Only add controllers that need lifecycle or special initialization here
         return controllers;
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.advanced_security_settings) {
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    return keys;
+                }
+            };
 }
 

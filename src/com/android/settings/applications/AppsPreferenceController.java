@@ -123,15 +123,31 @@ public class AppsPreferenceController extends BasePreferenceController implement
         mRecentApps = loadRecentApps();
         if (!mRecentApps.isEmpty()) {
             displayRecentApps();
-            mAllAppsInfoPref.setVisible(false);
-            mRecentAppsCategory.setVisible(true);
-            mGeneralCategory.setVisible(true);
-            mSeeAllPref.setVisible(true);
+            if (mAllAppsInfoPref != null) {
+                mAllAppsInfoPref.setVisible(false);
+            }
+            if (mRecentAppsCategory != null) {
+                mRecentAppsCategory.setVisible(true);
+            }
+            if (mGeneralCategory != null) {
+                mGeneralCategory.setVisible(true);
+            }
+            if (mSeeAllPref != null) {
+                mSeeAllPref.setVisible(true);
+            }
         } else {
-            mAllAppsInfoPref.setVisible(true);
-            mRecentAppsCategory.setVisible(false);
-            mGeneralCategory.setVisible(false);
-            mSeeAllPref.setVisible(false);
+            if (mAllAppsInfoPref != null) {
+                mAllAppsInfoPref.setVisible(true);
+            }
+            if (mRecentAppsCategory != null) {
+                mRecentAppsCategory.setVisible(false);
+            }
+            if (mGeneralCategory != null) {
+                mGeneralCategory.setVisible(false);
+            }
+            if (mSeeAllPref != null) {
+                mSeeAllPref.setVisible(false);
+            }
         }
     }
 
@@ -143,10 +159,14 @@ public class AppsPreferenceController extends BasePreferenceController implement
             @Override
             protected void onCountComplete(int num) {
                 if (!mRecentApps.isEmpty()) {
-                    mSeeAllPref.setTitle(StringUtil.getIcuPluralsString(mContext, num,
-                            R.string.see_all_apps_title));
+                    if (mSeeAllPref != null) {
+                        mSeeAllPref.setTitle(StringUtil.getIcuPluralsString(mContext, num,
+                                R.string.see_all_apps_title));
+                    }
                 } else {
-                    mAllAppsInfoPref.setSummary(mContext.getString(R.string.apps_summary, num));
+                    if (mAllAppsInfoPref != null) {
+                        mAllAppsInfoPref.setSummary(mContext.getString(R.string.apps_summary, num));
+                    }
                 }
             }
         }.execute();
@@ -165,10 +185,19 @@ public class AppsPreferenceController extends BasePreferenceController implement
         mGeneralCategory = screen.findPreference(KEY_GENERAL_CATEGORY);
         mAllAppsInfoPref = screen.findPreference(KEY_ALL_APP_INFO);
         mSeeAllPref = screen.findPreference(KEY_SEE_ALL);
-        mRecentAppsCategory.setVisible(false);
-        mGeneralCategory.setVisible(false);
-        mAllAppsInfoPref.setVisible(false);
-        mSeeAllPref.setVisible(false);
+        // Add null checks to prevent crashes if preferences don't exist
+        if (mRecentAppsCategory != null) {
+            mRecentAppsCategory.setVisible(false);
+        }
+        if (mGeneralCategory != null) {
+            mGeneralCategory.setVisible(false);
+        }
+        if (mAllAppsInfoPref != null) {
+            mAllAppsInfoPref.setVisible(false);
+        }
+        if (mSeeAllPref != null) {
+            mSeeAllPref.setVisible(false);
+        }
     }
 
     private void displayRecentApps() {

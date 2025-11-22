@@ -59,7 +59,11 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.smart_pixels);
 
-        final ContentResolver resolver = getActivity().getContentResolver();
+        final Context context = getActivity();
+        if (context == null) {
+            return;
+        }
+        final ContentResolver resolver = context.getContentResolver();
 
         mSmartPixelsEnabled = (TwoStatePreference) findPreference(SMART_PIXELS_ENABLE);
         mSmartPixelsPowerSave = (TwoStatePreference) findPreference(SMART_PIXELS_ON_POWER_SAVE);
@@ -158,7 +162,11 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final ContentResolver resolver = getActivity().getContentResolver();
+        final Context context = getActivity();
+        if (context == null) {
+            return false;
+        }
+        final ContentResolver resolver = context.getContentResolver();
         if (preference == mSmartPixelsEnabled) {
             boolean enabled = (Boolean) newValue;
             boolean success = Settings.System.putIntForUser(resolver,
@@ -253,7 +261,10 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
         }
 
         public void register() {
-            final Context mContext = getActivity().getApplicationContext();
+            final Context mContext = getActivity();
+            if (mContext == null) {
+                return;
+            }
             final ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SMART_PIXELS_ENABLE), false, this, UserHandle.USER_CURRENT);
@@ -266,7 +277,10 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
         }
 
         public void unregister() {
-            final Context mContext = getActivity().getApplicationContext();
+            final Context mContext = getActivity();
+            if (mContext == null) {
+                return;
+            }
             final ContentResolver resolver = mContext.getContentResolver();
             resolver.unregisterContentObserver(this);
         }

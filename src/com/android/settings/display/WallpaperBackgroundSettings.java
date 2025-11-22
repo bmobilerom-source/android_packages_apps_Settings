@@ -20,10 +20,8 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.awaken.fragments.DisplayCustomizationsAdapter;
@@ -32,17 +30,14 @@ import com.android.settings.awaken.fragments.DisplayCustomizationsHelper;
 /**
  * Settings page for Wallpaper Background feature
  * Includes wallpaper background toggle, blur toggle, and blur radius
+ * All preferences are managed by their controllers defined in XML
  */
 public class WallpaperBackgroundSettings extends SettingsPreferenceFragment {
 
-    private static final String KEY_WALLPAPER_BACKGROUND = "settings_wallpaper_background";
     private static final String KEY_WALLPAPER_BLUR = "wallpaper_blur";
     private static final String KEY_WALLPAPER_BLUR_RADIUS = "wallpaper_blur_radius";
     
     private DisplayCustomizationsAdapter mAdapter;
-    private SwitchPreference mWallpaperBackgroundPreference;
-    private SwitchPreference mWallpaperBlurPreference;
-    private ListPreference mWallpaperBlurRadiusPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,58 +45,59 @@ public class WallpaperBackgroundSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.wallpaper_background_settings);
         
         mAdapter = new DisplayCustomizationsAdapter(getContext());
-        initializePreferences();
+        setupBlurPreferences();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        updatePreferenceStates();
+        updateBlurRadiusState();
     }
 
     /**
-     * Initialize preferences and setup adapters.
+     * Setup blur preferences using adapter for proper dependency handling.
      */
-    private void initializePreferences() {
+    private void setupBlurPreferences() {
         PreferenceScreen screen = getPreferenceScreen();
         if (screen == null) {
             return;
         }
         
-        mWallpaperBackgroundPreference = screen.findPreference(KEY_WALLPAPER_BACKGROUND);
-        mWallpaperBlurPreference = screen.findPreference(KEY_WALLPAPER_BLUR);
-        mWallpaperBlurRadiusPreference = screen.findPreference(KEY_WALLPAPER_BLUR_RADIUS);
+        Preference blurPreference = screen.findPreference(KEY_WALLPAPER_BLUR);
+        Preference blurRadiusPreference = screen.findPreference(KEY_WALLPAPER_BLUR_RADIUS);
 
-        // Setup wallpaper blur preferences using adapter
-        if (mWallpaperBlurPreference != null && mWallpaperBlurRadiusPreference != null) {
-            mAdapter.setupWallpaperBlurPreference(mWallpaperBlurPreference, mWallpaperBlurRadiusPreference);
-            mAdapter.setupWallpaperBlurRadiusPreference(mWallpaperBlurRadiusPreference);
+        // Setup wallpaper blur radius preference using adapter
+        // The blur toggle is handled by WallpaperBlurController
+        if (blurRadiusPreference instanceof androidx.preference.ListPreference) {
+            mAdapter.setupWallpaperBlurRadiusPreference(
+                (androidx.preference.ListPreference) blurRadiusPreference);
+            
+            // Set up listener on blur preference to update radius enabled state
+            if (blurPreference instanceof androidx.preference.SwitchPreference) {
+                androidx.preference.SwitchPreference blurSwitch = 
+                    (androidx.preference.SwitchPreference) blurPreference;
+                blurSwitch.setOnPreferenceChangeListener((pref, newValue) -> {
+                    boolean enabled = (Boolean) newValue;
+                    blurRadiusPreference.setEnabled(enabled);
+                    return true; // Let controller handle the actual state change
+                });
+            }
         }
-        
-        updatePreferenceStates();
     }
 
     /**
-     * Update preference states based on current settings.
+     * Update blur radius enabled state based on blur toggle.
      */
-    private void updatePreferenceStates() {
-        if (mWallpaperBackgroundPreference != null) {
-            boolean enabled = DisplayCustomizationsHelper.isWallpaperBackgroundEnabled(getContext());
-            mWallpaperBackgroundPreference.setChecked(enabled);
+    private void updateBlurRadiusState() {
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
         }
         
-        if (mWallpaperBlurPreference != null) {
+        Preference blurRadiusPreference = screen.findPreference(KEY_WALLPAPER_BLUR_RADIUS);
+        if (blurRadiusPreference != null) {
             boolean blurEnabled = DisplayCustomizationsHelper.isWallpaperBlurEnabled(getContext());
-            mWallpaperBlurPreference.setChecked(blurEnabled);
-        }
-        
-        if (mWallpaperBlurRadiusPreference != null) {
-            int radius = DisplayCustomizationsHelper.getWallpaperBlurRadius(getContext());
-            mWallpaperBlurRadiusPreference.setValue(String.valueOf(radius));
-            mWallpaperBlurRadiusPreference.setSummary(
-                    getString(R.string.wallpaper_blur_radius_summary, radius));
-            boolean blurEnabled = DisplayCustomizationsHelper.isWallpaperBlurEnabled(getContext());
-            mWallpaperBlurRadiusPreference.setEnabled(blurEnabled);
+            blurRadiusPreference.setEnabled(blurEnabled);
         }
     }
 

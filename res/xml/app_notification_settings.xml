@@ -39,10 +39,10 @@
         android:visibility="gone">
 
     </PreferenceCategory>
-    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="invalid_conversation_switch"
         android:title="@string/conversation_section_switch_title"
-        app:position="top" />
+         />
     <com.android.settings.preferences.ui.AdaptivePreference
         android:key="invalid_conversation_info"
         app:position="middle"/>
@@ -73,47 +73,44 @@
         android:icon="@drawable/ic_expand"/>
 
     <!-- Importance toggle -->
-    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="allow_sound"
         android:title="@string/allow_interruption"
         android:summary="@string/allow_interruption_summary"
-        app:position="top"
-        settings:allowDividerAbove="false"
+                settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
     <!-- Visibility Override -->
     <com.android.settings.RestrictedListPreference
         android:key="visibility_override"
         android:title="@string/app_notification_visibility_override_title"
-        app:position="middle"
+        android:order="1"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
     <!-- Bypass DND -->
-    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="bypass_dnd"
         android:title="@string/app_notification_override_dnd_title"
         android:summary="@string/app_notification_override_dnd_summary"
-        app:position="middle"
-        settings:allowDividerAbove="false"
+                settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
     <!-- Allow full-screen intents -->
-    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="fsi_permission"
         android:title="@string/app_notification_fsi_permission_title"
         android:summary="@string/app_notification_fsi_permission_summary"
-        app:position="middle"
-        settings:allowDividerAbove="false"
+                settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
     <!-- Show badge -->
-    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="badge"
         android:title="@string/notification_badge_title"
         android:icon="@drawable/ic_notification_dot"
-        app:position="middle"
-        settings:useAdditionalSummary="true"
+                settings:useAdditionalSummary="true"
         settings:restrictedSwitchSummary="@string/enabled_by_admin"
         android:order="1001"
         settings:allowDividerAbove="false"

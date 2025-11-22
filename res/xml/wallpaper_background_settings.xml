@@ -17,7 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/settings_wallpaper_background_title">
 
     <!-- Lottie Animation Illustration - Always at top -->
@@ -50,7 +50,8 @@
         android:title="@string/wallpaper_blur_title"
         android:summary="@string/wallpaper_blur_summary"
         android:defaultValue="false"
-        app:position="middle" />
+        app:position="middle"
+        settings:controller="com.android.settings.display.WallpaperBlurController" />
 
     <!-- Wallpaper Blur Radius -->
     <com.android.settings.preferences.ui.AdaptiveListPreference
@@ -60,6 +61,7 @@
         android:entries="@array/wallpaper_blur_radius_entries"
         android:entryValues="@array/wallpaper_blur_radius_values"
         android:defaultValue="20"
-        app:position="bottom" />
+        app:position="bottom"
+        settings:controller="com.android.settings.display.WallpaperBlurRadiusController" />
 
 </PreferenceScreen>

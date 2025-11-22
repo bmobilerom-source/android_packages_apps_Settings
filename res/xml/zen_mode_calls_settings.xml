@@ -20,8 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_calls_settings_page"
     settings:searchable="false"
-     xmlns:app="http://schemas.android.com/apk/res-auto"    
-    android:title=" " >
+     xmlns:app="http://schemas.android.com/apk/res-auto"            android:title=" " >
 
 
     <com.android.settingslib.widget.IllustrationPreference
