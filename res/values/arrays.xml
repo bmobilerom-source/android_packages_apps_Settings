@@ -1786,25 +1786,15 @@
 
     <!-- Auto Reboot Interval Options -->
     <string-array name="auto_reboot_interval_entries">
+        <item>1 hour</item>
         <item>6 hours</item>
-        <item>12 hours</item>
         <item>1 day</item>
-        <item>2 days</item>
-        <item>3 days</item>
-        <item>7 days</item>
-        <item>14 days</item>
-        <item>30 days</item>
     </string-array>
 
     <string-array name="auto_reboot_interval_values" translatable="false">
-        <item>21600000</item> <!-- 6 hours in milliseconds -->
-        <item>43200000</item> <!-- 12 hours -->
+        <item>3600000</item> <!-- 1 hour in milliseconds -->
+        <item>21600000</item> <!-- 6 hours -->
         <item>86400000</item> <!-- 1 day (24 hours) -->
-        <item>172800000</item> <!-- 2 days -->
-        <item>259200000</item> <!-- 3 days -->
-        <item>604800000</item> <!-- 7 days -->
-        <item>1209600000</item> <!-- 14 days -->
-        <item>2592000000</item> <!-- 30 days -->
     </string-array>
 
     <!-- Smart Pixels -->
