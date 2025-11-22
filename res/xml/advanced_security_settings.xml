@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 LineageOS
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/advanced_security_settings_title">
+
+    <!-- Intro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="advanced_security_intro"
+        android:title="@string/advanced_security_intro_title"
+        android:summary="@string/advanced_security_intro_summary"
+        android:selectable="false" />
+
+    <!-- App Security Category -->
+    <PreferenceCategory
+        android:key="app_security_category"
+        android:title="@string/app_security_category_title"
+        settings:searchable="false">
+
+        <!-- Block USB Popup -->
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="block_usb_popup_toggle"
+            android:title="@string/block_usb_popup_toggle_title"
+            android:summary="@string/block_usb_popup_toggle_summary"
+            android:order="10"
+            app:position="top"
+            settings:controller="com.android.settings.applications.specialaccess.BlockUsbPopupController" />
+
+        <!-- Block Location Settings -->
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="block_location_settings_toggle"
+            android:title="@string/block_location_settings_toggle_title"
+            android:summary="@string/block_location_settings_toggle_summary"
+            android:order="20"
+            app:position="middle"
+            settings:controller="com.android.settings.applications.specialaccess.BlockLocationSettingsController" />
+
+        <!-- Block Account Dashboard -->
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="block_account_dashboard_toggle"
+            android:title="@string/block_account_dashboard_toggle_title"
+            android:summary="@string/block_account_dashboard_toggle_summary"
+            android:order="30"
+            app:position="middle"
+            settings:controller="com.android.settings.applications.specialaccess.BlockAccountDashboardController" />
+
+        <!-- Block Safety Center -->
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="block_safety_center_toggle"
+            android:title="@string/block_safety_center_toggle_title"
+            android:summary="@string/block_safety_center_toggle_summary"
+            android:order="40"
+            app:position="middle"
+            settings:controller="com.android.settings.applications.specialaccess.BlockSafetyCenterController" />
+
+        <!-- Block Extended Security -->
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="block_extended_security_toggle"
+            android:title="@string/block_extended_security_toggle_title"
+            android:summary="@string/block_extended_security_toggle_summary"
+            android:order="50"
+            app:position="bottom"
+            settings:controller="com.android.settings.applications.specialaccess.BlockExtendedSecurityController" />
+
+    </PreferenceCategory>
+
+    <!-- Network Security Category -->
+    <PreferenceCategory
+        android:key="network_security_category"
+        android:title="@string/network_security_category_title">
+
+        <!-- Mobile Network Security -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="mobile_network_security"
+            android:title="@string/cellular_security_title"
+            android:summary="@string/cellular_security_summary"
+            android:order="10"
+            app:position="solo"
+            android:fragment="com.android.settings.network.telephony.CellularSecuritySettingsFragment"
+            settings:controller="com.android.settings.network.CellularSecurityPreferenceController" />
+
+    </PreferenceCategory>
+
+    <!-- System Security Category -->
+    <PreferenceCategory
+        android:key="system_security_category"
+        android:title="@string/system_security_category_title">
+
+        <!-- Hide Developer Status -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="hide_developer_status_settings"
+            android:title="@string/hide_developer_status_title"
+            android:summary="@string/hide_developer_status_summary"
+            android:order="10"
+            app:position="top"
+            android:fragment="com.epic.fragments.HideDeveloperStatusSettings" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
+

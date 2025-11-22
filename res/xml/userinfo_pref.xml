@@ -39,26 +39,31 @@
     <Preference
             android:key="multiuser"
             android:order="30"
-         android:icon="@drawable/ic_translate_24dp"           
-            android:title="@string/multiuser_settings_title"
-            settings:layout="@layout/xd_pref_card_top"           
-            android:fragment="com.android.settings.users.UserSettings"/>
+         android:icon="@drawable/ic_translate_24dp"                   android:title="@string/multiuser_settings_title"
+            settings:layout="@layout/xd_pref_card_top"                   android:fragment="com.android.settings.users.UserSettings"/>
     
     <Preference
             android:key="accounts"
             android:order="40"
         android:icon="@drawable/ic_translate_24dp"
-            settings:layout="@layout/xd_pref_card_mid"           
-            android:title="@string/accounts_settings_title"
+            settings:layout="@layout/xd_pref_card_mid"                   android:title="@string/accounts_settings_title"
             android:fragment="com.android.settings.accounts.AccountDashboardFragment"/>
 
     <Preference
             android:key="emergency"
             android:order="50"
             android:icon="@drawable/ic_translate_24dp"
-            settings:layout="@layout/xd_pref_card_bot"           
-            android:title="@string/emergency_settings_title"
+            settings:layout="@layout/xd_pref_card_bot"                   android:title="@string/emergency_settings_title"
             android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
+    
+    <!-- Device Security Features -->
+    <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="device_security_features_settings"
+            android:order="55"
+            android:title="@string/device_security_features_settings_title"
+            android:summary="@string/device_security_features_settings_summary"
+            android:fragment="com.android.settings.safetycenter.DeviceSecurityFeaturesFragment"
+            app:position="solo" />
         
  <com.android.settingslib.widget.LayoutPreference
         android:key="battery_stats_view"
@@ -91,58 +96,6 @@
             android:title="@string/app_security_category_title"
             android:order="70" />
     
-    <!-- Trust Agents - Only available in User Info page -->
-    <com.android.settings.preferences.ui.AdaptivePreference
-            android:key="manage_trust_agents"
-            android:order="69"
-            android:title="@string/manage_trust_agents"
-            android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.security.trustagent.TrustAgentSettings"
-            settings:controller="com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController"
-            app:position="middle" />
-
-    <SwitchPreference
-            android:key="install_app_whitelist_toggle"
-            android:title="@string/install_app_whitelist_toggle_title"
-            android:summary="@string/install_app_whitelist_toggle_summary"
-            android:order="72"
-            settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController" />
-
-    <SwitchPreference
-            android:key="block_usb_popup_toggle"
-            android:title="@string/block_usb_popup_toggle_title"
-            android:summary="@string/block_usb_popup_toggle_summary"
-            android:order="73"
-            settings:controller="com.android.settings.applications.specialaccess.BlockUsbPopupController" />
-
-    <SwitchPreference
-            android:key="block_location_settings_toggle"
-            android:title="@string/block_location_settings_toggle_title"
-            android:summary="@string/block_location_settings_toggle_summary"
-            android:order="74"
-            settings:controller="com.android.settings.applications.specialaccess.BlockLocationSettingsController" />
-
-    <SwitchPreference
-            android:key="block_account_dashboard_toggle"
-            android:title="@string/block_account_dashboard_toggle_title"
-            android:summary="@string/block_account_dashboard_toggle_summary"
-            android:order="75"
-            settings:controller="com.android.settings.applications.specialaccess.BlockAccountDashboardController" />
-
-    <SwitchPreference
-            android:key="block_safety_center_toggle"
-            android:title="@string/block_safety_center_toggle_title"
-            android:summary="@string/block_safety_center_toggle_summary"
-            android:order="76"
-            settings:controller="com.android.settings.applications.specialaccess.BlockSafetyCenterController" />
-
-    <SwitchPreference
-            android:key="block_extended_security_toggle"
-            android:title="@string/block_extended_security_toggle_title"
-            android:summary="@string/block_extended_security_toggle_summary"
-            android:order="77"
-            settings:controller="com.android.settings.applications.specialaccess.BlockExtendedSecurityController" />
-
     <SwitchPreference
             android:key="pm_downgrade_allowed"
             android:title="@string/app_downgrade_title"
@@ -150,31 +103,4 @@
             android:defaultValue="true"
             android:order="78"
             settings:controller="com.android.settings.applications.AppDowngradePreferenceController" />
-
-    <!-- Mobile Network Security -->
-    <com.android.settings.preferences.ui.AdaptivePreference
-            android:key="mobile_network_security"
-            android:title="@string/cellular_security_title"
-            android:summary="@string/cellular_security_summary"
-            android:order="79"
-            app:position="solo"
-            android:fragment="com.android.settings.network.telephony.CellularSecuritySettingsFragment"
-            settings:controller="com.android.settings.network.CellularSecurityPreferenceController" />
-
-    <!-- Hide Developer Status Settings -->
-    <Preference
-            android:key="hide_developer_status_settings"
-            android:title="@string/hide_developer_status_title"
-            android:summary="@string/hide_developer_status_summary"
-            android:order="80"
-            android:fragment="com.epic.fragments.HideDeveloperStatusSettings" />
-
-    <!-- Password Protection for Settings Pages -->
-    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
-            android:key="settings_password_protection_enabled"
-            android:title="@string/settings_password_protection_title"
-            android:summary="@string/settings_password_protection_summary"
-            android:defaultValue="false"
-            android:order="81"
-            app:position="solo" />
 </PreferenceScreen>

@@ -19,6 +19,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.content.ContentResolver;
 import android.widget.Toast;
 import androidx.preference.Preference;
 import com.android.settings.R;
@@ -41,7 +42,8 @@ public class SettingsWallpaperBackgroundController extends TogglePreferenceContr
 
     @Override
     public boolean isChecked() {
-        return WallpaperBackgroundHelper.isEnabled(mContext);
+        // Use DisplayCustomizationsHelper which uses Settings.System directly
+        return com.android.settings.awaken.fragments.DisplayCustomizationsHelper.isWallpaperBackgroundEnabled(mContext);
     }
 
     @Override
@@ -53,7 +55,21 @@ public class SettingsWallpaperBackgroundController extends TogglePreferenceContr
                     Toast.LENGTH_LONG).show();
             return false;
         }
-        return WallpaperBackgroundHelper.setEnabled(mContext, isChecked);
+        // Use DisplayCustomizationsHelper which uses Settings.System.putIntForUser
+        // This ensures the setting is saved for the current user and triggers ContentObserver
+        boolean success = com.android.settings.awaken.fragments.DisplayCustomizationsHelper.setWallpaperBackgroundEnabled(mContext, isChecked);
+        
+        if (success) {
+            // Ensure the ContentObserver is triggered by explicitly notifying
+            // This helps ensure AdaptiveWallpaperBackgroundView updates immediately
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.notifyChange(
+                    android.provider.Settings.System.getUriFor(
+                            android.provider.Settings.System.SETTINGS_WALLPAPER_BACKGROUND_ENABLED),
+                    null, true);
+        }
+        
+        return success;
     }
 
     @Override

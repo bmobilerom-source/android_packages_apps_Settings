@@ -75,23 +75,6 @@ public class CustomThemeSettings extends SettingsPreferenceFragment
             mThemePreference.setOnPreferenceChangeListener(this);
         }
 
-        // Setup wallpaper background bottom sheet
-        Preference wallpaperBackgroundPref = findPreference("wallpaper_background_preference");
-        if (wallpaperBackgroundPref != null) {
-            wallpaperBackgroundPref.setOnPreferenceClickListener(preference -> {
-                try {
-                    com.epic.fragments.WallpaperBackgroundBottomSheet bottomSheet = 
-                            com.epic.fragments.WallpaperBackgroundBottomSheet.newInstance();
-                    if (getParentFragmentManager() != null) {
-                        bottomSheet.show(getParentFragmentManager(), "WallpaperBackgroundBottomSheet");
-                    }
-                } catch (Exception e) {
-                    Log.e(TAG, "Error showing wallpaper background bottom sheet", e);
-                }
-                return true;
-            });
-        }
-
         // Update preference states based on current theme
         updatePreferenceStates();
     }

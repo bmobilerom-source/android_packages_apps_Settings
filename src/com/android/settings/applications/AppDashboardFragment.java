@@ -23,6 +23,7 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController;
+import com.android.settings.applications.HibernatedAppsPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
@@ -45,6 +46,7 @@ public class AppDashboardFragment extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new AppsPreferenceController(context));
+        controllers.add(new HibernatedAppsPreferenceController(context, "hibernated_apps"));
 
         final UserAspectRatioAppsPreferenceController aspectRatioAppsPreferenceController =
                 new UserAspectRatioAppsPreferenceController(context, ASPECT_RATIO_PREF_KEY);
@@ -80,13 +82,23 @@ public class AppDashboardFragment extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         
-        mAppsPreferenceController = use(AppsPreferenceController.class);
-        mAppsPreferenceController.setFragment(this /* fragment */);
-        getSettingsLifecycle().addObserver(mAppsPreferenceController);
-
-        final HibernatedAppsPreferenceController hibernatedAppsPreferenceController =
-                use(HibernatedAppsPreferenceController.class);
-        getSettingsLifecycle().addObserver(hibernatedAppsPreferenceController);
+        // Get controllers from the list instead of using dependency injection
+        List<AbstractPreferenceController> controllers = createPreferenceControllers(context);
+        if (controllers != null) {
+            for (AbstractPreferenceController controller : controllers) {
+                if (controller instanceof AppsPreferenceController) {
+                    mAppsPreferenceController = (AppsPreferenceController) controller;
+                    mAppsPreferenceController.setFragment(this /* fragment */);
+                    if (getSettingsLifecycle() != null) {
+                        getSettingsLifecycle().addObserver(mAppsPreferenceController);
+                    }
+                } else if (controller instanceof HibernatedAppsPreferenceController) {
+                    if (getSettingsLifecycle() != null) {
+                        getSettingsLifecycle().addObserver((HibernatedAppsPreferenceController) controller);
+                    }
+                }
+            }
+        }
     }
 
     @VisibleForTesting

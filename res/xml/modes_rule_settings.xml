@@ -47,7 +47,8 @@
         android:title="@string/zen_mode_automatic_trigger_title">
         <!-- For configuring the trigger on tap  and enabling/disabling the mode with the switch. -->
         <com.android.settingslib.PrimarySwitchPreference
-            android:key="zen_automatic_trigger_settings" />
+            android:key="zen_automatic_trigger_settings"
+             />
         <!-- For adding a trigger for custom manual modes (no switch). -->
         <com.android.settings.preferences.ui.AdaptivePreference
             android:key="zen_add_automatic_trigger"

@@ -69,6 +69,16 @@
 
     </PreferenceCategory>
 
+    <!-- Screen Lock Settings -->
+    <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
+        android:key="unlock_set_or_change"
+        android:title="@string/unlock_set_unlock_launch_picker_title"
+        android:summary="@string/summary_placeholder"
+        android:order="1"
+        app:position="solo"
+        settings:controller="com.android.settings.security.ChangeScreenLockPreferenceController"
+        settings:keywords="@string/keywords_lockscreen" />
+
     <!-- Pocket Lock -->
     <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
         android:key="pocket_lock"
@@ -163,23 +173,6 @@
             android:defaultValue="false"
             android:order="2"
             app:position="bottom" />
-
-    </PreferenceCategory>
-
-    <!-- More Security Category -->
-    <PreferenceCategory
-        android:key="extended_security_more_category"
-        android:title="@string/more_security_privacy_settings"
-        android:order="5">
-
-        <!-- Device Security Features Settings - At the bottom -->
-        <com.android.settings.preferences.ui.AdaptivePreference
-            android:order="0"
-            android:key="device_security_features_settings"
-            android:title="@string/device_security_features_settings_title"
-            android:summary="@string/device_security_features_settings_summary"
-            android:fragment="com.android.settings.safetycenter.DeviceSecurityFeaturesFragment"
-            app:position="solo" />
 
     </PreferenceCategory>
 

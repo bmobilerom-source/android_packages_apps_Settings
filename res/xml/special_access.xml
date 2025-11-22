@@ -238,25 +238,26 @@
             android:value="com.android.settings.Settings$TurnScreenOnSettingsActivity" />
     </com.android.settings.preferences.ui.AdaptivePreference>
 
-    <com.android.settings.preferences.ui.AdaptivePreference
-        android:key="special_access_more"
-        android:title="@string/special_access_more"
-        android:order="-100"
-        app:position="bottom"
-        settings:controller="com.android.settings.applications.specialaccess.MoreSpecialAccessPreferenceController" />
-
     <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="install_app_whitelist_toggle"
         android:title="@string/install_app_whitelist_toggle_title"
         android:summary="@string/install_app_whitelist_toggle_summary"
-        android:order="-50"
-        app:position="middle"
+        android:order="100"
+        app:position="top"
         settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController"
         settings:isPreferenceVisible="@bool/config_show_install_app_whitelist_toggle" />
 
     <com.android.settings.preferences.ui.AdaptivePreference
+        android:key="special_access_more"
+        android:title="@string/special_access_more"
+        android:order="200"
+        app:position="middle"
+        settings:controller="com.android.settings.applications.specialaccess.MoreSpecialAccessPreferenceController" />
+
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="change_nfc_tag_apps_state"
         android:title="@string/change_nfc_tag_apps_title"
+        android:order="300"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
         app:position="bottom"
         settings:keywords="@string/keywords_change_nfc_tag_apps_state"

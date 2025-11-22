@@ -29,11 +29,13 @@
 
        
     <!-- Backup settings provided by the backup transport or the default settings -->
-    <Preference
-        android:key="backup_settings" />
+    <com.android.settings.preferences.ui.AdaptivePreference
+        android:key="backup_settings"
+        app:position="top" />
 
     <!-- Backup settings provided by the manufacturer -->
-    <Preference
-        android:key="manufacturer_backup" />
+    <com.android.settings.preferences.ui.AdaptivePreference
+        android:key="manufacturer_backup"
+        app:position="bottom" />
 
 </PreferenceScreen>

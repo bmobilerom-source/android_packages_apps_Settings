@@ -59,8 +59,13 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.specialaccess.BlockExtendedSecurityController;
+import com.android.settings.security.ChangeScreenLockPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Extended Security Settings Page
@@ -81,6 +86,9 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
     private static final String KEY_WINDOW_IGNORE_SECURE = "window_ignore_secure";
     private static final String KEY_SECURE_LOCKSCREEN_QS_DISABLED = "secure_lockscreen_qs_disabled";
     private static final String KEY_POCKET_LOCK = "pocket_lock";
+    private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
+
+    private ChangeScreenLockPreferenceController mScreenLockController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,6 +108,19 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final ContentResolver resolver = getActivity().getContentResolver();
+
+        // Initialize screen lock preference controller
+        mScreenLockController = new ChangeScreenLockPreferenceController(getActivity(), this);
+        if (mScreenLockController.isAvailable()) {
+            mScreenLockController.displayPreference(prefScreen);
+            mScreenLockController.updateState(prefScreen.findPreference(KEY_UNLOCK_SET_OR_CHANGE));
+        } else {
+            // Hide the preference if screen lock is not available
+            Preference screenLockPref = prefScreen.findPreference(KEY_UNLOCK_SET_OR_CHANGE);
+            if (screenLockPref != null) {
+                prefScreen.removePreference(screenLockPref);
+            }
+        }
 
         // Check fingerprint hardware and hide category if not available
         PreferenceCategory fingerprintCategory = (PreferenceCategory) findPreference(KEY_FINGERPRINT_CATEGORY);
@@ -206,7 +227,6 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                 secureLockscreenQsPref.setOnPreferenceChangeListener(this);
             }
             
-            // Update password protection enabled preference
             // Update pocket lock preference
             Preference pocketLockPref = findPreference(KEY_POCKET_LOCK);
             if (pocketLockPref != null) {
@@ -223,6 +243,29 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference states", e);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Update screen lock preference state when returning to this page
+        if (mScreenLockController != null && mScreenLockController.isAvailable()) {
+            Preference screenLockPref = findPreference(KEY_UNLOCK_SET_OR_CHANGE);
+            if (screenLockPref != null) {
+                mScreenLockController.updateState(screenLockPref);
+            }
+        }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        // Handle screen lock preference click
+        if (KEY_UNLOCK_SET_OR_CHANGE.equals(preference.getKey())) {
+            if (mScreenLockController != null && mScreenLockController.isAvailable()) {
+                return mScreenLockController.handlePreferenceTreeClick(preference);
+            }
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
@@ -261,6 +304,7 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                     keys.add("extended_security_top_intro");
                     keys.add("extended_security_fingerprint_category");
                     keys.add("bmobile_fingerprint_settings");
+                    keys.add("unlock_set_or_change");
                     keys.add("pocket_lock");
                     keys.add("auth_ripple_enabled");
                     keys.add("fp_success_vibrate");
@@ -270,13 +314,11 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
                     keys.add("lock_screen_notifications_extended");
                     keys.add("secure_lockscreen_qs_disabled");
                     keys.add("extended_security_privacy_category");
-                    keys.add("settings_password_protection_enabled");
                     keys.add("show_clipboard_overlay");
                     keys.add("extended_security_system_category");
                     keys.add("sensor_block_settings");
                     keys.add("no_storage_restrict");
                     keys.add("window_ignore_secure");
-                    keys.add("device_security_features_settings");
                     return keys;
                 }
             };

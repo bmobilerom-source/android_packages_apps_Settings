@@ -116,22 +116,27 @@ public class HideDeveloperStatusSettings extends SettingsPreferenceFragment {
         mMenu = menu;
         
         MenuItem searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        if (searchView != null) {
-            searchView.setQueryHint(getString(R.string.search_apps));
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
+        if (searchItem != null) {
+            android.view.View actionView = searchItem.getActionView();
+            if (actionView instanceof SearchView) {
+                SearchView searchView = (SearchView) actionView;
+                searchView.setQueryHint(getString(R.string.search_apps));
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
 
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    mSearchQuery = newText != null ? newText.toLowerCase() : "";
-                    filterApps();
-                    return true;
-                }
-            });
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        mSearchQuery = newText != null ? newText.toLowerCase() : "";
+                        filterApps();
+                        return true;
+                    }
+                });
+            } else {
+                Log.w(TAG, "Search menu item action view is not a SearchView");
+            }
         }
 
         updateMenuItems();

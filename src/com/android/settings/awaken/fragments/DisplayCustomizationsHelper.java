@@ -18,6 +18,7 @@ package com.android.settings.awaken.fragments;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 /**
@@ -31,8 +32,10 @@ public class DisplayCustomizationsHelper {
      */
     public static boolean isWallpaperBackgroundEnabled(Context context) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.getInt(resolver,
-                Settings.System.SETTINGS_WALLPAPER_BACKGROUND_ENABLED, 0) == 1;
+        return Settings.System.getIntForUser(resolver,
+                Settings.System.SETTINGS_WALLPAPER_BACKGROUND_ENABLED, 
+                0,
+                UserHandle.USER_CURRENT) == 1;
     }
 
     /**
@@ -40,8 +43,11 @@ public class DisplayCustomizationsHelper {
      */
     public static boolean setWallpaperBackgroundEnabled(Context context, boolean enabled) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver,
-                Settings.System.SETTINGS_WALLPAPER_BACKGROUND_ENABLED, enabled ? 1 : 0);
+        // Use putIntForUser to ensure it works for the current user and triggers observers
+        return Settings.System.putIntForUser(resolver,
+                Settings.System.SETTINGS_WALLPAPER_BACKGROUND_ENABLED, 
+                enabled ? 1 : 0,
+                UserHandle.USER_CURRENT);
     }
 
     /**

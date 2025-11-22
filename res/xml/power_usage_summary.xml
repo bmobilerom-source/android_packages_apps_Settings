@@ -76,6 +76,7 @@
     <!-- Charging control -->
     <lineageos.preference.LineagePartsPreference
         android:key="charging_control"
+        android:order="100"
         settings:requiresService="lineagehealth" />
 
     <!-- Charging speed -->
@@ -85,12 +86,14 @@
         android:key="charging_speed"
         android:summary="%s"
         android:title="@*lineageos.platform:string/charging_speed"
+        android:order="110"
         settings:controller="com.android.settings.fuelgauge.ChargingSpeedPreferenceController"
         settings:requiresService="lineagehealth" />
 
     <!-- Battery light -->
     <lineageos.preference.LineagePartsPreference
         android:key="battery_lights"
+        android:order="120"
         settings:requiresConfig="@*lineageos.platform:integer/config_deviceLightCapabilities"
         settings:requiresConfigMask="64" />
 
@@ -98,6 +101,7 @@
         android:key="status_bar_show_battery_percent"
         android:title="@string/battery_percentage"
         android:summary="@string/battery_percentage_description"
+        android:order="200"
         app:position="top"
         settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
 
@@ -105,14 +109,16 @@
         android:key="fast_charging"
         android:title="@string/fast_charging_title"
         android:summary="@string/fast_charging_summary"
+        android:order="210"
         app:position="bottom"
         settings:controller="com.android.settings.fuelgauge.FastChargingPreferenceController"/>
 
     <com.android.settings.preferences.ui.AdaptivePreference
         android:key="battery_info"
         android:title="@string/battery_info"
+        android:order="300"
         android:fragment="com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment"
-        app:position="top"
+        app:position="solo"
         settings:keywords="@string/keywords_battery_info"/>
 
     <com.android.settingslib.widget.FooterPreference

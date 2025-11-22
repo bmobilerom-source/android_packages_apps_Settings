@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import androidx.preference.Preference;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.awaken.fragments.DisplayCustomizationsHelper;
 
@@ -41,7 +42,26 @@ public class WallpaperBlurController extends TogglePreferenceController {
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return DisplayCustomizationsHelper.setWallpaperBlurEnabled(mContext, isChecked);
+        boolean result = DisplayCustomizationsHelper.setWallpaperBlurEnabled(mContext, isChecked);
+        // Update blur radius preference enabled state
+        if (result) {
+            updateBlurRadiusState();
+        }
+        return result;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        updateBlurRadiusState();
+    }
+
+    /**
+     * Update blur radius preference enabled state based on blur toggle.
+     */
+    private void updateBlurRadiusState() {
+        // This will be handled by the fragment or adapter
+        // Controllers can't directly access other preferences
     }
 
     @Override

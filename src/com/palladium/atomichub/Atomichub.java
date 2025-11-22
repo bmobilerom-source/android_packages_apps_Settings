@@ -12,15 +12,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import androidx.fragment.app.FragmentTransaction;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
-import com.palladium.atomichub.categories.frag_ui;
-import com.palladium.atomichub.categories.frag_theme;
-import com.palladium.atomichub.categories.frag_keys;
-import com.palladium.atomichub.categories.frag_misc;
-import com.palladium.atomichub.categories.frag_team;
-import com.palladium.atomichub.categories.frag_statusbar;
+import com.android.settings.core.SubSettingLauncher;
 
 public class Atomichub extends SettingsPreferenceFragment implements  View.OnClickListener{
 
@@ -53,6 +47,8 @@ public class Atomichub extends SettingsPreferenceFragment implements  View.OnCli
         title = view.findViewById(R.id.tv_title_big);
         summary = view.findViewById(R.id.tv_summary_big);
         c0 = view.findViewById(R.id.card);
+        c0.setClickable(true);
+        c0.setOnClickListener(this);
         c1 = view.findViewById(R.id.card1);
         c1.setOnClickListener(this);
         c2 = view.findViewById(R.id.card2);
@@ -65,7 +61,7 @@ public class Atomichub extends SettingsPreferenceFragment implements  View.OnCli
         c5.setOnClickListener(this);
         c6 = view.findViewById(R.id.card6);
         c6.setOnClickListener(this);
-        target[0] = "UI";
+        target[0] = "PocketMode";
 
 
     }
@@ -73,133 +69,71 @@ public class Atomichub extends SettingsPreferenceFragment implements  View.OnCli
 
     @Override
     public void onClick(View view) {
-
         int id = view.getId();
 
+        // Card 1: Pocket Mode
         if(id == R.id.card1){
-            // UI
-            Drawable d,e;
-            d = view.getResources().getDrawable(R.drawable.ic_ui_big_card);
-            e = view.getResources().getDrawable(R.drawable.ic_ui_logo);
-            btnicon.setImageDrawable(e);
-            c0.setBackground(d);
-            title.setText(R.string.UI_Title);
-            summary.setText(R.string.UI_Summary);
-            target[0] = "UI";
+            launchFragment("com.epic.fragments.PocketModeSettings", R.string.pocket_mode_title);
+            return;
         }
 
+        // Card 2: BMobile Fingerprint
         if(id == R.id.card2){
-            // Theme
-            Drawable d,e;
-            d = view.getResources().getDrawable(R.drawable.ic_theme_big_card);
-            c0.setBackground(d);
-            e = view.getResources().getDrawable(R.drawable.ic_theme_card_logo);
-            btnicon.setImageDrawable(e);
-            title.setText(R.string.Theme_Title);
-            summary.setText(R.string.Theme_summary);
-            target[0] = "Theme";
+            launchFragment("com.epic.fragments.BMobileFingerprintSettings", R.string.bmobile_fingerprint_title);
+            return;
         }
 
+        // Card 3: Privacy & Security
         if(id == R.id.card3){
-            // Status Bar
-            Drawable d,e;
-            d = view.getResources().getDrawable(R.drawable.ic_status_big_card);
-            c0.setBackground(d);
-            e = view.getResources().getDrawable(R.drawable.ic_status_card_logo );
-            btnicon.setImageDrawable(e);
-            title.setText(R.string.Status_Title);
-            summary.setText(R.string.Status_summary);
-            target[0] = "Statusbar";
+            launchFragment("com.epic.fragments.PrivacySecuritySettings", R.string.privacy_security_title);
+            return;
         }
 
+        // Card 4: Advanced Security Settings
         if(id == R.id.card4){
-            // Button
-            Drawable d,e;
-            d = view.getResources().getDrawable(R.drawable.ic_button_big_card);
-            c0.setBackground(d);
-            e = view.getResources().getDrawable(R.drawable.ic_button_logo);
-            btnicon.setImageDrawable(e);
-            title.setText(R.string.Button_Title);
-            summary.setText(R.string.Button_Summary);
-            target[0] = "Button";
+            launchFragment("com.epic.fragments.AdvancedSecuritySettings", R.string.advanced_security_settings_title);
+            return;
         }
 
+        // Card 5: System Optimization
         if(id == R.id.card5){
-            //  Misc
-            Drawable d,e;
-            d = view.getResources().getDrawable(R.drawable.ic_misc_big_card);
-            c0.setBackground(d);
-            e = view.getResources().getDrawable(R.drawable.ic_misc_card_logo);
-            btnicon.setImageDrawable(e);
-            title.setText(R.string.Misc_Title);
-            summary.setText(R.string.Misc_Summary);
-            target[0] = "Misc";
+            launchFragment("com.epic.fragments.SystemOptimizationSettings", R.string.system_optimization_title);
+            return;
         }
 
+        // Card 6: Settings Backup & Restore
         if(id == R.id.card6){
-            // Team
-            Drawable d,e;
-            d = view.getResources().getDrawable(R.drawable.ic_team_big_card);
-            c0.setBackground(d);
-            e = view.getResources().getDrawable(R.drawable.ic_team_card_logo);
-            btnicon.setImageDrawable(e);
-            title.setText(R.string.Team_Title);
-            summary.setText(R.string.Team_summary);
-            target[0] = "Team";
+            launchFragment("com.epic.fragments.SettingsBackupRestoreImproved", R.string.settings_backup_restore_title);
+            return;
         }
 
+        // Big Card: Mock Locations
+        if(id == R.id.card){
+            launchFragment("com.android.settings.location.MockLocationsSettings", R.string.mock_locations_title);
+            return;
+        }
+
+        // Transition button (back button) - navigate back
         if(id == R.id.btn_trans){
-            if(target[0].equals("UI")){
-                frag_ui destf = new frag_ui();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction.replace(this.getId(), destf);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-            if(target[0].equals("Theme")){
-                frag_theme destf = new frag_theme();
-                FragmentTransaction transaction1 = getFragmentManager().beginTransaction();
-                transaction1.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction1.replace(this.getId(), destf);
-                transaction1.addToBackStack(null);
-                transaction1.commit();
-
-            }
-            if(target[0].equals("Statusbar")){
-                frag_statusbar destf = new frag_statusbar();
-                FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
-                transaction2.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction2.replace(this.getId(), destf);
-                transaction2.addToBackStack(null);
-                transaction2.commit();
-            }
-            if(target[0].equals("Button")){
-                frag_keys destf = new frag_keys();
-                FragmentTransaction transaction3 = getFragmentManager().beginTransaction();
-                transaction3.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction3.replace(this.getId(), destf);
-                transaction3.addToBackStack(null);
-                transaction3.commit();
-            }
-            if(target[0].equals("Misc")){
-                frag_misc destf = new frag_misc();
-                FragmentTransaction transaction4 = getFragmentManager().beginTransaction();
-                transaction4.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction4.replace(this.getId(), destf);
-                transaction4.addToBackStack(null);
-                transaction4.commit();
-            }
-            if(target[0].equals("Team")){
-                frag_team destf = new frag_team();
-                FragmentTransaction transaction5 = getFragmentManager().beginTransaction();
-                transaction5.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                transaction5.replace(this.getId(), destf);
-                transaction5.addToBackStack(null);
-                transaction5.commit();
+            if (getActivity() != null) {
+                getActivity().onBackPressed();
             }
         }
+    }
 
+    /**
+     * Launch a fragment using SubSettingLauncher.
+     */
+    private void launchFragment(String fragmentClass, int titleResId) {
+        try {
+            new SubSettingLauncher(getActivity())
+                .setDestination(fragmentClass)
+                .setTitleRes(titleResId)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
+        } catch (Exception e) {
+            android.util.Log.e("Atomichub", "Failed to launch fragment: " + fragmentClass, e);
+        }
     }
 
 

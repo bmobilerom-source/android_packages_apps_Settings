@@ -19,8 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="zen_custom_rule_configuration_page"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-     xmlns:app="http://schemas.android.com/apk/res-auto"    
-    android:title=" " >
+     xmlns:app="http://schemas.android.com/apk/res-auto"            android:title=" " >
 
 
     <com.android.settingslib.widget.IllustrationPreference

@@ -18,262 +18,254 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:title="@string/anatolia_settings_title">
-		
-		<!-- Status bar -->
-        <PreferenceScreen
-            android:key="statusbar_category"
-            android:title="@string/statusbar_title"
-            android:summary="@string/statusbar_summary"
-            settings:layout="@layout/system_warning_preference_card"
-            android:fragment="com.epic.fragments.StatusBarSettings"
-            android:icon="@drawable/ic_anatolia_statusbar" />
 
-        <!-- About us -->
-        <PreferenceScreen
-            android:key="Aboutus_category"
-            android:title="@string/aboutus_title"
-            android:summary="@string/aboutus_summary"
-            android:fragment="com.epic.fragments.ButtonSettings"
-            android:icon="@drawable/ic_anatolia_buttons" />
-			
-		<!-- Lock screen -->
-        <PreferenceScreen
-            android:key="lockscreen_category"
-            android:title="@string/lockscreen_title"
-            android:summary="@string/lockscreen_summary"
-            settings:layout="@layout/system_features_preference_card"
-   	        android:fragment="com.epic.fragments.LockScreenSettings"
-   	        android:icon="@drawable/ic_anatolia_lockscreen" />	
-		
-		<!-- Notifications -->
-        <PreferenceScreen
-            android:key="notifications_category"
-            android:title="@string/notifications_title"
-            android:summary="@string/notifications_summary"
-            android:fragment="com.epic.fragments.NotificationSettings"
-            android:icon="@drawable/ic_anatolia_notifications" />
-
-        <!-- Gestures -->
-        <PreferenceScreen
-            android:key="gestures_category"
-            android:title="@string/gestures_title"
-            android:summary="@string/gestures_summary"
-	        android:fragment="com.epic.fragments.GestureSettings"
-            android:icon="@drawable/ic_anatolia_gestures" />
-       
-        <!-- Navigation bar -->
-        <PreferenceScreen
-            android:key="navigationbar_category"
-            android:title="@string/navbar_title"
-            android:summary="@string/navbar_summary"
-            android:fragment="com.epic.fragments.NavbarSettings"
-            android:icon="@drawable/ic_anatolia_navbar" />
-
-        <!-- Power menu -->
-        <PreferenceScreen
-            android:key="powermenu_category"
-            android:title="@string/powermenu_title"
-            android:summary="@string/powermenu_summary"
-            android:fragment="com.epic.fragments.PowerMenuSettings"
-            android:icon="@drawable/ic_anatolia_powermenu" />
-
-        <!-- Quick settings -->
-        <PreferenceScreen
-            android:key="quicksettings_category"
-            android:title="@string/quicksettings_title"
-            android:summary="@string/quicksettings_summary"
-            android:fragment="com.epic.fragments.QuickSettings"
-            android:icon="@drawable/ic_anatolia_quicksettings" />        
-
-        <!-- Extras -->
-        <PreferenceScreen
-            android:key="extras_category"
-            android:title="@string/extras_title"
-            android:summary="@string/extras_summary"
-            android:fragment="com.epic.fragments.ExtraSettings"
-            android:icon="@drawable/ic_anatolia_extras" />
-
-        <!-- Sensor Block -->
-        <PreferenceScreen
-            android:key="sensor_block_category"
-            android:title="@string/sensor_block_title"
-            android:summary="@string/sensor_block_summary"
-            android:fragment="com.epic.fragments.SensorBlockSettings"
-            android:icon="@drawable/ic_settings_battery_filled" />
-
-        <!-- Pocket Mode -->
-        <PreferenceScreen
-            android:key="pocket_mode_category"
-            android:title="@string/pocket_mode_title"
-            android:summary="@string/pocket_mode_summary"
-            android:fragment="com.epic.fragments.PocketModeSettings"
-            android:icon="@drawable/ic_anatolia_security" />
-
-        <!-- Extended Security -->
-        <PreferenceScreen
-            android:key="extended_security_category"
-            android:title="@string/extended_security_title"
-            android:summary="@string/extended_security_summary"
-            android:fragment="com.epic.fragments.SettingsExtendedSecurity"
-            android:icon="@drawable/ic_settings_security_filled" />
-
-        <!-- Kidsafe Security -->
-        <PreferenceScreen
-            android:key="kidsafe_security_category"
-            android:title="@string/kidsafe_security_title"
-            android:summary="@string/kidsafe_security_summary"
-            android:fragment="com.epic.fragments.KidsafeSecurity"
-            android:icon="@drawable/ic_settings_security_filled" />
-
-        <!-- BMobile Fingerprint -->
-        <PreferenceScreen
-            android:key="bmobile_fingerprint_category"
-            android:title="@string/bmobile_fingerprint_title"
-            android:summary="@string/bmobile_fingerprint_summary"
-            android:fragment="com.epic.fragments.BMobileFingerprintSettings"
-            android:icon="@drawable/ic_bmobile_fingerprint" />
-
-        <!-- Dashboard Style -->
-        <PreferenceScreen
-            android:key="dashboard_style_category"
-            android:title="@string/dashboard_style_title"
-            android:summary="@string/dashboard_style_summary"
-            android:fragment="com.epic.fragments.DashboardStyleSettings"
-            android:icon="@drawable/ic_settings_display_white" />
-
-        <!-- Custom System Theme -->
-        <PreferenceScreen
-            android:key="custom_theme_category"
-            android:title="@string/custom_theme_title"
-            android:summary="@string/custom_theme_summary"
-            android:fragment="com.android.settings.theme.CustomThemeSettings"
-            android:icon="@drawable/ic_settings_display_white" />
-
-        <!-- Settings Backup & Restore -->
-        <PreferenceScreen
-            android:key="settings_backup_restore_category"
-            android:title="@string/settings_backup_restore_title"
-            android:summary="@string/settings_backup_summary"
-            android:fragment="com.epic.fragments.SettingsBackupRestoreImproved" />
-
-        <!-- Security Features -->
-        <PreferenceScreen
-            android:key="security_features_category"
-            android:title="@string/security_features_title"
-            android:summary="@string/security_features_summary"
-            android:fragment="com.epic.fragments.SecurityFeaturesSettings"
-            android:icon="@drawable/ic_security" />
-
-        <!-- System Optimization -->
-        <PreferenceScreen
-            android:key="system_optimization_category"
-            android:title="@string/system_optimization_title"
-            android:summary="@string/system_optimization_summary"
-            android:fragment="com.epic.fragments.SystemOptimizationSettings"
-            android:icon="@drawable/ic_tune" />
-
-        <!-- Power Tweaks -->
-        <PreferenceScreen
-            android:key="power_tweaks_category"
-            android:title="@string/power_tweaks_title"
-            android:summary="@string/power_tweaks_summary"
-            android:fragment="com.epic.fragments.PowerTweaksSettings"
-            android:icon="@drawable/ic_tune" />
-
-        <!-- Developer Tools -->
-        <PreferenceScreen
-            android:key="developer_tools_category"
-            android:title="@string/developer_tools_title"
-            android:summary="@string/developer_tools_summary"
-            android:fragment="com.epic.fragments.DeveloperToolsSettings"
-            android:icon="@drawable/ic_build" />
-
-        <!-- Developer Options -->
-        <PreferenceScreen
-            android:key="developer_options_category"
-            android:title="@string/developer_options_title"
-            android:summary="@string/developer_options_summary"
-            android:fragment="com.android.settings.development.DevelopmentSettings"
-            android:icon="@drawable/ic_build" />
-
-        <!-- Install App Whitelist Toggle -->
-        <SwitchPreferenceCompat
-            android:key="install_app_whitelist_toggle"
-            android:title="@string/install_app_whitelist_toggle_title"
-            android:summary="@string/install_app_whitelist_toggle_summary"
-            android:order="50"
-            settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController" />
-
-    <!-- Mock Locations -->
+    <!-- ============================================ -->
+    <!-- UI & DISPLAY CUSTOMIZATIONS -->
+    <!-- ============================================ -->
+    
+    <!-- Status bar -->
     <PreferenceScreen
-        android:key="mock_locations_category"
-        android:title="@string/mock_locations_title"
-        android:summary="@string/mock_locations_summary"
-        android:fragment="com.android.settings.location.MockLocationsSettings"
-        android:icon="@drawable/ic_settings_location_filled" />
+        android:key="statusbar_category"
+        android:title="@string/statusbar_title"
+        android:summary="@string/statusbar_summary"
+        android:order="10"
+        settings:layout="@layout/system_warning_preference_card"
+        android:fragment="com.epic.fragments.StatusBarSettings"
+        android:icon="@drawable/ic_anatolia_statusbar" />
+
+    <!-- Lock screen -->
+    <PreferenceScreen
+        android:key="lockscreen_category"
+        android:title="@string/lockscreen_title"
+        android:summary="@string/lockscreen_summary"
+        android:order="20"
+        settings:layout="@layout/system_features_preference_card"
+        android:fragment="com.epic.fragments.LockScreenSettings"
+        android:icon="@drawable/ic_anatolia_lockscreen" />
+
+    <!-- Notifications -->
+    <PreferenceScreen
+        android:key="notifications_category"
+        android:title="@string/notifications_title"
+        android:summary="@string/notifications_summary"
+        android:order="30"
+        android:fragment="com.epic.fragments.NotificationSettings"
+        android:icon="@drawable/ic_anatolia_notifications" />
+
+    <!-- Quick settings -->
+    <PreferenceScreen
+        android:key="quicksettings_category"
+        android:title="@string/quicksettings_title"
+        android:summary="@string/quicksettings_summary"
+        android:order="40"
+        android:fragment="com.epic.fragments.QuickSettings"
+        android:icon="@drawable/ic_anatolia_quicksettings" />
 
     <!-- Display Customizations -->
     <PreferenceScreen
         android:key="display_customization"
         android:title="@string/display_customizations_title"
         android:summary="@string/display_customizations_summary"
+        android:order="50"
         android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations"
-        android:icon="@drawable/ic_settings_display_white" />   
-            <!-- Quick settings -->
-              
+        android:icon="@drawable/ic_settings_display_white" />
 
-        <!-- System Grid (two-column cards) -->
-        <PreferenceScreen
-            android:key="quicksettings_category"
-            android:title="@string/quicksettings_title"
-            android:summary="@string/quicksettings_summary"
-            android:fragment="com.afterlife.afterlab.CustomizeDashboard"
-            android:icon="@drawable/ic_anatolia_quicksettings" />     
+    <!-- Custom System Theme -->
+    <PreferenceScreen
+        android:key="custom_theme_category"
+        android:title="@string/custom_theme_title"
+        android:summary="@string/custom_theme_summary"
+        android:order="60"
+        android:fragment="com.android.settings.theme.CustomThemeSettings"
+        android:icon="@drawable/ic_settings_display_white" />
 
-        <!-- System Grid (two-column cards) -->
-        <PreferenceScreen
-            android:key="system_grid_category"
-            android:title="@string/category_system_title"
-            android:summary="@string/system_summary"
-            android:fragment="com.epic.fragments.SystemGrid" />
+    <!-- Dashboard Style -->
+    <PreferenceScreen
+        android:key="dashboard_style_category"
+        android:title="@string/dashboard_style_title"
+        android:summary="@string/dashboard_style_summary"
+        android:order="70"
+        android:fragment="com.epic.fragments.DashboardStyleSettings"
+        android:icon="@drawable/ic_settings_display_white" />
 
-        <!-- Security Grid (two-column cards) -->
-        <PreferenceScreen
-            android:key="security_grid_category"
-            android:title="@string/security_grid_title"
-            android:summary="@string/security_grid_summary"
-            android:fragment="com.epic.fragments.SecurityGrid"
-            android:icon="@drawable/ic_security_grid" />
+    <!-- Display Page Grid (consolidated grid view) -->
+    <PreferenceScreen
+        android:key="display_page_grid_category"
+        android:title="@string/display_page_grid_title"
+        android:summary="@string/display_page_grid_summary"
+        android:order="80"
+        android:fragment="com.epic.fragments.DisplayPageGrid"
+        android:icon="@drawable/ic_display_grid" />
 
-        <!-- Security Privacy Grid (two-column cards) -->
-        <PreferenceScreen
-            android:key="security_privacy_grid_category"
-            android:title="@string/security_privacy_grid_title"
-            android:summary="@string/security_privacy_grid_summary"
-            android:fragment="com.epic.fragments.SecurityPrivacyGrid"
-            android:icon="@drawable/ic_security_grid" />
+    <!-- ============================================ -->
+    <!-- INTERACTION & NAVIGATION -->
+    <!-- ============================================ -->
 
-        <!-- Display Grid (two-column cards) -->
-        <PreferenceScreen
-            android:key="display_grid_category"
-            android:title="@string/display_grid_title"
-            android:summary="@string/display_grid_summary"
-            android:fragment="com.epic.fragments.DisplayGrid"
-            android:icon="@drawable/ic_display_grid" />
+    <!-- Gestures -->
+    <PreferenceScreen
+        android:key="gestures_category"
+        android:title="@string/gestures_title"
+        android:summary="@string/gestures_summary"
+        android:order="100"
+        android:fragment="com.epic.fragments.GestureSettings"
+        android:icon="@drawable/ic_anatolia_gestures" />
 
-        <!-- System Basic Defaults (independent copy of DisplayGrid) -->
-        <PreferenceScreen
-            android:key="system_basic_defaults_category"
-            android:title="@string/system_basic_defaults_title"
-            android:summary="@string/system_basic_defaults_title"
-            android:fragment="com.epic.fragments.SystemBasicDefaults"
-            android:icon="@drawable/ic_settings_display_white" />
+    <!-- Navigation bar -->
+    <PreferenceScreen
+        android:key="navigationbar_category"
+        android:title="@string/navbar_title"
+        android:summary="@string/navbar_summary"
+        android:order="110"
+        android:fragment="com.epic.fragments.NavbarSettings"
+        android:icon="@drawable/ic_anatolia_navbar" />
 
-                    <!-- Display Page Grid (two-column cards) -->
-        <PreferenceScreen
-            android:key="display_page_grid_category"
-            android:title="@string/display_page_grid_title"
-            android:summary="@string/display_page_grid_summary"
-            android:fragment="com.epic.fragments.DisplayPageGrid"
-            android:icon="@drawable/ic_display_grid" />
+    <!-- Power menu -->
+    <PreferenceScreen
+        android:key="powermenu_category"
+        android:title="@string/powermenu_title"
+        android:summary="@string/powermenu_summary"
+        android:order="120"
+        android:fragment="com.epic.fragments.PowerMenuSettings"
+        android:icon="@drawable/ic_anatolia_powermenu" />
+
+    <!-- ============================================ -->
+    <!-- SECURITY & PRIVACY (MERGED) -->
+    <!-- ============================================ -->
+
+    <!-- Privacy & Security (consolidated security features) -->
+    <PreferenceScreen
+        android:key="privacy_security_category"
+        android:title="@string/privacy_security_title"
+        android:summary="@string/privacy_security_intro_summary_working"
+        android:order="200"
+        android:fragment="com.epic.fragments.PrivacySecuritySettings"
+        android:icon="@drawable/ic_security" />
+
+    <!-- Advanced Security Settings -->
+    <PreferenceScreen
+        android:key="advanced_security_category"
+        android:title="@string/advanced_security_settings_title"
+        android:summary="@string/advanced_security_intro_summary"
+        android:order="210"
+        android:fragment="com.epic.fragments.AdvancedSecuritySettings"
+        android:icon="@drawable/ic_security" />
+
+    <!-- Extended Security (merged with Kidsafe) -->
+    <PreferenceScreen
+        android:key="extended_security_category"
+        android:title="@string/extended_security_title"
+        android:summary="@string/extended_security_summary"
+        android:order="220"
+        android:fragment="com.epic.fragments.SettingsExtendedSecurity"
+        android:icon="@drawable/ic_settings_security_filled" />
+
+    <!-- BMobile Fingerprint -->
+    <PreferenceScreen
+        android:key="bmobile_fingerprint_category"
+        android:title="@string/bmobile_fingerprint_title"
+        android:summary="@string/bmobile_fingerprint_summary"
+        android:order="230"
+        android:fragment="com.epic.fragments.BMobileFingerprintSettings"
+        android:icon="@drawable/ic_bmobile_fingerprint" />
+
+    <!-- Pocket Mode -->
+    <PreferenceScreen
+        android:key="pocket_mode_category"
+        android:title="@string/pocket_mode_title"
+        android:summary="@string/pocket_mode_summary"
+        android:order="240"
+        android:fragment="com.epic.fragments.PocketModeSettings"
+        android:icon="@drawable/ic_anatolia_security" />
+
+    <!-- Sensor Block -->
+    <PreferenceScreen
+        android:key="sensor_block_category"
+        android:title="@string/sensor_block_title"
+        android:summary="@string/sensor_block_summary"
+        android:order="250"
+        android:fragment="com.epic.fragments.SensorBlockSettings"
+        android:icon="@drawable/ic_settings_battery_filled" />
+
+    <!-- ============================================ -->
+    <!-- SYSTEM & PERFORMANCE -->
+    <!-- ============================================ -->
+
+    <!-- System Optimization -->
+    <PreferenceScreen
+        android:key="system_optimization_category"
+        android:title="@string/system_optimization_title"
+        android:summary="@string/system_optimization_summary"
+        android:order="300"
+        android:fragment="com.epic.fragments.SystemOptimizationSettings"
+        android:icon="@drawable/ic_tune" />
+
+    <!-- Extras -->
+    <PreferenceScreen
+        android:key="extras_category"
+        android:title="@string/extras_title"
+        android:summary="@string/extras_summary"
+        android:order="310"
+        android:fragment="com.epic.fragments.ExtraSettings"
+        android:icon="@drawable/ic_anatolia_extras" />
+
+    <!-- ============================================ -->
+    <!-- DEVELOPER & ADVANCED -->
+    <!-- ============================================ -->
+
+    <!-- Developer Options (merged Developer Tools) -->
+    <PreferenceScreen
+        android:key="developer_options_category"
+        android:title="@string/developer_options_title"
+        android:summary="@string/developer_options_summary"
+        android:order="400"
+        android:fragment="com.android.settings.development.DevelopmentSettings"
+        android:icon="@drawable/ic_build" />
+
+    <!-- Developer Tools -->
+    <PreferenceScreen
+        android:key="developer_tools_category"
+        android:title="@string/developer_tools_title"
+        android:summary="@string/developer_tools_summary"
+        android:order="410"
+        android:fragment="com.epic.fragments.DeveloperToolsSettings"
+        android:icon="@drawable/ic_build" />
+
+    <!-- Mock Locations -->
+    <PreferenceScreen
+        android:key="mock_locations_category"
+        android:title="@string/mock_locations_title"
+        android:summary="@string/mock_locations_summary"
+        android:order="420"
+        android:fragment="com.android.settings.location.MockLocationsSettings"
+        android:icon="@drawable/ic_settings_location_filled" />
+
+    <!-- Install App Whitelist Toggle -->
+    <SwitchPreferenceCompat
+        android:key="install_app_whitelist_toggle"
+        android:title="@string/install_app_whitelist_toggle_title"
+        android:summary="@string/install_app_whitelist_toggle_summary"
+        android:order="430"
+        settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController" />
+
+    <!-- ============================================ -->
+    <!-- BACKUP & UTILITIES -->
+    <!-- ============================================ -->
+
+    <!-- Settings Backup & Restore -->
+    <PreferenceScreen
+        android:key="settings_backup_restore_category"
+        android:title="@string/settings_backup_restore_title"
+        android:summary="@string/settings_backup_summary"
+        android:order="500"
+        android:fragment="com.epic.fragments.SettingsBackupRestoreImproved" />
+
+    <!-- About us -->
+    <PreferenceScreen
+        android:key="Aboutus_category"
+        android:title="@string/aboutus_title"
+        android:summary="@string/aboutus_summary"
+        android:order="510"
+        android:fragment="com.epic.fragments.ButtonSettings"
+        android:icon="@drawable/ic_anatolia_buttons" />
+
 </PreferenceScreen>

@@ -17,7 +17,8 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="apps_screen"
     android:title=" ">
 
@@ -125,5 +126,31 @@
         </Preference>
 
     </PreferenceCategory>
+
+           <!-- Native Alpha Browser -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="native_alpha_pref"
+            android:title="Native Alpha"
+            android:summary="Open Native Alpha browser settings"
+            android:order="23"
+            app:position="middle">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.nativealpha"
+                android:targetClass="com.android.nativealpha.MainActivity" />
+        </com.android.settings.preferences.ui.AdaptivePreference>
+
+        <!-- DigPaws -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="digpaws_pref"
+            android:title="DigPaws"
+            android:summary="Open DigPaws settings"
+            android:order="24"
+            app:position="bottom">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="nethical.digipaws"
+                android:targetClass="nethical.digipaws.MainActivity" />
+        </com.android.settings.preferences.ui.AdaptivePreference>
 
 </PreferenceScreen>

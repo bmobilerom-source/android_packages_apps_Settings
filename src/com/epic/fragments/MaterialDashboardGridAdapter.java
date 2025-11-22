@@ -367,6 +367,12 @@ public class MaterialDashboardGridAdapter extends RecyclerView.Adapter<MaterialD
     }
     
     private void launchSafetyCenter() {
+        // Check config flag first - if disabled, don't launch
+        if (!activity.getResources().getBoolean(R.bool.config_safety_center_enabled)) {
+            Log.d(TAG, "Safety Center disabled via config_safety_center_enabled");
+            showErrorToast();
+            return;
+        }
         try {
             Intent intent = new Intent("android.settings.SAFETY_CENTER_SETTINGS");
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

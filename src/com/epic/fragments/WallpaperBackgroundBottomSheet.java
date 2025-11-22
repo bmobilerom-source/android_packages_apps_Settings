@@ -90,8 +90,7 @@ public class WallpaperBackgroundBottomSheet extends BottomSheetDialogFragment {
 
     public static class WallpaperBackgroundPreferenceFragment extends PreferenceFragmentCompat {
         private DisplayCustomizationsAdapter mAdapter;
-        private AdaptiveSwitchPreference mWallpaperBlurPreference;
-        private ListPreference mWallpaperBlurRadiusPreference;
+        private Preference mWallpaperBlurRadiusPreference;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -105,18 +104,12 @@ public class WallpaperBackgroundBottomSheet extends BottomSheetDialogFragment {
                 
                 mAdapter = new DisplayCustomizationsAdapter(context);
                 
-                // Setup wallpaper blur preferences using adapter
-                // Note: AdaptiveSwitchPreference extends SwitchPreference, so adapter methods work
-                Preference blurPref = findPreference("wallpaper_blur");
-                if (blurPref instanceof AdaptiveSwitchPreference) {
-                    mWallpaperBlurPreference = (AdaptiveSwitchPreference) blurPref;
-                }
+                // Get blur radius preference for dependency management
                 mWallpaperBlurRadiusPreference = findPreference("wallpaper_blur_radius");
                 
-                if (mWallpaperBlurPreference != null && mWallpaperBlurRadiusPreference != null) {
-                    // Setup using adapter - this handles state persistence
-                    mAdapter.setupWallpaperBlurPreference(mWallpaperBlurPreference, mWallpaperBlurRadiusPreference);
-                    mAdapter.setupWallpaperBlurRadiusPreference(mWallpaperBlurRadiusPreference);
+                // Controllers handle the main toggles, but we need to manage blur radius dependency
+                if (mWallpaperBlurRadiusPreference != null) {
+                    mAdapter.setupWallpaperBlurRadiusPreference((ListPreference) mWallpaperBlurRadiusPreference);
                 }
             } catch (Exception e) {
                 android.util.Log.e("WallpaperBackgroundBottomSheet", "Error in onCreatePreferences", e);
@@ -126,24 +119,19 @@ public class WallpaperBackgroundBottomSheet extends BottomSheetDialogFragment {
         @Override
         public void onResume() {
             super.onResume();
-            // Refresh preference states when bottom sheet is shown
-            refreshPreferenceStates();
+            // Refresh blur radius enabled state based on blur toggle
+            updateBlurRadiusState();
         }
         
-        private void refreshPreferenceStates() {
+        private void updateBlurRadiusState() {
             Context context = getContext();
-            if (context == null) {
+            if (context == null || mWallpaperBlurRadiusPreference == null) {
                 return;
             }
             
-            // Refresh wallpaper blur preference state
-            if (mWallpaperBlurPreference != null) {
-                boolean blurEnabled = DisplayCustomizationsHelper.isWallpaperBlurEnabled(context);
-                mWallpaperBlurPreference.setChecked(blurEnabled);
-                if (mWallpaperBlurRadiusPreference != null) {
-                    mWallpaperBlurRadiusPreference.setEnabled(blurEnabled);
-                }
-            }
+            // Enable/disable blur radius based on blur toggle state
+            boolean blurEnabled = DisplayCustomizationsHelper.isWallpaperBlurEnabled(context);
+            mWallpaperBlurRadiusPreference.setEnabled(blurEnabled);
         }
     }
 }

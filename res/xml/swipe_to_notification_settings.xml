@@ -23,8 +23,7 @@
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="gesture_swipe_down_fingerprint_video"
-        settings:searchable="false"         
-        android:order="-999"       
+        settings:searchable="false"                 android:order="-999"       
         app:lottie_rawRes="@raw/lottie_swipe_fingerprint"/>
 
     <com.android.settings.preferences.ui.AdaptiveSwitchPreference

@@ -20,15 +20,14 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.R;
 
 public class AutoRebootIntervalController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
-    private static final int REQUEST_CODE_CONFIRM_CREDENTIAL = 1002;
     private ListPreference mPreference;
-    private long mPendingIntervalMs = -1;
 
     public AutoRebootIntervalController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -45,6 +44,22 @@ public class AutoRebootIntervalController extends BasePreferenceController
     public String getSummary() {
         long intervalMs = PrivacySecurityHelper.getAutoRebootInterval(mContext);
         return formatInterval(intervalMs);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        // AbstractPreferenceController automatically sets OnPreferenceChangeListener
+        // if the controller implements it (see AbstractPreferenceController.displayPreference)
+        mPreference = screen.findPreference(getPreferenceKey());
+        if (mPreference != null && mPreference instanceof ListPreference) {
+            // Ensure listener is set (base class should do this automatically, but verify)
+            ListPreference listPref = (ListPreference) mPreference;
+            if (listPref.getOnPreferenceChangeListener() == null) {
+                listPref.setOnPreferenceChangeListener(this);
+            }
+            updateState(mPreference);
+        }
     }
 
     @Override
@@ -66,11 +81,33 @@ public class AutoRebootIntervalController extends BasePreferenceController
                         break;
                     }
                 }
-                // If no exact match, use the first available value (default: 1 hour)
-                if (!found && entryValues.length > 0 && entryValues[0] != null) {
-                    value = entryValues[0].toString();
-                    // Update the setting to match the default
-                    PrivacySecurityHelper.setAutoRebootInterval(mContext, Long.parseLong(value));
+                // If no exact match, find the closest value or use default
+                if (!found) {
+                    long closestDiff = Long.MAX_VALUE;
+                    String closestValue = null;
+                    for (CharSequence entryValue : entryValues) {
+                        if (entryValue != null) {
+                            try {
+                                long entryMs = Long.parseLong(entryValue.toString());
+                                long diff = Math.abs(entryMs - intervalMs);
+                                if (diff < closestDiff) {
+                                    closestDiff = diff;
+                                    closestValue = entryValue.toString();
+                                }
+                            } catch (NumberFormatException e) {
+                                // Skip invalid values
+                            }
+                        }
+                    }
+                    if (closestValue != null) {
+                        value = closestValue;
+                        // Update the setting to match the closest available value
+                        PrivacySecurityHelper.setAutoRebootInterval(mContext, Long.parseLong(value));
+                    } else if (entryValues.length > 0 && entryValues[0] != null) {
+                        // Fallback to first value
+                        value = entryValues[0].toString();
+                        PrivacySecurityHelper.setAutoRebootInterval(mContext, Long.parseLong(value));
+                    }
                 }
             }
             
@@ -85,7 +122,7 @@ public class AutoRebootIntervalController extends BasePreferenceController
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference instanceof ListPreference) {
+        if (preference instanceof ListPreference && newValue != null) {
             try {
                 String valueStr = newValue.toString();
                 long intervalMs = Long.parseLong(valueStr);
@@ -99,28 +136,48 @@ public class AutoRebootIntervalController extends BasePreferenceController
                     valueStr = String.valueOf(intervalMs);
                 }
                 
-                // Store pending interval and require PIN verification
-                mPendingIntervalMs = intervalMs;
-                
-                // Get the fragment/activity to launch credential confirmation
-                Context context = preference.getContext();
-                if (context instanceof Activity) {
-                    Activity activity = (Activity) context;
-                    AutoRebootPinHelper.launchCredentialConfirmation(activity, REQUEST_CODE_CONFIRM_CREDENTIAL);
-                    // Return false for now - will be set after PIN verification
-                    return false;
+                boolean success = PrivacySecurityHelper.setAutoRebootInterval(mContext, intervalMs);
+                if (success) {
+                    // Notify that the setting changed - this triggers framework to reschedule
+                    android.content.ContentResolver resolver = mContext.getContentResolver();
+                    resolver.notifyChange(
+                            android.provider.Settings.Secure.getUriFor(
+                                    android.provider.Settings.Secure.AUTO_REBOOT_DELAY),
+                            null, false);
+                    
+                    // Also notify the enabled setting in case framework needs to reschedule
+                    resolver.notifyChange(
+                            android.provider.Settings.Secure.getUriFor(
+                                    android.provider.Settings.Secure.AUTO_REBOOT_ENABLED),
+                            null, false);
+                    
+                    // Send broadcast to AutoRebootReceiver
+                    android.content.Intent intent = new android.content.Intent("com.epic.action.AUTO_REBOOT_CONFIG_CHANGED");
+                    intent.setPackage(mContext.getPackageName());
+                    mContext.sendBroadcast(intent);
+                    
+                    // Update the preference state immediately
+                    if (preference instanceof ListPreference) {
+                        ListPreference listPref = (ListPreference) preference;
+                        listPref.setValue(valueStr);
+                        listPref.setSummary(formatInterval(intervalMs));
+                    }
+                    
+                    android.util.Log.d("AutoRebootIntervalController", 
+                            "Auto reboot interval set to: " + formatInterval(intervalMs) + 
+                            " (" + intervalMs + " ms)");
                 } else {
-                    // If not an Activity context, try to find parent activity
-                    android.util.Log.w("AutoRebootIntervalController", 
-                            "Cannot verify PIN - context is not an Activity");
-                    return false;
+                    android.util.Log.e("AutoRebootIntervalController", 
+                            "Failed to save auto reboot interval");
                 }
+                return success;
             } catch (NumberFormatException e) {
                 android.util.Log.e("AutoRebootIntervalController", 
                         "Invalid interval value: " + newValue, e);
                 return false;
             } catch (Exception e) {
-                android.util.Log.e("AutoRebootIntervalController", "Failed to set auto reboot interval", e);
+                android.util.Log.e("AutoRebootIntervalController", 
+                        "Failed to set auto reboot interval", e);
                 return false;
             }
         }

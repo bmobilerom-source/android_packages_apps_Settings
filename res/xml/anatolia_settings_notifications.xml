@@ -26,6 +26,7 @@
             android:title="@string/smart_5g_title"
             android:persistent="false"
             android:summary="@string/smart_5g_summary"
+            app:position="solo"
             settings:controller="com.android.settings.network.telephony.Smart5gPreferenceController"/>
    <!-- Power menu -->
         <PreferenceScreen

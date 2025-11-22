@@ -17,8 +17,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="write_system_settings_permission_detail_settings"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"    
-    android:title=" " >
+    xmlns:app="http://schemas.android.com/apk/res-auto"            android:title=" " >
 
 
     <com.android.settingslib.widget.IllustrationPreference

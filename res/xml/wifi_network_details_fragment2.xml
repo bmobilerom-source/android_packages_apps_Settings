@@ -131,10 +131,11 @@
         settings:controller="com.android.settings.wifi.details2.CertificateDetailsPreferenceController"/>
 
     <!-- Add device Preference -->
-    <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="add_device_to_network"
         android:title="@string/wifi_dpp_add_device"
-        android:summary="@string/wifi_dpp_connect_network_using_qr_code"/>
+        android:summary="@string/wifi_dpp_connect_network_using_qr_code"
+        app:position="top"/>
 
     <!-- Network Details -->
     <PreferenceCategory

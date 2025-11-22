@@ -36,7 +36,7 @@
         android:order="10"
         android:icon="@drawable/ic_phone"
         android:enabled="false"
-        app:position="top"
+        app:position="solo"
         />
 
     <com.android.settings.preferences.ui.AdaptiveListPreference
@@ -46,7 +46,7 @@
         android:order="15"
         android:icon="@drawable/ic_sms"
         android:enabled="false"
-        app:position="bottom"
+        app:position="solo"
         />
 
     <PreferenceCategory

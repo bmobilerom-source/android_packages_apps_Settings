@@ -68,6 +68,10 @@ import com.android.settings.applications.specialaccess.BlockLocationSettingsCont
 import com.android.settings.applications.specialaccess.BlockAccountDashboardController;
 import com.android.settings.applications.specialaccess.BlockSafetyCenterController;
 import com.android.settings.applications.AppDowngradePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.view.View;
 
 public class UserInfoFragement extends SettingsPreferenceFragment {
 
@@ -170,6 +174,70 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
     public void onStart() {
         super.onStart();
         onUserCard();
+        setupAtomichubClicks();
+    }
+
+    /**
+     * Setup click handlers for atomichub cards.
+     */
+    private void setupAtomichubClicks() {
+        final LayoutPreference atomichubPreference =
+                (LayoutPreference) getPreferenceScreen().findPreference("battery_stats_view");
+        if (atomichubPreference == null) {
+            return;
+        }
+
+        final View atomichubView = atomichubPreference.findViewById(R.id.hsv_card);
+        if (atomichubView == null) {
+            return;
+        }
+
+        // Get card views
+        FrameLayout card1 = atomichubPreference.findViewById(R.id.card1);
+        FrameLayout card2 = atomichubPreference.findViewById(R.id.card2);
+        FrameLayout card3 = atomichubPreference.findViewById(R.id.card3);
+        FrameLayout card4 = atomichubPreference.findViewById(R.id.card4);
+        FrameLayout card5 = atomichubPreference.findViewById(R.id.card5);
+        FrameLayout card6 = atomichubPreference.findViewById(R.id.card6);
+        LinearLayout bigCard = atomichubPreference.findViewById(R.id.card);
+
+        // Set click listeners
+        if (card1 != null) {
+            card1.setOnClickListener(v -> launchFragment("com.epic.fragments.PocketModeSettings", R.string.pocket_mode_title));
+        }
+        if (card2 != null) {
+            card2.setOnClickListener(v -> launchFragment("com.epic.fragments.BMobileFingerprintSettings", R.string.bmobile_fingerprint_title));
+        }
+        if (card3 != null) {
+            card3.setOnClickListener(v -> launchFragment("com.epic.fragments.PrivacySecuritySettings", R.string.privacy_security_title));
+        }
+        if (card4 != null) {
+            card4.setOnClickListener(v -> launchFragment("com.epic.fragments.AdvancedSecuritySettings", R.string.advanced_security_settings_title));
+        }
+        if (card5 != null) {
+            card5.setOnClickListener(v -> launchFragment("com.epic.fragments.SystemOptimizationSettings", R.string.system_optimization_title));
+        }
+        if (card6 != null) {
+            card6.setOnClickListener(v -> launchFragment("com.epic.fragments.SettingsBackupRestoreImproved", R.string.settings_backup_restore_title));
+        }
+        if (bigCard != null) {
+            bigCard.setOnClickListener(v -> launchFragment("com.android.settings.location.MockLocationsSettings", R.string.mock_locations_title));
+        }
+    }
+
+    /**
+     * Launch a fragment using SubSettingLauncher.
+     */
+    private void launchFragment(String fragmentClass, int titleResId) {
+        try {
+            new SubSettingLauncher(getActivity())
+                .setDestination(fragmentClass)
+                .setTitleRes(titleResId)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
+        } catch (Exception e) {
+            android.util.Log.e("UserInfoFragement", "Failed to launch fragment: " + fragmentClass, e);
+        }
     }
 
     @Override

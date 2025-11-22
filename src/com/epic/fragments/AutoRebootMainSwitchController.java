@@ -86,19 +86,8 @@ public class AutoRebootMainSwitchController extends TogglePreferenceController
             android.content.ContentResolver resolver = mContext.getContentResolver();
             resolver.notifyChange(
                     android.provider.Settings.Secure.getUriFor(
-                            "auto_reboot_enabled"),
+                            android.provider.Settings.Secure.AUTO_REBOOT_ENABLED),
                     null, false);
-            
-            // Send broadcast to AutoRebootReceiver to trigger scheduling
-            android.content.Intent intent = new android.content.Intent("com.epic.action.AUTO_REBOOT_CONFIG_CHANGED");
-            intent.setPackage(mContext.getPackageName());
-            mContext.sendBroadcast(intent);
-            
-            // Update UI
-            updateState(null);
-        } else {
-            android.util.Log.e("AutoRebootMainSwitchController", 
-                    "Failed to set auto reboot enabled state");
         }
         return success;
     }

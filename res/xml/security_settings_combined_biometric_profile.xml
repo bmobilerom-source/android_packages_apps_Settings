@@ -55,20 +55,22 @@
         android:order="0"
         settings:searchable="false">
 
-        <com.android.settingslib.RestrictedPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="biometric_face_settings_profile"
             android:title="@string/security_settings_face_profile_preference_title"
             android:summary="@string/summary_placeholder"
             android:order="0"
+            app:position="top"
             settings:keywords="@string/keywords_face_settings"
             settings:controller="com.android.settings.biometrics.combination.BiometricFaceProfileStatusPreferenceController"
             settings:searchable="false" />
 
-        <com.android.settingslib.RestrictedPreference
+        <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="biometric_fingerprint_settings_profile"
             android:title="@string/security_settings_work_fingerprint_preference_title"
             android:summary="@string/summary_placeholder"
             android:order="1"
+            app:position="bottom"
             settings:keywords="@string/keywords_fingerprint_settings"
             settings:controller="com.android.settings.biometrics.combination.BiometricFingerprintProfileStatusPreferenceController"
             settings:searchable="false" />
@@ -80,10 +82,11 @@
         android:order="1"
         settings:searchable="false">
 
-        <SwitchPreferenceCompat
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
             android:key="biometric_settings_biometric_app_profile"
             android:title="@string/biometric_settings_use_biometric_for_apps"
             android:order="200"
+            app:position="solo"
             settings:keywords="@string/keywords_biometric_unlock"
             settings:controller="com.android.settings.biometrics.combination.BiometricSettingsAppPreferenceController"
             settings:searchable="false"/>
