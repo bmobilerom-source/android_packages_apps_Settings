@@ -371,6 +371,8 @@
     <string name="auto_reboot_interval_one_day">1 day</string>
     <string name="auto_reboot_interval_days">%1$d days</string>
     <string name="auto_reboot_interval_minutes">%1$d minutes</string>
+    <string name="auto_reboot_confirm_credential_title">Confirm PIN</string>
+    <string name="auto_reboot_confirm_credential_description">Enter your device PIN (1471) to change auto reboot settings</string>
     
     <string name="usb_accessories_title">USB Accessories</string>
     <string name="usb_accessories_summary">Allow USB accessories when device is locked</string>
