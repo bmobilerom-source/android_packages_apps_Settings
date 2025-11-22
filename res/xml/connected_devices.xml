@@ -127,4 +127,13 @@
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.bluetooth.BluetoothTimeoutPreferenceController" />
 
+    <!-- Bluetooth Battery Status -->
+    <lineageos.preference.SystemSettingSwitchPreference
+        android:key="bluetooth_show_battery"
+        android:title="@string/status_bar_bluetooth_battery_title"
+        android:summary="@string/status_bar_bluetooth_battery_summary"
+        android:defaultValue="true"
+        app:position="solo"
+        settings:allowDividerAbove="true" />
+
 </PreferenceScreen>
