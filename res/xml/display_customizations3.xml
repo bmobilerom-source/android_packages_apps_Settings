@@ -80,7 +80,18 @@
         android:entries="@array/animator_duration_scale_entries"
         android:entryValues="@array/animator_duration_scale_values"
         android:defaultValue="1"
-        app:position="bottom"
+        app:position="middle"
         settings:controller="com.android.settings.display.AnimatorDurationScaleController" />
+
+    <!-- System Animation Style -->
+    <com.android.settings.preferences.ui.AdaptiveListPreference
+        android:key="system_animation_style"
+        android:title="@string/system_animation_style_title"
+        android:entries="@array/system_animation_styles_entries"
+        android:entryValues="@array/system_animation_styles_values"
+        android:defaultValue="0"
+        android:summary="%s"
+        app:position="bottom"
+        settings:controller="com.epic.fragments.SystemAnimationStyleController" />
 
 </PreferenceScreen>
