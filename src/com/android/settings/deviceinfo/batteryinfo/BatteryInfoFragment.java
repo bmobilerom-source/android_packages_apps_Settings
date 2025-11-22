@@ -22,10 +22,16 @@ import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.deviceinfo.SleeptimePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** A fragment that shows battery hardware information. */
 @SearchIndexable
@@ -62,6 +68,18 @@ public class BatteryInfoFragment extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, this /* fragment */, getSettingsLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(
+            Context context, BatteryInfoFragment fragment, Lifecycle lifecycle) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new SleeptimePreferenceController(context, lifecycle));
+        return controllers;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
