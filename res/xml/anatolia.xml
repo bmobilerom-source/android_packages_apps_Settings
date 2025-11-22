@@ -143,4 +143,12 @@
         android:title="@string/display_page_grid_title"
         android:summary="@string/display_page_grid_summary"
         android:fragment="com.epic.fragments.DisplayPageGrid" />
+          <!-- Ambient Customization -->
+    <PreferenceScreen
+        android:key="ambient_customization_category"
+        android:title="@string/ambient_text_category_title"
+        android:summary="@string/ambient_text_summary"
+        android:order="85"
+        android:fragment="com.epic.fragments.AmbientCustomizations" />
+
 </PreferenceScreen>
