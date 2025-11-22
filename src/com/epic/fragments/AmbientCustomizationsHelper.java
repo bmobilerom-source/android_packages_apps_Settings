@@ -29,13 +29,15 @@ public class AmbientCustomizationsHelper {
     private static final int DEFAULT_TEXT_TYPE_COLOR = 0; // Accent color
     private static final int DEFAULT_TEXT_COLOR = 0xFF3980FF; // Default accent blue
     private static final String DEFAULT_CUSTOM_IMAGE = "";
+    private static final int DEFAULT_TEXT_SIZE = 30;
 
     /**
      * Get ambient text string
      */
     public static String getAmbientText(Context context) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.getString(resolver, AMBIENT_TEXT_STRING);
+        String text = Settings.System.getString(resolver, AMBIENT_TEXT_STRING);
+        return text != null ? text : DEFAULT_AMBIENT_TEXT;
     }
 
     /**
@@ -43,7 +45,12 @@ public class AmbientCustomizationsHelper {
      */
     public static boolean setAmbientText(Context context, String text) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putString(resolver, AMBIENT_TEXT_STRING, text != null ? text : DEFAULT_AMBIENT_TEXT);
+        boolean success = Settings.System.putString(resolver, AMBIENT_TEXT_STRING,
+                text != null ? text : DEFAULT_AMBIENT_TEXT);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
     }
 
     /**
@@ -59,7 +66,11 @@ public class AmbientCustomizationsHelper {
      */
     public static boolean setAmbientTextAlignment(Context context, int alignment) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver, AMBIENT_TEXT_ALIGNMENT, alignment);
+        boolean success = Settings.System.putInt(resolver, AMBIENT_TEXT_ALIGNMENT, alignment);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
     }
 
     /**
@@ -75,7 +86,11 @@ public class AmbientCustomizationsHelper {
      */
     public static boolean setAmbientTextTypeColor(Context context, int typeColor) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver, AMBIENT_TEXT_TYPE_COLOR, typeColor);
+        boolean success = Settings.System.putInt(resolver, AMBIENT_TEXT_TYPE_COLOR, typeColor);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
     }
 
     /**
@@ -91,7 +106,11 @@ public class AmbientCustomizationsHelper {
      */
     public static boolean setAmbientTextColor(Context context, int color) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver, AMBIENT_TEXT_COLOR, color);
+        boolean success = Settings.System.putInt(resolver, AMBIENT_TEXT_COLOR, color);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
     }
 
     /**
@@ -99,7 +118,8 @@ public class AmbientCustomizationsHelper {
      */
     public static String getAmbientCustomImage(Context context) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.getString(resolver, AMBIENT_CUSTOM_IMAGE);
+        String image = Settings.System.getString(resolver, AMBIENT_CUSTOM_IMAGE);
+        return image != null ? image : DEFAULT_CUSTOM_IMAGE;
     }
 
     /**
@@ -107,7 +127,12 @@ public class AmbientCustomizationsHelper {
      */
     public static boolean setAmbientCustomImage(Context context, String imageUri) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putString(resolver, AMBIENT_CUSTOM_IMAGE, imageUri != null ? imageUri : DEFAULT_CUSTOM_IMAGE);
+        boolean success = Settings.System.putString(resolver, AMBIENT_CUSTOM_IMAGE,
+                imageUri != null ? imageUri : DEFAULT_CUSTOM_IMAGE);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
     }
 
     /**
@@ -116,7 +141,8 @@ public class AmbientCustomizationsHelper {
     public static boolean isAmbientCustomizationEnabled(Context context) {
         String text = getAmbientText(context);
         String imageUri = getAmbientCustomImage(context);
-        return (text != null && !text.trim().isEmpty()) || (imageUri != null && !imageUri.trim().isEmpty());
+        return (text != null && !text.trim().isEmpty()) ||
+               (imageUri != null && !imageUri.trim().isEmpty());
     }
 
     /**
@@ -129,6 +155,91 @@ public class AmbientCustomizationsHelper {
         Settings.System.putInt(resolver, AMBIENT_TEXT_TYPE_COLOR, DEFAULT_TEXT_TYPE_COLOR);
         Settings.System.putInt(resolver, AMBIENT_TEXT_COLOR, DEFAULT_TEXT_COLOR);
         Settings.System.putString(resolver, AMBIENT_CUSTOM_IMAGE, DEFAULT_CUSTOM_IMAGE);
+        Settings.System.putInt(resolver, Settings.System.AMBIENT_TEXT, 0);
+        Settings.System.putInt(resolver, Settings.System.AMBIENT_TEXT_ANIMATION, 0);
+        Settings.System.putInt(resolver, Settings.System.AMBIENT_TEXT_SIZE, DEFAULT_TEXT_SIZE);
+        Settings.System.putInt(resolver, Settings.System.AMBIENT_IMAGE, 0);
+        notifyAmbientChange(context);
+    }
+
+    /**
+     * Check if ambient text is enabled.
+     */
+    public static boolean isAmbientTextEnabled(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.AMBIENT_TEXT, 0) == 1;
+    }
+
+    /**
+     * Enable or disable ambient text.
+     */
+    public static boolean setAmbientTextEnabled(Context context, boolean enabled) {
+        boolean success = Settings.System.putInt(context.getContentResolver(),
+                Settings.System.AMBIENT_TEXT, enabled ? 1 : 0);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
+    }
+
+    /**
+     * Check if ambient text animation is enabled.
+     */
+    public static boolean isAmbientTextAnimationEnabled(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.AMBIENT_TEXT_ANIMATION, 0) == 1;
+    }
+
+    /**
+     * Enable or disable ambient text animation.
+     */
+    public static boolean setAmbientTextAnimationEnabled(Context context, boolean enabled) {
+        boolean success = Settings.System.putInt(context.getContentResolver(),
+                Settings.System.AMBIENT_TEXT_ANIMATION, enabled ? 1 : 0);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
+    }
+
+    /**
+     * Get ambient text size value.
+     */
+    public static int getAmbientTextSize(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.AMBIENT_TEXT_SIZE, DEFAULT_TEXT_SIZE);
+    }
+
+    /**
+     * Set ambient text size value.
+     */
+    public static boolean setAmbientTextSize(Context context, int size) {
+        boolean success = Settings.System.putInt(context.getContentResolver(),
+                Settings.System.AMBIENT_TEXT_SIZE, size);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
+    }
+
+    /**
+     * Check if ambient custom image is enabled.
+     */
+    public static boolean isAmbientImageEnabled(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.AMBIENT_IMAGE, 0) == 1;
+    }
+
+    /**
+     * Enable or disable ambient custom image.
+     */
+    public static boolean setAmbientImageEnabled(Context context, boolean enabled) {
+        boolean success = Settings.System.putInt(context.getContentResolver(),
+                Settings.System.AMBIENT_IMAGE, enabled ? 1 : 0);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
     }
 
     /**
@@ -154,5 +265,53 @@ public class AmbientCustomizationsHelper {
         }
         return entries[0]; // Default
     }
-}
 
+    /**
+     * Notify SystemUI of ambient changes
+     */
+    private static void notifyAmbientChange(Context context) {
+        ContentResolver resolver = context.getContentResolver();
+        try {
+            // Notify all ambient-related settings
+            resolver.notifyChange(Settings.System.getUriFor(AMBIENT_TEXT_STRING), null, true);
+            resolver.notifyChange(Settings.System.getUriFor(AMBIENT_TEXT_ALIGNMENT), null, true);
+            resolver.notifyChange(Settings.System.getUriFor(AMBIENT_TEXT_TYPE_COLOR), null, true);
+            resolver.notifyChange(Settings.System.getUriFor(AMBIENT_TEXT_COLOR), null, true);
+            resolver.notifyChange(Settings.System.getUriFor(AMBIENT_CUSTOM_IMAGE), null, true);
+            resolver.notifyChange(Settings.System.getUriFor(Settings.System.AMBIENT_TEXT), null, true);
+            resolver.notifyChange(Settings.System.getUriFor(Settings.System.AMBIENT_TEXT_ANIMATION), null, true);
+            resolver.notifyChange(Settings.System.getUriFor(Settings.System.AMBIENT_TEXT_SIZE), null, true);
+            resolver.notifyChange(Settings.System.getUriFor(Settings.System.AMBIENT_IMAGE), null, true);
+            Log.d("AmbientCustomizationsHelper", "Notified SystemUI of ambient changes");
+        } catch (Exception e) {
+            Log.e("AmbientCustomizationsHelper", "Failed to notify ambient changes", e);
+        }
+    }
+
+    /**
+     * Check if ambient display is available on this device
+     */
+    public static boolean isAmbientDisplayAvailable(Context context) {
+        try {
+            return context.getPackageManager().hasSystemFeature("android.hardware.screen.ambient");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Get ambient display timeout
+     */
+    public static int getAmbientDisplayTimeout(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                "ambient_display_timeout", 30000); // Default 30 seconds
+    }
+
+    /**
+     * Set ambient display timeout
+     */
+    public static boolean setAmbientDisplayTimeout(Context context, int timeoutMs) {
+        return Settings.System.putInt(context.getContentResolver(),
+                "ambient_display_timeout", timeoutMs);
+    }
+}
