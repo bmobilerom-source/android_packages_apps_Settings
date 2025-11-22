@@ -130,12 +130,21 @@
             android:title="File Deletion"
             android:summary="Delete unnecessary files and free up space"
             android:order="23"
-            app:position="bottom">
+            app:position="middle">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.storagemanager"
                 android:targetClass="com.android.storagemanager.deletionhelper.DeletionHelperActivity" />
         </com.android.settings.preferences.ui.AdaptivePreference>
+
+        <!-- Restart SystemUI -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="restart_systemui"
+            android:title="@string/systemui_reset_title"
+            android:summary="@string/systemui_reset_summary"
+            android:order="24"
+            app:position="bottom"
+            settings:controller="com.epic.fragments.RestartSystemUIController" />
     </PreferenceCategory>
 
     <!-- Switches -->

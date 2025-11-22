@@ -17,10 +17,19 @@
 <resources>
     <!-- Ambient Customization -->
     <string name="ambient_text_category_title">Ambient Customization</string>
+    <string name="ambient_master_title">Ambient display content</string>
+    <string name="ambient_master_summary">Show custom elements on Always On Display</string>
     <string name="ambient_text_category">Text customization</string>
     <string name="ambient_image_category">Image customization</string>
     
     <!-- Text Customization -->
+    <string name="ambient_text_enable_title">Show custom text</string>
+    <string name="ambient_text_enable_summary">Display personalized text while Always On Display is active</string>
+    <string name="ambient_text_animation_title">Animate text</string>
+    <string name="ambient_text_animation_summary">Fade the custom text in and out while dozing</string>
+    <string name="ambient_text_size_title">Text size</string>
+    <string name="ambient_text_size_summary">Adjust the custom text size</string>
+    <string name="ambient_text_size_summary_value">Current size: %1$d</string>
     <string name="ambient_text_title">Ambient text</string>
     <string name="ambient_text_summary">Show ambient text in AoD</string>
     <string name="ambient_text_alignment_title">Text alignment</string>
@@ -30,6 +39,8 @@
     <string name="ambient_text_color_title">Custom color</string>
     
     <!-- Image Customization -->
+    <string name="ambient_image_enable_title">Show custom image</string>
+    <string name="ambient_image_enable_summary">Display a custom image alongside ambient text</string>
     <string name="ambient_image_title">Custom image</string>
     <string name="ambient_image_summary">Select a custom image for ambient display</string>
     <string name="ambient_image_selected">Image selected</string>
@@ -49,4 +60,5 @@
     <!-- Misc -->
     <string name="ambient_color_picker_not_implemented">Color picker will be implemented in framework</string>
 </resources>
+
 

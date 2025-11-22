@@ -45,10 +45,20 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
     private static final String KEY_QS_HEADER_PROVIDER = "qs_header_provider";
     private static final String KEY_QS_HEADER_VISIBILITY = "qs_header_visibility";
     private static final String KEY_QS_HEADER_IMAGE = "qs_header_image";
+    private static final String KEY_QS_HEADER_FILE_PICKER = "qs_header_file_picker";
+    private static final int REQUEST_PICK_HEADER_IMAGE = 1001;
+
+    private QsHeaderHelper mQsHeaderHelper;
+
+    // Provider values that match SystemUI
+    private static final String PROVIDER_STATIC = "static";
+    private static final String PROVIDER_FILE = "file";
+    private static final String PROVIDER_DAYLIGHT = "daylight";
 
     private ListPreference mHeaderProvider;
     private ListPreference mHeaderVisibility;
     private ListPreference mHeaderImage;
+    private Preference mFilePicker;
     
     private List<String> mHeaderImageEntries = new ArrayList<>();
     private List<String> mHeaderImageValues = new ArrayList<>();
@@ -57,17 +67,14 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.qs_header);
+        mQsHeaderHelper = new QsHeaderHelper(getContext());
 
         final ContentResolver resolver = getActivity().getContentResolver();
 
         mHeaderProvider = (ListPreference) findPreference(KEY_QS_HEADER_PROVIDER);
         if (mHeaderProvider != null) {
             mHeaderProvider.setOnPreferenceChangeListener(this);
-            String provider = Settings.System.getStringForUser(resolver,
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER, UserHandle.USER_CURRENT);
-            if (provider == null || provider.isEmpty()) {
-                provider = "static"; // Default from frameworks/base
-            }
+            String provider = mQsHeaderHelper.getHeaderProvider();
             mHeaderProvider.setValue(provider);
             updateProviderSummary(provider);
         }
@@ -75,40 +82,105 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
         mHeaderVisibility = (ListPreference) findPreference(KEY_QS_HEADER_VISIBILITY);
         if (mHeaderVisibility != null) {
             mHeaderVisibility.setOnPreferenceChangeListener(this);
-            int visibility = Settings.System.getIntForUser(resolver,
-                    "qs_header_image_enabled", 1, UserHandle.USER_CURRENT);
+            int visibility = mQsHeaderHelper.getHeaderVisibility() ? 1 : 0;
             mHeaderVisibility.setValue(String.valueOf(visibility));
             updateVisibilitySummary(visibility);
         }
 
         mHeaderImage = (ListPreference) findPreference(KEY_QS_HEADER_IMAGE);
         if (mHeaderImage != null) {
-            // Dynamically discover all available header images
             discoverAvailableHeaderImages();
-            
-            // Set entries and values
+
             mHeaderImage.setEntries(mHeaderImageEntries.toArray(new CharSequence[0]));
             mHeaderImage.setEntryValues(mHeaderImageValues.toArray(new CharSequence[0]));
-            
+
             mHeaderImage.setOnPreferenceChangeListener(this);
-            String image = Settings.System.getStringForUser(resolver,
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER_IMAGE, UserHandle.USER_CURRENT);
-            if (image == null || image.isEmpty()) {
-                image = "com.android.systemui/qs_header_image_1";
+            String currentValue = mQsHeaderHelper.getCurrentHeaderValue();
+            if (currentValue == null || !mHeaderImageValues.contains(currentValue)) {
+                if (!mHeaderImageValues.isEmpty()) {
+                    currentValue = mHeaderImageValues.get(0);
+                }
             }
-            // Extract image index from string like "com.android.systemui/qs_header_image_1"
-            int imageIndex = extractImageIndex(image);
-            // Make sure the index is valid
-            if (imageIndex < 0 || imageIndex >= mHeaderImageValues.size()) {
-                imageIndex = 0;
-                image = "com.android.systemui/qs_header_image_1";
-                Settings.System.putStringForUser(resolver,
-                        Settings.System.STATUS_BAR_CUSTOM_HEADER_IMAGE,
-                        image, UserHandle.USER_CURRENT);
+            if (currentValue != null) {
+                mHeaderImage.setValue(currentValue);
+                updateImageSummary(currentValue);
             }
-            mHeaderImage.setValue(String.valueOf(imageIndex));
-            updateImageSummary(imageIndex);
         }
+
+        // File Picker Preference
+        mFilePicker = findPreference("qs_header_file_image");
+        if (mFilePicker == null) {
+            // Create it if not in XML (compatibility)
+            mFilePicker = new Preference(getContext());
+            mFilePicker.setKey("qs_header_file_image");
+            mFilePicker.setTitle(R.string.custom_picture_theme_picker_title);
+            mFilePicker.setSummary(R.string.custom_picture_theme_picker_summary);
+            mFilePicker.setOrder(15);
+            getPreferenceScreen().addPreference(mFilePicker);
+        }
+        mFilePicker.setOnPreferenceClickListener(preference -> {
+            pickFile();
+            return true;
+        });
+        
+        updateFilePickerVisibility();
+    }
+
+    private void updateFilePickerVisibility() {
+        if (mFilePicker != null && mHeaderProvider != null) {
+            String provider = mHeaderProvider.getValue();
+            mFilePicker.setVisible(PROVIDER_FILE.equals(provider));
+        }
+    }
+
+    private void pickFile() {
+        android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(android.content.Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        intent.putExtra(android.content.Intent.EXTRA_MIME_TYPES, new String[] {"image/*", "video/*"});
+        startActivityForResult(intent, REQUEST_PICK_HEADER_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, android.content.Intent result) {
+        if (requestCode == REQUEST_PICK_HEADER_IMAGE) {
+            if (resultCode != android.app.Activity.RESULT_OK || result == null) {
+                return;
+            }
+            final android.net.Uri uri = result.getData();
+            if (uri != null) {
+                try {
+                    getContext().getContentResolver().takePersistableUriPermission(uri, 
+                            android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    
+                    String uriString = uri.toString();
+                    Settings.System.putString(getContentResolver(),
+                            Settings.System.STATUS_BAR_FILE_HEADER_IMAGE, uriString);
+                    
+                    // Also ensure provider is set to file
+                    Settings.System.putString(getContentResolver(),
+                            Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER, PROVIDER_FILE);
+                    if (mHeaderProvider != null) {
+                        mHeaderProvider.setValue(PROVIDER_FILE);
+                        updateProviderSummary(PROVIDER_FILE);
+                    }
+                    
+                    // Notify change
+                    getContentResolver().notifyChange(
+                            Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER),
+                            null, true);
+                    getContentResolver().notifyChange(
+                            Settings.System.getUriFor(Settings.System.STATUS_BAR_FILE_HEADER_IMAGE),
+                            null, true);
+                            
+                    mFilePicker.setSummary(R.string.image_selected);
+                    Log.d(TAG, "Set custom header image: " + uriString);
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to set custom header image", e);
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, result);
     }
 
     @Override
@@ -130,44 +202,28 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
                         Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER),
                         null, true);
                 updateProviderSummary(provider);
+                updateFilePickerVisibility(); // Update visibility
                 Log.d(TAG, "QS Header provider changed to: " + provider);
             }
             return success;
         } else if (preference == mHeaderVisibility) {
             int visibility = Integer.parseInt((String) newValue);
-            boolean success = Settings.System.putIntForUser(resolver,
-                    "qs_header_image_enabled",
-                    visibility, UserHandle.USER_CURRENT);
+            boolean success = mQsHeaderHelper.setHeaderVisibility(visibility == 1);
             if (success) {
-                // Notify SystemUI of the change
-                resolver.notifyChange(
-                        Settings.System.getUriFor("qs_header_image_enabled"),
-                        null, true);
                 updateVisibilitySummary(visibility);
                 Log.d(TAG, "QS Header visibility changed to: " + visibility);
             }
             return success;
         } else if (preference == mHeaderImage) {
-            int imageIndex = Integer.parseInt((String) newValue);
-            // Validate index
-            if (imageIndex < 0 || imageIndex >= mHeaderImageValues.size()) {
-                Log.w(TAG, "Invalid image index: " + imageIndex);
+            String value = (String) newValue;
+            if (value == null || !mHeaderImageValues.contains(value)) {
+                Log.w(TAG, "Invalid header image value: " + value);
                 return false;
             }
-            // Convert 0-based index to 1-based image number
-            int imageNumber = imageIndex + 1;
-            // Convert index to resource string format
-            String imageValue = "com.android.systemui/qs_header_image_" + imageNumber;
-            boolean success = Settings.System.putStringForUser(resolver,
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER_IMAGE,
-                    imageValue, UserHandle.USER_CURRENT);
+            boolean success = mQsHeaderHelper.setHeaderImageValue(value);
             if (success) {
-                // Notify SystemUI of the change - use UserHandle.USER_ALL to notify all users
-                resolver.notifyChange(
-                        Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_IMAGE),
-                        null, true);
-                updateImageSummary(imageIndex);
-                Log.d(TAG, "QS Header image changed to: " + imageValue);
+                updateImageSummary(value);
+                Log.d(TAG, "QS Header image changed to: " + value);
             }
             return success;
         }
@@ -197,104 +253,39 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
     }
 
     /**
-     * Dynamically discover all available QS header images from SystemUI package
+     * Load available QS header images from the helper
      */
     private void discoverAvailableHeaderImages() {
         mHeaderImageEntries.clear();
         mHeaderImageValues.clear();
-        
-        try {
-            PackageManager pm = getActivity().getPackageManager();
-            Resources sysuiRes = pm.getResourcesForApplication("com.android.systemui");
-            
-            // Try to find all qs_header_image_* resources
-            // We'll check from 1 to 200 (should cover all available headers)
-            for (int i = 1; i <= 200; i++) {
-                String resourceName = "qs_header_image_" + i;
-                int resId = sysuiRes.getIdentifier(resourceName, "drawable", "com.android.systemui");
-                if (resId != 0) {
-                    // Resource exists, add it to the list
-                    String entry = "Header " + i;
-                    // Try to get a better name if available
-                    try {
-                        String entryName = sysuiRes.getResourceEntryName(resId);
-                        if (entryName != null && entryName.startsWith("qs_header_image_")) {
-                            entry = "Header " + i;
-                        }
-                    } catch (Exception e) {
-                        // Use default name
-                    }
-                    mHeaderImageEntries.add(entry);
-                    mHeaderImageValues.add(String.valueOf(i - 1)); // 0-based index
-                }
-            }
-            
-            Log.d(TAG, "Discovered " + mHeaderImageEntries.size() + " header images");
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to discover header images", e);
-            // Fallback to default entries from arrays.xml
-            String[] entries = getResources().getStringArray(R.array.anciui_header_img_entries);
-            String[] values = getResources().getStringArray(R.array.anciui_header_img_values);
-            for (int i = 0; i < entries.length && i < values.length; i++) {
-                mHeaderImageEntries.add(entries[i]);
-                mHeaderImageValues.add(values[i]);
-            }
-        }
-        
-        // Ensure we have at least one entry
-        if (mHeaderImageEntries.isEmpty()) {
+
+        // Use helper to get available images
+        List<String> entries = mQsHeaderHelper.getAvailableImageNames();
+        List<String> values = mQsHeaderHelper.getAvailableImageValues();
+
+        mHeaderImageEntries.addAll(entries);
+        mHeaderImageValues.addAll(values);
+
+        Log.d(TAG, "Loaded " + mHeaderImageEntries.size() + " header images");
+
+        // Ensure we have at least one entry/value
+        if (mHeaderImageEntries.isEmpty() || mHeaderImageValues.isEmpty()) {
+            mHeaderImageEntries.clear();
+            mHeaderImageValues.clear();
             mHeaderImageEntries.add("Header 1");
-            mHeaderImageValues.add("0");
+            mHeaderImageValues.add("com.android.systemui/qs_header_image_1");
         }
     }
 
-    private void updateImageSummary(int image) {
+    private void updateImageSummary(String value) {
         if (mHeaderImage != null) {
-            if (image >= 0 && image < mHeaderImageEntries.size()) {
-                mHeaderImage.setSummary(mHeaderImageEntries.get(image));
+            int index = mHeaderImageValues.indexOf(value);
+            if (index >= 0 && index < mHeaderImageEntries.size()) {
+                mHeaderImage.setSummary(mHeaderImageEntries.get(index));
             } else {
                 mHeaderImage.setSummary(R.string.qs_header_image_summary);
             }
         }
-    }
-
-    /**
-     * Extract image index from resource string like "com.android.systemui/qs_header_image_1"
-     * Returns 0-based index (e.g., qs_header_image_1 -> 0, qs_header_image_2 -> 1)
-     */
-    private int extractImageIndex(String imageValue) {
-        if (imageValue == null || imageValue.isEmpty()) {
-            return 0;
-        }
-        try {
-            // Format: "com.android.systemui/qs_header_image_N" or just "qs_header_image_N"
-            String imageName;
-            int slashIndex = imageValue.indexOf('/');
-            if (slashIndex >= 0 && slashIndex < imageValue.length() - 1) {
-                imageName = imageValue.substring(slashIndex + 1);
-            } else {
-                imageName = imageValue;
-            }
-            
-            // Extract number from string like "qs_header_image_1" or "qs_header_image_25"
-            int lastUnderscore = imageName.lastIndexOf('_');
-            if (lastUnderscore >= 0 && lastUnderscore < imageName.length() - 1) {
-                String numberStr = imageName.substring(lastUnderscore + 1);
-                int imageNumber = Integer.parseInt(numberStr);
-                // Convert to 0-based index (image_1 -> 0, image_2 -> 1, etc.)
-                int index = Math.max(0, imageNumber - 1);
-                // Validate against discovered headers
-                if (index >= 0 && index < mHeaderImageValues.size()) {
-                    return index;
-                } else {
-                    Log.w(TAG, "Image index " + index + " out of range, using 0");
-                    return 0;
-                }
-            }
-        } catch (NumberFormatException e) {
-            Log.w(TAG, "Failed to parse image index from: " + imageValue, e);
-        }
-        return 0;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

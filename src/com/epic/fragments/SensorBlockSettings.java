@@ -136,17 +136,23 @@ public class SensorBlockSettings extends SettingsPreferenceFragment implements
         try {
             if (KEY_SENSOR_BLOCK.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.System.putInt(resolver, KEY_SENSOR_BLOCK, enabled ? 1 : 0);
+                boolean success = Settings.System.putInt(resolver, KEY_SENSOR_BLOCK, enabled ? 1 : 0);
+                if (success) {
+                    resolver.notifyChange(Settings.System.getUriFor(KEY_SENSOR_BLOCK), null, true);
+                }
                 Log.d(TAG, "sensor_block set to: " + enabled);
-                return true;
+                return success;
             } else if (KEY_SENSOR_BLOCK_LEVEL.equals(key)) {
                 int level = Integer.parseInt((String) newValue);
-                Settings.System.putInt(resolver, KEY_SENSOR_BLOCK_LEVEL, level);
+                boolean success = Settings.System.putInt(resolver, KEY_SENSOR_BLOCK_LEVEL, level);
+                if (success) {
+                    resolver.notifyChange(Settings.System.getUriFor(KEY_SENSOR_BLOCK_LEVEL), null, true);
+                }
                 Log.d(TAG, "sensor_block_level set to: " + level);
                 if (preference instanceof androidx.preference.ListPreference) {
                     updateBlockLevelSummary((androidx.preference.ListPreference) preference, level);
                 }
-                return true;
+                return success;
             }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference: " + key, e);
