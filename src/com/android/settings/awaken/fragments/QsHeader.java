@@ -76,7 +76,7 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
         if (mHeaderVisibility != null) {
             mHeaderVisibility.setOnPreferenceChangeListener(this);
             int visibility = Settings.System.getIntForUser(resolver,
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER, 0, UserHandle.USER_CURRENT);
+                    "qs_header_image_enabled", 1, UserHandle.USER_CURRENT);
             mHeaderVisibility.setValue(String.valueOf(visibility));
             updateVisibilitySummary(visibility);
         }
@@ -136,12 +136,12 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
         } else if (preference == mHeaderVisibility) {
             int visibility = Integer.parseInt((String) newValue);
             boolean success = Settings.System.putIntForUser(resolver,
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER,
+                    "qs_header_image_enabled",
                     visibility, UserHandle.USER_CURRENT);
             if (success) {
-                // Notify SystemUI of the change - use UserHandle.USER_ALL to notify all users
+                // Notify SystemUI of the change
                 resolver.notifyChange(
-                        Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER),
+                        Settings.System.getUriFor("qs_header_image_enabled"),
                         null, true);
                 updateVisibilitySummary(visibility);
                 Log.d(TAG, "QS Header visibility changed to: " + visibility);

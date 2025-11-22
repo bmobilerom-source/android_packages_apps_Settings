@@ -277,4 +277,33 @@
         android:fragment="com.epic.fragments.ButtonSettings"
         android:icon="@drawable/ic_anatolia_buttons" />
 
+    <!-- ============================================ -->
+    <!-- DISPLAY & UI CUSTOMIZATIONS -->
+    <!-- ============================================ -->
+
+    <!-- Ambient Customizations -->
+    <PreferenceScreen
+        android:key="ambient_customizations"
+        android:title="@string/ambient_text_category_title"
+        android:summary="@string/ambient_text_summary"
+        android:order="600"
+        android:fragment="com.epic.fragments.AmbientCustomizations" />
+
+    <!-- Wallpaper Background -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="settings_wallpaper_background"
+        android:title="@string/settings_wallpaper_background_title"
+        android:summary="@string/settings_wallpaper_background_summary"
+        android:defaultValue="false"
+        android:order="610"
+        settings:controller="com.android.settings.display.SettingsWallpaperBackgroundController" />
+
+    <!-- QS Header Image -->
+    <Preference
+        android:key="qs_header_settings"
+        android:title="@string/qs_header_title"
+        android:summary="@string/qs_header_summary"
+        android:order="620"
+        android:fragment="com.android.settings.awaken.fragments.QsHeader" />
+
 </PreferenceScreen>

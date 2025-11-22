@@ -18,35 +18,36 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/statusbar_title">
-    <!-- BananaDroid logo -->
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="banana_logo"
-        android:layout="@layout/banana_card_about"
-        android:selectable="false"/>
-          <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/homepage_widgets"
-        android:key="top_level_homepage_widgets"
-        android:selectable="false"
-        android:order="-180" />
-        <Preference
-            android:key="hidden_apps"
-            android:title="@string/hidden_apps_title"
-            android:summary="@string/hidden_apps_summary"
-            android:persistent="false"
-            settings:layout="@layout/preference_card"
-            android:fragment="com.palladium.atomichub.Atomichub" />
-   
-     <Preference
-            android:key="hidde_apps"
-            android:title="@string/hidden_apps_title"
-            android:summary="@string/hidden_apps_summary"
-            android:persistent="false"
-            settings:layout="@layout/dot_preference_top_card"
-            android:fragment="com.palladium.atomichub.Atomichub" />
+  
+    <!-- Logo -->
+    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+        android:key="status_bar_logo"
+        android:title="@string/status_bar_logo_title"
+        android:summary="@string/status_bar_logo_summary"
+        android:defaultValue="false"
+        app:position="top"
+        settings:controller="com.epic.fragments.StatusBarLogoController" />
 
-      <com.android.settingslib.widget.LayoutPreference
-        android:key="orchidosrom_grid"
-        android:layout="@layout/orchidosrom_grid"
-        android:selectable="false"/>
+    <!-- Logo position -->
+    <com.android.settings.preferences.ui.AdaptiveListPreference
+        android:key="status_bar_logo_position"
+        android:title="@string/status_bar_logo_position_title"
+        android:entries="@array/status_bar_logo_position_entries"
+        android:entryValues="@array/status_bar_logo_position_values"
+        android:defaultValue="0"
+        android:dependency="status_bar_logo"
+        app:position="middle"
+        settings:controller="com.epic.fragments.StatusBarLogoPositionController" />
+
+    <!-- Logo style -->
+    <com.android.settings.preferences.ui.AdaptiveListPreference
+        android:key="status_bar_logo_style"
+        android:title="@string/status_bar_logo_style_title"
+        android:entries="@array/status_bar_logo_style_entries"
+        android:entryValues="@array/status_bar_logo_style_values"
+        android:defaultValue="0"
+        android:dependency="status_bar_logo"
+        app:position="bottom"
+        settings:controller="com.epic.fragments.StatusBarLogoStyleController" />
         
 </PreferenceScreen>

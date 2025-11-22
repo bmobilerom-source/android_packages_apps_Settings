@@ -15,18 +15,35 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+  <!-- BananaDroid logo -->
     <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/afterlab_dashboard_header"
-        android:key="afterlabs_header">
-        <intent
-        android:action="com.afterlife.afterlab.fragments.team.AboutAfterLife"/>
-    </com.android.settingslib.widget.LayoutPreference>
-    <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/declan_afterlabs_tab_layout"
+        android:key="banana_logo"
+        android:layout="@layout/banana_card_about"
+        android:selectable="false"/>
+          <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/homepage_widgets"
+        android:key="top_level_homepage_widgets"
         android:selectable="false"
-        android:key="declan_tab_layout" />
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="qs_grid"
-        android:selectable="false"
-        android:layout="@layout/afterlab_two_column_grid" />
+        android:order="-180" />
+        <Preference
+            android:key="hidden_apps"
+            android:title="@string/hidden_apps_title"
+            android:summary="@string/hidden_apps_summary"
+            android:persistent="false"
+            settings:layout="@layout/preference_card"
+            android:fragment="com.palladium.atomichub.Atomichub" />
+   
+     <Preference
+            android:key="hidde_apps"
+            android:title="@string/hidden_apps_title"
+            android:summary="@string/hidden_apps_summary"
+            android:persistent="false"
+            settings:layout="@layout/dot_preference_top_card"
+            android:fragment="com.palladium.atomichub.Atomichub" />
+
+      <com.android.settingslib.widget.LayoutPreference
+        android:key="orchidosrom_grid"
+        android:layout="@layout/orchidosrom_grid"
+        android:selectable="false"/>
+
 </PreferenceScreen>
