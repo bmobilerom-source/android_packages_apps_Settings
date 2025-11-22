@@ -110,8 +110,17 @@
         android:summary="@string/bshare_settings_summary"
         android:order="45"
         settings:controller="com.android.settings.bshare.BSharePreferenceController"
-        settings:allowDividerAbove="true" />
-
+        settings:allowDividerAbove="false" />
+    <!-- Bluetooth Timeout -->
+    <com.android.settingslib.ListPreference
+        android:key="bluetooth_timeout"
+        android:title="@string/bluetooth_timeout"
+        android:entries="@array/bluetooth_timeout_entries"
+        android:entryValues="@array/bluetooth_timeout_values"
+        android:defaultValue="0"
+        android:summary="%s"
+        settings:allowDividerAbove="false"
+        settings:controller="com.android.settings.bluetooth.BluetoothTimeoutPreferenceController" />
     <com.android.settingslib.widget.FooterPreference
         android:key="discoverable_footer"
         android:selectable="false"
