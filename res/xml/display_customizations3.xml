@@ -17,7 +17,7 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="display_customizations3"
     android:title="@string/display_customizations3_title">
 

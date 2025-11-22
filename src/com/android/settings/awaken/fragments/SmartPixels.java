@@ -32,6 +32,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import android.provider.SearchIndexableResource;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -92,7 +93,7 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
         if (mSmartPixelsShiftTime != null) {
             mSmartPixelsShiftTime.setOnPreferenceChangeListener(this);
             int shiftTime = Settings.System.getIntForUser(resolver,
-                    Settings.System.SMART_PIXELS_SHIFT_TIME, 0, UserHandle.USER_CURRENT);
+                    Settings.System.SMART_PIXELS_SHIFT_TIMEOUT, 0, UserHandle.USER_CURRENT);
             mSmartPixelsShiftTime.setValue(String.valueOf(shiftTime));
             updateShiftTimeSummary(shiftTime);
         }
@@ -203,7 +204,7 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
             return success;
         } else if (preference == mSmartPixelsShiftTime) {
             int shiftTime = Integer.parseInt((String) newValue);
-            boolean success = Settings.System.putIntForUser(resolver,
+            Settings.System.putIntForUser(resolver,
                     Settings.System.SMART_PIXELS_SHIFT_TIMEOUT,
                     shiftTime, UserHandle.USER_CURRENT);
             if (success) {
@@ -280,12 +281,12 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<com.android.settingslib.search.SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
-                    ArrayList<com.android.settingslib.search.SearchIndexableResource> result =
-                            new ArrayList<com.android.settingslib.search.SearchIndexableResource>();
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
 
-                    com.android.settingslib.search.SearchIndexableResource sir = new com.android.settingslib.search.SearchIndexableResource(context);
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.smart_pixels;
                     result.add(sir);
                     return result;
