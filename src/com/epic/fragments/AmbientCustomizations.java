@@ -151,8 +151,7 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
         
         if (preference == mAmbientText) {
             String value = (String) newValue;
-            Settings.System.putString(resolver,
-                    Settings.System.AMBIENT_TEXT_STRING, value);
+            AmbientCustomizationsHelper.setAmbientText(getContext(), value);
             if (value != null && !value.isEmpty()) {
                 preference.setSummary(value);
             } else {
@@ -161,19 +160,17 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
             return true;
         } else if (preference == mAmbientTextAlign) {
             int align = Integer.parseInt((String) newValue);
+            AmbientCustomizationsHelper.setAmbientTextAlignment(getContext(), align);
             int index = mAmbientTextAlign.findIndexOfValue((String) newValue);
-            Settings.System.putInt(resolver,
-                    Settings.System.AMBIENT_TEXT_ALIGNMENT, align);
             if (index >= 0) {
                 mAmbientTextAlign.setSummary(mAmbientTextAlign.getEntries()[index]);
             }
             return true;
         } else if (preference == mAmbientTextTypeColor) {
             int value = Integer.parseInt((String) newValue);
+            AmbientCustomizationsHelper.setAmbientTextTypeColor(getContext(), value);
             int index = mAmbientTextTypeColor.findIndexOfValue((String) newValue);
             mAmbientTextTypeColor.setSummary(mAmbientTextTypeColor.getEntries()[index]);
-            Settings.System.putInt(resolver,
-                    Settings.System.AMBIENT_TEXT_TYPE_COLOR, value);
             updateColorPreferenceState(value);
             return true;
         }
@@ -222,8 +219,7 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
             }
             final Uri imageUri = result.getData();
             if (imageUri != null) {
-                Settings.System.putString(getContentResolver(), 
-                        Settings.System.AMBIENT_CUSTOM_IMAGE, imageUri.toString());
+                AmbientCustomizationsHelper.setAmbientCustomImage(getContext(), imageUri.toString());
                 if (mAmbientCustomImage != null) {
                     mAmbientCustomImage.setSummary(R.string.ambient_image_selected);
                 }
