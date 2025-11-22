@@ -46,6 +46,14 @@
     <string name="pocket_mode_title">Pocket Mode</string>
     <string name="pocket_mode_summary">Prevent accidental touches when device is in pocket or bag</string>
 
+    <!-- Advanced Security Settings -->
+    <string name="advanced_security_settings_title">Advanced Security</string>
+    <string name="advanced_security_intro_title">Advanced Security Settings</string>
+    <string name="advanced_security_intro_summary">Configure advanced security features and access restrictions</string>
+    <string name="app_security_category_title">App Security</string>
+    <string name="network_security_category_title">Network Security</string>
+    <string name="system_security_category_title">System Security</string>
+
     <!-- General strings -->
     <string name="ok">OK</string>
     <string name="reset">Reset</string>
@@ -73,5 +81,17 @@
     <string name="classic_style_header_title">Classic Style</string>
     <string name="classic_style_header_summary">Traditional categorized layout</string>
     <string name="dashboard_style_applied">Dashboard style changed to %1$s</string>
-    
+     <!-- Smart Pixels -->
+    <string name="smart_pixels_title">Smart Pixels</string>
+    <string name="smart_pixels_summary">Reduce power consumption by turning off pixels in a pattern</string>
+    <string name="smart_pixels_enable_title">Enable Smart Pixels</string>
+    <string name="smart_pixels_enable_summary">Turn off pixels in a pattern to save battery</string>
+    <string name="smart_pixels_on_power_save_title">Enable on Power Save</string>
+    <string name="smart_pixels_on_power_save_summary">Automatically enable Smart Pixels when battery saver is active</string>
+    <string name="smart_pixels_pattern_title">Pixel Pattern</string>
+    <string name="smart_pixels_pattern_summary">Percentage of pixels to turn off</string>
+    <string name="smart_pixels_shift_time_title">Shift Time</string>
+    <string name="smart_pixels_shift_time_summary">Time interval to shift the pixel pattern</string>
+    <string name="smart_pixels_footer">Smart Pixels helps reduce power consumption by turning off a percentage of pixels in a shifting pattern. This can extend battery life but may slightly affect display quality.</string>
+
 </resources>
