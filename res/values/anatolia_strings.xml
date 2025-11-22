@@ -94,4 +94,18 @@
     <string name="smart_pixels_shift_time_summary">Time interval to shift the pixel pattern</string>
     <string name="smart_pixels_footer">Smart Pixels helps reduce power consumption by turning off a percentage of pixels in a shifting pattern. This can extend battery life but may slightly affect display quality.</string>
 
+    <!-- QS Header Image Customization -->
+    <string name="qs_header_title">QS Header Image</string>
+    <string name="qs_header_summary">Customize Quick Settings header image and visibility</string>
+    <string name="qs_header_provider_title">Header Provider</string>
+    <string name="qs_header_provider_summary">Choose header image source</string>
+    <string name="qs_header_visibility_title">Header Visibility</string>
+    <string name="qs_header_visibility_summary">When to show the header image</string>
+    <string name="qs_header_image_title">Header Image</string>
+    <string name="qs_header_image_summary">Select a header image</string>
+    <string name="qs_header_footer">Customize the Quick Settings panel header with different images and control when they are displayed.</string>
+    <string name="daylight_header_provider_title">Daylight</string>
+    <string name="daylight_header_provider">daylight</string>
+    <string name="file_header_provider_title">File</string>
+    <string name="file_header_provider">file</string>
 </resources>

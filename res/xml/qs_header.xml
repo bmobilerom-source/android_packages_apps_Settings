@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 LineageOS
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/qs_header_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="qs_header_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/display" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="qs_header_intro"
+        android:title="@string/qs_header_title"
+        android:summary="@string/qs_header_summary"
+        android:order="-1000" />
+
+    <!-- QS Header Provider -->
+    <ListPreference
+        android:key="qs_header_provider"
+        android:title="@string/qs_header_provider_title"
+        android:summary="@string/qs_header_provider_summary"
+        android:entries="@array/custom_header_provider_entries"
+        android:entryValues="@array/custom_header_provider_values"
+        android:defaultValue="static"
+        android:order="0"
+        app:position="top" />
+
+    <!-- QS Header Visibility -->
+    <ListPreference
+        android:key="qs_header_visibility"
+        android:title="@string/qs_header_visibility_title"
+        android:summary="@string/qs_header_visibility_summary"
+        android:entries="@array/custom_header_visibility_entries"
+        android:entryValues="@array/custom_header_visibility_values"
+        android:defaultValue="0"
+        android:order="1"
+        app:position="middle" />
+
+    <!-- QS Header Image -->
+    <ListPreference
+        android:key="qs_header_image"
+        android:title="@string/qs_header_image_title"
+        android:summary="@string/qs_header_image_summary"
+        android:entries="@array/anciui_header_img_entries"
+        android:entryValues="@array/anciui_header_img_values"
+        android:defaultValue="0"
+        android:order="2"
+        app:position="middle" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="qs_header_footer"
+        android:title="@string/qs_header_footer"
+        android:selectable="false"
+        android:order="999"
+        settings:searchable="false" />
+
+</PreferenceScreen>
+
