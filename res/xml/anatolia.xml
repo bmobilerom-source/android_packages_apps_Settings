@@ -97,6 +97,15 @@
         android:fragment="com.epic.fragments.DisplayPageGrid"
         android:icon="@drawable/ic_display_grid" />
 
+    <!-- Ambient Customization -->
+    <PreferenceScreen
+        android:key="ambient_customization_category"
+        android:title="@string/ambient_text_category_title"
+        android:summary="@string/ambient_text_summary"
+        android:order="85"
+        android:fragment="com.epic.fragments.AmbientCustomizations"
+        android:icon="@drawable/ic_settings_display_white" />
+
     <!-- ============================================ -->
     <!-- INTERACTION & NAVIGATION -->
     <!-- ============================================ -->
