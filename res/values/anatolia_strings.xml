@@ -46,6 +46,14 @@
     <string name="pocket_mode_title">Pocket Mode</string>
     <string name="pocket_mode_summary">Prevent accidental touches when device is in pocket or bag</string>
 
+    <!-- Advanced Security Settings -->
+    <string name="advanced_security_settings_title">Advanced Security</string>
+    <string name="advanced_security_intro_title">Advanced Security Settings</string>
+    <string name="advanced_security_intro_summary">Configure advanced security features and access restrictions</string>
+    <string name="app_security_category_title">App Security</string>
+    <string name="network_security_category_title">Network Security</string>
+    <string name="system_security_category_title">System Security</string>
+
     <!-- General strings -->
     <string name="ok">OK</string>
     <string name="reset">Reset</string>
@@ -104,6 +112,9 @@
     <string name="settings_restore_success">Restored %d settings successfully</string>
     <string name="settings_restore_error">Failed to restore settings</string>
     <string name="settings_restore_file_not_found">Backup file not found</string>
+    <string name="settings_backup_restore_cancelled">Backup/Restore cancelled</string>
+    <string name="settings_restore_invalid_file">Invalid backup file format</string>
+    <string name="settings_restore_version_newer">Backup file version (%1$d) is newer than supported version (%2$d). Please update Settings app.</string>
     <string name="dashboard_style_features_intro_title">Custom Dashboard Features</string>
     <string name="dashboard_style_features_intro_summary">Choose from multiple dashboard styles to personalize your Settings experience. Each style offers a unique layout and organization of settings categories.</string>
     <string name="dashboard_style_reset_category_title">Reset</string>
@@ -332,4 +343,92 @@
     <string name="mock_location_intro_summary">Choose an application to provide mock location data. This allows apps to receive fake GPS coordinates for testing purposes.</string>
     <string name="mock_location_info_title">About Mock Locations</string>
     <string name="mock_location_info_summary">Mock location allows you to test apps with fake GPS coordinates. Select an app that provides mock location functionality. This feature works independently of Developer Options.</string>
+    
+    <!-- Privacy & Security Features (GrapheneOS/CalyxOS/Axion inspired) -->
+    <string name="privacy_security_title">Privacy &amp; Security</string>
+    <string name="privacy_security_intro_title">Privacy &amp; Security Features</string>
+    <string name="privacy_security_intro_summary">Settings-based privacy and security features inspired by GrapheneOS, CalyxOS, and Axion. All features work within Settings app only.</string>
+    <string name="privacy_security_intro_summary_working">6 privacy and security features that actually work. All features use Settings keys that the framework reads and enforces.</string>
+    
+    <!-- Categories -->
+    <string name="lockscreen_security_category_title">Lock Screen Security</string>
+    <string name="network_privacy_category_title">Network Privacy</string>
+    <string name="auto_features_category_title">Automatic Features</string>
+    <string name="privacy_controls_category_title">Privacy Controls</string>
+    <string name="security_controls_category_title">Security Controls</string>
+    
+    <!-- Feature Strings -->
+    <string name="pin_scramble_title">PIN Scrambling</string>
+    <string name="pin_scramble_summary">Randomize PIN keypad layout to prevent observation</string>
+    
+    <string name="auto_reboot_title">Auto Reboot</string>
+    <string name="auto_reboot_summary">Automatically reboot device after specified period</string>
+    <string name="auto_reboot_interval_title">Reboot Interval</string>
+    <string name="auto_reboot_interval_summary">Time between automatic reboots</string>
+    <string name="auto_reboot_footer">Device will automatically reboot after the selected time period. This helps maintain system performance and security.</string>
+    <string name="auto_reboot_interval_one_hour">1 hour</string>
+    <string name="auto_reboot_interval_hours">%1$d hours</string>
+    <string name="auto_reboot_interval_one_day">1 day</string>
+    <string name="auto_reboot_interval_days">%1$d days</string>
+    <string name="auto_reboot_interval_minutes">%1$d minutes</string>
+    
+    <string name="usb_accessories_title">USB Accessories</string>
+    <string name="usb_accessories_summary">Allow USB accessories when device is locked</string>
+    
+    <string name="mac_randomization_title">MAC Randomization</string>
+    <string name="mac_randomization_summary">Randomize MAC address per Wi-Fi connection</string>
+    
+    <string name="private_dns_title">Private DNS</string>
+    <string name="private_dns_summary">Use encrypted DNS for privacy</string>
+    <string name="private_dns_off">Off</string>
+    <string name="private_dns_opportunistic">Automatic</string>
+    
+    <string name="lockdown_mode_title">Lockdown Mode</string>
+    <string name="lockdown_mode_summary">Disable biometrics and notifications on lock screen</string>
+    
+    <string name="auto_disable_wifi_title">Auto Disable Wi-Fi</string>
+    <string name="auto_disable_wifi_summary">Automatically disable Wi-Fi when not in use</string>
+    
+    <string name="auto_disable_bluetooth_title">Auto Disable Bluetooth</string>
+    <string name="auto_disable_bluetooth_summary">Automatically disable Bluetooth when not in use</string>
+    
+    <string name="clipboard_notifications_title">Clipboard Notifications</string>
+    <string name="clipboard_notifications_summary">Show notification when apps access clipboard</string>
+    
+    <string name="show_passwords_title">Show Passwords</string>
+    <string name="show_passwords_summary">Show password characters as you type</string>
+    
+    <string name="privacy_indicators_title">Privacy Indicators</string>
+    <string name="privacy_indicators_summary">Show indicators when camera or microphone is in use</string>
+    
+    <string name="network_traffic_title">Network Traffic Monitor</string>
+    <string name="network_traffic_summary">Display network traffic in status bar</string>
+    
+    <string name="always_on_vpn_title">Always-On VPN</string>
+    <string name="always_on_vpn_summary">Require VPN connection for network access</string>
+    
+    <string name="webview_jit_title">WebView JIT</string>
+    <string name="webview_jit_summary">Enable Just-In-Time compilation for WebView</string>
+    
+    <string name="native_debugging_title">Native Debugging Restriction</string>
+    <string name="native_debugging_summary">Restrict native code debugging for apps</string>
+    
+    <string name="storage_scopes_title">Storage Scopes</string>
+    <string name="storage_scopes_summary">Grant apps access to selected files only</string>
+    
+    <string name="contact_scopes_title">Contact Scopes</string>
+    <string name="contact_scopes_summary">Limit app access to selected contacts only</string>
+
+    <!-- Smart Pixels -->
+    <string name="smart_pixels_title">Smart Pixels</string>
+    <string name="smart_pixels_summary">Reduce power consumption by turning off pixels in a pattern</string>
+    <string name="smart_pixels_enable_title">Enable Smart Pixels</string>
+    <string name="smart_pixels_enable_summary">Turn off pixels in a pattern to save battery</string>
+    <string name="smart_pixels_on_power_save_title">Enable on Power Save</string>
+    <string name="smart_pixels_on_power_save_summary">Automatically enable Smart Pixels when battery saver is active</string>
+    <string name="smart_pixels_pattern_title">Pixel Pattern</string>
+    <string name="smart_pixels_pattern_summary">Percentage of pixels to turn off</string>
+    <string name="smart_pixels_shift_time_title">Shift Time</string>
+    <string name="smart_pixels_shift_time_summary">Time interval to shift the pixel pattern</string>
+    <string name="smart_pixels_footer">Smart Pixels helps reduce power consumption by turning off a percentage of pixels in a shifting pattern. This can extend battery life but may slightly affect display quality.</string>
 </resources>
