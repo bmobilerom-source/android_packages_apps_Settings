@@ -51,7 +51,7 @@
         app:position="middle" />
 
     <!-- Smart Pixels Pattern -->
-    <com.android.settings.preferences.ui.AdaptiveListPreference
+    <ListPreference
         android:key="smart_pixels_pattern"
         android:title="@string/smart_pixels_pattern_title"
         android:summary="@string/smart_pixels_pattern_summary"
@@ -62,7 +62,7 @@
         app:position="middle" />
 
     <!-- Smart Pixels Shift Time -->
-    <com.android.settings.preferences.ui.AdaptiveListPreference
+    <ListPreference
         android:key="smart_pixels_shift_time"
         android:title="@string/smart_pixels_shift_time_title"
         android:summary="@string/smart_pixels_shift_time_summary"
