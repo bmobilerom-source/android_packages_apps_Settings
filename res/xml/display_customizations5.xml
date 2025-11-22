@@ -17,7 +17,7 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="display_customizations5"
     android:title="@string/display_customizations5_title">
 
@@ -35,7 +35,13 @@
         android:summary="@string/display_customizations5_intro_summary"
         android:order="-1000" />
 
-    <!-- Placeholder for future preferences -->
-    <!-- This page can be expanded with additional display customization options -->
+    <!-- QS Header Image -->
+    <com.android.settings.preferences.ui.AdaptivePreference
+        android:key="qs_header_settings"
+        android:title="@string/qs_header_title"
+        android:summary="@string/qs_header_summary"
+        android:fragment="com.android.settings.awaken.fragments.QsHeader"
+        android:order="0"
+        app:position="solo" />
 
 </PreferenceScreen>
