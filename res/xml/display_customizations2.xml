@@ -35,6 +35,14 @@
         android:summary="@string/display_customizations2_intro_summary"
         android:order="-1000" />
 
+    <!-- Hide IME Space -->
+    <SwitchPreference
+        android:key="hide_ime_space_enable"
+        android:title="@string/navigation_bar_hide_ime_space_title"
+        android:summary="@string/navigation_bar_hide_ime_space_summary"
+        android:defaultValue="false"
+        android:order="10" />
+
     <!-- Placeholder for future preferences -->
     <!-- Wallpaper blur features moved to wallpaper_background_settings.xml -->
 
