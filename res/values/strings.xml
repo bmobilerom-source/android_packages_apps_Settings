@@ -3310,6 +3310,8 @@
     <string name="status_serial_number">Serial number</string>
     <!-- About phone, status item title.  How long the device has been running since its last reboot. -->
     <string name="status_up_time">Uptime</string>
+    <!-- About phone, status item title.  How long the device has been in deep sleep since its last reboot. -->
+    <string name="status_sleep_time">Deep sleep</string>
 
     <!-- About phone, status item title. The battery manufacture date. [CHAR LIMIT=60]-->
     <string name="battery_manufacture_date">Manufacture date</string>

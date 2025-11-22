@@ -88,9 +88,17 @@
     <Preference
         android:key="battery_info_cycle_count"
         android:title="@string/battery_cycle_count"
-        settings:layout="@layout/adaptive_preference_card_bottom"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryCycleCountPreferenceController"
+        settings:enableCopying="true"/>
+
+    <!-- Device deep sleep time -->
+    <Preference
+        android:key="sleep_time"
+        android:title="@string/status_sleep_time"
+        android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         settings:enableCopying="true"/>
 
     <com.android.settingslib.widget.FooterPreference
