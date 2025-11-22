@@ -453,4 +453,8 @@
     <string name="daylight_header_provider">daylight</string>
     <string name="file_header_provider_title">File</string>
     <string name="file_header_provider">file</string>
+
+    <!-- Hide IME Space -->
+    <string name="navigation_bar_hide_ime_space_title">Hide IME space</string>
+    <string name="navigation_bar_hide_ime_space_summary">Hide the space below the keyboard</string>
 </resources>

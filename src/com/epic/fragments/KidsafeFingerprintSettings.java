@@ -300,3 +300,4 @@ public class KidsafeFingerprintSettings extends SettingsPreferenceFragment imple
     }
 }
 
+
