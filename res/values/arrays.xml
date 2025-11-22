@@ -1709,6 +1709,8 @@
         <item>Custom Theme</item>
         <item>Wallpaper Background</item>
         <item>Blocked Pages</item>
+        <item>Security Features (Legacy)</item>
+        <item>System Optimizations</item>
         <item>Security Features</item>
     </string-array>
 
@@ -1718,6 +1720,8 @@
         <item>wallpaper_background</item>
         <item>blocked_pages</item>
         <item>security_features</item>
+        <item>system_optimizations</item>
+        <item>security_features_new</item>
     </string-array>
 
     <string-array name="settings_backup_categories_default" translatable="false">
@@ -1726,6 +1730,8 @@
         <item>wallpaper_background</item>
         <item>blocked_pages</item>
         <item>security_features</item>
+        <item>system_optimizations</item>
+        <item>security_features_new</item>
     </string-array>
 
     <!-- Custom System Theme Arrays -->
@@ -1776,5 +1782,73 @@
         <item>30</item>
         <item>35</item>
         <item>40</item>
+    </string-array>
+
+    <!-- Auto Reboot Interval Options -->
+    <string-array name="auto_reboot_interval_entries">
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>1 day</item>
+        <item>2 days</item>
+        <item>3 days</item>
+        <item>7 days</item>
+        <item>14 days</item>
+        <item>30 days</item>
+    </string-array>
+
+    <string-array name="auto_reboot_interval_values" translatable="false">
+        <item>21600000</item> <!-- 6 hours in milliseconds -->
+        <item>43200000</item> <!-- 12 hours -->
+        <item>86400000</item> <!-- 1 day (24 hours) -->
+        <item>172800000</item> <!-- 2 days -->
+        <item>259200000</item> <!-- 3 days -->
+        <item>604800000</item> <!-- 7 days -->
+        <item>1209600000</item> <!-- 14 days -->
+        <item>2592000000</item> <!-- 30 days -->
+    </string-array>
+
+    <!-- Smart Pixels -->
+    <string-array name="smart_pixels_percent_strings" translatable="false">
+        <item>12</item>
+        <item>25</item>
+        <item>38</item>
+        <item>50</item>
+        <item>62</item>
+        <item>75</item>
+        <item>88</item>
+    </string-array>
+
+    <string-array name="smart_pixels_percent_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="smart_pixels_shift_times" translatable="false">
+        <item>@string/custom_timeout_summary_15secs</item>
+        <item>@string/custom_timeout_summary_30secs</item>
+        <item>@string/custom_timeout_summary_1min</item>
+        <item>@string/custom_timeout_summary_2mins</item>
+        <item>@string/custom_timeout_summary_5mins</item>
+        <item>@string/custom_timeout_summary_10mins</item>
+        <item>@string/custom_timeout_summary_20mins</item>
+        <item>@string/custom_timeout_summary_30mins</item>
+        <item>@string/custom_timeout_summary_1hour</item>
+    </string-array>
+
+    <string-array name="smart_pixels_shift_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
     </string-array>
 </resources>
