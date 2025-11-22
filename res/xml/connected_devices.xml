@@ -128,4 +128,13 @@
         settings:controller="com.android.settings.connecteddevice.DiscoverableFooterPreferenceController">
     </com.android.settingslib.widget.FooterPreference>
 
+    <!-- Bluetooth Battery Status -->
+    <lineageos.preference.SystemSettingSwitchPreference
+        android:key="bluetooth_show_battery"
+        android:title="@string/status_bar_bluetooth_battery_title"
+        android:summary="@string/status_bar_bluetooth_battery_summary"
+        android:defaultValue="true"
+        app:position="solo"
+        settings:allowDividerAbove="true" />
+
 </PreferenceScreen>
