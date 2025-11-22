@@ -102,11 +102,15 @@
         settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="discoverable_footer"
-        android:selectable="false"
-        android:title="@string/bluetooth_off_footer"
-        settings:controller="com.android.settings.connecteddevice.DiscoverableFooterPreferenceController">
-    </com.android.settingslib.widget.FooterPreference>
+    <!-- Bluetooth Timeout -->
+    <com.android.settingslib.ListPreference
+        android:key="bluetooth_timeout"
+        android:title="@string/bluetooth_timeout"
+        android:entries="@array/bluetooth_timeout_entries"
+        android:entryValues="@array/bluetooth_timeout_values"
+        android:defaultValue="0"
+        android:summary="%s"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.bluetooth.BluetoothTimeoutPreferenceController" />
 
 </PreferenceScreen>
