@@ -21,9 +21,14 @@
 
     <FrameLayout
         android:id="@+id/container"
-        style="@style/DotPreferenceBottomCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/adaptive_preference_card_bottom_background"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,12 +100,15 @@
                     <SeekBar
                         android:id="@*android:id/seekbar"
                         android:layout_width="match_parent"
-                        android:layout_height="88dp"
+                        android:layout_height="72dp"
                         android:layout_gravity="center_vertical"
                         android:background="@android:color/transparent"
                         android:paddingStart="12dp"
+                        android:paddingTop="9dp"
+                        android:paddingBottom="9dp"
                         android:progressDrawable="@drawable/dot_perf_progress"
-                        android:thumb="@null" />
+                        android:thumb="@null"
+                        android:minHeight="54dp" />
 
                     <TextView
                         android:id="@+id/suppression_text"
