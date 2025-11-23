@@ -53,7 +53,6 @@
         android:layout="@layout/settingslib_preference_category_no_title"
         android:order="0">
         
-        <!-- RestrictedPreference items -->
         <!-- Mobile Network reset -->
         <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="network_reset_mobile_network_settings_pref"
@@ -78,31 +77,30 @@
             android:key="factory_reset"
             android:title="@string/main_clear_title"
             android:order="2"
-            app:position="bottom"
+            app:position="middle"
             settings:keywords="@string/keywords_factory_data_reset"
             settings:userRestriction="no_factory_reset"
             settings:useAdminDisabledSummary="true"
             settings:controller="com.android.settings.system.FactoryResetPreferenceController"
             android:fragment="com.android.settings.MainClear" />
 
-        <!-- ComposePreference items -->
         <!-- Bluetooth and WiFi reset -->
+        <!-- Note: ComposePreference is kept as-is due to Compose UI requirements -->
         <com.android.settings.spa.preference.ComposePreference
             android:key="network_reset_bluetooth_wifi_pref"
             android:title="@string/reset_bluetooth_wifi_title"
             android:persistent="false"
-            android:order="10"
+            android:order="3"
             android:layout="@layout/preference_compose_top_intro"
             settings:searchable="false"
             settings:controller="com.android.settings.network.BluetoothWiFiResetPreferenceController" />
 
-        <!-- Preference items -->
         <!-- Erase Euicc data -->
         <com.android.settings.preferences.ui.AdaptivePreference
             android:key="erase_euicc_data"
             android:title="@string/reset_esim_title"
-            android:order="20"
-            app:position="top"
+            android:order="4"
+            app:position="middle"
             settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:controller="com.android.settings.network.EraseEuiccDataController" />
 
@@ -110,7 +108,7 @@
         <com.android.settings.preferences.ui.AdaptivePreference
             android:key="reset_delete_private_space"
             android:title="@string/reset_private_space_delete_title"
-            android:order="21"
+            android:order="5"
             app:position="middle"
             settings:controller="com.android.settings.privatespace.delete.ResetOptionsDeletePrivateSpaceController" />
 
@@ -118,7 +116,7 @@
         <com.android.settings.preferences.ui.AdaptivePreference
             android:key="factory_reset_demo_user"
             android:title="@string/main_clear_title"
-            android:order="22"
+            android:order="6"
             app:position="middle"
             settings:keywords="@string/keywords_factory_data_reset"
             settings:controller="com.android.settings.system.FactoryResetDemoUserPreferenceController"
@@ -129,22 +127,13 @@
             android:key="remove_items"
             android:title="File Deletion"
             android:summary="Delete unnecessary files and free up space"
-            android:order="23"
-            app:position="middle">
+            android:order="7"
+            app:position="bottom">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.storagemanager"
                 android:targetClass="com.android.storagemanager.deletionhelper.DeletionHelperActivity" />
         </com.android.settings.preferences.ui.AdaptivePreference>
-
-        <!-- Restart SystemUI -->
-        <com.android.settings.preferences.ui.AdaptivePreference
-            android:key="restart_systemui"
-            android:title="@string/systemui_reset_title"
-            android:summary="@string/systemui_reset_summary"
-            android:order="24"
-            app:position="bottom"
-            settings:controller="com.epic.fragments.RestartSystemUIController" />
     </PreferenceCategory>
 
     <!-- Switches -->

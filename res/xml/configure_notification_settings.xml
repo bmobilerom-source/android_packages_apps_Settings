@@ -100,17 +100,18 @@
         <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
             android:key="lock_screen_notifications"
             android:order="13"
+            android:selectable="false"
             android:title="@string/lock_screen_notifs_title"
             android:singleLineTitle="false"
             android:summary="@string/summary_placeholder"
-            app:position="middle" />
+            app:position="bottom" />
 
         <com.android.settings.preferences.ui.AdaptivePreference
             android:key="lock_screen_notifications_page"
             android:order="14"
             android:persistent="false"
             android:title="@string/lock_screen_notifs_title"
-            app:position="middle"
+            settings:layout="@layout/system_warning_preference_card"            
             android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
             settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
 
@@ -119,7 +120,7 @@
             android:order="15"
             android:title="@string/lock_screen_notifs_redact"
             android:summary="@string/lock_screen_notifs_redact_summary"
-            app:position="middle"
+            app:position="top"
             settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
 
         <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference

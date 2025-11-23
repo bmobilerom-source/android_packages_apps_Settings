@@ -50,7 +50,7 @@
         android:order="20"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.network.NetworkProviderCallsSmsFragment"
-        app:position="middle"
+        app:position="bottom"
         settings:userRestriction="no_config_mobile_networks"
         settings:allowDividerBelow="true"
         settings:useAdminDisabledSummary="true"
@@ -62,7 +62,7 @@
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_sim_card"
         android:order="30"
-        app:position="bottom"
+        app:position="solo"
         settings:keywords="@string/keywords_more_mobile_networks"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true"
@@ -83,7 +83,7 @@
         android:icon="@drawable/ic_wifi_tethering"
         android:order="110"
         android:summary="@string/summary_placeholder"
-        app:position="middle"
+        app:position="solo"
         settings:controller="com.android.settings.network.TetherPreferenceController"
         settings:keywords="@string/keywords_hotspot_tethering"
         settings:userRestriction="no_config_tethering"
@@ -124,7 +124,7 @@
         android:title="@string/adaptive_connectivity_title"
         android:summary="@string/summary_placeholder"
         android:order="200"
-        app:position="bottom"
+        app:position="solo"
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
 
     <com.android.settings.preferences.ui.AdaptivePreference
