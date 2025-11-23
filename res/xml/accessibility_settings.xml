@@ -111,7 +111,7 @@
             android:persistent="false"
             android:order="0"
             android:title="@string/accessibility_vibration_settings_title"
-            app:position="top"
+            app:position="solo"
             settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
             settings:keywords="@string/keywords_vibration"
             android:summary="@string/accessibility_vibration_settings_summary"/>
@@ -146,7 +146,7 @@
             android:persistent="false"
             android:order="3"
             android:title="@string/accessibility_tap_assistance_title"
-            app:position="bottom"
+            app:position="solo"
             settings:searchable="true"/>
    
     </PreferenceCategory>

@@ -48,14 +48,15 @@
         android:title="@string/emergency_gesture_screen_title"
         android:order="1"
         android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
-        app:position="top"
+        app:position="solo"
         settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
 
     <com.android.settings.preferences.ui.AdaptiveRestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings"
-        android:order="100"
-        app:position="bottom"
+        android:order="2"
+        app:position="solo"
+        settings:allowDividerAbove="true"
         settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"

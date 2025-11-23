@@ -18,7 +18,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title=" " >
        
-        <Preference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="gesture_one_handed"
         android:title="@string/one_handed_title"
         android:fragment="com.android.settings.gestures.OneHandedSettings"
@@ -108,7 +108,7 @@
         android:key="gesture_power_menu_summary"
         android:title="@string/power_menu_setting_name"
         android:fragment="com.android.settings.gestures.PowerMenuSettings"
-        app:position="middle"
+        app:position="bottom"
         settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
     
     <Preference
