@@ -20,17 +20,13 @@
             android:scaleType="centerCrop"
             android:alpha="0.7" />
 
-        <!-- Clock (Simulated) -->
-        <TextView
+        <!-- AOD Clock View -->
+        <com.epic.view.AODClockView
             android:id="@+id/ambient_preview_clock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="60dp"
-            android:text="12:00"
-            android:textSize="48sp"
-            android:textColor="#FFFFFF"
-            android:fontFamily="sans-serif-light" />
+            android:layout_marginTop="40dp" />
 
         <!-- Date (Simulated) -->
         <TextView
@@ -54,6 +50,22 @@
             android:textColor="#FFFFFF"
             android:padding="16dp"
             android:gravity="center" />
+
+        <!-- Notification Preview -->
+        <com.epic.view.AmbientNotificationView
+            android:id="@+id/ambient_preview_notification"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="70dp" />
+
+        <!-- Music Visualizer -->
+        <com.epic.view.AmbientMusicVisualizer
+            android:id="@+id/ambient_preview_visualizer"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="10dp" />
 
     </FrameLayout>
 

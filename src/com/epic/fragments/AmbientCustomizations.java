@@ -19,19 +19,30 @@ package com.epic.fragments;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.preference.SwitchPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SeekBarPreference;
+import androidx.preference.SwitchPreference;
+import com.android.settings.widget.SeekBarPreference;
+
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.epic.view.AODClockView;
+import com.epic.ambient.NotificationPreviewManager;
+import com.epic.view.AmbientNotificationView;
+import com.epic.view.AmbientMusicVisualizer;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -42,11 +53,9 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.graphics.Color;
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,13 +71,6 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
     private static final String KEY_AMBIENT_TEXT_TYPE_COLOR = "ambient_text_type_color";
     private static final String KEY_AMBIENT_TEXT_COLOR = "ambient_text_color";
     private static final String KEY_AMBIENT_CUSTOM_IMAGE = "ambient_custom_image";
-    private static final String KEY_AMBIENT_PREVIEW = "ambient_preview";
-    private static final String KEY_AMBIENT_ENABLE = "ambient_customization_enable";
-    private static final String KEY_DOZE_ALWAYS_ON = "doze_always_on";
-    private static final String KEY_AMBIENT_TEXT_ENABLE = "ambient_text_enable";
-    private static final String KEY_AMBIENT_TEXT_ANIMATION = "ambient_text_animation";
-    private static final String KEY_AMBIENT_TEXT_SIZE = "ambient_text_size";
-    private static final String KEY_AMBIENT_IMAGE_ENABLE = "ambient_image_enable";
 
     private SwitchPreference mAmbientEnable;
     private SwitchPreference mDozeAlwaysOn;
@@ -81,9 +83,24 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
     private ListPreference mAmbientTextTypeColor;
     private Preference mAmbientTextColor;
     private Preference mAmbientCustomImage;
-    private LayoutPreference mAmbientPreview;
-    private ImageView mPreviewImage;
+    private LayoutPreference mPreviewPreference;
+    private View mPreviewView;
     private TextView mPreviewText;
+    private ImageView mPreviewImage;
+    private AODClockView mPreviewClock;
+
+    // Clock style preference
+    private ListPreference mClockStylePreference;
+
+    // Notification preview
+    private NotificationPreviewManager mNotificationManager;
+    private AmbientNotificationView mNotificationPreview;
+
+    // Music visualizer
+    private AmbientMusicVisualizer mMusicVisualizer;
+    private ListPreference mVisualizerModePreference;
+    private PreferenceCategory textCategory;
+    private PreferenceCategory imageCategory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,85 +109,78 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
 
         ContentResolver resolver = getActivity().getContentResolver();
 
-        // Master Switch
-        mAmbientEnable = findPreference(KEY_AMBIENT_ENABLE);
+        // Master switches
+        mAmbientEnable = findPreference("ambient_customization_enable");
+        mDozeAlwaysOn = findPreference("doze_always_on");
+        
+        // Text customization switches
+        mAmbientTextToggle = findPreference("ambient_text_enable");
+        mAmbientTextAnimation = findPreference("ambient_text_animation");
+        mAmbientTextSize = findPreference("ambient_text_size");
+        
+        // Image customization switch
+        mAmbientImageToggle = findPreference("ambient_image_enable");
+        
+        // Text customization preferences
+        textCategory = findPreference("ambient_text_category");
+        mAmbientText = findPreference(KEY_AMBIENT_TEXT);
+        mAmbientTextAlign = findPreference(KEY_AMBIENT_TEXT_ALIGN);
+        mAmbientTextTypeColor = findPreference(KEY_AMBIENT_TEXT_TYPE_COLOR);
+        mAmbientTextColor = findPreference(KEY_AMBIENT_TEXT_COLOR);
+
+        // Image customization preferences
+        imageCategory = findPreference("ambient_image_category");
+        mAmbientCustomImage = findPreference(KEY_AMBIENT_CUSTOM_IMAGE);
+        
+        // Setup master switch
         if (mAmbientEnable != null) {
-            // Use Settings.Secure.DOZE_ENABLED for master switch
-            boolean enabled = Settings.Secure.getInt(resolver, 
-                    Settings.Secure.DOZE_ENABLED, 1) == 1;
-            mAmbientEnable.setChecked(enabled);
+            // Master switch controls overall ambient customization feature
+            // Check if any customization is enabled
+            boolean textEnabled = AmbientCustomizationsHelper.isAmbientTextEnabled(getContext());
+            boolean imageEnabled = AmbientCustomizationsHelper.isAmbientImageEnabled(getContext());
+            mAmbientEnable.setChecked(textEnabled || imageEnabled);
             mAmbientEnable.setOnPreferenceChangeListener(this);
         }
-
-        // Always On Switch
-        mDozeAlwaysOn = findPreference(KEY_DOZE_ALWAYS_ON);
+        
+        // Setup Doze Always On
         if (mDozeAlwaysOn != null) {
-            boolean alwaysOn = Settings.Secure.getInt(resolver, 
-                    Settings.Secure.DOZE_ALWAYS_ON, 0) == 1;
+            boolean alwaysOn = Settings.Secure.getIntForUser(resolver,
+                    Settings.Secure.DOZE_ALWAYS_ON, 0, UserHandle.USER_CURRENT) == 1;
             mDozeAlwaysOn.setChecked(alwaysOn);
             mDozeAlwaysOn.setOnPreferenceChangeListener(this);
-            // Disable AOD if master switch is off
-            mDozeAlwaysOn.setEnabled(mAmbientEnable.isChecked());
         }
-
-        // Ambient text toggle
-        mAmbientTextToggle = findPreference(KEY_AMBIENT_TEXT_ENABLE);
+        
+        // Setup text toggle
         if (mAmbientTextToggle != null) {
             boolean textEnabled = AmbientCustomizationsHelper.isAmbientTextEnabled(getContext());
             mAmbientTextToggle.setChecked(textEnabled);
             mAmbientTextToggle.setOnPreferenceChangeListener(this);
         }
-
-        // Ambient text animation
-        mAmbientTextAnimation = findPreference(KEY_AMBIENT_TEXT_ANIMATION);
+        
+        // Setup text animation toggle
         if (mAmbientTextAnimation != null) {
             boolean animate = AmbientCustomizationsHelper.isAmbientTextAnimationEnabled(getContext());
             mAmbientTextAnimation.setChecked(animate);
             mAmbientTextAnimation.setOnPreferenceChangeListener(this);
         }
-
-        // Ambient text size
-        mAmbientTextSize = findPreference(KEY_AMBIENT_TEXT_SIZE);
+        
+        // Setup text size seekbar
         if (mAmbientTextSize != null) {
-            mAmbientTextSize.setMin(20);
-            mAmbientTextSize.setMax(60);
-            mAmbientTextSize.setSeekBarIncrement(1);
             int size = AmbientCustomizationsHelper.getAmbientTextSize(getContext());
-            mAmbientTextSize.setValue(size);
-            updateTextSizeSummary(size);
+            mAmbientTextSize.setProgress(size);
             mAmbientTextSize.setOnPreferenceChangeListener(this);
         }
-
-        // Ambient image toggle
-        mAmbientImageToggle = findPreference(KEY_AMBIENT_IMAGE_ENABLE);
+        
+        // Setup image toggle
         if (mAmbientImageToggle != null) {
             boolean imageEnabled = AmbientCustomizationsHelper.isAmbientImageEnabled(getContext());
             mAmbientImageToggle.setChecked(imageEnabled);
             mAmbientImageToggle.setOnPreferenceChangeListener(this);
         }
 
-        // Preview
-        mAmbientPreview = findPreference(KEY_AMBIENT_PREVIEW);
-        if (mAmbientPreview != null) {
-            mPreviewImage = mAmbientPreview.findViewById(R.id.ambient_preview_image);
-            mPreviewText = mAmbientPreview.findViewById(R.id.ambient_preview_text);
-        }
-
-        // Text customization
-        PreferenceCategory textCategory = findPreference("ambient_text_category");
-        mAmbientText = findPreference(KEY_AMBIENT_TEXT);
-        mAmbientTextAlign = findPreference(KEY_AMBIENT_TEXT_ALIGN);
-        mAmbientTextTypeColor = findPreference(KEY_AMBIENT_TEXT_TYPE_COLOR);
-        mAmbientTextColor = findPreference(KEY_AMBIENT_TEXT_COLOR);
-
-        // Image customization
-        PreferenceCategory imageCategory = findPreference("ambient_image_category");
-        mAmbientCustomImage = findPreference(KEY_AMBIENT_CUSTOM_IMAGE);
-
         // Setup text preference
         if (mAmbientText != null) {
-            String textValue = Settings.System.getString(resolver,
-                    Settings.System.AMBIENT_TEXT_STRING);
+            String textValue = AmbientCustomizationsHelper.getAmbientText(getContext());
             if (textValue != null && !textValue.isEmpty()) {
                 mAmbientText.setText(textValue);
                 mAmbientText.setSummary(textValue);
@@ -182,8 +192,7 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
 
         // Setup alignment preference
         if (mAmbientTextAlign != null) {
-            int align = Settings.System.getInt(resolver,
-                    Settings.System.AMBIENT_TEXT_ALIGNMENT, 0);
+            int align = AmbientCustomizationsHelper.getAmbientTextAlignment(getContext());
             mAmbientTextAlign.setValue(String.valueOf(align));
             int index = mAmbientTextAlign.findIndexOfValue(String.valueOf(align));
             if (index >= 0) {
@@ -194,8 +203,7 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
 
         // Setup color type preference
         if (mAmbientTextTypeColor != null) {
-            int colorType = Settings.System.getInt(resolver,
-                    Settings.System.AMBIENT_TEXT_TYPE_COLOR, 0);
+            int colorType = AmbientCustomizationsHelper.getAmbientTextTypeColor(getContext());
             mAmbientTextTypeColor.setValue(String.valueOf(colorType));
             int index = mAmbientTextTypeColor.findIndexOfValue(String.valueOf(colorType));
             if (index >= 0) {
@@ -207,8 +215,7 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
 
         // Setup color preference
         if (mAmbientTextColor != null) {
-            int color = Settings.System.getInt(resolver,
-                    Settings.System.AMBIENT_TEXT_COLOR, 0xFF3980FF); // Default accent blue
+            int color = AmbientCustomizationsHelper.getAmbientTextColor(getContext());
             updateColorSummary(color);
             mAmbientTextColor.setOnPreferenceClickListener(preference -> {
                 // Open color picker dialog
@@ -219,8 +226,7 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
 
         // Setup custom image preference
         if (mAmbientCustomImage != null) {
-            String imageUri = Settings.System.getString(resolver,
-                    Settings.System.AMBIENT_CUSTOM_IMAGE);
+            String imageUri = AmbientCustomizationsHelper.getAmbientCustomImage(getContext());
             if (imageUri != null && !imageUri.isEmpty()) {
                 mAmbientCustomImage.setSummary(R.string.ambient_image_selected);
             } else {
@@ -231,176 +237,324 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
                 return true;
             });
         }
-        
-        updatePreview();
-        updateDependencyState(mAmbientEnable != null && mAmbientEnable.isChecked());
-    }
 
-    private void updatePreview() {
-        if (getContext() == null) return;
-
-        boolean masterEnabled = mAmbientEnable != null && mAmbientEnable.isChecked();
-        boolean textFeatureEnabled = masterEnabled
-                && mAmbientTextToggle != null && mAmbientTextToggle.isChecked();
-        boolean imageFeatureEnabled = masterEnabled
-                && mAmbientImageToggle != null && mAmbientImageToggle.isChecked();
-
-        // Update Text
-        if (mPreviewText != null) {
-            if (textFeatureEnabled) {
-                String text = AmbientCustomizationsHelper.getAmbientText(getContext());
-                if (text == null || text.isEmpty()) {
-                    text = getString(R.string.ambient_text_title);
-                }
-                mPreviewText.setVisibility(View.VISIBLE);
-                mPreviewText.setText(text);
-
-                int typeColor = AmbientCustomizationsHelper.getAmbientTextTypeColor(getContext());
-                int color = 0xFFFFFFFF; // Default white
-                if (typeColor == 0) {
-                    color = com.android.settingslib.Utils.getColorAttrDefaultColor(
-                            getContext(), android.R.attr.colorAccent);
-                } else if (typeColor == 2) {
-                    color = AmbientCustomizationsHelper.getAmbientTextColor(getContext());
-                }
-                mPreviewText.setTextColor(color);
-            } else {
-                mPreviewText.setVisibility(View.GONE);
-            }
+        // Setup clock style preference
+        mClockStylePreference = (ListPreference) findPreference(KEY_AOD_CLOCK_STYLE);
+        if (mClockStylePreference != null) {
+            mClockStylePreference.setOnPreferenceChangeListener(this);
+            int currentStyle = getCurrentClockStyle();
+            mClockStylePreference.setValue(String.valueOf(currentStyle));
+            updateClockStyleSummary(currentStyle);
         }
 
-        // Update Image
-        if (mPreviewImage != null) {
-            if (imageFeatureEnabled) {
-                String imageUriStr = AmbientCustomizationsHelper.getAmbientCustomImage(getContext());
-                if (imageUriStr != null && !imageUriStr.isEmpty()) {
-                    try {
-                        mPreviewImage.setImageURI(Uri.parse(imageUriStr));
-                        mPreviewImage.setVisibility(View.VISIBLE);
-                    } catch (Exception e) {
-                        Log.e(TAG, "Failed to load preview image", e);
-                        mPreviewImage.setVisibility(View.GONE);
-                    }
-                } else {
-                    mPreviewImage.setVisibility(View.GONE);
-                }
-            } else {
-                mPreviewImage.setVisibility(View.GONE);
+        // Initialize notification preview manager
+        mNotificationManager = new NotificationPreviewManager(getContext());
+
+        // Initialize music visualizer preference
+        mVisualizerModePreference = (ListPreference) findPreference(KEY_MUSIC_VISUALIZER_MODE);
+        if (mVisualizerModePreference != null) {
+            mVisualizerModePreference.setOnPreferenceChangeListener(this);
+            int currentMode = getCurrentVisualizerMode();
+            mVisualizerModePreference.setValue(String.valueOf(currentMode));
+            updateVisualizerModeSummary(currentMode);
+        }
+
+        // Initialize preview - defer view access to onViewCreated
+        mPreviewPreference = findPreference("ambient_preview");
+
+        // Update UI based on current states
+        updateCategoryVisibility();
+        updatePreview();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Initialize preview views - simplified approach
+        // Note: Preview functionality may need additional implementation
+        try {
+            mPreviewText = view.findViewById(R.id.ambient_preview_text);
+            mPreviewImage = view.findViewById(R.id.ambient_preview_image);
+            mPreviewClock = view.findViewById(R.id.ambient_preview_clock);
+            if (mPreviewClock != null) {
+                int clockStyle = getCurrentClockStyle();
+                mPreviewClock.setClockStyle(clockStyle);
+                mPreviewClock.setColors(
+                    AmbientCustomizationsHelper.getAmbientTextColor(getContext()),
+                    Color.parseColor("#B0B0B0"),
+                    Color.parseColor("#00BFFF")
+                );
             }
+
+            mNotificationPreview = view.findViewById(R.id.ambient_preview_notification);
+            if (mNotificationPreview != null) {
+                // Create a sample notification preview for demonstration
+                NotificationPreviewManager.NotificationPreview samplePreview =
+                    new NotificationPreviewManager.NotificationPreview();
+                samplePreview.smartText = "💬 Sample notification preview";
+                samplePreview.category = NotificationPreviewManager.CATEGORY_MESSAGE;
+                samplePreview.packageName = "com.example.messaging";
+                mNotificationPreview.setNotificationPreview(samplePreview);
+            }
+
+            mMusicVisualizer = view.findViewById(R.id.ambient_preview_visualizer);
+            if (mMusicVisualizer != null) {
+                int visualizerMode = getCurrentVisualizerMode();
+                mMusicVisualizer.setVisualizationMode(visualizerMode);
+                mMusicVisualizer.setColors(
+                    AmbientCustomizationsHelper.getAmbientTextColor(getContext()),
+                    Color.parseColor("#FF1493"),
+                    Color.parseColor("#32CD32")
+                );
+            }
+        } catch (Exception e) {
+            // Preview views may not be available - disable preview functionality
+            mPreviewText = null;
+            mPreviewImage = null;
+            mPreviewClock = null;
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (getActivity() == null || getActivity().getContentResolver() == null) {
+            return false;
+        }
+        
         ContentResolver resolver = getActivity().getContentResolver();
-        boolean handled = false;
         
-        if (preference == mAmbientEnable) {
-            boolean enabled = (Boolean) newValue;
-            // Toggle secure setting DOZE_ENABLED
-            Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ENABLED, enabled ? 1 : 0);
-            // Also toggle DOZE_ALWAYS_ON if AOD is desired when enabled
-            // For now, just link it to master switch or leave it independent if there's another toggle
-            // We'll just handle DOZE_ENABLED as the master switch for Ambient Display features
-            
-            // Enable/Disable other preferences based on switch
-            updateDependencyState(enabled);
-            updatePreview();
-            return true;
-        } else if (preference == mDozeAlwaysOn) {
-            boolean alwaysOn = (Boolean) newValue;
-            Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, alwaysOn ? 1 : 0);
-            return true;
-        } else if (preference == mAmbientTextToggle) {
-            boolean enabled = (Boolean) newValue;
-            AmbientCustomizationsHelper.setAmbientTextEnabled(getContext(), enabled);
-            updateDependencyState(mAmbientEnable != null && mAmbientEnable.isChecked());
-            handled = true;
-        } else if (preference == mAmbientTextAnimation) {
-            boolean animate = (Boolean) newValue;
-            AmbientCustomizationsHelper.setAmbientTextAnimationEnabled(getContext(), animate);
-            handled = true;
-        } else if (preference == mAmbientTextSize) {
-            int size = (Integer) newValue;
-            AmbientCustomizationsHelper.setAmbientTextSize(getContext(), size);
-            updateTextSizeSummary(size);
-            handled = true;
-        } else if (preference == mAmbientImageToggle) {
-            boolean enabled = (Boolean) newValue;
-            AmbientCustomizationsHelper.setAmbientImageEnabled(getContext(), enabled);
-            updateDependencyState(mAmbientEnable != null && mAmbientEnable.isChecked());
-            handled = true;
-        } else if (preference == mAmbientText) {
-            String value = (String) newValue;
-            AmbientCustomizationsHelper.setAmbientText(getContext(), value);
-            if (value != null && !value.isEmpty()) {
-                ((CustomEditTextPreferenceCompat) preference).setText(value);
-                preference.setSummary(value);
-            } else {
-                preference.setSummary(R.string.ambient_text_summary);
+        try {
+            if (preference == mAmbientEnable) {
+                boolean enabled = (Boolean) newValue;
+                // Master switch enables/disables all ambient customizations
+                if (mAmbientTextToggle != null) {
+                    mAmbientTextToggle.setChecked(enabled);
+                    AmbientCustomizationsHelper.setAmbientTextEnabled(getContext(), enabled);
+                }
+                if (mAmbientImageToggle != null) {
+                    mAmbientImageToggle.setChecked(enabled);
+                    AmbientCustomizationsHelper.setAmbientImageEnabled(getContext(), enabled);
+                }
+                return true;
+            } else if (preference == mDozeAlwaysOn) {
+                boolean alwaysOn = (Boolean) newValue;
+                Settings.Secure.putIntForUser(resolver,
+                        Settings.Secure.DOZE_ALWAYS_ON, alwaysOn ? 1 : 0, UserHandle.USER_CURRENT);
+                return true;
+            } else if (preference == mAmbientTextToggle) {
+                boolean enabled = (Boolean) newValue;
+                AmbientCustomizationsHelper.setAmbientTextEnabled(getContext(), enabled);
+                updateMasterSwitchState();
+                updateCategoryVisibility();
+                updatePreview();
+                return true;
+            } else if (preference == mAmbientTextAnimation) {
+                boolean animate = (Boolean) newValue;
+                AmbientCustomizationsHelper.setAmbientTextAnimationEnabled(getContext(), animate);
+                updatePreview();
+                return true;
+            } else if (preference == mAmbientTextSize) {
+                int size = (Integer) newValue;
+                AmbientCustomizationsHelper.setAmbientTextSize(getContext(), size);
+                updatePreview();
+                return true;
+            } else if (preference == mAmbientImageToggle) {
+                boolean enabled = (Boolean) newValue;
+                AmbientCustomizationsHelper.setAmbientImageEnabled(getContext(), enabled);
+                updateMasterSwitchState();
+                updateCategoryVisibility();
+                updatePreview();
+                return true;
+            } else if (preference == mAmbientText) {
+                String value = (String) newValue;
+                AmbientCustomizationsHelper.setAmbientText(getContext(), value);
+                if (value != null && !value.isEmpty()) {
+                    preference.setSummary(value);
+                } else {
+                    preference.setSummary(R.string.ambient_text_summary);
+                }
+                updatePreview();
+                return true;
+            } else if (preference == mAmbientTextAlign) {
+                int align = Integer.parseInt((String) newValue);
+                int index = mAmbientTextAlign.findIndexOfValue((String) newValue);
+                AmbientCustomizationsHelper.setAmbientTextAlignment(getContext(), align);
+                if (index >= 0) {
+                    mAmbientTextAlign.setSummary(mAmbientTextAlign.getEntries()[index]);
+                }
+                updatePreview();
+                return true;
+            } else if (preference == mAmbientTextTypeColor) {
+                int value = Integer.parseInt((String) newValue);
+                int index = mAmbientTextTypeColor.findIndexOfValue((String) newValue);
+                mAmbientTextTypeColor.setSummary(mAmbientTextTypeColor.getEntries()[index]);
+                AmbientCustomizationsHelper.setAmbientTextTypeColor(getContext(), value);
+                updateColorPreferenceState(value);
+                updatePreview();
+                return true;
+            } else if (preference == mClockStylePreference) {
+                int style = Integer.parseInt((String) newValue);
+                setClockStyle(style);
+                updateClockStyleSummary(style);
+                return true;
+            } else if (preference == mVisualizerModePreference) {
+                int mode = Integer.parseInt((String) newValue);
+                setVisualizerMode(mode);
+                updateVisualizerModeSummary(mode);
+                return true;
             }
-            handled = true;
-        } else if (preference == mAmbientTextAlign) {
-            int align = Integer.parseInt((String) newValue);
-            AmbientCustomizationsHelper.setAmbientTextAlignment(getContext(), align);
-            int index = mAmbientTextAlign.findIndexOfValue((String) newValue);
-            if (index >= 0) {
-                mAmbientTextAlign.setSummary(mAmbientTextAlign.getEntries()[index]);
-            }
-            handled = true;
-        } else if (preference == mAmbientTextTypeColor) {
-            int value = Integer.parseInt((String) newValue);
-            AmbientCustomizationsHelper.setAmbientTextTypeColor(getContext(), value);
-            int index = mAmbientTextTypeColor.findIndexOfValue((String) newValue);
-            mAmbientTextTypeColor.setSummary(mAmbientTextTypeColor.getEntries()[index]);
-            updateColorPreferenceState(value);
-            handled = true;
+        } catch (Exception e) {
+            Log.e(TAG, "Error handling preference change", e);
+            return false;
         }
-        
-        if (handled) {
-            updatePreview();
-        }
-        return handled;
-    }
-
-    private void updateDependencyState(boolean enabled) {
-        boolean textFeatureEnabled = enabled
-                && mAmbientTextToggle != null && mAmbientTextToggle.isChecked();
-        boolean imageFeatureEnabled = enabled
-                && mAmbientImageToggle != null && mAmbientImageToggle.isChecked();
-
-        if (mDozeAlwaysOn != null) mDozeAlwaysOn.setEnabled(enabled);
-        if (mAmbientTextToggle != null) mAmbientTextToggle.setEnabled(enabled);
-        if (mAmbientTextAnimation != null) mAmbientTextAnimation.setEnabled(textFeatureEnabled);
-        if (mAmbientTextSize != null) mAmbientTextSize.setEnabled(textFeatureEnabled);
-        if (mAmbientText != null) mAmbientText.setEnabled(textFeatureEnabled);
-        if (mAmbientTextAlign != null) mAmbientTextAlign.setEnabled(textFeatureEnabled);
-        if (mAmbientTextTypeColor != null) mAmbientTextTypeColor.setEnabled(textFeatureEnabled);
-        if (mAmbientTextColor != null) {
-            boolean allowColor = textFeatureEnabled &&
-                    AmbientCustomizationsHelper.getAmbientTextTypeColor(getContext()) == 2;
-            mAmbientTextColor.setEnabled(allowColor);
-        }
-        if (mAmbientImageToggle != null) mAmbientImageToggle.setEnabled(enabled);
-        if (mAmbientCustomImage != null) mAmbientCustomImage.setEnabled(imageFeatureEnabled);
-        if (mAmbientPreview != null) {
-            mAmbientPreview.setVisible(enabled && (textFeatureEnabled || imageFeatureEnabled));
-        }
+        return false;
     }
 
     private void updateColorPreferenceState(int colorType) {
         if (mAmbientTextColor != null) {
-            boolean masterEnabled = mAmbientEnable != null && mAmbientEnable.isChecked();
-            boolean textFeatureEnabled = masterEnabled
-                    && mAmbientTextToggle != null && mAmbientTextToggle.isChecked();
-            mAmbientTextColor.setEnabled(textFeatureEnabled && colorType == 2);
+            // Enable color picker only when custom color is selected (value == 2)
+            mAmbientTextColor.setEnabled(colorType == 2);
         }
     }
 
-    private void updateTextSizeSummary(int size) {
-        if (mAmbientTextSize != null) {
-            mAmbientTextSize.setSummary(getString(R.string.ambient_text_size_summary_value, size));
+    private void updateMasterSwitchState() {
+        if (mAmbientEnable != null) {
+            boolean textEnabled = AmbientCustomizationsHelper.isAmbientTextEnabled(getContext());
+            boolean imageEnabled = AmbientCustomizationsHelper.isAmbientImageEnabled(getContext());
+            mAmbientEnable.setChecked(textEnabled || imageEnabled);
         }
+    }
+
+    private void updateCategoryVisibility() {
+        // Update text category visibility - always visible so users can see options
+        if (textCategory != null) {
+            textCategory.setVisible(true);
+        }
+
+        // Update image category visibility - always visible so users can see options
+        if (imageCategory != null) {
+            imageCategory.setVisible(true);
+        }
+    }
+
+    private void updatePreview() {
+        if (mPreviewText == null || mPreviewImage == null) {
+            return;
+        }
+
+        Context context = getContext();
+
+        // Update text
+        boolean textEnabled = AmbientCustomizationsHelper.isAmbientTextEnabled(context);
+        if (textEnabled) {
+            String text = AmbientCustomizationsHelper.getAmbientText(context);
+            if (text == null || text.isEmpty()) {
+                text = "Ambient Text";
+            }
+            mPreviewText.setText(text);
+            mPreviewText.setVisibility(View.VISIBLE);
+
+            // Apply text styling
+            int textSize = AmbientCustomizationsHelper.getAmbientTextSize(context);
+            mPreviewText.setTextSize(textSize);
+
+            int alignment = AmbientCustomizationsHelper.getAmbientTextAlignment(context);
+            applyAlignment(mPreviewText, alignment);
+
+            int colorType = AmbientCustomizationsHelper.getAmbientTextTypeColor(context);
+            int color = getTextColor(context, colorType);
+            mPreviewText.setTextColor(color);
+
+        } else {
+            mPreviewText.setVisibility(View.GONE);
+        }
+
+        // Update image
+        boolean imageEnabled = AmbientCustomizationsHelper.isAmbientImageEnabled(context);
+        if (imageEnabled) {
+            String imageFile = AmbientCustomizationsHelper.getAmbientImageFile(context);
+            if (imageFile != null && !imageFile.isEmpty()) {
+                try {
+                    java.io.File file = new java.io.File(imageFile);
+                    if (file.exists()) {
+                        android.graphics.Bitmap bitmap = android.graphics.BitmapFactory.decodeFile(imageFile);
+                        if (bitmap != null) {
+                            mPreviewImage.setImageBitmap(bitmap);
+                            mPreviewImage.setVisibility(View.VISIBLE);
+                        } else {
+                            mPreviewImage.setVisibility(View.GONE);
+                        }
+                    } else {
+                        mPreviewImage.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to load preview image", e);
+                    mPreviewImage.setVisibility(View.GONE);
+                }
+            } else {
+                mPreviewImage.setVisibility(View.GONE);
+            }
+        } else {
+            mPreviewImage.setVisibility(View.GONE);
+        }
+    }
+
+    private void applyAlignment(TextView textView, int alignment) {
+        switch (alignment) {
+            case 0: // Start Top
+                textView.setGravity(android.view.Gravity.START | android.view.Gravity.TOP);
+                break;
+            case 1: // Start Center
+                textView.setGravity(android.view.Gravity.START | android.view.Gravity.CENTER_VERTICAL);
+                break;
+            case 2: // Start Bottom
+                textView.setGravity(android.view.Gravity.START | android.view.Gravity.BOTTOM);
+                break;
+            case 3: // Center
+            default:
+                textView.setGravity(android.view.Gravity.CENTER);
+                break;
+            case 4: // End Top
+                textView.setGravity(android.view.Gravity.END | android.view.Gravity.TOP);
+                break;
+            case 5: // End Center
+                textView.setGravity(android.view.Gravity.END | android.view.Gravity.CENTER_VERTICAL);
+                break;
+            case 6: // End Bottom
+                textView.setGravity(android.view.Gravity.END | android.view.Gravity.BOTTOM);
+                break;
+        }
+    }
+
+    private int getTextColor(Context context, int colorType) {
+        switch (colorType) {
+            case 0: // Accent color
+                return com.android.settingslib.Utils.getColorAccentDefaultColor(context);
+            case 1: // Wallpaper color
+                return getWallpaperDominantColor(context);
+            case 2: // Custom color
+                return AmbientCustomizationsHelper.getAmbientTextColor(context);
+            default:
+                return com.android.settingslib.Utils.getColorAccentDefaultColor(context);
+        }
+    }
+
+    private int getWallpaperDominantColor(Context context) {
+        try {
+            android.app.WallpaperManager wallpaperManager = android.app.WallpaperManager.getInstance(context);
+            android.graphics.drawable.Drawable wallpaper = wallpaperManager.getDrawable();
+            if (wallpaper instanceof android.graphics.drawable.BitmapDrawable) {
+                android.graphics.Bitmap bitmap = ((android.graphics.drawable.BitmapDrawable) wallpaper).getBitmap();
+                if (bitmap != null) {
+                    // Simple color extraction - use a pixel from the center
+                    return bitmap.getPixel(bitmap.getWidth() / 2, bitmap.getHeight() / 2);
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to get wallpaper color", e);
+        }
+        return com.android.settingslib.Utils.getColorAccentDefaultColor(context);
     }
 
     private void updateColorSummary(int color) {
@@ -415,18 +569,19 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
     }
 
     private void showColorPickerDialog() {
-        // For now, use a simple approach - in a full implementation,
-        // you'd use a ColorPickerPreference or custom dialog
-        Toast.makeText(getContext(), 
-                R.string.ambient_color_picker_not_implemented, 
-                Toast.LENGTH_SHORT).show();
-        // TODO: Implement proper color picker dialog
-        // This would require ColorPickerPreference or custom dialog
+        try {
+            // Color picker implementation not available - show placeholder
+            android.widget.Toast.makeText(getContext(), getString(R.string.ambient_color_picker_not_implemented), android.widget.Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to show color picker placeholder", e);
+        }
     }
 
     private void pickImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
         startActivityForResult(intent, REQUEST_PICK_IMAGE);
     }
 
@@ -438,22 +593,119 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
             }
             final Uri imageUri = result.getData();
             if (imageUri != null) {
-                // Take permission to read the URI
-                try {
-                    getContext().getContentResolver().takePersistableUriPermission(imageUri, 
-                            Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                } catch (Exception e) {
-                    Log.e(TAG, "Failed to take persistable uri permission", e);
-                }
-                
-                AmbientCustomizationsHelper.setAmbientCustomImage(getContext(), imageUri.toString());
-                if (mAmbientCustomImage != null) {
-                    mAmbientCustomImage.setSummary(R.string.ambient_image_selected);
-                }
-                updatePreview();
+                // Copy image to device-protected storage and update settings
+                copyImageToInternalStorage(imageUri);
             }
         }
         super.onActivityResult(requestCode, resultCode, result);
+    }
+
+    private void copyImageToInternalStorage(Uri imageUri) {
+        try {
+            Context deviceProtectedContext = getContext().createDeviceProtectedStorageContext();
+            if (deviceProtectedContext == null) {
+                Toast.makeText(getContext(), "Failed to access device storage", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            File filesDir = deviceProtectedContext.getFilesDir();
+            File imageFile = new File(filesDir, "custom_file_ambient_image");
+
+            // Copy the image file
+            try (InputStream input = getContext().getContentResolver().openInputStream(imageUri);
+                 FileOutputStream output = new FileOutputStream(imageFile)) {
+
+                byte[] buffer = new byte[8192];
+                int bytesRead;
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    output.write(buffer, 0, bytesRead);
+                }
+                output.flush();
+            }
+
+            // Update settings with file path and URI for future reference
+            AmbientCustomizationsHelper.setAmbientCustomImage(getContext(), imageUri.toString());
+            AmbientCustomizationsHelper.setAmbientImageFile(getContext(), imageFile.getAbsolutePath());
+
+            if (mAmbientCustomImage != null) {
+                mAmbientCustomImage.setSummary(R.string.ambient_image_selected);
+            }
+
+            Toast.makeText(getContext(), "Ambient image updated", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to copy ambient image", e);
+            Toast.makeText(getContext(), "Failed to save ambient image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // AOD Clock Style Methods
+    private static final String KEY_AOD_CLOCK_STYLE = "aod_clock_style";
+
+    private int getCurrentClockStyle() {
+        try {
+            return Settings.Secure.getInt(getContext().getContentResolver(),
+                    KEY_AOD_CLOCK_STYLE, AODClockView.STYLE_CLASSIC);
+        } catch (Exception e) {
+            return AODClockView.STYLE_CLASSIC;
+        }
+    }
+
+    private void setClockStyle(int style) {
+        Settings.Secure.putInt(getContext().getContentResolver(),
+                KEY_AOD_CLOCK_STYLE, style);
+        if (mPreviewClock != null) {
+            mPreviewClock.setClockStyle(style);
+        }
+    }
+
+    private void updateClockStyleSummary(int style) {
+        if (mClockStylePreference != null) {
+            String[] entries = getResources().getStringArray(R.array.aod_clock_style_entries);
+            if (entries != null && style >= 0 && style < entries.length) {
+                mClockStylePreference.setSummary(entries[style]);
+            }
+        }
+    }
+
+    // Music Visualizer Methods
+    private static final String KEY_MUSIC_VISUALIZER_MODE = "music_visualizer_mode";
+
+    private int getCurrentVisualizerMode() {
+        try {
+            return Settings.Secure.getInt(getContext().getContentResolver(),
+                    KEY_MUSIC_VISUALIZER_MODE, AmbientMusicVisualizer.MODE_SPECTRUM);
+        } catch (Exception e) {
+            return AmbientMusicVisualizer.MODE_SPECTRUM;
+        }
+    }
+
+    private void setVisualizerMode(int mode) {
+        Settings.Secure.putInt(getContext().getContentResolver(),
+                KEY_MUSIC_VISUALIZER_MODE, mode);
+        if (mMusicVisualizer != null) {
+            mMusicVisualizer.setVisualizationMode(mode);
+        }
+    }
+
+    private void updateVisualizerModeSummary(int mode) {
+        if (mVisualizerModePreference != null) {
+            String[] entries = getResources().getStringArray(R.array.music_visualizer_mode_entries);
+            if (entries != null && mode >= 0 && mode < entries.length) {
+                mVisualizerModePreference.setSummary(entries[mode]);
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Preview updates automatically when settings change
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override

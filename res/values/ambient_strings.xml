@@ -48,9 +48,11 @@
     <!-- Alignment Options -->
     <string name="ambient_text_align_start_top">Start Top</string>
     <string name="ambient_text_align_start_center">Start Center</string>
+    <string name="ambient_text_align_start_bottom">Start Bottom</string>
     <string name="ambient_text_align_center">Center</string>
     <string name="ambient_text_align_end_top">End Top</string>
     <string name="ambient_text_align_end_center">End Center</string>
+    <string name="ambient_text_align_end_bottom">End Bottom</string>
     
     <!-- Color Type Options -->
     <string name="ambient_notification_light_color_mode_accent">Accent color</string>

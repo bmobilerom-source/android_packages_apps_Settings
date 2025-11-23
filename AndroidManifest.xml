@@ -5579,5 +5579,12 @@
                 <action android:name="com.epic.action.AUTO_REBOOT_CONFIG_CHANGED" />
             </intent-filter>
         </receiver>
+
+        <!-- Ambient Display Customizations -->
+        <activity android:name="com.epic.fragments.AmbientCustomizations"
+                  android:label="@string/ambient_text_category_title"
+                  android:exported="false"
+                  android:theme="@style/Theme.Settings" />
+
     </application>
 </manifest>
