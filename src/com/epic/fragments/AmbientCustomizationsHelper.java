@@ -9,6 +9,7 @@ import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -22,6 +23,7 @@ public class AmbientCustomizationsHelper {
     public static final String AMBIENT_TEXT_TYPE_COLOR = "ambient_text_type_color";
     public static final String AMBIENT_TEXT_COLOR = "ambient_text_color";
     public static final String AMBIENT_CUSTOM_IMAGE = "ambient_custom_image";
+    public static final String AMBIENT_IMAGE_FILE = "ambient_image_file";
 
     // Default values
     private static final String DEFAULT_AMBIENT_TEXT = "";
@@ -313,5 +315,27 @@ public class AmbientCustomizationsHelper {
     public static boolean setAmbientDisplayTimeout(Context context, int timeoutMs) {
         return Settings.System.putInt(context.getContentResolver(),
                 "ambient_display_timeout", timeoutMs);
+    }
+
+    /**
+     * Get ambient image file path
+     */
+    public static String getAmbientImageFile(Context context) {
+        ContentResolver resolver = context.getContentResolver();
+        String filePath = Settings.System.getStringForUser(resolver, AMBIENT_IMAGE_FILE, UserHandle.USER_CURRENT);
+        return filePath != null ? filePath : "";
+    }
+
+    /**
+     * Set ambient image file path
+     */
+    public static boolean setAmbientImageFile(Context context, String filePath) {
+        ContentResolver resolver = context.getContentResolver();
+        boolean success = Settings.System.putStringForUser(resolver, AMBIENT_IMAGE_FILE,
+                filePath != null ? filePath : "", UserHandle.USER_CURRENT);
+        if (success) {
+            notifyAmbientChange(context);
+        }
+        return success;
     }
 }
