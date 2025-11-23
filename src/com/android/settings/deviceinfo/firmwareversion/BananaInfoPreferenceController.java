@@ -82,6 +82,9 @@ public class BananaInfoPreferenceController extends AbstractPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final LayoutPreference BananaInfoPreference = screen.findPreference(KEY_BANANA_INFO);
+        if (BananaInfoPreference == null) {
+            return;
+        }
         final TextView version = (TextView) BananaInfoPreference.findViewById(R.id.version_message);
         final TextView device = (TextView) BananaInfoPreference.findViewById(R.id.device_message);
         final TextView releaseType = (TextView) BananaInfoPreference.findViewById(R.id.release_type_message);
@@ -90,10 +93,18 @@ public class BananaInfoPreferenceController extends AbstractPreferenceController
         final String bananaDevice = getDeviceName();
         final String bananaReleaseType = getbananaReleaseType();
         final String bananaMaintainer = getbananaMaintainer();
-        version.setText(bananaVersion);
-        device.setText(bananaDevice);
-        releaseType.setText(bananaReleaseType);
-        maintainer.setText(bananaMaintainer);
+        if (version != null) {
+            version.setText(bananaVersion);
+        }
+        if (device != null) {
+            device.setText(bananaDevice);
+        }
+        if (releaseType != null) {
+            releaseType.setText(bananaReleaseType);
+        }
+        if (maintainer != null) {
+            maintainer.setText(bananaMaintainer);
+        }
     }
 
     @Override

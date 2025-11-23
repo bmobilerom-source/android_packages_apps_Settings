@@ -87,7 +87,9 @@ public class MyDeviceInfoFragment extends DashboardFragment
         super.onAttach(context);
         use(DeviceNamePreferenceController.class).setHost(this /* parent */);
         mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
-        mBuildNumberPreferenceController.setHost(this /* parent */);
+        if (mBuildNumberPreferenceController != null) {
+            mBuildNumberPreferenceController.setHost(this /* parent */);
+        }
     }
 
     @Override
@@ -125,7 +127,8 @@ public class MyDeviceInfoFragment extends DashboardFragment
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (mBuildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
+        if (mBuildNumberPreferenceController != null && 
+                mBuildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
