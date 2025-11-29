@@ -15,18 +15,23 @@
  */
 package com.android.settings.awaken.fragments;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -35,33 +40,22 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @SearchIndexable
 public class QsHeader extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String TAG = "QsHeader";
-    private static final String KEY_QS_HEADER_PROVIDER = "qs_header_provider";
-    private static final String KEY_QS_HEADER_VISIBILITY = "qs_header_visibility";
     private static final String KEY_QS_HEADER_IMAGE = "qs_header_image";
-    private static final String KEY_QS_HEADER_FILE_PICKER = "qs_header_file_picker";
-    private static final int REQUEST_PICK_HEADER_IMAGE = 1001;
+    private static final String KEY_QS_HEADER_SHADOW = "qs_header_shadow";
+    private static final String KEY_QS_HEADER_HEIGHT = "qs_header_height";
+    private static final String KEY_QS_HEADER_CUSTOM_FILE = "qs_header_custom_file";
+    private static final int REQUEST_CODE_PICK_HEADER_FILE = 1001;
 
     private QsHeaderHelper mQsHeaderHelper;
-
-    // Provider values that match SystemUI
-    private static final String PROVIDER_STATIC = "static";
-    private static final String PROVIDER_FILE = "file";
-    private static final String PROVIDER_DAYLIGHT = "daylight";
-
-    private ListPreference mHeaderProvider;
-    private ListPreference mHeaderVisibility;
     private ListPreference mHeaderImage;
-    private Preference mFilePicker;
-    
-    private List<String> mHeaderImageEntries = new ArrayList<>();
-    private List<String> mHeaderImageValues = new ArrayList<>();
+    private ListPreference mHeaderShadow;
+    private ListPreference mHeaderHeight;
+    private Preference mCustomFilePicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,118 +63,69 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
         addPreferencesFromResource(R.xml.qs_header);
         mQsHeaderHelper = new QsHeaderHelper(getContext());
 
-        final ContentResolver resolver = getActivity().getContentResolver();
-
-        mHeaderProvider = (ListPreference) findPreference(KEY_QS_HEADER_PROVIDER);
-        if (mHeaderProvider != null) {
-            mHeaderProvider.setOnPreferenceChangeListener(this);
-            String provider = mQsHeaderHelper.getHeaderProvider();
-            mHeaderProvider.setValue(provider);
-            updateProviderSummary(provider);
-        }
-
-        mHeaderVisibility = (ListPreference) findPreference(KEY_QS_HEADER_VISIBILITY);
-        if (mHeaderVisibility != null) {
-            mHeaderVisibility.setOnPreferenceChangeListener(this);
-            int visibility = mQsHeaderHelper.getHeaderVisibility() ? 1 : 0;
-            mHeaderVisibility.setValue(String.valueOf(visibility));
-            updateVisibilitySummary(visibility);
-        }
+        // Enable QS header by default and set provider to static
+        ContentResolver resolver = getActivity().getContentResolver();
+        Settings.System.putInt(resolver, Settings.System.STATUS_BAR_CUSTOM_HEADER, 1);
+        Settings.System.putString(resolver, Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER, "static");
 
         mHeaderImage = (ListPreference) findPreference(KEY_QS_HEADER_IMAGE);
         if (mHeaderImage != null) {
-            discoverAvailableHeaderImages();
+            // Use dynamic discovery of available headers
+            java.util.List<String> names = mQsHeaderHelper.getAvailableImageNames();
+            java.util.List<String> values = mQsHeaderHelper.getAvailableImageValues();
 
-            mHeaderImage.setEntries(mHeaderImageEntries.toArray(new CharSequence[0]));
-            mHeaderImage.setEntryValues(mHeaderImageValues.toArray(new CharSequence[0]));
+            if (names.size() > 0 && values.size() > 0) {
+                mHeaderImage.setEntries(names.toArray(new String[0]));
+                mHeaderImage.setEntryValues(values.toArray(new String[0]));
 
-            mHeaderImage.setOnPreferenceChangeListener(this);
-            String currentValue = mQsHeaderHelper.getCurrentHeaderValue();
-            if (currentValue == null || !mHeaderImageValues.contains(currentValue)) {
-                if (!mHeaderImageValues.isEmpty()) {
-                    currentValue = mHeaderImageValues.get(0);
+                mHeaderImage.setOnPreferenceChangeListener(this);
+                String currentValue = mQsHeaderHelper.getCurrentHeaderValue();
+                if (currentValue == null || !values.contains(currentValue)) {
+                    currentValue = values.get(0); // Default to first available header
                 }
-            }
-            if (currentValue != null) {
-                mHeaderImage.setValue(currentValue);
-                updateImageSummary(currentValue);
-            }
-        }
-
-        // File Picker Preference
-        mFilePicker = findPreference("qs_header_file_image");
-        if (mFilePicker == null) {
-            // Create it if not in XML (compatibility)
-            mFilePicker = new Preference(getContext());
-            mFilePicker.setKey("qs_header_file_image");
-            mFilePicker.setTitle(R.string.custom_picture_theme_picker_title);
-            mFilePicker.setSummary(R.string.custom_picture_theme_picker_summary);
-            mFilePicker.setOrder(15);
-            getPreferenceScreen().addPreference(mFilePicker);
-        }
-        mFilePicker.setOnPreferenceClickListener(preference -> {
-            pickFile();
-            return true;
-        });
-        
-        updateFilePickerVisibility();
-    }
-
-    private void updateFilePickerVisibility() {
-        if (mFilePicker != null && mHeaderProvider != null) {
-            String provider = mHeaderProvider.getValue();
-            mFilePicker.setVisible(PROVIDER_FILE.equals(provider));
-        }
-    }
-
-    private void pickFile() {
-        android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(android.content.Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-        intent.putExtra(android.content.Intent.EXTRA_MIME_TYPES, new String[] {"image/*", "video/*"});
-        startActivityForResult(intent, REQUEST_PICK_HEADER_IMAGE);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, android.content.Intent result) {
-        if (requestCode == REQUEST_PICK_HEADER_IMAGE) {
-            if (resultCode != android.app.Activity.RESULT_OK || result == null) {
-                return;
-            }
-            final android.net.Uri uri = result.getData();
-            if (uri != null) {
-                try {
-                    getContext().getContentResolver().takePersistableUriPermission(uri, 
-                            android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    
-                    String uriString = uri.toString();
-                    Settings.System.putString(getContentResolver(),
-                            Settings.System.STATUS_BAR_FILE_HEADER_IMAGE, uriString);
-                    
-                    // Also ensure provider is set to file
-                    Settings.System.putString(getContentResolver(),
-                            Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER, PROVIDER_FILE);
-                    if (mHeaderProvider != null) {
-                        mHeaderProvider.setValue(PROVIDER_FILE);
-                        updateProviderSummary(PROVIDER_FILE);
-                    }
-                    
-                    // Notify change
-                    getContentResolver().notifyChange(
-                            Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER),
-                            null, true);
-                    getContentResolver().notifyChange(
-                            Settings.System.getUriFor(Settings.System.STATUS_BAR_FILE_HEADER_IMAGE),
-                            null, true);
-                            
-                    mFilePicker.setSummary(R.string.image_selected);
-                    Log.d(TAG, "Set custom header image: " + uriString);
-                } catch (Exception e) {
-                    Log.e(TAG, "Failed to set custom header image", e);
+                if (currentValue != null) {
+                    mHeaderImage.setValue(currentValue);
+                    updateImageSummary(currentValue);
                 }
+            } else {
+                Log.w(TAG, "No QS header images found via dynamic discovery");
+                // Fallback to static arrays
+                String[] entries = getResources().getStringArray(R.array.anciui_header_img_entries);
+                String[] staticValues = getResources().getStringArray(R.array.anciui_header_img_values);
+                mHeaderImage.setEntries(entries);
+                mHeaderImage.setEntryValues(staticValues);
+                mHeaderImage.setOnPreferenceChangeListener(this);
             }
         }
-        super.onActivityResult(requestCode, resultCode, result);
+
+        // Shadow / brightness preference (maps to STATUS_BAR_CUSTOM_HEADER_SHADOW)
+        mHeaderShadow = (ListPreference) findPreference(KEY_QS_HEADER_SHADOW);
+        if (mHeaderShadow != null) {
+            mHeaderShadow.setOnPreferenceChangeListener(this);
+            int currentShadow = Settings.System.getInt(getContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
+            // Values are 0-3, map to index
+            mHeaderShadow.setValue(String.valueOf(currentShadow));
+        }
+
+        // Header height preference (maps to STATUS_BAR_CUSTOM_HEADER_HEIGHT)
+        mHeaderHeight = (ListPreference) findPreference(KEY_QS_HEADER_HEIGHT);
+        if (mHeaderHeight != null) {
+            mHeaderHeight.setOnPreferenceChangeListener(this);
+            int currentHeight = Settings.System.getInt(getContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER_HEIGHT, 142);
+            mHeaderHeight.setValue(String.valueOf(currentHeight));
+        }
+
+        // Custom file picker preference
+        mCustomFilePicker = findPreference(KEY_QS_HEADER_CUSTOM_FILE);
+        if (mCustomFilePicker != null) {
+            mCustomFilePicker.setOnPreferenceClickListener(preference -> {
+                openFilePicker();
+                return true;
+            });
+            updateCustomFileSummary();
+        }
     }
 
     @Override
@@ -190,33 +135,11 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final ContentResolver resolver = getActivity().getContentResolver();
-        if (preference == mHeaderProvider) {
-            String provider = (String) newValue;
-            boolean success = Settings.System.putStringForUser(resolver,
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER,
-                    provider, UserHandle.USER_CURRENT);
-            if (success) {
-                // Notify SystemUI of the change - use UserHandle.USER_ALL to notify all users
-                resolver.notifyChange(
-                        Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER),
-                        null, true);
-                updateProviderSummary(provider);
-                updateFilePickerVisibility(); // Update visibility
-                Log.d(TAG, "QS Header provider changed to: " + provider);
-            }
-            return success;
-        } else if (preference == mHeaderVisibility) {
-            int visibility = Integer.parseInt((String) newValue);
-            boolean success = mQsHeaderHelper.setHeaderVisibility(visibility == 1);
-            if (success) {
-                updateVisibilitySummary(visibility);
-                Log.d(TAG, "QS Header visibility changed to: " + visibility);
-            }
-            return success;
-        } else if (preference == mHeaderImage) {
+        if (preference == mHeaderImage) {
             String value = (String) newValue;
-            if (value == null || !mHeaderImageValues.contains(value)) {
+            // Validate against dynamic values
+            java.util.List<String> values = mQsHeaderHelper.getAvailableImageValues();
+            if (value == null || !values.contains(value)) {
                 Log.w(TAG, "Invalid header image value: " + value);
                 return false;
             }
@@ -226,67 +149,116 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
                 Log.d(TAG, "QS Header image changed to: " + value);
             }
             return success;
+        } else if (preference == mHeaderShadow) {
+            try {
+                int shadowValue = Integer.parseInt((String) newValue);
+                Settings.System.putInt(getContext().getContentResolver(),
+                        Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, shadowValue);
+                Log.d(TAG, "QS Header shadow changed to: " + shadowValue);
+                return true;
+            } catch (NumberFormatException e) {
+                Log.w(TAG, "Invalid shadow value: " + newValue, e);
+                return false;
+            }
+        } else if (preference == mHeaderHeight) {
+            try {
+                int height = Integer.parseInt((String) newValue);
+                Settings.System.putInt(getContext().getContentResolver(),
+                        Settings.System.STATUS_BAR_CUSTOM_HEADER_HEIGHT, height);
+                Log.d(TAG, "QS Header height changed to: " + height);
+                return true;
+            } catch (NumberFormatException e) {
+                Log.w(TAG, "Invalid height value: " + newValue, e);
+                return false;
+            }
         }
         return false;
     }
 
-    private void updateProviderSummary(String provider) {
-        if (mHeaderProvider != null) {
-            String[] entries = getResources().getStringArray(R.array.custom_header_provider_entries);
-            String[] values = getResources().getStringArray(R.array.custom_header_provider_values);
-            for (int i = 0; i < values.length; i++) {
-                if (provider.equals(values[i])) {
-                    mHeaderProvider.setSummary(entries[i]);
-                    return;
-                }
-            }
-        }
-    }
-
-    private void updateVisibilitySummary(int visibility) {
-        if (mHeaderVisibility != null) {
-            String[] entries = getResources().getStringArray(R.array.custom_header_visibility_entries);
-            if (visibility >= 0 && visibility < entries.length) {
-                mHeaderVisibility.setSummary(entries[visibility]);
-            }
-        }
-    }
-
-    /**
-     * Load available QS header images from the helper
-     */
-    private void discoverAvailableHeaderImages() {
-        mHeaderImageEntries.clear();
-        mHeaderImageValues.clear();
-
-        // Use helper to get available images
-        List<String> entries = mQsHeaderHelper.getAvailableImageNames();
-        List<String> values = mQsHeaderHelper.getAvailableImageValues();
-
-        mHeaderImageEntries.addAll(entries);
-        mHeaderImageValues.addAll(values);
-
-        Log.d(TAG, "Loaded " + mHeaderImageEntries.size() + " header images");
-
-        // Ensure we have at least one entry/value
-        if (mHeaderImageEntries.isEmpty() || mHeaderImageValues.isEmpty()) {
-            mHeaderImageEntries.clear();
-            mHeaderImageValues.clear();
-            mHeaderImageEntries.add("Header 1");
-            mHeaderImageValues.add("com.android.systemui/qs_header_image_1");
-        }
-    }
 
     private void updateImageSummary(String value) {
         if (mHeaderImage != null) {
-            int index = mHeaderImageValues.indexOf(value);
-            if (index >= 0 && index < mHeaderImageEntries.size()) {
-                mHeaderImage.setSummary(mHeaderImageEntries.get(index));
+            java.util.List<String> names = mQsHeaderHelper.getAvailableImageNames();
+            java.util.List<String> values = mQsHeaderHelper.getAvailableImageValues();
+
+            int index = values.indexOf(value);
+            if (index >= 0 && index < names.size()) {
+                mHeaderImage.setSummary(names.get(index));
             } else {
                 mHeaderImage.setSummary(R.string.qs_header_image_summary);
             }
         }
     }
+
+    private void openFilePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "image/gif", "image/png", "image/jpeg", "image/jpg", "image/webp"});
+        try {
+            startActivityForResult(Intent.createChooser(intent, getString(R.string.qs_header_file_picker_title)), REQUEST_CODE_PICK_HEADER_FILE);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getContext(), R.string.qs_header_file_picker_error, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_PICK_HEADER_FILE && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getData() != null) {
+                Uri selectedFileUri = data.getData();
+                handleCustomFileSelected(selectedFileUri);
+            }
+        }
+    }
+
+    private void handleCustomFileSelected(Uri fileUri) {
+        try {
+            ContentResolver resolver = getContext().getContentResolver();
+            // Store the file URI as a string
+            String uriString = fileUri.toString();
+            Settings.System.putStringForUser(resolver, Settings.System.STATUS_BAR_FILE_HEADER_IMAGE, uriString, UserHandle.USER_CURRENT);
+            
+            // Set provider to "file" to use custom file
+            Settings.System.putStringForUser(resolver, Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER, "file", UserHandle.USER_CURRENT);
+            
+            // Enable header
+            Settings.System.putIntForUser(resolver, Settings.System.STATUS_BAR_CUSTOM_HEADER, 1, UserHandle.USER_CURRENT);
+            
+            // Notify SystemUI
+            resolver.notifyChange(Settings.System.getUriFor(Settings.System.STATUS_BAR_FILE_HEADER_IMAGE), null, true, UserHandle.USER_ALL);
+            
+            updateCustomFileSummary();
+            Toast.makeText(getContext(), R.string.qs_header_file_picker_success, Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Custom header file selected: " + uriString);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to set custom header file", e);
+            Toast.makeText(getContext(), R.string.qs_header_file_picker_error, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateCustomFileSummary() {
+        if (mCustomFilePicker != null) {
+            ContentResolver resolver = getContext().getContentResolver();
+            String fileUri = Settings.System.getStringForUser(resolver, Settings.System.STATUS_BAR_FILE_HEADER_IMAGE, UserHandle.USER_CURRENT);
+            if (fileUri != null && !fileUri.isEmpty()) {
+                try {
+                    Uri uri = Uri.parse(fileUri);
+                    String fileName = uri.getLastPathSegment();
+                    if (fileName != null && fileName.length() > 30) {
+                        fileName = fileName.substring(0, 27) + "...";
+                    }
+                    mCustomFilePicker.setSummary(fileName != null ? fileName : getString(R.string.qs_header_file_picker_summary));
+                } catch (Exception e) {
+                    mCustomFilePicker.setSummary(getString(R.string.qs_header_file_picker_summary));
+                }
+            } else {
+                mCustomFilePicker.setSummary(getString(R.string.qs_header_file_picker_summary));
+            }
+        }
+    }
+
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
@@ -308,5 +280,7 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
                     return keys;
                 }
             };
+
+
 }
 

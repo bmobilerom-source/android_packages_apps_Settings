@@ -32,45 +32,46 @@
         android:summary="@string/qs_header_summary"
         android:order="-1000" />
 
-    <!-- QS Header Provider -->
-    <com.android.settings.preferences.ui.AdaptiveListPreference
-        android:key="qs_header_provider"
-        android:title="@string/qs_header_provider_title"
-        android:summary="@string/qs_header_provider_summary"
-        android:entries="@array/custom_header_provider_entries"
-        android:entryValues="@array/custom_header_provider_values"
-        android:defaultValue="static"
-        android:order="0"
+    <!-- Custom Header File Picker -->
+    <Preference
+        android:key="qs_header_custom_file"
+        android:title="@string/qs_header_file_picker_title"
+        android:summary="@string/qs_header_file_picker_summary"
+        android:order="-1"
         app:position="top" />
 
-    <!-- QS Header Visibility -->
-    <com.android.settings.preferences.ui.AdaptiveListPreference
-        android:key="qs_header_visibility"
-        android:title="@string/qs_header_visibility_title"
-        android:summary="@string/qs_header_visibility_summary"
-        android:entries="@array/custom_header_visibility_entries"
-        android:entryValues="@array/custom_header_visibility_values"
-        android:defaultValue="0"
-        android:order="1"
-        app:position="middle" />
-
-    <!-- QS Header Image -->
+    <!-- QS Header Selection -->
     <com.android.settings.preferences.ui.AdaptiveListPreference
         android:key="qs_header_image"
         android:title="@string/qs_header_image_title"
         android:summary="@string/qs_header_image_summary"
         android:entries="@array/anciui_header_img_entries"
         android:entryValues="@array/anciui_header_img_values"
-        android:defaultValue="0"
-        android:order="2"
+        android:defaultValue="com.android.systemui/qs_header_image_0"
+        android:order="0"
         app:position="middle" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="qs_header_footer"
-        android:title="@string/qs_header_footer"
-        android:selectable="false"
-        android:order="999"
-        settings:searchable="false" />
+    <!-- QS Header Shadow / Brightness -->
+    <com.android.settings.preferences.ui.AdaptiveListPreference
+        android:key="qs_header_shadow"
+        android:title="@string/qs_header_shadow_title"
+        android:summary="@string/qs_header_shadow_summary"
+        android:entries="@array/qs_header_shadow_entries"
+        android:entryValues="@array/qs_header_shadow_values"
+        android:defaultValue="1"
+        android:order="10"
+        app:position="middle" />
+
+    <!-- Header Height (Length) -->
+    <com.android.settings.preferences.ui.AdaptiveListPreference
+        android:key="qs_header_height"
+        android:title="@string/qs_header_height_title"
+        android:summary="@string/qs_header_height_summary"
+        android:entries="@array/qs_header_height_entries"
+        android:entryValues="@array/qs_header_height_values"
+        android:defaultValue="142"
+        android:order="20"
+        app:position="bottom" />
 
 </PreferenceScreen>
 
