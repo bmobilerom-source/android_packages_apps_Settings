@@ -117,21 +117,7 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     "com.android.settings.display.WallpaperSettings",
                     null));
             
-            // Row 2: Wallpaper Background (replaces second wallpaper card) and Text reading options
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.settings_wallpaper_background_title,
-                    R.string.settings_wallpaper_background_summary,
-                    "com.android.settings.display.WallpaperBackgroundSettings",
-                    null));
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_THEME_PACKS,
-                    R.string.accessibility_text_reading_options_title,
-                    R.string.accessibility_text_reading_options_summary,
-                    "com.android.settings.accessibility.TextReadingPreferenceFragment",
-                    null));
-            
-            // Row 3: Night display and Auto-rotate
+            // Row 2: Night display and Auto-rotate
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_STANDARD,
                     R.string.night_display_title,
@@ -153,7 +139,15 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.ambient_display_category_triggers,
                     "ambient_display", // Special key for ambient display
                     null));
-            
+
+            // System Animation Card (opens animation settings)
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_STANDARD,
+                    R.string.system_animation_title,
+                    R.string.system_animation_summary,
+                    "display_customizations3", // Special key for display customizations 3
+                    null));
+
             // Last 10 cards (ordered as specified):
             // 1. Adaptive brightness
             items.add(new DisplayPageGridAdapter.CardItem(
@@ -176,12 +170,12 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.accessibility_text_reading_options_summary,
                     "com.android.settings.accessibility.TextReadingPreferenceFragment",
                     null));
-            // Display Rotation (LineageParts)
+            // Screen Timeout
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.display_rotation_title,
-                    R.string.display_rotation_summary,
-                    "org.lineageos.lineageparts.hardware.DisplayRotation",
+                    R.string.screen_timeout,
+                    R.string.screen_timeout_summary,
+                    "com.android.settings.display.ScreenTimeoutSettings",
                     null));
             // 4. Custom Themes (replaces first Anatolia settings card)
             items.add(new DisplayPageGridAdapter.CardItem(
@@ -190,33 +184,33 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.custom_theme_summary,
                     "com.android.settings.theme.CustomThemeSettings",
                     null));
-            // 5. Screen saver
+            // 5. Display Page Colors (new page with color settings)
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.screensaver_settings_title,
-                    R.string.screensaver_settings_when_to_dream,
-                    "com.android.settings.dream.DreamSettings",
+                    R.string.display_page_colors_title,
+                    R.string.display_page_colors_summary,
+                    "display_page_colors", // Special key for display page colors
                     null));
-            // 6. Color contrast
+            // 6. QS Header
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.accessibility_color_contrast_title,
-                    R.string.accessibility_color_contrast_summary,
-                    "com.android.settings.display.ColorContrastFragment",
+                    R.string.qs_header_title,
+                    R.string.qs_header_summary,
+                    "com.android.settings.awaken.fragments.QsHeader",
                     null));
-            // 7. Colors (Color mode)
+            // 7. Smart Pixels
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.color_mode_title,
-                    R.string.color_mode_option_automatic,
-                    "com.android.settings.display.ColorModePreferenceFragment",
+                    R.string.smart_pixels_title,
+                    R.string.smart_pixels_summary,
+                    "com.android.settings.awaken.fragments.SmartPixels",
                     null));
-            // 8. Live display (dynamically injected - use LineageParts intent)
+            // 8. Statusbar Logo
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.color_mode_title, // Use color_mode_title as fallback if livedisplay_title doesn't exist
-                    R.string.color_mode_option_natural,
-                    "livedisplay", // Special key for live display - will use LineageParts intent
+                    R.string.status_bar_logo_title,
+                    R.string.status_bar_logo_summary,
+                    "com.afterlife.afterlab.fragments.StatusBarLogo",
                     null));
             // 9. Custom Dashboard (replaces second Anatolia settings card at bottom)
             items.add(new DisplayPageGridAdapter.CardItem(
@@ -225,12 +219,12 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.dashboard_style_summary,
                     "com.epic.fragments.DashboardStyleSettings",
                     null));
-            // 10. Color and motion
+            // 10. Ambient Mode (renamed from Color and motion)
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.accessibility_color_and_motion_title,
-                    R.string.accessibility_color_and_motion_summary,
-                    "com.android.settings.accessibility.ColorAndMotionFragment",
+                    R.string.ambient_mode_title,
+                    R.string.ambient_mode_summary,
+                    "com.epic.fragments.AmbientCustomizations",
                     null));
 
             rv.setAdapter(new DisplayPageGridAdapter(activity, items, getMetricsCategory()));
@@ -272,8 +266,7 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                         new com.android.settings.preferences.ui.AdaptiveThemeBackgroundView(activity);
                 themeView.setId(R.id.theme_background);
                 themeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
-                int insertIndex = (rootGroup.findViewById(R.id.wallpaper_background) != null) ? 1 : 0;
-                rootGroup.addView(themeView, insertIndex, new ViewGroup.LayoutParams(
+                rootGroup.addView(themeView, 0, new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT));
             }

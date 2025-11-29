@@ -20,5 +20,17 @@
     <string name="color_default">Default</string>
     <string name="pie_system_animation_style">Android P</string>
     <string name="scale_system_animation_style">Scale</string>
+    <string name="bounce_system_animation_style">Bounce</string>
+    <string name="overshoot_system_animation_style">Overshoot</string>
+    <string name="anticipate_system_animation_style">Anticipate</string>
+    <string name="anticipate_overshoot_system_animation_style">Anticipate Overshoot</string>
+    <string name="accelerate_system_animation_style">Accelerate</string>
+    <string name="decelerate_system_animation_style">Decelerate</string>
+    <string name="accelerate_decelerate_system_animation_style">Accelerate Decelerate</string>
+    <string name="fast_out_slow_in_system_animation_style">Fast Out Slow In</string>
+    <string name="fast_out_linear_in_system_animation_style">Fast Out Linear In</string>
+    <string name="linear_out_slow_in_system_animation_style">Linear Out Slow In</string>
+    <string name="elastic_system_animation_style">Elastic</string>
+    <string name="flip_elastic_system_animation_style">Flip Elastic</string>
 </resources>
 

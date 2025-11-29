@@ -151,9 +151,10 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
             }
             
             // Handle special card types
+            // Monet color card - color swatches removed, only title shown
             if (item.cardType == CARD_TYPE_MONET_COLOR && holder.colorSwatchesLayout != null) {
-                // Color swatches are already in layout
-                holder.colorSwatchesLayout.setVisibility(View.VISIBLE);
+                // Hide color swatches - only show title
+                holder.colorSwatchesLayout.setVisibility(View.GONE);
             }
             
             // Handle LockScreen card - TextClock handles time automatically
@@ -279,10 +280,14 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
                 launchLiveDisplay();
                 return;
             }
+
+            if ("display_customizations3".equals(destFragment)) {
+                launchDisplayCustomizations3();
+                return;
+            }
             
-            // Handle Wallpaper Background Settings
-            if (destFragment.contains("WallpaperBackgroundSettings")) {
-                launchSettingsFragment(destFragment, R.string.settings_wallpaper_background_title);
+            if ("display_page_colors".equals(destFragment)) {
+                launchDisplayPageColors();
                 return;
             }
             
@@ -451,12 +456,42 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
             showErrorToast();
         }
     }
-    
+
+    private void launchDisplayCustomizations3() {
+        try {
+            Log.d("DisplayPageGridAdapter", "Launching Display Customizations 3");
+            new SubSettingLauncher(activity)
+                .setDestination("com.android.settings.awaken.fragments.DisplayCustomizations3")
+                .setTitleRes(R.string.display_customizations3_title)
+                .setSourceMetricsCategory(sourceMetrics)
+                .launch();
+            Log.d("DisplayPageGridAdapter", "Successfully launched Display Customizations 3");
+        } catch (Exception e) {
+            Log.e("DisplayPageGridAdapter", "Failed to launch Display Customizations 3", e);
+            showErrorToast();
+        }
+    }
+
+    private void launchDisplayPageColors() {
+        try {
+            Log.d("DisplayPageGridAdapter", "Launching Display Page Colors");
+            new SubSettingLauncher(activity)
+                .setDestination("com.epic.fragments.DisplayPageColors")
+                .setTitleRes(R.string.display_page_colors_title)
+                .setSourceMetricsCategory(sourceMetrics)
+                .launch();
+            Log.d("DisplayPageGridAdapter", "Successfully launched Display Page Colors");
+        } catch (Exception e) {
+            Log.e("DisplayPageGridAdapter", "Failed to launch Display Page Colors", e);
+            showErrorToast();
+        }
+    }
+
     private void launchWallpaperPickerActivity() {
         try {
             Intent intent = new Intent();
-            intent.setClassName("com.android.wallpaper", 
-                "com.android.customization.picker.CustomizationPickerActivity");
+            intent.setClassName("com.android.wallpaper",
+                "com.android.wallpaper.picker.CustomizationPickerActivity");
             activity.startActivity(intent);
         } catch (Exception e) {
             Log.e("DisplayPageGridAdapter", "Failed to launch wallpaper picker", e);
