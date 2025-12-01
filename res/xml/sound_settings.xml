@@ -95,7 +95,7 @@
         android:icon="@*android:drawable/ic_audio_alarm"
         android:title="@string/alarm_volume_option_title"
         android:order="-140"
-        android:layout="@layout/dot_preference_bottom_card_progress"
+        android:layout="@layout/dot_preference_middle_card_progress"
         settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
 
@@ -105,7 +105,7 @@
         android:title="@string/media_output_title"
         android:dialogTitle="@string/media_output_title"
         android:order="-135"
-        app:position="top"
+        app:position="solo"
         settings:searchable="false"
         settings:controller="com.android.settings.sound.MediaOutputPreferenceController"/>
 
@@ -130,7 +130,7 @@
         android:summary="@string/summary_placeholder"
         android:ringtoneType="ringtone"
         android:order="-120"
-        app:position="top"
+        app:position="solo"
         settings:keywords="@string/sound_settings"/>
 
     
@@ -142,13 +142,14 @@
         android:summary="@string/summary_placeholder"
         android:ringtoneType="notification"
         android:order="-119"
-        app:position="middle"/>
+        app:position="top"/>
 
     <!-- Custom charging sounds -->
-    <lineageos.preference.LineagePartsPreference
+    <com.android.settings.preferences.ui.AdaptivePreference
         android:key="charging_sounds_settings"
         android:order="-117"
         app:position="middle"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:replacesKey="charging_sounds"
         settings:requiresConfig="@bool/config_show_charging_sounds" />
 
@@ -169,27 +170,17 @@
         android:key="vibration_and_haptics"
         android:title="@string/accessibility_vibration_settings_title"
         android:order="-100"
-        app:position="middle"
+        app:position="solo"
         settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
         settings:keywords="@string/keywords_vibration"/>
 
-    <!-- Media controls -->
-    <com.android.settings.preferences.ui.AdaptivePreference
-        android:key="media_controls_page_summary"
-        android:title="@string/media_controls_page_title"
-        android:fragment="com.android.settings.sound.MediaControlsSettings"
-        android:order="-90"
-        app:position="bottom"
-        settings:controller="com.android.settings.sound.MediaControlsParentPreferenceController"
-        settings:keywords="@string/keywords_media_controls"/>
-    
     <!-- Prevent ringing gesture -->
     <com.android.settings.preferences.ui.AdaptivePrimarySwitchPreference
         android:key="gesture_prevent_ringing_sound"
         android:title="@string/gesture_prevent_ringing_sound_title"
         android:order="-80"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
-        app:position="solo"
+        app:position="top"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController"/>
 
 
@@ -274,4 +265,33 @@
         android:order="100"
         app:position="solo"
         settings:controller="com.android.settings.notification.WorkSoundsPreferenceController"/>
+
+      <!-- Media controls -->
+    <Preference
+        android:key="media_controls_page_summary"
+        android:title="@string/media_controls_page_title"
+        android:fragment="com.android.settings.sound.MediaControlsSettings"
+        android:order="130"
+        settings:layout="@layout/system_features_preference_card"
+        settings:controller="com.android.settings.sound.MediaControlsParentPreferenceController"
+        settings:keywords="@string/keywords_media_controls"/>
+
+    <!-- System Haptics intensities preference -->
+    <Preference
+        android:key="haptics_settings"
+        android:title="@string/haptics_settings_title"
+        android:summary="@string/haptics_settings_summary"
+        android:order="140"
+        settings:layout="@layout/system_features_preference_card"
+        android:fragment="com.android.settings.sound.HapticsPreferenceFragment"/>
+        
+ <!-- Adaptive Playback / Smart Pause -->
+    <Preference
+        android:key="adaptive_playback"
+        android:title="@string/adaptive_playback_enabled"
+        android:fragment="com.android.settings.sound.AdaptivePlaybackSoundSettings"
+        android:order="150"
+        app:position="solo"        
+        settings:layout="@layout/system_features_preference_card"
+        settings:controller="com.android.settings.sound.AdaptivePlaybackParentPreferenceController"/>
 </PreferenceScreen>
