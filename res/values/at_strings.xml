@@ -23,8 +23,8 @@
 
 
     <!-- Card Names -->
-    <string name="UI_Title">User Interface</string>
-    <string name="UI_Summary">Redefine your experience by changing fonts, icons, volume panel</string>
+    <string name="UI_Title">bMobile Services</string>
+    <string name="UI_Summary">Access privacy tools including MicroG services, Aurora Store integration, and ad services control</string>
     <string name="Theme_Title">Theme</string>
     <string name="Theme_summary">Take your experience to next level by playing with colors !</string>
     <string name="Status_Title">Status Bar</string>
