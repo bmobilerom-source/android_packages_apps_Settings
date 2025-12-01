@@ -212,7 +212,7 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
             return success;
         } else if (preference == mSmartPixelsShiftTime) {
             int shiftTime = Integer.parseInt((String) newValue);
-            Settings.System.putIntForUser(resolver,
+            boolean success = Settings.System.putIntForUser(resolver,
                     Settings.System.SMART_PIXELS_SHIFT_TIMEOUT,
                     shiftTime, UserHandle.USER_CURRENT);
             if (success) {
