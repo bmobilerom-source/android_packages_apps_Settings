@@ -238,14 +238,15 @@
             android:value="com.android.settings.Settings$TurnScreenOnSettingsActivity" />
     </com.android.settings.preferences.ui.AdaptivePreference>
 
-    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+    <!-- Install App Whitelist Toggle - Moved to BMobile Settings -->
+    <!-- <com.android.settings.preferences.ui.AdaptiveSwitchPreference
         android:key="install_app_whitelist_toggle"
         android:title="@string/install_app_whitelist_toggle_title"
         android:summary="@string/install_app_whitelist_toggle_summary"
         android:order="100"
         app:position="top"
         settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController"
-        settings:isPreferenceVisible="@bool/config_show_install_app_whitelist_toggle" />
+        settings:isPreferenceVisible="@bool/config_show_install_app_whitelist_toggle" /> -->
 
     <com.android.settings.preferences.ui.AdaptivePreference
         android:key="special_access_more"
