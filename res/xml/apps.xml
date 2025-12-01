@@ -125,6 +125,14 @@
             <intent android:action="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS"/>
         </Preference>
 
+        <SwitchPreference
+            android:key="pm_downgrade_allowed"
+            android:title="@string/app_downgrade_title"
+            android:summary="@string/app_downgrade_summary"
+            android:defaultValue="true"
+            android:order="26"
+            settings:controller="com.android.settings.applications.AppDowngradePreferenceController" />
+
     </PreferenceCategory>
 
            <!-- Native Alpha Browser -->
@@ -133,11 +141,12 @@
             android:title="Native Alpha"
             android:summary="Open Native Alpha browser settings"
             android:order="23"
-            app:position="middle">
+            app:position="middle"
+            settings:controller="com.android.settings.applications.NativeAlphaPreferenceController">
             <intent
                 android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.nativealpha"
-                android:targetClass="com.android.nativealpha.MainActivity" />
+                android:targetPackage="com.cylonid.nativealpha"
+                android:targetClass="com.cylonid.nativealpha.MainActivity" />
         </com.android.settings.preferences.ui.AdaptivePreference>
 
         <!-- DigPaws -->
@@ -146,11 +155,26 @@
             android:title="DigPaws"
             android:summary="Open DigPaws settings"
             android:order="24"
-            app:position="bottom">
+            app:position="bottom"
+            settings:controller="com.android.settings.applications.DigPawsPreferenceController">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="nethical.digipaws"
-                android:targetClass="nethical.digipaws.MainActivity" />
+                android:targetClass="nethical.digipaws.ui.activity.MainActivity" />
+        </com.android.settings.preferences.ui.AdaptivePreference>
+
+        <!-- System Launch Pad -->
+        <com.android.settings.preferences.ui.AdaptivePreference
+            android:key="system_launchpad_pref"
+            android:title="System Launch Pad"
+            android:summary="Quick search for online and system"
+            android:order="25"
+            app:position="bottom"
+            settings:controller="com.android.settings.applications.SystemLaunchPadPreferenceController">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.devrinth.launchpad"
+                android:targetClass="com.devrinth.launchpad.activities.SettingsActivity" />
         </com.android.settings.preferences.ui.AdaptivePreference>
 
 </PreferenceScreen>
