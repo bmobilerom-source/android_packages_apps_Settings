@@ -65,6 +65,9 @@ android_library {
         "res-export", // for external usage
         "res-product",
     ],
+
+    aaptflags: ["--extra-packages com.epic"],
+
     static_libs: [
         // External dependencies
         "androidx.navigation_navigation-fragment-ktx",
@@ -145,6 +148,10 @@ android_library {
         "android.security.flags-aconfig",
         "keyboard_flags",
     ],
+
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
 }
 
 platform_compat_config {

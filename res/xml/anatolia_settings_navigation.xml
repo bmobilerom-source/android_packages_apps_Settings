@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C)  2022 EpicROM-AOSP
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+	android:title="@string/navbar_title">
+ 
+           <com.android.settingslib.widget.LayoutPreference
+        android:key="orchidosrom_grid"
+        android:layout="@layout/about"
+        android:selectable="false"/>
+
+    <!-- Statusbar Settings -->
+    <Preference
+            settings:layout="@layout/dot_preference_middle_card"
+        android:key="statusbar_settings"
+        android:title="@string/status_bar_title"
+        android:icon="@drawable/ic_settings_statusbar"
+        android:order="-248"
+        android:fragment="com.android.settings.custom.statusbar.StatusBarSettings" />
+</PreferenceScreen>
