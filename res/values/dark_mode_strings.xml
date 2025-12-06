@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Display settings screen, activation button action for custom schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_on_custom">Turn on until %1$s</string>
+    <!-- Display settings screen, deactivation button action for custom schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_off_custom">Turn off until %1$s</string>
+    <!-- Dot Customization -->
+    <string name="dot_lightMode">Light Theme</string>
+    <string name="dot_darkMode">Dark Theme</string>
+</resources>
+
