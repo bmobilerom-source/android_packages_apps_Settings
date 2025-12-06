@@ -26,6 +26,7 @@ import android.animation.LayoutTransition;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -41,12 +42,20 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.net.URISyntaxException;
+import java.util.Calendar;
+import java.util.Random;
+import android.widget.LinearLayout;
 import android.widget.Toolbar;
+
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.Insets;
@@ -60,6 +69,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitInfo;
+import androidx.window.embedding.ActivityEmbeddingController;
 import androidx.window.embedding.SplitRule;
 import androidx.window.java.embedding.SplitControllerCallbackAdapter;
 
@@ -85,6 +95,8 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
+import java.util.*;
+import java.lang.*;
 
 /** Settings homepage activity */
 public class SettingsHomepageActivity extends FragmentActivity implements
@@ -114,6 +126,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private View mTwoPaneSuggestionView;
     private CategoryMixin mCategoryMixin;
     private Set<HomepageLoadedListener> mLoadedListeners;
+    private ActivityEmbeddingController mActivityEmbeddingController;
     private boolean mIsEmbeddingActivityEnabled;
     private boolean mIsTwoPane;
     // A regular layout shows icons on homepage, whereas a simplified layout doesn't.
@@ -189,9 +202,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         return mCategoryMixin;
     }
 
+    Context context;
+    UserManager mUserManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
 
         // Ensure device is provisioned in order to access Settings home
         // TODO(b/331254029): This should later be replaced in favor of an allowlist
@@ -259,6 +276,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         updateAppBarMinHeight();
         initHomepageContainer();
+
+        Context context = getApplicationContext();
+        mUserManager = context.getSystemService(UserManager.class);
+
         updateHomepageAppBar();
         updateHomepageBackground();
         mLoadedListeners = new ArraySet<>();
@@ -283,6 +304,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                         .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
             }
         }
+        
+        // Set contextual messages for both v1 and v2 layouts
+        setContextualMessages();
         mMainFragment = showFragment(() -> {
             final TopLevelSettings fragment = new TopLevelSettings();
             fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
@@ -306,6 +330,98 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         updateSplitLayout();
 
         enableTaskLocaleOverride();
+        } catch (Exception e) {
+            Log.e(TAG, "Settings homepage init failed, falling back to classic SettingsActivity", e);
+            Intent fallback = new Intent(this, SettingsActivity.class);
+            fallback.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(fallback);
+            finish();
+        }
+    }
+
+    private void setContextualMessages() {
+        // Use post() to ensure layout is fully inflated
+        findViewById(android.R.id.content).post(() -> {
+            // Find TextViews for both v1 and v2 layouts
+            TextView userTitle = findViewById(R.id.user_title);
+            TextView homepageTitle = findViewById(R.id.homepage_title);
+            
+            // Debug logging
+            Log.d(TAG, "setContextualMessages: userTitle=" + (userTitle != null ? "found" : "null") + 
+                  ", homepageTitle=" + (homepageTitle != null ? "found" : "null"));
+            
+            // Set user title if found
+            if (userTitle != null) {
+                userTitle.setVisibility(View.VISIBLE);
+                userTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorPrimary));
+                userTitle.setText(getString(R.string.settings_label));
+                Log.d(TAG, "setContextualMessages: Set user title to: " + getString(R.string.settings_label));
+            } else {
+                Log.w(TAG, "setContextualMessages: userTitle is null!");
+            }
+            
+            // Set contextual message based on time of day
+            if (homepageTitle != null) {
+                homepageTitle.setVisibility(View.VISIBLE);
+                homepageTitle.setTextColor(Utils.getColorAttrDefaultColor(this, android.R.attr.textColorSecondary));
+                
+                String contextualMessage = getContextualMessage();
+                homepageTitle.setText(contextualMessage);
+                Log.d(TAG, "setContextualMessages: Set homepage title to: " + contextualMessage);
+            } else {
+                Log.w(TAG, "setContextualMessages: homepageTitle is null!");
+            }
+        });
+    }
+    
+    private String getContextualMessage() {
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        
+        try {
+            switch (hour) {
+                case 5: case 6: case 7: case 8: case 9: case 10:
+                    String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
+                    Random genMorningMsg = new Random();
+                    int morning = genMorningMsg.nextInt(morningMsg.length);
+                    return morningMsg[morning];
+
+                case 18: case 19: case 20: 
+                    String[] msgearlyNight = getResources().getStringArray(R.array.dashboard_early_night);
+                    Random genmsgeNight = new Random();
+                    int eNight = genmsgeNight.nextInt(msgearlyNight.length);
+                    return msgearlyNight[eNight];
+
+                case 21: case 22: case 23: case 0: 
+                    String[] msgNight = getResources().getStringArray(R.array.dashboard_night);
+                    Random genmsgNight = new Random();
+                    int night = genmsgNight.nextInt(msgNight.length);
+                    return msgNight[night];
+
+                case 16: case 17:
+                    String[] msgNoon = getResources().getStringArray(R.array.dashboard_noon);
+                    Random genmsgNoon = new Random();
+                    int noon = genmsgNoon.nextInt(msgNoon.length);
+                    return msgNoon[noon];
+
+                case 1: case 2: case 3: case 4:
+                    String[] msgMN = getResources().getStringArray(R.array.dashboard_midnight);
+                    Random genmsgMN = new Random();
+                    int mn = genmsgMN.nextInt(msgMN.length);
+                    return msgMN[mn];
+
+                case 11: case 12: case 13: case 14: case 15:
+                    String[] msgRD = getResources().getStringArray(R.array.dashboard_random);
+                    Random genmsgRD = new Random();
+                    int randomm = genmsgRD.nextInt(msgRD.length);
+                    return msgRD[randomm];
+
+                default:
+                    return getString(R.string.settings_label);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting contextual message", e);
+            return getString(R.string.settings_label);
+        }
     }
 
     @VisibleForTesting
@@ -770,9 +886,16 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void updateHomepageAppBar() {
-        if (Flags.homepageRevamp() || !mIsEmbeddingActivityEnabled) {
+        if (Flags.homepageRevamp()) {
+            // For v2 layout, ensure contextual messages are visible
+            setContextualMessages();
             return;
         }
+        
+        if (!mIsEmbeddingActivityEnabled) {
+            return;
+        }
+        
         updateAppBarMinHeight();
         if (mIsTwoPane) {
             findViewById(R.id.homepage_app_bar_regular_phone_view).setVisibility(View.GONE);
@@ -859,4 +982,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             }
         }
     }
+
+    private String getOwnerName(){
+        final UserManager mUserManager = getSystemService(UserManager.class);
+        final UserInfo userInfo = com.android.settings.Utils.getExistingUser(mUserManager,
+                    UserHandle.of(UserHandle.myUserId()));
+        return userInfo.name != null ? userInfo.name : getString(R.string.default_user);
+        }
 }

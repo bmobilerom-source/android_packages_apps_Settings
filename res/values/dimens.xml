@@ -17,6 +17,7 @@
 <resources>
     <dimen name="match_parent">-1px</dimen>
 
+    <dimen name="cardStrokeWidth">1dp</dimen>
     <dimen name="app_icon_size">40dip</dimen>
     <dimen name="min_tap_target_size">48dp</dimen>
     <dimen name="screen_margin_sides">64dip</dimen>
@@ -78,7 +79,7 @@
     <!-- Search bar -->
     <dimen name="search_bar_margin">16dp</dimen>
     <dimen name="search_bar_height">52dp</dimen>
-    <dimen name="search_bar_text_size">20sp</dimen>
+    <dimen name="search_bar_text_size">18sp</dimen>
     <dimen name="search_bar_corner_radius">28dp</dimen>
     <dimen name="search_bar_content_inset">56dp</dimen>
     <dimen name="search_bar_padding_start">4dp</dimen>
@@ -542,7 +543,37 @@
 
     <!-- Connected displays -->
     <dimen name="display_topology_pane_margin">24dp</dimen>
+    
+    <!-- OnePlus -->
+    <dimen name="op_control_margin_list_top2">12dp</dimen>
+    <dimen name="op_control_margin_space1">4dp</dimen>
+    <dimen name="op_control_margin_space7">40.0dip</dimen>
+    <dimen name="op_control_margin_screen_right3">20.0dip</dimen>
+    <dimen name="op_control_margin_screen_left3">20dp</dimen>
+    <dimen name="op_control_margin_space3">16.0dip</dimen>
+    <dimen name="op_control_margin_list_bottom4">21.0dip</dimen>
+    <dimen name="op_control_margin_list_top4">21.0dip</dimen>
+    <dimen name="op_control_avatar_size3">33.0dip</dimen>
+    <dimen name="op_control_icon_size_indicator">16.0dip</dimen>
+    
+    <!-- Card Layout -->
+     <dimen name="card_margin_start">16.0dp</dimen>
+     <dimen name="card_margin_end">16.0dp</dimen>
+     <dimen name="card_padding_end">70.0dp</dimen>
+     <dimen name="card_height">75.0dp</dimen>
+     <dimen name="card_height_wave">75.0dp</dimen>
+     <dimen name="card_radius_wave">32dp</dimen>
+     <dimen name="dashboard_icon_size">42dp</dimen>
+     <dimen name="top_pref_start">60dp</dimen>
+     <dimen name="card_radius">12dp</dimen>
+     
 
-    <!-- Material Design Card -->
-    <dimen name="cardStrokeWidth">1dp</dimen>
+    <!-- duplicate overridden above at L534; remove conflicting redefinition -->
+    <!-- <dimen name="zen_mode_icon_list_item_size">96dp</dimen> -->
+    <dimen name="zen_mode_icon_list_circle_diameter">56dp</dimen>
+    <dimen name="zen_mode_icon_list_icon_size">32dp</dimen>
+    
+    <!-- Header Messages -->
+    <dimen name="header_text_size_contextual">34sp</dimen>
+    <dimen name="header_text_size_default">40sp</dimen>
 </resources>
