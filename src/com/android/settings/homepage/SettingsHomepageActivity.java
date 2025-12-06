@@ -56,7 +56,6 @@ import java.util.Random;
 import android.widget.LinearLayout;
 import android.widget.Toolbar;
 
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.Insets;
@@ -132,7 +131,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private boolean mIsTwoPane;
     // A regular layout shows icons on homepage, whereas a simplified layout doesn't.
     private boolean mIsRegularLayout = true;
-    CollapsingToolbarLayout collapsing_toolbar;
 
     private SplitControllerCallbackAdapter mSplitControllerAdapter;
     private SplitInfoCallback mCallback;
@@ -210,6 +208,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
 
         // Ensure device is provisioned in order to access Settings home
         // TODO(b/331254029): This should later be replaced in favor of an allowlist
@@ -331,6 +330,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         updateSplitLayout();
 
         enableTaskLocaleOverride();
+        } catch (Exception e) {
+            Log.e(TAG, "Settings homepage init failed, falling back to classic SettingsActivity", e);
+            Intent fallback = new Intent(this, SettingsActivity.class);
+            fallback.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(fallback);
+            finish();
+        }
     }
 
     private void setContextualMessages() {
