@@ -396,7 +396,7 @@ public class SettingsActivity extends SettingsBaseActivity
             if (SettingsThemeHelper.isExpressiveTheme(this)) {
                 actionBar.setHomeAsUpIndicator(EXPRESSIVE_BACK_ICON);
             }
-            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
         }
     }
 
