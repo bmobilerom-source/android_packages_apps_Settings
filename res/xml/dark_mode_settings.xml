@@ -17,35 +17,53 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/dark_ui_mode"
+    android:title=" "
     settings:keywords="@string/keywords_dark_ui_mode">
-
+    
+      
     <com.android.settingslib.widget.TopIntroPreference
         android:key="dark_ui_top_intro"
         android:title="@string/dark_ui_text"
         settings:searchable="false"/>
 
-    <com.android.settingslib.widget.MainSwitchPreference
-        android:key="dark_ui_activated"
-        android:title="@string/dark_theme_main_switch_title"
-        settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
 
     <com.android.settingslib.widget.BannerMessagePreference
         android:key="dark_ui_location_off"
         android:title="@string/twilight_mode_location_off_dialog_message"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
+    
+        
+    <com.android.settingslib.widget.LayoutPreference
+        android:selectable="false"
+        android:layout="@layout/dark_mode_layout"
+        settings:allowDividerBelow="false"/>
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="dark_ui_activated"
+        android:title="@string/dark_ui_title"
+        android:selectable="false"
+        android:layout="@layout/dark_ui_activation_button"
+        settings:allowDividerBelow="false"
+        settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
 
+    <lineageos.preference.LineageSecureSettingSwitchPreference
+        android:key="berry_black_theme"
+        android:dependency="dark_ui_activated"
+        android:title="@string/berry_black_theme_title"
+        android:summary="@string/berry_black_theme_summary"
+        android:defaultValue="false"
+        settings:requiresPackage="org.lineageos.overlay.customization.blacktheme" />
+    
     <DropDownPreference
         android:key="dark_ui_auto_mode"
         android:title="@string/dark_ui_auto_mode_title"
         android:summary="%s"
         android:entries="@array/dark_ui_scheduler_preference_titles"
         android:entryValues="@array/dark_ui_scheduler_preference_titles"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
+        settings:iconSpaceReserved="false" 
         settings:keywords="@string/keywords_dark_ui_mode"/>
 
-    <Preference
+     <Preference
         android:key="dark_theme_start_time"
         android:title="@string/night_display_start_time_title"
         settings:searchable="false"/>
@@ -56,17 +74,17 @@
         settings:searchable="false"/>
 
     <com.android.settingslib.widget.FooterPreference
+        android:key="dark_ui_footer"
+        android:title="@string/dark_ui_text"
+        android:layout="@layout/dot_preference_footer"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:allowDividerAbove="true"/>
+    <com.android.settingslib.widget.FooterPreference
         android:key="dark_theme_custom_bedtime_footer"
         android:title="@string/dark_ui_bedtime_footer_summary"
         android:selectable="false"
         settings:searchable="false"
-        settings:controller="com.android.settings.display.darkmode.DarkModeCustomModesPreferenceController" />
+        settings:controller="com.android.settings.display.darkmode.DarkModeCustomBedtimePreferenceController" />
 
-    <lineageos.preference.LineageSecureSettingSwitchPreference
-        android:key="berry_black_theme"
-        android:dependency="dark_ui_activated"
-        android:title="@string/berry_black_theme_title"
-        android:summary="@string/berry_black_theme_summary"
-        android:defaultValue="false"
-        settings:requiresPackage="org.lineageos.overlay.customization.blacktheme" />
 </PreferenceScreen>
