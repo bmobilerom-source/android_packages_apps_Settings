@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2021-2022 BananaDroid
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+
+    <dimen name="stroke_widthAboutUI">1dp</dimen>
+
+    <!-- Cards -->
+    <dimen name="rdnt_cardview_padding">16dp</dimen>
+    <dimen name="rdnt_top_icn">42dp</dimen>
+    <dimen name="rdnt_top_icn_max">52.5dp</dimen>
+    <dimen name="rdnt_cardview_margin_list">16dip</dimen>
+    <dimen name="rdnt_pref_vert">5.5dp</dimen>
+    <dimen name="rdnt_card_radius">22dp</dimen>
+    <dimen name="card_margin_start">20dp</dimen>
+    <dimen name="card_margin_end">20dp</dimen>
+
+    <!-- Rounded corner theme radius -->
+    <dimen name="rounded_corner_theme_overlay_radius">24dp</dimen>
+
+    <!-- Dimensions for Contextual Card -->
+    <dimen name="contextual_card_content_padding">13dp</dimen>
+
+    <!-- Card radius for wave-style preferences -->
+    <dimen name="card_radius_wave">28dp</dimen>
+
+    <!-- Card radius for XD preferences -->
+    <dimen name="xd_pref_card_radius">24dp</dimen>
+
+    <!-- Card height for wave-style preferences -->
+    <dimen name="card_height_wave">88dp</dimen>
+
+    <!-- Avatar size for OP Control preferences -->
+    <dimen name="op_control_avatar_size3">56dp</dimen>
+
+    <!-- Dashboard icon size -->
+    <dimen name="dashboard_icon_size">36dp</dimen>
+
+    <!-- Top preference start margin -->
+    <dimen name="top_pref_start">16dp</dimen>
+</resources>
