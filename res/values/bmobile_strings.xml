@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- bMobile profile card strings -->
+    <string name="bmobile_profile_title">bMobile profile</string>
+    <string name="bmobile_profile_subtitle">Tap for device information</string>
+    <string name="bmobile_profile_build_summary">Build details</string>
+    <string name="bmobile_profile_variant_label">bMobile</string>
+
+    <!-- bMobile user info -->
+    <string name="bmobile_userinfo_title">User info</string>
+    <string name="bmobile_userinfo_summary">Manage your account and user settings</string>
+</resources>
+

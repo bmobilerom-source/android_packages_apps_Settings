@@ -52,6 +52,7 @@
         android:layout_gravity="center"
         android:id="@+id/entity_header_icon"
         android:layout_width="48dp"
-        android:layout_height="48dp"/>
+        android:layout_height="48dp"
+        android:src="@drawable/user"/>
 
 </FrameLayout>

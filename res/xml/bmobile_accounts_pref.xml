@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/bmobile_accounts_info_frag"
+        android:key="bmobile_accounts_header"
+        android:selectable="false"
+        android:order="10" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="bmobile_accounts_desc"
+        android:order="20"
+        android:title="@string/bmobile_accounts_summary"/>
+
+    <Preference
+        android:key="bmobile_accounts_multiuser"
+        android:order="30"
+        android:icon="@drawable/multiuser"
+        settings:layout="@layout/bmobile_banner_card"
+        android:title=""
+        android:fragment="com.android.settings.users.UserSettings"/>
+
+    <Preference
+        android:key="bmobile_accounts_manage"
+        android:order="40"
+        android:icon="@drawable/manage_account"
+        settings:layout="@layout/bmobile_banner_card"
+        android:title=""
+        android:fragment="com.android.settings.accounts.AccountDashboardFragment"/>
+
+    <Preference
+        android:key="bmobile_accounts_emergency"
+        android:order="50"
+        android:icon="@drawable/emergency"
+        settings:layout="@layout/bmobile_banner_card"
+        android:title=""
+        android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
+
+</PreferenceScreen>
+
