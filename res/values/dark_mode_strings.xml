@@ -7,5 +7,7 @@
     <!-- Dot Customization -->
     <string name="dot_lightMode">Light Theme</string>
     <string name="dot_darkMode">Dark Theme</string>
+    <!-- Device Name Dialog -->
+    <string name="about_device_nearby">Nearby devices</string>
 </resources>
 
