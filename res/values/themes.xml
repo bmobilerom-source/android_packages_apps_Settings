@@ -186,7 +186,8 @@
         <item name="preferenceTheme">@style/SettingsPreferenceTheme</item>
 
         <!-- action bar, needed for search bar icon tinting -->
-        <item name="android:actionBarTheme">@*android:style/ThemeOverlay.DeviceDefault.ActionBar</item>
+        <item name="android:actionBarTheme">@style/Settings.ActionBar.Accent</item>
+        <item name="toolbarStyle">@style/Settings.Toolbar.Accent</item>
 
         <!-- Define this color for material design -->
         <item name="colorPrimaryVariant">@android:color/white</item>
