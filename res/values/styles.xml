@@ -421,11 +421,33 @@
         <item name="android:textSize">16dp</item>
     </style>
 
+    <!-- Custom style for PreferenceScreen titles with system accent color -->
+    <style name="PreferenceScreenTitle.Accent" parent="@style/TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">@android:color/system_accent1_600</item>
+    </style>
+
     <style name="device_info_dialog_label">
         <item name="android:textAlignment">viewStart</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <!-- Toolbar/ActionBar title accent overlay -->
+    <style name="Settings.ActionBar.Accent" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
+        <item name="android:textColorPrimary">@android:color/system_accent1_600</item>
+        <item name="android:titleTextStyle">@style/Settings.ActionBar.TitleText</item>
+    </style>
+
+    <!-- Explicit title text style to force ActionBar title color -->
+    <style name="Settings.ActionBar.TitleText" parent="@*android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/system_accent1_600</item>
+    </style>
+
+    <!-- Toolbar style for AppCompat/Material toolbars -->
+    <style name="Settings.Toolbar.Accent" parent="@style/Widget.Material3.Toolbar">
+        <item name="titleTextColor">@android:color/system_accent1_600</item>
+        <item name="subtitleTextColor">@android:color/system_accent1_600</item>
     </style>
 
     <style name="device_info_dialog_value">
@@ -767,13 +789,6 @@
         <item name="android:gravity">start</item>
     </style>
 
-    <style name="HomepageTitleText" parent="CollapsingToolbarTitle.Expanded">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">@dimen/homepage_title_margin_bottom</item>
-        <item name="android:layout_marginHorizontal">@dimen/homepage_title_margin_horizontal</item>
-    </style>
-
     <style name="RequestManageCredentialsButtonPanel">
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingEnd">12dp</item>
@@ -1037,4 +1052,55 @@
         <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
     </style>
 
+    <style name="TextAppearance.HomepagePreferenceTitle" parent="@android:style/TextAppearance.DeviceDefault">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">48sp</item>
+    </style>
+
+    <style name="HomepageTitleText" parent="CollapsingToolbarTitle.Expanded">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/system_accent1_400</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+        <item name="android:layout_marginBottom">@dimen/homepage_title_margin_bottom</item>
+        <item name="android:layout_marginHorizontal">@dimen/homepage_title_margin_horizontal</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="HomepageSubTitleText" parent="CollapsingToolbarTitle.Expanded">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+        <item name="android:layout_marginBottom">@dimen/homepage_title_margin_bottom</item>
+        <item name="android:layout_marginHorizontal">@dimen/homepage_title_margin_horizontal</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontWeight">500</item>
+    </style>
+    
+     <!-- custom Action Bar -->
+    <style name="custom_toolbar_Expanded" parent="custom_toolbar_Collapsed">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">75dp</item>
+        <item name="android:layout_marginBottom">@dimen/homepage_title_margin_bottom</item>
+        <item name="android:layout_marginStart">@dimen/homepage_title_margin_horizontal</item>
+        <item name="android:layout_marginEnd">75dp</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">@color/settingslib_text_color_primary_device_default</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
+    </style>
+    <style name="custom_toolbar_Contextual" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:fontFamily">@string/settingslib_config_headlineFontFamily</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/settingslib_text_color_primary_device_default</item>
+    </style>   
+    <style name="custom_toolbar_Collapsed" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:fontFamily">@string/settingslib_config_headlineFontFamily</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/settingslib_text_color_primary_device_default</item>
+    </style>
 </resources>
