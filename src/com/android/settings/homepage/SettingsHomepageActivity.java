@@ -56,6 +56,8 @@ import java.util.Random;
 import android.widget.LinearLayout;
 import android.widget.Toolbar;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.Insets;
 import androidx.core.util.Consumer;
