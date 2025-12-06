@@ -17,9 +17,23 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="display_settings_screen"
     android:title="@string/display_settings"
     settings:keywords="@string/keywords_display">
+
+ 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="display_animation"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/display"/>
+
+        
+	<com.android.settings.widget.HomepagePreference
+        android:fragment="com.epic.Anatolia"
+        android:key="top_level_anatolia"
+        android:title="@string/anatolia_settings_title" />	
 
     <PreferenceCategory
         android:title="@string/category_name_brightness"
