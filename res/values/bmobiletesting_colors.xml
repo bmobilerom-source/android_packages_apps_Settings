@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Copied from at_colors.xml -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="card_text">#171717</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bottom_bar_divider_color">#1f000000</color>
+    <color name="bottom_navigation_color">#FFFFFF</color>
+    <color name="bottom_navigation_ripple">#1f000000</color>
+    <color name="teambackground">#ececec</color>
+
+    <!-- Copied from afterlife_colors.xml -->
+    <color name="google_grey700">#5f6368</color>
+    <color name="edit_background_base">@color/google_grey700</color>
+    <color name="option_border_default">@color/edit_background_base</color>
+
+    <color name="testclrbg0">@android:color/system_accent1_50</color>
+    <color name="testclrbg1">@android:color/system_accent1_100</color>
+    <color name="testclrcrcl1">@color/settingslib_dialog_accent</color>
+
+    <color name="text_black">@android:color/system_accent1_700</color>
+    <color name="text_white">@android:color/system_accent3_100</color>
+    <color name="text_accent1">@android:color/system_accent2_800</color>
+    <color name="text_accent2">@android:color/system_accent2_700</color>
+    <color name="bg_card">@android:color/system_accent2_100</color>
+    <color name="bg_card_1">@android:color/system_accent2_50</color>
+</resources>
+
