@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- bMobile accounts page -->
+    <string name="bmobile_accounts_title">bMobile accounts</string>
+    <string name="bmobile_accounts_summary">View and manage your accounts (Google, Outlook, others)</string>
+</resources>
+

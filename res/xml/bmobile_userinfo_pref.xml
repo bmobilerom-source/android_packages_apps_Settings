@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/bmobile_user_info_frag"
+        android:key="bmobile_user_header"
+        android:selectable="false"
+        android:order="10" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="bmobile_userinfo_desc"
+        android:order="20"
+        android:title="@string/bmobile_userinfo_summary"/>
+
+    <Preference
+        android:key="bmobile_multiuser"
+        android:order="30"
+        android:icon="@drawable/ic_translate_24dp"
+        settings:layout="@layout/xd_pref_card_top"
+        android:title="@string/multiuser_settings_title"
+        android:fragment="com.android.settings.users.UserSettings"/>
+
+    <Preference
+        android:key="bmobile_accounts"
+        android:order="40"
+        android:icon="@drawable/ic_translate_24dp"
+        settings:layout="@layout/xd_pref_card_mid"
+        android:title="@string/accounts_settings_title"
+        android:fragment="com.android.settings.accounts.AccountDashboardFragment"/>
+
+    <Preference
+        android:key="bmobile_emergency"
+        android:order="50"
+        android:icon="@drawable/ic_translate_24dp"
+        settings:layout="@layout/xd_pref_card_bot"
+        android:title="@string/emergency_settings_title"
+        android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
+
+</PreferenceScreen>
+

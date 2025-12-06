@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Basic text style used by bMobile profile card -->
+    <style name="bmobile_text_style_h6" parent="@android:style/TextAppearance.Material.Medium" />
+</resources>
+
