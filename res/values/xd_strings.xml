@@ -133,5 +133,14 @@
     <string name="selinux_status_disabled">Disabled</string>
     <string name="selinux_status_permissive">Permissive</string>
     <string name="selinux_status_enforcing">Enforcing</string>
+  <!-- Default User -->
+    <string name="default_user">Default User</string>
 
+    <!-- Wellbeing -->
+    <string name="wellbeing_title">Wellbeing</string>
+
+    <!-- Main user profile card -->
+    <string name="build_variant_label">Build Variant</string>
+    <string name="mainuser_profile_text">Device Info</string>
+    <string name="clickhere_summary_title">Tap to view build info</string>
 </resources>
