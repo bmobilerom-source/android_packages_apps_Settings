@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- System Advice card layout: matches system_features_preference_card but with advice background -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="4dp">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/system_advice_preference_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:id="@*android:id/icon_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp"
+                android:visibility="gone">
+
+                <com.android.internal.widget.PreferenceImageView
+                    android:id="@*android:id/icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="12dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/custom_surface_color"
+                    android:tint="?android:attr/colorAccent" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@*android:id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
+                android:textColor="?android:attr/textColorPrimary"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@*android:id/summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body2"
+                android:textColor="?android:attr/textColorSecondary"
+                android:maxLines="4"
+                tools:text="Summary text goes here" />
+
+            <LinearLayout
+                android:id="@*android:id/widget_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="end|center_vertical"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
