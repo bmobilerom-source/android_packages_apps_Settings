@@ -21,18 +21,16 @@
 
     <Preference
         android:key="quicksettings_bmobile_userinfo"
-        android:icon="@drawable/ic_translate_24dp"
         android:title="@string/bmobile_userinfo_title"
         android:summary="@string/bmobile_userinfo_summary"
         android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
-        settings:layout="@layout/xd_pref_card_top" />
+        settings:layout="@layout/bmobile_card_preference_top" />
 
     <Preference
         android:key="quicksettings_bmobile_accounts"
-        android:icon="@drawable/ic_translate_24dp"
         android:title="@string/bmobile_accounts_title"
         android:summary="@string/bmobile_accounts_summary"
         android:fragment="com.android.settings.deviceinfo.BMobileAccountsFragment"
-        settings:layout="@layout/xd_pref_card_mid" />
+        settings:layout="@layout/bmobile_card_preference_mid" />
 
 </PreferenceScreen>
