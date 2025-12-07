@@ -20,7 +20,7 @@
         android:key="bmobile_accounts_multiuser"
         android:order="30"
         android:icon="@drawable/multiuser"
-        settings:layout="@layout/xd_pref_card_top"
+        settings:layout="@layout/bmobile_full_card"
         android:title="@string/multiuser_settings_title"
         android:fragment="com.android.settings.users.UserSettings"/>
 
@@ -28,7 +28,7 @@
         android:key="bmobile_accounts_manage"
         android:order="40"
         android:icon="@drawable/manage_account"
-        settings:layout="@layout/xd_pref_card_mid"
+        settings:layout="@layout/bmobile_full_card"
         android:title="@string/accounts_settings_title"
         android:fragment="com.android.settings.accounts.AccountDashboardFragment"/>
 
@@ -36,7 +36,7 @@
         android:key="bmobile_accounts_emergency"
         android:order="50"
         android:icon="@drawable/emergency"
-        settings:layout="@layout/xd_pref_card_bot"
+        settings:layout="@layout/bmobile_full_card"
         android:title="@string/emergency_settings_title"
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
 
