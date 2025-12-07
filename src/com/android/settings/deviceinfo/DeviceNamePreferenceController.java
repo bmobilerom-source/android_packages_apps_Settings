@@ -53,7 +53,7 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     protected WifiManager mWifiManager;
     private final BluetoothAdapter mBluetoothAdapter;
     private final WifiDeviceNameTextValidator mWifiDeviceNameTextValidator;
-    private LayoutPreference mPreference;
+    private Preference mPreference;
     private DeviceCardView mDeviceCard;
     private DeviceNamePreferenceHost mHost;
     private String mPendingDeviceName;
