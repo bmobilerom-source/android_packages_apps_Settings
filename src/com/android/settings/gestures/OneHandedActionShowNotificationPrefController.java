@@ -37,6 +37,8 @@ public class OneHandedActionShowNotificationPrefController extends BasePreferenc
     private final OneHandedSettingsUtils mUtils;
 
     private Preference mPreference;
+    private PreferenceScreen mScreen;
+    private static final String PULL_DOWN_KEY = "gesture_one_handed_action_pull_screen_down";
 
     public OneHandedActionShowNotificationPrefController(Context context, String key) {
         super(context, key);
@@ -68,12 +70,20 @@ public class OneHandedActionShowNotificationPrefController extends BasePreferenc
         if (preference instanceof SelectorWithWidgetPreference) {
             ((SelectorWithWidgetPreference) preference).setChecked(true);
         }
+        // Uncheck the pull-down option
+        if (mScreen != null) {
+            Preference pullDownPref = mScreen.findPreference(PULL_DOWN_KEY);
+            if (pullDownPref instanceof SelectorWithWidgetPreference) {
+                ((SelectorWithWidgetPreference) pullDownPref).setChecked(false);
+            }
+        }
         return true;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mScreen = screen;
         mPreference = screen.findPreference(getPreferenceKey());
     }
 
