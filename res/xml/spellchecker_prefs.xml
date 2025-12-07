@@ -16,9 +16,12 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/spellcheckers_settings_title">
     <Preference
         android:key="spellchecker_language"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/phone_language"
         android:persistent="false" />
 </PreferenceScreen>

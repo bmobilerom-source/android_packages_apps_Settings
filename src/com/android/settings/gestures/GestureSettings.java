@@ -19,10 +19,15 @@ package com.android.settings.gestures;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
+import android.text.TextUtils;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.List;
@@ -62,6 +67,51 @@ public class GestureSettings extends DashboardFragment {
             mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
         }
         return mAmbientDisplayConfig;
+    }
+
+    @Override
+    protected Preference createPreference(Tile tile) {
+        Preference preference = super.createPreference(tile);
+        // Set card layout for Active Edge preference
+        setActiveEdgeCardLayout(preference, tile);
+        return preference;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Also set layout for Active Edge if it already exists (rebinding case)
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            for (int i = 0; i < screen.getPreferenceCount(); i++) {
+                Preference pref = screen.getPreference(i);
+                if (pref != null) {
+                    CharSequence title = pref.getTitle();
+                    if (title != null) {
+                        String titleStr = title.toString();
+                        if (titleStr != null && titleStr.contains("Active Edge")) {
+                            pref.setLayoutResource(R.layout.adaptive_preference_card_top);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void setActiveEdgeCardLayout(Preference preference, Tile tile) {
+        if (preference != null && tile != null) {
+            CharSequence title = tile.getTitle(getContext());
+            if (title != null) {
+                String titleStr = title.toString();
+                if (titleStr != null) {
+                    // Check if this is Active Edge by title or key
+                    if (titleStr.contains("Active Edge") ||
+                        (tile.hasKey() && tile.getKey(getContext()).contains("active_edge"))) {
+                        preference.setLayoutResource(R.layout.adaptive_preference_card_top);
+                    }
+                }
+            }
+        }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

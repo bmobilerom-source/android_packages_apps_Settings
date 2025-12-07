@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="button_navigation_settings_page"
     android:title="@string/button_navigation_settings_activity_title"
     settings:keywords="@string/keywords_button_navigation_settings">

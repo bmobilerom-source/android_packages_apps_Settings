@@ -21,12 +21,17 @@
     android:title="@string/system_navigation_title"
     settings:keywords="@string/keywords_system_navigation">
 
+    <!-- Circle to Search / Drawing App Launcher
+         On devices with native Circle to Search: Controls SEARCH_ALL_ENTRYPOINTS_ENABLED
+         On Lineage ROM without native feature: Launches drawing/screen annotation apps -->
     <SwitchPreferenceCompat
         android:key="search_gesture_press_hold"
         android:title="@string/search_gesture_feature_title"
-        android:summary="@string/search_gesture_feature_summary"
+        android:summary="not available"
         android:order="100"
-        settings:allowDividerAbove="true"
+        android:selectable="false"
+        settings:isPreferenceVisible="false"
+        settings:allowDividerAbove="false"
         settings:controller="com.android.settings.gestures.NavigationSettingsContextualSearchController"
         settings:highlightableMenuKey="@string/menu_key_system" />
 

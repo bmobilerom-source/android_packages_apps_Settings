@@ -35,6 +35,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.Nullable;
@@ -65,6 +66,8 @@ import java.util.List;
 @SearchIndexable
 public class SystemNavigationGestureSettings extends RadioButtonPickerFragment implements
         HelpResourceProvider {
+
+    private static final String TAG = "SystemNavigationGestureSettings";
 
     @VisibleForTesting
     static final String KEY_SYSTEM_NAV_3BUTTONS = "system_nav_3buttons";
@@ -172,6 +175,13 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     }
 
     @Override
+    protected SelectorWithWidgetPreference createPreference() {
+        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(getPrefContext());
+        // Set card layout for navigation mode preferences
+        preference.setLayoutResource(R.layout.adaptive_preference_card);
+        return preference;
+    }
+
     public void bindPreferenceExtra(SelectorWithWidgetPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
         if (!(info instanceof CandidateInfoExtra)) {
@@ -181,9 +191,15 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         pref.setSummary(((CandidateInfoExtra) info).loadSummary());
 
         if (KEY_SYSTEM_NAV_GESTURAL.equals(info.getKey())) {
-            pref.setExtraWidgetOnClickListener((v) -> startActivity(new Intent(
-                    GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)
-                    .setPackage(getContext().getPackageName())));
+            pref.setExtraWidgetOnClickListener((v) -> {
+                try {
+                    startActivity(new Intent(
+                            GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)
+                            .setPackage(getContext().getPackageName()));
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to launch gesture navigation settings", e);
+                }
+            });
         }
 
         if ((KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey())
@@ -264,7 +280,11 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                 if (isGestureTutorialAvailable()){
                     videoPref.setContentDescription(R.string.nav_tutorial_button_description);
                     videoPref.setOnPreferenceClickListener(preference -> {
-                        startActivity(mLaunchSandboxIntent);
+                        try {
+                            startActivity(mLaunchSandboxIntent);
+                        } catch (Exception e) {
+                            Log.e(TAG, "Failed to launch gesture tutorial", e);
+                        }
                         return true;
                     });
                 } else {

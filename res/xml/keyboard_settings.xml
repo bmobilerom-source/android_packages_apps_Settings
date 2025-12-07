@@ -18,24 +18,37 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/keyboard_settings">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="keyboard_illustration"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/system" />
+
     <PreferenceCategory
-        android:key="keyboards_category">
+        android:key="keyboards_category"
+        android:order="0">
         <Preference
             android:key="virtual_keyboard_pref"
             android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/adaptive_preference_card"
+            android:order="0"
             android:fragment="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment"
             settings:keywords="@string/keywords_virtual_keyboard"/>
 
         <Preference
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
-            android:summary="@string/summary_placeholder"/>
+            android:summary="@string/summary_placeholder"
+            settings:layout="@layout/adaptive_preference_card"/>
+            android:order="1"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="input_assistance_category"
-        android:title="@string/input_assistance">
+        android:title="@string/input_assistance"
+        android:order="1">
         <!-- Spell checker preference title, summary and fragment will be set programmatically. -->
         <!-- Note: Mark this as persistent="false" to remove unnecessarily saved shared preference.
              See: InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference. -->
@@ -43,6 +56,8 @@
             android:key="spellcheckers_settings"
             android:title="@string/spellcheckers_settings_title"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card_top"
+            android:order="0"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings" />
 
         <!-- User dictionary preference title and fragment will be set programmatically. -->
@@ -50,23 +65,28 @@
             android:key="key_user_dictionary_settings"
             android:title="@string/user_dict_settings_title"
             android:summary="@string/user_dict_settings_summary"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            android:order="1"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
             settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="pointer_category"
-        android:layout="@layout/preference_category_no_label">
+        android:layout="@layout/preference_category_no_label"
+        android:order="2">
         <com.android.settings.PointerSpeedPreference
             android:key="pointer_speed"
             android:title="@string/pointer_speed"
-            android:dialogTitle="@string/pointer_speed" />
+            android:dialogTitle="@string/pointer_speed"
+            settings:layout="@layout/adaptive_preference_card" />
 
         <lineageos.preference.LineageSecureSettingSwitchPreference
             android:key="feature_touch_hovering"
             android:title="@string/touchscreen_hovering_title"
             android:summary="@string/touchscreen_hovering_summary"
             android:defaultValue="false"
+            android:order="200"
             settings:requiresFeature="lineagehardware:FEATURE_TOUCH_HOVERING" />
 
     </PreferenceCategory>
@@ -75,16 +95,19 @@
         android:key="vibrate_input_devices"
         android:title="@string/vibrate_input_devices"
         android:summary="@string/vibrate_input_devices_summary"
+        android:order="200"
         settings:controller="com.android.settings.inputmethod.GameControllerPreferenceController" />
 
     <com.android.settings.widget.WorkOnlyCategory
         android:key="language_and_input_for_work_category"
         android:title="@string/language_and_input_for_work_category_title"
+        android:order="3"
         settings:searchable="false">
 
         <Preference
             android:key="spellcheckers_settings_for_work_pref"
             android:title="@string/spellcheckers_settings_for_work_title"
+            android:order="0"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
             settings:forWork="true"
             settings:controller="com.android.settings.core.WorkPreferenceController" />
@@ -92,6 +115,7 @@
         <Preference
             android:key="user_dictionary_settings_for_work_pref"
             android:title="@string/user_dict_settings_for_work_title"
+            android:order="1"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
             settings:forWork="true"
             settings:controller="com.android.settings.inputmethod.SpellCheckerForWorkPreferenceController" />

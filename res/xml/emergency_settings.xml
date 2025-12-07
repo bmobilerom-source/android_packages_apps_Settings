@@ -16,35 +16,35 @@
   -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="safety_and_emergency_screen"
-    android:title="@string/emergency_settings_preference_title">
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="more_emergency_settings"
-        android:layout="@layout/more_settings_button"
-        android:order="0"
-        android:selectable="false"
-        settings:controller="com.android.settings.emergency.MoreSettingsPreferenceController" />
-    <Preference
+    android:title=" ">
+
+
+       <com.android.settingslib.widget.IllustrationPreference
+        android:key="emer_illustration"
+        settings:lottie_rawRes="@raw/emer_illustration"
+        android:order="-1001" />
+
+       <Preference
         android:key="gesture_emergency_summary"
         android:title="@string/emergency_gesture_screen_title"
-        android:icon="@drawable/ic_emergency_gesture_24dp"
+        settings:layout="@layout/adaptive_preference_card_top"
         android:order="100"
         android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
         settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
+
+       <Preference
+        android:key="emergency_info"
+        android:title="@string/emergency_info_title"
+        settings:layout="@layout/adaptive_preference_card_bottom"
+        android:order="101"
+        settings:controller="com.android.settings.accounts.EmergencyInfoPreferenceController" />
+
     <PreferenceCategory
         android:order="170"
         android:layout="@layout/preference_category_no_label"
-        settings:allowDividerAbove="true"/>
-    <com.android.settingslib.RestrictedPreference
-        android:key="app_and_notif_cell_broadcast_settings"
-        android:title="@string/cell_broadcast_settings"
-        android:order="200"
-        settings:useAdminDisabledSummary="true">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="@string/config_cell_broadcast_receiver_package"
-            android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
-    </com.android.settingslib.RestrictedPreference>
-</PreferenceScreen>
+        settings:allowDividerAbove="false"/>
+    </PreferenceScreen>

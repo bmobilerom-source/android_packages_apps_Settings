@@ -115,6 +115,9 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
 
     private void initSeekBarPreference(final String key) {
         final LabeledSeekBarPreference pref = getPreferenceScreen().findPreference(key);
+        if (pref != null) {
+            pref.setLayoutResource(R.layout.adaptive_labeled_seekbar_card_progress);
+        }
         pref.setContinuousUpdates(true);
         pref.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_TICKS);
 

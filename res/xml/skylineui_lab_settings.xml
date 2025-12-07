@@ -18,5 +18,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title=" ">
-    
+     <PreferenceScreen
+            android:key="system_grid_category"
+            android:title="@string/category_system_title"
+            android:summary="@string/system_summary"
+            android:fragment="com.epic.fragments.SystemGrid" />
 </PreferenceScreen>

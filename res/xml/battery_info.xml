@@ -18,12 +18,20 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/battery_info"
     settings:keywords="@string/keywords_battery_info">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="batteryinfo"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/batteryinfo"/> 
 
     <Preference
         android:key="battery_info_technology"
         android:title="@string/battery_technology"
+        settings:layout="@layout/adaptive_preference_card_top"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryTechnologyPreferenceController"
         settings:enableCopying="true"/>
@@ -31,6 +39,7 @@
     <Preference
         android:key="battery_info_health"
         android:title="@string/battery_health"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryHealthPreferenceController"
         settings:enableCopying="true"/>
@@ -38,6 +47,7 @@
     <Preference
         android:key="battery_info_temperature"
         android:title="@string/battery_temperature"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryTemperaturePreferenceController"
         settings:enableCopying="true"/>
@@ -45,6 +55,7 @@
     <Preference
         android:key="battery_info_voltage"
         android:title="@string/battery_voltage"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryVoltagePreferenceController"
         settings:enableCopying="true"/>
@@ -52,6 +63,7 @@
     <Preference
         android:key="battery_info_design_capacity"
         android:title="@string/battery_design_capacity"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryDesignCapacityPreferenceController"
         settings:enableCopying="true"/>
@@ -59,6 +71,7 @@
     <Preference
         android:key="battery_info_maximum_capacity"
         android:title="@string/battery_maximum_capacity"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryMaximumCapacityPreferenceController"
         settings:enableCopying="true"/>
@@ -66,6 +79,7 @@
     <Preference
         android:key="battery_info_manufacture_date"
         android:title="@string/battery_manufacture_date"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryManufactureDatePreferenceController"
         settings:enableCopying="true"/>
@@ -73,6 +87,7 @@
     <Preference
         android:key="battery_info_first_use_date"
         android:title="@string/battery_first_use_date"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryFirstUseDatePreferenceController"
         settings:enableCopying="true"/>
@@ -80,12 +95,14 @@
     <Preference
         android:key="battery_info_cycle_count"
         android:title="@string/battery_cycle_count"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryCycleCountPreferenceController"
         settings:enableCopying="true"/>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="battery_info_footer"
+        settings:isPreferenceVisible="false"
         android:title="@string/battery_cycle_count_footer"
         android:selectable="false"
         settings:searchable="false" />

@@ -18,8 +18,15 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/gesture_preference_title">
 
+  <com.android.settingslib.widget.IllustrationPreference
+        android:key="auto_brightness_video"
+        settings:searchable="false"
+        android:order="-1999"
+        settings:lottie_rawRes="@raw/gesture_settings"/>
+        
     <lineageos.preference.LineagePartsPreference
         android:key="touchscreen_gesture_settings"
         settings:requiresFeature="lineagehardware:FEATURE_TOUCHSCREEN_GESTURES" />
@@ -38,6 +45,7 @@
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"
         settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
     <Preference
@@ -45,6 +53,7 @@
         android:title="@string/double_tap_power_title"
         android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
         settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController" />
 
     <Preference
@@ -52,12 +61,14 @@
         android:title="@string/double_twist_for_camera_mode_title"
         android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings"
         settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:controller="com.android.settings.gestures.DoubleTwistPreferenceController" />
 
     <Preference
         android:key="gesture_system_navigation_input_summary"
         android:title="@string/system_navigation_title"
         android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"
         settings:keywords="@string/keywords_system_navigation" />
 
@@ -65,6 +76,7 @@
         android:key="gesture_one_handed"
         android:title="@string/one_handed_title"
         android:fragment="com.android.settings.gestures.OneHandedSettings"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController" />
 
     <Preference
@@ -72,6 +84,7 @@
         android:title="@string/ambient_display_tap_screen_title"
         android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
         settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
 
     <Preference
@@ -79,6 +92,7 @@
         android:title="@string/ambient_display_title"
         android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
         settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
 
     <Preference
@@ -86,12 +100,14 @@
         android:title="@string/ambient_display_pickup_title"
         android:fragment="com.android.settings.gestures.PickupGestureSettings"
         settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
     <Preference
         android:key="gesture_power_menu_summary"
         android:title="@string/power_menu_setting_name"
         android:fragment="com.android.settings.gestures.PowerMenuSettings"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
 
     <com.android.settingslib.PrimarySwitchPreference

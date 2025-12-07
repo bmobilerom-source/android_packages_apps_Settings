@@ -16,16 +16,38 @@
   -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/languages_settings"
     android:key="language_settings">
+
+ 
+    <!-- MainSwitch -->
+    <!-- Note: No MainSwitch present in this page -->
+
+    <!-- TopIntro -->
+    <!-- Note: No TopIntro present in this page -->
+
+    <!-- Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="new_regional_pref_footer"
+        android:title="@string/title_regional_pref_footer"
+        android:order="-998"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.regionalpreferences.NewRegionalFooterPreferenceController"/>
+
+    <!-- Other Preferences -->
     <PreferenceCategory
         android:key="languages_category"
-        android:title="@string/locale_picker_category_title">
+        android:title="@string/locale_picker_category_title"
+        android:order="0">
         <Preference
             android:key="phone_language"
             android:title="@string/system_language"
+            settings:layout="@layout/adaptive_preference_card_top"
+            android:order="0"
             android:fragment="com.android.settings.localepicker.LocaleListEditor"
             settings:controller="com.android.settings.language.PhoneLanguagePreferenceController" />
 
@@ -33,6 +55,8 @@
             android:key="apps_language"
             android:title="@string/app_locales_picker_menu_title"
             android:summary="@string/app_locale_picker_summary"
+            settings:layout="@layout/adaptive_preference_card_middle"
+            android:order="1"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
             settings:controller="com.android.settings.applications.appinfo.AppsLocalePreferenceController">
             <extra
@@ -44,6 +68,8 @@
             android:key="regional_preferences"
             android:title="@string/regional_preferences_title"
             android:summary="@string/regional_preferences_summary"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            android:order="2"
             android:fragment="com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment"
             settings:controller="com.android.settings.regionalpreferences.RegionalPreferencesController" />
 
@@ -52,11 +78,14 @@
     <PreferenceCategory
         android:key="more_language_settings_category"
         android:title="@string/more_language_settings_category"
+        android:order="1"
         settings:controller="com.android.settings.language.MoreLanguagesSettingsCategoryController">
         <Preference
             android:key="apps_language_in_more_language_settings"
             android:title="@string/app_locales_picker_menu_title"
-            android:summary="@string/app_locale_picker_summary"
+            android:summary="@string/app_locale_picker_summary" 
+            settings:layout="@layout/adaptive_preference_card"
+            android:order="0"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
             settings:controller="com.android.settings.applications.appinfo.NewAppsLocalePreferenceController">
             <extra
@@ -68,12 +97,15 @@
     <PreferenceCategory
         android:key="regional_preferences_category"
         android:title="@string/regional_preferences_category_title"
+        android:order="2"
         settings:controller="com.android.settings.regionalpreferences.RegionalPreferencesCategoryController">
 
         <Preference
             android:key="temperature_preference"
             android:title="@string/temperature_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
+            settings:layout="@layout/adaptive_preference_card_top"
+            android:order="0"
             settings:controller="com.android.settings.regionalpreferences.NewTemperatureUnitController"
             settings:fragment="com.android.settings.regionalpreferences.TemperatureUnitFragment">
             <extra
@@ -85,6 +117,8 @@
             android:key="first_day_of_week_preference"
             android:title="@string/first_day_of_week_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
+            settings:layout="@layout/adaptive_preference_card_middle"
+            android:order="1"
             settings:controller="com.android.settings.regionalpreferences.NewFirstDayOfWeekController"
             settings:fragment="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment">
             <extra
@@ -96,6 +130,8 @@
             android:key="numbering_system_preference"
             android:title="@string/numbers_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            android:order="2"
             settings:controller="com.android.settings.regionalpreferences.NewNumberingSystemController"
             settings:fragment="com.android.settings.regionalpreferences.NumberingPreferencesFragment">
             <extra
@@ -106,30 +142,35 @@
 
     <PreferenceCategory
         android:key="speech_category"
-        android:title="@string/speech_category_title">
+        android:title="@string/speech_category_title"
+        android:order="3">
         <com.android.settings.widget.GearPreference
             android:key="voice_input_settings"
             android:title="@string/voice_input_settings_title"
+            android:order="0"
             android:fragment="com.android.settings.language.DefaultVoiceInputPicker" />
 
         <Preference
             android:key="on_device_recognition_settings"
             android:title="@string/on_device_recognition_settings_title"
             android:summary="@string/on_device_recognition_settings_summary"
+            settings:layout="@layout/adaptive_preference_card"
+            android:order="1"
             settings:controller=
                 "com.android.settings.language.OnDeviceRecognitionPreferenceController" />
 
         <Preference
             android:key="tts_settings_summary"
             android:title="@string/tts_settings_title"
+            settings:layout="@layout/adaptive_preference_card"
+            android:order="2"
             android:fragment="com.android.settings.tts.TextToSpeechSettings"
             settings:searchable="false"/>
     </PreferenceCategory>
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="new_regional_pref_footer"
-        android:title="@string/title_regional_pref_footer"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.regionalpreferences.NewRegionalFooterPreferenceController"/>
+    <!-- Switches -->
+    <!-- Note: No Switches present in this page -->
+
+    <!-- SeekBars -->
+    <!-- Note: No SeekBars present in this page -->
 </PreferenceScreen>
