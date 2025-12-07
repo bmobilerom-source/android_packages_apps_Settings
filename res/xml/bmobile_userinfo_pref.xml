@@ -19,24 +19,21 @@
     <Preference
         android:key="bmobile_multiuser"
         android:order="30"
-        android:icon="@drawable/ic_translate_24dp"
-        settings:layout="@layout/xd_pref_card_top"
+        settings:layout="@layout/bmobile_card_preference_top"
         android:title="@string/multiuser_settings_title"
         android:fragment="com.android.settings.users.UserSettings"/>
 
     <Preference
         android:key="bmobile_accounts"
         android:order="40"
-        android:icon="@drawable/ic_translate_24dp"
-        settings:layout="@layout/xd_pref_card_mid"
+        settings:layout="@layout/bmobile_card_preference_mid"
         android:title="@string/accounts_settings_title"
         android:fragment="com.android.settings.accounts.AccountDashboardFragment"/>
 
     <Preference
         android:key="bmobile_emergency"
         android:order="50"
-        android:icon="@drawable/ic_translate_24dp"
-        settings:layout="@layout/xd_pref_card_bot"
+        settings:layout="@layout/bmobile_card_preference_bot"
         android:title="@string/emergency_settings_title"
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
 
