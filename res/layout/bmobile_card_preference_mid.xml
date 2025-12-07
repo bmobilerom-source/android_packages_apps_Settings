@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="2dp"
+    android:background="@drawable/bmobile_card_mid"
+    android:clipToPadding="false"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="14dp"
+        android:baselineAligned="false">
+
+        <ImageView
+            android:id="@+android:id/icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@null"
+            android:scaleType="centerInside" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp">
+
+            <TextView
+                android:id="@+android:id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                style="@style/xd_text_primary"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal" />
+
+            <TextView
+                android:id="@+android:id/summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@android:id/title"
+                android:layout_alignStart="@android:id/title"
+                style="@style/xd_text_secondary"
+                android:maxLines="4" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+android:id/widget_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical" />
+    </LinearLayout>
+
+</FrameLayout>
+
