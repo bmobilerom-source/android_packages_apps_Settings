@@ -18,19 +18,28 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/keyboard_settings">
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="auto_brightness_video"
+        settings:searchable="false"
+        android:order="-1999"
+        settings:lottie_rawRes="@raw/Permission"/>
+        
     <PreferenceCategory
         android:key="keyboards_category">
         <Preference
             android:key="virtual_keyboard_pref"
             android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/adaptive_preference_card"
             android:fragment="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment"
             settings:keywords="@string/keywords_virtual_keyboard"/>
 
         <Preference
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
-            android:summary="@string/summary_placeholder"/>
+            android:summary="@string/summary_placeholder"
+            settings:layout="@layout/adaptive_preference_card"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -43,6 +52,7 @@
             android:key="spellcheckers_settings"
             android:title="@string/spellcheckers_settings_title"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card_top"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings" />
 
         <!-- User dictionary preference title and fragment will be set programmatically. -->
@@ -50,6 +60,7 @@
             android:key="key_user_dictionary_settings"
             android:title="@string/user_dict_settings_title"
             android:summary="@string/user_dict_settings_summary"
+            settings:layout="@layout/adaptive_preference_card_bottom"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
             settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
     </PreferenceCategory>
@@ -60,7 +71,8 @@
         <com.android.settings.PointerSpeedPreference
             android:key="pointer_speed"
             android:title="@string/pointer_speed"
-            android:dialogTitle="@string/pointer_speed" />
+            android:dialogTitle="@string/pointer_speed"
+            settings:layout="@layout/adaptive_preference_card" />
 
         <lineageos.preference.LineageSecureSettingSwitchPreference
             android:key="feature_touch_hovering"

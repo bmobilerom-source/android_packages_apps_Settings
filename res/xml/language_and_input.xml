@@ -18,13 +18,22 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/language_settings">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="auto_brightness_video"
+        settings:searchable="false"
+        android:order="-1999"
+        settings:lottie_rawRes="@raw/Permission"/>
+        
     <PreferenceCategory
         android:key="languages_category"
         android:title="@string/locale_picker_category_title">
         <Preference
             android:key="phone_language"
             android:title="@string/phone_language"
+            settings:layout="@layout/adaptive_preference_card_top"
             android:fragment="com.android.settings.localepicker.LocaleListEditor"
             settings:controller="com.android.settings.language.PhoneLanguagePreferenceController" />
 
@@ -32,6 +41,7 @@
             android:key="apps_language"
             android:title="@string/app_locales_picker_menu_title"
             android:summary="@string/app_locale_picker_summary"
+            settings:layout="@layout/adaptive_preference_card_middle"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
             settings:controller="com.android.settings.applications.appinfo.ManageAppLocalePreferenceController">
             <extra
@@ -43,6 +53,7 @@
             android:key="regional_preferences"
             android:title="@string/regional_preferences_title"
             android:summary="@string/regional_preferences_summary"
+            settings:layout="@layout/adaptive_preference_card_bottom"
             android:fragment="com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment"
             settings:controller="com.android.settings.regionalpreferences.RegionalPreferencesController">
         </Preference>
@@ -55,6 +66,7 @@
         <Preference
             android:key="virtual_keyboard_pref"
             android:title="@string/virtual_keyboard_category"
+            settings:layout="@layout/adaptive_preference_card_top"
             android:fragment="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment"
             settings:keywords="@string/keywords_virtual_keyboard"/>
 
@@ -62,6 +74,7 @@
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
             android:summary="@string/summary_placeholder"
+            settings:layout="@layout/adaptive_preference_card_bottom"
             android:fragment="com.android.settings.inputmethod.PhysicalKeyboardFragment"/>
     </PreferenceCategory>
 
@@ -76,6 +89,7 @@
         <Preference
             android:key="tts_settings_summary"
             android:title="@string/tts_settings_title"
+            settings:layout="@layout/adaptive_preference_card"
             android:fragment="com.android.settings.tts.TextToSpeechSettings"
             settings:searchable="false"/>
     </PreferenceCategory>
@@ -90,6 +104,7 @@
             android:key="spellcheckers_settings"
             android:title="@string/spellcheckers_settings_title"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings" />
 
         <!-- User dictionary preference title and fragment will be set programmatically. -->
@@ -97,6 +112,7 @@
             android:key="key_user_dictionary_settings"
             android:title="@string/user_dict_settings_title"
             android:summary="@string/user_dict_settings_summary"
+            settings:layout="@layout/adaptive_preference_card"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
             settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
     </PreferenceCategory>
@@ -126,6 +142,7 @@
             android:title="@string/spellcheckers_settings_for_work_title"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
             settings:forWork="true"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.core.WorkPreferenceController" />
 
         <Preference
@@ -133,6 +150,7 @@
             android:title="@string/user_dict_settings_for_work_title"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
             settings:forWork="true"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.inputmethod.SpellCheckerForWorkPreferenceController" />
     </com.android.settings.widget.WorkOnlyCategory>
 

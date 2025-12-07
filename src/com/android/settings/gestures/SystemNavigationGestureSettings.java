@@ -172,6 +172,13 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     }
 
     @Override
+    protected SelectorWithWidgetPreference createPreference() {
+        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(getPrefContext());
+        // Set card layout for navigation mode preferences
+        preference.setLayoutResource(R.layout.adaptive_preference_card);
+        return preference;
+    }
+
     public void bindPreferenceExtra(SelectorWithWidgetPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
         if (!(info instanceof CandidateInfoExtra)) {
