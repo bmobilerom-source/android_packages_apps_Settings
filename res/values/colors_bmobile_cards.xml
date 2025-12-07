@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="bmobile_card_bg">?android:attr/colorBackgroundFloating</color>
-    <color name="bmobile_card_stroke">#1A000000</color>
+    <color name="bmobile_card_stroke">#26000000</color>
 </resources>
 

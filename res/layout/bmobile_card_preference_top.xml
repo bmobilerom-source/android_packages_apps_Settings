@@ -3,12 +3,14 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
+    android:layout_marginHorizontal="12dp"
     android:layout_marginTop="8dp"
-    android:layout_marginBottom="2dp"
+    android:layout_marginBottom="6dp"
     android:background="@drawable/bmobile_card_top"
     android:clipToPadding="false"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?android:attr/selectableItemBackground"
+    android:padding="10dp"
+    android:elevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,8 +18,8 @@
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="14dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
         android:baselineAligned="false">
 
         <ImageView
