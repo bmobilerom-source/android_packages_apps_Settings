@@ -232,7 +232,6 @@
 
    <com.android.settings.widget.HomepagePreference
         android:fragment="com.skylineui.settings.laboratory.LabSettings"
-        android:icon="@drawable/ic_skylineui_lab"
         android:key="top_level_lab"
         android:order="5"
         android:title="@string/skylineui_lab_title"

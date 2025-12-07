@@ -7,18 +7,16 @@ import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-import com.hanks.htextview.base.AnimationListener;
-import com.hanks.htextview.base.DisplayUtils;
-import com.hanks.htextview.base.HTextView;
+import android.util.TypedValue;
+import android.widget.TextView;
 import com.android.settings.R;
-import android.graphics.Color;
 
 /**
  * RainbowTextView
  * Created by hanks on 2017/3/14.
  */
 
-public class RainbowTextView extends HTextView {
+public class RainbowTextView extends TextView {
 
     private Matrix mMatrix;
     private float mTranslate;
@@ -41,16 +39,15 @@ public class RainbowTextView extends HTextView {
         init(attrs, defStyleAttr);
     }
 
-    @Override
-    public void setAnimationListener(AnimationListener listener) {
-        throw new UnsupportedOperationException("Invalid operation for rainbow");
-    }
-
     private void init(AttributeSet attrs, int defStyleAttr) {
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.RainbowTextView);
-        colorSpace = typedArray.getDimension(R.styleable.RainbowTextView_colorSpace, DisplayUtils.dp2px(150));
-        colorSpeed = typedArray.getDimension(R.styleable.RainbowTextView_colorSpeed, DisplayUtils.dp2px(5));
+        colorSpace = typedArray.getDimension(
+                R.styleable.RainbowTextView_colorSpace,
+                dpToPx(getContext(), 150));
+        colorSpeed = typedArray.getDimension(
+                R.styleable.RainbowTextView_colorSpeed,
+                dpToPx(getContext(), 5));
         typedArray.recycle();
 
         mMatrix = new Matrix();
@@ -83,11 +80,10 @@ public class RainbowTextView extends HTextView {
         getPaint().setShader(mLinearGradient);
     }
 
-    @Override
     public void setProgress(float progress) {
+        // No-op: kept for API parity
     }
 
-    @Override
     public void animateText(CharSequence text) {
         setText(text);
     }
@@ -102,5 +98,12 @@ public class RainbowTextView extends HTextView {
         mLinearGradient.setLocalMatrix(mMatrix);
         super.onDraw(canvas);
         postInvalidateDelayed(30);
+    }
+
+    private static float dpToPx(Context context, float dp) {
+        return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                context.getResources().getDisplayMetrics());
     }
 }

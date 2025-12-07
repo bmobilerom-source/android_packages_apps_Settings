@@ -15,10 +15,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="24dp"
+        android:padding="16dp"
         android:orientation="vertical"
         android:clickable="true"
         android:clipToOutline="true"
-        android:background="?android:attr/colorBackgroundFloating">
+        android:background="@drawable/card_background">
 
         <RelativeLayout
             android:id="@+id/firmware_details_frame"
@@ -77,7 +78,8 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="24dp"
-        android:background="?android:attr/colorBackgroundFloating"
+        android:padding="16dp"
+        android:background="@drawable/card_background"
         android:orientation="vertical"
         android:clickable="true"
         android:clipChildren="true"

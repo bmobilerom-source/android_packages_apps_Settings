@@ -14,13 +14,25 @@
      limitations under the License.
 -->
 <PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-	android:title="@string/quicksettings_title">
-        <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/about_device_info"
-        android:key="about_device_info"
-        android:selectable="false"
-        android:order="-10" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <Preference
+        android:key="quicksettings_bmobile_userinfo"
+        android:icon="@drawable/ic_translate_24dp"
+        android:title="@string/bmobile_userinfo_title"
+        android:summary="@string/bmobile_userinfo_summary"
+        android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
+        settings:layout="@layout/xd_pref_card_top" />
+
+    <Preference
+        android:key="quicksettings_bmobile_accounts"
+        android:icon="@drawable/ic_translate_24dp"
+        android:title="@string/bmobile_accounts_title"
+        android:summary="@string/bmobile_accounts_summary"
+        android:fragment="com.android.settings.deviceinfo.BMobileAccountsFragment"
+        settings:layout="@layout/xd_pref_card_mid" />
+
 </PreferenceScreen>

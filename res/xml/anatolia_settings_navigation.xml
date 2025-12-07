@@ -17,19 +17,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-	android:title="@string/navbar_title">
+	android:title=" ">
  
-           <com.android.settingslib.widget.LayoutPreference
-        android:key="orchidosrom_grid"
-        android:layout="@layout/about"
-        android:selectable="false"/>
-
-    <!-- Statusbar Settings -->
-    <Preference
-            settings:layout="@layout/dot_preference_middle_card"
-        android:key="statusbar_settings"
-        android:title="@string/status_bar_title"
-        android:icon="@drawable/ic_settings_statusbar"
-        android:order="-248"
-        android:fragment="com.android.settings.custom.statusbar.StatusBarSettings" />
 </PreferenceScreen>

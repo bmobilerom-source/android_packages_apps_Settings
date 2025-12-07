@@ -5537,7 +5537,7 @@
        <activity android:name="Settings$StartLabActivity"
             android:label="@string/skylineui_lab_title"
             android:exported="true"            
-            android:icon="@drawable/ic_skylineui_lab">
+            android:icon="@null">
             <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />                
@@ -5551,7 +5551,7 @@
         <!-- EpicROM-AOSP -->
         <activity android:name=".Settings$AnatoliaSettingsActivity"
                   android:label="@string/anatolia_settings_title"
-                  android:icon="@drawable/ic_homepage_anatolia"
+                  android:icon="@null"
                   android:exported="true">
             <intent-filter android:priority="1">
                   <action android:name="android.intent.action.ANATOLİA_SETTINGS" />

@@ -17,20 +17,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-	android:title="@string/notifications_title">
-        <com.android.settingslib.widget.LayoutPreference
-                android:key="device_name"
-                android:order="-1"
-                android:selectable="false"
-                android:layout="@layout/top_level_about"
-                settings:isPreferenceVisible="false" />
-    <!-- Statusbar Settings -->
-    <Preference
-            android:layout="@layout/dot_preference_bottom_card"
-        android:key="statusbar_settings"
-        android:title="@string/status_bar_title"
-        android:icon="@drawable/ic_settings_statusbar"
-        android:order="-248"
-        android:fragment="com.android.settings.custom.statusbar.StatusBarSettings" />
-
+	android:title=" ">
+   
 </PreferenceScreen>
