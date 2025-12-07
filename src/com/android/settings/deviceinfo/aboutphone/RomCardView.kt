@@ -25,7 +25,8 @@ class RomCardView(context: Context, attrs: AttributeSet?) : AboutBaseCard(contex
         rom_logo.setPadding(72, 72, 72, 72)
         rom_logo.adjustViewBounds = true
         linearLayout.id = R.id.rom_logo_id
-        rom_logo.setImageResource(R.drawable.stallion)
+        // Stallion logo asset missing; use generic user icon to avoid build failure
+        rom_logo.setImageResource(R.drawable.user)
         val rlparams = RelativeLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.MATCH_PARENT
