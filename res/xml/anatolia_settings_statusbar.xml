@@ -19,5 +19,19 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title=" ">
    
-        
+      
+    <Preference
+        android:key="quicksettings_bmobile_userinfo"
+        android:title="@string/bmobile_userinfo_title"
+        android:summary="@string/bmobile_userinfo_summary"
+        android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
+        settings:layout="@layout/adaptive_preference_card_top" />
+
+    <Preference
+        android:key="quicksettings_bmobile_accounts"
+        android:title="@string/bmobile_accounts_title"
+        android:summary="@string/bmobile_accounts_summary"
+        android:fragment="com.android.settings.deviceinfo.BMobileAccountsFragment"
+        settings:layout="@layout/adaptive_preference_card_middle" />
+  
 </PreferenceScreen>
