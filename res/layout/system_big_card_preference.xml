@@ -22,7 +22,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="fill_parent"
         android:layout_height="180dp"
-        app:cardBackgroundColor="?android:attr/colorBackgroundFloating"
+        app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="26dp"
         app:cardElevation="2dp"
         app:strokeWidth="0dp"
@@ -30,7 +30,8 @@
         <RelativeLayout
             android:padding="16.0dip"
             android:layout_width="wrap_content"
-            android:layout_height="180.0dip">
+            android:layout_height="180.0dip"
+            android:background="@drawable/system_big_card_background">
             <ImageView
                 android:gravity="end"
                 android:layout_gravity="end"
