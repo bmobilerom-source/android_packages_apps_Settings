@@ -27,7 +27,7 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipToOutline="true"
-            android:background="@drawable/navigation_card_background">
+            android:background="@drawable/custom_preference_background">
 
             <RelativeLayout
                 android:id="@+id/card_1_frame"
@@ -93,7 +93,7 @@
             android:clipChildren="true"
             android:clipToPadding="true"
             android:clipToOutline="true"
-            android:background="@drawable/navigation_card_background">
+            android:background="@drawable/custom_preference_background">
 
             <TextView
                 android:id="@+id/card_2_title"
@@ -143,7 +143,7 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipToOutline="true"
-            android:background="@drawable/navigation_card_background">
+            android:background="@drawable/custom_preference_background">
 
             <RelativeLayout
                 android:id="@+id/card_3_frame"
@@ -209,7 +209,7 @@
             android:clipChildren="true"
             android:clipToPadding="true"
             android:clipToOutline="true"
-            android:background="@drawable/navigation_card_background">
+            android:background="@drawable/custom_preference_background">
 
             <TextView
                 android:id="@+id/card_4_title"

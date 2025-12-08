@@ -9,7 +9,7 @@
     </item>
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
-            <solid android:color="?android:attr/colorBackgroundFloating" />
+            <solid android:color="@color/user_crd_bg" />
             <corners android:radius="12dp" />
             <padding android:left="12dp" android:top="12dp"
                 android:right="12dp" android:bottom="12dp" />
