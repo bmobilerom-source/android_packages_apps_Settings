@@ -45,6 +45,7 @@ import android.view.View;
 
 import java.util.List;
 import java.util.ArrayList;
+import android.view.ViewGroup;
 
 public class SystemGrid extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
@@ -53,11 +54,15 @@ public class SystemGrid extends SettingsPreferenceFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.anatolia_settings_system_grid);
-        }
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
+        // Ensure custom theme backgrounds are applied
+        ensureThemeBackgrounds();
+        
         PreferenceScreen screen = getPreferenceScreen();
         androidx.preference.Preference layoutPref = screen.findPreference("system_grid");
         if (layoutPref instanceof com.android.settingslib.widget.LayoutPreference) {
@@ -143,6 +148,37 @@ public class SystemGrid extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
         return false;
+    }
+
+    /**
+     * Ensures custom theme backgrounds are applied to this fragment.
+     */
+    private void ensureThemeBackgrounds() {
+        try {
+            android.app.Activity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
+            
+            View rootView = activity.findViewById(android.R.id.content);
+            if (rootView instanceof ViewGroup) {
+                ViewGroup rootGroup = (ViewGroup) rootView;
+                if (rootGroup.findViewById(R.id.theme_background) != null) {
+                    return;
+                }
+                
+                com.android.settings.preferences.ui.AdaptiveThemeBackgroundView themeView =
+                        new com.android.settings.preferences.ui.AdaptiveThemeBackgroundView(activity);
+                themeView.setId(R.id.theme_background);
+                themeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+                int insertIndex = (rootGroup.findViewById(R.id.wallpaper_background) != null) ? 1 : 0;
+                rootGroup.addView(themeView, insertIndex, new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
+            }
+        } catch (Exception e) {
+            android.util.Log.e("SystemGrid", "Error adding theme background", e);
+        }
     }
 
     @Override

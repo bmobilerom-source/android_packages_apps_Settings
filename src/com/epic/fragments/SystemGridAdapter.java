@@ -58,6 +58,11 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
         this.sourceMetrics = sourceMetrics;
     }
 
+    private int getSafeMetrics() {
+        return sourceMetrics > 0
+                ? sourceMetrics
+                : com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
+    }
     @NonNull
     @Override
     public CardVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -78,6 +83,7 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
     @Override
     public void onBindViewHolder(@NonNull CardVH holder, int position) {
         CardItem item = items.get(position);
+        // Hide icons as requested
         if (holder.iconView != null) {
             holder.iconView.setVisibility(View.GONE);
         }
@@ -142,7 +148,7 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
                     new SubSettingLauncher(context)
                         .setDestination(com.android.settings.backup.transport.TransportFragment.class.getName())
                         .setTitleRes(R.string.backup_transport_title)
-                        .setSourceMetricsCategory(sourceMetrics)
+                        .setSourceMetricsCategory(getSafeMetrics())
                         .launch();
                 } catch (Exception e) {
                     Log.e("SystemGridAdapter", "Failed to launch TransportFragment", e);
@@ -180,7 +186,7 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
                     new SubSettingLauncher(context)
                         .setDestination(com.android.settings.applications.AppDashboardFragment.class.getName())
                         .setTitleRes(item.titleResId)
-                        .setSourceMetricsCategory(sourceMetrics)
+                        .setSourceMetricsCategory(getSafeMetrics())
                         .launch();
                 } catch (Exception e) {
                     Log.e("SystemGridAdapter", "Failed to launch AppDashboardFragment", e);
@@ -194,7 +200,7 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
                         .setDestination(item.destFragment)
                         .setTitleRes(item.titleResId)
                         .setArguments(new Bundle())
-                        .setSourceMetricsCategory(sourceMetrics)
+                        .setSourceMetricsCategory(getSafeMetrics())
                         .launch();
                 } catch (Exception e) {
                     Log.e("SystemGridAdapter", "Failed to launch fragment: " + item.destFragment, e);
