@@ -18,6 +18,14 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/anatolia_settings_title">
 		
+    <!-- Customer Header sample -->
+ <com.android.settingslib.widget.LayoutPreference
+        android:key="Branding_CustomerOS_view"
+        android:selectable="true"
+        android:enabled="true"
+        android:shouldDisableView="false"
+        android:fragment="com.epic.fragments.SystemSettingsAboutus" 
+        android:layout="@layout/CustomerOS_header" />
 		<!-- Status bar -->
         <PreferenceScreen
             android:key="statusbar_category"
@@ -120,4 +128,15 @@
             android:fragment="com.epic.fragments.ExtraSettings" />
   
 
+    <Preference
+        android:key="system_basic_defaults_lock"
+        android:title="@string/system_basic_defaults_title"
+        android:summary="@string/system_basic_defaults_summary"
+        android:fragment="com.epic.fragments.SystemBasicDefaults" />
+        
+    <Preference
+        android:key="display_page_grid_launch"
+        android:title="@string/display_page_grid_title"
+        android:summary="@string/display_page_grid_summary"
+        android:fragment="com.epic.fragments.DisplayPageGrid" />
 </PreferenceScreen>

@@ -19,15 +19,11 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/gestures_title">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="extended_homepage_widgets"
+        android:title="@string/extended_homepage_widgets_title"
+        android:summary="@string/extended_homepage_widgets_summary"
+        android:selectable="false"
+        android:layout="@layout/extended_homepage_widgets" />
 
-    <!-- Customer Header sample -->
- <com.android.settingslib.widget.LayoutPreference
-        android:key="Branding_CustomerOS_view"
-        android:selectable="true"
-        android:enabled="true"
-        android:shouldDisableView="false"
-        android:fragment="com.epic.fragments.SystemSettingsAboutus" 
-        android:layout="@layout/CustomerOS_header" />
-
-   
 </PreferenceScreen>

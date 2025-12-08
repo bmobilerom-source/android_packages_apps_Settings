@@ -18,5 +18,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/extras_title">
-  
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="toplevel_card_navigation"
+        android:title="@string/navigation_cards_title"
+        android:summary="@string/navigation_cards_summary"
+        android:layout="@layout/toplevel_card_navigation" />
+
 </PreferenceScreen>
