@@ -213,4 +213,8 @@
         <attr name="cardStrokeWidth" format="dimension" />
         <attr name="cardStrokeColor" format="color" />
     </declare-styleable>
+    <!-- Custom attributes used by preferences/layouts -->
+    <attr name="units" format="string"/>
+    <attr name="interval" format="integer"/>
+    <attr name="position" format="integer"/>
 </resources>
