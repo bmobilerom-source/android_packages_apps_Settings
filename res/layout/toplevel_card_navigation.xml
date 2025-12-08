@@ -27,7 +27,7 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background">
+            android:background="@drawable/navigation_card_background">
 
             <RelativeLayout
                 android:id="@+id/card_1_frame"
@@ -86,14 +86,14 @@
             android:layout_marginBottom="7dp"
             android:layout_marginStart="7dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/custom_preference_background"
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipChildren="true"
             android:clipToPadding="true"
-            android:clipToOutline="true">
+            android:clipToOutline="true"
+            android:background="@drawable/navigation_card_background">
 
             <TextView
                 android:id="@+id/card_2_title"
@@ -143,7 +143,7 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background">
+            android:background="@drawable/navigation_card_background">
 
             <RelativeLayout
                 android:id="@+id/card_3_frame"
@@ -202,14 +202,14 @@
             android:layout_marginBottom="7dp"
             android:layout_marginStart="7dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/custom_preference_background"
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipChildren="true"
             android:clipToPadding="true"
-            android:clipToOutline="true">
+            android:clipToOutline="true"
+            android:background="@drawable/navigation_card_background">
 
             <TextView
                 android:id="@+id/card_4_title"
