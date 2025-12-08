@@ -126,6 +126,11 @@ public class SystemGrid extends SettingsPreferenceFragment implements
                         "com.android.settings.emergency.EmergencyDashboardFragment"));
                 items.add(new SystemGridAdapter.CardItem(
                         /* icon */ 0,
+                        R.string.about_us_info,
+                        R.string.about_us_info_summary,
+                        "com.epic.fragments.SystemSettingsAboutus"));
+                items.add(new SystemGridAdapter.CardItem(
+                        /* icon */ 0,
                         R.string.reset_dashboard_title,
                         R.string.system_reset_summary,
                         "com.android.settings.system.ResetDashboardFragment"));
