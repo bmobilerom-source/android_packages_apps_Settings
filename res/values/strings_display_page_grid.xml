@@ -20,5 +20,16 @@
 
     <!-- Color and motion -->
     <string name="accessibility_color_and_motion_summary">Reduce motion and adjust color effects for comfort</string>
+
+    <!-- Launcher entry for Display Page Grid -->
+    <string name="display_page_grid_title">Display page</string>
+    <string name="display_page_grid_summary">Grid view for display customizations</string>
+
+    <!-- System basic defaults entry -->
+    <string name="system_basic_defaults_summary">Open System Basic Defaults cards</string>
+
+    <!-- Navigation cards entry -->
+    <string name="navigation_cards_title">Navigation cards</string>
+    <string name="navigation_cards_summary">Open quick navigation card grid</string>
 </resources>
 
