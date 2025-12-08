@@ -31,5 +31,6 @@
     <!-- Navigation cards entry -->
     <string name="navigation_cards_title">Navigation cards</string>
     <string name="navigation_cards_summary">Open quick navigation card grid</string>
+
 </resources>
 
