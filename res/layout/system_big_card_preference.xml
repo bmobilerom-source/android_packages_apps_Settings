@@ -12,8 +12,7 @@
 -->
 <LinearLayout
     android:layout_width="fill_parent"
-    android:background="@drawable/system_big_card_background"
-    android:backgroundTint="@android:color/transparent"
+    android:background="@android:color/transparent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8.0dip"
     android:layout_marginEnd="16.0dip"
@@ -23,9 +22,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="fill_parent"
         android:layout_height="180dp"
-        app:cardBackgroundColor="@color/system_big_card_bg"
-        app:cardCornerRadius="26.0dip"
-        app:cardElevation="2.0dip"
+        app:cardBackgroundColor="?android:attr/colorBackgroundFloating"
+        app:cardCornerRadius="26dp"
+        app:cardElevation="2dp"
         app:strokeWidth="0dp"
         app:rippleColor="?android:attr/colorControlHighlight">
         <RelativeLayout
@@ -34,20 +33,18 @@
             android:layout_height="180.0dip">
             <ImageView
                 android:gravity="end"
-                android:background="@drawable/system_big_card_bg_icon"
                 android:layout_gravity="end"
                 android:padding="4dp"
                 android:id="@android:id/icon"
                 android:layout_width="55.0dip"
                 android:layout_height="35.0dip"
-                android:backgroundTint="@color/system_big_card_icon_bg"
-                android:tint="@color/system_big_card_icon_tint"
+                android:tint="?android:attr/textColorPrimary"
                 android:layout_alignParentTop="true"/>
             <TextView
                 android:layout_gravity="start"
                 android:textSize="18.0sp"
                 android:textStyle="bold"
-                android:textColor="@color/system_big_card_text_tint"
+                android:textColor="?android:attr/textColorPrimary"
                 android:id="@android:id/title"
                 android:layout_width="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -57,7 +54,7 @@
             <TextView
                 android:layout_gravity="start|center"
                 android:textSize="14.0sp"
-                android:textColor="@color/system_big_card_text_tint"
+                android:textColor="?android:attr/textColorSecondary"
                 android:id="@android:id/summary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
