@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="system_basic_defaults_aurora_store_title">Aurora Store</string>
+    <string name="system_basic_defaults_aurora_store_summary">Install apps without Google Play</string>
+
+    <string name="system_basic_defaults_default_apps_title">Default apps</string>
+    <string name="system_basic_defaults_default_apps_summary">Choose your default browser, dialer, and SMS apps</string>
+
+    <string name="system_basic_defaults_gesture_navigation_title">Gesture navigation</string>
+    <string name="system_basic_defaults_gesture_navigation_summary">Set navigation mode and gesture actions</string>
+
+    <string name="system_basic_defaults_one_handed_title">One-handed mode</string>
+    <string name="system_basic_defaults_one_handed_summary">Pull screen content into reach</string>
+
+    <string name="system_basic_defaults_more_title">More settings</string>
+    <string name="system_basic_defaults_more_summary">Additional customization and tools</string>
+</resources>
+

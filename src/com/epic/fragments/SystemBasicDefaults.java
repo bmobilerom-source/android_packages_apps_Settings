@@ -62,10 +62,6 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
-        // Ensure custom theme backgrounds are applied
-        ensureThemeBackgrounds();
-        
         try {
             PreferenceScreen screen = getPreferenceScreen();
             if (screen == null) {
@@ -188,41 +184,6 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
             android.util.Log.e("SystemBasicDefaults", "Error in onPreferenceChange", e);
         }
         return false;
-    }
-
-    /**
-     * Ensures custom theme backgrounds are applied to this fragment.
-     * Similar to SettingsBaseActivity.addThemeBackground().
-     */
-    private void ensureThemeBackgrounds() {
-        try {
-            android.app.Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            
-            View rootView = activity.findViewById(android.R.id.content);
-            if (rootView instanceof ViewGroup) {
-                ViewGroup rootGroup = (ViewGroup) rootView;
-                // Check if theme background already exists
-                if (rootGroup.findViewById(R.id.theme_background) != null) {
-                    return;
-                }
-                
-                // Create theme background view
-                com.android.settings.preferences.ui.AdaptiveThemeBackgroundView themeView =
-                        new com.android.settings.preferences.ui.AdaptiveThemeBackgroundView(activity);
-                themeView.setId(R.id.theme_background);
-                themeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
-                // Insert after wallpaper background (if exists) so it's on top of wallpaper but behind content
-                int insertIndex = (rootGroup.findViewById(R.id.wallpaper_background) != null) ? 1 : 0;
-                rootGroup.addView(themeView, insertIndex, new ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
-            }
-        } catch (Exception e) {
-            android.util.Log.e("SystemBasicDefaults", "Error adding theme background", e);
-        }
     }
 
     @Override
