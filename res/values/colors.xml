@@ -17,9 +17,25 @@
 <resources
     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
 
-    <color name="card_bg">#E0E0E0</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="theme_pack_button_light_blue">#81D4FA</color>
+    <color name="quick_access_icon_bg">#9C27B0</color>
+    <color name="display_grid_card_border">#81D4FA</color>
+    <color name="display_grid_toggle_on">#81D4FA</color>
+    <color name="display_grid_icon_bg">#81D4FA</color>
+    <color name="display_grid_circular_button_bg">#81D4FA</color>
+    <color name="display_grid_circular_button_border">#1976D2</color>
+    <color name="display_grid_circular_button_icon">#1976D2</color>
+    <color name="security_privacy_pastel_red_card_bg">#FFB3BA</color>
+    <color name="security_privacy_card_text_primary">#8B0000</color>
+    <color name="security_privacy_card_text_secondary">#A52A2A</color>
+    <color name="wallpapers_card_bg">#1E3A5F</color>
     <color name="setup_wizard_wifi_color_dark">#89ffffff</color>
     <color name="setup_wizard_wifi_color_light">#89000000</color>
+    
+    <!-- InfinitySuite colors -->
+    <color name="crd_bg">?android:attr/colorBackground</color>
+    <color name="card_outline_light">#1F000000</color>
 
     <color name="running_processes_system_ram">#ff384248</color>
     <color name="running_processes_free_ram">#ffced7db</color>
@@ -75,7 +91,7 @@
     <color name="homepage_dot_background">#AEAEAE</color>
 
     <color name="contextual_card_dismissal_background">@*android:color/material_grey_100</color>
-    <color name="contextual_card_background">@*android:color/background_device_default_light</color>
+    <color name="contextual_card_background">#FFFFFF</color>
     <!-- End of dashboard/homepage icon background colors -->
 
     <color name="battery_good_color_light">#43a047</color> <!-- Material Green 600 -->
@@ -188,7 +204,7 @@
     <color name="oneplus_homepage_icon_background">#ffffff</color>
     <color name="oneplus_accent_color">@color/settingsHeaderColor</color>
     <color name="settings_accent_color">@color/oneplus_accent_color</color>
-    <color name="user_crd_bg">#f8f8f8</color>
+    <color name="user_crd_bg">#FFFFFF</color>
     <color name="disabled_text_color">#66000000</color>
     <color name="transparent">#00000000</color>
     <color name="wave_homepage_icon_background">@*android:color/system_neutral1_50</color>

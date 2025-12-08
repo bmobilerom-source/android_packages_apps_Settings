@@ -18,8 +18,14 @@
     xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <color name="homepage_accessibility_background">#783BE5</color>
     <color name="homepage_support_background">#3F5FBD</color>
-    <color name="contextual_card_background">@*android:color/material_grey_900</color>
-    <color name="search_bar_background">?androidprv:attr/materialColorSurfaceBright</color>
+    <color name="homepage_dot_background">#838383</color>
+    <color name="homepage_card_dismissal_background">@*android:color/material_grey_900</color>
+    <color name="contextual_card_background">@android:color/system_neutral1_700</color>
+    <color name="search_bar_background">@*android:color/material_grey_900</color>
+    <!-- Dialog background color. -->
+    <color name="dialog_background">@*android:color/material_grey_900</color>
+    <color name="notification_importance_selection_bg">@*android:color/material_grey_900</color>
+    <color name="notification_importance_button_selected">#AECBFA</color> <!-- material blue 200 -->
     <color name="notification_importance_button_unselected">#5F6368</color>
 
     <!-- Palette list preference colors. -->
@@ -94,7 +100,7 @@
     <color name="settingsHeaderColor">@*android:color/accent_device_default_dark</color>
 
     <!-- Icon tint color for battery usage system icon -->
-    <color name="card_bg">@android:color/system_neutral1_800</color>
+    <color name="card_bg">@android:color/system_neutral1_700</color>
 
 </resources>
 
