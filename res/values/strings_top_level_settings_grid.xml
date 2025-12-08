@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Top-level display grid title -->
+    <string name="display_grid_title">Display grid</string>
+
+    <!-- Top-level settings grid cards -->
+    <string name="display_grid_quick_settings_title">Quick settings</string>
+    <string name="display_grid_quick_settings_summary">Customize quick tiles and layout</string>
+
+    <string name="display_grid_about_us_title">About us</string>
+    <string name="display_grid_about_us_summary">Project info and credits</string>
+
+    <string name="display_grid_status_bar_title">Status bar</string>
+    <string name="display_grid_status_bar_summary">Icons, indicators, and style</string>
+
+    <string name="display_grid_lock_title">Lockscreen</string>
+    <string name="display_grid_lock_summary">Lockscreen shortcuts and UI</string>
+
+    <string name="display_grid_messages_title">Messages</string>
+    <string name="display_grid_messages_summary">Messaging notifications and bubbles</string>
+
+    <string name="display_grid_connection_title">Connections</string>
+    <string name="display_grid_connection_summary">Network, Bluetooth, and tethering</string>
+
+    <string name="display_grid_edit_title">Edit dashboard</string>
+    <string name="display_grid_edit_summary">Reorder or hide dashboard tiles</string>
+
+    <string name="display_grid_location_title">Location</string>
+    <string name="display_grid_location_summary">Location services and permissions</string>
+
+    <string name="display_grid_team_title">Team</string>
+    <string name="display_grid_team_summary">Meet the developers and contributors</string>
+</resources>
+
