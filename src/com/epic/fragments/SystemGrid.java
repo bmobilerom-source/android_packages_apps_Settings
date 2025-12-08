@@ -60,9 +60,6 @@ public class SystemGrid extends SettingsPreferenceFragment implements
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         
-        // Ensure custom theme backgrounds are applied
-        ensureThemeBackgrounds();
-        
         PreferenceScreen screen = getPreferenceScreen();
         androidx.preference.Preference layoutPref = screen.findPreference("system_grid");
         if (layoutPref instanceof com.android.settingslib.widget.LayoutPreference) {
@@ -77,43 +74,43 @@ public class SystemGrid extends SettingsPreferenceFragment implements
                 java.util.List<SystemGridAdapter.CardItem> items = new java.util.ArrayList<>();
                 // Base UI Theme
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_sb,
+                        /* icon */ 0,
                         R.string.gesture_preference_title,
                         R.string.system_grid_gesture_summary,
                         "com.android.settings.gestures.GestureSettings"));
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_qs,
+                        /* icon */ 0,
                         R.string.system_navigation_title,
                         R.string.system_grid_navigation_summary,
                         "com.android.settings.gestures.SystemNavigationGestureSettings"));
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_battery,
+                        /* icon */ 0,
                         R.string.power_usage_summary_title,
                         R.string.system_grid_power_usage_summary,
                         "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"));
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_ls,
+                        /* icon */ 0,
                         R.string.languages_settings,
                         R.string.languages_setting_summary,
                         "com.android.settings.language.LanguageSettings"));
                 // System Features
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_misc,
+                        /* icon */ 0,
                         R.string.date_and_time,
                         R.string.date_and_time_summary,
                         "com.android.settings.datetime.DateTimeSettings"));
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_buttons,
+                        /* icon */ 0,
                         R.string.category_buttons_title,
                         R.string.button_summary,
                         "org.lineageos.lineageparts.input.ButtonSettings"));
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_settings_statusbar,
+                        /* icon */ 0,
                         R.string.statusbar_title,
                         R.string.system_grid_statusbar_summary,
                         "org.lineageos.lineageparts.statusbar.StatusBarSettings"));
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_power,
+                        /* icon */ 0,
                         R.string.keyboard_settings,
                         R.string.keyboard_settings_summary,
                         "com.android.settings.inputmethod.KeyboardSettings"));
@@ -127,14 +124,8 @@ public class SystemGrid extends SettingsPreferenceFragment implements
                         R.string.emergency_settings_preference_title,
                         R.string.system_grid_emergency_summary,
                         "com.android.settings.emergency.EmergencyDashboardFragment"));
-                // Misc and General
                 items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_misc,
-                        R.string.aboutus_title,
-                        R.string.aboutus_summary,
-                        "com.epic.fragments.SystemSettingsAboutus"));
-                items.add(new SystemGridAdapter.CardItem(
-                        R.drawable.ic_interface_system,
+                        /* icon */ 0,
                         R.string.reset_dashboard_title,
                         R.string.system_reset_summary,
                         "com.android.settings.system.ResetDashboardFragment"));
@@ -148,37 +139,6 @@ public class SystemGrid extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
         return false;
-    }
-
-    /**
-     * Ensures custom theme backgrounds are applied to this fragment.
-     */
-    private void ensureThemeBackgrounds() {
-        try {
-            android.app.Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            
-            View rootView = activity.findViewById(android.R.id.content);
-            if (rootView instanceof ViewGroup) {
-                ViewGroup rootGroup = (ViewGroup) rootView;
-                if (rootGroup.findViewById(R.id.theme_background) != null) {
-                    return;
-                }
-                
-                com.android.settings.preferences.ui.AdaptiveThemeBackgroundView themeView =
-                        new com.android.settings.preferences.ui.AdaptiveThemeBackgroundView(activity);
-                themeView.setId(R.id.theme_background);
-                themeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
-                int insertIndex = (rootGroup.findViewById(R.id.wallpaper_background) != null) ? 1 : 0;
-                rootGroup.addView(themeView, insertIndex, new ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
-            }
-        } catch (Exception e) {
-            android.util.Log.e("SystemGrid", "Error adding theme background", e);
-        }
     }
 
     @Override
