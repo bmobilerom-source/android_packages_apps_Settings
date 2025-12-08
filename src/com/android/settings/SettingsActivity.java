@@ -210,12 +210,18 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
+        int sourceMetrics = (caller instanceof Instrumentable)
+                ? ((Instrumentable) caller).getMetricsCategory()
+                : Instrumentable.METRICS_CATEGORY_UNKNOWN;
+        if (sourceMetrics <= 0) {
+            // Fallback to a valid custom category to avoid crashes when launching sub settings
+            sourceMetrics = com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
+        }
+
         new SubSettingLauncher(this)
                 .setDestination(pref.getFragment())
                 .setArguments(pref.getExtras())
-                .setSourceMetricsCategory(caller instanceof Instrumentable
-                        ? ((Instrumentable) caller).getMetricsCategory()
-                        : Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setSourceMetricsCategory(sourceMetrics)
                 .setTitleRes(-1)
                 .launch();
         return true;
