@@ -10,7 +10,7 @@
 
     <FrameLayout
         android:id="@+id/container"
-        android:background="@drawable/bmobile_card_mid"
+        android:background="@drawable/adaptive_preference_card_middle_background"
         android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
