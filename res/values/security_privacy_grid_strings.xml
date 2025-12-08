@@ -1,0 +1,74 @@
+<resources>
+    <!-- Security Privacy Grid Title -->
+    <string name="security_privacy_grid_title">Security &amp; Privacy</string>
+    <string name="security_privacy_grid_summary">Customize security and privacy settings</string>
+    
+    <!-- Monet Color -->
+    <string name="security_privacy_grid_monet_color_title">Monet Color</string>
+    <string name="security_privacy_grid_monet_color_summary">Customize system colors</string>
+    
+    <!-- LockScreen -->
+    <string name="security_privacy_grid_lockscreen_title">LockScreen</string>
+    <string name="security_privacy_grid_lockscreen_summary">Customize lock screen</string>
+    
+    <!-- Wallpapers -->
+    <string name="security_privacy_grid_wallpapers_title">Wallpapers</string>
+    <string name="security_privacy_grid_wallpapers_summary">Change wallpaper</string>
+    
+    <!-- Theme Packs -->
+    <string name="security_privacy_grid_theme_packs_title">Theme Packs</string>
+    <string name="security_privacy_grid_theme_packs_summary">Apply theme packs</string>
+    
+    <!-- Statusbar -->
+    <string name="security_privacy_grid_statusbar_title">Statusbar</string>
+    <string name="security_privacy_grid_statusbar_summary">Customize status bar</string>
+    
+    <!-- QS Panel -->
+    <string name="security_privacy_grid_qs_panel_title">QS Panel</string>
+    <string name="security_privacy_grid_qs_panel_summary">Quick settings panel</string>
+    
+    <!-- AOD Customizations -->
+    <string name="security_privacy_grid_aod_title">AOD Customizations</string>
+    <string name="security_privacy_grid_aod_summary">Always on display settings</string>
+    
+    <!-- Time Display -->
+    <string name="security_privacy_grid_time_display_title">Time Display</string>
+    <string name="security_privacy_grid_time_display_summary">Time settings</string>
+    
+    <!-- Buttons -->
+    <string name="security_privacy_grid_buttons_title">Buttons</string>
+    <string name="security_privacy_grid_buttons_summary">Button settings</string>
+    
+    <!-- Navigation -->
+    <string name="security_privacy_grid_navigation_title">Navigation</string>
+    <string name="security_privacy_grid_navigation_summary">Navigation settings</string>
+    
+    <!-- Powermenu -->
+    <string name="security_privacy_grid_powermenu_title">Powermenu</string>
+    <string name="security_privacy_grid_powermenu_summary">Power menu settings</string>
+    
+    <!-- Miscellaneous -->
+    <string name="security_privacy_grid_miscellaneous_title">Miscellaneous</string>
+    <string name="security_privacy_grid_miscellaneous_summary">Miscellaneous settings</string>
+    
+    <!-- Notification -->
+    <string name="security_privacy_grid_notification_title">Notification</string>
+    <string name="security_privacy_grid_notification_summary">Notification settings</string>
+    
+    <!-- Team -->
+    <string name="security_privacy_grid_team_title">Team</string>
+    <string name="security_privacy_grid_team_summary">Team information</string>
+    
+    <!-- Gestures -->
+    <string name="security_privacy_grid_gestures_title">Gestures</string>
+    <string name="security_privacy_grid_gestures_summary">Gesture settings</string>
+    
+    <!-- About Us -->
+    <string name="security_privacy_grid_about_us_title">About Us</string>
+    <string name="security_privacy_grid_about_us_summary">About information</string>
+    
+    <!-- System Tuner -->
+    <string name="system_tuner_not_available">System tuner is not available</string>
+
+</resources>
+
