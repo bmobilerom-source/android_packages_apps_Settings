@@ -402,8 +402,17 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @VisibleForTesting
     void updateUninstallButton() {
         final boolean isBundled = (mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+        final boolean isVendorApp = isVendorApp();
+        final boolean hasUpdates = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         boolean enabled = true;
-        if (isBundled) {
+        // Allow updates for vendor apps even if they're system apps
+        if (isBundled && !isVendorApp) {
+            enabled = handleDisableable();
+        } else if (isBundled && isVendorApp && hasUpdates) {
+            // Vendor apps with updates can be uninstalled (revert to vendor version)
+            enabled = handleDisableable();
+        } else if (isBundled && isVendorApp && !hasUpdates) {
+            // Vendor apps without updates can still be disabled/enabled
             enabled = handleDisableable();
         } else {
             if ((mPackageInfo.applicationInfo.flags & ApplicationInfo.FLAG_INSTALLED) == 0
@@ -628,6 +637,30 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @VisibleForTesting
     boolean isSystemPackage(Resources resources, PackageManager pm, PackageInfo packageInfo) {
         return Utils.isSystemPackage(resources, pm, packageInfo);
+    }
+
+    /**
+     * Check if app is installed on vendor or product partition
+     * Note: product_specific apps install to /product/, not /vendor/
+     */
+    private boolean isVendorApp() {
+        if (mAppEntry == null || mAppEntry.info == null) {
+            return false;
+        }
+        String sourceDir = mAppEntry.info.sourceDir;
+        if (sourceDir == null) {
+            return false;
+        }
+        // Check for vendor partition
+        if (sourceDir.startsWith("/vendor/")) {
+            return true;
+        }
+        // Check for product partition (product_specific apps)
+        // These are treated as vendor-like apps for update purposes
+        if (sourceDir.startsWith("/product/") || sourceDir.contains("/product/")) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isDisabledUntilUsed() {
