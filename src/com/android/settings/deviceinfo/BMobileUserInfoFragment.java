@@ -130,6 +130,9 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 
+        // Force a stable default avatar to match design expectations.
+        controller.setIcon(activity.getDrawable(R.drawable.user_png));
+
         final UserManager userManager = (UserManager) getActivity().getSystemService(
                 Context.USER_SERVICE);
         controller.setLabel(Utils.getExistingUser(userManager,
