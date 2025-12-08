@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- First Row: Two Cards -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/card_1"
+            android:layout_width="0dp"
+            android:layout_height="111dp"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="7dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clipToOutline="true"
+            android:background="@drawable/custom_preference_background">
+
+            <RelativeLayout
+                android:id="@+id/card_1_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/card_1_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    style="@style/mtx_text_style_h6"
+                    android:textColor="@color/mtx_text_color_primary"
+                    android:text="@string/gestures_title"
+                    android:textSize="12sp"
+                    android:layout_marginStart="14dp"
+                    android:layout_alignParentTop="true" />
+
+                <TextView
+                    android:id="@+id/card_1_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/card_1_title"
+                    android:layout_marginTop="2dp"
+                    style="@style/mtx_text_style_h6"
+                    android:textColor="@color/mtx_text_color_secondary"
+                    android:textSize="9sp"
+                    android:text="@string/gestures_summary"
+                    android:layout_marginStart="14dp"/>
+
+                <TextView
+                    android:id="@+id/card_1_summary"
+                    style="@style/mtx_text_style_h6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="@string/clickhere_summary_title"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    android:textColor="@color/mtx_text_color_primary"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_alignParentBottom="true"/>
+        
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/card_2"
+            android:layout_width="0dp"
+            android:layout_height="111dp"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:clipToOutline="true"
+            android:background="@drawable/custom_preference_background">
+
+            <TextView
+                android:id="@+id/card_2_title"
+                style="@style/mtx_text_style_h6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/extras_title"
+                android:textSize="11sp"
+                android:textColor="@color/mtx_text_color_primary"
+                android:layout_marginTop="11dp"
+                android:layout_marginStart="14dp"
+                android:layout_alignParentTop="true" />
+
+            <ImageView
+                android:id="@+id/card_2_icon"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/device_info_android_logo"
+                android:layout_marginTop="11dp"
+                android:layout_marginStart="11dp"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- Second Row: Two Cards -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/card_3"
+            android:layout_width="0dp"
+            android:layout_height="111dp"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="7dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clipToOutline="true"
+            android:background="@drawable/custom_preference_background">
+
+            <RelativeLayout
+                android:id="@+id/card_3_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/card_3_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    style="@style/mtx_text_style_h6"
+                    android:textColor="@color/mtx_text_color_primary"
+                    android:text="@string/quicksettings_title"
+                    android:textSize="12sp"
+                    android:layout_marginStart="14dp"
+                    android:layout_alignParentTop="true" />
+
+                <TextView
+                    android:id="@+id/card_3_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/card_3_title"
+                    android:layout_marginTop="2dp"
+                    style="@style/mtx_text_style_h6"
+                    android:textColor="@color/mtx_text_color_secondary"
+                    android:textSize="9sp"
+                    android:text="@string/quicksettings_summary"
+                    android:layout_marginStart="14dp"/>
+
+                <TextView
+                    android:id="@+id/card_3_summary"
+                    style="@style/mtx_text_style_h6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="@string/clickhere_summary_title"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    android:textColor="@color/mtx_text_color_primary"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_alignParentBottom="true"/>
+        
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/card_4"
+            android:layout_width="0dp"
+            android:layout_height="111dp"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:clipToOutline="true"
+            android:background="@drawable/custom_preference_background">
+
+            <TextView
+                android:id="@+id/card_4_title"
+                style="@style/mtx_text_style_h6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/statusbar_title"
+                android:textSize="11sp"
+                android:textColor="@color/mtx_text_color_primary"
+                android:layout_marginTop="11dp"
+                android:layout_marginStart="14dp"
+                android:layout_alignParentTop="true" />
+
+            <ImageView
+                android:id="@+id/card_4_icon"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/device_info_android_logo"
+                android:layout_marginTop="11dp"
+                android:layout_marginStart="11dp"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
