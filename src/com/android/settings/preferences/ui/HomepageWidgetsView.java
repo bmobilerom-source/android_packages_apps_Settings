@@ -57,6 +57,9 @@ public class HomepageWidgetsView extends LinearLayout {
 
     private void bindActions() {
         Activity activity = findActivity(getContext());
+        if (activity == null) {
+            return;
+        }
         View battery = findViewById(R.id.battery_widget);
         View storage = findViewById(R.id.storage_widget);
         View search = findViewById(R.id.search_widget);
@@ -84,6 +87,7 @@ public class HomepageWidgetsView extends LinearLayout {
     }
 
     private void launchSystemLaunchPad(Activity activity) {
+        if (activity == null) return;
         // Try System Launch Pad app first
         Intent launchPadIntent = new Intent(Intent.ACTION_MAIN);
         launchPadIntent.setClassName("com.devrinth.launchpad",
@@ -125,20 +129,13 @@ public class HomepageWidgetsView extends LinearLayout {
     }
 
     private void launchSubsetting(Activity activity, String dest, int titleRes) {
+        if (activity == null) return;
         try {
-            if (activity != null) {
-                new SubSettingLauncher(activity)
-                        .setDestination(dest)
-                        .setTitleRes(titleRes)
-                        .setSourceMetricsCategory(com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS)
-                        .launch();
-            } else {
-                // fallback: attempt direct activity if available
-                Intent intent = new Intent();
-                intent.setComponent(ComponentName.unflattenFromString(dest));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getContext().startActivity(intent);
-            }
+            new SubSettingLauncher(activity)
+                    .setDestination(dest)
+                    .setTitleRes(titleRes)
+                    .setSourceMetricsCategory(com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS)
+                    .launch();
         } catch (Exception ignored) { }
     }
 
