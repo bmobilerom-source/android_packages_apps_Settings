@@ -31,17 +31,13 @@ public class SettingsDividerItemDecoration extends DividerItemDecoration {
 
     @Override
     protected boolean isDividerAllowedAbove(RecyclerView.ViewHolder viewHolder) {
-        if (viewHolder instanceof PreferenceViewHolder) {
-            return ((PreferenceViewHolder) viewHolder).isDividerAllowedAbove();
-        }
-        return super.isDividerAllowedAbove(viewHolder);
+        // Hide all dividers in Settings
+        return false;
     }
 
     @Override
     protected boolean isDividerAllowedBelow(RecyclerView.ViewHolder viewHolder) {
-        if (viewHolder instanceof PreferenceViewHolder) {
-            return ((PreferenceViewHolder) viewHolder).isDividerAllowedBelow();
-        }
-        return super.isDividerAllowedBelow(viewHolder);
+        // Hide all dividers in Settings
+        return false;
     }
 }
