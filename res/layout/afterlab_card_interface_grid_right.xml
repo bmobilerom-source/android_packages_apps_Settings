@@ -24,10 +24,10 @@
     android:layout_marginBottom="16.0dip"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:gravity="center_vertical"
         android:layout_gravity="top"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="180dp"
         app:cardBackgroundColor="@color/card_bg"
         app:cardCornerRadius="26.0dip"
@@ -46,7 +46,7 @@
                 android:layout_height="43.0dip"
                 android:tint="?android:colorPrimary"
                 android:backgroundTint="?android:colorAccent" />
-        </LinearLayout>
+        </RelativeLayout>
         <ImageView
             android:gravity="end|center"
             android:background="@drawable/adaptive_icon_shape"
@@ -55,7 +55,7 @@
             android:src="@drawable/afterlabs_icon_next"
             android:tint="?android:textColorPrimary"
             android:backgroundTint="?android:colorBackground" />
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
     <LinearLayout
         android:gravity="center_vertical"
         android:orientation="vertical"
