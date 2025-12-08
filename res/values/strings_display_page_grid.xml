@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text reading options -->
+    <string name="accessibility_text_reading_options_summary">Adjust font size, display size, bold text, and contrast</string>
+
+    <!-- Display rotation -->
+    <string name="display_rotation_title">Display rotation</string>
+    <string name="display_rotation_summary">Control auto-rotate and rotation angles</string>
+
+    <!-- Custom themes -->
+    <string name="custom_theme_title">Custom themes</string>
+    <string name="custom_theme_summary">Choose and manage your custom theme packs</string>
+
+    <!-- Color contrast -->
+    <string name="accessibility_color_contrast_summary">Improve readability with higher contrast</string>
+
+    <!-- Dashboard style -->
+    <string name="dashboard_style_title">Dashboard style</string>
+    <string name="dashboard_style_summary">Switch between dashboard layouts</string>
+
+    <!-- Color and motion -->
+    <string name="accessibility_color_and_motion_summary">Reduce motion and adjust color effects for comfort</string>
+</resources>
+

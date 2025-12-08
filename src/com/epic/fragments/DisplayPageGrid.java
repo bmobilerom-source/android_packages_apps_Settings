@@ -63,10 +63,7 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
-        // Ensure custom theme backgrounds are applied
-        ensureThemeBackgrounds();
-        
+
         try {
             PreferenceScreen screen = getPreferenceScreen();
             if (screen == null) {
@@ -249,37 +246,6 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
             android.util.Log.e("DisplayPageGrid", "Error in onPreferenceChange", e);
         }
         return false;
-    }
-
-    /**
-     * Ensures custom theme backgrounds are applied to this fragment.
-     */
-    private void ensureThemeBackgrounds() {
-        try {
-            android.app.Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            
-            View rootView = activity.findViewById(android.R.id.content);
-            if (rootView instanceof ViewGroup) {
-                ViewGroup rootGroup = (ViewGroup) rootView;
-                if (rootGroup.findViewById(R.id.theme_background) != null) {
-                    return;
-                }
-                
-                com.android.settings.preferences.ui.AdaptiveThemeBackgroundView themeView =
-                        new com.android.settings.preferences.ui.AdaptiveThemeBackgroundView(activity);
-                themeView.setId(R.id.theme_background);
-                themeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
-                int insertIndex = (rootGroup.findViewById(R.id.wallpaper_background) != null) ? 1 : 0;
-                rootGroup.addView(themeView, insertIndex, new ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
-            }
-        } catch (Exception e) {
-            android.util.Log.e("DisplayPageGrid", "Error adding theme background", e);
-        }
     }
 
     @Override
