@@ -16,7 +16,10 @@ import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -114,12 +117,17 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         final Bundle bundle = getArguments();
 
+        Drawable chosenDrawable = null;
         String path = activity.getSharedPreferences(getImagePrefName(), Context.MODE_PRIVATE)
                 .getString(getImagePrefKey(), "");
         if (!path.isEmpty()) {
             try {
-                iv.setImageBitmap(BitmapFactory.decodeStream(
-                        getContentResolver().openInputStream(Uri.parse(path))));
+                Bitmap bmp = BitmapFactory.decodeStream(
+                        getContentResolver().openInputStream(Uri.parse(path)));
+                if (bmp != null) {
+                    iv.setImageBitmap(bmp);
+                    chosenDrawable = new BitmapDrawable(getResources(), bmp);
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -130,8 +138,12 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 
-        // Force a stable default avatar to match design expectations.
-        controller.setIcon(activity.getDrawable(R.drawable.user_png));
+        // Use chosen avatar if available, else fallback to default.
+        if (chosenDrawable != null) {
+            controller.setIcon(chosenDrawable);
+        } else {
+            controller.setIcon(activity.getDrawable(R.drawable.user_png));
+        }
 
         final UserManager userManager = (UserManager) getActivity().getSystemService(
                 Context.USER_SERVICE);
