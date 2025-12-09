@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 LineageOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/my_session_title">
+   <com.android.settingslib.widget.IllustrationPreference
+        android:key="qs_header_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/display" />
+
+    <!-- Session Messenger Intro -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="session_intro"
+        android:title="@string/session_messenger_intro_title"
+        android:summary="@string/session_messenger_intro_summary"
+        android:order="1"
+        settings:searchable="false" />
+
+    <!-- Session Messenger -->
+    <com.android.settings.preferences.ui.AdaptivePreference
+        android:key="session_messenger_pref"
+        android:title="@string/session_messenger_title"
+        android:summary="@string/session_messenger_summary"
+        android:order="3"
+        app:position="solo"
+        settings:controller="com.epic.fragments.SessionMessengerController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="network.loki.messenger"
+            android:targetClass="network.loki.messenger.RoutingActivity" />
+    </com.android.settings.preferences.ui.AdaptivePreference>
+
+</PreferenceScreen>
