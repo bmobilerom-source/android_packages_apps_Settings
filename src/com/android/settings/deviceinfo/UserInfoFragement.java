@@ -36,6 +36,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -46,9 +47,9 @@ import android.net.Uri;
 import com.android.internal.util.UserIcons;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -66,6 +67,8 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
     UserManager mUserManager;
     Context context;
     private static final String KEY_USER_CARD = "user_header";
+    private static final String IMAGE_PREF_NAME = "shared_user_image_path";
+    private static final String IMAGE_PREF_KEY = "image_path";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,9 +122,10 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
             try {
                 iv.setImageBitmap(BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.parse(path))));
             } catch (FileNotFoundException e) {
-                iv.setImageResource(R.drawable.user);
+                iv.setImageResource(R.drawable.user_png);
             }
-            context.getSharedPreferences("image_path", Context.MODE_PRIVATE).edit().putString("image_path", path).commit();
+            context.getSharedPreferences(IMAGE_PREF_NAME, Context.MODE_PRIVATE)
+                    .edit().putString(IMAGE_PREF_KEY, path).commit();
         }
     }
 
@@ -144,13 +148,22 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
         final Activity context = getActivity();
         final Bundle bundle = getArguments();
 
-        String path = context.getSharedPreferences("image_path", Context.MODE_PRIVATE).getString("image_path", "");
+        String path = context.getSharedPreferences(IMAGE_PREF_NAME, Context.MODE_PRIVATE)
+                .getString(IMAGE_PREF_KEY, "");
+        Drawable chosenDrawable = null;
         if (!path.isEmpty()) {
             try {
-                iv.setImageBitmap(BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.parse(path))));
+                Bitmap bmp = BitmapFactory.decodeStream(
+                        getContentResolver().openInputStream(Uri.parse(path)));
+                if (bmp != null) {
+                    iv.setImageBitmap(bmp);
+                    chosenDrawable = new BitmapDrawable(getResources(), bmp);
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        } else {
+            iv.setImageResource(R.drawable.user_png);
         }
 
         final EntityHeaderController controller = EntityHeaderController
@@ -165,6 +178,12 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
             final UserInfo info = Utils.getExistingUser(userManager,
                     android.os.Process.myUserHandle());
             controller.setLabel(info.name);
+        }
+
+        if (chosenDrawable != null) {
+            controller.setIcon(chosenDrawable);
+        } else {
+            controller.setIcon(getActivity().getDrawable(R.drawable.user_png));
         }
 
         controller.done(true);
