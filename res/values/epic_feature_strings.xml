@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- System Optimization -->
+    <string name="system_optimization_title">System optimization</string>
+    <string name="system_optimization_intro_title">Optimize your device</string>
+    <string name="system_optimization_intro_summary">Enable safe, framework-free optimizations that improve stability, battery, storage, and thermal behavior.</string>
+    <string name="background_app_limits_title">Background app limits</string>
+    <string name="background_app_limits_summary">Restrict background processes to reduce resource usage.</string>
+    <string name="network_optimization_title">Network optimization</string>
+    <string name="network_optimization_summary">Optimize network behavior to reduce unnecessary data and power use.</string>
+    <string name="battery_optimization_title">Battery optimization</string>
+    <string name="battery_optimization_summary">Apply aggressive battery saving tuned for stability.</string>
+    <string name="storage_optimization_title">Storage optimization</string>
+    <string name="storage_optimization_summary">Optimize storage access patterns to improve responsiveness.</string>
+    <string name="thermal_throttling_title">Thermal monitoring</string>
+    <string name="thermal_throttling_summary">Monitor and react to thermal throttling conditions.</string>
+    <string name="optimization_status_title">Optimization status</string>
+    <string name="optimization_status_summary">View active optimizations and current system status.</string>
+    <string name="system_optimization_info_title">About these optimizations</string>
+    <string name="system_optimization_info_summary">Only features that work without kernel or framework changes are provided here.</string>
+
+    <!-- Security Features -->
+    <string name="security_features_title">Security features</string>
+    <string name="security_features_intro_title">Harden your device</string>
+    <string name="security_features_intro_summary">Control app network, sensor, location, and microphone access with OS-level toggles.</string>
+    <string name="security_features_category_access_control">Access controls</string>
+    <string name="network_permission_control_title">Network permission control</string>
+    <string name="network_permission_control_summary">Restrict app network access at the OS layer.</string>
+    <string name="app_hardening_title">App hardening</string>
+    <string name="app_hardening_summary">Apply additional runtime mitigations to user apps.</string>
+    <string name="sensor_access_control_title">Sensor access control</string>
+    <string name="sensor_access_control_summary">Block sensor access when not explicitly in use.</string>
+    <string name="location_access_control_title">Location access control</string>
+    <string name="location_access_control_summary">Require explicit approval before apps can read location.</string>
+    <string name="microphone_access_control_title">Microphone access control</string>
+    <string name="microphone_access_control_summary">Block microphone access except when permitted.</string>
+
+    <!-- Settings Backup & Restore -->
+    <string name="settings_backup_restore_title">Settings backup &amp; restore</string>
+    <string name="settings_backup_restore_intro_title">Save your setup</string>
+    <string name="settings_backup_restore_intro_summary">Backup your Settings configuration and restore it later on this device.</string>
+    <string name="settings_backup_restore_category_title">Backup options</string>
+    <string name="settings_backup_title">Backup settings</string>
+    <string name="settings_backup_summary">Export your current Settings configuration to a file.</string>
+    <string name="settings_restore_title">Restore settings</string>
+    <string name="settings_restore_summary">Import a previously saved Settings configuration.</string>
+    <string name="settings_backup_success">Backup saved to: %1$s</string>
+    <string name="settings_backup_error">Could not complete backup.</string>
+    <string name="settings_restore_success">Restored %1$d settings.</string>
+    <string name="settings_restore_error">Could not restore settings.</string>
+    <string name="settings_restore_file_not_found">Backup file not found.</string>
+
+    <!-- Power Tweaks -->
+    <string name="power_tweaks_title">Power tweaks</string>
+    <string name="power_tweaks_summary">Charge, battery, and power efficiency controls.</string>
+    <string name="power_tweaks_category_charging">Charging</string>
+    <string name="power_tweaks_category_battery">Battery &amp; efficiency</string>
+    <string name="fast_charging_title">Fast charging</string>
+    <string name="fast_charging_summary">Enable vendor fast-charging behavior.</string>
+    <string name="charging_led_title">Charging LED</string>
+    <string name="charging_led_summary">Show LED while charging.</string>
+    <string name="charging_sound_title">Charging sound</string>
+    <string name="charging_sound_summary">Play a sound when charging starts.</string>
+    <string name="charging_animation_title">Charging animation</string>
+    <string name="charging_animation_summary">Show charging animation on screen.</string>
+    <string name="smart_charging_title">Smart charging</string>
+    <string name="smart_charging_summary">Slow charging above 80% to reduce wear.</string>
+    <string name="wake_on_charge_title">Wake on charge</string>
+    <string name="wake_on_charge_summary">Turn on the screen when power is connected.</string>
+    <string name="battery_saver_auto_title">Auto battery saver</string>
+    <string name="battery_saver_auto_summary">Enable battery saver automatically at low battery.</string>
+    <string name="battery_calibration_title">Battery calibration</string>
+    <string name="battery_calibration_summary">Reset battery stats for troubleshooting.</string>
+    <string name="power_efficient_mode_title">Power efficient mode</string>
+    <string name="power_efficient_mode_summary">Reduce performance to save power.</string>
+    <string name="screen_off_optimization_title">Screen-off optimization</string>
+    <string name="screen_off_optimization_summary">Apply extra savings when the screen is off.</string>
+
+    <!-- Hide developer status -->
+    <string name="hide_developer_status_title">Hide developer status</string>
+    <string name="hide_developer_status_summary">Choose apps that should not see ADB/developer enabled state.</string>
+</resources>
+

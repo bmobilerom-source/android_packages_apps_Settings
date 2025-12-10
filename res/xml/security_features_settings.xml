@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 LineageOS
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/security_features_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="security_features_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/security" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="security_features_intro"
+        android:order="-1000"
+        android:title="@string/security_features_intro_title"
+        android:summary="@string/security_features_intro_summary"
+        android:persistent="false"
+        settings:searchable="false" />
+
+    <!-- Note: Data Collection, Services, and Updates categories removed as controllers don't exist -->
+    <!-- These can be reimplemented in the future if needed -->
+
+    <!-- Access Control Features - Based on GrapheneOS and CalyxOS -->
+    <PreferenceCategory
+        android:title="@string/security_features_category_access_control"
+        android:key="security_access_control_category"
+        android:order="40"
+        settings:searchable="false">
+
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="network_permission_control"
+            android:title="@string/network_permission_control_title"
+            android:summary="@string/network_permission_control_summary"
+            android:defaultValue="false"
+            app:position="top"
+            settings:controller="com.epic.fragments.NetworkPermissionControlController"
+            settings:searchable="false" />
+
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="app_hardening"
+            android:title="@string/app_hardening_title"
+            android:summary="@string/app_hardening_summary"
+            android:defaultValue="false"
+            app:position="middle"
+            settings:controller="com.epic.fragments.AppHardeningController"
+            settings:searchable="false" />
+
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="sensor_access_control"
+            android:title="@string/sensor_access_control_title"
+            android:summary="@string/sensor_access_control_summary"
+            android:defaultValue="false"
+            app:position="middle"
+            settings:controller="com.epic.fragments.SensorAccessControlController"
+            settings:searchable="false" />
+
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="location_access_control"
+            android:title="@string/location_access_control_title"
+            android:summary="@string/location_access_control_summary"
+            android:defaultValue="false"
+            app:position="middle"
+            settings:controller="com.epic.fragments.LocationAccessControlController"
+            settings:searchable="false" />
+
+        <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+            android:key="microphone_access_control"
+            android:title="@string/microphone_access_control_title"
+            android:summary="@string/microphone_access_control_summary"
+            android:defaultValue="false"
+            app:position="bottom"
+            settings:controller="com.epic.fragments.MicrophoneAccessControlController"
+            settings:searchable="false" />
+
+    </PreferenceCategory>
+
+    <Preference
+        android:key="hide_developer_status_entry"
+        android:title="@string/hide_developer_status_title"
+        android:summary="@string/hide_developer_status_summary"
+        android:fragment="com.epic.fragments.HideDeveloperStatusSettings" />
+
+</PreferenceScreen>
