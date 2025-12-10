@@ -57,24 +57,15 @@ public class HomepageWidgetsView extends LinearLayout {
 
     private void bindActions() {
         Activity activity = findActivity(getContext());
-        if (activity == null) {
-            return;
-        }
         View battery = findViewById(R.id.battery_widget);
         View storage = findViewById(R.id.storage_widget);
         View search = findViewById(R.id.search_widget);
         View system = findViewById(R.id.system_widget);
 
-        setInteractiveClick(battery, () -> launchSubsetting(activity,
-                "com.android.settings.fuelgauge.PowerUsageSummary",
-                R.string.power_usage_summary_title));
-        setInteractiveClick(storage, () -> launchSubsetting(activity,
-                "com.android.settings.deviceinfo.StorageDashboardFragment",
-                R.string.storage_settings));
+        setInteractiveClick(battery, () -> openBattery(activity));
+        setInteractiveClick(storage, () -> openStorage(activity));
         setInteractiveClick(search, () -> launchSystemLaunchPad(activity));
-        setInteractiveClick(system, () -> launchSubsetting(activity,
-                "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
-                R.string.connected_devices_dashboard_title));
+        setInteractiveClick(system, () -> openConnectedDevices(activity));
     }
 
     private void setInteractiveClick(View v, Runnable action) {
@@ -86,25 +77,84 @@ public class HomepageWidgetsView extends LinearLayout {
         v.setOnClickListener(view -> action.run());
     }
 
+    private void openBattery(Activity activity) {
+        // Try stock battery activity first (works for system/priv apps), then fallback fragment.
+        try {
+            Intent intent = new Intent("android.intent.action.POWER_USAGE_SUMMARY");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            (activity != null ? activity : getContext()).startActivity(intent);
+            return;
+        } catch (Exception ignored) { }
+
+        if (activity != null) {
+            try {
+                new com.android.settings.core.SubSettingLauncher(activity)
+                        .setDestination("com.android.settings.fuelgauge.batteryusage.PowerUsageSummary")
+                        .setTitleRes(R.string.power_usage_summary_title)
+                        .setSourceMetricsCategory(com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS)
+                        .launch();
+                return;
+            } catch (Exception ignored) { }
+        }
+    }
+
+    private void openStorage(Activity activity) {
+        // Use exported storage settings activity first to avoid fragment crashes without privilege.
+        try {
+            Intent intent = new Intent(android.provider.Settings.ACTION_INTERNAL_STORAGE_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            (activity != null ? activity : getContext()).startActivity(intent);
+            return;
+        } catch (Exception ignored) { }
+
+        if (activity != null) {
+            try {
+                new com.android.settings.core.SubSettingLauncher(activity)
+                        .setDestination("com.android.settings.deviceinfo.StorageDashboardFragment")
+                        .setTitleRes(R.string.storage_settings)
+                        .setSourceMetricsCategory(com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS)
+                        .launch();
+                return;
+            } catch (Exception ignored) { }
+        }
+    }
+
+    private void openConnectedDevices(Activity activity) {
+        // Prefer exported BT settings for faster, one-tap open; fallback to fragment.
+        try {
+            Intent intent = new Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            (activity != null ? activity : getContext()).startActivity(intent);
+            return;
+        } catch (Exception ignored) { }
+
+        if (activity != null) {
+            try {
+                new com.android.settings.core.SubSettingLauncher(activity)
+                        .setDestination("com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment")
+                        .setTitleRes(R.string.connected_devices_dashboard_title)
+                        .setSourceMetricsCategory(com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS)
+                        .launch();
+                return;
+            } catch (Exception ignored) { }
+        }
+    }
+
     private void launchSystemLaunchPad(Activity activity) {
         if (activity == null) return;
         // Try System Launch Pad app first
         Intent launchPadIntent = new Intent(Intent.ACTION_MAIN);
         launchPadIntent.setClassName("com.devrinth.launchpad",
                 "com.devrinth.launchpad.activities.LaunchpadOverlayActivity");
-        PackageManager pm = getContext().getPackageManager();
-        ResolveInfo ri = pm.resolveActivity(launchPadIntent, 0);
-        if (ri != null) {
-            try {
-                if (activity != null) {
-                    activity.startActivity(launchPadIntent);
-                } else {
-                    launchPadIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getContext().startActivity(launchPadIntent);
-                }
-                return;
-            } catch (Exception ignored) { }
-        }
+        launchPadIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        try {
+            if (activity != null) {
+                activity.startActivity(launchPadIntent);
+            } else {
+                getContext().startActivity(launchPadIntent);
+            }
+            return;
+        } catch (Exception ignored) { }
 
         // Fallback to Settings search, then main Settings
         try {
@@ -126,17 +176,6 @@ public class HomepageWidgetsView extends LinearLayout {
                 }
             } catch (Exception ignored) { }
         }
-    }
-
-    private void launchSubsetting(Activity activity, String dest, int titleRes) {
-        if (activity == null) return;
-        try {
-            new SubSettingLauncher(activity)
-                    .setDestination(dest)
-                    .setTitleRes(titleRes)
-                    .setSourceMetricsCategory(com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS)
-                    .launch();
-        } catch (Exception ignored) { }
     }
 
     private Activity findActivity(Context context) {
