@@ -410,10 +410,10 @@ public class SettingsGateway {
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
             ContactsStorageSettings.class.getName(),
-            LabSettings.class.getName(),            
-            // Anatolia Additions
-            Anatolia.class.getName(),
-            com.epic.fragments.SettingsExtendedSecurity.class.getName()
+            com.epic.fragments.SettingsExtendedSecurity.class.getName(),
+            com.epic.fragments.MyPersonalFragment.class.getName(),
+            com.epic.fragments.MySessionFragment.class.getName(),
+            com.epic.fragments.BMobileSettingsFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
