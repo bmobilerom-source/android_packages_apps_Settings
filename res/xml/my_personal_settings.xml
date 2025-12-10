@@ -26,47 +26,17 @@
         app:lottie_rawRes="@raw/display" />
 
     <!-- Daily Journal -->
-    <com.android.settings.preferences.ui.AdaptivePreference
+    <Preference
         android:key="daily_journal_pref"
         android:title="@string/daily_journal_title"
         android:summary="@string/daily_journal_summary"
         android:order="3"
-        app:position="middle"
         settings:controller="com.epic.fragments.DailyJournalController">
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.demizo.daily_you"
             android:targetClass="com.demizo.daily_you.MainActivity" />
-    </com.android.settings.preferences.ui.AdaptivePreference>
+    </Preference>
 
-    <!-- Multiuser Settings -->
-    <com.android.settings.preferences.ui.AdaptivePreference
-        android:key="multiuser"
-        android:order="4"
-        android:icon="@drawable/ic_translate_24dp"
-        android:title="@string/multiuser_settings_title"
-        app:position="middle"
-        settings:layout="@layout/system_features_preference_card"
-        android:fragment="com.android.settings.users.UserSettings" />
-
-    <!-- Accounts Settings -->
-    <com.android.settings.preferences.ui.AdaptivePreference
-        android:key="accounts"
-        android:order="5"
-        android:icon="@drawable/ic_translate_24dp"
-        settings:layout="@layout/system_features_preference_card"
-        android:title="@string/accounts_settings_title"
-        app:position="middle"
-        android:fragment="com.android.settings.accounts.AccountDashboardFragment" />
-
-    <!-- Emergency Settings -->
-    <com.android.settings.preferences.ui.AdaptivePreference
-        android:key="emergency"
-        android:order="6"
-        android:icon="@drawable/ic_translate_24dp"
-        settings:layout="@layout/system_features_preference_card"
-        android:title="@string/emergency_settings_title"
-        app:position="bottom"
-        android:fragment="com.android.settings.emergency.EmergencyDashboardFragment" />
-
+    
 </PreferenceScreen>

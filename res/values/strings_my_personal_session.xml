@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- My Personal -->
+    <string name="daily_journal_title">Daily Journal</string>
+    <string name="daily_journal_summary">Open Daily You journal</string>
+
+    <!-- My Session -->
+    <string name="session_messenger_intro_title">Session Messenger</string>
+    <string name="session_messenger_intro_summary">Private messenger overview</string>
+    <string name="session_messenger_title">Session Messenger</string>
+    <string name="session_messenger_summary">Launch Session routing activity</string>
+</resources>
+

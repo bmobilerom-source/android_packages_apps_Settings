@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/bmobile_settings_title">
+
+    <Preference
+        android:key="microg_pref"
+        android:title="@string/bmobile_microg_title"
+        android:summary="@string/bmobile_microg_summary"
+        settings:controller="com.epic.fragments.MicroGPreferenceController" />
+
+    <Preference
+        android:key="aurora_services_pref"
+        android:title="@string/bmobile_aurora_services_title"
+        android:summary="@string/bmobile_aurora_services_summary"
+        settings:controller="com.epic.fragments.AuroraServicesPreferenceController" />
+
+    <Preference
+        android:key="firewall_pref"
+        android:title="@string/bmobile_firewall_title"
+        android:summary="@string/bmobile_firewall_summary"
+        settings:controller="com.epic.fragments.FirewallPreferenceController" />
+
+    <Preference
+        android:key="ad_services_pref"
+        android:title="@string/bmobile_ad_services_title"
+        android:summary="@string/bmobile_ad_services_summary"
+        settings:controller="com.epic.fragments.AdServicesPreferenceController" />
+
+</PreferenceScreen>
+

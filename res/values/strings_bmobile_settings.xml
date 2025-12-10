@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bmobile_settings_title">BMobile settings</string>
+    <string name="bmobile_settings_summary">Manage BMobile service integrations</string>
+    <string name="bmobile_microg_title">MicroG services</string>
+    <string name="bmobile_microg_summary">MicroG or GmsCore configuration</string>
+    <string name="bmobile_aurora_services_title">Aurora services</string>
+    <string name="bmobile_aurora_services_summary">Aurora integration options</string>
+    <string name="bmobile_firewall_title">Firewall</string>
+    <string name="bmobile_firewall_summary">Network firewall controls</string>
+    <string name="bmobile_ad_services_title">Ad services</string>
+    <string name="bmobile_ad_services_summary">Ad/privacy service toggles</string>
+</resources>
+
