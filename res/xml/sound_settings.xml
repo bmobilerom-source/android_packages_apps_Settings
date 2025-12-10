@@ -17,10 +17,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/sound_settings"
     android:key="sound_settings"
     settings:keywords="@string/keywords_sounds">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="sounds"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/sound"/> 
     <!-- Remote volume group -->
     <PreferenceCategory
         android:key="remote_media_group"
@@ -33,6 +39,7 @@
     <!-- Media volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="media_volume"
+        android:layout="@layout/adaptive_volume_card_progress"
         android:icon="@drawable/ic_media_stream"
         android:title="@string/media_volume_option_title"
         android:order="-180"
@@ -51,6 +58,7 @@
     <!-- Call volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="call_volume"
+        android:layout="@layout/adaptive_volume_card_progress"
         android:icon="@drawable/ic_local_phone_24_lib"
         android:title="@string/call_volume_option_title"
         android:order="-170"
@@ -72,12 +80,14 @@
         android:icon="@drawable/ic_ring_volume"
         android:title="@string/separate_ring_volume_option_title"
         android:order="-155"
+        android:layout="@layout/adaptive_volume_card_progress"
         settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.SeparateRingVolumePreferenceController"/>
 
     <!-- Notification volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="notification_volume"
+        android:layout="@layout/adaptive_volume_card_progress"
         android:icon="@drawable/ic_notifications"
         android:title="@string/notification_volume_option_title"
         android:order="-150"
@@ -91,6 +101,7 @@
         android:icon="@*android:drawable/ic_audio_alarm"
         android:title="@string/alarm_volume_option_title"
         android:order="-140"
+        android:layout="@layout/adaptive_volume_card_progress"
         settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
 
@@ -109,13 +120,33 @@
     <com.android.settings.DefaultRingtonePreference
         android:key="phone_ringtone"
         android:title="@string/ringtone_title"
+        settings:layout="@layout/adaptive_preference_card_top"
         android:dialogTitle="@string/ringtone_title"
         android:summary="@string/summary_placeholder"
         android:ringtoneType="ringtone"
         android:order="-120"
         settings:keywords="@string/sound_settings"/>
 
-    <!-- Live Caption -110 and Now Playing -105-->
+    
+    <!-- Default notification ringtone -->
+    <com.android.settings.DefaultRingtonePreference
+        android:key="notification_ringtone"
+        android:title="@string/notification_ringtone_title"
+        settings:layout="@layout/adaptive_preference_card_middle"
+        android:dialogTitle="@string/notification_ringtone_title"
+        android:summary="@string/summary_placeholder"
+        android:ringtoneType="notification"
+        android:order="-119"/>
+
+    <!-- Custom charging sounds -->
+    <lineageos.preference.LineagePartsPreference
+        android:key="charging_sounds_settings"
+        android:order="-117"
+        settings:replacesKey="charging_sounds"  
+        settings:requiresConfig="@bool/config_show_charging_sounds" 
+        settings:layout="@layout/adaptive_preference_card_middle" />
+
+    <!-- Live Caption and Now Playing are added programmatically via controllers -->
 
     <!-- Spatial audio -->
     <Preference
@@ -128,6 +159,7 @@
     <Preference
         android:key="media_controls_summary"
         android:title="@string/media_controls_title"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:fragment="com.android.settings.sound.MediaControlsSettings"
         android:order="-100"
         settings:controller="com.android.settings.sound.MediaControlsParentPreferenceController"
@@ -135,6 +167,7 @@
 
     <!-- Also vibration -->
     <Preference
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:fragment="com.android.settings.accessibility.VibrationSettings"
         android:key="vibration_and_haptics"
         android:title="@string/accessibility_vibration_settings_title"
@@ -149,19 +182,12 @@
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController"/>
 
-    <!-- Default notification ringtone -->
-    <com.android.settings.DefaultRingtonePreference
-        android:key="notification_ringtone"
-        android:title="@string/notification_ringtone_title"
-        android:dialogTitle="@string/notification_ringtone_title"
-        android:summary="@string/summary_placeholder"
-        android:ringtoneType="notification"
-        android:order="-70"/>
 
     <!-- Default alarm ringtone -->
     <com.android.settings.DefaultRingtonePreference
         android:key="alarm_ringtone"
         android:title="@string/alarm_ringtone_title"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:dialogTitle="@string/alarm_ringtone_title"
         android:summary="@string/summary_placeholder"
         android:persistent="false"
