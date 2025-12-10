@@ -18,9 +18,13 @@ package com.android.settings.notification;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SOUND_SETTINGS_SECTION_HEADER;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -34,6 +38,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
@@ -47,6 +52,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.ActionBarShadowController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -126,6 +132,27 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     @Override
     public int getHelpResource() {
         return R.string.help_url_sound;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Apply card layouts to programmatically added preferences
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            // Live Caption - already handled by LiveCaptionPreferenceController.displayPreference()
+            // but ensure it's set in case of rebinding
+            Preference liveCaptionPref = screen.findPreference("live_caption");
+            if (liveCaptionPref != null) {
+                liveCaptionPref.setLayoutResource(R.layout.adaptive_preference_card);
+            }
+            
+            // Now Playing - apply card layout programmatically
+            Preference nowPlayingPref = screen.findPreference("now_playing");
+            if (nowPlayingPref != null) {
+                nowPlayingPref.setLayoutResource(R.layout.adaptive_preference_card);
+            }
+        }
     }
 
     @Override
@@ -268,6 +295,9 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         controllers.add(new PhoneRingtonePreferenceController(context));
         controllers.add(new AlarmRingtonePreferenceController(context));
         controllers.add(new NotificationRingtonePreferenceController(context));
+
+        // === Live Caption & Now Playing ===
+        controllers.add(new com.android.settings.accessibility.LiveCaptionPreferenceController(context, "live_caption"));
 
         // === Other Sound Settings ===
         final DialPadTonePreferenceController dialPadTonePreferenceController =
