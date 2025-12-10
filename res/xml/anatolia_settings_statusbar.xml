@@ -33,5 +33,11 @@
         android:summary="@string/bmobile_accounts_summary"
         android:fragment="com.android.settings.deviceinfo.BMobileAccountsFragment"
         settings:layout="@layout/adaptive_preference_card_middle" />
+
+    <Preference
+        android:key="system_optimization_entry_statusbar"
+        android:title="@string/system_optimization_title"
+        android:summary="@string/system_optimization_intro_summary"
+        android:fragment="com.epic.fragments.SystemOptimizationSettings" />
   
 </PreferenceScreen>

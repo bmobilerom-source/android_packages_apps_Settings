@@ -25,4 +25,16 @@
         android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
         settings:layout="@layout/system_big_card_preference" />
 
+    <Preference
+        android:key="system_optimization_entry_power"
+        android:title="@string/system_optimization_title"
+        android:summary="@string/system_optimization_intro_summary"
+        android:fragment="com.epic.fragments.SystemOptimizationSettings" />
+
+    <Preference
+        android:key="power_tweaks_entry"
+        android:title="@string/power_tweaks_title"
+        android:summary="@string/power_tweaks_summary"
+        android:fragment="com.epic.fragments.PowerTweaksSettings" />
+
 </PreferenceScreen>
