@@ -21,7 +21,7 @@ public class BMobileAccountsFragment extends BMobileUserInfoFragment {
 
     @Override
     protected String getImagePrefName() {
-        return "bmobile_accounts_image_path";
+        return "shared_user_image_path";
     }
 
     @Override

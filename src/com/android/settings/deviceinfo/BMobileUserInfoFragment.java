@@ -95,10 +95,10 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
                 iv.setImageBitmap(BitmapFactory.decodeStream(
                         getContentResolver().openInputStream(Uri.parse(path))));
             } catch (FileNotFoundException e) {
-                iv.setImageResource(R.drawable.user);
+                iv.setImageResource(R.drawable.user_png);
             }
-            context.getSharedPreferences("bmobile_image_path", Context.MODE_PRIVATE)
-                    .edit().putString("image_path", path).commit();
+            context.getSharedPreferences(getImagePrefName(), Context.MODE_PRIVATE)
+                    .edit().putString(getImagePrefKey(), path).commit();
         }
     }
 
@@ -131,6 +131,8 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        } else {
+            iv.setImageResource(R.drawable.user_png);
         }
 
         final EntityHeaderController controller = EntityHeaderController
@@ -162,7 +164,7 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
     }
 
     protected String getImagePrefName() {
-        return "bmobile_image_path";
+        return "shared_user_image_path";
     }
 
     protected String getImagePrefKey() {
