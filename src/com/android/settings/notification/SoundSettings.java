@@ -18,9 +18,6 @@ package com.android.settings.notification;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SOUND_SETTINGS_SECTION_HEADER;
 
-import android.app.settings.SettingsEnums;
-import android.content.Context;
-import android.content.Intent;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -56,8 +53,6 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ActionBarShadowController;
-
-import com.android.settings.preferences.ui.AdaptiveSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
