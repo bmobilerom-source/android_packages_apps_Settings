@@ -48,6 +48,19 @@ public class MicroGPreferenceController extends BasePreferenceController {
         }
     }
 
+    private boolean launchApp() {
+        try {
+            android.content.Intent intent =
+                    mContext.getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
+            if (intent == null) return false;
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     @Override
     public boolean handlePreferenceTreeClick(androidx.preference.Preference preference) {
         if (!isAppInstalled()) {
@@ -56,7 +69,8 @@ public class MicroGPreferenceController extends BasePreferenceController {
                 "MicroG app is not installed", android.widget.Toast.LENGTH_LONG).show();
             return true; // Consume the click
         }
-        // App is installed - let the intent handle it
+        // Try to launch the app; if it fails, fall back to super
+        if (launchApp()) return true;
         return super.handlePreferenceTreeClick(preference);
     }
 }
