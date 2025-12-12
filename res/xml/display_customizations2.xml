@@ -19,4 +19,11 @@
     android:key="display_customizations2"
     android:title=" ">
 
+    <!-- Monet Color Integration -->
+    <PreferenceScreen
+        android:key="monet_color_integration"
+        android:title="@string/monet_color_settings_title"
+        android:summary="@string/monet_color_settings_summary"
+        android:fragment="com.android.settings.display.MonetColorSettings" />
+
 </PreferenceScreen>

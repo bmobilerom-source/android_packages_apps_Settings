@@ -13,8 +13,19 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
-    <!-- Monet color swatch dimensions -->
-    <dimen name="monet_color_swatch_size">40dp</dimen>
-    <dimen name="monet_color_swatch_corner_radius">8dp</dimen>
-</resources>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="custom_gradients_settings_screen"
+    android:title="@string/monet_custom_gradients_title">
+
+    <!-- Custom container for gradient grid -->
+    <LinearLayout
+        android:id="@+id/gradients_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp" />
+
+</PreferenceScreen>
