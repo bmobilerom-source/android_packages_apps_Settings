@@ -13921,4 +13921,62 @@
 
     <!-- Device Name Dialog -->
     <string name="about_device_nearby">Nearby devices</string>
+
+    <!-- Status Bar Settings -->
+    <string name="status_bar_settings_title">Status bar</string>
+    <string name="status_bar_settings_summary">Advanced status bar customizations</string>
+    <string name="status_bar_general_options">General options</string>
+    <string name="status_bar_height">Status bar height</string>
+    <string name="status_bar_height_summary">Adjust the height of the status bar</string>
+    <string name="notification_icon_limit_title">Notification icon limit</string>
+    <string name="notification_icon_limit_summary">Maximum number of notification icons to show</string>
+    <string name="combined_signal_icon_title">Combined signal icons</string>
+    <string name="combined_signal_icon_summary">Show combined mobile and Wi-Fi signal icons</string>
+    <string name="hide_roaming_title">Hide roaming indicator</string>
+    <string name="hide_roaming_summary">Hide roaming indicator in status bar</string>
+    <string name="volte_icon_title">VoLTE icon</string>
+    <string name="volte_icon_summary">Show VoLTE icon in status bar</string>
+    <string name="vowifi_icon_title">VoWiFi icon</string>
+    <string name="vowifi_icon_summary">Show VoWiFi icon in status bar</string>
+    <string name="hide_privacychip_title">Hide privacy indicators</string>
+    <string name="hide_privacychip_summary">Hide microphone and camera privacy indicators</string>
+    <string name="status_bar_multi_row_category">Multi-row options</string>
+    <string name="multi_row_system_icons">Multi-row system icons</string>
+    <string name="multi_row_system_icons_summary">Show system icons in multiple rows</string>
+    <string name="multi_row_notification_icons">Multi-row notification icons</string>
+    <string name="multi_row_notification_icons_summary">Show notification icons in multiple rows</string>
+    <string name="network_traffic_category">Network traffic</string>
+    <string name="network_traffic_title">Network traffic indicator</string>
+    <string name="network_traffic_summary">Show network speed indicator in status bar</string>
+
+    <!-- Quick Settings Settings -->
+    <string name="quick_settings_settings_title">Quick settings</string>
+    <string name="quick_settings_settings_summary">Advanced Quick Settings customizations</string>
+    <string name="quick_settings_tiles_category">Tiles</string>
+    <string name="qs_volume_unmute_title">Volume unmute percentage</string>
+    <string name="qs_volume_unmute_summary">Set the volume level when unmuting</string>
+    <string name="qs_leveled_flashlight_title">Leveled flashlight</string>
+    <string name="qs_leveled_flashlight_summary">Adjust flashlight brightness level</string>
+    <string name="qs_flashlight_level_global_title">Global flashlight level</string>
+    <string name="qs_flashlight_level_global_summary">Apply flashlight level to all apps</string>
+    <string name="qs_tile_label_size">Tile label size</string>
+    <string name="qs_tile_label_size_summary">Adjust the size of QS tile labels</string>
+    <string name="qs_tile_secondary_label_size">Secondary label size</string>
+    <string name="qs_tile_secondary_label_size_summary">Adjust the size of QS secondary labels</string>
+    <string name="qs_pulldown_category">Pull-down</string>
+    <string name="qs_pulldown_switch_title">QS pull-down</string>
+    <string name="qs_pulldown_switch_summary">Enable pull-down gesture on QS</string>
+    <string name="qs_pulldown_size">Pull-down size</string>
+    <string name="qs_pulldown_size_summary">Set the size of QS pull-down area</string>
+    <string name="qs_pulldown_side_title">Pull-down side</string>
+    <string name="qs_pullup_switch_title">One-finger pull-up</string>
+    <string name="qs_pullup_switch_summary">Enable one-finger pull-up gesture</string>
+    <string-array name="qs_pulldown_side_entries">
+        <item>Left</item>
+        <item>Right</item>
+    </string-array>
+    <string-array name="qs_pulldown_side_values">
+        <item>left</item>
+        <item>right</item>
+    </string-array>
 </resources>

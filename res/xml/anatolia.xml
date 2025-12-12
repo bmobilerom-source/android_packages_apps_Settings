@@ -18,12 +18,19 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/anatolia_settings_title">
 		
-		<!-- Status bar -->
+        <!-- Status bar -->
         <PreferenceScreen
             android:key="statusbar_category"
             android:title="@string/statusbar_title"
             android:summary="@string/statusbar_summary"
             android:fragment="com.epic.fragments.StatusBarSettings" />
+
+        <!-- Status bar customizations -->
+        <PreferenceScreen
+            android:key="aospmods_statusbar_category"
+            android:title="@string/status_bar_settings_title"
+            android:summary="@string/status_bar_settings_summary"
+            android:fragment="com.android.settings.display.StatusBarSettings" />
 
         <!-- Buttons -->
         <PreferenceScreen
@@ -72,7 +79,14 @@
             android:key="quicksettings_category"
             android:title="@string/quicksettings_title"
             android:summary="@string/quicksettings_summary"
-            android:fragment="com.epic.fragments.QuickSettings" />        
+            android:fragment="com.epic.fragments.QuickSettings" />
+
+        <!-- AOSPMods Quick settings -->
+        <PreferenceScreen
+            android:key="aospmods_quicksettings_category"
+            android:title="@string/quick_settings_settings_title"
+            android:summary="@string/quick_settings_settings_summary"
+            android:fragment="com.android.settings.display.QuickSettingsSettings" />        
 
         <!-- Display customizations -->
         <PreferenceScreen

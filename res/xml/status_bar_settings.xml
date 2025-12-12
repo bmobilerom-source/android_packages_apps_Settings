@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="status_bar_settings_screen"
+    android:title="@string/status_bar_settings_title">
+
+    <PreferenceCategory
+        android:title="@string/status_bar_general_options"
+        android:key="status_bar_general_category">
+
+        <!-- Note: Status bar height requires SystemUI framework modification to work -->
+        <lineageos.preference.LineageSystemSettingSeekBarPreference
+            android:key="status_bar_height_factor"
+            android:title="@string/status_bar_height"
+            android:summary="@string/status_bar_height_summary"
+            android:defaultValue="100"
+            android:max="200"
+            android:min="50"
+            settings:interval="5"
+            settings:requiresConfig="@*lineageos.platform:bool/config_enableStatusBarHeightCustomization" />
+
+        <!-- Note: Notification icon limit requires SystemUI modification to work -->
+        <lineageos.preference.LineageSystemSettingSeekBarPreference
+            android:key="notification_icon_limit"
+            android:title="@string/notification_icon_limit_title"
+            android:summary="@string/notification_icon_limit_summary"
+            android:defaultValue="4"
+            android:max="10"
+            android:min="1"
+            settings:interval="1" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="combined_signal_icons"
+            android:title="@string/combined_signal_icon_title"
+            android:summary="@string/combined_signal_icon_summary"
+            android:defaultValue="false" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="hide_roaming_state"
+            android:title="@string/hide_roaming_title"
+            android:summary="@string/hide_roaming_summary"
+            android:defaultValue="false" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="volte_icon_enabled"
+            android:title="@string/volte_icon_title"
+            android:summary="@string/volte_icon_summary"
+            android:defaultValue="false" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="vowifi_icon_enabled"
+            android:title="@string/vowifi_icon_title"
+            android:summary="@string/vowifi_icon_summary"
+            android:defaultValue="false" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="hide_privacy_chip"
+            android:title="@string/hide_privacychip_title"
+            android:summary="@string/hide_privacychip_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/status_bar_multi_row_category"
+        android:key="status_bar_multi_row_category">
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="system_icons_multi_row"
+            android:title="@string/multi_row_system_icons"
+            android:summary="@string/multi_row_system_icons_summary"
+            android:defaultValue="false" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="notification_area_multi_row"
+            android:title="@string/multi_row_notification_icons"
+            android:summary="@string/multi_row_notification_icons_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/network_traffic_category"
+        android:key="network_traffic_category">
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="network_on_sb_enabled"
+            android:title="@string/network_traffic_title"
+            android:summary="@string/network_traffic_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
