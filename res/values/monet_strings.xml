@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Monet Color Settings -->
+    <string name="monet_color_settings_title">System Background</string>
+    <string name="monet_color_settings_summary">Choose your system background color</string>
+    <string name="monet_current_colors_title">Current colors</string>
+    <string name="monet_current_style_title">Current style</string>
+    <string name="monet_current_style">Current style: %s</string>
+    <string name="monet_current_style_summary">Active color style</string>
+    <string name="monet_color_style_title">Color style</string>
+    <string name="monet_color_style_summary">Choose monet color style</string>
+    <string name="monet_style_selection_title">Style Selection</string>
+    <string name="monet_color_presets_title">Color presets</string>
+    <string name="monet_color_presets_summary">Predefined dark color combinations</string>
+    <string name="monet_custom_gradients_title">Custom gradients</string>
+    <string name="monet_custom_gradients_summary">Multi-color gradients</string>
+    <string name="monet_time_based_colors_title">Time-based colors</string>
+    <string name="monet_time_based_colors_summary">Colors change based on time of day</string>
+    <string name="monet_contextual_colors_title">Contextual colors</string>
+    <string name="monet_contextual_colors_summary">Colors change based on notifications</string>
+    <string name="monet_settings_background_title">Settings background</string>
+    <string name="monet_settings_background_mode_title">Background mode</string>
+    <string name="monet_settings_background_mode_summary">Choose background color source</string>
+    <string name="monet_settings_background_custom_title">Custom color</string>
+    <string name="monet_settings_background_custom_summary">Pick custom background color</string>
+    <string name="monet_reset_to_wallpaper_title">Reset to wallpaper</string>
+    <string name="monet_reset_to_wallpaper_summary">Use wallpaper colors</string>
+    <string name="monet_reset_title">Reset</string>
+
+    <!-- Custom Seed Color -->
+    <string name="monet_custom_seed_title">Custom seed color</string>
+    <string name="monet_custom_seed_summary">Pick your own base color for Monet theming</string>
+
+    <!-- Random Preset -->
+    <string name="monet_random_preset_title">Generate random</string>
+    <string name="monet_random_preset_summary">Create a random color scheme</string>
+
+    <!-- Advanced Controls -->
+    <string name="monet_advanced_title">Advanced controls</string>
+    <string name="monet_luminance_title">Luminance factor</string>
+    <string name="monet_luminance_summary">Adjust color brightness (0-100%)</string>
+    <string name="monet_chroma_title">Chroma factor</string>
+    <string name="monet_chroma_summary">Adjust color saturation (0-100%)</string>
+    <string name="monet_tint_background_title">Tint background</string>
+    <string name="monet_tint_background_summary">Apply accent color to system background</string>
+
+    <!-- Color Styles -->
+    <string-array name="monet_color_styles">
+        <item>Tonal Spot</item>
+        <item>Vibrant</item>
+        <item>Expressive</item>
+        <item>Spritz</item>
+        <item>Rainbow</item>
+        <item>Fruit Salad</item>
+    </string-array>
+    <string-array name="monet_color_style_values">
+        <item>tonal_spot</item>
+        <item>vibrant</item>
+        <item>expressive</item>
+        <item>spritz</item>
+        <item>rainbow</item>
+        <item>fruit_salad</item>
+    </string-array>
+
+    <!-- Background Modes -->
+    <string-array name="settings_background_modes">
+        <item>Wallpaper</item>
+        <item>Custom</item>
+        <item>Preset</item>
+    </string-array>
+    <string-array name="settings_background_mode_values">
+        <item>wallpaper</item>
+        <item>custom</item>
+        <item>preset</item>
+    </string-array>
+
+    <!-- Time-based Colors -->
+    <string name="monet_time_based_colors_category">Time slots</string>
+    <string name="monet_time_based_colors_enable_title">Enable time-based colors</string>
+    <string name="monet_time_based_colors_enable_summary">Change colors based on time of day</string>
+    <string name="monet_current_time_slot_title">Current time slot</string>
+    <string name="monet_current_time_slot_summary">Active time-based colors</string>
+    <string name="monet_time_based_preview_title">Color preview</string>
+    <string name="monet_time_based_preview_summary">Current colors for this time</string>
+
+    <!-- Contextual Colors -->
+    <string name="monet_contextual_colors_category">Notifications</string>
+    <string name="monet_contextual_colors_enable_title">Enable contextual colors</string>
+    <string name="monet_contextual_colors_enable_summary">Change colors based on notifications</string>
+    <string name="monet_last_notification_title">Last notification</string>
+    <string name="monet_last_notification_summary">Colors from recent notification</string>
+    <string name="monet_supported_apps_title">Supported apps</string>
+    <string name="monet_supported_apps_summary">Apps with contextual colors</string>
+
+    <!-- Color Preset Names -->
+    <string name="monet_preset_applied">Preset applied: %s</string>
+    <string name="monet_gradient_applied">Gradient applied: %s</string>
+    <string name="monet_time_slot_active">Active: %s</string>
+    <string name="monet_contextual_active">Contextual: %s</string>
+</resources>

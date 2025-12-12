@@ -1637,26 +1637,38 @@
         <!-- Researched Color Collection -->
         <item>French Violet</item>
         <item>Rose Bonbon</item>
+        <item>Cream</item>
+        <item>Turquoise</item>
         <item>Vivid Sky Blue</item>
+        <item>Canary</item>
         <item>Orange (Pantone)</item>
         <item>Off Red (RGB)</item>
         <item>Blue Orchid</item>
         <item>Screamin\' Green</item>
+        <item>Russian Violet</item>
         <item>Orange (Crayola)</item>
         <item>Spring Green</item>
         <item>Lime Green</item>
+        <item>Night</item>
         <item>Palatinate Blue</item>
         <item>Federal Blue</item>
         <item>Steel Pink</item>
+        <item>Celeste</item>
         <item>Ultramarine</item>
         <item>Dark Purple</item>
         <item>Pear</item>
+        <item>Celadon Blue</item>
         <item>Pastel Pink</item>
+        <item>Bisque</item>
+        <item>Brown</item>
         <item>Tan</item>
         <item>Lilac</item>
         <item>Steel Blue</item>
         <item>Deep Moss Green</item>
         <item>Dark Sea Green</item>
+        <item>Alabaster</item>
+        <item>Quick Silver</item>
+        <item>Mint</item>
         <item>American Blue</item>
         <!-- Additional Material Design Accent Colors -->
         <item>Red Accent</item>
@@ -1672,26 +1684,38 @@
         <!-- Researched Color Collection -->
         <item>french_violet</item>
         <item>rose_bonbon</item>
+        <item>cream</item>
+        <item>turquoise</item>
         <item>vivid_sky_blue</item>
+        <item>canary</item>
         <item>orange_pantone</item>
         <item>off_red_rgb</item>
         <item>blue_orchid</item>
         <item>screamin_green</item>
+        <item>russian_violet</item>
         <item>orange_crayola</item>
         <item>spring_green</item>
         <item>lime_green</item>
+        <item>night</item>
         <item>palatinate_blue</item>
         <item>federal_blue</item>
         <item>steel_pink</item>
+        <item>celeste</item>
         <item>ultramarine</item>
         <item>dark_purple</item>
         <item>pear</item>
+        <item>celadon_blue</item>
         <item>pastel_pink</item>
+        <item>bisque</item>
+        <item>brown</item>
         <item>tan</item>
         <item>lilac</item>
         <item>steel_blue</item>
         <item>deep_moss_green</item>
         <item>dark_sea_green</item>
+        <item>alabaster</item>
+        <item>quick_silver</item>
+        <item>mint</item>
         <item>american_blue</item>
         <!-- Additional Material Design Accent Colors -->
         <item>red_accent</item>

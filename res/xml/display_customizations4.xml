@@ -20,26 +20,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="display_customizations4"
     android:title=" ">
-
-   <com.android.settingslib.widget.IllustrationPreference
-        android:key="location"
-        settings:searchable="false"
-        android:order="-1001"
-        app:lottie_rawRes="@raw/location"/>
-    <PreferenceCategory
-        android:key="font_settings"
-        android:title="@string/font_settings_title"
-        android:order="100">
-
-        <ListPreference
-            android:key="font_family_selection"
-            android:title="@string/font_family_title"
-            android:summary="@string/font_family_summary"
-            android:entries="@array/font_family_entries"
-            android:entryValues="@array/font_family_values"
-            android:defaultValue="default"
-            android:persistent="true" />
-
-    </PreferenceCategory>
+    <!-- Monet Color Integration -->
+    <PreferenceScreen
+        android:key="monet_color_integration"
+        android:title="@string/monet_color_settings_title"
+        android:summary="@string/monet_color_settings_summary"
+        android:fragment="com.android.settings.display.MonetColorSettings" />
 
 </PreferenceScreen>

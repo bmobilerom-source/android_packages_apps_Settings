@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="monet_color_settings_screen"
+    android:title="System Background">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="monet_color_illustration"
+        android:order="-1999"
+        app:lottie_rawRes="@raw/monet"
+        app:lottie_speed="0.3" />
+
+    <!-- Dark Mode Notice -->
+    <PreferenceCategory
+        android:title="Dark Mode Notice"
+        android:summary="Background and wallpaper features work best in dark mode for maximum visual impact"
+        android:key="dark_mode_notice_category"
+        android:order="-1000" />
+
+    <!-- Background Color Selection -->
+    <PreferenceCategory
+        android:title="Choose Background Color"
+        android:key="color_presets_category">
+
+        <ListPreference
+            android:key="monet_color_presets"
+            android:title="Background Color"
+            android:summary="Select a color for your system theme"
+            android:entries="@array/monet_color_presets"
+            settings:layout="@layout/adaptive_preference_card"
+            android:entryValues="@array/monet_color_preset_values"
+            android:defaultValue="royal_blue"
+            settings:controller="com.android.settings.display.MonetColorPresetsController" />
+
+    </PreferenceCategory>
+
+    <!-- Dynamic Color Cycling -->
+    <PreferenceCategory
+        android:title="Dynamic Colors"
+        android:key="dynamic_colors_category">
+
+        <SwitchPreference
+            android:key="monet_color_cycling"
+            android:title="Color Cycling"
+            android:summary="Automatically cycle through dark colors every minute"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.display.MonetColorCyclingController" />
+
+    </PreferenceCategory>
+
+    <!-- Color Style (Only feature actually hooked in frameworks/base) -->
+    <PreferenceCategory
+        android:title="Color Style"
+        android:key="color_style_category">
+
+        <ListPreference
+            android:key="monet_color_style"
+            android:title="Material You Style"
+            android:summary="Choose how colors are generated from your seed color"
+            android:entries="@array/monet_color_styles"
+            android:entryValues="@array/monet_color_style_values"
+            android:defaultValue="tonal_spot"
+            settings:layout="@layout/adaptive_preference_card"
+            settings:controller="com.android.settings.display.MonetColorStyleController" />
+
+        <!-- Monochromatic Mode toggle removed: feature is not fully supported in current build -->
+    </PreferenceCategory>
+
+ <!-- TODO: Settings Background Tint - Will be released in future update -->
+    <!--
+    <PreferenceCategory
+        android:title="Settings Background"
+        android:key="settings_background_category">
+
+        <SwitchPreference
+            android:key="monet_tint_background"
+            android:title="Tint Background"
+            android:summary="Apply additional darker tinting to colors for enhanced contrast in settings"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.display.MonetTintBackgroundController" />
+
+    </PreferenceCategory>
+    -->
+
+</PreferenceScreen>
