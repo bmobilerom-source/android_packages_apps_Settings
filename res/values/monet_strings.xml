@@ -23,6 +23,7 @@
     <string name="monet_current_style_summary">Active color style</string>
     <string name="monet_color_style_title">Color style</string>
     <string name="monet_color_style_summary">Choose monet color style</string>
+    <string name="monet_style_selection_title">Style Selection</string>
     <string name="monet_color_presets_title">Color presets</string>
     <string name="monet_color_presets_summary">Predefined dark color combinations</string>
     <string name="monet_custom_gradients_title">Custom gradients</string>

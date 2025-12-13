@@ -17,12 +17,16 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
-import androidx.preference.SwitchPreferenceCompat;
+import com.android.settings.core.TogglePreferenceController;
 
-import com.android.settings.core.BasePreferenceController;
+public class TimeBasedColorsController extends TogglePreferenceController {
 
-public class TimeBasedColorsController extends BasePreferenceController {
+    private static final String PREF_FILE = "monet_prefs";
+    private static final String KEY_TIME_BASED_ENABLED = "monet_time_based_enabled";
+    private static final String KEY_TIME_SLOT_COLORS = "monet_time_slot_colors";
+    private static final String KEY_CURRENT_TIME_SLOT = "monet_current_time_slot";
 
     public TimeBasedColorsController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -34,7 +38,28 @@ public class TimeBasedColorsController extends BasePreferenceController {
     }
 
     @Override
-    public boolean isPublicSlice() {
-        return false;
+    public boolean isChecked() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+        return prefs.getBoolean(KEY_TIME_BASED_ENABLED, false);
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        if (isChecked) {
+            // Set default time slot colors
+            String defaultColors = "#FFF8E1,#FFE0B2,#FFCC02,#FF9800"; // Sunrise colors
+            editor.putString(KEY_TIME_SLOT_COLORS, defaultColors);
+            editor.putString(KEY_CURRENT_TIME_SLOT, "dawn");
+        }
+
+        return editor.putBoolean(KEY_TIME_BASED_ENABLED, isChecked).commit();
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return 0;
     }
 }

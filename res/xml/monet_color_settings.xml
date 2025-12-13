@@ -25,23 +25,6 @@
         android:title="@string/monet_current_colors_title"
         android:key="current_colors_category">
 
-        <!-- Wallpaper Preview -->
-        <View
-            android:id="@+id/wallpaper_preview"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/monet_wallpaper_preview_height"
-            android:layout_margin="@dimen/monet_grid_container_padding"
-            android:background="@android:color/transparent" />
-
-        <!-- Color Swatches Container -->
-        <LinearLayout
-            android:id="@+id/color_swatches_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_margin="@dimen/monet_grid_container_padding" />
-
         <!-- Current Style Indicator -->
         <Preference
             android:key="current_style_indicator"
@@ -76,7 +59,6 @@
             android:key="monet_color_presets"
             android:title="@string/monet_color_presets_title"
             android:summary="@string/monet_color_presets_summary"
-            android:fragment="com.android.settings.display.MonetColorPresets"
             settings:controller="com.android.settings.display.MonetColorPresetsController" />
 
     </PreferenceCategory>
@@ -90,7 +72,6 @@
             android:key="monet_custom_gradients"
             android:title="@string/monet_custom_gradients_title"
             android:summary="@string/monet_custom_gradients_summary"
-            android:fragment="com.android.settings.display.CustomGradientsSettings"
             settings:controller="com.android.settings.display.CustomGradientsController" />
 
     </PreferenceCategory>
@@ -104,7 +85,6 @@
             android:key="monet_time_based_colors"
             android:title="@string/monet_time_based_colors_title"
             android:summary="@string/monet_time_based_colors_summary"
-            android:fragment="com.android.settings.display.TimeBasedColorsSettings"
             settings:controller="com.android.settings.display.TimeBasedColorsController" />
 
     </PreferenceCategory>
@@ -118,7 +98,6 @@
             android:key="monet_contextual_colors"
             android:title="@string/monet_contextual_colors_title"
             android:summary="@string/monet_contextual_colors_summary"
-            android:fragment="com.android.settings.display.ContextualColorsSettings"
             settings:controller="com.android.settings.display.ContextualColorsController" />
 
     </PreferenceCategory>
@@ -139,8 +118,7 @@
         <Preference
             android:key="settings_background_custom_color"
             android:title="@string/monet_settings_background_custom_title"
-            android:summary="@string/monet_settings_background_custom_summary"
-            android:fragment="com.android.settings.display.SettingsBackgroundColorPicker" />
+            android:summary="@string/monet_settings_background_custom_summary" />
 
     </PreferenceCategory>
 

@@ -21,8 +21,8 @@
     <color name="monet_preset_text_color_secondary">?android:attr/textColorSecondary</color>
 
     <!-- Preset card background - using system surface colors -->
-    <color name="monet_preset_card_background">?android:attr/colorSurfaceContainer</color>
-    <color name="monet_preset_card_stroke">?android:attr/colorOutlineVariant</color>
+    <color name="monet_preset_card_background">?android:attr/colorBackground</color>
+    <color name="monet_preset_card_stroke">?android:attr/colorPrimary</color>
 
     <!-- Status colors for feedback -->
     <color name="monet_status_success">#4CAF50</color>
@@ -37,11 +37,11 @@
     <!-- Default fallback colors using system color references -->
     <color name="monet_fallback_primary">?android:attr/colorPrimary</color>
     <color name="monet_fallback_secondary">?android:attr/colorSecondary</color>
-    <color name="monet_fallback_tertiary">?android:attr/colorTertiary</color>
-    <color name="monet_fallback_neutral">?android:attr/colorSurfaceVariant</color>
+    <color name="monet_fallback_tertiary">?android:attr/colorAccent</color>
+    <color name="monet_fallback_neutral">?android:attr/colorBackground</color>
 
     <!-- Gradient preview background -->
-    <color name="monet_gradient_preview_bg">?android:attr/colorSurfaceVariant</color>
+    <color name="monet_gradient_preview_bg">?android:attr/colorBackground</color>
 
     <!-- Time slot indicator colors -->
     <color name="monet_time_dawn">#FFF8E1</color>

@@ -17,12 +17,16 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
-import androidx.preference.SwitchPreferenceCompat;
+import com.android.settings.core.TogglePreferenceController;
 
-import com.android.settings.core.BasePreferenceController;
+public class ContextualColorsController extends TogglePreferenceController {
 
-public class ContextualColorsController extends BasePreferenceController {
+    private static final String PREF_FILE = "monet_prefs";
+    private static final String KEY_CONTEXTUAL_ENABLED = "monet_contextual_enabled";
+    private static final String KEY_CONTEXTUAL_COLORS = "monet_contextual_colors";
+    private static final String KEY_LAST_NOTIFICATION = "monet_last_notification";
 
     public ContextualColorsController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -34,7 +38,27 @@ public class ContextualColorsController extends BasePreferenceController {
     }
 
     @Override
-    public boolean isPublicSlice() {
-        return false;
+    public boolean isChecked() {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+        return prefs.getBoolean(KEY_CONTEXTUAL_ENABLED, false);
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        SharedPreferences prefs = mContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        if (isChecked) {
+            // Clear any existing contextual data
+            editor.putString(KEY_CONTEXTUAL_COLORS, null);
+            editor.putString(KEY_LAST_NOTIFICATION, null);
+        }
+
+        return editor.putBoolean(KEY_CONTEXTUAL_ENABLED, isChecked).commit();
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return 0;
     }
 }

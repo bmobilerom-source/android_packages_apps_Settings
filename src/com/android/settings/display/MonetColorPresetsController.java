@@ -17,10 +17,18 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
-public class MonetColorPresetsController extends BasePreferenceController {
+public class MonetColorPresetsController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
+
+    private static final String PREF_FILE = "monet_prefs";
+    private static final String KEY_COLOR_PRESET = "monet_color_preset";
+    private static final String KEY_PRESET_VALUES = "monet_preset_values";
+    private static final String KEY_OVERRIDE_ENABLED = "monet_override_enabled";
 
     public MonetColorPresetsController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -32,7 +40,49 @@ public class MonetColorPresetsController extends BasePreferenceController {
     }
 
     @Override
-    public boolean isPublicSlice() {
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String presetName = (String) newValue;
+
+        // Get preset colors (simplified implementation)
+        ColorPreset preset = getPresetByName(presetName);
+        if (preset != null) {
+            String colorString = preset.colors[0] + "," + preset.colors[1] + "," +
+                               preset.colors[2] + "," + preset.colors[3];
+
+            SharedPreferences prefs = mContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
+            return prefs.edit()
+                    .putString(KEY_COLOR_PRESET, presetName)
+                    .putString(KEY_PRESET_VALUES, colorString)
+                    .putBoolean(KEY_OVERRIDE_ENABLED, true)
+                    .commit();
+        }
+
         return false;
+    }
+
+    private ColorPreset getPresetByName(String name) {
+        // Simplified preset definitions
+        switch (name) {
+            case "default":
+                return new ColorPreset("Default", new int[]{0xFF4285F4, 0xFF34A853, 0xFFEA4335, 0xFFFBBC05});
+            case "ocean":
+                return new ColorPreset("Ocean", new int[]{0xFF1976D2, 0xFF42A5F5, 0xFF90CAF9, 0xFFE3F2FD});
+            case "forest":
+                return new ColorPreset("Forest", new int[]{0xFF388E3C, 0xFF4CAF50, 0xFF81C784, 0xFFE8F5E8});
+            case "sunset":
+                return new ColorPreset("Sunset", new int[]{0xFFF57C00, 0xFFFF9800, 0xFFFFB74D, 0xFFFFF3E0});
+            default:
+                return new ColorPreset("Default", new int[]{0xFF4285F4, 0xFF34A853, 0xFFEA4335, 0xFFFBBC05});
+        }
+    }
+
+    private static class ColorPreset {
+        public final String name;
+        public final int[] colors;
+
+        public ColorPreset(String name, int[] colors) {
+            this.name = name;
+            this.colors = colors;
+        }
     }
 }
