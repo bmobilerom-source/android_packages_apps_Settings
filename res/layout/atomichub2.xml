@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.settings.preferences.ui.Atomichub2View xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="5"
+    android:orientation="vertical">
+
+
+  
+
+    <HorizontalScrollView
+        android:id="@+id/hsv_card2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1.7"
+        style="@style/hsv_style2"
+        android:scrollbars="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:weightSum="6"
+            android:orientation="horizontal">
+
+
+            <!-- Card 1: Accounts - Opens BMobileAccountsFragment -->
+            <FrameLayout
+                android:id="@+id/card1_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_ui_card2"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:hapticFeedbackEnabled="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | center"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="Accounts"
+                    android:textColor="@color/card_text2"
+                    android:textSize="16sp"
+                    android:clickable="false"
+                    android:focusable="false" />
+
+
+            </FrameLayout>
+
+            <!-- Card 2: Apps - Opens AppDashboardFragment -->
+            <FrameLayout
+                android:id="@+id/card2_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_theme_card2"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:foreground="?android:attr/selectableItemBackground">
+
+          
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | center"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="Apps"
+                    android:textColor="@color/card_text2"
+                    android:textSize="16sp"
+                    android:clickable="false"
+                    android:focusable="false" />
+
+            </FrameLayout>
+
+            <!-- Card 3: Bmobile - Opens BMobileSettingsFragment -->
+            <FrameLayout
+                android:id="@+id/card3_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_status_card2"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:foreground="?android:attr/selectableItemBackground">
+
+               
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | center"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="Bmobile"
+                    android:textColor="@color/card_text2"
+                    android:textSize="16sp"
+                    android:clickable="false"
+                    android:focusable="false" />
+
+            </FrameLayout>
+
+            <!-- Card 4: AppLock - Opens LockLock app -->
+            <FrameLayout
+                android:id="@+id/card4_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_button_card2"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | center"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="AppLock"
+                    android:textColor="@color/card_text2"
+                    android:textSize="16sp"
+                    android:clickable="false"
+                    android:focusable="false" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/card5_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_misc_card2"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | center"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="DeviceTweaks"
+                    android:textColor="@color/card_text2"
+                    android:textSize="16sp"
+                    android:clickable="false"
+                    android:focusable="false" />
+
+            </FrameLayout>
+
+            <!-- Card 6: Optimize - Opens SystemOptimizationSettings -->
+            <FrameLayout
+                android:id="@+id/card6_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_team_card2"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:foreground="?android:attr/selectableItemBackground">
+
+             
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | center"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="Optimize"
+                    android:textColor="@color/card_text2"
+                    android:textSize="16sp"
+                    android:clickable="false"
+                    android:focusable="false" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/card2"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:layout_weight="2"
+        android:weightSum="3"
+        android:background="@drawable/ic_ui_big_card2"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="false"
+        android:foreground="?android:attr/selectableItemBackground">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_trans2"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#00FFFFFF"
+                android:clickable="true"
+                android:contentDescription="Back button"
+                android:src="@drawable/ic_backicon2" />
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/tv_title_big2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:gravity="end | center"
+            android:text="Personal"
+            android:textColor="#FFFFFF"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/tv_summary_big2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="start"
+            android:gravity="start | center"
+            android:inputType="textMultiLine"
+            android:text="it's personal"
+            android:textColor="@color/card_text2"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</com.android.settings.preferences.ui.Atomichub2View>

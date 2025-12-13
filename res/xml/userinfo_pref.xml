@@ -30,22 +30,30 @@
             android:order="20"
             android:title="@string/userinfo_bubble_setting_description"/>
 
+    <!-- TODO: When making cheaper level of ROM, include and hide atomichub2 -->
+    <!--
     <Preference
             android:key="multiuser"
-            android:order="30"
+            android:order="40"
             android:title="@string/multiuser_settings_title"
             android:fragment="com.android.settings.users.UserSettings"/>
-    
+
     <Preference
             android:key="accounts"
-            android:order="40"
+            android:order="50"
             android:title="@string/accounts_settings_title"
             android:fragment="com.android.settings.accounts.AccountDashboardFragment"/>
 
     <Preference
             android:key="emergency"
-            android:order="50"
+            android:order="60"
             android:title="@string/emergency_settings_title"
             android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
+    -->
         
+     <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/atomichub2"
+        android:key="bmobile_user_header2"
+           android:order="30"
+        android:selectable="false" />
 </PreferenceScreen>

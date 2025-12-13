@@ -48,12 +48,18 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(getPrefXmlResId());
         context = getActivity();
-        ((SettingsBaseActivity) getActivity()).mAppBarLayout.setExpanded(false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        // Collapse the app bar when fragment starts
+        if (getActivity() instanceof SettingsBaseActivity) {
+            SettingsBaseActivity activity = (SettingsBaseActivity) getActivity();
+            if (activity.mAppBarLayout != null) {
+                activity.mAppBarLayout.setExpanded(false);
+            }
+        }
         onUserCard();
     }
 

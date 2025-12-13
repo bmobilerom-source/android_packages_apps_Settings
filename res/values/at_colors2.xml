@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200_2">#FFBB86FC</color>
+    <color name="purple_500_2">#FF6200EE</color>
+    <color name="purple_700_2">#FF3700B3</color>
+    <color name="teal_200_2">#FF03DAC5</color>
+    <color name="teal_700_2">#FF018786</color>
+    <color name="black_2">#FF000000</color>
+    <color name="card_text2">#171717</color>
+    <color name="white_2">#FFFFFFFF</color>
+    <color name="bottom_bar_divider_color_2">#1f000000</color>
+    <color name="bottom_navigation_color_2">#FFFFFF</color>
+    <color name="bottom_navigation_ripple_2">#1f000000</color>
+    <color name="teambackground_2">#ececec</color>
+
+    <!-- System Warning Background Color -->
+    <color name="system_warning_bg_2">#99C58181</color>
+
+    <!-- System Features Background Color -->
+    <color name="system_features_bg_2">#9922B5AD</color>
+
+    <!-- System Help Background Color -->
+    <color name="system_help_bg_2">#99FDFD96</color>
+
+    <!-- System Advice Background Color -->
+    <color name="system_advice_bg_2">#5f626b</color>
+</resources>
+
+

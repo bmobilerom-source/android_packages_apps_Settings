@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Atomichubdub2" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500_2</item>
+        <item name="colorPrimaryVariant">@color/purple_700_2</item>
+        <item name="colorOnPrimary">@color/white_2</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200_2</item>
+        <item name="colorSecondaryVariant">@color/teal_700_2</item>
+        <item name="colorOnSecondary">@color/black_2</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
+    <style name="hsv_style2">
+        <item name="android:scrollbarAlwaysDrawHorizontalTrack">true</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">250</item>
+        <item name="android:scrollbarFadeDuration">500</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbars">horizontal</item>
+        <item name="android:fadeScrollbars">true</item>
+    </style>
+</resources>
+
+

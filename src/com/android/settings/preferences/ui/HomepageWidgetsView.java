@@ -52,7 +52,26 @@ public class HomepageWidgetsView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        bindActions();
+        // Only bind actions if not used within a preference (which handles its own click listeners)
+        if (!isInPreference()) {
+            bindActions();
+        }
+    }
+
+    private boolean isInPreference() {
+        // Check if this view is inside a Preference by walking up the view hierarchy
+        android.view.ViewParent parent = getParent();
+        while (parent != null) {
+            if (parent.getClass().getName().contains("Preference")) {
+                return true;
+            }
+            if (parent instanceof android.view.View) {
+                parent = ((android.view.View) parent).getParent();
+            } else {
+                break;
+            }
+        }
+        return false;
     }
 
     private void bindActions() {

@@ -10,15 +10,15 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 
 /**
- * Atomichub fragment - displays the atomichub.xml layout.
- * Click handling is done by AtomichubView in onFinishInflate().
+ * Atomichub2 fragment - displays the atomichub2.xml layout.
+ * Click handling is done by Atomichub2View in onFinishInflate().
  */
-public class Atomichub extends SettingsPreferenceFragment {
+public class Atomichub2 extends SettingsPreferenceFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.atomichub, container, false);
+        return inflater.inflate(R.layout.atomichub2, container, false);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class Atomichub extends SettingsPreferenceFragment {
         if (getActivity() != null && getActivity().getActionBar() != null) {
             getActivity().getActionBar().hide();
         }
-        // Click handling is done by AtomichubView in onFinishInflate()
+        // Click handling is done by Atomichub2View in onFinishInflate()
     }
 
     @Override

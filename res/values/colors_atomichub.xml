@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Atomichub card fills (10% darker than pure white) -->
+    <color name="atomichub_card_fill">#FFFFFFFF</color>
+    <color name="atomichub_card_stroke">#1AFFFFFF</color>
+    <color name="card_text">#171717</color>
+    <color name="text_color">#000000</color>
+</resources>
+

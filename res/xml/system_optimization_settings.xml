@@ -35,6 +35,16 @@
         android:persistent="false"
         settings:searchable="false" />
 
+    <!-- Status Summary -->
+    <Preference
+        android:key="optimization_status"
+        android:title="@string/optimization_status_title"
+        android:summary="@string/optimization_status_summary"
+        android:selectable="false"
+        android:order="-990"
+        settings:controller="com.epic.fragments.OptimizationStatusController"
+        settings:searchable="false" />
+
     <!-- Optimization Preferences -->
     <!-- Only features that work out of the box without kernel/framework changes -->
     
@@ -78,30 +88,5 @@
         settings:controller="com.epic.fragments.ThermalThrottlingController"
         settings:searchable="false" />
     
-    <!-- Removed features (require kernel/framework):
-         - Memory Optimization (needs framework)
-         - CPU Governor Optimization (needs kernel)
-         - I/O Scheduler Optimization (needs kernel)
-         - ZRAM Optimization (needs kernel)
-         - Performance Mode (needs kernel)
-    -->
-
-    <!-- Status Summary -->
-    <Preference
-        android:key="optimization_status"
-        android:title="@string/optimization_status_title"
-        android:summary="@string/optimization_status_summary"
-        android:selectable="false"
-        android:order="50"
-        settings:controller="com.epic.fragments.OptimizationStatusController"
-        settings:searchable="false" />
-
-    <!-- Footer -->
-    <com.android.settingslib.widget.FooterPreference
-        android:key="system_optimization_footer"
-        android:order="100"
-        android:title="@string/system_optimization_info_title"
-        android:summary="@string/system_optimization_info_summary"
-        settings:searchable="false" />
-
+  
 </PreferenceScreen>
