@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The LineageOS Project
+ * Copyright (C) 2025 LineageOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.display;
+package com.epic.fragments;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -23,13 +23,13 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.SeekBarPreference;
 
-public class StatusBarHeightPreferenceController extends BasePreferenceController
+public class NotificationIconLimitController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
     private SeekBarPreference mPreference;
-    private static final String KEY_STATUS_BAR_HEIGHT_FACTOR = "status_bar_height_factor";
+    private static final String KEY_NOTIFICATION_ICON_LIMIT = "notification_icon_limit";
 
-    public StatusBarHeightPreferenceController(Context context, String preferenceKey) {
+    public NotificationIconLimitController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -44,7 +44,7 @@ public class StatusBarHeightPreferenceController extends BasePreferenceControlle
         mPreference = screen.findPreference(getPreferenceKey());
         if (mPreference != null) {
             mPreference.setOnPreferenceChangeListener(this);
-            int currentValue = getStatusBarHeightFactor();
+            int currentValue = getNotificationIconLimit();
             mPreference.setProgress(currentValue);
             updateSummary(currentValue);
         }
@@ -54,7 +54,7 @@ public class StatusBarHeightPreferenceController extends BasePreferenceControlle
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         int value = (Integer) newValue;
         boolean result = Settings.System.putInt(mContext.getContentResolver(),
-                KEY_STATUS_BAR_HEIGHT_FACTOR, value);
+                KEY_NOTIFICATION_ICON_LIMIT, value);
         if (result && mPreference != null) {
             updateSummary(value);
         }
@@ -63,13 +63,13 @@ public class StatusBarHeightPreferenceController extends BasePreferenceControlle
 
     private void updateSummary(int value) {
         if (mPreference != null) {
-            String summary = mContext.getString(com.android.settings.R.string.status_bar_height_factor_summary);
-            mPreference.setSummary(summary + " (" + value + "%)");
+            String summary = mContext.getString(com.android.settings.R.string.notification_icon_limit_summary);
+            mPreference.setSummary(summary + " (" + value + ")");
         }
     }
 
-    private int getStatusBarHeightFactor() {
+    private int getNotificationIconLimit() {
         return Settings.System.getInt(mContext.getContentResolver(),
-                KEY_STATUS_BAR_HEIGHT_FACTOR, 100);
+                KEY_NOTIFICATION_ICON_LIMIT, 4);
     }
 }

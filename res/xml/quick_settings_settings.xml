@@ -24,45 +24,66 @@
         android:title="@string/quick_settings_tiles_category"
         android:key="quick_settings_tiles_category">
 
+        <!-- TODO: Implement SystemUI backend for volume unmute percentage -->
         <!-- Note: Volume unmute percentage requires SystemUI modification to work -->
-        <lineageos.preference.LineageSystemSettingSeekBarPreference
+        <!-- Reference: https://github.com/simplnc/android_packages_apps_Settings/tree/committree -->
+        <!--
+        <com.android.settings.widget.SeekBarPreference
             android:key="qs_volume_unmute_percentage"
             android:title="@string/qs_volume_unmute_title"
             android:summary="@string/qs_volume_unmute_summary"
             android:defaultValue="50"
             android:max="100"
             android:min="0"
-            settings:interval="5" />
+            settings:interval="5"
+            settings:searchable="false" />
+        -->
 
-        <lineageos.preference.LineageSystemSettingSwitchPreference
+        <!-- TODO: Implement SystemUI backend for leveled flashlight tile -->
+        <!--
+        <SwitchPreference
             android:key="leveled_flashlight_tile"
             android:title="@string/qs_leveled_flashlight_title"
             android:summary="@string/qs_leveled_flashlight_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            settings:searchable="false" />
+        -->
 
-        <lineageos.preference.LineageSystemSettingSwitchPreference
+        <!-- TODO: Implement SystemUI backend for global flashlight level -->
+        <!--
+        <SwitchPreference
             android:key="flashlight_level_global"
             android:title="@string/qs_flashlight_level_global_title"
             android:summary="@string/qs_flashlight_level_global_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            settings:searchable="false" />
+        -->
 
-        <lineageos.preference.LineageSystemSettingSeekBarPreference
+        <!-- TODO: Implement SystemUI backend for QS tile label scaling -->
+        <!--
+        <com.android.settings.widget.SeekBarPreference
             android:key="qs_tile_label_scale"
             android:title="@string/qs_tile_label_size"
             android:summary="@string/qs_tile_label_size_summary"
             android:defaultValue="0"
             android:max="50"
             android:min="-50"
-            settings:interval="5" />
+            settings:interval="5"
+            settings:searchable="false" />
+        -->
 
-        <lineageos.preference.LineageSystemSettingSeekBarPreference
+        <!-- TODO: Implement SystemUI backend for QS secondary label scaling -->
+        <!--
+        <com.android.settings.widget.SeekBarPreference
             android:key="qs_secondary_label_scale"
             android:title="@string/qs_tile_secondary_label_size"
             android:summary="@string/qs_tile_secondary_label_size_summary"
             android:defaultValue="0"
             android:max="50"
             android:min="-50"
-            settings:interval="5" />
+            settings:interval="5"
+            settings:searchable="false" />
+        -->
 
     </PreferenceCategory>
 
@@ -70,34 +91,44 @@
         android:title="@string/qs_pulldown_category"
         android:key="qs_pulldown_category">
 
-        <lineageos.preference.LineageSystemSettingSwitchPreference
+        <SwitchPreference
             android:key="qs_pulldown_enabled"
             android:title="@string/qs_pulldown_switch_title"
             android:summary="@string/qs_pulldown_switch_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            settings:searchable="false" />
 
-        <lineageos.preference.LineageSystemSettingSeekBarPreference
+        <com.android.settings.widget.SeekBarPreference
             android:key="qs_pulldown_percentage"
             android:title="@string/qs_pulldown_size"
             android:summary="@string/qs_pulldown_size_summary"
             android:defaultValue="25"
             android:max="50"
             android:min="10"
-            settings:interval="5" />
+            settings:interval="5"
+            settings:searchable="false" />
 
+        <!-- TODO: Implement SystemUI backend for QS pulldown side positioning -->
+        <!--
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/qs_pulldown_side_entries"
             android:entryValues="@array/qs_pulldown_side_values"
             android:key="qs_pulldown_side"
             android:summary="%s"
-            android:title="@string/qs_pulldown_side_title" />
+            android:title="@string/qs_pulldown_side_title"
+            settings:searchable="false" />
+        -->
 
-        <lineageos.preference.LineageSystemSettingSwitchPreference
+        <!-- TODO: Implement SystemUI backend for one finger pullup gesture -->
+        <!--
+        <SwitchPreference
             android:key="one_finger_pullup_enabled"
             android:title="@string/qs_pullup_switch_title"
             android:summary="@string/qs_pullup_switch_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            settings:searchable="false" />
+        -->
 
     </PreferenceCategory>
 

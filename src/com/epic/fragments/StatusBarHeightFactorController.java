@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The LineageOS Project
+ * Copyright (C) 2025 LineageOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.display;
+package com.epic.fragments;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -23,13 +23,13 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.SeekBarPreference;
 
-public class StatusBarHeightPreferenceController extends BasePreferenceController
+public class StatusBarHeightFactorController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
     private SeekBarPreference mPreference;
     private static final String KEY_STATUS_BAR_HEIGHT_FACTOR = "status_bar_height_factor";
 
-    public StatusBarHeightPreferenceController(Context context, String preferenceKey) {
+    public StatusBarHeightFactorController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 

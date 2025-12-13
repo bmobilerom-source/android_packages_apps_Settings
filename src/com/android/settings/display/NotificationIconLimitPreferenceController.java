@@ -18,11 +18,15 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.provider.Settings;
-
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.widget.SeekBarPreference;
 
-public class NotificationIconLimitPreferenceController extends BasePreferenceController {
+public class NotificationIconLimitPreferenceController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
+    private SeekBarPreference mPreference;
     private static final String KEY_NOTIFICATION_ICON_LIMIT = "notification_icon_limit";
 
     public NotificationIconLimitPreferenceController(Context context, String preferenceKey) {
@@ -35,7 +39,37 @@ public class NotificationIconLimitPreferenceController extends BasePreferenceCon
     }
 
     @Override
-    public boolean isPublicSlice() {
-        return false;
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        if (mPreference != null) {
+            mPreference.setOnPreferenceChangeListener(this);
+            int currentValue = getNotificationIconLimit();
+            mPreference.setProgress(currentValue);
+            updateSummary(currentValue);
+        }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        int value = (Integer) newValue;
+        boolean result = Settings.System.putInt(mContext.getContentResolver(),
+                KEY_NOTIFICATION_ICON_LIMIT, value);
+        if (result && mPreference != null) {
+            updateSummary(value);
+        }
+        return result;
+    }
+
+    private void updateSummary(int value) {
+        if (mPreference != null) {
+            String summary = mContext.getString(com.android.settings.R.string.notification_icon_limit_summary);
+            mPreference.setSummary(summary + " (" + value + ")");
+        }
+    }
+
+    private int getNotificationIconLimit() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                KEY_NOTIFICATION_ICON_LIMIT, 4);
     }
 }

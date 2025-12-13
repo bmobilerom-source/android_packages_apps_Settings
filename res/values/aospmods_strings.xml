@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 LineageOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <!-- AOSPMods Settings -->
+    <string name="aospmods_settings_title">AOSPMods Settings</string>
+    <string name="aospmods_status_bar_category">Status Bar</string>
+    <string name="aospmods_qs_category">Quick Settings</string>
+
+    <!-- Status Bar Settings -->
+    <string name="status_bar_height_factor_title">Status Bar Height</string>
+    <string name="status_bar_height_factor_summary">Adjust status bar height (50-200%)</string>
+
+    <string name="notification_icon_limit_title">Notification Icon Limit</string>
+    <string name="notification_icon_limit_summary">Maximum number of notification icons to show</string>
+
+    <string name="combined_signal_icons_title">Combined Signal Icons</string>
+    <string name="combined_signal_icons_summary">Merge mobile and Wi-Fi signal icons</string>
+
+    <string name="hide_roaming_state_title">Hide Roaming Indicator</string>
+    <string name="hide_roaming_state_summary">Hide roaming state in status bar</string>
+
+    <string name="volte_icon_enabled_title">VoLTE Icon</string>
+    <string name="volte_icon_enabled_summary">Show VoLTE icon in status bar</string>
+
+    <string name="vowifi_icon_enabled_title">VoWiFi Icon</string>
+    <string name="vowifi_icon_enabled_summary">Show VoWiFi icon in status bar</string>
+
+    <string name="hide_privacy_chip_title">Hide Privacy Chip</string>
+    <string name="hide_privacy_chip_summary">Hide microphone/camera privacy indicators</string>
+
+    <string name="system_icons_multi_row_title">Multi-row System Icons</string>
+    <string name="system_icons_multi_row_summary">Allow system icons to wrap to multiple rows</string>
+
+    <string name="notification_area_multi_row_title">Multi-row Notification Icons</string>
+    <string name="notification_area_multi_row_summary">Allow notification icons to wrap to multiple rows</string>
+
+    <string name="network_on_sb_enabled_title">Network Speed Indicator</string>
+    <string name="network_on_sb_enabled_summary">Show network speed in status bar</string>
+
+    <!-- Note: Quick Settings features are already implemented in LineageOS -->
+
+</resources>

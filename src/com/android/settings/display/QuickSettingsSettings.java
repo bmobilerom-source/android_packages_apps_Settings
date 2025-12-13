@@ -70,7 +70,20 @@ public class QuickSettingsSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        // Add preference controllers here as we implement them
+
+        // Quick Settings Pulldown controllers - Only these have full backend implementation
+        controllers.add(new com.epic.fragments.QsPulldownEnabledController(context, "qs_pulldown_enabled"));
+        controllers.add(new com.epic.fragments.QsPulldownPercentageController(context, "qs_pulldown_percentage"));
+
+        // TODO: Implement SystemUI backend for additional Quick Settings features:
+        // - qs_pulldown_side (ListPreference for left/right/center positioning)
+        // - qs_volume_unmute_percentage (SeekBarPreference for volume unmute threshold)
+        // - flashlight_level_global (SwitchPreference for global flashlight level)
+        // - leveled_flashlight_tile (SwitchPreference for flashlight strength levels)
+        // - qs_tile_label_scale (SeekBarPreference for tile label text size)
+        // - qs_secondary_label_scale (SeekBarPreference for secondary label text size)
+        // - one_finger_pullup_enabled (SwitchPreference for gesture control)
+
         return controllers;
     }
 
