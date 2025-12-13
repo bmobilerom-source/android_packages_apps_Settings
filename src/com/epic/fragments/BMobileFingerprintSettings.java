@@ -155,10 +155,11 @@ public class BMobileFingerprintSettings extends SettingsPreferenceFragment imple
                 return true;
             } else if (KEY_FINGERPRINT_TOOLS.equals(key)) {
                 // Show fingerprint tools bottom sheet
-                FingerprintToolsBottomSheet bottomSheet = FingerprintToolsBottomSheet.newInstance();
-                if (getFragmentManager() != null) {
-                    bottomSheet.show(getFragmentManager(), "FingerprintToolsBottomSheet");
-                }
+                // TODO: Implement FingerprintToolsBottomSheet
+                // FingerprintToolsBottomSheet bottomSheet = FingerprintToolsBottomSheet.newInstance();
+                // if (getFragmentManager() != null) {
+                //     bottomSheet.show(getFragmentManager(), "FingerprintToolsBottomSheet");
+                // }
                 return true;
             }
         } catch (Exception e) {
@@ -326,22 +327,23 @@ public class BMobileFingerprintSettings extends SettingsPreferenceFragment imple
                 return;
             }
             
-            android.view.View rootView = activity.findViewById(android.R.id.content);
-            if (rootView instanceof android.view.ViewGroup) {
-                android.view.ViewGroup rootGroup = (android.view.ViewGroup) rootView;
-                if (rootGroup.findViewById(R.id.theme_background) != null) {
-                    return;
-                }
-                
-                com.android.settings.preferences.ui.AdaptiveThemeBackgroundView themeView =
-                        new com.android.settings.preferences.ui.AdaptiveThemeBackgroundView(activity);
-                themeView.setId(R.id.theme_background);
-                themeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
-                int insertIndex = (rootGroup.findViewById(R.id.wallpaper_background) != null) ? 1 : 0;
-                rootGroup.addView(themeView, insertIndex, new android.view.ViewGroup.LayoutParams(
-                        android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-                        android.view.ViewGroup.LayoutParams.MATCH_PARENT));
-            }
+            // TODO: Implement adaptive theme background
+            // android.view.View rootView = activity.findViewById(android.R.id.content);
+            // if (rootView instanceof android.view.ViewGroup) {
+            //     android.view.ViewGroup rootGroup = (android.view.ViewGroup) rootView;
+            //     if (rootGroup.findViewById(R.id.theme_background) != null) {
+            //         return;
+            //     }
+            //
+            //     com.android.settings.preferences.ui.AdaptiveThemeBackgroundView themeView =
+            //             new com.android.settings.preferences.ui.AdaptiveThemeBackgroundView(activity);
+            //     themeView.setId(R.id.theme_background);
+            //     themeView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+            //     int insertIndex = (rootGroup.findViewById(R.id.wallpaper_background) != null) ? 1 : 0;
+            //     rootGroup.addView(themeView, insertIndex, new android.view.ViewGroup.LayoutParams(
+            //             android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+            //             android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+            // }
         } catch (Exception e) {
             android.util.Log.e(TAG, "Error adding theme background", e);
         }

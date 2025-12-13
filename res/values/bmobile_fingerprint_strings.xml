@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bmobile_fingerprint_title">Fingerprint</string>
+    <string name="bmobile_fingerprint_enroll_title">Add fingerprint</string>
+    <string name="bmobile_fingerprint_enroll_summary">Enroll new fingerprint</string>
+    <string name="bmobile_fingerprint_enroll_summary_existing">Enroll another fingerprint</string>
+    <string name="bmobile_fingerprint_enroll_summary_new">Enroll your first fingerprint</string>
+    <string name="bmobile_fingerprint_manage_title">Manage fingerprints</string>
+    <string name="bmobile_fingerprint_manage_summary">Edit or delete fingerprints (%d enrolled)</string>
+</resources>
+
+

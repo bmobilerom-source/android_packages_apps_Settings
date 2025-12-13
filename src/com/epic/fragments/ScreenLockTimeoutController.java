@@ -13,9 +13,9 @@ package com.epic.fragments;
 import android.content.Context;
 import com.android.settings.core.TogglePreferenceController;
 
-public class BatteryCalibrationController extends TogglePreferenceController {
+public class ScreenLockTimeoutController extends TogglePreferenceController {
 
-    public BatteryCalibrationController(Context context, String preferenceKey) {
+    public ScreenLockTimeoutController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -26,12 +26,12 @@ public class BatteryCalibrationController extends TogglePreferenceController {
 
     @Override
     public boolean isChecked() {
-        return PowerTweaksHelper.isBatteryCalibrationEnabled(mContext);
+        return SecurityFeaturesHelper.isScreenLockTimeoutEnabled(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return PowerTweaksHelper.setBatteryCalibrationEnabled(mContext, isChecked);
+        return SecurityFeaturesHelper.setScreenLockTimeoutEnabled(mContext, isChecked);
     }
 
     @Override

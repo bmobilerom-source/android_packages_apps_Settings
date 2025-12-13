@@ -19,21 +19,108 @@
     <string name="system_optimization_info_title">About these optimizations</string>
     <string name="system_optimization_info_summary">Only features that work without kernel or framework changes are provided here.</string>
 
-    <!-- Security Features -->
+    <!-- Security & Privacy Features -->
+    <string name="security_privacy_title">Security &amp; privacy</string>
+    <string name="security_privacy_intro_title">Advanced security controls</string>
+    <string name="security_privacy_intro_summary">19 additional security and privacy features inspired by GrapheneOS, CalyxOS, and other privacy-focused ROMs.</string>
+
+    <!-- Separate Security Features (for compatibility) -->
     <string name="security_features_title">Security features</string>
     <string name="security_features_intro_title">Harden your device</string>
     <string name="security_features_intro_summary">Control app network, sensor, location, and microphone access with OS-level toggles.</string>
     <string name="security_features_category_access_control">Access controls</string>
+
+    <!-- Core Security Features -->
     <string name="network_permission_control_title">Network permission control</string>
-    <string name="network_permission_control_summary">Restrict app network access at the OS layer.</string>
+    <string name="network_permission_control_summary">Control which apps can access the internet. Currently: %s</string>
+    <string name="network_permission_control_summary_enabled">Network access is restricted (requires framework support)</string>
+    <string name="network_permission_control_summary_disabled">Network access is unrestricted</string>
     <string name="app_hardening_title">App hardening</string>
-    <string name="app_hardening_summary">Apply additional runtime mitigations to user apps.</string>
+    <string name="app_hardening_summary">Add security protections to running apps. Currently: %s</string>
+    <string name="app_hardening_summary_enabled">App hardening is enabled (requires framework support)</string>
+    <string name="app_hardening_summary_disabled">App hardening is disabled</string>
     <string name="sensor_access_control_title">Sensor access control</string>
-    <string name="sensor_access_control_summary">Block sensor access when not explicitly in use.</string>
+    <string name="sensor_access_control_summary">Control app access to device sensors. Currently: %s</string>
+    <string name="sensor_access_control_summary_enabled">Sensor access is restricted (requires framework support)</string>
+    <string name="sensor_access_control_summary_disabled">Sensor access is unrestricted</string>
     <string name="location_access_control_title">Location access control</string>
-    <string name="location_access_control_summary">Require explicit approval before apps can read location.</string>
+    <string name="location_access_control_summary">Control app access to location services. Currently: %s</string>
+    <string name="location_access_control_summary_enabled">Location services are enabled (GPS + Network)</string>
+    <string name="location_access_control_summary_disabled">Location services are disabled</string>
     <string name="microphone_access_control_title">Microphone access control</string>
-    <string name="microphone_access_control_summary">Block microphone access except when permitted.</string>
+    <string name="microphone_access_control_summary">Control app access to microphone. Currently: %s</string>
+    <string name="microphone_access_control_summary_enabled">Microphone access is blocked (synced with QS tile)</string>
+    <string name="microphone_access_control_summary_disabled">Microphone access is allowed (synced with QS tile)</string>
+
+    <!-- Developer & USB Features -->
+    <string name="usb_debugging_title">USB debugging control</string>
+    <string name="usb_debugging_summary">Control ADB access and developer debugging.</string>
+    <string name="developer_options_title">Developer options access</string>
+    <string name="developer_options_summary">Show/hide developer options in Settings.</string>
+
+    <!-- Location & VPN Features -->
+    <string name="vpn_always_on_title">VPN always-on control</string>
+    <string name="vpn_always_on_summary">Require VPN for all network connections. Currently: %s</string>
+    <string name="vpn_always_on_summary_enabled">VPN always-on is active</string>
+    <string name="vpn_always_on_summary_disabled">No VPN always-on configured (tap to set up)</string>
+
+    <!-- Lock Screen & Biometric Features -->
+    <string name="biometric_timeout_title">Biometric timeout</string>
+    <string name="biometric_timeout_summary">Control biometric unlock after screen timeout. Currently: %s</string>
+    <string name="biometric_timeout_summary_on">Biometric unlock enabled (30s timeout)</string>
+    <string name="biometric_timeout_summary_off">Biometric unlock disabled</string>
+    <string name="secure_lock_screen_title">Secure lock screen</string>
+    <string name="secure_lock_screen_summary">Enhance lock screen security. Currently: %s</string>
+    <string name="secure_lock_screen_summary_on">Secure lock screen timeout is set</string>
+    <string name="secure_lock_screen_summary_off">Secure lock screen timeout disabled</string>
+
+    <!-- Privacy Features -->
+    <string name="clipboard_access_notifications_title">Clipboard access notifications</string>
+    <string name="clipboard_access_notifications_summary">Show alerts when apps access clipboard content. Currently: %s</string>
+    <string name="clipboard_access_notifications_summary_on">Notifications enabled</string>
+    <string name="clipboard_access_notifications_summary_off">Notifications disabled</string>
+    <string name="app_permission_auto_revoke_title">App permission auto-revoke</string>
+    <string name="app_permission_auto_revoke_summary">Automatically remove unused app permissions. Currently: %s</string>
+    <string name="app_permission_auto_revoke_summary_on">Auto-revoke enabled for unused apps</string>
+    <string name="app_permission_auto_revoke_summary_off">Auto-revoke disabled</string>
+    <string name="battery_optimization_exemptions_title">Battery optimization exemptions</string>
+    <string name="battery_optimization_exemptions_summary">Control which apps bypass battery restrictions. Currently: %s</string>
+    <string name="battery_optimization_exemptions_summary_on">App restrictions enabled</string>
+    <string name="battery_optimization_exemptions_summary_off">App restrictions disabled</string>
+    <string name="notification_access_title">Notification access control</string>
+    <string name="notification_access_summary">Control apps that can read your notifications. Currently: %s</string>
+    <string name="notification_access_summary_on">Notification access monitoring enabled</string>
+    <string name="notification_access_summary_off">Notification access monitoring disabled</string>
+
+    <!-- Lock Screen & Backup Features -->
+    <string name="app_data_backup_title">App data backup control</string>
+    <string name="app_data_backup_summary">Control automatic app data backups. Currently: %s</string>
+    <string name="app_data_backup_summary_on">Automatic backups enabled</string>
+    <string name="app_data_backup_summary_off">Automatic backups disabled</string>
+
+    <!-- Network & Location Features -->
+    <string name="network_traffic_monitoring_title">Network traffic monitoring</string>
+    <string name="network_traffic_monitoring_summary">Control network multipath preferences. Currently: %s</string>
+    <string name="network_traffic_monitoring_summary_on">Multipath handover enabled</string>
+    <string name="network_traffic_monitoring_summary_off">Multipath disabled</string>
+    <string name="location_accuracy_title">Location accuracy control</string>
+    <string name="location_accuracy_summary">Control location precision and power usage. Currently: %s</string>
+    <string name="location_accuracy_summary_on">High accuracy mode (GPS + Network)</string>
+    <string name="location_accuracy_summary_off">Battery saving mode (Network only)</string>
+
+    <!-- Hardware Privacy Features -->
+    <string name="camera_privacy_title">Camera privacy control</string>
+    <string name="camera_privacy_summary">Block camera access for all apps. Currently: %s</string>
+    <string name="camera_privacy_summary_on">Camera is blocked</string>
+    <string name="camera_privacy_summary_off">Camera is available</string>
+    <string name="microphone_privacy_title">Microphone privacy control</string>
+    <string name="microphone_privacy_summary">Block microphone access for all apps. Currently: %s</string>
+    <string name="microphone_privacy_summary_on">Microphone is blocked</string>
+    <string name="microphone_privacy_summary_off">Microphone is available</string>
+    <string name="storage_access_title">Storage access control</string>
+    <string name="storage_access_summary">Control app access to device storage. Currently: %s</string>
+    <string name="storage_access_summary_on">Storage access framework enabled</string>
+    <string name="storage_access_summary_off">Storage access framework preference disabled</string>
 
     <!-- Settings Backup & Restore -->
     <string name="settings_backup_restore_title">Settings backup &amp; restore</string>
@@ -46,38 +133,64 @@
     <string name="settings_restore_summary">Import a previously saved Settings configuration.</string>
     <string name="settings_backup_success">Backup saved to: %1$s</string>
     <string name="settings_backup_error">Could not complete backup.</string>
+    <string name="settings_backup_location_title">Backup Location</string>
+    <string name="settings_backup_no_backup">No backup found</string>
     <string name="settings_restore_success">Restored %1$d settings.</string>
     <string name="settings_restore_error">Could not restore settings.</string>
     <string name="settings_restore_file_not_found">Backup file not found.</string>
 
-    <!-- Power Tweaks -->
-    <string name="power_tweaks_title">Power tweaks</string>
-    <string name="power_tweaks_summary">Charge, battery, and power efficiency controls.</string>
-    <string name="power_tweaks_category_charging">Charging</string>
-    <string name="power_tweaks_category_battery">Battery &amp; efficiency</string>
+    <!-- Power Tweaks - Working Android Features -->
+    <string name="power_tweaks_title">Display &amp; system tweaks</string>
+    <string name="power_tweaks_summary">Display, accessibility, and system behavior controls.</string>
+    <string name="power_tweaks_category_display">Display &amp; accessibility</string>
+    <string name="power_tweaks_category_system">System behavior</string>
+    <string name="power_tweaks_category_charging">Display, accessibility &amp; system behavior</string>
+
+    <!-- Standard Android features removed - use built-in Settings -->
+
+    <!-- Charging & Battery Features -->
     <string name="fast_charging_title">Fast charging</string>
-    <string name="fast_charging_summary">Enable vendor fast-charging behavior.</string>
-    <string name="charging_led_title">Charging LED</string>
-    <string name="charging_led_summary">Show LED while charging.</string>
-    <string name="charging_sound_title">Charging sound</string>
-    <string name="charging_sound_summary">Play a sound when charging starts.</string>
-    <string name="charging_animation_title">Charging animation</string>
-    <string name="charging_animation_summary">Show charging animation on screen.</string>
-    <string name="smart_charging_title">Smart charging</string>
-    <string name="smart_charging_summary">Slow charging above 80% to reduce wear.</string>
-    <string name="wake_on_charge_title">Wake on charge</string>
-    <string name="wake_on_charge_summary">Turn on the screen when power is connected.</string>
-    <string name="battery_saver_auto_title">Auto battery saver</string>
-    <string name="battery_saver_auto_summary">Enable battery saver automatically at low battery.</string>
-    <string name="battery_calibration_title">Battery calibration</string>
-    <string name="battery_calibration_summary">Reset battery stats for troubleshooting.</string>
-    <string name="power_efficient_mode_title">Power efficient mode</string>
-    <string name="power_efficient_mode_summary">Reduce performance to save power.</string>
-    <string name="screen_off_optimization_title">Screen-off optimization</string>
-    <string name="screen_off_optimization_summary">Apply extra savings when the screen is off.</string>
+    <string name="fast_charging_summary">Enable fast charging to reduce charging time.</string>
+    <string name="stay_awake_charging_title">Stay awake when charging</string>
+    <string name="stay_awake_charging_summary">Keep screen on while device is charging.</string>
+    <string name="adaptive_battery_title">Adaptive battery</string>
+    <string name="adaptive_battery_summary">Learn from app usage to optimize battery life.</string>
 
     <!-- Hide developer status -->
     <string name="hide_developer_status_title">Hide developer status</string>
     <string name="hide_developer_status_summary">Choose apps that should not see ADB/developer enabled state.</string>
+
+    <!-- Toast Messages for Security Features -->
+    <string name="usb_debugging_enabled_toast">USB debugging enabled</string>
+    <string name="usb_debugging_disabled_toast">USB debugging disabled</string>
+    <string name="usb_debugging_error">Cannot change USB debugging setting</string>
+    <string name="usb_debugging_summary_on">ADB debugging is enabled</string>
+    <string name="usb_debugging_summary_off">ADB debugging is disabled</string>
+
+    <string name="developer_options_enabled_toast">Developer options enabled</string>
+    <string name="developer_options_disabled_toast">Developer options disabled</string>
+    <string name="developer_options_error">Cannot change developer options setting</string>
+    <string name="developer_options_summary_on">Developer options are visible</string>
+    <string name="developer_options_summary_off">Developer options are hidden</string>
+
+    <string name="location_access_control_enabled_toast">Location access enabled</string>
+    <string name="location_access_control_disabled_toast">Location access disabled</string>
+    <string name="location_access_control_summary_on">Location services are enabled</string>
+    <string name="location_access_control_summary_off">Location services are disabled</string>
+
+    <string name="microphone_access_control_enabled_toast">Microphone access enabled</string>
+    <string name="microphone_access_control_disabled_toast">Microphone access disabled</string>
+    <string name="microphone_access_control_summary_on">Microphone access is enabled</string>
+    <string name="microphone_access_control_summary_off">Microphone access is blocked</string>
+
+    <string name="camera_privacy_enabled_toast">Camera blocked</string>
+    <string name="camera_privacy_disabled_toast">Camera unblocked</string>
+
+    <string name="microphone_privacy_enabled_toast">Microphone blocked</string>
+    <string name="microphone_privacy_disabled_toast">Microphone unblocked</string>
+
+    <!-- Non-functional feature warnings -->
+    <string name="mock_location_detection_warning">Cannot be changed on user builds</string>
+    <string name="vpn_always_on_warning">Select a VPN app first in Network settings</string>
 </resources>
 

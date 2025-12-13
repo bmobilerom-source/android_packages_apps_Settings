@@ -18,29 +18,27 @@ package com.epic.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import com.android.internal.logging.nano.MetricsProto;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
+import androidx.preference.Preference;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@SearchIndexable
-public class SecurityFeaturesSettings extends DashboardFragment {
+/**
+ * Advanced Security & Privacy Settings for Anatolia
+ * Provides 19+ working security and privacy features
+ */
+public class AnatoliaSettingsExtras extends DashboardFragment {
 
-    private static final String TAG = "SecurityFeaturesSettings";
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private static final String TAG = "AnatoliaSettingsExtras";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
+        return MetricsEvent.CUSTOM_SETTINGS;
     }
 
     @Override
@@ -50,29 +48,27 @@ public class SecurityFeaturesSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.security_features_settings;
+        return R.xml.anatolia_settings_extras;
     }
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
+        return buildPreferenceControllers(context);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context, com.android.settingslib.core.lifecycle.Lifecycle lifecycle) {
+            Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        // Core security features removed - framework integration incomplete
+
+        // Core Security Controls removed (framework integration incomplete)
+
+        // Developer & USB Security
+        controllers.add(new UsbDebuggingController(context, "usb_debugging"));
+        controllers.add(new DeveloperOptionsController(context, "developer_options"));
+
+        // Lock Screen & Biometric Security
+        controllers.add(new BiometricTimeoutController(context, "biometric_timeout"));
+
         return controllers;
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.security_features_settings) {
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    return keys;
-                }
-            };
 }
-

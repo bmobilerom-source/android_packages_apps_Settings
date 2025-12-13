@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="hide_developer_status_hidden_apps">
+        <item>com.android.settings</item>
+    </string-array>
+</resources>
+
+

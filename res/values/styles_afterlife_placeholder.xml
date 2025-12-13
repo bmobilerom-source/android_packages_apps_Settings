@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="hsv_style" parent="@android:style/Theme.Material.Light">
-        <!-- Placeholder style to satisfy references -->
-    </style>
-</resources>
-

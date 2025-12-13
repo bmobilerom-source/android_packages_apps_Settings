@@ -93,8 +93,8 @@ public class HideDeveloperStatusSettings extends SettingsPreferenceFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.hide_developer_status_layout, container, false);
-        // Ensure wallpaper background is added
-        ensureWallpaperBackground(rootView);
+        // TODO: Ensure wallpaper background is added
+        // ensureWallpaperBackground(rootView);
         return rootView;
     }
 
