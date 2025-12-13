@@ -4,6 +4,8 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/power_tweaks_title">
 
+
+
     <PreferenceCategory
         android:title="@string/power_tweaks_category_charging">
 
@@ -11,76 +13,22 @@
             android:key="fast_charging"
             android:title="@string/fast_charging_title"
             android:summary="@string/fast_charging_summary"
-            android:defaultValue="false"
+            android:defaultValue="true"
             settings:controller="com.epic.fragments.FastChargingController" />
 
         <SwitchPreference
-            android:key="charging_led"
-            android:title="@string/charging_led_title"
-            android:summary="@string/charging_led_summary"
+            android:key="stay_awake_charging"
+            android:title="@string/stay_awake_charging_title"
+            android:summary="@string/stay_awake_charging_summary"
+            android:defaultValue="false"
+            settings:controller="com.epic.fragments.StayAwakeChargingController" />
+
+        <SwitchPreference
+            android:key="adaptive_battery"
+            android:title="@string/adaptive_battery_title"
+            android:summary="@string/adaptive_battery_summary"
             android:defaultValue="true"
-            settings:controller="com.epic.fragments.ChargingLedController" />
-
-        <SwitchPreference
-            android:key="charging_sound"
-            android:title="@string/charging_sound_title"
-            android:summary="@string/charging_sound_summary"
-            android:defaultValue="true"
-            settings:controller="com.epic.fragments.ChargingSoundController" />
-
-        <SwitchPreference
-            android:key="charging_animation"
-            android:title="@string/charging_animation_title"
-            android:summary="@string/charging_animation_summary"
-            android:defaultValue="true"
-            settings:controller="com.epic.fragments.ChargingAnimationController" />
-
-        <SwitchPreference
-            android:key="smart_charging"
-            android:title="@string/smart_charging_title"
-            android:summary="@string/smart_charging_summary"
-            android:defaultValue="false"
-            settings:controller="com.epic.fragments.SmartChargingController" />
-
-        <SwitchPreference
-            android:key="wake_on_charge"
-            android:title="@string/wake_on_charge_title"
-            android:summary="@string/wake_on_charge_summary"
-            android:defaultValue="false"
-            settings:controller="com.epic.fragments.WakeOnChargeController" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/power_tweaks_category_battery">
-
-        <SwitchPreference
-            android:key="battery_saver_auto"
-            android:title="@string/battery_saver_auto_title"
-            android:summary="@string/battery_saver_auto_summary"
-            android:defaultValue="false"
-            settings:controller="com.epic.fragments.BatterySaverAutoController" />
-
-        <SwitchPreference
-            android:key="battery_calibration"
-            android:title="@string/battery_calibration_title"
-            android:summary="@string/battery_calibration_summary"
-            android:defaultValue="false"
-            settings:controller="com.epic.fragments.BatteryCalibrationController" />
-
-        <SwitchPreference
-            android:key="power_efficient_mode"
-            android:title="@string/power_efficient_mode_title"
-            android:summary="@string/power_efficient_mode_summary"
-            android:defaultValue="false"
-            settings:controller="com.epic.fragments.PowerEfficientModeController" />
-
-        <SwitchPreference
-            android:key="screen_off_optimization"
-            android:title="@string/screen_off_optimization_title"
-            android:summary="@string/screen_off_optimization_summary"
-            android:defaultValue="false"
-            settings:controller="com.epic.fragments.ScreenOffOptimizationController" />
+            settings:controller="com.epic.fragments.AdaptiveBatteryController" />
 
     </PreferenceCategory>
 

@@ -38,136 +38,81 @@ public class PowerTweaksHelper {
     private static final String KEY_SCREEN_OFF_OPTIMIZATION = "screen_off_optimization_enabled";
     private static final String KEY_CHARGING_ANIMATION = "charging_animation_enabled";
 
-    // crDroid Features
+    // Standard Android feature methods removed - use built-in Settings implementations
+
+    /**
+     * Enable/disable fast charging
+     * Uses Settings.System key for fast charging control
+     */
     public static boolean isFastChargingEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_FAST_CHARGING, 0) == 1;
+        return Settings.System.getInt(context.getContentResolver(), KEY_FAST_CHARGING, 1) == 1;
     }
 
     public static boolean setFastChargingEnabled(Context context, boolean enabled) {
         boolean result = Settings.System.putInt(context.getContentResolver(), KEY_FAST_CHARGING, enabled ? 1 : 0);
         if (result) {
-            Settings.Global.putInt(context.getContentResolver(), "fast_charging_enabled", enabled ? 1 : 0);
             Log.d(TAG, "Fast charging " + (enabled ? "enabled" : "disabled"));
         }
         return result;
     }
 
-    public static boolean isChargingLedEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_CHARGING_LED, 1) == 1;
+    /**
+     * Stay awake when charging - Keep screen on while plugged in
+     * Uses Settings.Global.STAY_ON_WHILE_PLUGGED_IN
+     * Values: 0=off, 1=AC, 2=USB, 4=Wireless, 7=All
+     */
+    public static boolean isStayAwakeWhenChargingEnabled(Context context) {
+        int stayOn = Settings.Global.getInt(context.getContentResolver(),
+                Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0);
+        // Check if stay on is enabled for any charging method
+        return stayOn > 0;
     }
 
-    public static boolean setChargingLedEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(), KEY_CHARGING_LED, enabled ? 1 : 0);
+    public static boolean setStayAwakeWhenChargingEnabled(Context context, boolean enabled) {
+        // Enable for AC (1), USB (2), and Wireless (4) = 7 (all)
+        int flags = enabled ? 7 : 0;
+        boolean result = Settings.Global.putInt(context.getContentResolver(),
+                Settings.Global.STAY_ON_WHILE_PLUGGED_IN, flags);
         if (result) {
-            Settings.System.putInt(context.getContentResolver(), "charging_led_enabled", enabled ? 1 : 0);
-            Log.d(TAG, "Charging LED " + (enabled ? "enabled" : "disabled"));
+            Log.d(TAG, "Stay awake when charging " + (enabled ? "enabled" : "disabled"));
         }
         return result;
     }
 
-    public static boolean isBatterySaverAutoEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_BATTERY_SAVER_AUTO, 0) == 1;
+    /**
+     * Adaptive Battery - Learn from app usage to optimize battery
+     * Uses Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED
+     */
+    public static boolean isAdaptiveBatteryEnabled(Context context) {
+        return Settings.Global.getInt(context.getContentResolver(),
+                "adaptive_battery_management_enabled", 1) == 1;
     }
 
-    public static boolean setBatterySaverAutoEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(), KEY_BATTERY_SAVER_AUTO, enabled ? 1 : 0);
+    public static boolean setAdaptiveBatteryEnabled(Context context, boolean enabled) {
+        boolean result = Settings.Global.putInt(context.getContentResolver(),
+                "adaptive_battery_management_enabled", enabled ? 1 : 0);
         if (result) {
-            // Auto-enable battery saver at 15% battery
-            Settings.Global.putInt(context.getContentResolver(), "low_power_trigger_level", enabled ? 15 : 0);
-            Log.d(TAG, "Auto battery saver " + (enabled ? "enabled" : "disabled"));
+            Log.d(TAG, "Adaptive battery " + (enabled ? "enabled" : "disabled"));
         }
         return result;
     }
 
-    public static boolean isWakeOnChargeEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_WAKE_ON_CHARGE, 0) == 1;
+    /**
+     * Get screen timeout in milliseconds
+     */
+    public static int getScreenTimeout(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.SCREEN_OFF_TIMEOUT, 30000); // Default 30 seconds
     }
 
-    public static boolean setWakeOnChargeEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(), KEY_WAKE_ON_CHARGE, enabled ? 1 : 0);
+    /**
+     * Set screen timeout in milliseconds
+     */
+    public static boolean setScreenTimeout(Context context, int timeoutMs) {
+        boolean result = Settings.System.putInt(context.getContentResolver(),
+                Settings.System.SCREEN_OFF_TIMEOUT, timeoutMs);
         if (result) {
-            Settings.System.putInt(context.getContentResolver(), "wake_on_charge", enabled ? 1 : 0);
-            Log.d(TAG, "Wake on charge " + (enabled ? "enabled" : "disabled"));
-        }
-        return result;
-    }
-
-    public static boolean isChargingSoundEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_CHARGING_SOUND, 1) == 1;
-    }
-
-    public static boolean setChargingSoundEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(), KEY_CHARGING_SOUND, enabled ? 1 : 0);
-        if (result) {
-            Settings.System.putInt(context.getContentResolver(), "charging_sound_enabled", enabled ? 1 : 0);
-            Log.d(TAG, "Charging sound " + (enabled ? "enabled" : "disabled"));
-        }
-        return result;
-    }
-
-    // Axion A16 Features
-    public static boolean isSmartChargingEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_SMART_CHARGING, 0) == 1;
-    }
-
-    public static boolean setSmartChargingEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(), KEY_SMART_CHARGING, enabled ? 1 : 0);
-        if (result) {
-            // Smart charging: slow down charging when battery is above 80%
-            Settings.Global.putInt(context.getContentResolver(), "smart_charging_enabled", enabled ? 1 : 0);
-            Log.d(TAG, "Smart charging " + (enabled ? "enabled" : "disabled"));
-        }
-        return result;
-    }
-
-    public static boolean isBatteryCalibrationEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_BATTERY_CALIBRATION, 0) == 1;
-    }
-
-    public static boolean setBatteryCalibrationEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(), KEY_BATTERY_CALIBRATION, enabled ? 1 : 0);
-        if (result) {
-            Settings.Global.putInt(context.getContentResolver(), "battery_calibration_enabled", enabled ? 1 : 0);
-            Log.d(TAG, "Battery calibration " + (enabled ? "enabled" : "disabled"));
-        }
-        return result;
-    }
-
-    public static boolean isPowerEfficientModeEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_POWER_EFFICIENT_MODE, 0) == 1;
-    }
-
-    public static boolean setPowerEfficientModeEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(), KEY_POWER_EFFICIENT_MODE, enabled ? 1 : 0);
-        if (result) {
-            Settings.Global.putInt(context.getContentResolver(), "power_efficient_mode", enabled ? 1 : 0);
-            Log.d(TAG, "Power efficient mode " + (enabled ? "enabled" : "disabled"));
-        }
-        return result;
-    }
-
-    public static boolean isScreenOffOptimizationEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_SCREEN_OFF_OPTIMIZATION, 0) == 1;
-    }
-
-    public static boolean setScreenOffOptimizationEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(), KEY_SCREEN_OFF_OPTIMIZATION, enabled ? 1 : 0);
-        if (result) {
-            Settings.Global.putInt(context.getContentResolver(), "screen_off_optimization", enabled ? 1 : 0);
-            Log.d(TAG, "Screen off optimization " + (enabled ? "enabled" : "disabled"));
-        }
-        return result;
-    }
-
-    public static boolean isChargingAnimationEnabled(Context context) {
-        return Settings.System.getInt(context.getContentResolver(), KEY_CHARGING_ANIMATION, 1) == 1;
-    }
-
-    public static boolean setChargingAnimationEnabled(Context context, boolean enabled) {
-        boolean result = Settings.System.putInt(context.getContentResolver(), KEY_CHARGING_ANIMATION, enabled ? 1 : 0);
-        if (result) {
-            Settings.System.putInt(context.getContentResolver(), "charging_animation_enabled", enabled ? 1 : 0);
-            Log.d(TAG, "Charging animation " + (enabled ? "enabled" : "disabled"));
+            Log.d(TAG, "Screen timeout set to " + timeoutMs + "ms");
         }
         return result;
     }

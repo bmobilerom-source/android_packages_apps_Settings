@@ -55,23 +55,15 @@ public class PowerTweaksSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, com.android.settingslib.core.lifecycle.Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        // crDroid features
+        // Custom charging & battery features only
         controllers.add(new FastChargingController(context, "fast_charging"));
-        controllers.add(new ChargingLedController(context, "charging_led"));
-        controllers.add(new BatterySaverAutoController(context, "battery_saver_auto"));
-        controllers.add(new WakeOnChargeController(context, "wake_on_charge"));
-        controllers.add(new ChargingSoundController(context, "charging_sound"));
-        // Axion A16 features
-        controllers.add(new SmartChargingController(context, "smart_charging"));
-        controllers.add(new BatteryCalibrationController(context, "battery_calibration"));
-        controllers.add(new PowerEfficientModeController(context, "power_efficient_mode"));
-        controllers.add(new ScreenOffOptimizationController(context, "screen_off_optimization"));
-        controllers.add(new ChargingAnimationController(context, "charging_animation"));
+        controllers.add(new StayAwakeChargingController(context, "stay_awake_charging"));
+        controllers.add(new AdaptiveBatteryController(context, "adaptive_battery"));
         return controllers;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.anatolia_settings_power) {
+            new BaseSearchIndexProvider(R.xml.power_tweaks_settings) {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {

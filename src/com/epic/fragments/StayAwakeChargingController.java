@@ -13,9 +13,9 @@ package com.epic.fragments;
 import android.content.Context;
 import com.android.settings.core.TogglePreferenceController;
 
-public class ChargingSoundController extends TogglePreferenceController {
+public class StayAwakeChargingController extends TogglePreferenceController {
 
-    public ChargingSoundController(Context context, String preferenceKey) {
+    public StayAwakeChargingController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -26,12 +26,12 @@ public class ChargingSoundController extends TogglePreferenceController {
 
     @Override
     public boolean isChecked() {
-        return PowerTweaksHelper.isChargingSoundEnabled(mContext);
+        return PowerTweaksHelper.isStayAwakeWhenChargingEnabled(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return PowerTweaksHelper.setChargingSoundEnabled(mContext, isChecked);
+        return PowerTweaksHelper.setStayAwakeWhenChargingEnabled(mContext, isChecked);
     }
 
     @Override
