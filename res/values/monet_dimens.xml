@@ -42,4 +42,8 @@
     <!-- Color picker dimensions -->
     <dimen name="monet_color_picker_height">48dp</dimen>
     <dimen name="monet_color_picker_width">48dp</dimen>
+
+      <!-- Monet color swatch dimensions -->
+    <dimen name="monet_color_swatch_size">40dp</dimen>
+    <dimen name="monet_color_swatch_corner_radius">8dp</dimen>
 </resources>
