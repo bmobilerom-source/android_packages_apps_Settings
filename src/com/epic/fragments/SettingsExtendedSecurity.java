@@ -41,13 +41,11 @@
 
 package com.epic.fragments;
 
-import android.content.ContentResolver;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -60,8 +58,7 @@ import com.android.settings.SettingsPreferenceFragment;
  * Provides additional granular security options beyond standard security settings.
  * This page is completely independent and can be transferred to other ROMs.
  */
-public class SettingsExtendedSecurity extends SettingsPreferenceFragment implements
-        OnPreferenceChangeListener {
+public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
 
     private static final String TAG = "SettingsExtendedSecurity";
 
@@ -71,11 +68,6 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
 
         addPreferencesFromResource(R.xml.anatolia_settings_extended_security);
 
-        final PreferenceScreen prefScreen = getPreferenceScreen();
-        final ContentResolver resolver = getActivity().getContentResolver();
-
-        // Initialize preference states
-        updatePreferenceStates(resolver);
     }
 
 

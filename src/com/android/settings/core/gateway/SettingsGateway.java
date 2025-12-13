@@ -102,13 +102,18 @@ import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
+import com.android.settings.deviceinfo.BMobileAccountsFragment;
+import com.android.settings.deviceinfo.BMobileUserInfoFragment;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
 import com.android.settings.display.ColorContrastFragment;
+import com.android.settings.display.MonetColorSettings;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.display.QuickSettingsSettings;
+import com.android.settings.display.StatusBarSettings;
 import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.display.SmartAutoRotatePreferenceFragment;
 import com.android.settings.display.darkmode.DarkModeSettingsFragment;
@@ -413,7 +418,19 @@ public class SettingsGateway {
             com.epic.fragments.SettingsExtendedSecurity.class.getName(),
             com.epic.fragments.MyPersonalFragment.class.getName(),
             com.epic.fragments.MySessionFragment.class.getName(),
-            com.epic.fragments.BMobileSettingsFragment.class.getName()
+            com.epic.fragments.BMobileSettingsFragment.class.getName(),
+            com.epic.fragments.AnatoliaSettingsExtras.class.getName(),
+            com.epic.fragments.AOSPModsSettings.class.getName(),
+            com.epic.fragments.NotificationSettings.class.getName(),
+            com.epic.fragments.GestureSettings.class.getName(),
+            com.epic.fragments.NavbarSettings.class.getName(),
+            com.android.settings.deviceinfo.BMobileAccountsFragment.class.getName(),
+            com.android.settings.deviceinfo.BMobileUserInfoFragment.class.getName(),
+            com.palladium.atomichub.Atomichub.class.getName(),
+            com.palladium.atomichub.Atomichub2.class.getName(),
+            StatusBarSettings.class.getName(),
+            QuickSettingsSettings.class.getName(),
+            MonetColorSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
