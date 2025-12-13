@@ -40,19 +40,21 @@
         android:title="@string/settings_backup_restore_category_title"
         android:key="settings_backup_category">
 
-        <com.android.settings.preferences.ui.AdaptivePreference
+        <Preference
             android:key="backup_settings"
             android:title="@string/settings_backup_title"
-            android:summary="@string/settings_backup_summary"
-            android:icon="@drawable/ic_settings_backup_restore"
-            app:position="top" />
+            android:summary="@string/settings_backup_summary"/>
 
-        <com.android.settings.preferences.ui.AdaptivePreference
+        <Preference
             android:key="restore_settings"
             android:title="@string/settings_restore_title"
-            android:summary="@string/settings_restore_summary"
-            android:icon="@drawable/ic_restore"
-            app:position="bottom" />
+            android:summary="@string/settings_restore_summary" />
+
+        <Preference
+            android:key="backup_location"
+            android:title="@string/settings_backup_location_title"
+            android:summary="@string/settings_backup_no_backup"
+            android:selectable="false" />
 
     </PreferenceCategory>
 
