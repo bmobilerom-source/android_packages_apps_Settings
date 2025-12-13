@@ -27,7 +27,11 @@ import com.android.settings.core.BasePreferenceController;
  */
 public class MicroGPreferenceController extends BasePreferenceController {
 
-    private static final String PACKAGE_NAME = "com.google.android.gms";
+    private static final String[] MICROG_PACKAGES = {
+        "com.google.android.gms",
+        "org.microg.gms.droidguard",
+        "com.google.android.gsf"
+    };
 
     public MicroGPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -35,42 +39,56 @@ public class MicroGPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        // Always available - preference should be visible even if app not installed
         return AVAILABLE;
     }
 
-    private boolean isAppInstalled() {
-        try {
-            mContext.getPackageManager().getPackageInfo(PACKAGE_NAME, 0);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
+    private String findInstalledMicroGPackage() {
+        PackageManager pm = mContext.getPackageManager();
+        for (String packageName : MICROG_PACKAGES) {
+            try {
+                pm.getPackageInfo(packageName, 0);
+                return packageName;
+            } catch (PackageManager.NameNotFoundException e) {
+                // Continue checking other packages
+            }
         }
-    }
-
-    private boolean launchApp() {
-        try {
-            android.content.Intent intent =
-                    mContext.getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
-            if (intent == null) return false;
-            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(intent);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return null;
     }
 
     @Override
     public boolean handlePreferenceTreeClick(androidx.preference.Preference preference) {
-        if (!isAppInstalled()) {
-            // App not installed - show message
-            android.widget.Toast.makeText(mContext,
-                "MicroG app is not installed", android.widget.Toast.LENGTH_LONG).show();
-            return true; // Consume the click
+        if (!preference.getKey().equals(getPreferenceKey())) {
+            return super.handlePreferenceTreeClick(preference);
         }
-        // Try to launch the app; if it fails, fall back to super
-        if (launchApp()) return true;
-        return super.handlePreferenceTreeClick(preference);
+
+        String packageName = findInstalledMicroGPackage();
+        if (packageName == null) {
+            android.widget.Toast.makeText(mContext,
+                "MicroG/GmsCore is not installed. Please install MicroG or GmsCore first.",
+                android.widget.Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        try {
+            // First try to launch the app's main activity
+            android.content.Intent intent = mContext.getPackageManager().getLaunchIntentForPackage(packageName);
+            if (intent != null) {
+                intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+                return true;
+            }
+            
+            // Fallback: Open app's settings page
+            intent = new android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(android.net.Uri.parse("package:" + packageName));
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            android.util.Log.e("MicroGPreferenceController", "Error opening MicroG", e);
+            android.widget.Toast.makeText(mContext,
+                "Unable to open MicroG settings", android.widget.Toast.LENGTH_SHORT).show();
+            return true;
+        }
     }
 }

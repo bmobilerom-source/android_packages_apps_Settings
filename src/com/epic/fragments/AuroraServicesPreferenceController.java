@@ -63,13 +63,33 @@ public class AuroraServicesPreferenceController extends BasePreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(androidx.preference.Preference preference) {
+        if (!preference.getKey().equals(getPreferenceKey())) {
+            return super.handlePreferenceTreeClick(preference);
+        }
+
         if (!isAppInstalled()) {
             // App not installed - show message
             android.widget.Toast.makeText(mContext,
                 "Aurora Services app is not installed", android.widget.Toast.LENGTH_LONG).show();
             return true; // Consume the click
         }
-        if (launchApp()) return true;
-        return super.handlePreferenceTreeClick(preference);
+        
+        // Try to launch the app
+        if (launchApp()) {
+            return true;
+        }
+        
+        // Fallback: Open app's settings page
+        try {
+            android.content.Intent intent = new android.content.Intent(
+                android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(android.net.Uri.parse("package:" + PACKAGE_NAME));
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            android.util.Log.e("AuroraServicesPreferenceController", "Error opening Aurora Services", e);
+            return super.handlePreferenceTreeClick(preference);
+        }
     }
 }

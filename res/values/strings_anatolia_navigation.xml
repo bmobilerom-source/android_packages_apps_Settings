@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="my_personal_title">Personal settings</string>
+    <string name="my_personal_summary">Open personal customization options</string>
+    <string name="my_session_title">Session settings</string>
+    <string name="my_session_summary">Manage Session messenger options</string>
+    <string name="bmobile_settings_title">BMobile settings</string>
+    <string name="bmobile_settings_summary">Controls for BMobile services and privacy</string>
+</resources>
+

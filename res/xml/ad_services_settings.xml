@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 LineageOS
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/bmobile_ad_services_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="ad_services_intro"
+        android:title="@string/bmobile_ad_services_title"
+        android:summary="This will attempt to open the system's Ad Services settings. If not available, it opens Privacy settings."
+        settings:searchable="false" />
+
+    <PreferenceCategory
+        android:title="Ad Services Access">
+
+        <Preference
+            android:key="ad_services_direct"
+            android:title="Open Ad Services"
+            android:summary="Launch Ad Services settings directly"
+            settings:controller="com.epic.fragments.AdServicesPreferenceController" />
+
+        <Preference
+            android:key="ad_services_privacy"
+            android:title="Privacy Settings"
+            android:summary="Open system privacy dashboard"
+            android:fragment="com.android.settings.privacy.PrivacyDashboardFragment" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Information">
+
+        <Preference
+            android:key="ad_services_info"
+            android:title="About Ad Services"
+            android:summary="Learn more about advertising and privacy controls" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

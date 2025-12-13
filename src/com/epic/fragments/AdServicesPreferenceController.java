@@ -63,13 +63,53 @@ public class AdServicesPreferenceController extends BasePreferenceController {
 
     @Override
     public boolean handlePreferenceTreeClick(androidx.preference.Preference preference) {
-        if (!isAppInstalled()) {
-            // App not installed - show message
-            android.widget.Toast.makeText(mContext,
-                "Ad Services Control app is not installed", android.widget.Toast.LENGTH_LONG).show();
-            return true; // Consume the click
+        if (!preference.getKey().equals(getPreferenceKey())) {
+            return super.handlePreferenceTreeClick(preference);
         }
-        if (launchApp()) return true;
-        return super.handlePreferenceTreeClick(preference);
+
+        android.util.Log.d("AdServicesPreferenceController", "Ad Services preference clicked");
+
+        // Try to open system Ad Services settings first (Android 12+)
+        try {
+            android.content.Intent intent = new android.content.Intent(
+                android.provider.Settings.ACTION_PRIVACY_SETTINGS);
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+            android.util.Log.d("AdServicesPreferenceController", "Opened system privacy settings");
+            return true;
+        } catch (Exception e) {
+            android.util.Log.d("AdServicesPreferenceController", "Failed to open system privacy settings", e);
+        }
+
+        // Fallback: Try to launch the Ad Services app
+        if (isAppInstalled()) {
+            android.util.Log.d("AdServicesPreferenceController", "Ad Services app is installed, launching");
+            if (launchApp()) {
+                android.util.Log.d("AdServicesPreferenceController", "Successfully launched Ad Services app");
+                return true;
+            }
+        } else {
+            android.util.Log.d("AdServicesPreferenceController", "Ad Services app is not installed");
+        }
+
+        // Final fallback: Open app's settings page if app exists
+        if (isAppInstalled()) {
+            try {
+                android.content.Intent intent = new android.content.Intent(
+                    android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                intent.setData(android.net.Uri.parse("package:" + PACKAGE_NAME));
+                intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+                android.util.Log.d("AdServicesPreferenceController", "Opened Ad Services app settings");
+                return true;
+            } catch (Exception e) {
+                android.util.Log.e("AdServicesPreferenceController", "Error opening Ad Services app settings", e);
+            }
+        }
+
+        // Last resort: Show message
+        android.widget.Toast.makeText(mContext,
+            "Ad Services settings are not available on this device", android.widget.Toast.LENGTH_LONG).show();
+        return true; // Consume the click
     }
 }
