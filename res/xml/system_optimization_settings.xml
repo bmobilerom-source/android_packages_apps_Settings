@@ -24,7 +24,7 @@
         android:key="system_optimization_illustration"
         settings:searchable="false"
         android:order="-1001"
-        app:lottie_rawRes="@raw/display" />
+        app:lottie_rawRes="@raw/optimise" />
 
     <!-- Header -->
     <com.android.settingslib.widget.TopIntroPreference
