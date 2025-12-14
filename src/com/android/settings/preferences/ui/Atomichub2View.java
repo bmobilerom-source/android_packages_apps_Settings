@@ -159,6 +159,18 @@ public class Atomichub2View extends LinearLayout {
         }
     }
 
+    private void launchApp(Activity activity, String packageName, String activityClass) {
+        if (activity == null) return;
+        try {
+            android.content.Intent intent = new android.content.Intent();
+            intent.setClassName(packageName, activityClass);
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(intent);
+        } catch (Exception e) {
+            android.util.Log.e("Atomichub2View", "Failed to launch app: " + packageName + "/" + activityClass, e);
+        }
+    }
+
     private Activity findActivity(Context context) {
         while (context instanceof ContextWrapper) {
             if (context instanceof Activity) {
