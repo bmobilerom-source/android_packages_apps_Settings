@@ -53,7 +53,7 @@ if [ -f "$SETTINGS_FILE" ]; then
     print_status "Created backup: ${SETTINGS_FILE}.backup"
 
     # Add the new settings keys
-    cat >> "$SETTINGS_FILE" << 'EOF'
+    cat >> "$SETTINGS_FILE" << 'EOF2'
 
 // AOSPMods-inspired SystemUI Settings
 public static final String STATUS_BAR_HEIGHT_FACTOR = "status_bar_height_factor";
@@ -77,7 +77,7 @@ public static final String QS_PULLDOWN_ENABLED = "qs_pulldown_enabled";
 public static final String QS_PULLDOWN_PERCENTAGE = "qs_pulldown_percentage";
 public static final String QS_PULLDOWN_SIDE = "qs_pulldown_side";
 public static final String ONE_FINGER_PULLUP_ENABLED = "one_finger_pullup_enabled";
-EOF
+EOF2
 
     print_status "Added settings keys to Settings.java"
 else
@@ -97,7 +97,7 @@ if [ ! -d "$AOSPMODS_UTILS_DIR" ]; then
 fi
 
 # Create AOSPMods settings utility
-cat > "$AOSPMODS_UTILS_DIR/AOSPModsSettings.java" << 'EOF'
+cat > "$AOSPMODS_UTILS_DIR/AOSPModsSettings.java" << 'EOF2'
 package com.android.systemui.aospmods;
 
 import android.content.Context;
@@ -216,14 +216,14 @@ public class AOSPModsSettings {
                 Settings.System.ONE_FINGER_PULLUP_ENABLED, 0) == 1;
     }
 }
-EOF
+EOF2
 
 print_status "Created AOSPModsSettings utility class"
 
 # Step 3: Create NetworkSpeedController
 print_step "Step 3: Creating NetworkSpeedController"
 
-cat > "$SYSTEMUI_SRC_DIR/statusbar/NetworkSpeedController.java" << 'EOF'
+cat > "$SYSTEMUI_SRC_DIR/statusbar/NetworkSpeedController.java" << 'EOF2'
 package com.android.systemui.statusbar;
 
 import android.content.Context;
@@ -345,53 +345,9 @@ public class NetworkSpeedController {
         }
     }
 }
-EOF
+EOF2
 
 print_status "Created NetworkSpeedController"
-
-# Step 4: Create StatusBar modifications template
-print_step "Step 4: Creating StatusBar modification templates"
-
-# Modify StatusBar.java to include height control
-STATUSBAR_FILE="$SYSTEMUI_SRC_DIR/statusbar/phone/StatusBar.java"
-if [ -f "$STATUSBAR_FILE" ]; then
-    print_status "Found StatusBar.java - you will need to manually add height control logic"
-    print_warning "Please add the following to StatusBar.java:"
-    echo ""
-    echo "1. Add AOSPModsSettings injection to StatusBar constructor"
-    echo "2. Add status bar height update method"
-    echo "3. Register settings change listener"
-    echo ""
-else
-    print_warning "StatusBar.java not found - please check SystemUI structure"
-fi
-
-# Step 5: Create QS modifications template
-print_step "Step 5: Creating QS modification templates"
-
-QSPANEL_FILE="$SYSTEMUI_SRC_DIR/qs/QSPanel.java"
-if [ -f "$QSPANEL_FILE" ]; then
-    print_status "Found QSPanel.java - you will need to manually add scaling and gesture logic"
-    print_warning "Please add the following to QSPanel.java:"
-    echo ""
-    echo "1. Add AOSPModsSettings injection"
-    echo "2. Add label scaling logic"
-    echo "3. Add pull-down gesture detection"
-    echo ""
-else
-    print_warning "QSPanel.java not found - please check SystemUI structure"
-fi
-
-# Step 6: Create VolumeTile modification
-print_step "Step 6: Creating VolumeTile modification template"
-
-VOLUMETILE_FILE="$SYSTEMUI_SRC_DIR/qs/tiles/VolumeTile.java"
-if [ -f "$VOLUMETILE_FILE" ]; then
-    print_status "Found VolumeTile.java - you will need to manually add unmute percentage logic"
-    print_warning "Please add unmute percentage logic to VolumeTile.java"
-else
-    print_warning "VolumeTile.java not found - please check SystemUI structure"
-fi
 
 print_status "=== Implementation Script Complete ==="
 print_status ""
