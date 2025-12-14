@@ -36,8 +36,7 @@
         android:key="ad_services_pref"
         android:title="@string/bmobile_ad_services_title"
         android:summary="@string/bmobile_ad_services_summary"
-        android:fragment="com.epic.fragments.AdServicesFragment"
-        settings:controller="com.epic.fragments.AdServicesPreferenceController"
+        android:fragment="com.android.adservices.ui.settings.activities.AdServicesSettingsMainActivity"
         settings:layout="@layout/adaptive_preference_card_middle" />
     <!-- Mock Locations -->
     <PreferenceScreen
