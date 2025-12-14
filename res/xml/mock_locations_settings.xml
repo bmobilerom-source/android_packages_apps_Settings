@@ -25,7 +25,7 @@
         android:key="mock_location_illustration"
         android:order="-1001"
         settings:searchable="false"
-        app:lottie_rawRes="@raw/location" />
+        app:lottie_rawRes="@raw/loc_illustration" />
 
     <!-- Header -->
     <com.android.settingslib.widget.TopIntroPreference
