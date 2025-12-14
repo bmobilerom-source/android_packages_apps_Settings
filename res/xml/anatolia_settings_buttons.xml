@@ -19,4 +19,29 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	   android:title="@string/buttons_title">
 
+  
+     <Preference
+        android:key="system_optimization_entry_buttons"
+        android:title="@string/system_optimization_title"
+        android:summary="@string/system_optimization_intro_summary"
+        android:fragment="com.epic.fragments.SystemOptimizationSettings" />
+  
+     <Preference
+        android:key="extended_security_launcher"
+        android:title="@string/extended_security_title"
+        android:summary="@string/extended_security_intro"
+        android:fragment="com.epic.fragments.SettingsExtendedSecurity" />
+ 
+     <Preference
+        android:key="nav_settings_backup_restore"
+        android:title="@string/settings_backup_restore_title"
+        android:summary="@string/settings_backup_restore_intro_summary"
+        android:fragment="com.epic.fragments.SettingsBackupRestore" />
+
+     <Preference
+        android:key="power_tweaks_entry_buttons"
+        android:title="@string/power_tweaks_title"
+        android:summary="@string/power_tweaks_summary"
+        android:fragment="com.epic.fragments.PowerTweaksSettings" />
+
 </PreferenceScreen>

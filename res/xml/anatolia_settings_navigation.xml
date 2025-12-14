@@ -17,6 +17,49 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-	android:title=" ">
- 
+        android:title=" ">
+
+    <Preference
+        android:key="nav_my_personal"
+        android:title="@string/my_personal_title"
+        android:summary="@string/my_personal_summary"
+        android:fragment="com.epic.fragments.MyPersonalFragment" />
+
+    <Preference
+        android:key="nav_my_session"
+        android:title="@string/my_session_title"
+        android:summary="@string/my_session_summary"
+        android:fragment="com.epic.fragments.MySessionFragment" />
+
+    <Preference
+        android:key="nav_bmobile_settings"
+        android:title="@string/bmobile_settings_title"
+        android:summary="@string/bmobile_settings_summary"
+        android:fragment="com.epic.fragments.BMobileSettingsFragment" />
+
+    <Preference
+        android:key="nav_system_optimization"
+        android:title="@string/system_optimization_title"
+        android:summary="@string/system_optimization_intro_summary"
+        android:fragment="com.epic.fragments.SystemOptimizationSettings" />
+
+
+    <Preference
+        android:key="nav_settings_backup_restore"
+        android:title="@string/settings_backup_restore_title"
+        android:summary="@string/settings_backup_restore_intro_summary"
+        android:fragment="com.epic.fragments.SettingsBackupRestore" />
+
+    <Preference
+        android:key="nav_anatolia_extras"
+        android:title="@string/security_privacy_title"
+        android:summary="@string/security_privacy_intro_summary"
+        android:fragment="com.epic.fragments.AnatoliaSettingsExtras" />
+
+    <Preference
+        android:key="nav_aospmods_settings"
+        android:title="@string/aospmods_settings_title"
+        android:summary="Advanced status bar customizations"
+        android:fragment="com.epic.fragments.AOSPModsSettings" />
+
 </PreferenceScreen>
