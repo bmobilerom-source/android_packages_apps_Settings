@@ -69,13 +69,21 @@ public class MonetTintBackgroundController extends BasePreferenceController
             String currentPreset = android.provider.Settings.System.getString(
                     mContext.getContentResolver(), "monet_color_preset");
 
-            if (currentPreset != null && enabled) {
-                // Apply darker tinting for specific colors that need better contrast
-                int tintedColor = getDarkerTintForSettings(currentPreset);
+            if (currentPreset != null) {
+                // Always apply darker tinting for specific colors that need better contrast in settings
+                // These 5 colors get automatic darker tinting regardless of toggle setting
+                int tintedColor = getAutoDarkerTintForSettings(currentPreset);
                 if (tintedColor != 0) {
                     // Apply the darker tint for settings background
                     android.provider.Settings.System.putInt(mContext.getContentResolver(),
                             "settings_background_tint_color", tintedColor);
+                } else if (enabled) {
+                    // For other colors, only apply tinting if the toggle is enabled
+                    tintedColor = getDarkerTintForSettings(currentPreset);
+                    if (tintedColor != 0) {
+                        android.provider.Settings.System.putInt(mContext.getContentResolver(),
+                                "settings_background_tint_color", tintedColor);
+                    }
                 }
             }
 
@@ -94,15 +102,38 @@ public class MonetTintBackgroundController extends BasePreferenceController
         }
     }
 
-    private int getDarkerTintForSettings(String preset) {
-        // Apply 40% darker tinting for specific colors that need better visibility in settings
-        // These colors appear darker ONLY when tinting is enabled AND this specific color is selected
+    private int getAutoDarkerTintForSettings(String preset) {
+        // Apply 40% darker tinting AUTOMATICALLY for these 15 colors that need better visibility in settings
+        // These colors always get darker tinting in settings, regardless of toggle setting
         switch (preset) {
-            case "deep_moss_green": return darkenColor(0xFF375F47, 0.4f); // Deep Moss Green - 40% darker
-            case "lilac": return darkenColor(0xFFC9A5C0, 0.4f);            // Lilac - 40% darker
-            case "tan": return darkenColor(0xFFCFBA8F, 0.4f);             // Tan - 40% darker
-            case "pear": return darkenColor(0xFFD9DA40, 0.4f);            // Pear - 40% darker
-            case "ultramarine": return darkenColor(0xFFF20BF8, 0.4f);     // Ultramarine - 40% darker
+            // Original 5 colors
+            case "deep_moss_green": return darkenColor(0xFF375F47, 0.4f); // Deep Moss Green - auto 40% darker
+            case "lilac": return darkenColor(0xFFC9A5C0, 0.4f);            // Lilac - auto 40% darker
+            case "tan": return darkenColor(0xFFCFBA8F, 0.4f);             // Tan - auto 40% darker
+            case "pear": return darkenColor(0xFFD9DA40, 0.4f);            // Pear - auto 40% darker
+            case "ultramarine": return darkenColor(0xFFF20BF8, 0.4f);     // Ultramarine - auto 40% darker
+
+            // Additional 10 colors that need darker backgrounds for better visibility
+            case "cream": return darkenColor(0xFFF5F5DC, 0.4f);           // Cream - auto 40% darker
+            case "canary": return darkenColor(0xFFFFE91A, 0.4f);          // Canary - auto 40% darker
+            case "orange_pantone": return darkenColor(0xFFFF8C00, 0.4f);  // Orange - auto 40% darker
+            case "screamin_green": return darkenColor(0xFF55FC77, 0.4f);  // Screamin Green - auto 40% darker
+            case "spring_green": return darkenColor(0xFF00F891, 0.4f);    // Spring Green - auto 40% darker
+            case "lime_green": return darkenColor(0xFF00D61C, 0.4f);      // Lime Green - auto 40% darker
+            case "celeste": return darkenColor(0xFFB6FFFE, 0.4f);         // Celeste - auto 40% darker
+            case "pastel_pink": return darkenColor(0xFFD99EB0, 0.4f);     // Pastel Pink - auto 40% darker
+            case "bisque": return darkenColor(0xFFFFE8BD, 0.4f);          // Bisque - auto 40% darker
+            case "alabaster": return darkenColor(0xFFFAF9F6, 0.4f);       // Alabaster - auto 40% darker
+
+            default: return 0; // No auto tinting for other colors
+        }
+    }
+
+    private int getDarkerTintForSettings(String preset) {
+        // Apply additional tinting for other colors when toggle is enabled
+        // These colors only get darker when the user enables the toggle
+        switch (preset) {
+            // Add other colors here if needed in the future
             default: return 0; // No special tinting for other colors
         }
     }

@@ -1630,4 +1630,184 @@
     <!-- Packages that will not show Display over other apps permission -->
     <string-array name="display_over_apps_permission_change_exempt">
     </string-array>
+
+    <!-- Monet color presets (36 researched colors) -->
+    <string-array name="monet_color_presets">
+        <item>Wallpaper (Dynamic)</item>
+        <!-- Researched Color Collection -->
+        <item>French Violet</item>
+        <item>Rose Bonbon</item>
+        <item>Cream</item>
+        <item>Turquoise</item>
+        <item>Vivid Sky Blue</item>
+        <item>Canary</item>
+        <item>Orange (Pantone)</item>
+        <item>Off Red (RGB)</item>
+        <item>Blue Orchid</item>
+        <item>Screamin\' Green</item>
+        <item>Russian Violet</item>
+        <item>Orange (Crayola)</item>
+        <item>Spring Green</item>
+        <item>Lime Green</item>
+        <item>Night</item>
+        <item>Palatinate Blue</item>
+        <item>Federal Blue</item>
+        <item>Steel Pink</item>
+        <item>Celeste</item>
+        <item>Ultramarine</item>
+        <item>Dark Purple</item>
+        <item>Pear</item>
+        <item>Celadon Blue</item>
+        <item>Pastel Pink</item>
+        <item>Bisque</item>
+        <item>Brown</item>
+        <item>Tan</item>
+        <item>Lilac</item>
+        <item>Steel Blue</item>
+        <item>Deep Moss Green</item>
+        <item>Dark Sea Green</item>
+        <item>Alabaster</item>
+        <item>Quick Silver</item>
+        <item>Mint</item>
+        <item>American Blue</item>
+        <!-- Additional Material Design Accent Colors -->
+        <item>Red Accent</item>
+        <item>Purple Accent</item>
+        <item>Indigo Accent</item>
+        <item>Cyan Accent</item>
+        <item>Green Accent</item>
+        <item>Yellow Accent</item>
+    </string-array>
+
+    <string-array name="monet_color_preset_values" translatable="false">
+        <item>wallpaper</item>
+        <!-- Researched Color Collection -->
+        <item>french_violet</item>
+        <item>rose_bonbon</item>
+        <item>cream</item>
+        <item>turquoise</item>
+        <item>vivid_sky_blue</item>
+        <item>canary</item>
+        <item>orange_pantone</item>
+        <item>off_red_rgb</item>
+        <item>blue_orchid</item>
+        <item>screamin_green</item>
+        <item>russian_violet</item>
+        <item>orange_crayola</item>
+        <item>spring_green</item>
+        <item>lime_green</item>
+        <item>night</item>
+        <item>palatinate_blue</item>
+        <item>federal_blue</item>
+        <item>steel_pink</item>
+        <item>celeste</item>
+        <item>ultramarine</item>
+        <item>dark_purple</item>
+        <item>pear</item>
+        <item>celadon_blue</item>
+        <item>pastel_pink</item>
+        <item>bisque</item>
+        <item>brown</item>
+        <item>tan</item>
+        <item>lilac</item>
+        <item>steel_blue</item>
+        <item>deep_moss_green</item>
+        <item>dark_sea_green</item>
+        <item>alabaster</item>
+        <item>quick_silver</item>
+        <item>mint</item>
+        <item>american_blue</item>
+        <!-- Additional Material Design Accent Colors -->
+        <item>red_accent</item>
+        <item>purple_accent</item>
+        <item>indigo_accent</item>
+        <item>cyan_accent</item>
+        <item>green_accent</item>
+        <item>yellow_accent</item>
+    </string-array>
+
+    <!-- Power menu buttons -->
+    <string-array name="power_menu_button_entries">
+        <item>Power Off</item>
+        <item>Restart</item>
+        <item>Screenshot</item>
+        <item>Emergency</item>
+        <item>Lockdown</item>
+        <item>Reboot Recovery</item>
+        <item>Reboot Bootloader</item>
+        <item>Reboot Fastboot</item>
+        <item>Soft Reboot</item>
+        <item>Airplane Mode</item>
+    </string-array>
+
+    <string-array name="power_menu_button_values" translatable="false">
+        <item>power_off</item>
+        <item>restart</item>
+        <item>screenshot</item>
+        <item>emergency</item>
+        <item>lockdown</item>
+        <item>recovery</item>
+        <item>bootloader</item>
+        <item>fastboot</item>
+        <item>soft_reboot</item>
+        <item>airplane</item>
+    </string-array>
+
+    <!-- Monet wallpaper sources (MonetCompat inspired) -->
+    <string-array name="monet_wallpaper_source_entries">
+        <item>Home Screen Wallpaper</item>
+        <item>Lock Screen Wallpaper</item>
+    </string-array>
+
+    <string-array name="monet_wallpaper_source_values" translatable="false">
+        <item>system</item>
+        <item>lock_screen</item>
+    </string-array>
+
+    <!-- Monet gradient types -->
+    <string-array name="monet_gradient_types">
+        <item>None</item>
+        <item>Sunrise</item>
+        <item>Ocean</item>
+        <item>Forest</item>
+        <item>Lavender</item>
+    </string-array>
+
+    <string-array name="monet_gradient_type_values" translatable="false">
+        <item>none</item>
+        <item>sunrise</item>
+        <item>ocean</item>
+        <item>forest</item>
+        <item>lavender</item>
+    </string-array>
+
+    <!-- Settings background modes -->
+    <string-array name="settings_background_modes">
+        <item>Wallpaper</item>
+        <item>Solid Color</item>
+        <item>Gradient</item>
+        <item>Monet</item>
+    </string-array>
+
+    <string-array name="settings_background_mode_values" translatable="false">
+        <item>wallpaper</item>
+        <item>solid</item>
+        <item>gradient</item>
+        <item>monet</item>
+    </string-array>
+
+    <!-- Ripple Animation Styles -->
+    <string-array name="ripple_animation_entries">
+        <item>Default</item>
+        <item>Fluent</item>
+        <item>No Sparkles</item>
+        <item>Legacy</item>
+    </string-array>
+
+    <string-array name="ripple_animation_values" translatable="false">
+        <item>default</item>
+        <item>fluent</item>
+        <item>no_sparkles</item>
+        <item>legacy</item>
+    </string-array>
 </resources>
