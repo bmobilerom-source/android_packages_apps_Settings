@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/android12_extensions_title">
+
+    <!-- Animations &amp; Interactions -->
+    <PreferenceCategory
+        android:title="@string/android12_animations_category_title"
+        android:key="animations_category">
+
+        <ListPreference
+            android:key="ripple_animation_style"
+            android:title="@string/ripple_animation_title"
+            android:summary="@string/ripple_animation_summary"
+            android:entries="@array/ripple_animation_entries"
+            android:entryValues="@array/ripple_animation_values"
+            android:defaultValue="default"
+            settings:controller="com.epic.fragments.RippleAnimationController" />
+
+    </PreferenceCategory>
+
+    <!-- Theming &amp; Appearance -->
+    <PreferenceCategory
+        android:title="@string/android12_theming_category_title"
+        android:key="theming_category">
+
+        <Preference
+            android:key="custom_theme_engine"
+            android:title="@string/custom_theme_engine_title"
+            android:summary="@string/custom_theme_engine_summary"
+            android:fragment="com.epic.fragments.CustomThemeEngineFragment"
+            settings:controller="com.epic.fragments.CustomThemeEngineController" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
