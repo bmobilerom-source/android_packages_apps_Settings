@@ -39,7 +39,6 @@
 
         <Preference
             android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragment"
-            android:icon="@drawable/ic_adaptive_font_download"
             android:key="text_reading_options"
             android:persistent="false"
             android:title="@string/accessibility_text_reading_options_title"
@@ -48,7 +47,6 @@
         <Preference
             android:fragment="com.android.settings.accessibility.ColorAndMotionFragment"
             android:key="accessibility_color_and_motion"
-            android:icon="@drawable/ic_color_and_motion"
             android:persistent="false"
             android:title="@string/accessibility_color_and_motion_title"
             settings:searchable="true"/>
@@ -56,7 +54,6 @@
         <com.android.settingslib.PrimarySwitchPreference
             android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment"
             android:key="reduce_bright_colors_preference"
-            android:icon="@drawable/ic_reduce_bright_colors"
             android:persistent="false"
             android:title="@string/reduce_bright_colors_preference_title"
             settings:keywords="@string/keywords_reduce_bright_colors"
@@ -66,13 +63,11 @@
             android:key="even_dimmer_activated"
             android:title="@string/even_dimmer_display_title"
             android:summary="@string/even_dimmer_display_summary"
-            android:icon="@drawable/ic_reduce_bright_colors"
             settings:controller="com.android.settings.display.EvenDimmerPreferenceController"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
-            android:icon="@drawable/ic_accessibility_magnification"
             android:persistent="false"
             android:title="@string/accessibility_screen_magnification_title"
             settings:keywords="@string/keywords_magnification"
@@ -88,7 +83,6 @@
         <Preference
             android:fragment="com.android.settings.accessibility.TapAssistanceFragment"
             android:key="tap_assistance_preference_screen"
-            android:icon="@drawable/ic_tap_assistance"
             android:persistent="false"
             android:title="@string/accessibility_tap_assistance_title"
             settings:searchable="true"/>
@@ -96,14 +90,12 @@
         <Preference
             android:fragment="com.android.settings.accessibility.SystemControlsFragment"
             android:key="system_controls_preference_screen"
-            android:icon="@drawable/ic_system_controls"
             android:title="@string/accessibility_system_controls_title"
             settings:searchable="true"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.VibrationSettings"
             android:key="vibration_preference_screen"
-            android:icon="@drawable/ic_vibration"
             android:persistent="false"
             android:title="@string/accessibility_vibration_settings_title"
             settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
@@ -113,7 +105,6 @@
         <Preference
             android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"
             android:key="pointer_and_touchpad"
-            android:icon="@drawable/ic_pointer_and_touchpad"
             android:persistent="false"
             android:title="@string/accessibility_pointer_and_touchpad_title"
             android:summary="@string/accessibility_pointer_and_touchpad_summary"
@@ -121,7 +112,6 @@
             settings:searchable="true"/>
 
         <Preference
-            android:icon="@drawable/ic_sticky_keys"
             android:key="physical_keyboard_a11y"
             android:title="@string/keyboard_a11y_settings"
             android:summary="@string/keyboard_a11y_settings_summary"
@@ -137,7 +127,6 @@
 
         <Preference
             android:key="live_caption"
-            android:icon="@drawable/ic_live_caption"
             android:persistent="false"
             android:summary="@string/live_caption_summary"
             android:title="@string/live_caption_title"
@@ -147,13 +136,11 @@
         <Preference
             android:fragment="com.android.settings.accessibility.CaptioningPropertiesFragment"
             android:key="captioning_preference_screen"
-            android:icon="@drawable/ic_captioning"
             android:title="@string/accessibility_captioning_title"
             settings:controller="com.android.settings.accessibility.CaptioningPreferenceController"/>
 
         <Preference
             android:key="rtt_setting"
-            android:icon="@drawable/ic_rtt_settings"
             android:summary="@string/summary_placeholder"
             android:title="@string/rtt_settings_title"
             settings:keywords="@string/keywords_rtt"
@@ -169,7 +156,6 @@
         <SwitchPreferenceCompat
             android:key="toggle_audio_description"
             android:persistent="false"
-            android:icon="@drawable/ic_audio_description"
             android:summary="@string/accessibility_audio_description_summary"
             android:title="@string/accessibility_toggle_audio_description_preference_title"
             settings:keywords="@string/keywords_audio_description"
@@ -179,7 +165,6 @@
         <Preference
             android:fragment="com.android.settings.accessibility.FlashNotificationsPreferenceFragment"
             android:key="flash_notifications_preference_accessibility"
-            android:icon="@drawable/ic_flash_notification"
             android:persistent="false"
             android:title="@string/flash_notifications_title"
             settings:keywords="@string/flash_notifications_keywords"
@@ -188,7 +173,6 @@
 
         <Preference
             android:key="hearing_aid_preference"
-            android:icon="@drawable/ic_hearing_aid"
             android:persistent="false"
             android:summary="@string/accessibility_hearingaid_not_connected_summary"
             android:title="@string/accessibility_hearingaid_title"
@@ -198,7 +182,6 @@
         <Preference
             android:fragment="com.android.settings.accessibility.AudioAdjustmentFragment"
             android:key="audio_adjustment_preference_screen"
-            android:icon="@drawable/ic_audio_adjustment"
             android:persistent="false"
             android:title="@string/accessibility_audio_adjustment_title"
             settings:searchable="true"/>

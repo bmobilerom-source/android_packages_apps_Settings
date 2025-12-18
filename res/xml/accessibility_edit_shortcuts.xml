@@ -74,7 +74,6 @@
         settings:controller="com.android.settings.accessibility.shortcuts.TwoFingerDoubleTapShortcutOptionController" />
 
     <Preference
-        android:icon="@drawable/ic_keyboard_arrow_down"
         android:key="@string/accessibility_shortcuts_advanced_collapsed"
         android:persistent="false"
         android:selectable="true"
