@@ -28,20 +28,23 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/firmware_name"
+            <!-- Background Lottie Animation -->
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/profile_background_lottie"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                style="@style/mtx_text_style_h6"
-                android:textColor="@color/mtx_text_color_primary"
-                android:text="@string/mainuser_profile_text"
-                android:textSize="18sp"
-                android:layout_marginStart="20dp"
-                android:layout_alignParentTop="true" />
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                app:lottie_rawRes="@raw/welcome2"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:alpha="0.2"
+                android:scaleType="centerCrop" />
 
-           
-    
+
+
         </RelativeLayout>
 
     </LinearLayout>
@@ -69,7 +72,7 @@
             style="@style/mtx_text_style_h6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BMobile"
+            android:text="Personal"
             android:textSize="16sp"
             android:textColor="@color/mtx_text_color_primary"
             android:layout_marginTop="16dp"

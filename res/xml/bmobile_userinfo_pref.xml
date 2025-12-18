@@ -29,17 +29,9 @@
             android:summary="Access your private profile and apps"
             android:order="31"
             settings:layout="@layout/adaptive_preference_card_top"
-            android:fragment="com.android.settings.privatespace.PrivateSpaceDashboardFragment" />
+            android:fragment="com.android.settings.privatespace.PrivateSpaceSetupActivity" />
 
-        <!-- Private Space Security Dashboard -->
-        <Preference
-            android:key="private_space_security"
-            android:title="Private Space Security"
-            android:summary="Manage private space authentication and settings"
-            android:order="32"
-            settings:layout="@layout/adaptive_preference_card_bottom"
-            android:fragment="com.android.settings.privatespace.PrivateSpaceDashboardFragment" />
-   <!-- Session Messenger -->
+    <!-- Session Messenger -->
     <Preference
         android:key="session_messenger_pref"
         android:title="@string/session_messenger_title"

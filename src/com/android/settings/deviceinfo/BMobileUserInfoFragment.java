@@ -187,9 +187,9 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
             android.util.Log.d("BMobileUserInfoFragment", "Launching Private Space Dashboard");
 
             try {
-                // Use SubSettingLauncher to launch the private space fragment
+                // Use SubSettingLauncher to launch the private space setup activity
                 new com.android.settings.core.SubSettingLauncher(getActivity())
-                        .setDestination("com.android.settings.privatespace.PrivateSpaceDashboardFragment")
+                        .setDestination("com.android.settings.privatespace.PrivateSpaceSetupActivity")
                         .setTitleRes(com.android.settings.R.string.private_space_title)
                         .setSourceMetricsCategory(com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS)
                         .launch();
