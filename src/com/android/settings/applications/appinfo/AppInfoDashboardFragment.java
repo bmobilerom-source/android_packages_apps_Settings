@@ -203,7 +203,11 @@ public class AppInfoDashboardFragment extends DashboardFragment
         timeSpentInAppPreferenceController.setParentFragment(this);
         timeSpentInAppPreferenceController.initLifeCycleOwner(this);
 
-        use(AppDataUsagePreferenceController.class).setParentFragment(this);
+        {
+            @SuppressWarnings("removal")
+            final var temp = use(AppDataUsagePreferenceController.class);
+            temp.setParentFragment(this);
+        }
         final AppInstallerInfoPreferenceController installer =
                 use(AppInstallerInfoPreferenceController.class);
         installer.setPackageName(packageName);
