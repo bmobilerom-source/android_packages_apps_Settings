@@ -28,12 +28,12 @@
       <Preference
           android:key="zen_mode_people_messages"
           android:title="@string/zen_mode_messages_title"
-          android:icon="@drawable/ic_zen_mode_people_messages" />
+          settings:layout="@layout/adaptive_preference_card" />
 
       <Preference
           android:key="zen_mode_people_calls"
           android:title="@string/zen_mode_calls_title"
-          android:icon="@drawable/ic_zen_mode_people_calls" />
+          settings:layout="@layout/adaptive_preference_card" />
    </PreferenceCategory>
 
    <com.android.settingslib.widget.FooterPreference

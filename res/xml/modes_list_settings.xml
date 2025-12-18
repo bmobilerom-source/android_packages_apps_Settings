@@ -33,6 +33,7 @@
         android:key="add_mode"
         android:title="@string/zen_modes_add_mode"
         android:icon="@drawable/ic_add_24dp"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerAbove="false"/>
 
 </PreferenceScreen>
