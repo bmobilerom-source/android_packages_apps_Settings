@@ -2,7 +2,7 @@
 <resources>
     <color name="card_surface_color">#1AFFFFFF</color>
     <color name="system_features_bg">#FF1E88E5</color>
-    <color name="system_help_bg">#FF43A047</color>
-    <color name="system_warning_bg">#FFF4511E</color>
+    <color name="system_help_bg">#f5f501</color>
+    <color name="system_warning_bg">#99C58181</color>
 </resources>
 
