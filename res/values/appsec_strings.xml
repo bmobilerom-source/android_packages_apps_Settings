@@ -56,4 +56,7 @@
 
     <!-- Summary for toggle to block Safety Center access [CHAR LIMIT=NONE] -->
     <string name="appsec_block_safety_center_summary">Prevent access to Safety Center</string>
+
+    <!-- Summary for restricted install app permission [CHAR LIMIT=NONE] -->
+    <string name="install_app_permission_restricted_summary">App installation is restricted by device policy</string>
 </resources>
