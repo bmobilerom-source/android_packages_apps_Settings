@@ -19,19 +19,30 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/bluetooth_pairing_pref_title">
 
+   <!-- Header -->
+  <PreferenceCategory
+        android:title="Hearing devices"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
+
     <com.android.settingslib.widget.TopIntroPreference
+        android:order="-999"
         settings:searchable="false"
         android:title="@string/accessibility_hearing_device_pairing_intro" />
 
     <com.android.settings.bluetooth.BluetoothProgressCategory
         android:key="available_hearing_devices"
+        android:order="0"
         android:title="@string/accessibility_found_hearing_devices" />
 
     <PreferenceCategory
         android:key="more_devices_category"
+        android:order="1"
         android:title="@string/accessibility_found_all_devices">
         <com.android.settings.accessibility.ArrowPreference
             android:key="more_devices"
+            android:order="0"
             android:title="@string/accessibility_list_all_devices_title"
             settings:searchable="false"
             settings:userRestriction="no_config_bluetooth"

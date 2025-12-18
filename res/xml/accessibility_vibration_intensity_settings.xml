@@ -16,9 +16,21 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:title="@string/accessibility_vibration_settings_title">
+    android:title=" ">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        app:searchable="false"
+        android:order="-1900"
+        app:lottie_rawRes="@raw/vibrate"/>
+  <!-- Header -->
+  <PreferenceCategory
+        android:title="Vibration Intensity"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+  </PreferenceCategory>
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="vibrate_on"
         android:title="@string/accessibility_vibration_primary_switch_title"
@@ -32,6 +44,7 @@
         <com.android.settings.widget.SeekBarPreference
             android:key="vibration_intensity_preference_ring"
             android:title="@string/accessibility_ring_vibration_title"
+            android:layout="@layout/adaptive_vibration_card_progress"
             app:keywords="@string/keywords_ring_vibration"
             app:controller="com.android.settings.accessibility.RingVibrationIntensityPreferenceController" />
 
@@ -50,12 +63,14 @@
         <com.android.settings.widget.SeekBarPreference
             android:key="vibration_intensity_preference_notification"
             android:title="@string/accessibility_notification_vibration_title"
+            android:layout="@layout/adaptive_vibration_card_progress"
             app:keywords="@string/keywords_notification_vibration"
             app:controller="com.android.settings.accessibility.NotificationVibrationIntensityPreferenceController" />
 
         <com.android.settings.widget.SeekBarPreference
             android:key="vibration_intensity_preference_alarm"
             android:title="@string/accessibility_alarm_vibration_title"
+            android:layout="@layout/adaptive_vibration_card_progress"
             app:keywords="@string/keywords_alarm_vibration"
             app:controller="com.android.settings.accessibility.AlarmVibrationIntensityPreferenceController" />
 
@@ -68,12 +83,14 @@
         <com.android.settings.widget.SeekBarPreference
             android:key="vibration_intensity_preference_touch"
             android:title="@string/accessibility_touch_vibration_title"
+            android:layout="@layout/adaptive_vibration_card_progress"
             app:keywords="@string/keywords_touch_vibration"
             app:controller="com.android.settings.accessibility.HapticFeedbackIntensityPreferenceController" />
 
         <com.android.settings.widget.SeekBarPreference
             android:key="vibration_intensity_preference_media"
             android:title="@string/accessibility_media_vibration_title"
+            android:layout="@layout/adaptive_vibration_card_progress"
             app:keywords="@string/keywords_media_vibration"
             app:controller="com.android.settings.accessibility.MediaVibrationIntensityPreferenceController" />
 

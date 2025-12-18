@@ -17,14 +17,21 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_shortcuts_settings"
     android:persistent="false"
-    android:title="@string/accessibility_shortcuts_settings_title">
+    android:title=" ">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="accessibility"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/acc_short"/>
     <Preference
         android:fragment="com.android.settings.accessibility.AccessibilityButtonFragment"
         android:key="accessibility_button_preference"
         android:persistent="false"
+        settings:layout="@layout/adaptive_preference_card"
         android:summary="@string/accessibility_button_summary"
         settings:controller="com.android.settings.accessibility.AccessibilityButtonPreferenceController"/>
 

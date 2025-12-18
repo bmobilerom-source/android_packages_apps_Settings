@@ -17,10 +17,18 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_pointer_color_customization"
     android:persistent="false"
     android:title="@string/accessibility_pointer_color_customization_title">
 
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        app:searchable="false"
+        android:order="-1000"
+        app:lottie_rawRes="@raw/pointer"/>
+        
     <com.android.settings.inputmethod.PointerFillStylePreference
         android:key="pointer_fill_style"
         android:title="@string/pointer_fill_style"

@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
-    android:title="@string/accessibility_color_contrast_title">
+    android:title=" ">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/accessibility_color_contrast_intro" />
