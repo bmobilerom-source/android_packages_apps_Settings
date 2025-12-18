@@ -103,10 +103,15 @@ public class DaltonizerSaturationSeekbarPreferenceController
         super.displayPreference(screen);
         SeekBarPreference preference = screen.findPreference(getPreferenceKey());
         mPreference = preference;
-        preference.setMax(getMax());
-        preference.setMin(getMin());
-        preference.setProgress(mSliderPosition);
-        preference.setContinuousUpdates(true);
+        if (preference != null) {
+            if (isAvailable()) {
+                preference.setLayoutResource(R.layout.adaptive_vibration_card_progress);
+            }
+            preference.setMax(getMax());
+            preference.setMin(getMin());
+            preference.setProgress(mSliderPosition);
+            preference.setContinuousUpdates(true);
+        }
     }
 
     @Override

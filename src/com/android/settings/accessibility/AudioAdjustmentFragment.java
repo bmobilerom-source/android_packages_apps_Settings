@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -28,6 +29,7 @@ import com.android.settingslib.search.SearchIndexable;
 public class AudioAdjustmentFragment extends DashboardFragment {
 
     private static final String TAG = "AudioAdjustmentFragment";
+    private static final String KEY_BALANCE_SEEKBAR = "seekbar_primary_balance";
 
     @Override
     public int getMetricsCategory() {
@@ -42,6 +44,21 @@ public class AudioAdjustmentFragment extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    public void onCreatePreferences(android.os.Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        
+        // Override the layout for BalanceSeekBarPreference to use adaptive card
+        // This must be done after super.onCreatePreferences so the preference screen is loaded
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            BalanceSeekBarPreference balancePref = screen.findPreference(KEY_BALANCE_SEEKBAR);
+            if (balancePref != null) {
+                balancePref.setLayoutResource(R.layout.adaptive_balance_seekbar_card_progress);
+            }
+        }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

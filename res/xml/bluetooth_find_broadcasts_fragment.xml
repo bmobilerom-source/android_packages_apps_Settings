@@ -23,7 +23,7 @@
         android:key="bluetooth_find_broadcast_header"
         android:layout="@layout/bluetooth_broadcast_entity_header"
         android:selectable="false"
-        settings:allowDividerBelow="true"
+        settings:allowDividerBelow="false"
         settings:searchable="false" />
 
     <PreferenceCategory

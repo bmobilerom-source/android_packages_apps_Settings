@@ -23,7 +23,9 @@ import android.content.pm.ResolveInfo;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
@@ -49,6 +51,15 @@ public class LiveCaptionPreferenceController extends BasePreferenceController {
         return resolved != null && !resolved.isEmpty()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null && isAvailable()) {
+            preference.setLayoutResource(R.layout.adaptive_preference_card_top);
+        }
     }
 
     @Override

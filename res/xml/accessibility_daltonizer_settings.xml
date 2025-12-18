@@ -17,15 +17,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
-    android:title="@string/accessibility_display_daltonizer_preference_title">
+    android:title=" ">
 
     <com.android.settings.accessibility.PaletteListPreference
         android:key="daltonizer_preview"
         android:persistent="false"
         android:selectable="false"
         android:title="@string/summary_placeholder"
-        settings:allowDividerBelow="true"
+        settings:allowDividerBelow="false"
         settings:searchable="false"/>
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
@@ -63,6 +64,6 @@
         android:key="daltonizer_saturation"
         android:persistent="false"
         android:title="@string/daltonizer_saturation_title"
-        settings:controller="com.android.settings.accessibility.DaltonizerSaturationSeekbarPreferenceController"
-        />
+        android:layout="@layout/adaptive_vibration_card_progress"
+        settings:controller="com.android.settings.accessibility.DaltonizerSaturationSeekbarPreferenceController" />
 </PreferenceScreen>

@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
@@ -42,7 +43,24 @@ public class BalanceSeekBarPreference extends SeekBarPreference {
                 com.android.settingslib.R.attr.preferenceStyle,
                 android.R.attr.preferenceStyle));
         mContext = context;
-        setLayoutResource(R.layout.preference_balance_slider);
+        
+        // Check if layout is specified in XML attributes (android:layout)
+        TypedArray a = context.obtainStyledAttributes(attrs,
+                new int[]{android.R.attr.layout});
+        int xmlLayoutResId = a.getResourceId(0, 0);
+        a.recycle();
+        
+        // Check what layout the parent class set (it may have read from XML or used default)
+        int currentLayout = getLayoutResource();
+        int parentDefaultLayout = com.android.internal.R.layout.preference_widget_seekbar;
+        
+        // Only set our default layout if:
+        // 1. No layout was specified in XML (xmlLayoutResId == 0), AND
+        // 2. The parent class is using its default layout (meaning XML didn't override it)
+        if (xmlLayoutResId == 0 && currentLayout == parentDefaultLayout) {
+            setLayoutResource(R.layout.preference_balance_slider);
+        }
+        // If XML specified a layout, it will already be set by parent class, so don't override
     }
 
     @Override

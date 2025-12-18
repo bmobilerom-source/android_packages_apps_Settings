@@ -394,28 +394,45 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     }
 
     private void updatePreferenceOrder() {
-        final List<String> lists = getPreferenceOrderList();
-
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);
 
-        final int size = lists.size();
-        for (int i = 0; i < size; i++) {
-            final Preference preference = preferenceScreen.findPreference(lists.get(i));
-            if (preference != null) {
-                preference.setOrder(i);
-            }
+        // Set explicit order values following uniform structure:
+        // Illustration → Header → TopIntro → Footer → MainSwitch → Preferences → Switches
+        final Preference illustrationPreference = preferenceScreen.findPreference(KEY_ANIMATED_IMAGE);
+        if (illustrationPreference != null) {
+            illustrationPreference.setOrder(-1001);
+        }
+
+        final Preference topIntroPreference = preferenceScreen.findPreference(KEY_TOP_INTRO_PREFERENCE);
+        if (topIntroPreference != null) {
+            topIntroPreference.setOrder(-999);
+        }
+
+        final Preference footerPreference = preferenceScreen.findPreference(KEY_HTML_DESCRIPTION_PREFERENCE);
+        if (footerPreference != null) {
+            footerPreference.setOrder(-998);
+        }
+
+        final Preference mainSwitchPreference = preferenceScreen.findPreference(getUseServicePreferenceKey());
+        if (mainSwitchPreference != null) {
+            mainSwitchPreference.setOrder(-997); // After footer
+        }
+
+        final PreferenceCategory generalCategory = (PreferenceCategory) preferenceScreen.findPreference(KEY_GENERAL_CATEGORY);
+        if (generalCategory != null) {
+            generalCategory.setOrder(0);
         }
     }
 
     /** Customizes the order by preference key. */
     protected List<String> getPreferenceOrderList() {
         final List<String> lists = new ArrayList<>();
-        lists.add(KEY_TOP_INTRO_PREFERENCE);
         lists.add(KEY_ANIMATED_IMAGE);
+        lists.add(KEY_TOP_INTRO_PREFERENCE);
+        lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
         lists.add(getUseServicePreferenceKey());
         lists.add(KEY_GENERAL_CATEGORY);
-        lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
         return lists;
     }
 

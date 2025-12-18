@@ -144,14 +144,18 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
         final int initialIndex = mSizeData.getInitialIndex();
         mLastProgress = initialIndex;
         mSeekBarPreference = screen.findPreference(getPreferenceKey());
-        mSeekBarPreference.setMax(dataSize - 1);
-        mSeekBarPreference.setProgress(initialIndex);
-        mSeekBarPreference.setContinuousUpdates(true);
-        mSeekBarPreference.setOnSeekBarChangeListener(mSeekBarChangeListener);
-        if (mNeedsQSTooltipReshow) {
-            mHandler.post(this::showQuickSettingsTooltipIfNeeded);
+        if (mSeekBarPreference != null) {
+            // Set adaptive card layout
+            mSeekBarPreference.setLayoutResource(R.layout.adaptive_labeled_seekbar_card_progress);
+            mSeekBarPreference.setMax(dataSize - 1);
+            mSeekBarPreference.setProgress(initialIndex);
+            mSeekBarPreference.setContinuousUpdates(true);
+            mSeekBarPreference.setOnSeekBarChangeListener(mSeekBarChangeListener);
+            if (mNeedsQSTooltipReshow) {
+                mHandler.post(this::showQuickSettingsTooltipIfNeeded);
+            }
+            setSeekbarStateDescription(mSeekBarPreference.getProgress());
         }
-        setSeekbarStateDescription(mSeekBarPreference.getProgress());
     }
 
     @Override

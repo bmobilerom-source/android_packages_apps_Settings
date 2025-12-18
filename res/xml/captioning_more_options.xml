@@ -18,11 +18,20 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/captioning_more_options_title" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" " >
 
+ <!-- Lottie Animation -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="display_customizations2_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/display"/>
+        
     <com.android.settings.accessibility.LocalePreference
         android:key="captioning_locale"
         android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/captioning_locale"
         settings:controller="com.android.settings.accessibility.CaptioningLocalePreferenceController"/>
 
