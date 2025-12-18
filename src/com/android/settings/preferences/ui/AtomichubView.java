@@ -50,73 +50,46 @@ public class AtomichubView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        // Only bind actions if not used within a preference (which handles its own click listeners)
-        if (!isInPreference()) {
-            bindActions();
-        }
+        // Bind actions for direct Fragment usage
+        bindActions();
     }
 
-    private boolean isInPreference() {
-        // Check if this view is inside a Preference by walking up the view hierarchy
-        android.view.ViewParent parent = getParent();
-        while (parent != null) {
-            if (parent.getClass().getName().contains("Preference")) {
-                return true;
-            }
-            if (parent instanceof android.view.View) {
-                parent = ((android.view.View) parent).getParent();
-            } else {
-                break;
-            }
-        }
-        return false;
-    }
 
     private void bindActions() {
         Activity activity = findActivity(getContext());
-        
-        // #region agent log
-        try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"init\",\"hypothesisId\":\"A\",\"location\":\"AtomichubView.java:bindActions\",\"message\":\"bindActions called\",\"data\":{\"activityNull\":" + (activity == null) + "},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
-        // #endregion
-        
+
+        // Debug logging
+        try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"init\",\"hypothesisId\":\"A\",\"location\":\"AtomichubView.java:bindActions\",\"message\":\"bindActions called\",\"data\":{\"activityNull\":" + (activity == null) + ",\"orientation\":\"" + getResources().getConfiguration().orientation + "\"},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
+
         // Cards
         View journalCard = findViewById(R.id.mcstatus);   // Journal
         View privateCard = findViewById(R.id.mcui);       // Private
         View duressCard = findViewById(R.id.mcmisc);      // Duress
         View sessionCard = findViewById(R.id.mctheme);    // Session
 
-        // #region agent log
+        // Debug logging for cards
         try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"init\",\"hypothesisId\":\"B\",\"location\":\"AtomichubView.java:cards\",\"message\":\"cards found\",\"data\":{\"journal\":" + (journalCard != null) + ",\"private\":" + (privateCard != null) + ",\"duress\":" + (duressCard != null) + ",\"session\":" + (sessionCard != null) + "},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
-        // #endregion
 
         // Bind click actions
-        // Journal → Daily Journal app
+        // Journal → Daily You app (as requested by user)
         setInteractiveClick(journalCard, () -> {
-            // #region agent log
-            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"AtomichubView.java:journalClick\",\"message\":\"journal card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
-            // #endregion
+            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"AtomichubView.java:journal\",\"message\":\"journal card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
             launchApp(activity, "com.demizo.daily_you", "com.demizo.daily_you.MainActivity");
         });
-        // Private → PrivateSpaceDashboardFragment
+        // Private → Private Space Dashboard Fragment
         setInteractiveClick(privateCard, () -> {
-            // #region agent log
-            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"AtomichubView.java:privateClick\",\"message\":\"private card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
-            // #endregion
+            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"AtomichubView.java:private\",\"message\":\"private card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
             launchFragment(activity, "com.android.settings.privatespace.PrivateSpaceDashboardFragment", R.string.private_space_title);
         });
-        // Duress → GestureSettings
+        // Duress → Nothing (as requested)
         setInteractiveClick(duressCard, () -> {
-            // #region agent log
-            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"AtomichubView.java:duressClick\",\"message\":\"duress card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
-            // #endregion
-            launchFragment(activity, "com.epic.fragments.GestureSettings", R.string.gestures_title);
+            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"AtomichubView.java:duress\",\"message\":\"duress card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
+            // Duress does nothing as requested by user
         });
-        // Session → Session Messenger app
+        // Session → My Session Fragment
         setInteractiveClick(sessionCard, () -> {
-            // #region agent log
-            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"AtomichubView.java:sessionClick\",\"message\":\"session card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
-            // #endregion
-            launchApp(activity, "network.loki.messenger", "network.loki.messenger.RoutingActivity");
+            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"AtomichubView.java:session\",\"message\":\"session card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
+            launchFragment(activity, "com.epic.fragments.MySessionFragment", R.string.my_session_title);
         });
     }
 
@@ -154,6 +127,7 @@ public class AtomichubView extends LinearLayout {
             Toast.makeText(activity, "App not installed", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private Activity findActivity(Context context) {
         while (context instanceof ContextWrapper) {

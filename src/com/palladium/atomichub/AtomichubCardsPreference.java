@@ -54,36 +54,43 @@ public class AtomichubCardsPreference extends Preference {
     }
 
     private void bindFragmentCard(PreferenceViewHolder holder, int viewId, String fragment, int titleRes) {
-        View v = holder.findViewById(viewId);
-        // #region agent log
-        try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub-pref\",\"runId\":\"bind\",\"hypothesisId\":\"J\",\"location\":\"AtomichubCardsPreference.java:bindFragmentCard\",\"message\":\"binding fragment card\",\"data\":{\"viewId\":" + viewId + ",\"viewNull\":" + (v == null) + ",\"fragment\":\"" + fragment + "\"},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
-        // #endregion
+        View v = holder.itemView.findViewById(viewId);
+        android.util.Log.d("AtomichubCardsPreference", "Binding fragment card - viewId: " + viewId + ", fragment: " + fragment + ", view found: " + (v != null));
 
         if (v == null) {
-            android.util.Log.d("AtomichubCardsPreference", "Card view is null for id: " + viewId);
-            return;
+            android.util.Log.e("AtomichubCardsPreference", "Card view is null for id: " + viewId + " - fragment: " + fragment + " - trying holder.findViewById");
+            v = holder.findViewById(viewId);
+            if (v == null) {
+                android.util.Log.e("AtomichubCardsPreference", "Card view still null with holder.findViewById for id: " + viewId);
+                return;
+            }
         }
         v.setClickable(true);
         v.setFocusable(true);
         v.setHapticFeedbackEnabled(true);
         v.setOnClickListener(view -> {
-            // #region agent log
-            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub-pref\",\"runId\":\"click\",\"hypothesisId\":\"G\",\"location\":\"AtomichubCardsPreference.java:fragmentClick\",\"message\":\"fragment card clicked\",\"data\":{\"fragment\":\"" + fragment + "\"},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
-            // #endregion
+            android.util.Log.d("AtomichubCardsPreference", "Fragment card clicked: " + fragment);
             launchFragment(fragment, titleRes);
         });
     }
 
     private void bindAppCard(PreferenceViewHolder holder, int viewId, String packageName, String className) {
-        View v = holder.findViewById(viewId);
-        if (v == null) return;
+        View v = holder.itemView.findViewById(viewId);
+        android.util.Log.d("AtomichubCardsPreference", "Binding app card - viewId: " + viewId + ", package: " + packageName + ", view found: " + (v != null));
+
+        if (v == null) {
+            android.util.Log.e("AtomichubCardsPreference", "App card view is null for id: " + viewId + " - package: " + packageName + " - trying holder.findViewById");
+            v = holder.findViewById(viewId);
+            if (v == null) {
+                android.util.Log.e("AtomichubCardsPreference", "App card view still null with holder.findViewById for id: " + viewId);
+                return;
+            }
+        }
         v.setClickable(true);
         v.setFocusable(true);
         v.setHapticFeedbackEnabled(true);
         v.setOnClickListener(view -> {
-            // #region agent log
-            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub-pref\",\"runId\":\"click\",\"hypothesisId\":\"D\",\"location\":\"AtomichubCardsPreference.java:appClick\",\"message\":\"app card clicked\",\"data\":{\"package\":\"" + packageName + "\"},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
-            // #endregion
+            android.util.Log.d("AtomichubCardsPreference", "App card clicked: " + packageName);
             launchApp(packageName, className);
         });
     }

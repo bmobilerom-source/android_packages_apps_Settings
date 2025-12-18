@@ -46,22 +46,24 @@ public class Atomichub2CardsPreference extends Preference {
         bindCard(holder, R.id.card5_2, "com.epic.fragments.GestureSettings", R.string.gestures_title);
         // Optimize → SystemOptimizationSettings
         bindCard(holder, R.id.card6_2, "com.epic.fragments.SystemOptimizationSettings", R.string.system_optimization_title);
+        // bSettings → AppSecSettings
+        bindCard(holder, R.id.card7_2, "com.android.settings.applications.specialaccess.AppSecSettings", R.string.appsec_category_title);
         // Big Personal card → BMobileUserInfoFragment
         bindCard(holder, R.id.card2, "com.android.settings.deviceinfo.BMobileUserInfoFragment", R.string.bmobile_userinfo_title);
-        
-        // Back button
-        View backBtn = holder.findViewById(R.id.btn_trans2);
-        if (backBtn != null) {
-            backBtn.setOnClickListener(v -> {
-                // Try to go back
-                try {
-                    android.app.Activity activity = findActivity(getContext());
-                    if (activity != null) {
-                        activity.onBackPressed();
-                    }
-                } catch (Exception ignored) {}
-            });
-        }
+
+        // Back button - commented out as btn_trans2 doesn't exist in layout
+        // View backBtn = holder.findViewById(R.id.btn_trans2);
+        // if (backBtn != null) {
+        //     backBtn.setOnClickListener(v -> {
+        //         // Try to go back
+        //         try {
+        //             android.app.Activity activity = findActivity(getContext());
+        //             if (activity != null) {
+        //                 activity.onBackPressed();
+        //             }
+        //         } catch (Exception ignored) {}
+        //     });
+        // }
     }
 
     private void bindCard(PreferenceViewHolder holder, int viewId, String fragment, int titleRes) {

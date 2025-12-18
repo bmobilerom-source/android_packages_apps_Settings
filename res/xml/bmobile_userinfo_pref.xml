@@ -16,11 +16,58 @@
         android:order="20"
         android:title="@string/bmobile_userinfo_summary"/>
 
-    <com.palladium.atomichub.AtomichubCardsPreference
-        android:key="bmobile_atomichub_cards"
-        android:order="30"
-        android:title="@string/app_name"
-        android:summary="@string/app_name" />
+    <!-- Quick Access Preferences -->
+    <PreferenceCategory
+        android:title="Quick Access"
+        android:key="quick_access_category"
+        android:order="30">
+
+        <!-- Private Space Access -->
+        <Preference
+            android:key="private_space_access"
+            android:title="Private Space"
+            android:summary="Access your private profile and apps"
+            android:order="31"
+            settings:layout="@layout/adaptive_preference_card_top"
+            android:fragment="com.android.settings.privatespace.PrivateSpaceDashboardFragment" />
+
+        <!-- Private Space Security Dashboard -->
+        <Preference
+            android:key="private_space_security"
+            android:title="Private Space Security"
+            android:summary="Manage private space authentication and settings"
+            android:order="32"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            android:fragment="com.android.settings.privatespace.PrivateSpaceDashboardFragment" />
+   <!-- Session Messenger -->
+    <Preference
+        android:key="session_messenger_pref"
+        android:title="@string/session_messenger_title"
+        android:summary="@string/session_messenger_summary"
+        android:order="40"
+        settings:layout="@layout/adaptive_preference_card_middle"
+        settings:controller="com.epic.fragments.SessionMessengerController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="network.loki.messenger"
+            android:targetClass="network.loki.messenger.RoutingActivity" />
+    </Preference>
+    <!-- Daily Journal -->
+    <Preference
+        android:key="daily_journal_pref"
+        android:title="@string/daily_journal_title"
+        android:summary="@string/daily_journal_summary"
+        android:order="50"
+        settings:layout="@layout/adaptive_preference_card_bottom"
+        settings:controller="com.epic.fragments.DailyJournalController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.demizo.daily_you"
+            android:targetClass="com.demizo.daily_you.MainActivity" />
+    </Preference>
+
+    
+    </PreferenceCategory>
 
 </PreferenceScreen>
 

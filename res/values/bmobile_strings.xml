@@ -8,6 +8,6 @@
 
     <!-- bMobile user info -->
     <string name="bmobile_userinfo_title">User info</string>
-    <string name="bmobile_userinfo_summary">Manage your account and user settings</string>
+    <string name="bmobile_userinfo_summary">This is where you can keep things personal. This is for you and only you - no one else but you. This is your own special zone.</string>
 </resources>
 

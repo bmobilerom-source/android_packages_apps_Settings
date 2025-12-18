@@ -19,6 +19,7 @@
     <string name="bmobile_settings_title">BMobile</string>
     <string name="bmobile_settings_intro_title">Privacy &amp; Services</string>
     <string name="bmobile_settings_intro_description">Configure privacy tools: mock locations for testing, MicroG services, Aurora Store access, network firewall, ad tracking controls, and app installation permissions.</string>
+    <string name="bmobile_settings_description">This is where you can sort out your core MicroG settings, privacy tools, app stores, ad services, firewall, and other essential configurations for a fully functional Android experience without Google services.</string>
 
    
     <!-- MicroG -->

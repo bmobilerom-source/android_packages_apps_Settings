@@ -47,12 +47,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom | center"
                     android:layout_marginBottom="50dp"
-                    android:fontFamily="sans-serif-condensed-light"
+                    android:fontFamily="sans-serif-condensed-bold"
                     android:gravity="start"
                     android:rotation="270"
                     android:text="Accounts"
-                    android:textColor="@color/card_text2"
-                    android:textSize="16sp"
+                    android:textColor="@color/card_text2" 
+                    android:textSize="20sp"
                     android:clickable="false"
                     android:focusable="false" />
 
@@ -79,12 +79,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom | center"
                     android:layout_marginBottom="50dp"
-                    android:fontFamily="sans-serif-condensed-light"
+                    android:fontFamily="sans-serif-condensed-bold"
                     android:gravity="start"
                     android:rotation="270"
                     android:text="Apps"
                     android:textColor="@color/card_text2"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:clickable="false"
                     android:focusable="false" />
 
@@ -110,12 +110,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom | center"
                     android:layout_marginBottom="50dp"
-                    android:fontFamily="sans-serif-condensed-light"
+                    android:fontFamily="sans-serif-condensed-bold"
                     android:gravity="start"
                     android:rotation="270"
                     android:text="Bmobile"
                     android:textColor="@color/card_text2"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:clickable="false"
                     android:focusable="false" />
 
@@ -140,12 +140,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom | center"
                     android:layout_marginBottom="50dp"
-                    android:fontFamily="sans-serif-condensed-light"
+                    android:fontFamily="sans-serif-condensed-bold"
                     android:gravity="start"
                     android:rotation="270"
                     android:text="AppLock"
                     android:textColor="@color/card_text2"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:clickable="false"
                     android:focusable="false" />
 
@@ -169,12 +169,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom | center"
                     android:layout_marginBottom="50dp"
-                    android:fontFamily="sans-serif-condensed-light"
+                    android:fontFamily="sans-serif-condensed-bold"
                     android:gravity="start"
                     android:rotation="270"
-                    android:text="DeviceTweaks"
+                    android:text="Tweaks"
                     android:textColor="@color/card_text2"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:clickable="false"
                     android:focusable="false" />
 
@@ -186,6 +186,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/ic_team_card2"
                 android:clickable="true"
@@ -193,18 +194,47 @@
                 android:focusableInTouchMode="false"
                 android:foreground="?android:attr/selectableItemBackground">
 
-             
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom | center"
                     android:layout_marginBottom="50dp"
-                    android:fontFamily="sans-serif-condensed-light"
+                    android:fontFamily="sans-serif-condensed-bold"
                     android:gravity="start"
                     android:rotation="270"
                     android:text="Optimize"
                     android:textColor="@color/card_text2"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
+                    android:clickable="false"
+                    android:focusable="false" />
+
+            </FrameLayout>
+
+            <!-- Card 7: bSettings - Opens AppSec settings -->
+            <FrameLayout
+                android:id="@+id/card7_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_settings_security"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom | center"
+                    android:layout_marginBottom="50dp"
+                    android:fontFamily="sans-serif-condensed-bold"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="bSettings"
+                    android:textColor="@color/card_text2"
+                    android:textSize="20sp"
                     android:clickable="false"
                     android:focusable="false" />
 
@@ -248,48 +278,20 @@
                 android:layout_weight="3"
                 />
 
-            <ImageButton
-                android:id="@+id/btn_trans2"
-                android:layout_width="75dp"
+            <TextView
+                android:id="@+id/tv_title_big2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:fontFamily="sans-serif-condensed-bold"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="#00FFFFFF"
-                android:clickable="true"
-                android:contentDescription="Back button"
-                android:src="@drawable/ic_backicon2" />
-
+                android:gravity="center"
+                android:text="Personal Settings"
+                android:textColor="#000000"
+                android:textSize="25sp" />
 
         </LinearLayout>
 
-
-
-        <TextView
-            android:id="@+id/tv_title_big2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:layout_gravity="end"
-            android:layout_weight="1"
-            android:layout_marginRight="20dp"
-            android:gravity="end | center"
-            android:text="Personal"
-            android:textColor="#FFFFFF"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/tv_summary_big2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="start"
-            android:gravity="start | center"
-            android:inputType="textMultiLine"
-            android:text="it's personal"
-            android:textColor="@color/card_text2"
-            android:textSize="16sp" />
 
     </LinearLayout>
 

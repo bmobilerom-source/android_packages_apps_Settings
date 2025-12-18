@@ -176,5 +176,34 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
     protected String getImagePrefKey() {
         return "image_path";
     }
+
+    @Override
+    public boolean onPreferenceTreeClick(androidx.preference.Preference preference) {
+        String key = preference.getKey();
+        android.util.Log.d("BMobileUserInfoFragment", "onPreferenceTreeClick called for key: " + key);
+
+        // Handle private space preferences
+        if ("private_space_access".equals(key) || "private_space_security".equals(key)) {
+            android.util.Log.d("BMobileUserInfoFragment", "Launching Private Space Dashboard");
+
+            try {
+                // Use SubSettingLauncher to launch the private space fragment
+                new com.android.settings.core.SubSettingLauncher(getActivity())
+                        .setDestination("com.android.settings.privatespace.PrivateSpaceDashboardFragment")
+                        .setTitleRes(com.android.settings.R.string.private_space_title)
+                        .setSourceMetricsCategory(com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS)
+                        .launch();
+
+                android.util.Log.d("BMobileUserInfoFragment", "Private Space Dashboard launched successfully");
+                return true;
+            } catch (Exception e) {
+                android.util.Log.e("BMobileUserInfoFragment", "Failed to launch Private Space Dashboard", e);
+                android.widget.Toast.makeText(getContext(), "Unable to open Private Space", android.widget.Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        return super.onPreferenceTreeClick(preference);
+    }
 }
 

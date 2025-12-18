@@ -69,7 +69,20 @@ public class AdServicesPreferenceController extends BasePreferenceController {
 
         android.util.Log.d("AdServicesPreferenceController", "Ad Services preference clicked");
 
-        // Try to open system Ad Services settings first (Android 12+)
+        // Try to open Ad Services settings directly
+        try {
+            android.content.Intent intent = new android.content.Intent();
+            intent.setClassName("com.android.adservices.api",
+                "com.android.adservices.ui.settings.activities.AdServicesSettingsMainActivity");
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+            android.util.Log.d("AdServicesPreferenceController", "Opened Ad Services settings");
+            return true;
+        } catch (Exception e) {
+            android.util.Log.d("AdServicesPreferenceController", "Failed to open Ad Services settings", e);
+        }
+
+        // Fallback: Try to open system privacy settings
         try {
             android.content.Intent intent = new android.content.Intent(
                 android.provider.Settings.ACTION_PRIVACY_SETTINGS);

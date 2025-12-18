@@ -12,6 +12,13 @@
         settings:lottie_rawRes="@raw/bmobSettings"/>
 
     <Preference
+        android:key="bmobile_description"
+        android:title="@string/bmobile_settings_intro_title"
+        android:summary="@string/bmobile_settings_description"
+        android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card" 
+        android:order="-999" />
+    <Preference
         android:key="microg_pref"
         android:title="@string/bmobile_microg_title"
         android:summary="@string/bmobile_microg_summary"
@@ -36,7 +43,7 @@
         android:key="ad_services_pref"
         android:title="@string/bmobile_ad_services_title"
         android:summary="@string/bmobile_ad_services_summary"
-        android:fragment="com.android.adservices.ui.settings.activities.AdServicesSettingsMainActivity"
+        settings:controller="com.epic.fragments.AdServicesPreferenceController"
         settings:layout="@layout/adaptive_preference_card_middle" />
     <!-- Mock Locations -->
     <PreferenceScreen

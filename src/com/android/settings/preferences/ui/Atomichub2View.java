@@ -69,9 +69,9 @@ public class Atomichub2View extends LinearLayout {
         
         // Big card
         View bigCard = findViewById(R.id.card2);  // Personal
-        
-        // Back button
-        View backBtn = findViewById(R.id.btn_trans2);
+
+        // Back button - commented out as btn_trans2 doesn't exist in layout
+        // View backBtn = findViewById(R.id.btn_trans2);
 
         // #region agent log
         try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub2\",\"runId\":\"init\",\"hypothesisId\":\"B\",\"location\":\"Atomichub2View.java:cards\",\"message\":\"cards found\",\"data\":{\"card1\":" + (card1 != null) + ",\"card2\":" + (card2 != null) + ",\"card3\":" + (card3 != null) + ",\"card4\":" + (card4 != null) + ",\"card5\":" + (card5 != null) + ",\"card6\":" + (card6 != null) + ",\"bigCard\":" + (bigCard != null) + "},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
@@ -106,12 +106,12 @@ public class Atomichub2View extends LinearLayout {
             // #endregion
             launchApp(activity, "nethical.locklock", "nethical.locklock.MainActivity");
         });
-        // DeviceTweaks → GestureSettings
+        // DeviceTweaks → DeviceTweaksSettings
         setInteractiveClick(card5, () -> {
             // #region agent log
             try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub2\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"Atomichub2View.java:card5\",\"message\":\"devicetweaks card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
             // #endregion
-            launchFragment(activity, "com.epic.fragments.GestureSettings", R.string.gestures_title);
+            launchFragment(activity, "com.epic.fragments.DeviceTweaksSettings", R.string.device_tweaks_title);
         });
         // Optimize → SystemOptimizationSettings
         setInteractiveClick(card6, () -> {
@@ -127,14 +127,15 @@ public class Atomichub2View extends LinearLayout {
             // #endregion
             launchFragment(activity, "com.android.settings.deviceinfo.BMobileUserInfoFragment", R.string.bmobile_userinfo_title);
         });
-        
-        if (backBtn != null) {
-            backBtn.setOnClickListener(v -> {
-                if (activity != null) {
-                    activity.onBackPressed();
-                }
-            });
-        }
+
+        // Back button functionality commented out - btn_trans2 doesn't exist in layout
+        // if (backBtn != null) {
+        //     backBtn.setOnClickListener(v -> {
+        //         if (activity != null) {
+        //             activity.onBackPressed();
+        //         }
+        //     });
+        // }
     }
 
     private void setInteractiveClick(View v, Runnable action) {
