@@ -25,7 +25,6 @@
         android:title="@string/calls_preference_title"
         settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
         android:order="10"
-        android:icon="@drawable/ic_phone"
         android:enabled="false"
         />
 
@@ -34,7 +33,6 @@
         android:title="@string/sms_preference_title"
         settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"
         android:order="15"
-        android:icon="@drawable/ic_sms"
         android:enabled="false"
         />
 
@@ -43,6 +41,6 @@
         android:title="@string/calls_and_sms_category"
         android:order="20"
         settings:controller="com.android.settings.network.telephony.NetworkProviderWifiCallingPreferenceController"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
         />
 </PreferenceScreen>

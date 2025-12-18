@@ -24,6 +24,7 @@
         android:title="@string/wifi_wakeup"
         android:icon="@drawable/ic_auto_wifi"
         android:summary="@string/wifi_wakeup_summary"
+        android:order="1"
         settings:controller="com.android.settings.wifi.WifiWakeupPreferenceController"/>
 
     <SwitchPreferenceCompat
@@ -31,27 +32,39 @@
         android:title="@string/wifi_notify_open_networks"
         android:icon="@drawable/ic_open_wifi_notifications"
         android:summary="@string/wifi_notify_open_networks_summary"
+        android:order="2"
         settings:keywords="@string/keywords_wifi_notify_open_networks"
         settings:controller="com.android.settings.wifi.NotifyOpenNetworksPreferenceController"/>
 
     <com.android.settings.spa.preference.ComposePreference
         android:key="allow_wep_networks"
         android:title="@string/wifi_allow_wep_networks"
+        android:order="7"
+        android:background="@drawable/adaptive_preference_card_middle_background"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="4dp"
+        android:padding="13dp"
         settings:controller="com.android.settings.wifi.WepNetworksPreferenceController"/>
 
     <SwitchPreferenceCompat
         android:key="wifi_cellular_data_fallback"
         android:title="@string/wifi_cellular_data_fallback_title"
         android:summary="@string/wifi_cellular_data_fallback_summary"
+        android:order="4"
         settings:controller="com.android.settings.wifi.CellularFallbackPreferenceController" />
 
     <Preference
         android:key="install_credentials"
-        android:title="@string/wifi_install_credentials"/>
+        android:title="@string/wifi_install_credentials"
+        android:order="5"
+        settings:layout="@layout/adaptive_preference_card_top"/>
 
     <Preference
         android:key="wifi_direct"
         android:title="@string/wifi_menu_p2p"
-        android:fragment="com.android.settings.wifi.p2p.WifiP2pSettings" />
+        android:order="6"
+        android:fragment="com.android.settings.wifi.p2p.WifiP2pSettings"
+        settings:layout="@layout/adaptive_preference_card_bottom"/>
 
 </PreferenceScreen>

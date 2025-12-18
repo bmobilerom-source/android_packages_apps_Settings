@@ -16,10 +16,12 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/wifi_p2p_settings_title">
     <Preference
         android:key="p2p_this_device"
-        android:selectable="false" />
+        android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card" />
     <PreferenceCategory
         android:key="p2p_peer_devices"
         android:title="@string/wifi_p2p_peer_devices" />

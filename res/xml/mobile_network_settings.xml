@@ -39,13 +39,15 @@
             android:summary="@string/summary_placeholder"
             android:enabled="false"
             settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
-            settings:allowDividerAbove="true"/>
+            settings:allowDividerAbove="false"
+            settings:layout="@layout/adaptive_preference_card"/>
 
         <ListPreference
             android:key="sms_preference"
             android:title="@string/sms_preference"
             android:summary="@string/summary_placeholder"
             android:enabled="false"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"/>
 
         <Preference
@@ -62,7 +64,8 @@
             android:summary="@string/summary_placeholder"
             android:selectable="false"
             settings:controller="com.android.settings.network.telephony.MobileNetworkPhoneNumberPreferenceController"
-            settings:allowDividerBelow="true"
+                settings:allowDividerBelow="false"
+                settings:layout="@layout/adaptive_preference_card"
             settings:enableCopying="true"/>
 
         <Preference
@@ -96,6 +99,7 @@
             android:key="data_usage_summary"
             android:title="@string/app_cellular_data_usage"
             settings:searchable="false"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.DataUsagePreferenceController"/>
 
         <!-- Settings search is handled by BillingCycleSearchItem. -->
@@ -113,6 +117,7 @@
 
         <Preference
             android:key="carrier_wifi_network"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/carrier_wifi_network_title"
             android:selectable="false"
             settings:searchable="false"/>
@@ -165,6 +170,7 @@
             android:entryValues="@array/preferred_network_mode_values"
             android:dialogTitle="@string/preferred_network_mode_dialogtitle"
             settings:searchable="false"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.PreferredNetworkModePreferenceController"/>
 
         <!-- Settings search is handled by EnabledNetworkModeSearchItem. -->
@@ -176,6 +182,7 @@
             android:entryValues="@array/enabled_networks_values"
             android:dialogTitle="@string/preferred_network_mode_dialogtitle"
             settings:searchable="false"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.EnabledNetworkModePreferenceController"/>
 
         <!-- Settings search is handled by CarrierSettingsVersionSearchItem. -->
@@ -183,6 +190,7 @@
             android:key="carrier_settings_version_key"
             android:title="@string/carrier_settings_version"
             settings:searchable="false"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.CarrierSettingsVersionPreferenceController"
             settings:enableCopying="true"/>
 
@@ -193,6 +201,7 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_imei_info"
             settings:enableCopying="true"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.MobileNetworkImeiPreferenceController"/>
         <!-- EID -->
         <com.android.settingslib.CustomDialogPreferenceCompat
@@ -230,6 +239,7 @@
                 android:title="@string/wifi_calling_settings_title"
                 android:summary="@string/wifi_calling_summary"
                 settings:searchable="false"
+                settings:layout="@layout/adaptive_preference_card"
                 settings:controller="com.android.settings.network.telephony.WifiCallingPreferenceController">
                 <intent android:action="android.intent.action.MAIN"
                         android:targetPackage="com.android.settings"
@@ -268,7 +278,7 @@
         <PreferenceCategory
             android:key="network_operators_category_key"
             android:title="@string/network_operator_category"
-            settings:allowDividerBelow="true"
+            settings:allowDividerBelow="false"
             settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
 
             <com.android.settings.spa.preference.ComposePreference
@@ -279,6 +289,7 @@
             <Preference
                 android:key="choose_network_key"
                 android:title="@string/choose_network_title"
+                settings:layout="@layout/adaptive_preference_card"
                 settings:controller="com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController"/>
         </PreferenceCategory>
 
@@ -293,6 +304,7 @@
         <Preference
             android:key="carrier_settings_key"
             android:title="@string/carrier_settings_title"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.CarrierPreferenceController">
         </Preference>
 
@@ -334,14 +346,14 @@
         android:key="erase_sim"
         android:persistent="false"
         android:title="@string/mobile_network_erase_sim"
-        settings:allowDividerBelow="true"
+        settings:allowDividerBelow="false"
         settings:controller="com.android.settings.network.telephony.DeleteSimProfilePreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="disable_sim_explanation"
         android:title="@string/mobile_network_disable_sim_explanation"
         android:selectable="false"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
         settings:searchable="false"
         settings:controller="com.android.settings.network.telephony.DisableSimFooterPreferenceController"/>
 
@@ -349,7 +361,7 @@
         android:key="no_5g_in_dsds_explanation"
         android:title="@string/no_5g_in_dsds_text"
         android:selectable="false"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
         settings:searchable="false"
         settings:controller="com.android.settings.network.telephony.NrDisabledInDsdsFooterPreferenceController"/>
 </PreferenceScreen>

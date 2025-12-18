@@ -80,27 +80,31 @@
         android:key="frequency"
         android:icon="@drawable/ic_frequency_antenna"
         android:title="@string/wifi_frequency"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card"/>
 
     <Preference
         android:key="security"
         android:icon="@drawable/ic_security_lock_24dp"
         android:title="@string/wifi_security"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card"/>
 
     <ListPreference
         android:key="metered"
         android:icon="@drawable/ic_attach_money_black_24dp"
         android:title="@string/wifi_metered_title"
         android:entries="@array/wifi_metered_entries"
-        android:entryValues="@array/wifi_metered_values"/>
+        android:entryValues="@array/wifi_metered_values"
+        settings:layout="@layout/adaptive_preference_card"/>
 
     <ListPreference
         android:key="privacy"
         android:icon="@drawable/ic_wifi_privacy_24dp"
         android:title="@string/wifi_privacy_settings"
         android:entries="@array/wifi_privacy_entries"
-        android:entryValues="@array/wifi_privacy_values"/>
+        android:entryValues="@array/wifi_privacy_values"
+        settings:layout="@layout/adaptive_preference_card"/>
 
     <com.android.settings.spa.preference.ComposePreference
         android:key="privacy_settings"
@@ -110,7 +114,8 @@
     <Preference
         android:key="subscription_detail"
         android:title="@string/wifi_subscription"
-        android:summary="@string/wifi_subscription_summary"/>
+        android:summary="@string/wifi_subscription_summary"
+        settings:layout="@layout/adaptive_preference_card"/>
 
     <SwitchPreferenceCompat
         android:key="auto_connect"
@@ -125,7 +130,8 @@
     <Preference
         android:key="add_device_to_network"
         android:title="@string/wifi_dpp_add_device"
-        android:summary="@string/wifi_dpp_connect_network_using_qr_code"/>
+        android:summary="@string/wifi_dpp_connect_network_using_qr_code"
+        settings:layout="@layout/adaptive_preference_card"/>
 
     <!-- Network Details -->
     <PreferenceCategory
