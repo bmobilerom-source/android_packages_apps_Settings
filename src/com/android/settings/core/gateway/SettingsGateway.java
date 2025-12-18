@@ -422,7 +422,6 @@ public class SettingsGateway {
             com.epic.fragments.MySessionFragment.class.getName(),
             com.epic.fragments.BMobileSettingsFragment.class.getName(),
             com.epic.fragments.AnatoliaSettingsExtras.class.getName(),
-            com.epic.fragments.AOSPModsSettings.class.getName(),
             com.epic.fragments.NotificationSettings.class.getName(),
             com.epic.fragments.GestureSettings.class.getName(),
             com.epic.fragments.NavbarSettings.class.getName(),
