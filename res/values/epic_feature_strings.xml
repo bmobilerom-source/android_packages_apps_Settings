@@ -146,6 +146,55 @@
     <string name="power_tweaks_category_system">System behavior</string>
     <string name="power_tweaks_category_charging">Display, accessibility &amp; system behavior</string>
 
+    <!-- Device Tweaks -->
+    <string name="device_tweaks_title">Device Tweaks</string>
+
+    <!-- Android 12 Extensions -->
+    <string name="android12_extensions_title">Android 12 Extensions</string>
+    <string name="android12_animations_category_title">Animations &amp; Interactions</string>
+    <string name="android12_statusbar_category_title">Status Bar &amp; Signals</string>
+    <string name="android12_qs_category_title">Quick Settings</string>
+    <string name="android12_theming_category_title">Theming &amp; Appearance</string>
+    <string name="android12_advanced_category_title">Advanced Features</string>
+
+    <!-- Ripple Animation -->
+    <string name="ripple_animation_title">Ripple Animation Style</string>
+    <string name="ripple_animation_summary">Choose ripple animation style for touch feedback</string>
+
+    <!-- Rounded Screenshots -->
+    <string name="rounded_screenshots_title">Rounded Screenshots</string>
+    <string name="rounded_screenshots_summary">Add rounded corners to screenshots</string>
+
+    <!-- Haptic Touch -->
+    <string name="haptic_touch_title">Enhanced Haptic Touch</string>
+    <string name="haptic_touch_summary">Add haptic feedback for touch interactions</string>
+
+    <!-- Signal Icons -->
+    <string name="unified_signal_icons_title">Unified Signal Icons</string>
+    <string name="unified_signal_icons_summary">Combine WiFi and cellular signal icons</string>
+
+    <!-- QS Tiles -->
+    <string name="dedicated_wifi_tile_title">Dedicated WiFi Tile</string>
+    <string name="dedicated_wifi_tile_summary">Show separate WiFi control tile in Quick Settings</string>
+    <string name="dedicated_cellular_tile_title">Dedicated Cellular Tile</string>
+    <string name="dedicated_cellular_tile_summary">Show separate cellular data control tile in Quick Settings</string>
+
+    <!-- Material You Charts -->
+    <string name="material_you_charts_title">Material You Color Charts</string>
+    <string name="material_you_charts_summary">Display color palette charts for Material You theming</string>
+
+    <!-- Custom Theme Engine -->
+    <string name="custom_theme_engine_title">Custom Theme Engine</string>
+    <string name="custom_theme_engine_summary">Advanced wallpaper-based theming with custom color controls</string>
+
+    <!-- Launcher Features -->
+    <string name="launcher_multicolor_title">Multi-color Popup Menus</string>
+    <string name="launcher_multicolor_summary">Enable multi-color popup menus in launcher</string>
+
+    <!-- App Animations -->
+    <string name="new_app_animations_title">Enhanced App Animations</string>
+    <string name="new_app_animations_summary">Use new app open and close animations</string>
+
     <!-- Standard Android features removed - use built-in Settings -->
 
     <!-- Charging & Battery Features -->
