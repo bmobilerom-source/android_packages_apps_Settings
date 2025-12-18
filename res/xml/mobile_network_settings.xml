@@ -15,8 +15,15 @@
 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="mobile_network_pref_screen">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="mobile_illustration_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/sim_animation"/>
 
     <com.android.settings.spa.preference.ComposeMainSwitchPreference
         android:key="use_sim_switch"
@@ -55,8 +62,9 @@
             android:title="@string/mobile_network_spn_title"
             android:summary="@string/summary_placeholder"
             android:selectable="false"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.MobileNetworkSpnPreferenceController"
-            settings:allowDividerAbove="true" />
+            settings:allowDividerAbove="false" />
 
         <Preference
             android:key="phone_number"
@@ -64,8 +72,8 @@
             android:summary="@string/summary_placeholder"
             android:selectable="false"
             settings:controller="com.android.settings.network.telephony.MobileNetworkPhoneNumberPreferenceController"
-                settings:allowDividerBelow="false"
-                settings:layout="@layout/adaptive_preference_card"
+            settings:allowDividerBelow="false"
+            settings:layout="@layout/adaptive_preference_card"
             settings:enableCopying="true"/>
 
         <Preference
@@ -80,7 +88,7 @@
             android:title="@string/mobile_data_settings_title"
             android:summary="@string/mobile_data_settings_summary"
             settings:controller="com.android.settings.network.telephony.MobileDataPreferenceController"
-            settings:allowDividerAbove="true"/>
+            settings:allowDividerAbove="false"/>
 
         <SwitchPreferenceCompat
             android:key="auto_data_switch"
