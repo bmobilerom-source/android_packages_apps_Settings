@@ -37,8 +37,7 @@
             android:key="security_features_status"
             android:title="Security Features Status"
             android:summary="View current security settings and status"
-            android:fragment="com.epic.fragments.SecurityFeaturesSettings"
-            android:icon="@drawable/ic_security" />
+            android:fragment="com.epic.fragments.SecurityFeaturesSettings" />
 
     </PreferenceCategory>
 
@@ -77,5 +76,41 @@
 
     </PreferenceCategory>
 
+    <!-- ClassicPowerMenu & MonetCompat Testing -->
+    <PreferenceCategory
+        android:title="Testing Features"
+        android:key="testing_features_category">
+
+        <Preference
+            android:key="power_menu_theming_test"
+            android:title="Power Menu &amp; Theming"
+            android:summary="ClassicPowerMenu &amp; MonetCompat integration testing"
+            android:fragment="com.android.settings.display.PowerMenuSettings" />
+
+        <Preference
+            android:key="enhanced_power_menu_test"
+            android:title="Enhanced Power Menu"
+            android:summary="Test custom power menu options"
+            android:fragment="com.android.settings.display.EnhancedPowerMenuSettings" />
+
+        <Preference
+            android:key="wallet_test"
+            android:title="Quick Access Wallet"
+            android:summary="Test wallet integration features"
+            android:fragment="com.android.settings.display.WalletSettings" />
+
+        <Preference
+            android:key="device_controls_test"
+            android:title="Device Controls"
+            android:summary="Test smart home controls"
+            android:fragment="com.android.settings.display.DeviceControlsSettings" />
+
+        <Preference
+            android:key="advanced_monet_test"
+            android:title="Advanced Material You"
+            android:summary="Test MonetCompat advanced features"
+            android:fragment="com.android.settings.display.AdvancedMonetSettings" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

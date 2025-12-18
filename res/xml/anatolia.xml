@@ -26,19 +26,14 @@
         android:shouldDisableView="false"
         android:fragment="com.epic.fragments.SystemSettingsAboutus" 
         android:layout="@layout/CustomerOS_header" />
-		<!-- Status bar -->
-        <PreferenceScreen
-            android:key="statusbar_category"
-            android:title="@string/statusbar_title"
-            android:summary="@string/statusbar_summary"
-            android:fragment="com.epic.fragments.StatusBarSettings" />
 
-        <!-- Status bar customizations -->
-        <PreferenceScreen
-            android:key="aospmods_statusbar_category"
-            android:title="@string/status_bar_settings_title"
-            android:summary="@string/status_bar_settings_summary"
-            android:fragment="com.android.settings.display.StatusBarSettings" />
+
+        <Preference
+            android:key="security_features_status"
+            android:title="Security Features Status"
+            android:summary="View current security settings and status"
+            android:fragment="com.epic.fragments.SecurityFeaturesSettings"
+            android:icon="@drawable/ic_security" />
 
         <!-- Buttons -->
         <PreferenceScreen
@@ -82,20 +77,7 @@
             android:summary="@string/powermenu_summary"
             android:fragment="com.epic.fragments.PowerMenuSettings" />
 
-        <!-- Quick settings -->
-        <PreferenceScreen
-            android:key="quicksettings_category"
-            android:title="@string/quicksettings_title"
-            android:summary="@string/quicksettings_summary"
-            android:fragment="com.epic.fragments.QuickSettings" />
 
-        <!-- AOSPMods Quick settings -->
-        <!-- Reference: https://github.com/simplnc/android_packages_apps_Settings/tree/committree -->
-        <PreferenceScreen
-            android:key="aospmods_quicksettings_category"
-            android:title="@string/quick_settings_settings_title"
-            android:summary="@string/quick_settings_settings_summary"
-            android:fragment="com.android.settings.display.QuickSettingsSettings" />        
 
         <!-- Display customizations -->
         <PreferenceScreen

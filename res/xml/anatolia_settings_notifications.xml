@@ -20,4 +20,10 @@
 	android:title=" ">
    
 
+ 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="epic_toplevel_card_navigation_lock"
+        android:selectable="false"
+        android:layout="@layout/xd_about_phone_header" />
+
 </PreferenceScreen>
