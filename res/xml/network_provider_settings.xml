@@ -25,6 +25,8 @@
         android:key="resetting_your_internet"
         android:title="@string/resetting_internet_text"
         android:selectable="false"
+        android:enabled="true"
+        android:shouldDisableView="false"
         android:layout="@layout/resetting_internet"
         settings:allowDividerBelow="false"/>
 
@@ -33,6 +35,8 @@
         android:key="airplane_mode_message"
         android:title="@string/condition_airplane_title"
         android:selectable="false"
+        android:enabled="true"
+        android:shouldDisableView="false"
         android:layout="@layout/airplane_mode_message_preference"
         settings:allowDividerBelow="false"/>
 
