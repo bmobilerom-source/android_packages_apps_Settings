@@ -96,6 +96,7 @@ public class MonetTintBackgroundController extends BasePreferenceController
 
     private int getDarkerTintForSettings(String preset) {
         // Apply 40% darker tinting for specific colors that need better visibility in settings
+        // These colors appear darker ONLY when tinting is enabled AND this specific color is selected
         switch (preset) {
             case "deep_moss_green": return darkenColor(0xFF375F47, 0.4f); // Deep Moss Green - 40% darker
             case "lilac": return darkenColor(0xFFC9A5C0, 0.4f);            // Lilac - 40% darker

@@ -22,14 +22,14 @@ import android.content.pm.PackageManager;
 import com.android.settings.core.BasePreferenceController;
 
 /**
- * Controller for Native Alpha browser preference.
- * Only shows the preference if the Native Alpha app is installed.
+ * Controller for Cloud Media app preference.
+ * Only shows the preference if the Cloud Media app is installed.
  */
-public class NativeAlphaPreferenceController extends BasePreferenceController {
+public class CloudMediaPreferenceController extends BasePreferenceController {
 
-    private static final String PACKAGE_NAME = "com.cylonid.nativealpha";
+    private static final String PACKAGE_NAME = "com.android.documentsui";
 
-    public NativeAlphaPreferenceController(Context context, String preferenceKey) {
+    public CloudMediaPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -47,6 +47,3 @@ public class NativeAlphaPreferenceController extends BasePreferenceController {
         }
     }
 }
-
-
-

@@ -51,8 +51,7 @@
             <Preference
                 android:key="open_by_default_add_link"
                 android:title="@string/app_launch_add_link"
-                android:order="300"
-                android:icon="@drawable/ic_add_24dp"/>
+                android:order="300"/>
 
         </PreferenceCategory>
 

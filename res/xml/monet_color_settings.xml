@@ -50,4 +50,18 @@
 
     </PreferenceCategory>
 
+    <!-- Settings Background Tint -->
+    <PreferenceCategory
+        android:title="Settings Background"
+        android:key="settings_background_category">
+
+        <SwitchPreference
+            android:key="monet_tint_background"
+            android:title="Tint Background"
+            android:summary="Apply darker tinting to light colors for better visibility in settings"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.display.MonetTintBackgroundController" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

@@ -22,14 +22,14 @@ import android.content.pm.PackageManager;
 import com.android.settings.core.BasePreferenceController;
 
 /**
- * Controller for Native Alpha browser preference.
- * Only shows the preference if the Native Alpha app is installed.
+ * Controller for Sidebar app preference.
+ * Only shows the preference if the Sidebar app is installed.
  */
-public class NativeAlphaPreferenceController extends BasePreferenceController {
+public class SidebarPreferenceController extends BasePreferenceController {
 
-    private static final String PACKAGE_NAME = "com.cylonid.nativealpha";
+    private static final String PACKAGE_NAME = "com.libremobileos.sidebar";
 
-    public NativeAlphaPreferenceController(Context context, String preferenceKey) {
+    public SidebarPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -47,6 +47,3 @@ public class NativeAlphaPreferenceController extends BasePreferenceController {
         }
     }
 }
-
-
-
