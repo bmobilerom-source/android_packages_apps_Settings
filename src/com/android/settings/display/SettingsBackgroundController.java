@@ -23,10 +23,10 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
-public class MonetColorStyleController extends BasePreferenceController
+public class SettingsBackgroundController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
-    public MonetColorStyleController(Context context, String preferenceKey) {
+    public SettingsBackgroundController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -40,20 +40,19 @@ public class MonetColorStyleController extends BasePreferenceController
         super.updateState(preference);
         if (preference instanceof ListPreference) {
             ListPreference listPreference = (ListPreference) preference;
-            int currentStyle = Settings.System.getInt(mContext.getContentResolver(),
-                    "monet_color_style", 0); // 0 = tonal_spot
-            listPreference.setValue(String.valueOf(currentStyle));
+            String currentValue = Settings.System.getString(mContext.getContentResolver(),
+                    "settings_background_mode");
+            if (currentValue == null) {
+                currentValue = "wallpaper";
+            }
+            listPreference.setValue(currentValue);
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        try {
-            int styleValue = Integer.parseInt((String) newValue);
-            return Settings.System.putInt(mContext.getContentResolver(),
-                    "monet_color_style", styleValue);
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        String value = (String) newValue;
+        return Settings.System.putString(mContext.getContentResolver(),
+                "settings_background_mode", value);
     }
 }

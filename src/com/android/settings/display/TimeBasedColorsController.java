@@ -17,16 +17,12 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.provider.Settings;
+import androidx.preference.Preference;
 
 import com.android.settings.core.TogglePreferenceController;
 
 public class TimeBasedColorsController extends TogglePreferenceController {
-
-    private static final String PREF_FILE = "monet_prefs";
-    private static final String KEY_TIME_BASED_ENABLED = "monet_time_based_enabled";
-    private static final String KEY_TIME_SLOT_COLORS = "monet_time_slot_colors";
-    private static final String KEY_CURRENT_TIME_SLOT = "monet_current_time_slot";
 
     public TimeBasedColorsController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -38,24 +34,36 @@ public class TimeBasedColorsController extends TogglePreferenceController {
     }
 
     @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference != null) {
+            boolean isEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                    "monet_time_based_enabled", 0) == 1;
+            preference.setSummary(isEnabled ?
+                "Colors change based on time of day (enabled)" :
+                "Colors change based on time of day (disabled)");
+        }
+    }
+
+    @Override
     public boolean isChecked() {
-        SharedPreferences prefs = mContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
-        return prefs.getBoolean(KEY_TIME_BASED_ENABLED, false);
+        return Settings.System.getInt(mContext.getContentResolver(),
+                "monet_time_based_enabled", 0) == 1;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        SharedPreferences prefs = mContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-
         if (isChecked) {
-            // Set default time slot colors
+            // Set default time slot colors when enabled
             String defaultColors = "#FFF8E1,#FFE0B2,#FFCC02,#FF9800"; // Sunrise colors
-            editor.putString(KEY_TIME_SLOT_COLORS, defaultColors);
-            editor.putString(KEY_CURRENT_TIME_SLOT, "dawn");
+            Settings.System.putString(mContext.getContentResolver(),
+                    "monet_time_slot_colors", defaultColors);
+            Settings.System.putString(mContext.getContentResolver(),
+                    "monet_current_time_slot", "dawn");
         }
 
-        return editor.putBoolean(KEY_TIME_BASED_ENABLED, isChecked).commit();
+        return Settings.System.putInt(mContext.getContentResolver(),
+                "monet_time_based_enabled", isChecked ? 1 : 0);
     }
 
     @Override

@@ -17,18 +17,13 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
 public class MonetColorPresetsController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
-
-    private static final String PREF_FILE = "monet_prefs";
-    private static final String KEY_COLOR_PRESET = "monet_color_preset";
-    private static final String KEY_PRESET_VALUES = "monet_preset_values";
-    private static final String KEY_OVERRIDE_ENABLED = "monet_override_enabled";
 
     public MonetColorPresetsController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -40,28 +35,44 @@ public class MonetColorPresetsController extends BasePreferenceController
     }
 
     @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference instanceof androidx.preference.ListPreference) {
+            androidx.preference.ListPreference listPreference = (androidx.preference.ListPreference) preference;
+            String currentPreset = android.provider.Settings.System.getString(
+                    mContext.getContentResolver(), "monet_color_preset");
+            if (currentPreset != null) {
+                listPreference.setValue(currentPreset);
+            } else {
+                listPreference.setValue("default");
+            }
+        }
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String presetName = (String) newValue;
 
-        // Get preset colors (simplified implementation)
+        // Get preset colors
         ColorPreset preset = getPresetByName(presetName);
         if (preset != null) {
             String colorString = preset.colors[0] + "," + preset.colors[1] + "," +
                                preset.colors[2] + "," + preset.colors[3];
 
-            SharedPreferences prefs = mContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
-            return prefs.edit()
-                    .putString(KEY_COLOR_PRESET, presetName)
-                    .putString(KEY_PRESET_VALUES, colorString)
-                    .putBoolean(KEY_OVERRIDE_ENABLED, true)
-                    .commit();
+            // Save to system settings
+            return Settings.System.putString(mContext.getContentResolver(),
+                        "monet_color_preset", presetName) &&
+                   Settings.System.putString(mContext.getContentResolver(),
+                        "monet_custom_colors", colorString) &&
+                   Settings.System.putInt(mContext.getContentResolver(),
+                        "monet_override_enabled", 1);
         }
 
         return false;
     }
 
     private ColorPreset getPresetByName(String name) {
-        // Simplified preset definitions
+        // Preset color definitions
         switch (name) {
             case "default":
                 return new ColorPreset("Default", new int[]{0xFF4285F4, 0xFF34A853, 0xFFEA4335, 0xFFFBBC05});

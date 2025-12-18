@@ -17,18 +17,13 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
 public class CustomGradientsController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
-
-    private static final String PREF_FILE = "monet_prefs";
-    private static final String KEY_GRADIENT_TYPE = "monet_gradient_type";
-    private static final String KEY_GRADIENT_COLORS = "monet_gradient_colors";
-    private static final String KEY_GRADIENT_ENABLED = "monet_gradient_enabled";
 
     public CustomGradientsController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -40,20 +35,36 @@ public class CustomGradientsController extends BasePreferenceController
     }
 
     @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference instanceof androidx.preference.ListPreference) {
+            androidx.preference.ListPreference listPreference = (androidx.preference.ListPreference) preference;
+            String currentGradient = android.provider.Settings.System.getString(
+                    mContext.getContentResolver(), "monet_gradient_type");
+            if (currentGradient != null) {
+                listPreference.setValue(currentGradient);
+            } else {
+                listPreference.setValue("none");
+            }
+        }
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String gradientType = (String) newValue;
 
-        // Simplified gradient implementation
+        // Get gradient colors
         String[] colors = getGradientColors(gradientType);
         if (colors != null) {
             String colorString = String.join(",", colors);
 
-            SharedPreferences prefs = mContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
-            return prefs.edit()
-                    .putString(KEY_GRADIENT_TYPE, gradientType)
-                    .putString(KEY_GRADIENT_COLORS, colorString)
-                    .putBoolean(KEY_GRADIENT_ENABLED, true)
-                    .commit();
+            // Save to system settings
+            return Settings.System.putString(mContext.getContentResolver(),
+                        "monet_gradient_type", gradientType) &&
+                   Settings.System.putString(mContext.getContentResolver(),
+                        "monet_gradient_colors", colorString) &&
+                   Settings.System.putInt(mContext.getContentResolver(),
+                        "monet_gradient_enabled", 1);
         }
 
         return false;

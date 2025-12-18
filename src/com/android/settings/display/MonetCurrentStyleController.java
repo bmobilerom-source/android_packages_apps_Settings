@@ -17,16 +17,13 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.provider.Settings;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
-public class MonetColorStyleController extends BasePreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class MonetCurrentStyleController extends BasePreferenceController {
 
-    public MonetColorStyleController(Context context, String preferenceKey) {
+    public MonetCurrentStyleController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -38,22 +35,23 @@ public class MonetColorStyleController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (preference instanceof ListPreference) {
-            ListPreference listPreference = (ListPreference) preference;
-            int currentStyle = Settings.System.getInt(mContext.getContentResolver(),
-                    "monet_color_style", 0); // 0 = tonal_spot
-            listPreference.setValue(String.valueOf(currentStyle));
+        if (preference != null) {
+            int currentStyle = android.provider.Settings.System.getInt(
+                    mContext.getContentResolver(), "monet_color_style", 0);
+            String styleName = getStyleName(currentStyle);
+            preference.setSummary(styleName);
         }
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        try {
-            int styleValue = Integer.parseInt((String) newValue);
-            return Settings.System.putInt(mContext.getContentResolver(),
-                    "monet_color_style", styleValue);
-        } catch (NumberFormatException e) {
-            return false;
+    private String getStyleName(int styleValue) {
+        switch (styleValue) {
+            case 0: return "Tonal Spot";
+            case 1: return "Spritz";
+            case 2: return "Vibrant";
+            case 3: return "Expressive";
+            case 4: return "Rainbow";
+            case 5: return "Fruit Salad";
+            default: return "Tonal Spot";
         }
     }
 }
