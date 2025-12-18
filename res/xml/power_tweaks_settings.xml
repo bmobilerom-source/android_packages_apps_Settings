@@ -13,7 +13,7 @@
             android:key="fast_charging"
             android:title="@string/fast_charging_title"
             android:summary="@string/fast_charging_summary"
-            android:defaultValue="true"
+            android:defaultValue="false"
             settings:controller="com.epic.fragments.FastChargingController" />
 
         <SwitchPreference
@@ -23,13 +23,7 @@
             android:defaultValue="false"
             settings:controller="com.epic.fragments.StayAwakeChargingController" />
 
-        <SwitchPreference
-            android:key="adaptive_battery"
-            android:title="@string/adaptive_battery_title"
-            android:summary="@string/adaptive_battery_summary"
-            android:defaultValue="true"
-            settings:controller="com.epic.fragments.AdaptiveBatteryController" />
-
+     
     </PreferenceCategory>
 
 </PreferenceScreen>
