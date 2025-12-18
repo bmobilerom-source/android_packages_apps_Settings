@@ -72,8 +72,6 @@ public class StatusBarSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new StatusBarHeightPreferenceController(context, "status_bar_height_factor"));
-        controllers.add(new NotificationIconLimitPreferenceController(context, "notification_icon_limit"));
         return controllers;
     }
 

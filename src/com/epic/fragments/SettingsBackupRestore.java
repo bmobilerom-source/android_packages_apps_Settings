@@ -93,19 +93,6 @@ public class SettingsBackupRestore extends SettingsPreferenceFragment
             Settings.Secure.NOTIFICATION_BADGING
     };
 
-    // AOSPMods Settings.System keys
-    private static final String[] AOSPMODS_SETTINGS_KEYS = {
-            "status_bar_height_factor",
-            "notification_icon_limit",
-            "combined_signal_icons",
-            "hide_roaming_state",
-            "volte_icon_enabled",
-            "vowifi_icon_enabled",
-            "hide_privacy_chip",
-            "system_icons_multi_row",
-            "notification_area_multi_row",
-            "network_on_sb_enabled"
-    };
 
     // General Settings keys
     private static final String[] GENERAL_SETTINGS_KEYS = {
@@ -226,19 +213,6 @@ public class SettingsBackupRestore extends SettingsPreferenceFragment
             }
             backupData.put("power_tweaks_settings", powerTweaksSettings);
 
-            // Backup AOSPMods Settings (Settings.System)
-            JSONObject aospmodsSettings = new JSONObject();
-            for (String key : AOSPMODS_SETTINGS_KEYS) {
-                try {
-                    int value = Settings.System.getIntForUser(resolver, key, -1, UserHandle.USER_CURRENT);
-                    if (value != -1) {
-                        aospmodsSettings.put(key, value);
-                    }
-                } catch (Exception e) {
-                    Log.w(TAG, "Error backing up AOSPMods setting: " + key, e);
-                }
-            }
-            backupData.put("aospmods_settings", aospmodsSettings);
 
             // Backup General Settings
             JSONObject generalSettings = new JSONObject();
@@ -362,21 +336,6 @@ public class SettingsBackupRestore extends SettingsPreferenceFragment
                 }
             }
 
-            // Restore AOSPMods Settings
-            if (backupData.has("aospmods_settings")) {
-                JSONObject aospmodsSettings = backupData.getJSONObject("aospmods_settings");
-                for (String key : AOSPMODS_SETTINGS_KEYS) {
-                    if (aospmodsSettings.has(key)) {
-                        try {
-                            int value = aospmodsSettings.getInt(key);
-                            Settings.System.putIntForUser(resolver, key, value, UserHandle.USER_CURRENT);
-                            restored++;
-                        } catch (Exception e) {
-                            Log.w(TAG, "Error restoring AOSPMods setting: " + key, e);
-                        }
-                    }
-                }
-            }
 
             // Restore General Settings (backward compatibility)
             if (backupData.has("system_settings")) {
