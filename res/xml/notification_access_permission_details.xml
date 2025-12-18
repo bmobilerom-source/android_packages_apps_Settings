@@ -66,6 +66,7 @@
 
     <Preference
         android:key="more_settings"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/notif_listener_more_settings"
         android:summary="@string/notif_listener_more_settings_desc"
         settings:controller="com.android.settings.applications.specialaccess.notificationaccess.MoreSettingsPreferenceController" />
