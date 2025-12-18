@@ -40,30 +40,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_alignParentTop="true" />
 
-            <TextView
-                android:id="@+id/firmware_version"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/firmware_name"
-                android:layout_marginTop="2dp"
-                style="@style/mtx_text_style_h6"
-                android:textColor="@color/mtx_text_color_secondary"
-                android:textSize="13sp"
-                android:layout_marginStart="20dp"/>
-
-            <TextView
-                android:id="@+id/firmware_build_summary"
-                style="@style/mtx_text_style_h6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@string/clickhere_summary_title"
-                android:textSize="18sp"
-                android:textStyle="italic"
-                android:textColor="@color/mtx_text_color_primary"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="24dp"
-                android:layout_alignParentBottom="true"/>
+           
     
         </RelativeLayout>
 
@@ -105,7 +82,7 @@
             android:adjustViewBounds="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/device_info_android_logo"
+            android:src="@drawable/android_version_logo"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_alignParentBottom="true" />

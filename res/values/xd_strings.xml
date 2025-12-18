@@ -141,6 +141,6 @@
 
     <!-- Main user profile card -->
     <string name="build_variant_label">Build Variant</string>
-    <string name="mainuser_profile_text">Device Info</string>
-    <string name="clickhere_summary_title">Tap to view build info</string>
+    <string name="mainuser_profile_text">Personal Information</string>
+    <string name="clickhere_summary_title">Tap to view</string>
 </resources>
