@@ -43,6 +43,14 @@
 
     </PreferenceCategory>
 
+
+    <Preference
+        android:key="nav_settings_backup_restore"
+        android:title="@string/settings_backup_restore_title"
+        android:summary="@string/settings_backup_restore_intro_summary"
+         settings:layout="@layout/adaptive_preference_card"
+        android:fragment="com.epic.fragments.SettingsBackupRestore" />
+
     <PreferenceCategory
         android:key="recent_apps_category"
         android:title="@string/recent_app_category_title"

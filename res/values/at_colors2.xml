@@ -6,7 +6,7 @@
     <color name="teal_200_2">#FF03DAC5</color>
     <color name="teal_700_2">#FF018786</color>
     <color name="black_2">#FF000000</color>
-    <color name="card_text2">#171717</color>
+    <color name="card_text2">#FF000000</color>
     <color name="white_2">#FFFFFFFF</color>
     <color name="bottom_bar_divider_color_2">#1f000000</color>
     <color name="bottom_navigation_color_2">#FFFFFF</color>
