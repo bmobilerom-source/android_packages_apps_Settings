@@ -251,15 +251,8 @@ public class MonetColorSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new MonetCurrentStyleController(context, "current_style_indicator"));
-        controllers.add(new MonetColorStyleController(context, "monet_color_style"));
         controllers.add(new MonetColorPresetsController(context, "monet_color_presets"));
-        controllers.add(new CustomGradientsController(context, "monet_custom_gradients"));
-        controllers.add(new TimeBasedColorsController(context, "monet_time_based_colors"));
-        controllers.add(new ContextualColorsController(context, "monet_contextual_colors"));
-        controllers.add(new SettingsBackgroundController(context, "settings_background_color_mode"));
-        controllers.add(new CustomBackgroundColorController(context, "settings_background_custom_color"));
-        controllers.add(new MonetResetController(context, "monet_reset_to_wallpaper"));
+        controllers.add(new MonetColorCyclingController(context, "monet_color_cycling"));
         return controllers;
     }
 

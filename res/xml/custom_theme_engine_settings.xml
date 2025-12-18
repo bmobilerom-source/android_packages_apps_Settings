@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/custom_theme_engine_title">
+
+    <PreferenceCategory
+        android:title="Theme Engine Settings"
+        android:key="theme_engine_category">
+
+        <Preference
+            android:key="theme_engine_info"
+            android:title="Advanced Theming"
+            android:summary="Custom wallpaper-based theming with enhanced color science. Framework integration required."
+            android:selectable="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

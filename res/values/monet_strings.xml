@@ -15,8 +15,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Monet Color Settings -->
-    <string name="monet_color_settings_title">Monet colors</string>
-    <string name="monet_color_settings_summary">Advanced wallpaper color theming</string>
+    <string name="monet_color_settings_title">System Background</string>
+    <string name="monet_color_settings_summary">Choose your system background color</string>
     <string name="monet_current_colors_title">Current colors</string>
     <string name="monet_current_style_title">Current style</string>
     <string name="monet_current_style">Current style: %s</string>
@@ -40,6 +40,23 @@
     <string name="monet_reset_to_wallpaper_title">Reset to wallpaper</string>
     <string name="monet_reset_to_wallpaper_summary">Use wallpaper colors</string>
     <string name="monet_reset_title">Reset</string>
+
+    <!-- Custom Seed Color -->
+    <string name="monet_custom_seed_title">Custom seed color</string>
+    <string name="monet_custom_seed_summary">Pick your own base color for Monet theming</string>
+
+    <!-- Random Preset -->
+    <string name="monet_random_preset_title">Generate random</string>
+    <string name="monet_random_preset_summary">Create a random color scheme</string>
+
+    <!-- Advanced Controls -->
+    <string name="monet_advanced_title">Advanced controls</string>
+    <string name="monet_luminance_title">Luminance factor</string>
+    <string name="monet_luminance_summary">Adjust color brightness (0-100%)</string>
+    <string name="monet_chroma_title">Chroma factor</string>
+    <string name="monet_chroma_summary">Adjust color saturation (0-100%)</string>
+    <string name="monet_tint_background_title">Tint background</string>
+    <string name="monet_tint_background_summary">Apply accent color to system background</string>
 
     <!-- Color Styles -->
     <string-array name="monet_color_styles">

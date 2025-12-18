@@ -42,18 +42,41 @@ public class MonetColorStyleController extends BasePreferenceController
             ListPreference listPreference = (ListPreference) preference;
             int currentStyle = Settings.System.getInt(mContext.getContentResolver(),
                     "monet_color_style", 0); // 0 = tonal_spot
-            listPreference.setValue(String.valueOf(currentStyle));
+            // Map integer back to string value
+            String styleValue = mapIntToStyleString(currentStyle);
+            listPreference.setValue(styleValue);
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        try {
-            int styleValue = Integer.parseInt((String) newValue);
-            return Settings.System.putInt(mContext.getContentResolver(),
-                    "monet_color_style", styleValue);
-        } catch (NumberFormatException e) {
-            return false;
+        String styleString = (String) newValue;
+        int styleValue = mapStyleStringToInt(styleString);
+        return Settings.System.putInt(mContext.getContentResolver(),
+                "monet_color_style", styleValue);
+    }
+
+    private String mapIntToStyleString(int styleInt) {
+        switch (styleInt) {
+            case 0: return "tonal_spot";
+            case 1: return "vibrant";
+            case 2: return "expressive";
+            case 3: return "spritz";
+            case 4: return "rainbow";
+            case 5: return "fruit_salad";
+            default: return "tonal_spot";
+        }
+    }
+
+    private int mapStyleStringToInt(String styleString) {
+        switch (styleString) {
+            case "tonal_spot": return 0;
+            case "vibrant": return 1;
+            case "expressive": return 2;
+            case "spritz": return 3;
+            case "rainbow": return 4;
+            case "fruit_salad": return 5;
+            default: return 0; // Default to TONAL_SPOT
         }
     }
 }

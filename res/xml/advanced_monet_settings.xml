@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="advanced_monet_settings_screen"
+    android:title="Advanced Material You">
+
+    <!-- Advanced Monet Features (Inspired by MonetCompat) -->
+    <PreferenceCategory
+        android:title="Color Customization"
+        android:key="advanced_monet_category">
+
+        <SeekBarPreference
+            android:key="monet_chroma_multiplier"
+            android:title="Color Vibrancy"
+            android:summary="Adjust color saturation intensity (50-200%)"
+            android:max="200"
+            android:min="50"
+            android:defaultValue="100"
+            android:icon="@drawable/ic_settings_display"
+            settings:controller="com.android.settings.display.MonetChromaMultiplierController" />
+
+        <ListPreference
+            android:key="monet_wallpaper_source"
+            android:title="Wallpaper Source"
+            android:summary="Choose which wallpaper provides color theme"
+            android:entries="@array/monet_wallpaper_source_entries"
+            android:entryValues="@array/monet_wallpaper_source_values"
+            android:defaultValue="system"
+            settings:controller="com.android.settings.display.MonetWallpaperSourceController" />
+
+        <SwitchPreference
+            android:key="monet_apply_to_menus"
+            android:title="Theme Menus &amp; Toolbars"
+            android:summary="Apply Material You colors to popup menus and toolbars"
+            android:defaultValue="true"
+            settings:controller="com.android.settings.display.MonetMenuController" />
+
+        <SwitchPreference
+            android:key="monet_apply_to_window"
+            android:title="Theme Window Background"
+            android:summary="Apply generated background color to app windows"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.display.MonetWindowController" />
+
+    </PreferenceCategory>
+
+    <!-- Custom Color Picker (MonetCompat inspired) -->
+    <PreferenceCategory
+        android:title="Custom Colors"
+        android:key="monet_picker_category">
+
+        <Preference
+            android:key="monet_custom_color_picker"
+            android:title="Pick Custom Seed Color"
+            android:summary="Choose your own base color for Material You theming"
+            settings:controller="com.android.settings.display.MonetColorPickerController" />
+
+        <Preference
+            android:key="monet_reset_custom_color"
+            android:title="Reset to Wallpaper Colors"
+            android:summary="Return to dynamic wallpaper-based theming"
+            settings:controller="com.android.settings.display.MonetResetCustomController" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

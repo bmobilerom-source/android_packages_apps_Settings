@@ -43,11 +43,13 @@ public class MonetResetController extends BasePreferenceController {
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        // Reset all Monet settings to defaults
+        // Reset to monochrome theme as requested
         Settings.System.putInt(mContext.getContentResolver(),
-                "monet_color_style", 0); // tonal_spot
+                "monet_color_style", 7); // Monochromatic style
         Settings.System.putString(mContext.getContentResolver(),
-                "monet_color_preset", "default");
+                "monet_color_preset", "gray"); // Gray/monochrome preset
+        Settings.System.putInt(mContext.getContentResolver(),
+                "monet_preset_enabled", 1); // Enable preset mode
         Settings.System.putInt(mContext.getContentResolver(),
                 "monet_override_enabled", 0);
         Settings.System.putInt(mContext.getContentResolver(),
@@ -60,6 +62,10 @@ public class MonetResetController extends BasePreferenceController {
                 "monet_gradient_type", "none");
         Settings.System.putString(mContext.getContentResolver(),
                 "settings_background_mode", "wallpaper");
+
+        // Set monochrome seed color
+        Settings.System.putInt(mContext.getContentResolver(),
+                "monet_seed_color", 0xFF757575); // Gray color
 
         return true;
     }
