@@ -27,7 +27,7 @@
         android:order="-1999"
         settings:lottie_rawRes="@raw/net_illustration"/>
 
-    <!-- Extended Homepage Widgets -->
+    <!-- network internet settings card Homepage Widgets -->
     <com.android.settingslib.widget.LayoutPreference
         android:key="network_internet_settings_card"
         android:selectable="false"
@@ -40,9 +40,8 @@
         isPreferenceVisible="false"
         android:title="@string/provider_internet_settings"
         android:summary="@string/summary_placeholder"
-        android:icon="@drawable/ic_settings_wireless"
         android:order="-30"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
         settings:keywords="@string/keywords_internet"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_wifi"
@@ -52,12 +51,11 @@
         android:key="calls_and_sms"
         isPreferenceVisible="false"
         android:title="@string/calls_and_sms"
-        android:icon="@drawable/ic_calls_sms"
         android:order="-20"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.network.NetworkProviderCallsSmsFragment"
         settings:userRestriction="no_config_mobile_networks"
-        settings:allowDividerBelow="true"
+        settings:allowDividerBelow="false"
         settings:useAdminDisabledSummary="true"
         settings:controller="com.android.settings.network.NetworkProviderCallsSmsController" />
 
@@ -65,7 +63,6 @@
         android:key="mobile_network_list"
         android:title="@string/provider_network_settings_title"
         android:summary="@string/summary_placeholder"
-        android:icon="@drawable/ic_sim_card"
         android:order="-15"
         isPreferenceVisible="false"
         settings:keywords="@string/keywords_more_mobile_networks"
@@ -76,7 +73,6 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="airplane_mode_on"
         android:title="@string/airplane_mode"
-        android:icon="@drawable/ic_airplanemode_active"
         android:order="-5"
         settings:controller="com.android.settings.network.AirplaneModePreferenceController"
         settings:userRestriction="no_airplane_mode"/>
@@ -85,7 +81,6 @@
         android:fragment="com.android.settings.network.tether.TetherSettings"
         android:key="tether_settings"
         android:title="@string/tether_settings_title_all"
-        android:icon="@drawable/ic_wifi_tethering"
         android:order="5"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.network.TetherPreferenceController"
@@ -96,17 +91,16 @@
     <com.android.settings.datausage.DataSaverPreference
         android:key="restrict_background_parent_entry"
         android:title="@string/data_saver_title"
-        android:icon="@drawable/ic_settings_data_usage"
         android:order="10"
         android:persistent="false"
         settings:isPreferenceVisible="@bool/config_show_data_saver"
+        settings:layout="@layout/adaptive_preference_card"
         android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 
     <com.android.settings.vpn2.VpnInfoPreference
         android:fragment="com.android.settings.vpn2.VpnSettings"
         android:key="vpn_settings"
         android:title="@string/vpn_settings_title"
-        android:icon="@drawable/ic_vpn_key"
         android:order="15"
         android:summary="@string/summary_placeholder"
         settings:userRestriction="no_config_vpn"
@@ -115,8 +109,8 @@
     <com.android.settings.network.PrivateDnsModeDialogPreference
         android:key="private_dns_settings"
         android:title="@string/select_private_dns_configuration_title"
-        android:icon="@drawable/ic_settings_private_dns"
         android:order="20"
+        settings:layout="@layout/adaptive_preference_card"
         android:dialogTitle="@string/select_private_dns_configuration_dialog_title"
         android:dialogLayout="@layout/private_dns_mode_dialog"
         android:positiveButtonText="@string/save"
@@ -136,5 +130,6 @@
         android:title="@string/cellular_security_title"
         android:summary="@string/cellular_security_summary"
         android:order="30"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.network.CellularSecurityPreferenceController"/>
 </PreferenceScreen>
