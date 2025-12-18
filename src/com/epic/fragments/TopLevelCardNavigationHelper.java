@@ -67,54 +67,48 @@ public class TopLevelCardNavigationHelper {
 
             android.app.Activity activity = (android.app.Activity) context;
 
-            // Card 1: Gestures
+            // Card 1: My Journal - Launch journal app
             View card1 = layoutPref.findViewById(R.id.card_1);
             if (card1 != null) {
-                Log.d("TopLevelCardNavigationHelper", "Found card_1, setting click listener");
+                Log.d("TopLevelCardNavigationHelper", "Found card_1, setting click listener for journal app");
                 card1.setOnClickListener(v -> {
-                    Log.d("TopLevelCardNavigationHelper", "Card 1 clicked, launching GestureSettings");
-                    launchFragment(activity, "com.epic.fragments.GestureSettings", 
-                            R.string.gestures_title, sourceMetrics);
+                    Log.d("TopLevelCardNavigationHelper", "Card 1 clicked, launching journal app");
+                    launchApp(activity, "com.demizo.daily_you", "com.demizo.daily_you.MainActivity");
                 });
             } else {
                 Log.e("TopLevelCardNavigationHelper", "card_1 not found in layout");
             }
 
-            // Card 2: Extras
+            // Card 2: MySession - Launch session app
             View card2 = layoutPref.findViewById(R.id.card_2);
             if (card2 != null) {
-                Log.d("TopLevelCardNavigationHelper", "Found card_2, setting click listener");
+                Log.d("TopLevelCardNavigationHelper", "Found card_2, setting click listener for session app");
                 card2.setOnClickListener(v -> {
-                    Log.d("TopLevelCardNavigationHelper", "Card 2 clicked, launching ExtraSettings");
-                    launchFragment(activity, "com.epic.fragments.ExtraSettings", 
-                            R.string.extras_title, sourceMetrics);
+                    Log.d("TopLevelCardNavigationHelper", "Card 2 clicked, launching session app");
+                    launchApp(activity, "network.loki.messenger", "network.loki.messenger.RoutingActivity");
                 });
             } else {
                 Log.e("TopLevelCardNavigationHelper", "card_2 not found in layout");
             }
 
-            // Card 3: Quick Settings
+            // Card 3: Private Space - Launch private space
             View card3 = layoutPref.findViewById(R.id.card_3);
             if (card3 != null) {
-                Log.d("TopLevelCardNavigationHelper", "Found card_3, setting click listener");
+                Log.d("TopLevelCardNavigationHelper", "Found card_3, setting click listener for private space");
                 card3.setOnClickListener(v -> {
-                    Log.d("TopLevelCardNavigationHelper", "Card 3 clicked, launching QuickSettings");
-                    launchFragment(activity, "com.epic.fragments.QuickSettings", 
-                            R.string.quicksettings_title, sourceMetrics);
+                    Log.d("TopLevelCardNavigationHelper", "Card 3 clicked, launching private space");
+                    launchFragment(activity, "com.android.settings.privatespace.PrivateSpaceSetupActivity",
+                            R.string.private_space_title, sourceMetrics);
                 });
             } else {
                 Log.e("TopLevelCardNavigationHelper", "card_3 not found in layout");
             }
 
-            // Card 4: Status Bar
+            // Card 4: Duress - Leave as is for now
             View card4 = layoutPref.findViewById(R.id.card_4);
             if (card4 != null) {
-                Log.d("TopLevelCardNavigationHelper", "Found card_4, setting click listener");
-                card4.setOnClickListener(v -> {
-                    Log.d("TopLevelCardNavigationHelper", "Card 4 clicked, launching StatusBarSettings");
-                    launchFragment(activity, "com.epic.fragments.StatusBarSettings", 
-                            R.string.statusbar_title, sourceMetrics);
-                });
+                Log.d("TopLevelCardNavigationHelper", "Found card_4, duress card - leaving as is");
+                // Duress functionality not implemented yet
             } else {
                 Log.e("TopLevelCardNavigationHelper", "card_4 not found in layout");
             }
@@ -123,7 +117,7 @@ public class TopLevelCardNavigationHelper {
         }
     }
 
-    private static void launchFragment(android.app.Activity activity, String fragmentClass, 
+    private static void launchFragment(android.app.Activity activity, String fragmentClass,
             int titleResId, int sourceMetrics) {
         try {
             Log.d("TopLevelCardNavigationHelper", "Launching fragment: " + fragmentClass);
@@ -135,8 +129,24 @@ public class TopLevelCardNavigationHelper {
             Log.d("TopLevelCardNavigationHelper", "Fragment launch initiated successfully");
         } catch (Exception e) {
             Log.e("TopLevelCardNavigationHelper", "Failed to launch fragment: " + fragmentClass, e);
-            android.widget.Toast.makeText(activity, 
-                    "Failed to open: " + fragmentClass, 
+            android.widget.Toast.makeText(activity,
+                    "Failed to open: " + fragmentClass,
+                    android.widget.Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private static void launchApp(android.app.Activity activity, String packageName, String className) {
+        try {
+            Log.d("TopLevelCardNavigationHelper", "Launching app: " + packageName + "/" + className);
+            android.content.Intent intent = new android.content.Intent();
+            intent.setClassName(packageName, className);
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(intent);
+            Log.d("TopLevelCardNavigationHelper", "App launch initiated successfully");
+        } catch (Exception e) {
+            Log.e("TopLevelCardNavigationHelper", "Failed to launch app: " + packageName + "/" + className, e);
+            android.widget.Toast.makeText(activity,
+                    "App not installed: " + packageName,
                     android.widget.Toast.LENGTH_SHORT).show();
         }
     }

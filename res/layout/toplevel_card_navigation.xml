@@ -41,34 +41,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     style="@style/mtx_text_style_h6"
-                    android:textColor="@color/mtx_text_color_primary"
-                    android:text="@string/gestures_title"
-                    android:textSize="12sp"
-                    android:layout_marginStart="14dp"
+                    android:textColor="?android:attr/colorAccent"
+                    android:text="My Journal"
+                    android:textSize="20sp"
+                    android:gravity="center"
                     android:layout_alignParentTop="true" />
 
-                <TextView
-                    android:id="@+id/card_1_subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/card_1_title"
-                    android:layout_marginTop="2dp"
-                    style="@style/mtx_text_style_h6"
-                    android:textColor="@color/mtx_text_color_secondary"
-                    android:textSize="9sp"
-                    android:text="@string/gestures_summary"
-                    android:layout_marginStart="14dp"/>
+       
 
                 <TextView
                     android:id="@+id/card_1_summary"
                     style="@style/mtx_text_style_h6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:text="@string/clickhere_summary_title"
+                    android:gravity="center"
+                    android:text="View My Journal"
                     android:textSize="12sp"
                     android:textStyle="italic"
-                    android:textColor="@color/mtx_text_color_primary"
+                    android:textColor="?android:attr/colorAccent"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="16dp"
                     android:layout_alignParentBottom="true"/>
@@ -100,23 +90,12 @@
                 style="@style/mtx_text_style_h6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/extras_title"
-                android:textSize="11sp"
+                android:text="MySession"
+                android:textSize="20sp"
                 android:textColor="@color/mtx_text_color_primary"
                 android:layout_marginTop="11dp"
-                android:layout_marginStart="14dp"
+                android:gravity="center"
                 android:layout_alignParentTop="true" />
-
-            <ImageView
-                android:id="@+id/card_2_icon"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/device_info_android_logo"
-                android:layout_marginTop="11dp"
-                android:layout_marginStart="11dp"
-                android:layout_alignParentBottom="true" />
 
         </RelativeLayout>
 
@@ -157,34 +136,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     style="@style/mtx_text_style_h6"
-                    android:textColor="@color/mtx_text_color_primary"
-                    android:text="@string/quicksettings_title"
-                    android:textSize="12sp"
-                    android:layout_marginStart="14dp"
+                    android:textColor="?android:attr/colorAccent"
+                    android:text="Private Space"
+                    android:textSize="20sp"
+                    android:gravity="center"
                     android:layout_alignParentTop="true" />
 
-                <TextView
-                    android:id="@+id/card_3_subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/card_3_title"
-                    android:layout_marginTop="2dp"
-                    style="@style/mtx_text_style_h6"
-                    android:textColor="@color/mtx_text_color_secondary"
-                    android:textSize="9sp"
-                    android:text="@string/quicksettings_summary"
-                    android:layout_marginStart="14dp"/>
-
+     
                 <TextView
                     android:id="@+id/card_3_summary"
                     style="@style/mtx_text_style_h6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:text="@string/clickhere_summary_title"
+                    android:gravity="center"
+                    android:text="Activate Private Space"
                     android:textSize="12sp"
                     android:textStyle="italic"
-                    android:textColor="@color/mtx_text_color_primary"
+                    android:textColor="?android:attr/colorAccent"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="16dp"
                     android:layout_alignParentBottom="true"/>
@@ -216,24 +184,14 @@
                 style="@style/mtx_text_style_h6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/statusbar_title"
-                android:textSize="11sp"
+                android:text="Duress"
+                android:textSize="20sp"
                 android:textColor="@color/mtx_text_color_primary"
                 android:layout_marginTop="11dp"
-                android:layout_marginStart="14dp"
+                android:gravity="center"
                 android:layout_alignParentTop="true" />
 
-            <ImageView
-                android:id="@+id/card_4_icon"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/device_info_android_logo"
-                android:layout_marginTop="11dp"
-                android:layout_marginStart="11dp"
-                android:layout_alignParentBottom="true" />
-
+         
         </RelativeLayout>
 
     </LinearLayout>
