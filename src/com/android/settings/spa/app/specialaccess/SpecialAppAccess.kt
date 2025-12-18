@@ -16,13 +16,16 @@
 
 package com.android.settings.spa.app.specialaccess
 
+import android.content.Context
 import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
+import com.android.settings.applications.specialaccess.InstallAppWhitelistController
 import com.android.settingslib.spa.framework.common.SettingsEntry
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
 import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.widget.preference.Preference
@@ -57,6 +60,9 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
     fun buildInjectEntry() = SettingsEntryBuilder.createInject(owner)
 
     override fun buildEntry(arguments: Bundle?): List<SettingsEntry> {
+        val context = SpaEnvironmentFactory.instance.appContext
+        val isWhitelistEnabled = InstallAppWhitelistController.isWhitelistEnabled(context)
+        
         return listOf(
                 AllFilesAccessAppListProvider,
                 DisplayOverOtherAppsAppListProvider,
@@ -65,13 +71,15 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
                 ModifySystemSettingsAppListProvider,
                 UseFullScreenIntentAppListProvider,
                 PictureInPictureListProvider,
-                InstallUnknownAppsListProvider,
+                // Hide Install Unknown Apps when whitelist is enabled
+                if (!isWhitelistEnabled) InstallUnknownAppsListProvider else null,
                 AlarmsAndRemindersAppListProvider,
                 WifiControlAppListProvider,
                 LongBackgroundTasksAppListProvider,
                 TurnScreenOnAppsAppListProvider,
                 WriteSystemPreferencesAppListProvider,
             )
+            .filterNotNull()
             .map { it.buildAppListInjectEntry().setLink(fromPage = owner).build() }
     }
 }

@@ -15,15 +15,39 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/install_other_apps">
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/install_other_apps">
 
+    <!-- Illustration -->
+    <!-- Note: No Illustration present in this page -->
+
+    <!-- Header -->
+    <!-- Note: No Header present in this page -->
+
+    <!-- MainSwitch -->
     <com.android.settings.widget.FilterTouchesRestrictedSwitchPreference
         android:key="external_sources_settings_switch"
+        android:order="-998"
         android:title="@string/external_source_switch_title" />
 
+    <!-- TopIntro -->
+    <!-- Note: No TopIntro present in this page -->
+
+    <!-- Footer -->
     <com.android.settingslib.widget.FooterPreference
         android:key="external_sources_settings_description"
+        android:order="-997"
         android:title="@string/install_all_warning"
         android:selectable="false" />
+
+    <!-- Other Preferences -->
+    <!-- Note: No Other Preferences present in this page -->
+
+    <!-- Switches -->
+    <!-- Note: No Switches present in this page -->
+
+    <!-- SeekBars -->
+    <!-- Note: No SeekBars present in this page -->
 
 </PreferenceScreen>

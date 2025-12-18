@@ -66,6 +66,21 @@ public class UsbDetailsFragment extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        
+        // Block USB popup page if blocked
+        if (com.android.settings.applications.specialaccess.BlockUsbPopupController
+                .isBlocked(context)) {
+            // USB popup access is blocked, finish this activity
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         mUserAuthenticated = false;

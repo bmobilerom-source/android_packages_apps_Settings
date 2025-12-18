@@ -49,6 +49,13 @@ public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenc
             return super.handlePreferenceTreeClick(preference);
         }
 
+        // Block Safety Center access if blocked
+        if (com.android.settings.applications.specialaccess.BlockSafetyCenterController
+                .isBlocked(mContext)) {
+            Log.d(TAG, "Safety Center access is blocked");
+            return true; // Return true to indicate we handled it (by blocking it)
+        }
+
         try {
             mContext.startActivity(new Intent(Intent.ACTION_SAFETY_CENTER)
                     .setPackage(mContext.getPackageManager().getPermissionControllerPackageName()));

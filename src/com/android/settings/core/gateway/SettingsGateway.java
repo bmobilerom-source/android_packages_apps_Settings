@@ -66,6 +66,7 @@ import com.android.settings.applications.managedomainurls.ManageDomainUrls;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings;
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetails;
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings;
+import com.android.settings.applications.specialaccess.AppSecSettings;
 import com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
@@ -365,6 +366,7 @@ public class SettingsGateway {
             ConnectedDeviceDashboardFragment.class.getName(),
             UsbDetailsFragment.class.getName(),
             AppDashboardFragment.class.getName(),
+            AppSecSettings.class.getName(),
             WifiCallingDisclaimerFragment.class.getName(),
             AccountDashboardFragment.class.getName(),
             EnterprisePrivacySettings.class.getName(),

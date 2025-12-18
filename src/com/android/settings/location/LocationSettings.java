@@ -114,6 +114,16 @@ public class LocationSettings extends DashboardFragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        
+        // Block Location Settings access if blocked
+        if (com.android.settings.applications.specialaccess.BlockLocationSettingsController
+                .isBlocked(context)) {
+            // Location Settings access is blocked, finish this activity
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
 
         use(AppLocationPermissionPreferenceController.class).init(this);
         mController = use(RecentLocationAccessPreferenceController.class);

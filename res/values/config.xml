@@ -730,6 +730,18 @@
         <item>android.uid.system:1000</item>
     </string-array>
 
+    <!-- An array of package names allowed to install apps from unknown sources.
+         Only packages listed here can be granted permission to install apps.
+         Aurora Store and Google Play Store are pre-enabled and all other apps are blocked. -->
+    <string-array name="config_allowed_install_app_packages" translatable="false">
+        <item>com.aurora.store</item>
+        <item>com.android.vending</item>
+    </string-array>
+
+    <!-- Whether to show the toggle to enable/disable install app whitelist restriction.
+         Set to true to show the toggle in Special app access settings. -->
+    <bool name="config_show_install_app_whitelist_toggle">false</bool>
+
     <!-- The default value for RedactionInterstitial in SUW -->
     <bool name="default_allow_sensitive_lockscreen_content">false</bool>
 
