@@ -16,16 +16,24 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_tap_assistance"
     android:persistent="false"
-    android:title="@string/accessibility_tap_assistance_title">
+    android:title=" ">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        app:searchable="false"
+        android:order="-1000"
+        app:lottie_rawRes="@raw/doubletap"/>
+        
     <ListPreference
         android:entries="@array/long_press_timeout_selector_list_titles"
         android:entryValues="@array/long_press_timeout_selector_values"
         android:key="select_long_press_timeout_preference"
         android:summary="%s"
         android:persistent="false"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/accessibility_long_press_timeout_preference_title"
         settings:controller="com.android.settings.accessibility.SelectLongPressTimeoutPreferenceController"
         settings:keywords="@string/keywords_touch_and_hold_delay"/>
@@ -34,6 +42,7 @@
         android:fragment="com.android.settings.accessibility.AccessibilityControlTimeoutPreferenceFragment"
         android:key="accessibility_control_timeout_preference_fragment"
         android:persistent="false"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/accessibility_setting_item_control_timeout_title"
         settings:controller="com.android.settings.accessibility.AccessibilityTimeoutPreferenceController"
         settings:keywords="@string/keywords_accessibility_timeout"/>

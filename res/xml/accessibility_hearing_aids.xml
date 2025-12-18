@@ -16,8 +16,16 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_hearing_devices_screen"
-    android:title="@string/accessibility_hearingaid_title">
+    android:title=" ">
+
+
+  <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/hearing_aids"/>
 
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/accessibility_hearingaid_intro"
@@ -50,6 +58,7 @@
         <Preference
             android:key="audio_routing"
             android:title="@string/bluetooth_audio_routing_title"
+            android:layout="@layout/adaptive_preference_card"
             android:summary="@string/bluetooth_audio_routing_summary"
             android:fragment="com.android.settings.accessibility.AccessibilityAudioRoutingFragment"
             settings:controller="com.android.settings.accessibility.HearingAidAudioRoutingPreferenceController"/>

@@ -18,7 +18,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/accessibility_control_timeout_preference_title">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="accessibility_control_timeout_intro"

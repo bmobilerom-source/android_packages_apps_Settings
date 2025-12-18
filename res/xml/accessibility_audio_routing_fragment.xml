@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/bluetooth_audio_routing_title">
 
     <com.android.settingslib.widget.TopIntroPreference
@@ -28,6 +29,7 @@
         android:entries="@array/bluetooth_audio_routing_titles"
         android:entryValues="@array/bluetooth_audio_routing_values"
         android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
         android:key="audio_routing_ringtone"
         android:persistent="false"
         android:title="@string/bluetooth_ringtone_title"
@@ -37,6 +39,7 @@
         android:entries="@array/bluetooth_audio_routing_titles"
         android:entryValues="@array/bluetooth_audio_routing_values"
         android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
         android:key="audio_routing_call"
         android:persistent="false"
         android:title="@string/bluetooth_call_title"
@@ -48,6 +51,7 @@
         android:summary="%s"
         android:key="audio_routing_notification"
         android:persistent="false"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/bluetooth_notification_title"
         settings:controller="com.android.settings.accessibility.HearingDeviceNotificationRoutingPreferenceController" />
 

@@ -18,12 +18,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:persistent="true"
-    android:title="@string/vision_settings_title">
+    android:title=" ">
 
     <Preference
         android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard"
         android:key="text_reading_options"
         android:persistent="false"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/accessibility_text_reading_options_title"
         settings:keywords="text_reading_options"
         settings:controller="com.android.settings.accessibility.TextReadingFragmentForSuwController"/>
@@ -45,6 +46,7 @@
     <Preference
         android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragmentForSetupWizard"
         android:key="screen_magnification_preference"
+        settings:layout="@layout/adaptive_preference_card"
         android:summary="@string/accessibility_preference_magnification_summary"
         android:title="@string/accessibility_screen_magnification_title" />
 

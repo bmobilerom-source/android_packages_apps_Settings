@@ -19,8 +19,15 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_settings_screen"
     android:persistent="false"
-    android:title="@string/accessibility_settings"
+    android:title=" "
     settings:keywords="@string/keywords_accessibility">
+
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        app:searchable="false"
+        android:order="-1000"
+        app:lottie_rawRes="@raw/accessibility"/>
 
     <PreferenceCategory
         android:key="user_installed_services_category"
@@ -41,6 +48,7 @@
             android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragment"
             android:key="text_reading_options"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_text_reading_options_title"
             settings:controller="com.android.settings.accessibility.TextReadingFragmentForA11ySettingsController"/>
 
@@ -48,6 +56,7 @@
             android:fragment="com.android.settings.accessibility.ColorAndMotionFragment"
             android:key="accessibility_color_and_motion"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_color_and_motion_title"
             settings:searchable="true"/>
 
@@ -69,6 +78,7 @@
             android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_screen_magnification_title"
             settings:keywords="@string/keywords_magnification"
             settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"/>
@@ -84,12 +94,14 @@
             android:fragment="com.android.settings.accessibility.TapAssistanceFragment"
             android:key="tap_assistance_preference_screen"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_tap_assistance_title"
             settings:searchable="true"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.SystemControlsFragment"
             android:key="system_controls_preference_screen"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_system_controls_title"
             settings:searchable="true"/>
 
@@ -97,6 +109,7 @@
             android:fragment="com.android.settings.accessibility.VibrationSettings"
             android:key="vibration_preference_screen"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_vibration_settings_title"
             settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
             settings:keywords="@string/keywords_vibration"
@@ -106,6 +119,7 @@
             android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"
             android:key="pointer_and_touchpad"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_pointer_and_touchpad_title"
             android:summary="@string/accessibility_pointer_and_touchpad_summary"
             settings:controller="com.android.settings.inputmethod.PointerTouchpadPreferenceController"
@@ -116,6 +130,7 @@
             android:title="@string/keyboard_a11y_settings"
             android:summary="@string/keyboard_a11y_settings_summary"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:fragment="com.android.settings.inputmethod.PhysicalKeyboardA11yFragment"
             settings:controller="com.android.settings.inputmethod.PhysicalKeyboardA11yPreferenceController" />
     </PreferenceCategory>
@@ -130,12 +145,14 @@
             android:persistent="false"
             android:summary="@string/live_caption_summary"
             android:title="@string/live_caption_title"
+            settings:layout="@layout/adaptive_preference_card"
             settings:keywords="@string/keywords_live_caption"
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.CaptioningPropertiesFragment"
             android:key="captioning_preference_screen"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_captioning_title"
             settings:controller="com.android.settings.accessibility.CaptioningPreferenceController"/>
 
@@ -144,6 +161,7 @@
             android:summary="@string/summary_placeholder"
             android:title="@string/rtt_settings_title"
             settings:keywords="@string/keywords_rtt"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.accessibility.RTTSettingPreferenceController"/>
 
     </PreferenceCategory>
@@ -169,6 +187,7 @@
             android:title="@string/flash_notifications_title"
             settings:keywords="@string/flash_notifications_keywords"
             settings:searchable="true"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.accessibility.FlashNotificationsPreferenceController" />
 
         <Preference
@@ -177,12 +196,14 @@
             android:summary="@string/accessibility_hearingaid_not_connected_summary"
             android:title="@string/accessibility_hearingaid_title"
             settings:keywords="@string/keywords_hearing_aids"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.accessibility.AccessibilityHearingAidPreferenceController"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.AudioAdjustmentFragment"
             android:key="audio_adjustment_preference_screen"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_audio_adjustment_title"
             settings:searchable="true"/>
 
@@ -201,6 +222,7 @@
             android:fragment="com.android.settings.accessibility.ShortcutsSettingsFragment"
             android:key="accessibility_shortcuts_preference_screen"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/accessibility_shortcuts_settings_title"
             settings:searchable="true"/>
 
@@ -208,6 +230,7 @@
             android:fragment="com.android.settings.tts.TextToSpeechSettings"
             android:key="tts_settings_preference"
             android:persistent="false"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/tts_settings_title"
             settings:controller="com.android.settings.language.TtsPreferenceController"/>
 

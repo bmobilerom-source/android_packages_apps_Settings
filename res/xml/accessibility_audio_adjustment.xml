@@ -17,9 +17,18 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_audio_adjustment"
     android:persistent="false"
-    android:title="@string/accessibility_audio_adjustment_title">
+    android:title=" ">
+
+
+  <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/sound"/>
+
 
     <SwitchPreferenceCompat
         android:key="toggle_primary_mono"

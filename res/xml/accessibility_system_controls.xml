@@ -18,7 +18,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_system_controls"
     android:persistent="false"
-    android:title="@string/accessibility_system_controls_title">
+    android:title=" ">
 
     <!-- The item is not specific to Accessibility.
         The same entry is under System, which is unlikely to be removed,
@@ -29,6 +29,7 @@
         android:persistent="false"
         android:title="@string/system_navigation_title"
         settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"/>
 
     <!-- The item is not specific to Accessibility.
@@ -40,6 +41,7 @@
         android:persistent="false"
         android:title="@string/one_handed_title"
         settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController"/>
 
     <SwitchPreferenceCompat
@@ -68,6 +70,7 @@
     <Preference
         android:key="device_state_auto_rotate_accessibility"
         android:persistent="false"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/accelerometer_title"
         android:fragment="com.android.settings.display.DeviceStateAutoRotateDetailsFragment"
         settings:searchable="false"

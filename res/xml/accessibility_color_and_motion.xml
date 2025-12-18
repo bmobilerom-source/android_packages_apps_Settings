@@ -17,9 +17,17 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_color_and_motion"
     android:persistent="false"
-    android:title="@string/accessibility_color_and_motion_title">
+    android:title=" ">
+
+  <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/color_and_motion"/>
+
 
     <Preference
         android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
@@ -27,6 +35,7 @@
         android:persistent="false"
         android:title="@string/accessibility_display_daltonizer_preference_title"
         settings:keywords="@string/keywords_color_correction"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.accessibility.DaltonizerPreferenceController"/>
 
     <Preference
@@ -35,6 +44,7 @@
         android:persistent="false"
         android:title="@string/accessibility_display_inversion_preference_title"
         settings:keywords="@string/keywords_color_inversion"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.accessibility.ColorInversionPreferenceController"/>
 
     <!-- DarkModePreference is searchable in the Display & Touch setting.
@@ -45,6 +55,7 @@
         android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
         android:widgetLayout="@null"
         settings:widgetLayout="@null"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.display.DarkUIPreferenceController"
         settings:searchable="false"/>
 
