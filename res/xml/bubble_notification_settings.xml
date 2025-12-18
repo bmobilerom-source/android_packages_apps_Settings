@@ -19,6 +19,11 @@
                   xmlns:app="http://schemas.android.com/apk/res-auto"
                   android:title="@string/bubbles_app_toggle_title">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="notification_illustration_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/notification_apps"/>
         <com.android.settingslib.widget.TopIntroPreference
             android:key="notification_bubbles_desc"
             android:title="@string/notifications_bubble_setting_description"/>
