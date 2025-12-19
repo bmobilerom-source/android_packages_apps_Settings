@@ -18,6 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="location_settings"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/location_settings_title"
     settings:keywords="@string/keywords_location">
 
@@ -40,6 +41,8 @@
         android:title="@string/assisted_gps"
         android:summary="@string/assisted_gps_summary"
         settings:controller="com.android.settings.location.AgpsPreferenceController"/>
+
+
 
     <PreferenceCategory
         android:key="location_advanced_settings"
@@ -66,15 +69,18 @@
         <!-- This preference category gets removed if new_recent_location_ui is disabled -->
         <Preference
             android:key="app_level_permissions"
+            settings:layout="@layout/adaptive_preference_card_top"
             android:title="@string/location_app_level_permissions"
             settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController"/>
 
         <Preference
             android:fragment="com.android.settings.location.LocationServices"
             android:key="location_services"
+            settings:layout="@layout/adaptive_preference_card_bottom"
             android:title="@string/location_services_preference_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
+     
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
