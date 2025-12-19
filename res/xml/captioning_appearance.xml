@@ -33,6 +33,7 @@
         android:entryValues="@array/captioning_font_size_selector_values"
         android:key="captioning_font_size"
         android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/captioning_text_size"
         settings:controller="com.android.settings.accessibility.CaptioningFontSizeController"/>
 
@@ -51,6 +52,7 @@
             android:entryValues="@array/captioning_typeface_selector_values"
             android:key="captioning_typeface"
             android:summary="%s"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/captioning_typeface"
             settings:controller="com.android.settings.accessibility.CaptioningTypefaceController"/>
 
