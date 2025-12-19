@@ -27,7 +27,7 @@
         android:key="apps_illustration_video"
         settings:searchable="false"
         android:order="-1000"
-        settings:lottie_rawRes="@raw/bmobilesettings"/>
+        settings:lottie_rawRes="@raw/powermenu1"/>
 
     <!-- Hidden: All Apps preference - commented out -->
     <!--
@@ -45,6 +45,7 @@
         android:key="recent_apps_category"
         android:title="@string/recent_app_category_title"
         android:order="-998"
+        settings:layout="@layout/adaptive_preference_card"
         settings:isPreferenceVisible="false"
         settings:searchable="false">
         <!-- Placeholder for a list of recent apps -->
@@ -72,7 +73,33 @@
         android:title="@string/app_default_dashboard_title"
         android:order="-996"
         settings:controller="com.android.settings.applications.DefaultAppsPreferenceController"
-        settings:layout="@layout/adaptive_preference_card"/>
+        settings:layout="@layout/adaptive_preference_card_top"/>
+        
+    <!-- Sidebar App (dynamically shown if installed) -->
+    <Preference
+        android:key="sidebar_pref"
+        android:title="Sidebar"
+        android:summary="Access sidebar features"
+        android:order="-995"
+        settings:controller="com.android.settings.applications.SidebarPreferenceController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.libremobileos.sidebar"
+            android:targetClass="com.libremobileos.sidebar.ui.sidebar.SidebarSettingsActivity" />
+    </Preference>
+
+    <!-- Files/Cloud Media App (dynamically shown if installed) -->
+    <Preference
+        android:key="files_app_pref"
+        android:title="Cloud media app"
+        android:summary="Access cloud media and file management"
+        android:order="-994"
+        settings:controller="com.android.settings.applications.CloudMediaPreferenceController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.documentsui"
+            android:targetClass="com.android.documentsui.LauncherActivity" />
+    </Preference>
 
     <Preference
         android:key="cloned_apps"
@@ -110,7 +137,7 @@
         android:order="15"
         settings:keywords="app_hibernation_key"
         settings:controller="com.android.settings.applications.HibernatedAppsPreferenceController"
-        settings:layout="@layout/adaptive_preference_card_middle"/>
+        settings:layout="@layout/adaptive_preference_card_top"/>
 
     <Preference
         android:key="app_battery_usage"
@@ -130,7 +157,7 @@
         android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
         android:title="@string/special_access"
         android:order="20"
-        settings:layout="@layout/adaptive_preference_card_middle">
+        settings:layout="@layout/adaptive_preference_card_bottom">
     </Preference>
 
     <PreferenceCategory
@@ -154,34 +181,6 @@
 
     </PreferenceCategory>
 
-        <!-- Sidebar App (dynamically shown if installed) -->
-        <Preference
-            android:key="sidebar_pref"
-            android:title="Sidebar"
-            android:summary="Access sidebar features"
-            android:order="26"
-            settings:controller="com.android.settings.applications.SidebarPreferenceController"
-            settings:layout="@layout/adaptive_preference_card_middle">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.libremobileos.sidebar"
-                android:targetClass="com.libremobileos.sidebar.ui.sidebar.SidebarSettingsActivity" />
-        </Preference>
-
-        <!-- Files/Cloud Media App (dynamically shown if installed) -->
-        <Preference
-            android:key="files_app_pref"
-            android:title="Files"
-            android:summary="Access cloud media and file management"
-            android:order="27"
-            settings:controller="com.android.settings.applications.CloudMediaPreferenceController"
-            settings:layout="@layout/adaptive_preference_card_middle">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.documentsui"
-                android:targetClass="com.android.documentsui.DocumentsActivity" />
-        </Preference>
-
         <!-- Native Alpha Browser (dynamically shown if installed) -->
         <Preference
             android:key="native_alpha_pref"
@@ -189,7 +188,7 @@
             android:summary="Open Native Alpha browser settings"
             android:order="28"
             settings:controller="com.android.settings.applications.NativeAlphaPreferenceController"
-            settings:layout="@layout/adaptive_preference_card_middle">
+            settings:layout="@layout/system_features_preference_card">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.cylonid.nativealpha"
@@ -203,7 +202,7 @@
             android:summary="Open DigPaws settings"
             android:order="29"
             settings:controller="com.android.settings.applications.DigPawsPreferenceController"
-            settings:layout="@layout/adaptive_preference_card_middle">
+            settings:layout="@layout/system_features_preference_card">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="nethical.digipaws"
@@ -217,7 +216,7 @@
             android:summary="Quick search for online and system"
             android:order="30"
             settings:controller="com.android.settings.applications.SystemLaunchPadPreferenceController"
-            settings:layout="@layout/adaptive_preference_card_bottom">
+            settings:layout="@layout/system_features_preference_card">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.devrinth.launchpad"

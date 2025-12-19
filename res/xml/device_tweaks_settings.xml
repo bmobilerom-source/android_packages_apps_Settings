@@ -11,6 +11,8 @@
         android:order="-1999"
         settings:lottie_rawRes="@raw/Permission"/>
         
+    <!-- TODO: On devices with fast charging and stay awake charging enabled, this option will be enabled -->
+    <!--
     <PreferenceCategory
         android:title="@string/power_tweaks_category_charging">
 
@@ -18,17 +20,18 @@
             android:key="fast_charging"
             android:title="@string/fast_charging_title"
             android:summary="@string/fast_charging_summary"
-            android:defaultValue="false"
+            android:defaultValue="true"
             settings:controller="com.epic.fragments.FastChargingController" />
 
         <SwitchPreference
             android:key="stay_awake_charging"
             android:title="@string/stay_awake_charging_title"
             android:summary="@string/stay_awake_charging_summary"
-            android:defaultValue="false"
+            android:defaultValue="true"
             settings:controller="com.epic.fragments.StayAwakeChargingController" />
 
     </PreferenceCategory>
+    -->
 
     <PreferenceCategory
         android:title="Developer &amp; USB Security"
@@ -55,24 +58,15 @@
         android:key="nav_settings_backup_restore"
         android:title="@string/settings_backup_restore_title"
         android:summary="@string/settings_backup_restore_intro_summary"
-         settings:layout="@layout/adaptive_preference_card"
+        android:order="50"
+        settings:layout="@layout/adaptive_preference_card_top"
         android:fragment="com.epic.fragments.SettingsBackupRestore" />
 
-    <PreferenceCategory
-        android:key="recent_apps_category"
-        android:title="@string/recent_app_category_title"
-        android:order="-998"
-        settings:searchable="false">
-        <!-- Placeholder for a list of recent apps -->
-
-        <!-- See all apps -->
-        <Preference
-            android:key="see_all_apps"
-            android:title="@string/default_see_all_apps_title"
-            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            android:order="5"
-            settings:searchable="false"
-            settings:layout="@layout/adaptive_preference_card" />
-    </PreferenceCategory>
-
+    <Preference
+        android:key="auto_reboot_settings"
+        android:title="@string/auto_reboot_title"
+        android:summary="@string/auto_reboot_summary"
+        android:fragment="com.epic.fragments.AutoRebootSettings"
+        android:order="100"
+        settings:layout="@layout/adaptive_preference_card_bottom" />
 </PreferenceScreen>

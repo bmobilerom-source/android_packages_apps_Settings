@@ -58,23 +58,26 @@
     <string name="monet_tint_background_title">Tint background</string>
     <string name="monet_tint_background_summary">Apply accent color to system background</string>
 
-    <!-- Color Styles -->
+    <!-- Color Styles (matching frameworks/base ThemeOverlayController mapping) -->
+    <!-- Available styles (spritz, expressive, and monochromatic removed) -->
     <string-array name="monet_color_styles">
-        <item>Tonal Spot</item>
-        <item>Vibrant</item>
-        <item>Expressive</item>
-        <item>Spritz</item>
-        <item>Rainbow</item>
-        <item>Fruit Salad</item>
+        <item>System</item>
+        <item>Strong</item>
+        <item>Mixed</item>
+        <item>Creative</item>
+        <item>Focus</item>
     </string-array>
     <string-array name="monet_color_style_values">
         <item>tonal_spot</item>
         <item>vibrant</item>
-        <item>expressive</item>
-        <item>spritz</item>
         <item>rainbow</item>
         <item>fruit_salad</item>
+        <item>content</item>
     </string-array>
+
+    <!-- Monochromatic Mode (independent toggle) -->
+    <string name="monet_monochromatic_title">Monochromatic Mode</string>
+    <string name="monet_monochromatic_summary">Override all styles with pure monochromatic theming</string>
 
     <!-- Background Modes -->
     <string-array name="settings_background_modes">

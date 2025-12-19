@@ -37,10 +37,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                app:lottie_rawRes="@raw/welcome2"
+                app:lottie_rawRes="@raw/profile_persons"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                android:alpha="0.2"
+                app:lottie_speed="0.3"
+                android:alpha="1.0"
                 android:scaleType="centerCrop" />
 
 
@@ -69,12 +70,10 @@
 
         <TextView
             android:id="@+id/build_variant_title"
-            style="@style/mtx_text_style_h6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Personal"
-            android:textSize="16sp"
-            android:textColor="@color/mtx_text_color_primary"
+            android:text="Profile"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
             android:layout_marginTop="16dp"
             android:layout_marginStart="20dp"
             android:layout_alignParentTop="true" />

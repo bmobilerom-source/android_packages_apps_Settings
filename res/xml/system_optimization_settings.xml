@@ -80,6 +80,19 @@
         android:defaultValue="false"
         settings:controller="com.epic.fragments.ThermalThrottlingController"
         settings:searchable="false" />
-    
-  
+
+    <!-- Auto Reboot Settings -->
+
+   <!-- Files/Cloud Media App (dynamically shown if installed) -->
+        <Preference
+            android:key="files_app_pref"
+            android:title="file manager"
+            android:summary="Access cloud media and file management"
+            settings:controller="com.android.settings.applications.CloudMediaPreferenceController"
+            settings:layout="@layout/adaptive_preference_card">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.documentsui"
+                android:targetClass="com.android.documentsui.LauncherActivity" />
+        </Preference>
 </PreferenceScreen>

@@ -195,9 +195,9 @@ public class InstallAppWhitelistController extends TogglePreferenceController {
         if (currentValue == -1) {
             // Setting not set yet, initialize to enabled (1) by default
             Settings.Secure.putInt(context.getContentResolver(), SETTINGS_KEY, 1);
-            // Enforce whitelist on first boot
+            // Enforce whitelist on first boot - use a valid preference key
             final InstallAppWhitelistController controller = 
-                    new InstallAppWhitelistController(context, "");
+                    new InstallAppWhitelistController(context, "install_app_whitelist_toggle");
             controller.enforceWhitelistInternal();
             Log.d("InstallAppWhitelist", "Initialized whitelist restriction to enabled by default");
         }

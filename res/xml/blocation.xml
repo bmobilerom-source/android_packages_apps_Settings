@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Enhanced Location Privacy and Status Settings
+
+     Copyright (C) 2024 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="blocation_settings"
+    android:title="@string/location_privacy_dashboard_title"
+    settings:keywords="@string/keywords_location">
+
+    <!-- Location Privacy Dashboard -->
+    <PreferenceCategory
+        android:key="location_privacy_category"
+        android:title="@string/location_privacy_dashboard_title"
+        android:summary="@string/location_privacy_dashboard_summary"
+        android:order="5"
+        settings:layout="@layout/adaptive_preference_card_top">
+
+        <!-- Privacy Indicators -->
+        <Preference
+            android:key="location_privacy_indicators"
+            android:title="@string/location_apps_with_access"
+            android:summary="@string/location_recent_access_count"
+            android:order="6"
+            settings:controller="com.android.settings.location.LocationPrivacyIndicatorsController"
+            settings:layout="@layout/adaptive_preference_card"/>
+
+        <!-- Granular Permission Controls -->
+        <ListPreference
+            android:key="location_precision"
+            android:title="@string/location_precision_title"
+            android:summary="@string/location_precision_summary"
+            android:entries="@array/location_precision_entries"
+            android:entryValues="@array/location_precision_values"
+            android:defaultValue="precise"
+            android:order="7"
+            settings:controller="com.android.settings.location.LocationPrecisionController"/>
+
+        <Preference
+            android:key="location_time_restrictions"
+            android:title="@string/location_time_restrictions_title"
+            android:summary="@string/location_time_restrictions_summary"
+            android:order="8"
+            settings:controller="com.android.settings.location.LocationTimeRestrictionsController"
+            android:fragment="com.android.settings.location.LocationTimeRestrictionsFragment"/>
+
+        <Preference
+            android:key="location_app_overrides"
+            android:title="@string/location_app_overrides_title"
+            android:summary="@string/location_app_overrides_summary"
+            android:order="9"
+            settings:controller="com.android.settings.location.LocationAppOverridesController"
+            android:fragment="com.android.settings.location.LocationAppOverridesFragment"/>
+
+        <Preference
+            android:key="location_sharing_controls"
+            android:title="@string/location_sharing_controls_title"
+            android:summary="@string/location_sharing_controls_summary"
+            android:order="10"
+            settings:controller="com.android.settings.location.LocationSharingControlsController"
+            android:fragment="com.android.settings.location.LocationSharingControlsFragment"/>
+    </PreferenceCategory>
+
+    <!-- Location Status Indicators -->
+    <PreferenceCategory
+        android:key="location_status_category"
+        android:title="@string/location_status_title"
+        android:order="11"
+        settings:layout="@layout/adaptive_preference_card">
+
+        <!-- Service Status -->
+        <Preference
+            android:key="location_service_status"
+            android:title="@string/location_status_gps_active"
+            android:summary="@string/location_accuracy_high"
+            android:order="12"
+            settings:controller="com.android.settings.location.LocationServiceStatusController"
+            settings:layout="@layout/adaptive_preference_card_top"/>
+
+        <Preference
+            android:key="location_accuracy_indicator"
+            android:title="@string/location_accuracy_title"
+            android:summary="@string/location_last_update"
+            android:order="13"
+            settings:controller="com.android.settings.location.LocationAccuracyIndicatorController"
+            settings:layout="@layout/adaptive_preference_card_bottom"/>
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:title="These enhanced location privacy features help you maintain better control over your location data and understand location service status."
+        android:key="blocation_footer"
+        settings:searchable="false"
+        settings:controller="com.android.settings.location.LocationPrivacyFooterController"/>
+</PreferenceScreen>

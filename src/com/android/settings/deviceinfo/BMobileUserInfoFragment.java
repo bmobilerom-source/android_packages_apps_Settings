@@ -184,20 +184,19 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
 
         // Handle private space preferences
         if ("private_space_access".equals(key) || "private_space_security".equals(key)) {
-            android.util.Log.d("BMobileUserInfoFragment", "Launching Private Space Dashboard");
+            android.util.Log.d("BMobileUserInfoFragment", "Launching Private Space Setup Activity");
 
             try {
-                // Use SubSettingLauncher to launch the private space setup activity
-                new com.android.settings.core.SubSettingLauncher(getActivity())
-                        .setDestination("com.android.settings.privatespace.PrivateSpaceSetupActivity")
-                        .setTitleRes(com.android.settings.R.string.private_space_title)
-                        .setSourceMetricsCategory(com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS)
-                        .launch();
+                // Launch Private Space Setup Activity directly using Intent
+                android.content.Intent intent = new android.content.Intent();
+                intent.setClassName("com.android.settings", "com.android.settings.privatespace.PrivateSpaceSetupActivity");
+                intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+                getActivity().startActivity(intent);
 
-                android.util.Log.d("BMobileUserInfoFragment", "Private Space Dashboard launched successfully");
+                android.util.Log.d("BMobileUserInfoFragment", "Private Space Setup Activity launched successfully");
                 return true;
             } catch (Exception e) {
-                android.util.Log.e("BMobileUserInfoFragment", "Failed to launch Private Space Dashboard", e);
+                android.util.Log.e("BMobileUserInfoFragment", "Failed to launch Private Space Setup Activity", e);
                 android.widget.Toast.makeText(getContext(), "Unable to open Private Space", android.widget.Toast.LENGTH_SHORT).show();
                 return false;
             }

@@ -26,15 +26,9 @@
         android:key="settings_backup_illustration"
         settings:searchable="false"
         android:order="-1001"
-        app:lottie_rawRes="@raw/backup_settings" />
+        app:lottie_rawRes="@raw/backup_restore" />
 
-    <!-- Top Intro -->
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="settings_backup_intro"
-        android:order="-1000"
-        android:title="@string/settings_backup_restore_intro_title"
-        android:summary="@string/settings_backup_restore_intro_summary"
-        android:persistent="false" />
+
 
     <PreferenceCategory
         android:title="@string/settings_backup_restore_category_title"
@@ -43,16 +37,19 @@
         <Preference
             android:key="backup_settings"
             android:title="@string/settings_backup_title"
+            settings:layout="@layout/adaptive_preference_card_top"
             android:summary="@string/settings_backup_summary"/>
 
         <Preference
             android:key="restore_settings"
             android:title="@string/settings_restore_title"
+            settings:layout="@layout/adaptive_preference_card_middle"
             android:summary="@string/settings_restore_summary" />
 
         <Preference
             android:key="backup_location"
             android:title="@string/settings_backup_location_title"
+            settings:layout="@layout/adaptive_preference_card_bottom"
             android:summary="@string/settings_backup_no_backup"
             android:selectable="false" />
 
