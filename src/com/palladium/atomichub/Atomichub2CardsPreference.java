@@ -47,7 +47,9 @@ public class Atomichub2CardsPreference extends Preference {
         // Optimize → SystemOptimizationSettings
         bindCard(holder, R.id.card6_2, "com.epic.fragments.SystemOptimizationSettings", R.string.system_optimization_title);
         // bSettings → AppSecSettings
+        android.util.Log.d("Atomichub2CardsPreference", "About to bind card7_2");
         bindCard(holder, R.id.card7_2, "com.android.settings.applications.specialaccess.AppSecSettings", R.string.appsec_category_title);
+        android.util.Log.d("Atomichub2CardsPreference", "Finished binding card7_2");
         // Big Personal card → BMobileUserInfoFragment
         bindCard(holder, R.id.card2, "com.android.settings.deviceinfo.BMobileUserInfoFragment", R.string.bmobile_userinfo_title);
 
@@ -67,12 +69,23 @@ public class Atomichub2CardsPreference extends Preference {
     }
 
     private void bindCard(PreferenceViewHolder holder, int viewId, String fragment, int titleRes) {
-        View v = holder.findViewById(viewId);
+        android.util.Log.d("Atomichub2CardsPreference", "bindCard called for viewId: " + viewId + ", fragment: " + fragment);
+        View v = holder.itemView.findViewById(viewId);
+        android.util.Log.d("Atomichub2CardsPreference", "View found with itemView.findViewById: " + (v != null));
         if (v == null) {
             // #region agent log
-            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub2-pref\",\"runId\":\"bind\",\"hypothesisId\":\"E\",\"location\":\"Atomichub2CardsPreference.java:bindCard\",\"message\":\"card not found\",\"data\":{\"viewId\":" + viewId + "},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
+            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub2-pref\",\"runId\":\"bind\",\"hypothesisId\":\"E\",\"location\":\"Atomichub2CardsPreference.java:bindCard\",\"message\":\"card not found with itemView, trying holder\",\"data\":{\"viewId\":" + viewId + "},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
             // #endregion
-            return;
+            android.util.Log.d("Atomichub2CardsPreference", "Trying holder.findViewById for viewId: " + viewId);
+            v = holder.findViewById(viewId);
+            android.util.Log.d("Atomichub2CardsPreference", "View found with holder.findViewById: " + (v != null));
+            if (v == null) {
+                android.util.Log.e("Atomichub2CardsPreference", "Card view is null for id: " + viewId + " - fragment: " + fragment);
+                // #region agent log
+                try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub2-pref\",\"runId\":\"bind\",\"hypothesisId\":\"E\",\"location\":\"Atomichub2CardsPreference.java:bindCard\",\"message\":\"card not found with holder either\",\"data\":{\"viewId\":" + viewId + "},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
+                // #endregion
+                return;
+            }
         }
         v.setClickable(true);
         v.setFocusable(true);
@@ -86,14 +99,18 @@ public class Atomichub2CardsPreference extends Preference {
     }
 
     private void bindAppCard(PreferenceViewHolder holder, int viewId, String packageName, String className) {
-        View v = holder.findViewById(viewId);
+        View v = holder.itemView.findViewById(viewId);
         // #region agent log
         try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub2-pref\",\"runId\":\"bind\",\"hypothesisId\":\"J\",\"location\":\"Atomichub2CardsPreference.java:bindAppCard\",\"message\":\"binding app card\",\"data\":{\"viewId\":" + viewId + ",\"package\":\"" + packageName + "\"},\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
         // #endregion
 
         if (v == null) {
-            android.util.Log.d("Atomichub2CardsPreference", "Card view is null for id: " + viewId);
-            return;
+            android.util.Log.d("Atomichub2CardsPreference", "Card view is null for id: " + viewId + " - trying holder.findViewById");
+            v = holder.findViewById(viewId);
+            if (v == null) {
+                android.util.Log.d("Atomichub2CardsPreference", "Card view still null with holder.findViewById for id: " + viewId);
+                return;
+            }
         }
 
         android.util.Log.d("Atomichub2CardsPreference", "Setting click listener for app card " + viewId);

@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settings.accounts.EmergencyInfoPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -62,6 +63,7 @@ public class EmergencyDashboardFragment extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyBroadcastPreferenceController(context, WEA_PREF_KEY));
+        controllers.add(new EmergencyInfoPreferenceController(context, "emergency_info"));
         return controllers;
     }
 
