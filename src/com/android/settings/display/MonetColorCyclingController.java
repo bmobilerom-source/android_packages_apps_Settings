@@ -50,6 +50,7 @@ public class MonetColorCyclingController extends BasePreferenceController
     private PendingIntent mCycleIntent;
     private Handler mHandler;
     private int mCurrentColorIndex = 0;
+    private boolean mIsReceiverRegistered = false;
 
     private final BroadcastReceiver mColorCycleReceiver = new BroadcastReceiver() {
         @Override
@@ -69,8 +70,17 @@ public class MonetColorCyclingController extends BasePreferenceController
 
         // Create the pending intent for color cycling
         Intent cycleIntent = new Intent(ACTION_COLOR_CYCLE);
+        cycleIntent.setPackage(context.getPackageName()); // Ensure it goes to our app
         mCycleIntent = PendingIntent.getBroadcast(context, 0, cycleIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        // Check if cycling should be active and start it if needed
+        boolean isEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                "monet_color_cycling", 0) == 1;
+        if (isEnabled) {
+            android.util.Log.d("MonetColorCyclingController", "Cycling was enabled, restarting...");
+            startColorCycling();
+        }
     }
 
     @Override
@@ -112,34 +122,72 @@ public class MonetColorCyclingController extends BasePreferenceController
         android.util.Log.d("MonetColorCyclingController", "Starting color cycling");
 
         try {
-            // Register the broadcast receiver
-            IntentFilter filter = new IntentFilter(ACTION_COLOR_CYCLE);
-            mContext.registerReceiver(mColorCycleReceiver, filter);
-            android.util.Log.d("MonetColorCyclingController", "Broadcast receiver registered");
+            // Register the broadcast receiver if not already registered
+            if (!mIsReceiverRegistered) {
+                IntentFilter filter = new IntentFilter(ACTION_COLOR_CYCLE);
+                mContext.registerReceiver(mColorCycleReceiver, filter, Context.RECEIVER_EXPORTED);
+                mIsReceiverRegistered = true;
+                android.util.Log.d("MonetColorCyclingController", "Broadcast receiver registered");
+            }
 
             // Start with first color immediately
             mCurrentColorIndex = 0;
             applyCurrentColor();
 
-            // Schedule repeating alarm
+            // Schedule repeating alarm using setExactAndAllowWhileIdle for better reliability
             long nextTriggerTime = System.currentTimeMillis() + CYCLE_INTERVAL_MS;
-            mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, nextTriggerTime,
-                    CYCLE_INTERVAL_MS, mCycleIntent);
+
+            // Cancel any existing alarm first
+            mAlarmManager.cancel(mCycleIntent);
+
+            // Use setExactAndAllowWhileIdle for Android 12+ compatibility
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextTriggerTime, mCycleIntent);
+            } else {
+                mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, nextTriggerTime, mCycleIntent);
+            }
+
             android.util.Log.d("MonetColorCyclingController", "Alarm scheduled for " + nextTriggerTime);
+
+            // Schedule the next alarm to create repeating behavior
+            scheduleNextAlarm();
+
         } catch (Exception e) {
             android.util.Log.e("MonetColorCyclingController", "Failed to start color cycling", e);
         }
     }
 
+    private void scheduleNextAlarm() {
+        try {
+            long nextTriggerTime = System.currentTimeMillis() + CYCLE_INTERVAL_MS;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                mAlarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextTriggerTime, mCycleIntent);
+            } else {
+                mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, nextTriggerTime, mCycleIntent);
+            }
+        } catch (Exception e) {
+            android.util.Log.e("MonetColorCyclingController", "Failed to schedule next alarm", e);
+        }
+    }
+
     private void stopColorCycling() {
+        android.util.Log.d("MonetColorCyclingController", "Stopping color cycling");
+
         // Cancel the alarm
-        mAlarmManager.cancel(mCycleIntent);
+        if (mAlarmManager != null && mCycleIntent != null) {
+            mAlarmManager.cancel(mCycleIntent);
+            android.util.Log.d("MonetColorCyclingController", "Alarm cancelled");
+        }
 
         // Unregister the receiver
-        try {
-            mContext.unregisterReceiver(mColorCycleReceiver);
-        } catch (IllegalArgumentException e) {
-            // Receiver might not be registered, ignore
+        if (mIsReceiverRegistered) {
+            try {
+                mContext.unregisterReceiver(mColorCycleReceiver);
+                mIsReceiverRegistered = false;
+                android.util.Log.d("MonetColorCyclingController", "Broadcast receiver unregistered");
+            } catch (IllegalArgumentException e) {
+                android.util.Log.w("MonetColorCyclingController", "Receiver was not registered or already unregistered");
+            }
         }
     }
 
@@ -147,33 +195,52 @@ public class MonetColorCyclingController extends BasePreferenceController
         mCurrentColorIndex = (mCurrentColorIndex + 1) % DARK_COLORS.length;
         android.util.Log.d("MonetColorCyclingController", "Cycling to next color: index " + mCurrentColorIndex + ", color: " + String.format("0x%08X", DARK_COLORS[mCurrentColorIndex]));
         applyCurrentColor();
+
+        // Schedule the next alarm for repeating behavior
+        scheduleNextAlarm();
     }
 
     private void applyCurrentColor() {
         int color = DARK_COLORS[mCurrentColorIndex];
         android.util.Log.d("MonetColorCyclingController", "Applying color: " + String.format("0x%08X", color));
 
-        // Apply the color using the same method as presets
-        boolean colorSaved = Settings.System.putInt(mContext.getContentResolver(),
-                "monet_seed_color", color);
-        boolean presetSaved = Settings.System.putString(mContext.getContentResolver(),
-                "monet_color_preset", "cycling_" + mCurrentColorIndex);
-
-        android.util.Log.d("MonetColorCyclingController", "Settings saved - color: " + colorSaved + ", preset: " + presetSaved);
-
-        // Trigger theme refresh
         try {
-            Intent wallpaperIntent = new Intent("android.intent.action.WALLPAPER_CHANGED");
-            wallpaperIntent.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(wallpaperIntent);
-            android.util.Log.d("MonetColorCyclingController", "Wallpaper changed broadcast sent");
+            // Apply the color using the same method as presets
+            boolean colorSaved = Settings.System.putInt(mContext.getContentResolver(),
+                    "monet_seed_color", color);
+            boolean presetSaved = Settings.System.putString(mContext.getContentResolver(),
+                    "monet_color_preset", "cycling_" + mCurrentColorIndex);
+            boolean modeSaved = Settings.System.putInt(mContext.getContentResolver(),
+                    "monet_preset_enabled", 1);
 
-            Intent configIntent = new Intent("android.intent.action.CONFIGURATION_CHANGED");
-            configIntent.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(configIntent);
-            android.util.Log.d("MonetColorCyclingController", "Configuration changed broadcast sent");
+            android.util.Log.d("MonetColorCyclingController", "Settings saved - color: " + colorSaved + ", preset: " + presetSaved + ", mode: " + modeSaved);
+
+            // Trigger theme refresh with multiple broadcasts for reliability
+            Intent[] intents = {
+                new Intent("android.intent.action.WALLPAPER_CHANGED"),
+                new Intent("android.intent.action.CONFIGURATION_CHANGED"),
+                new Intent("android.intent.action.THEME_CHANGED")
+            };
+
+            for (Intent intent : intents) {
+                intent.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+                try {
+                    mContext.sendBroadcast(intent);
+                    android.util.Log.d("MonetColorCyclingController", "Broadcast sent: " + intent.getAction());
+                } catch (Exception e) {
+                    android.util.Log.w("MonetColorCyclingController", "Failed to send broadcast: " + intent.getAction(), e);
+                }
+            }
+
         } catch (Exception e) {
-            android.util.Log.e("MonetColorCyclingController", "Failed to send broadcasts", e);
+            android.util.Log.e("MonetColorCyclingController", "Failed to apply current color", e);
         }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        // Clean up resources
+        stopColorCycling();
+        super.finalize();
     }
 }

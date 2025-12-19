@@ -41,7 +41,7 @@ public class MonetColorStyleController extends BasePreferenceController
         if (preference instanceof ListPreference) {
             ListPreference listPreference = (ListPreference) preference;
             int currentStyle = Settings.System.getInt(mContext.getContentResolver(),
-                    "monet_color_style", 0); // 0 = tonal_spot
+                    "monet_color_style", 1); // Default to TONAL_SPOT (1)
             // Map integer back to string value
             String styleValue = mapIntToStyleString(currentStyle);
             listPreference.setValue(styleValue);
@@ -52,31 +52,61 @@ public class MonetColorStyleController extends BasePreferenceController
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String styleString = (String) newValue;
         int styleValue = mapStyleStringToInt(styleString);
-        return Settings.System.putInt(mContext.getContentResolver(),
+        
+        // Save the style setting
+        boolean styleSaved = Settings.System.putInt(mContext.getContentResolver(),
                 "monet_color_style", styleValue);
+        
+        if (styleSaved) {
+            // Trigger theme refresh so style change takes effect immediately
+            triggerThemeRefresh();
+        }
+        
+        return styleSaved;
+    }
+
+    /**
+     * Triggers a theme refresh when style changes
+     */
+    private void triggerThemeRefresh() {
+        try {
+            android.content.Intent wallpaperIntent = new android.content.Intent("android.intent.action.WALLPAPER_CHANGED");
+            wallpaperIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+            mContext.sendBroadcast(wallpaperIntent);
+
+            android.content.Intent configIntent = new android.content.Intent("android.intent.action.CONFIGURATION_CHANGED");
+            configIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+            mContext.sendBroadcast(configIntent);
+        } catch (Exception e) {
+            // Best effort - ignore exceptions
+        }
     }
 
     private String mapIntToStyleString(int styleInt) {
         switch (styleInt) {
-            case 0: return "tonal_spot";
-            case 1: return "vibrant";
-            case 2: return "expressive";
-            case 3: return "spritz";
+            case 0: return "spritz";
+            case 1: return "tonal_spot";
+            case 2: return "vibrant";
+            case 3: return "expressive";
             case 4: return "rainbow";
             case 5: return "fruit_salad";
+            case 6: return "content";
+            case 7: return "monochromatic";
             default: return "tonal_spot";
         }
     }
 
     private int mapStyleStringToInt(String styleString) {
         switch (styleString) {
-            case "tonal_spot": return 0;
-            case "vibrant": return 1;
-            case "expressive": return 2;
-            case "spritz": return 3;
+            case "spritz": return 0;
+            case "tonal_spot": return 1;
+            case "vibrant": return 2;
+            case "expressive": return 3;
             case "rainbow": return 4;
             case "fruit_salad": return 5;
-            default: return 0; // Default to TONAL_SPOT
+            case "content": return 6;
+            case "monochromatic": return 7;
+            default: return 1; // Default to TONAL_SPOT (1)
         }
     }
 }

@@ -17,8 +17,22 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="monet_color_settings_screen"
     android:title="System Background">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="monet_color_illustration"
+        android:order="-1999"
+        app:lottie_rawRes="@raw/monet"
+        app:lottie_speed="0.3" />
+
+    <!-- Dark Mode Notice -->
+    <PreferenceCategory
+        android:title="Dark Mode Notice"
+        android:summary="Background and wallpaper features work best in dark mode for maximum visual impact"
+        android:key="dark_mode_notice_category"
+        android:order="-1000" />
 
     <!-- Background Color Selection -->
     <PreferenceCategory
@@ -30,6 +44,7 @@
             android:title="Background Color"
             android:summary="Select a color for your system theme"
             android:entries="@array/monet_color_presets"
+            settings:layout="@layout/adaptive_preference_card"
             android:entryValues="@array/monet_color_preset_values"
             android:defaultValue="royal_blue"
             settings:controller="com.android.settings.display.MonetColorPresetsController" />
@@ -50,7 +65,34 @@
 
     </PreferenceCategory>
 
-    <!-- Settings Background Tint -->
+    <!-- Color Style (Only feature actually hooked in frameworks/base) -->
+    <PreferenceCategory
+        android:title="Color Style"
+        android:key="color_style_category">
+
+        <ListPreference
+            android:key="monet_color_style"
+            android:title="Material You Style"
+            android:summary="Choose how colors are generated from your seed color"
+            android:entries="@array/monet_color_styles"
+            android:entryValues="@array/monet_color_style_values"
+            android:defaultValue="tonal_spot"
+            settings:layout="@layout/adaptive_preference_card"
+            settings:controller="com.android.settings.display.MonetColorStyleController" />
+
+        <!-- Monochromatic Mode (independent toggle that overrides all styles) -->
+        <SwitchPreference
+            android:key="monet_monochromatic_mode"
+            android:title="@string/monet_monochromatic_title"
+            android:summary="@string/monet_monochromatic_summary"
+            android:defaultValue="false"
+            settings:layout="@layout/adaptive_preference_card"
+            settings:controller="com.android.settings.display.MonetMonochromaticController" />
+
+    </PreferenceCategory>
+
+ <!-- TODO: Settings Background Tint - Will be released in future update -->
+    <!--
     <PreferenceCategory
         android:title="Settings Background"
         android:key="settings_background_category">
@@ -63,5 +105,6 @@
             settings:controller="com.android.settings.display.MonetTintBackgroundController" />
 
     </PreferenceCategory>
+    -->
 
 </PreferenceScreen>

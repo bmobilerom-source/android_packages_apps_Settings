@@ -253,6 +253,8 @@ public class MonetColorSettings extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new MonetColorPresetsController(context, "monet_color_presets"));
         controllers.add(new MonetColorCyclingController(context, "monet_color_cycling"));
+        controllers.add(new MonetColorStyleController(context, "monet_color_style"));
+        controllers.add(new MonetMonochromaticController(context, "monet_monochromatic_mode"));
         controllers.add(new MonetTintBackgroundController(context, "monet_tint_background"));
         return controllers;
     }
