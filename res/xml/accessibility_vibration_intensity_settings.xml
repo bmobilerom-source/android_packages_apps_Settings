@@ -24,7 +24,7 @@
         android:key="access_illust_video"
         app:searchable="false"
         android:order="-1000"
-        app:lottie_rawRes="@raw/doubletap"/>
+        app:lottie_rawRes="@raw/vibrate"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="vibrate_on"
@@ -40,7 +40,8 @@
             android:key="vibration_intensity_preference_ring"
             android:title="@string/accessibility_ring_vibration_title"
             app:keywords="@string/keywords_ring_vibration"
-            app:controller="com.android.settings.accessibility.RingVibrationIntensityPreferenceController" />
+            app:controller="com.android.settings.accessibility.RingVibrationIntensityPreferenceController"
+            settings:layout="@layout/adaptive_seekbar_card" />
 
         <SwitchPreferenceCompat
             android:key="vibration_intensity_preference_ramping_ringer"
@@ -58,13 +59,15 @@
             android:key="vibration_intensity_preference_notification"
             android:title="@string/accessibility_notification_vibration_title"
             app:keywords="@string/keywords_notification_vibration"
-            app:controller="com.android.settings.accessibility.NotificationVibrationIntensityPreferenceController" />
+            app:controller="com.android.settings.accessibility.NotificationVibrationIntensityPreferenceController"
+            settings:layout="@layout/adaptive_preference_card" />
 
         <com.android.settings.widget.SeekBarPreference
             android:key="vibration_intensity_preference_alarm"
             android:title="@string/accessibility_alarm_vibration_title"
             app:keywords="@string/keywords_alarm_vibration"
-            app:controller="com.android.settings.accessibility.AlarmVibrationIntensityPreferenceController" />
+            app:controller="com.android.settings.accessibility.AlarmVibrationIntensityPreferenceController"
+            settings:layout="@layout/adaptive_preference_card" />
 
     </PreferenceCategory>
 
@@ -76,13 +79,15 @@
             android:key="vibration_intensity_preference_touch"
             android:title="@string/accessibility_touch_vibration_title"
             app:keywords="@string/keywords_touch_vibration"
-            app:controller="com.android.settings.accessibility.HapticFeedbackIntensityPreferenceController" />
+            app:controller="com.android.settings.accessibility.HapticFeedbackIntensityPreferenceController"
+            settings:layout="@layout/adaptive_preference_card" />
 
         <com.android.settings.widget.SeekBarPreference
             android:key="vibration_intensity_preference_media"
             android:title="@string/accessibility_media_vibration_title"
             app:keywords="@string/keywords_media_vibration"
-            app:controller="com.android.settings.accessibility.MediaVibrationIntensityPreferenceController" />
+            app:controller="com.android.settings.accessibility.MediaVibrationIntensityPreferenceController"
+            settings:layout="@layout/adaptive_preference_card" />
 
         <SwitchPreferenceCompat
             android:key="vibration_intensity_preference_keyboard"

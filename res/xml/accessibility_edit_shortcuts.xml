@@ -79,7 +79,7 @@
         android:key="@string/accessibility_shortcuts_advanced_collapsed"
         android:persistent="false"
         android:selectable="true"
-        ettings:layout="@layout/adaptive_preference_card"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/accessibility_shortcut_edit_dialog_title_advance"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false"

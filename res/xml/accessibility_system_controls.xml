@@ -16,10 +16,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_system_controls"
     android:persistent="false"
     android:title=" ">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        app:searchable="false"
+        android:order="-1000"
+        app:lottie_rawRes="@raw/syscontrol"/>
     <!-- The item is not specific to Accessibility.
         The same entry is under System, which is unlikely to be removed,
         so this is not searchable. -->

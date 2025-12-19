@@ -26,7 +26,7 @@
         android:key="access_illust_video"
         settings:searchable="false"
         android:order="-1000"
-        settings:lottie_rawRes="@raw/color_and_motion"/>
+        settings:lottie_rawRes="@raw/color_motion"/>
 
 
     <Preference
