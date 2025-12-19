@@ -147,8 +147,12 @@ import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageSettings;
 import com.android.settings.localepicker.LocaleListEditor;
+import com.android.settings.location.BLocationSettings;
+import com.android.settings.location.LocationAppOverridesFragment;
 import com.android.settings.location.LocationServices;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.location.LocationSharingControlsFragment;
+import com.android.settings.location.LocationTimeRestrictionsFragment;
 import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -216,6 +220,7 @@ import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settings.wifi.tether.WifiTetherSettings;
+import com.epic.fragments.AutoRebootSettings;
 
 public class SettingsGateway {
 
@@ -259,6 +264,10 @@ public class SettingsGateway {
             ProcessStatsUi.class.getName(),
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),
+            BLocationSettings.class.getName(),
+            LocationTimeRestrictionsFragment.class.getName(),
+            LocationAppOverridesFragment.class.getName(),
+            LocationSharingControlsFragment.class.getName(),
             WifiScanningFragment.class.getName(),
             PrivacyDashboardFragment.class.getName(),
             PrivacyControlsFragment.class.getName(),
@@ -367,6 +376,7 @@ public class SettingsGateway {
             UsbDetailsFragment.class.getName(),
             AppDashboardFragment.class.getName(),
             AppSecSettings.class.getName(),
+            AutoRebootSettings.class.getName(),
             WifiCallingDisclaimerFragment.class.getName(),
             AccountDashboardFragment.class.getName(),
             EnterprisePrivacySettings.class.getName(),

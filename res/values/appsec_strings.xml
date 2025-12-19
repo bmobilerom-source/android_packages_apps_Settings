@@ -59,4 +59,73 @@
 
     <!-- Summary for restricted install app permission [CHAR LIMIT=NONE] -->
     <string name="install_app_permission_restricted_summary">App installation is restricted by device policy</string>
+
+    <!-- Enhanced Security Categories -->
+    <string name="appsec_installation_security_title">Installation Security</string>
+    <string name="appsec_installation_security_summary">Control how apps are installed and updated</string>
+
+    <string name="appsec_access_control_title">Access Control</string>
+    <string name="appsec_access_control_summary">Restrict access to system settings and features</string>
+
+    <string name="appsec_system_protection_title">System Protection</string>
+    <string name="appsec_system_protection_summary">Protect against unauthorized system modifications</string>
+
+    <!-- Enhanced Security Descriptions -->
+    <string name="appsec_install_whitelist_warning">⚠️ This may prevent sideloading apps from unknown sources</string>
+    <string name="appsec_block_app_dashboard_warning">⚠️ Advanced users only - may limit troubleshooting capabilities</string>
+    <string name="appsec_block_usb_popup_warning">⚠️ May prevent legitimate USB device connections</string>
+    <string name="appsec_block_location_settings_warning">⚠️ Emergency services may be affected</string>
+    <string name="appsec_block_account_dashboard_warning">⚠️ May prevent account synchronization</string>
+    <string name="appsec_block_safety_center_warning">⚠️ Reduces visibility into device security status</string>
+
+    <!-- Security Impact Indicators -->
+    <string name="appsec_security_level_basic">Basic Security</string>
+    <string name="appsec_security_level_advanced">Advanced Security</string>
+    <string name="appsec_security_level_maximum">Maximum Security</string>
+    <string name="appsec_security_score">Security Score: %1$d/100</string>
+
+    <!-- Enhanced Location Privacy Controls -->
+    <string name="location_privacy_dashboard_title">Location Privacy</string>
+    <string name="location_privacy_dashboard_summary">Manage location sharing and privacy</string>
+
+    <string name="location_precision_title">Location Precision</string>
+    <string name="location_precision_summary">Choose between precise and approximate location</string>
+    <string name="location_precision_precise">Precise (GPS accuracy)</string>
+    <string name="location_precision_approximate">Approximate (city-level)</string>
+
+    <string name="location_time_restrictions_title">Time-Based Access</string>
+    <string name="location_time_restrictions_summary">Only allow location access during specific hours</string>
+
+    <string name="location_app_overrides_title">App-Specific Permissions</string>
+    <string name="location_app_overrides_summary">Override location permissions for individual apps</string>
+
+    <string name="location_sharing_controls_title">Location Sharing</string>
+    <string name="location_sharing_controls_summary">Control how location data is shared</string>
+
+    <!-- Privacy Indicators -->
+    <string name="location_apps_with_access">Apps with location access: %1$d</string>
+    <string name="location_privacy_score">Privacy Score: %1$d/100</string>
+    <string name="location_recent_access_count">Recent access: %1$d apps in last hour</string>
+
+    <!-- Location Service Status Indicators -->
+    <string name="location_status_title">Location Status</string>
+    <string name="location_status_gps_active">GPS: Active</string>
+    <string name="location_status_gps_inactive">GPS: Inactive</string>
+    <string name="location_status_gps_acquiring">GPS: Acquiring signal</string>
+    <string name="location_status_network_active">Network: Active</string>
+    <string name="location_status_network_inactive">Network: Inactive</string>
+    <string name="location_status_wifi_active">Wi-Fi: Active</string>
+    <string name="location_status_wifi_inactive">Wi-Fi: Inactive</string>
+
+    <!-- Location Accuracy Indicators -->
+    <string name="location_accuracy_title">Location Accuracy</string>
+    <string name="location_accuracy_high">High precision (±3m)</string>
+    <string name="location_accuracy_medium">Medium precision (±30m)</string>
+    <string name="location_accuracy_low">Low precision (±300m)</string>
+    <string name="location_accuracy_unknown">Accuracy unknown</string>
+    <string name="location_last_update">Last update: %1$s</string>
+    <string name="location_battery_impact">Battery impact: %1$s</string>
+    <string name="location_battery_low">Low</string>
+    <string name="location_battery_medium">Medium</string>
+    <string name="location_battery_high">High</string>
 </resources>

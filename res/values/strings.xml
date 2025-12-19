@@ -3842,6 +3842,7 @@
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" />
     <!-- [CHAR LIMIT=60] Date&Time settings screen, summary of the dialog when AutoTimeZone is blocked by settings -->
     <string name="location_time_zone_detection_status_summary_blocked_by_settings">Location or Location Services are off</string>
+
     <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is blocked by the environment-->
     <string name="location_time_zone_detection_status_summary_blocked_by_environment" />
     <!-- Date&Time settings screen, summary of the dialog when AutoTimeZone is temporarily unavailable-->

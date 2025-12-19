@@ -17,56 +17,148 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:title=" ">
+    android:title="@string/appsec_category_title">
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="apps_illustration_video"
         settings:searchable="false"
         android:order="-1000"
-        settings:lottie_rawRes="@raw/bmobilesettings"/>
+        settings:lottie_rawRes="@raw/bmobileblock"/>
 
-    <SwitchPreference
+    <!-- Security Status Indicator -->
+    <Preference
+        android:key="security_score_indicator"
+        android:title="@string/appsec_security_score"
+        android:summary="@string/appsec_security_level_advanced"
+        android:order="1"
+        settings:controller="com.android.settings.applications.specialaccess.SecurityScoreController"
+        settings:layout="@layout/adaptive_preference_card_top"
+        android:icon="@drawable/ic_security_24dp"/>
+
+    <!-- Installation Security Category -->
+    <PreferenceCategory
+        android:key="installation_security_category"
+        android:title="@string/appsec_installation_security_title"
+        android:summary="@string/appsec_installation_security_summary"
+        android:order="10"
+        settings:layout="@layout/adaptive_preference_card">
+
+        <SwitchPreference
             android:key="install_app_whitelist_toggle"
             android:title="@string/appsec_install_whitelist_title"
             android:summary="@string/appsec_install_whitelist_summary"
-            android:order="70"
+            android:order="11"
             settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController" />
 
-    <SwitchPreference
+        <TextViewPreference
+            android:key="install_whitelist_warning"
+            android:title="@string/appsec_install_whitelist_warning"
+            android:order="12"
+            settings:searchable="false"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"/>
+    </PreferenceCategory>
+
+    <!-- Access Control Category -->
+    <PreferenceCategory
+        android:key="access_control_category"
+        android:title="@string/appsec_access_control_title"
+        android:summary="@string/appsec_access_control_summary"
+        android:order="20"
+        settings:layout="@layout/adaptive_preference_card">
+
+        <SwitchPreference
             android:key="block_app_dashboard_toggle"
             android:title="@string/appsec_block_app_dashboard_title"
             android:summary="@string/appsec_block_app_dashboard_summary"
-            android:order="71"
+            android:order="21"
             settings:controller="com.android.settings.applications.specialaccess.BlockAppDashboardController" />
 
-    <SwitchPreference
+        <TextViewPreference
+            android:key="block_app_dashboard_warning"
+            android:title="@string/appsec_block_app_dashboard_warning"
+            android:order="22"
+            settings:searchable="false"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"/>
+
+        <SwitchPreference
             android:key="block_usb_popup_toggle"
             android:title="@string/appsec_block_usb_popup_title"
             android:summary="@string/appsec_block_usb_popup_summary"
-            android:order="73"
+            android:order="23"
             settings:controller="com.android.settings.applications.specialaccess.BlockUsbPopupController" />
 
-    <SwitchPreference
+        <TextViewPreference
+            android:key="block_usb_warning"
+            android:title="@string/appsec_block_usb_popup_warning"
+            android:order="24"
+            settings:searchable="false"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"/>
+    </PreferenceCategory>
+
+    <!-- System Protection Category -->
+    <PreferenceCategory
+        android:key="system_protection_category"
+        android:title="@string/appsec_system_protection_title"
+        android:summary="@string/appsec_system_protection_summary"
+        android:order="30"
+        settings:layout="@layout/adaptive_preference_card">
+
+        <SwitchPreference
             android:key="block_location_settings_toggle"
             android:title="@string/appsec_block_location_settings_title"
             android:summary="@string/appsec_block_location_settings_summary"
-            android:order="74"
+            android:order="31"
             settings:controller="com.android.settings.applications.specialaccess.BlockLocationSettingsController" />
 
-    <SwitchPreference
+        <TextViewPreference
+            android:key="block_location_warning"
+            android:title="@string/appsec_block_location_settings_warning"
+            android:order="32"
+            settings:searchable="false"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"/>
+
+        <SwitchPreference
             android:key="block_account_dashboard_toggle"
             android:title="@string/appsec_block_account_dashboard_title"
             android:summary="@string/appsec_block_account_dashboard_summary"
-            android:order="75"
+            android:order="33"
             settings:controller="com.android.settings.applications.specialaccess.BlockAccountDashboardController" />
 
-    <SwitchPreference
+        <TextViewPreference
+            android:key="block_account_warning"
+            android:title="@string/appsec_block_account_dashboard_warning"
+            android:order="34"
+            settings:searchable="false"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"/>
+
+        <SwitchPreference
             android:key="block_safety_center_toggle"
             android:title="@string/appsec_block_safety_center_title"
             android:summary="@string/appsec_block_safety_center_summary"
-            android:order="76"
+            android:order="35"
             settings:controller="com.android.settings.applications.specialaccess.BlockSafetyCenterController" />
+
+        <TextViewPreference
+            android:key="block_safety_center_warning"
+            android:title="@string/appsec_block_safety_center_warning"
+            android:order="36"
+            settings:searchable="false"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"/>
+    </PreferenceCategory>
+
+    <!-- Security Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:title="These security features help protect your device from unauthorized access and potential security threats. Use caution when enabling advanced restrictions."
+        android:key="security_footer"
+        settings:searchable="false"
+        settings:controller="com.android.settings.applications.specialaccess.SecurityFooterController"/>
 
 </PreferenceScreen>
