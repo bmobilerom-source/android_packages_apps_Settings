@@ -16,7 +16,14 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
         android:title="@string/location_scanning_wifi_always_scanning_title">
+
+     <com.android.settingslib.widget.IllustrationPreference
+        android:key="location"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/wifi_scan"/>
 
         <com.android.settingslib.widget.MainSwitchPreference
             android:key="wifi_always_scanning_switch"
