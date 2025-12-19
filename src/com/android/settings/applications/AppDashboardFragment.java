@@ -53,12 +53,6 @@ public class AppDashboardFragment extends DashboardFragment {
         advancedCategoryController.setChildren(List.of(aspectRatioAppsPreferenceController));
         controllers.add(advancedCategoryController);
 
-        // Add dynamic app preference controllers
-        controllers.add(new SidebarPreferenceController(context, "sidebar_pref"));
-        controllers.add(new CloudMediaPreferenceController(context, "files_app_pref"));
-        controllers.add(new NativeAlphaPreferenceController(context, "native_alpha_pref"));
-        controllers.add(new DigPawsPreferenceController(context, "digpaws_pref"));
-        controllers.add(new SystemLaunchPadPreferenceController(context, "system_launchpad_pref"));
 
         return controllers;
     }

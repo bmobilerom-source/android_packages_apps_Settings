@@ -19,6 +19,10 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /**
@@ -36,6 +40,15 @@ public class SidebarPreferenceController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return isAppInstalled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null && isAvailable()) {
+            preference.setLayoutResource(R.layout.adaptive_preference_card_middle);
+        }
     }
 
     private boolean isAppInstalled() {

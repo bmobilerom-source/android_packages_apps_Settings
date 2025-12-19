@@ -20,13 +20,6 @@
     android:key="app_data_usage_screen"
     android:title=" ">
 
-   <!-- Header -->
-  <PreferenceCategory
-        android:title="App Usage"
-        android:order="-997"
-        android:layout="@layout/settings_title_header_small">
-  </PreferenceCategory>
-
     <com.android.settings.datausage.SpinnerPreference
         android:key="cycle"
         settings:controller="com.android.settings.datausage.AppDataUsageCycleController" />
@@ -42,6 +35,7 @@
         <Preference
             android:key="app_settings"
             android:title="@string/data_usage_app_settings"
+            settings:layout="@layout/adaptive_preference_card" 
             settings:controller="com.android.settings.datausage.AppDataUsageAppSettingsController" />
 
         <com.android.settingslib.RestrictedSwitchPreference

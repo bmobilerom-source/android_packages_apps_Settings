@@ -47,13 +47,13 @@
         android:key="all_services_settings"
         android:title="@string/app_info_all_services_label"
         android:summary="@string/summary_placeholder"
-
+        settings:layout="@layout/adaptive_preference_card" 
         settings:controller="com.android.settings.applications.appinfo.AppAllServicesPreferenceController" />
 
     <Preference
         android:key="notification_settings"
         android:title="@string/notifications_label"
-        
+        settings:layout="@layout/adaptive_preference_card" 
         settings:controller="com.android.settings.applications.appinfo.AppNotificationPreferenceController" />
 
     <com.android.settings.widget.FixedLineSummaryPreference
@@ -74,6 +74,7 @@
         android:key="instant_app_launch_supported_domain_urls"
         android:title="@string/app_launch_supported_domain_urls_title"
         android:selectable="true"
+        settings:layout="@layout/adaptive_preference_card" 
         settings:controller="com.android.settings.applications.appinfo.InstantAppDomainsPreferenceController" />
 
     <Preference

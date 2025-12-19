@@ -17,8 +17,6 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
-
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -26,20 +24,19 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /**
- * Controller for Cloud Media app preference.
- * Only shows the preference if the Cloud Media app is installed.
+ * Controller for dynamic app cards that appear based on app installation.
+ * Creates cards programmatically only for installed apps.
  */
-public class CloudMediaPreferenceController extends BasePreferenceController {
+public class DynamicAppCardsController extends BasePreferenceController {
 
-    private static final String PACKAGE_NAME = "com.android.documentsui";
-
-    public CloudMediaPreferenceController(Context context, String preferenceKey) {
+    public DynamicAppCardsController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return isAppInstalled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        // Always available - the preference itself will handle showing/hiding cards
+        return AVAILABLE;
     }
 
     @Override
@@ -47,16 +44,7 @@ public class CloudMediaPreferenceController extends BasePreferenceController {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
         if (preference != null && isAvailable()) {
-            preference.setLayoutResource(R.layout.adaptive_preference_card_bottom);
-        }
-    }
-
-    private boolean isAppInstalled() {
-        try {
-            mContext.getPackageManager().getPackageInfo(PACKAGE_NAME, 0);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
+            preference.setLayoutResource(R.layout.dynamic_app_cards_container);
         }
     }
 }

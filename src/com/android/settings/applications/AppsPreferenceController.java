@@ -123,12 +123,12 @@ public class AppsPreferenceController extends BasePreferenceController implement
         mRecentApps = loadRecentApps();
         if (!mRecentApps.isEmpty()) {
             displayRecentApps();
-            mAllAppsInfoPref.setVisible(false);
+            if (mAllAppsInfoPref != null) mAllAppsInfoPref.setVisible(false);
             mRecentAppsCategory.setVisible(true);
             mGeneralCategory.setVisible(true);
             mSeeAllPref.setVisible(true);
         } else {
-            mAllAppsInfoPref.setVisible(true);
+            if (mAllAppsInfoPref != null) mAllAppsInfoPref.setVisible(true);
             mRecentAppsCategory.setVisible(false);
             mGeneralCategory.setVisible(false);
             mSeeAllPref.setVisible(false);
@@ -146,7 +146,9 @@ public class AppsPreferenceController extends BasePreferenceController implement
                     mSeeAllPref.setTitle(StringUtil.getIcuPluralsString(mContext, num,
                             R.string.see_all_apps_title));
                 } else {
-                    mAllAppsInfoPref.setSummary(mContext.getString(R.string.apps_summary, num));
+                    if (mAllAppsInfoPref != null) {
+                        mAllAppsInfoPref.setSummary(mContext.getString(R.string.apps_summary, num));
+                    }
                 }
             }
         }.execute();
@@ -167,7 +169,7 @@ public class AppsPreferenceController extends BasePreferenceController implement
         mSeeAllPref = screen.findPreference(KEY_SEE_ALL);
         mRecentAppsCategory.setVisible(false);
         mGeneralCategory.setVisible(false);
-        mAllAppsInfoPref.setVisible(false);
+        if (mAllAppsInfoPref != null) mAllAppsInfoPref.setVisible(false);
         mSeeAllPref.setVisible(false);
     }
 
