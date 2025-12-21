@@ -293,6 +293,9 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         controllers.add(new AlarmRingtonePreferenceController(context));
         controllers.add(new NotificationRingtonePreferenceController(context));
 
+        // === Live Caption & Now Playing ===
+        controllers.add(new com.android.settings.accessibility.LiveCaptionPreferenceController(context, "live_caption"));
+
         // === Other Sound Settings ===
         final DialPadTonePreferenceController dialPadTonePreferenceController =
                 new DialPadTonePreferenceController(context, fragment, lifecycle);
