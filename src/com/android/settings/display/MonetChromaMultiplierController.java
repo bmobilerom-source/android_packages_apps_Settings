@@ -44,10 +44,14 @@ public class MonetChromaMultiplierController extends BasePreferenceController
         super.updateState(preference);
         if (preference instanceof SeekBarPreference) {
             SeekBarPreference seekBarPreference = (SeekBarPreference) preference;
-            // Convert from 50-200 range to 0.5-2.0 multiplier
-            int storedValue = Settings.System.getInt(mContext.getContentResolver(),
-                    "monet_chroma_multiplier", 100); // Default 100%
+            // Get stored value (50-200 range, default 100%)
+            int storedValue = Settings.Secure.getInt(mContext.getContentResolver(),
+                    "monet_chroma_multiplier", 100);
             seekBarPreference.setProgress(storedValue);
+
+            // Update summary to show current multiplier
+            float multiplier = storedValue / 100.0f;
+            preference.setSummary(String.format("%.1fx vibrancy", multiplier));
         }
     }
 
@@ -55,43 +59,46 @@ public class MonetChromaMultiplierController extends BasePreferenceController
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         int progressValue = (Integer) newValue;
 
-        // Save the multiplier value (50-200 range)
-        boolean settingSaved = Settings.System.putInt(mContext.getContentResolver(),
+        // Save to secure settings for theme-related preferences
+        boolean settingSaved = Settings.Secure.putInt(mContext.getContentResolver(),
                 "monet_chroma_multiplier", progressValue);
 
         if (settingSaved) {
-            // Convert to actual multiplier (0.5-2.0)
-            float multiplier = progressValue / 100.0f;
+            // Apply the chroma multiplier change
+            applyChromaMultiplier(progressValue / 100.0f);
 
-            // Apply the chroma multiplier
-            // In MonetCompat, this would adjust: chroma = baseChroma * multiplier
-            applyChromaMultiplier(multiplier);
+            // Update summary immediately
+            float multiplier = progressValue / 100.0f;
+            preference.setSummary(String.format("%.1fx vibrancy", multiplier));
         }
 
         return settingSaved;
     }
 
     private void applyChromaMultiplier(float multiplier) {
-        // Force theme refresh to apply new chroma multiplier
-        // In a full MonetCompat implementation, this would:
-        // 1. Recalculate all Monet colors with new chroma multiplier
-        // 2. Update the color palette
-        // 3. Notify all apps of color changes
-
         try {
-            // Send broadcasts to trigger theme refresh
-            android.content.Intent wallpaperIntent =
-                new android.content.Intent("android.intent.action.WALLPAPER_CHANGED");
-            wallpaperIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(wallpaperIntent);
+            // Apply chroma multiplier by updating system theme properties
+            // This simulates MonetCompat behavior by triggering theme refresh
 
-            android.content.Intent configIntent =
-                new android.content.Intent("android.intent.action.CONFIGURATION_CHANGED");
+            // Send theme change broadcast to trigger UI refresh
+            android.content.Intent themeIntent = new android.content.Intent("android.intent.action.THEME_CHANGED");
+            themeIntent.putExtra("monet_chroma_multiplier", multiplier);
+            themeIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+            mContext.sendBroadcast(themeIntent);
+
+            // Also send configuration change to refresh system UI
+            android.content.Intent configIntent = new android.content.Intent("android.intent.action.CONFIGURATION_CHANGED");
             configIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
             mContext.sendBroadcast(configIntent);
 
+            // Force activity recreation for settings app
+            if (mContext instanceof android.app.Activity) {
+                ((android.app.Activity) mContext).recreate();
+            }
+
         } catch (Exception e) {
-            // Best effort implementation
+            // Log error but don't crash
+            android.util.Log.e("MonetChromaMultiplier", "Failed to apply chroma multiplier", e);
         }
     }
 }

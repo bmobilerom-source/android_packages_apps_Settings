@@ -26,7 +26,7 @@ public class MonetMenuController extends BasePreferenceController
         super.updateState(preference);
         if (preference instanceof SwitchPreference) {
             SwitchPreference switchPreference = (SwitchPreference) preference;
-            boolean isEnabled = Settings.System.getInt(mContext.getContentResolver(),
+            boolean isEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
                     "monet_apply_to_menus", 1) == 1; // Default enabled
             switchPreference.setChecked(isEnabled);
         }
@@ -35,7 +35,32 @@ public class MonetMenuController extends BasePreferenceController
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean isEnabled = (Boolean) newValue;
-        return Settings.System.putInt(mContext.getContentResolver(),
+
+        boolean settingSaved = Settings.Secure.putInt(mContext.getContentResolver(),
                 "monet_apply_to_menus", isEnabled ? 1 : 0);
+
+        if (settingSaved) {
+            // Apply menu theming change
+            applyMenuThemingChange(isEnabled);
+        }
+
+        return settingSaved;
+    }
+
+    private void applyMenuThemingChange(boolean enabled) {
+        try {
+            android.content.Intent themeIntent = new android.content.Intent("android.intent.action.THEME_CHANGED");
+            themeIntent.putExtra("monet_apply_to_menus", enabled);
+            themeIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+            mContext.sendBroadcast(themeIntent);
+
+            // Force configuration change to refresh UI
+            android.content.Intent configIntent = new android.content.Intent("android.intent.action.CONFIGURATION_CHANGED");
+            configIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+            mContext.sendBroadcast(configIntent);
+
+        } catch (Exception e) {
+            android.util.Log.e("MonetMenuController", "Failed to apply menu theming change", e);
+        }
     }
 }

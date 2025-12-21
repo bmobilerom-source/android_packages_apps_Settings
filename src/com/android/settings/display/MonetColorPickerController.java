@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
@@ -49,17 +50,102 @@ public class MonetColorPickerController extends BasePreferenceController {
             return super.handlePreferenceTreeClick(preference);
         }
 
-        // In MonetCompat, this would:
-        // 1. Open a color picker dialog
-        // 2. Allow user to select a custom seed color
-        // 3. Apply the selected color as the new theme base
-        // 4. Update all Material You colors accordingly
-
-        // For this implementation, show a placeholder message
-        android.widget.Toast.makeText(mContext,
-            "Color picker would open here (MonetCompat inspired feature)",
-            android.widget.Toast.LENGTH_SHORT).show();
+        // Open a simple color picker dialog
+        showColorPickerDialog();
 
         return true;
+    }
+
+    private void showColorPickerDialog() {
+        // Create a simple color picker using Android's ColorPickerDialog
+        try {
+            // Use array to hold mutable currentColor value (workaround for lambda final variable restriction)
+            final int[] currentColorHolder = new int[1];
+            currentColorHolder[0] = Settings.Secure.getInt(mContext.getContentResolver(),
+                    "monet_custom_seed_color", 0xFF6750A4); // Default Material You purple
+
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
+            builder.setTitle("Choose Custom Seed Color");
+
+            // Create a color picker view (simplified implementation)
+            android.widget.LinearLayout layout = new android.widget.LinearLayout(mContext);
+            layout.setOrientation(android.widget.LinearLayout.VERTICAL);
+            layout.setPadding(32, 16, 32, 16);
+
+            // Color preview
+            android.widget.TextView colorPreview = new android.widget.TextView(mContext);
+            colorPreview.setText("Selected Color Preview");
+            colorPreview.setTextSize(16);
+            colorPreview.setGravity(android.view.Gravity.CENTER);
+            colorPreview.setPadding(16, 16, 16, 16);
+            colorPreview.setBackgroundColor(currentColorHolder[0]);
+            layout.addView(colorPreview);
+
+            // Simple color buttons for common Material You colors
+            android.widget.LinearLayout colorButtons = new android.widget.LinearLayout(mContext);
+            colorButtons.setOrientation(android.widget.LinearLayout.HORIZONTAL);
+            colorButtons.setGravity(android.view.Gravity.CENTER);
+
+            int[] materialColors = {
+                0xFF6750A4, // Purple
+                0xFF625B71, // Neutral
+                0xFF1C1B1F, // Neutral Variant
+                0xFF21005D, // Primary Dark
+                0xFF381E72, // Secondary
+                0xFF4F378B  // Tertiary
+            };
+
+            for (int color : materialColors) {
+                android.widget.Button colorButton = new android.widget.Button(mContext);
+                colorButton.setBackgroundColor(color);
+                colorButton.setWidth(60);
+                colorButton.setHeight(60);
+                final int selectedColor = color; // Make effectively final for lambda
+                colorButton.setOnClickListener(v -> {
+                    currentColorHolder[0] = selectedColor;
+                    colorPreview.setBackgroundColor(selectedColor);
+                });
+                colorButtons.addView(colorButton);
+            }
+
+            layout.addView(colorButtons);
+
+            builder.setView(layout);
+            builder.setPositiveButton("Apply", (dialog, which) -> {
+                applyCustomColor(currentColorHolder[0]);
+            });
+            builder.setNegativeButton("Cancel", null);
+
+            builder.show();
+
+        } catch (Exception e) {
+            android.util.Log.e("MonetColorPicker", "Failed to show color picker", e);
+            android.widget.Toast.makeText(mContext,
+                "Color picker unavailable", android.widget.Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void applyCustomColor(int color) {
+        try {
+            // Save the custom seed color
+            Settings.Secure.putInt(mContext.getContentResolver(), "monet_custom_seed_color", color);
+
+            // Send theme change broadcast
+            android.content.Intent themeIntent = new android.content.Intent("android.intent.action.THEME_CHANGED");
+            themeIntent.putExtra("monet_custom_seed_color", color);
+            themeIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+            mContext.sendBroadcast(themeIntent);
+
+            // Force configuration change
+            android.content.Intent configIntent = new android.content.Intent("android.intent.action.CONFIGURATION_CHANGED");
+            configIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+            mContext.sendBroadcast(configIntent);
+
+            android.widget.Toast.makeText(mContext,
+                "Custom color applied!", android.widget.Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            android.util.Log.e("MonetColorPicker", "Failed to apply custom color", e);
+        }
     }
 }
