@@ -43,15 +43,7 @@
         android:summary="@string/assisted_gps_summary"
         settings:controller="com.android.settings.location.AgpsPreferenceController"/>
 
-    <!-- Enhanced Location Privacy & Status -->
-    <Preference
-        android:key="enhanced_location_features"
-        android:title="@string/location_privacy_dashboard_title"
-        android:summary="@string/location_privacy_dashboard_summary"
-        android:icon="@drawable/ic_location_on_24dp"
-        android:order="4"
-        settings:layout="@layout/adaptive_preference_card"
-        android:fragment="com.android.settings.location.BLocationSettings"/>
+
 
     <PreferenceCategory
         android:key="location_advanced_settings"
@@ -89,6 +81,7 @@
             settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
+     
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
