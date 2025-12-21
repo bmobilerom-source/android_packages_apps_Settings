@@ -41,6 +41,7 @@
 
 package com.epic.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -51,6 +52,11 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Extended Security Settings Page
@@ -61,6 +67,7 @@ import com.android.settings.SettingsPreferenceFragment;
 public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
 
     private static final String TAG = "SettingsExtendedSecurity";
+    private SecurityInfoHeaderController mSecurityInfoHeaderController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,8 +75,13 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.anatolia_settings_extended_security);
 
+        // Initialize security info header controller
+        mSecurityInfoHeaderController = new SecurityInfoHeaderController(getContext());
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            mSecurityInfoHeaderController.displayPreference(screen);
+        }
     }
-
 
     @Override
     public int getMetricsCategory() {
