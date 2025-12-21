@@ -42,6 +42,7 @@
             android:entries="@array/monet_wallpaper_source_entries"
             android:entryValues="@array/monet_wallpaper_source_values"
             android:defaultValue="system"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.display.MonetWallpaperSourceController" />
 
         <SwitchPreference
@@ -69,12 +70,14 @@
             android:key="monet_custom_color_picker"
             android:title="Pick Custom Seed Color"
             android:summary="Choose your own base color for Material You theming"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.display.MonetColorPickerController" />
 
         <Preference
             android:key="monet_reset_custom_color"
             android:title="Reset to Wallpaper Colors"
             android:summary="Return to dynamic wallpaper-based theming"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.display.MonetResetCustomController" />
 
     </PreferenceCategory>
