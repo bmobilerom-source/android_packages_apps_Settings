@@ -41,5 +41,5 @@
         android:key="seekbar_primary_balance"
         android:persistent="false"
         android:title="@string/accessibility_toggle_primary_balance_title"
-        settings:layout="@layout/adaptive_preference_card"/>
+        android:layout="@layout/adaptive_balance_seekbar_card_progress"/>
 </PreferenceScreen>

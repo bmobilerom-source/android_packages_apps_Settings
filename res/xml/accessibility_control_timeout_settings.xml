@@ -34,6 +34,7 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_default"
         android:title="@string/accessibility_timeout_default"
+        settings:layout="@layout/adaptive_preference_card_top"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController" />
 
@@ -41,6 +42,7 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_10secs"
         android:title="@string/accessibility_timeout_10secs"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController"/>
 
@@ -48,6 +50,7 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_30secs"
         android:title="@string/accessibility_timeout_30secs"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController"/>
 
@@ -55,6 +58,7 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_1min"
         android:title="@string/accessibility_timeout_1min"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController"/>
 
@@ -62,6 +66,7 @@
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_2mins"
         android:title="@string/accessibility_timeout_2mins"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.AccessibilityTimeoutController"/>
 

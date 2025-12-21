@@ -25,7 +25,7 @@
         android:key="access_illust_video"
         app:searchable="false"
         android:order="-1000"
-        app:lottie_rawRes="@raw/doubletap"/>
+        app:lottie_rawRes="@raw/accessibility_shortcut_type_tripletap"/>
         
     <ListPreference
         android:entries="@array/long_press_timeout_selector_list_titles"

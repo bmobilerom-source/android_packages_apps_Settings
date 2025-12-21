@@ -58,7 +58,7 @@
         <Preference
             android:key="audio_routing"
             android:title="@string/bluetooth_audio_routing_title"
-            android:layout="@layout/adaptive_preference_card"
+            settings:layout="@layout/adaptive_preference_card"
             android:summary="@string/bluetooth_audio_routing_summary"
             android:fragment="com.android.settings.accessibility.AccessibilityAudioRoutingFragment"
             settings:controller="com.android.settings.accessibility.HearingAidAudioRoutingPreferenceController"/>

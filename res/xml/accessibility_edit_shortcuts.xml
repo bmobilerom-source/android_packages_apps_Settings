@@ -31,6 +31,7 @@
         android:key="@string/accessibility_shortcut_quick_settings_pref"
         android:persistent="false"
         android:selectable="true"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.accessibility.shortcuts.QuickSettingsShortcutOptionController" />
@@ -40,6 +41,7 @@
         android:persistent="false"
         android:selectable="true"
         settings:allowDividerAbove="false"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.accessibility.shortcuts.FloatingButtonShortcutOptionController" />
 
@@ -48,6 +50,7 @@
         android:persistent="false"
         android:selectable="true"
         settings:allowDividerAbove="false"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.accessibility.shortcuts.GestureShortcutOptionController" />
 
@@ -55,6 +58,7 @@
         android:key="@string/accessibility_shortcut_nav_button_pref"
         android:persistent="false"
         android:selectable="true"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.accessibility.shortcuts.NavButtonShortcutOptionController" />
@@ -64,6 +68,7 @@
         android:persistent="false"
         android:selectable="true"
         settings:allowDividerAbove="false"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.accessibility.shortcuts.VolumeKeysShortcutOptionController" />
 
@@ -72,6 +77,7 @@
         android:persistent="false"
         android:selectable="true"
         settings:allowDividerAbove="false"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.accessibility.shortcuts.TwoFingerDoubleTapShortcutOptionController" />
 
@@ -90,7 +96,8 @@
         android:persistent="false"
         android:selectable="true"
         settings:allowDividerAbove="false"
-        settings:allowDividerBelow="false"
+        settings:allowDividerBelow="false"  
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.accessibility.shortcuts.TripleTapShortcutOptionController" />
     <!-- LINT.ThenChange(/src/com/android/settings/accessibility/AccessibilityUtil.java:shortcut_type_ui_order) -->
 </PreferenceScreen>

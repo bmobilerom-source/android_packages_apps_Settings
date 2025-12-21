@@ -32,6 +32,7 @@
         android:key="pointer_scale_preference"
         android:title="@string/pointer_scale"
         android:max="@integer/pointer_scale_seek_bar_end"
+        android:layout="@layout/adaptive_labeled_seekbar_card_progress"
         settings:iconStart="@drawable/ic_remove_24dp"
         settings:iconStartContentDescription="@string/pointer_scale_decrease_content_description"
         settings:iconEnd="@drawable/ic_add_24dp"
