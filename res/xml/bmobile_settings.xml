@@ -51,6 +51,17 @@
         android:title="@string/mock_locations_title"
         android:summary="@string/mock_locations_summary"
         android:fragment="com.android.settings.location.MockLocationsSettings"
-        settings:layout="@layout/adaptive_preference_card_bottom" />
+        settings:layout="@layout/adaptive_preference_card_middle"/>
+
+           <!-- Enhanced Location Privacy & Status -->
+        <Preference
+            android:key="enhanced_location_features"
+            android:title="@string/location_privacy_dashboard_title"
+            android:summary="@string/location_privacy_dashboard_summary"
+            android:icon="@drawable/ic_settings_location_filled"
+            android:order="4"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            android:fragment="com.android.settings.location.BLocationSettings"/>
+
 </PreferenceScreen>
 

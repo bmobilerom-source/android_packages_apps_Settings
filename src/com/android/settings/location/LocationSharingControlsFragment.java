@@ -39,9 +39,7 @@ public class LocationSharingControlsFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        // This would reference a dedicated XML file for sharing controls
-        // For now, return a placeholder - implement actual XML layout
-        return R.xml.location_settings; // Placeholder
+        return R.xml.location_sharing_controls;
     }
 
     @Override
@@ -52,7 +50,9 @@ public class LocationSharingControlsFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Initialize any specific controllers for sharing controls
+        use(LocationSharingToggleController.class);
+        use(SharingSettingsPreferenceController.class);
+        use(EmergencySharingToggleController.class);
     }
 
     @Override
@@ -67,3 +67,4 @@ public class LocationSharingControlsFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.location_settings); // Placeholder
 }
+

@@ -41,3 +41,4 @@ public class LocationPrivacyFooterController extends BasePreferenceController {
         return "These enhanced location privacy features help you maintain better control over your location data and understand location service status.";
     }
 }
+

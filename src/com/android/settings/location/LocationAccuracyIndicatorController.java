@@ -39,6 +39,7 @@ public class LocationAccuracyIndicatorController extends BasePreferenceControlle
     private LocationManager mLocationManager;
     private Location mLastLocation;
     private long mLastUpdateTime;
+    private Preference mPreference;
 
     public LocationAccuracyIndicatorController(Context context, String key) {
         super(context, key);
@@ -49,6 +50,12 @@ public class LocationAccuracyIndicatorController extends BasePreferenceControlle
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(androidx.preference.PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -125,8 +132,8 @@ public class LocationAccuracyIndicatorController extends BasePreferenceControlle
         mLastLocation = location;
         mLastUpdateTime = System.currentTimeMillis();
         // Notify preference to update
-        if (getPreference() != null) {
-            updateState(getPreference());
+        if (mPreference != null) {
+            updateState(mPreference);
         }
     }
 
@@ -145,9 +152,10 @@ public class LocationAccuracyIndicatorController extends BasePreferenceControlle
         // Handle provider disabled
     }
 
-    @Override
     public void onDestroy() {
-        super.onDestroy();
-        mLocationManager.removeUpdates(this);
+        if (mLocationManager != null) {
+            mLocationManager.removeUpdates(this);
+        }
     }
 }
+

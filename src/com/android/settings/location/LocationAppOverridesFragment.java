@@ -39,9 +39,7 @@ public class LocationAppOverridesFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        // This would reference a dedicated XML file for app overrides
-        // For now, return a placeholder - implement actual XML layout
-        return R.xml.location_settings; // Placeholder
+        return R.xml.location_app_overrides;
     }
 
     @Override
@@ -52,7 +50,8 @@ public class LocationAppOverridesFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Initialize any specific controllers for app overrides
+        use(ManageAppPermissionsPreferenceController.class);
+        use(BackgroundLocationToggleController.class);
     }
 
     @Override
@@ -67,3 +66,4 @@ public class LocationAppOverridesFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.location_settings); // Placeholder
 }
+

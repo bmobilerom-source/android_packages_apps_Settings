@@ -19,8 +19,14 @@
     <string name="bmobile_settings_title">BMobile</string>
     <string name="bmobile_settings_intro_title">Privacy &amp; Services</string>
     <string name="bmobile_settings_intro_description">Configure privacy tools: mock locations for testing, MicroG services, Aurora Store access, network firewall, ad tracking controls, and app installation permissions.</string>
+    <string name="bmobile_settings_description">Configure privacy tools: mock locations for testing, MicroG services, Aurora Store access, network firewall, ad tracking controls, and app installation permissions.</string>
 
-   
+    <!-- Mock Locations -->
+    <string name="mock_locations_title">Mock Locations</string>
+    <string name="mock_locations_summary">Set mock location for testing applications</string>
+    <string name="mock_location_intro_title">Mock Location Settings</string>
+    <string name="mock_location_intro_summary">Configure mock GPS coordinates for application testing. This allows apps to receive fake location data instead of real GPS coordinates.</string>
+
     <!-- MicroG -->
     <string name="microg_title">MicroG</string>
     <string name="microg_summary">Open-source implementation of Google Play Services</string>

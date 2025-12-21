@@ -16,14 +16,20 @@
 
 package com.android.settings.applications.specialaccess;
 
+import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.util.Log;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -31,6 +37,8 @@ import com.android.settingslib.search.SearchIndexable;
 public class AppSecSettings extends DashboardFragment {
 
     private static final String TAG = "AppSecSettings";
+    private static final int REQUEST_CODE_CONFIRM_CREDENTIAL = 1001;
+    private boolean mIsAuthenticated = false;
 
     // Controllers
     private BlockAppDashboardController mBlockAppDashboardController;
@@ -48,8 +56,19 @@ public class AppSecSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
+        // Check authentication first before initializing controllers
+        if (icicle != null) {
+            mIsAuthenticated = icicle.getBoolean("is_authenticated", false);
+        }
+        
         final Context context = getContext();
 
+        // Don't initialize controllers if not authenticated
+        if (!mIsAuthenticated) {
+            return;
+        }
+        
         // Initialize controllers
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
@@ -85,6 +104,7 @@ public class AppSecSettings extends DashboardFragment {
                     com.android.settings.core.BasePreferenceController.AVAILABLE) {
                 SwitchPreference usbPopupPref = prefScreen.findPreference("block_usb_popup_toggle");
                 if (usbPopupPref != null) {
+                    mBlockUsbPopupController.displayPreference(prefScreen);
                     mBlockUsbPopupController.updateState(usbPopupPref);
                     usbPopupPref.setOnPreferenceChangeListener(mBlockUsbPopupController);
                 }
@@ -125,6 +145,78 @@ public class AppSecSettings extends DashboardFragment {
                     safetyCenterPref.setOnPreferenceChangeListener(mBlockSafetyCenterController);
                 }
             }
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("is_authenticated", mIsAuthenticated);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        
+        // Check if authentication is required
+        if (!mIsAuthenticated) {
+            checkAndRequestAuthentication();
+            return;
+        }
+        
+        // Refresh USB popup preference state
+        if (mBlockUsbPopupController != null) {
+            SwitchPreference usbPopupPref = getPreferenceScreen().findPreference("block_usb_popup_toggle");
+            if (usbPopupPref != null) {
+                mBlockUsbPopupController.updateState(usbPopupPref);
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_CONFIRM_CREDENTIAL) {
+            if (resultCode == Activity.RESULT_OK) {
+                mIsAuthenticated = true;
+            } else {
+                // Authentication failed or cancelled - finish the activity
+                if (getActivity() != null) {
+                    getActivity().finish();
+                }
+            }
+        }
+    }
+
+    private void checkAndRequestAuthentication() {
+        Context context = getContext();
+        if (context == null) {
+            return;
+        }
+
+        KeyguardManager km = context.getSystemService(KeyguardManager.class);
+        if (km == null || !km.isKeyguardSecure()) {
+            // No lock screen set up - allow access without authentication
+            mIsAuthenticated = true;
+            return;
+        }
+
+        // Request device credential confirmation
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                ConfirmDeviceCredentialActivity.class.getName());
+        intent.putExtra(KeyguardManager.EXTRA_TITLE,
+                context.getString(R.string.appsec_confirm_credential_title));
+        intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION,
+                context.getString(R.string.appsec_confirm_credential_description));
+        intent.putExtra(KeyguardManager.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false);
+
+        try {
+            startActivityForResult(intent, REQUEST_CODE_CONFIRM_CREDENTIAL);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to launch credential confirmation", e);
+            // If we can't launch auth, allow access (fallback)
+            mIsAuthenticated = true;
         }
     }
 

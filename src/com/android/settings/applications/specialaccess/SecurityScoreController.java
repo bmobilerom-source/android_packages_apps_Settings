@@ -76,31 +76,32 @@ public class SecurityScoreController extends BasePreferenceController {
 
     private boolean isInstallWhitelistEnabled() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-            "install_app_whitelist_toggle", 0) == 1;
+            "install_app_whitelist_enabled", 0) == 1;
     }
 
     private boolean isBlockAppDashboardEnabled() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-            "block_app_dashboard_toggle", 0) == 1;
+            "block_app_dashboard_enabled", 0) == 1;
     }
 
     private boolean isBlockUsbPopupEnabled() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-            "block_usb_popup_toggle", 0) == 1;
+            "block_usb_popup_enabled", 0) == 1;
     }
 
     private boolean isBlockLocationSettingsEnabled() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-            "block_location_settings_toggle", 0) == 1;
+            "block_location_settings_enabled", 0) == 1;
     }
 
     private boolean isBlockAccountDashboardEnabled() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-            "block_account_dashboard_toggle", 0) == 1;
+            "block_account_dashboard_enabled", 0) == 1;
     }
 
     private boolean isBlockSafetyCenterEnabled() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-            "block_safety_center_toggle", 0) == 1;
+            "block_safety_center_enabled", 0) == 1;
     }
 }
+

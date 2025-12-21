@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Time-based location access restrictions -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="location_time_restrictions_screen"
+    android:title="@string/location_time_restrictions_title">
+
+    <PreferenceCategory
+        android:key="time_restrictions_category"
+        android:title="Time Restrictions"
+        android:summary="Configure when location access is allowed">
+
+        <SwitchPreferenceCompat
+            android:key="enable_time_restrictions"
+            android:title="Enable Time-Based Restrictions"
+            android:summary="Limit location access to specific time periods"
+            android:defaultValue="false"
+            android:order="1"
+            settings:controller="com.android.settings.location.TimeRestrictionsToggleController" />
+
+        <ListPreference
+            android:key="allowed_times"
+            android:title="Allowed Time Periods"
+            android:summary="Set specific hours when location access is permitted"
+            android:entries="@array/location_time_period_entries"
+            android:entryValues="@array/location_time_period_values"
+            android:defaultValue="always"
+            android:order="2"
+            android:dependency="enable_time_restrictions"
+            settings:controller="com.android.settings.location.AllowedTimesPreferenceController" />
+
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:title="Time-based restrictions help protect your privacy by limiting location access to specific hours of the day."
+        android:key="time_restrictions_footer"
+        settings:searchable="false" />
+
+</PreferenceScreen>

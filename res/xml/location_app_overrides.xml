@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- App-specific location permission overrides -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="location_app_overrides_screen"
+    android:title="@string/location_app_overrides_title">
+
+    <PreferenceCategory
+        android:key="app_overrides_category"
+        android:title="App-Specific Permissions"
+        android:summary="Override location permissions for individual apps">
+
+        <Preference
+            android:key="manage_app_permissions"
+            android:title="Manage App Permissions"
+            android:summary="Review and modify location permissions for each app"
+            android:order="1"
+            settings:controller="com.android.settings.location.ManageAppPermissionsPreferenceController" />
+
+        <SwitchPreferenceCompat
+            android:key="allow_background_access"
+            android:title="Allow Background Location"
+            android:summary="Permit apps to access location when not in use"
+            android:defaultValue="true"
+            android:order="2"
+            settings:controller="com.android.settings.location.BackgroundLocationToggleController" />
+
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:title="App-specific overrides allow you to customize location permissions beyond the standard Android settings."
+        android:key="app_overrides_footer"
+        settings:searchable="false" />
+
+</PreferenceScreen>

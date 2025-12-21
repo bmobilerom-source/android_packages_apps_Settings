@@ -39,9 +39,7 @@ public class LocationTimeRestrictionsFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        // This would reference a dedicated XML file for time restrictions
-        // For now, return a placeholder - implement actual XML layout
-        return R.xml.location_settings; // Placeholder
+        return R.xml.location_time_restrictions;
     }
 
     @Override
@@ -52,7 +50,8 @@ public class LocationTimeRestrictionsFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Initialize any specific controllers for time restrictions
+        use(TimeRestrictionsToggleController.class);
+        use(AllowedTimesPreferenceController.class);
     }
 
     @Override
@@ -67,3 +66,4 @@ public class LocationTimeRestrictionsFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.location_settings); // Placeholder
 }
+

@@ -19,6 +19,9 @@ import android.content.Context;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.R;
 
@@ -54,6 +57,17 @@ public class BlockAppDashboardController extends TogglePreferenceController {
             Log.d(TAG, "App Dashboard access " + (isChecked ? "blocked" : "allowed"));
         }
         return result;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference instanceof SwitchPreference) {
+            SwitchPreference switchPref = (SwitchPreference) preference;
+            // Ensure preference is enabled but not selectable
+            switchPref.setEnabled(true);
+            switchPref.setSelectable(false);
+        }
     }
 
     @Override

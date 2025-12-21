@@ -69,4 +69,5 @@
         android:fragment="com.epic.fragments.AutoRebootSettings"
         android:order="100"
         settings:layout="@layout/adaptive_preference_card_bottom" />
+
 </PreferenceScreen>

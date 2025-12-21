@@ -17,8 +17,9 @@
 -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="blocation_settings"
     android:title="@string/location_privacy_dashboard_title"
     settings:keywords="@string/keywords_location">
@@ -49,6 +50,8 @@
             android:entryValues="@array/location_precision_values"
             android:defaultValue="precise"
             android:order="7"
+            android:selectable="true"
+            android:layout="@layout/adaptive_preference_card_middle"
             settings:controller="com.android.settings.location.LocationPrecisionController"/>
 
         <Preference
@@ -56,7 +59,6 @@
             android:title="@string/location_time_restrictions_title"
             android:summary="@string/location_time_restrictions_summary"
             android:order="8"
-            settings:controller="com.android.settings.location.LocationTimeRestrictionsController"
             android:fragment="com.android.settings.location.LocationTimeRestrictionsFragment"/>
 
         <Preference
@@ -64,7 +66,6 @@
             android:title="@string/location_app_overrides_title"
             android:summary="@string/location_app_overrides_summary"
             android:order="9"
-            settings:controller="com.android.settings.location.LocationAppOverridesController"
             android:fragment="com.android.settings.location.LocationAppOverridesFragment"/>
 
         <Preference
@@ -72,7 +73,6 @@
             android:title="@string/location_sharing_controls_title"
             android:summary="@string/location_sharing_controls_summary"
             android:order="10"
-            settings:controller="com.android.settings.location.LocationSharingControlsController"
             android:fragment="com.android.settings.location.LocationSharingControlsFragment"/>
     </PreferenceCategory>
 
@@ -92,13 +92,6 @@
             settings:controller="com.android.settings.location.LocationServiceStatusController"
             settings:layout="@layout/adaptive_preference_card_top"/>
 
-        <Preference
-            android:key="location_accuracy_indicator"
-            android:title="@string/location_accuracy_title"
-            android:summary="@string/location_last_update"
-            android:order="13"
-            settings:controller="com.android.settings.location.LocationAccuracyIndicatorController"
-            settings:layout="@layout/adaptive_preference_card_bottom"/>
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
@@ -107,3 +100,4 @@
         settings:searchable="false"
         settings:controller="com.android.settings.location.LocationPrivacyFooterController"/>
 </PreferenceScreen>
+

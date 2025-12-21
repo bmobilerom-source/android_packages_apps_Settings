@@ -92,6 +92,7 @@
     <string name="location_precision_summary">Choose between precise and approximate location</string>
     <string name="location_precision_precise">Precise (GPS accuracy)</string>
     <string name="location_precision_approximate">Approximate (city-level)</string>
+    <string name="location_precision_coarse">Coarse (region-level)</string>
 
     <string name="location_time_restrictions_title">Time-Based Access</string>
     <string name="location_time_restrictions_summary">Only allow location access during specific hours</string>

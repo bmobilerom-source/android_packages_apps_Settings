@@ -17,26 +17,39 @@
 package com.android.settings.location;
 
 import android.content.Context;
+import android.database.ContentObserver;
 import android.location.GnssStatus;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * Controller for location service status indicators.
  * Shows GPS, Network, and Wi-Fi location service status.
  */
-public class LocationServiceStatusController extends BasePreferenceController {
+public class LocationServiceStatusController extends BasePreferenceController
+        implements LifecycleObserver, OnStart, OnStop {
 
     private LocationManager mLocationManager;
     private GnssStatus.Callback mGnssCallback;
+    private Preference mPreference;
+    private SettingObserver mSettingObserver;
 
     public LocationServiceStatusController(Context context, String key) {
         super(context, key);
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        mSettingObserver = new SettingObserver(new Handler(Looper.getMainLooper()));
         setupGnssCallback();
     }
 
@@ -46,11 +59,32 @@ public class LocationServiceStatusController extends BasePreferenceController {
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        if (mPreference != null) {
+            mPreference.setLayoutResource(R.layout.adaptive_preference_card_top);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        mSettingObserver.register(mContext.getContentResolver());
+    }
+
+    @Override
+    public void onStop() {
+        mSettingObserver.unregister(mContext.getContentResolver());
+    }
+
+    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
 
         String statusText = getLocationServiceStatus();
+        String accuracyText = getLocationAccuracy();
         preference.setTitle(statusText);
+        preference.setSummary(accuracyText);
     }
 
     private String getLocationServiceStatus() {
@@ -66,6 +100,24 @@ public class LocationServiceStatusController extends BasePreferenceController {
         } else {
             return mContext.getString(R.string.location_status_gps_inactive);
         }
+    }
+
+    private String getLocationAccuracy() {
+        // Get accuracy from settings
+        String precision = Settings.Secure.getString(
+                mContext.getContentResolver(),
+                "location_precision");
+        if (precision != null) {
+            switch (precision) {
+                case "precise":
+                    return mContext.getString(R.string.location_accuracy_high);
+                case "approximate":
+                    return mContext.getString(R.string.location_accuracy_medium);
+                case "coarse":
+                    return mContext.getString(R.string.location_accuracy_low);
+            }
+        }
+        return mContext.getString(R.string.location_accuracy_high);
     }
 
     private void setupGnssCallback() {
@@ -85,11 +137,37 @@ public class LocationServiceStatusController extends BasePreferenceController {
         }
     }
 
-    @Override
     public void onDestroy() {
-        super.onDestroy();
         if (mGnssCallback != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             mLocationManager.unregisterGnssStatusCallback(mGnssCallback);
         }
     }
+
+    private class SettingObserver extends ContentObserver {
+        public SettingObserver(Handler handler) {
+            super(handler);
+        }
+
+        public void register(android.content.ContentResolver resolver) {
+            resolver.registerContentObserver(
+                    Settings.Secure.getUriFor(Settings.Secure.LOCATION_MODE),
+                    false, this);
+            resolver.registerContentObserver(
+                    Settings.Secure.getUriFor("location_precision"),
+                    false, this);
+        }
+
+        public void unregister(android.content.ContentResolver resolver) {
+            resolver.unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (mPreference != null) {
+                updateState(mPreference);
+            }
+        }
+    }
 }
+

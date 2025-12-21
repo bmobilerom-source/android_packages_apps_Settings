@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Location sharing and broadcasting controls -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="location_sharing_controls_screen"
+    android:title="@string/location_sharing_controls_title">
+
+    <PreferenceCategory
+        android:key="sharing_controls_category"
+        android:title="Location Sharing"
+        android:summary="Control how your location is shared with others">
+
+        <SwitchPreferenceCompat
+            android:key="enable_location_sharing"
+            android:title="Enable Location Sharing"
+            android:summary="Allow sharing your location with contacts and apps"
+            android:defaultValue="true"
+            android:order="1"
+            settings:controller="com.android.settings.location.LocationSharingToggleController" />
+
+        <Preference
+            android:key="sharing_settings"
+            android:title="Sharing Settings"
+            android:summary="Configure who can see your location and for how long"
+            android:order="2"
+            android:dependency="enable_location_sharing"
+            settings:controller="com.android.settings.location.SharingSettingsPreferenceController" />
+
+        <SwitchPreferenceCompat
+            android:key="emergency_sharing"
+            android:title="Emergency Location Sharing"
+            android:summary="Automatically share location during emergency calls"
+            android:defaultValue="true"
+            android:order="3"
+            settings:controller="com.android.settings.location.EmergencySharingToggleController" />
+
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:title="Location sharing controls help you manage privacy when sharing your location with others or services."
+        android:key="sharing_controls_footer"
+        settings:searchable="false" />
+
+</PreferenceScreen>

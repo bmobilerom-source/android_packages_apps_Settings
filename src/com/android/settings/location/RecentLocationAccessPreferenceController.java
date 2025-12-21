@@ -156,6 +156,7 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
             final Preference banner = new AppPreference(prefContext);
             banner.setTitle(R.string.location_no_recent_accesses);
             banner.setSelectable(false);
+            banner.setLayoutResource(R.layout.adaptive_preference_card_top);
             mCategoryRecentLocationRequests.addPreference(banner);
         }
     }

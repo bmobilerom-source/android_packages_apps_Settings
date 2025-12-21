@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,6 +25,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +33,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -40,19 +43,54 @@ import java.io.FileNotFoundException;
 
 public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
 
+    private static final String TAG = "BMobileUserInfoFragment";
+    private static final int REQUEST_CODE_CONFIRM_CREDENTIAL = 1004;
+    private boolean mIsAuthenticated = false;
+    
     private ImageView iv;
     private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(getPrefXmlResId());
+        
+        // Restore authentication state
+        if (savedInstanceState != null) {
+            mIsAuthenticated = savedInstanceState.getBoolean("is_authenticated", false);
+        }
+        
+        // Only load preferences if authenticated or if no lock screen is set
+        if (mIsAuthenticated || !isKeyguardSecure()) {
+            addPreferencesFromResource(getPrefXmlResId());
+        }
         context = getActivity();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("is_authenticated", mIsAuthenticated);
+    }
+
+    private boolean isKeyguardSecure() {
+        Context context = getContext();
+        if (context == null) {
+            return false;
+        }
+        KeyguardManager km = context.getSystemService(KeyguardManager.class);
+        return km != null && km.isKeyguardSecure();
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        
+        // Check if authentication is required
+        if (!mIsAuthenticated) {
+            checkAndRequestAuthentication();
+            return;
+        }
+        
         // Collapse the app bar when fragment starts
         if (getActivity() instanceof SettingsBaseActivity) {
             SettingsBaseActivity activity = (SettingsBaseActivity) getActivity();
@@ -95,6 +133,31 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        
+        if (requestCode == REQUEST_CODE_CONFIRM_CREDENTIAL) {
+            if (resultCode == Activity.RESULT_OK) {
+                mIsAuthenticated = true;
+                // Load preferences if not already loaded
+                if (getPreferenceScreen() == null) {
+                    addPreferencesFromResource(getPrefXmlResId());
+                }
+                // Now proceed with normal fragment initialization
+                if (getActivity() instanceof SettingsBaseActivity) {
+                    SettingsBaseActivity activity = (SettingsBaseActivity) getActivity();
+                    if (activity.mAppBarLayout != null) {
+                        activity.mAppBarLayout.setExpanded(false);
+                    }
+                }
+                onUserCard();
+            } else {
+                // Authentication failed or cancelled - finish the activity
+                if (getActivity() != null) {
+                    getActivity().finish();
+                }
+            }
+            return;
+        }
+        
         if (resultCode == RESULT_OK && data != null && data.getData() != null && requestCode == 100) {
             String path = data.getData().toString();
             try {
@@ -105,6 +168,61 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
             }
             context.getSharedPreferences(getImagePrefName(), Context.MODE_PRIVATE)
                     .edit().putString(getImagePrefKey(), path).commit();
+        }
+    }
+
+    private void checkAndRequestAuthentication() {
+        Context context = getContext();
+        if (context == null) {
+            return;
+        }
+
+        KeyguardManager km = context.getSystemService(KeyguardManager.class);
+        if (km == null || !km.isKeyguardSecure()) {
+            // No lock screen set up - allow access without authentication
+            mIsAuthenticated = true;
+            // Load preferences if not already loaded
+            if (getPreferenceScreen() == null) {
+                addPreferencesFromResource(getPrefXmlResId());
+            }
+            // Proceed with normal initialization
+            if (getActivity() instanceof SettingsBaseActivity) {
+                SettingsBaseActivity activity = (SettingsBaseActivity) getActivity();
+                if (activity.mAppBarLayout != null) {
+                    activity.mAppBarLayout.setExpanded(false);
+                }
+            }
+            onUserCard();
+            return;
+        }
+
+        // Request device credential confirmation
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                ConfirmDeviceCredentialActivity.class.getName());
+        intent.putExtra(KeyguardManager.EXTRA_TITLE,
+                context.getString(R.string.bmobile_userinfo_confirm_credential_title));
+        intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION,
+                context.getString(R.string.bmobile_userinfo_confirm_credential_description));
+        intent.putExtra(KeyguardManager.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false);
+
+        try {
+            startActivityForResult(intent, REQUEST_CODE_CONFIRM_CREDENTIAL);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to launch credential confirmation", e);
+            // If we can't launch auth, allow access (fallback)
+            mIsAuthenticated = true;
+            // Load preferences if not already loaded
+            if (getPreferenceScreen() == null) {
+                addPreferencesFromResource(getPrefXmlResId());
+            }
+            if (getActivity() instanceof SettingsBaseActivity) {
+                SettingsBaseActivity activity = (SettingsBaseActivity) getActivity();
+                if (activity.mAppBarLayout != null) {
+                    activity.mAppBarLayout.setExpanded(false);
+                }
+            }
+            onUserCard();
         }
     }
 

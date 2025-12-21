@@ -17,19 +17,18 @@
 package com.android.settings.location;
 
 import android.content.Context;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /**
- * Controller for location sharing controls preference.
- * Manages how location data is shared with different system components.
+ * Controller for sharing settings preference.
  */
-public class LocationSharingControlsController extends BasePreferenceController {
+public class SharingSettingsPreferenceController extends BasePreferenceController {
 
-    public LocationSharingControlsController(Context context, String key) {
+    public SharingSettingsPreferenceController(Context context, String key) {
         super(context, key);
     }
 
@@ -41,29 +40,24 @@ public class LocationSharingControlsController extends BasePreferenceController 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-
-        preference.setTitle(mContext.getString(R.string.location_sharing_controls_title));
-        preference.setSummary(mContext.getString(R.string.location_sharing_controls_summary));
-
-        // Could add indicators for current sharing settings
-        String sharingStatus = getSharingStatus();
-        if (!sharingStatus.isEmpty()) {
-            preference.setSummary(mContext.getString(R.string.location_sharing_controls_summary) +
-                " (" + sharingStatus + ")");
+        
+        // Update summary based on current sharing settings
+        String sharingLevel = Settings.Secure.getString(
+                mContext.getContentResolver(),
+                "location_sharing_level");
+        
+        if (sharingLevel != null) {
+            preference.setSummary("Current: " + sharingLevel);
         }
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        // Open sharing controls settings fragment
-        // Implementation would navigate to LocationSharingControlsFragment
+        if (getPreferenceKey().equals(preference.getKey())) {
+            // TODO: Open sharing settings dialog
+            return true;
+        }
         return super.handlePreferenceTreeClick(preference);
-    }
-
-    private String getSharingStatus() {
-        // Check current sharing settings and return status summary
-        // This would check various sharing preferences
-        return ""; // Placeholder - implement actual logic
     }
 }
 
