@@ -31,13 +31,11 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/extended_security_title">
 
-    <!-- Illustration -->
-    <com.android.settingslib.widget.IllustrationPreference
-        android:key="extended_security_illustration"
-        settings:searchable="false"
-        android:order="-1001"
-        app:lottie_rawRes="@raw/security" />
-
+  
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="epic_toplevel_card_navigation_lock"
+        android:selectable="false"
+        android:layout="@layout/xd_about_phone_header" />
     <!-- Header -->
     <PreferenceCategory
         android:title="@string/extended_security_title"
@@ -52,6 +50,13 @@
         android:persistent="false"
         android:order="-999"/>
 
+    <!-- SIM Lock Settings -->
+    <Preference
+        android:key="sim_lock_settings"
+        android:title="@string/sim_lock_settings"
+        android:fragment="com.android.settings.IccLockSettings"
+        android:order="10"
+        settings:layout="@layout/adaptive_preference_card"/>
 
 </PreferenceScreen>
 
