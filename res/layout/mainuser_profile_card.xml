@@ -42,7 +42,9 @@
                 app:lottie_loop="true"
                 app:lottie_speed="0.3"
                 android:alpha="1.0"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:scaleX="0.9"
+                android:scaleY="0.9" />
 
 
 
@@ -74,8 +76,9 @@
             android:layout_height="wrap_content"
             android:text="Profile"
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
+            android:textStyle="bold"
+            android:gravity="center"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="20dp"
             android:layout_alignParentTop="true" />
 
         <ImageView
@@ -85,9 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/android_version_logo"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_alignParentBottom="true" />
+            android:layout_centerInParent="true" />
 
     </RelativeLayout>
 

@@ -66,6 +66,7 @@ public class Atomichub2View extends LinearLayout {
         View card4 = findViewById(R.id.card4_2);  // AppLock
         View card5 = findViewById(R.id.card5_2);  // DeviceTweaks
         View card6 = findViewById(R.id.card6_2);  // Optimize
+        View card7 = findViewById(R.id.card7_2);  // bSettings (AppSec)
         
         // Big card
         View bigCard = findViewById(R.id.card2);  // Personal
@@ -85,12 +86,12 @@ public class Atomichub2View extends LinearLayout {
             // #endregion
             launchFragment(activity, "com.android.settings.deviceinfo.BMobileAccountsFragment", R.string.bmobile_accounts_title);
         });
-        // Apps → AppDashboardFragment
+        // Apps → SystemApplicationSettings
         setInteractiveClick(card2, () -> {
             // #region agent log
             try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub2\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"Atomichub2View.java:card2\",\"message\":\"apps card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
             // #endregion
-            launchFragment(activity, "com.android.settings.applications.AppDashboardFragment", R.string.apps_dashboard_title);
+            launchFragment(activity, "com.epic.fragments.SystemApplicationSettings", R.string.apps_dashboard_title);
         });
         // Bmobile → BMobileSettingsFragment
         setInteractiveClick(card3, () -> {
@@ -119,6 +120,13 @@ public class Atomichub2View extends LinearLayout {
             try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub2\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"Atomichub2View.java:card6\",\"message\":\"optimize card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
             // #endregion
             launchFragment(activity, "com.epic.fragments.SystemOptimizationSettings", R.string.system_optimization_title);
+        });
+        // bSettings → AppSecSettings
+        setInteractiveClick(card7, () -> {
+            // #region agent log
+            try { java.io.FileWriter fw = new java.io.FileWriter("/media/linuxmain/lineageos/android/lineageos/.cursor/debug.log", true); fw.write("{\"sessionId\":\"atomichub2\",\"runId\":\"click\",\"hypothesisId\":\"C\",\"location\":\"Atomichub2View.java:card7\",\"message\":\"bSettings card clicked\",\"timestamp\":" + System.currentTimeMillis() + "}\n"); fw.close(); } catch (Exception e) {}
+            // #endregion
+            launchFragment(activity, "com.android.settings.applications.specialaccess.AppSecSettings", R.string.appsec_category_title);
         });
         // Big Personal card → BMobileUserInfoFragment
         setInteractiveClick(bigCard, () -> {
