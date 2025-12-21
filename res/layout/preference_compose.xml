@@ -15,7 +15,46 @@
   ~ limitations under the License.
   -->
 
-<androidx.compose.ui.platform.ComposeView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="15dp"
+    android:layout_marginVertical="4dp">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:background="@drawable/adaptive_preference_card_background"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp">
+
+        <!-- Content Layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall">
+
+            <!-- Icon Frame - Hidden by default for consistent positioning -->
+            <LinearLayout
+                android:id="@*android:id/icon_frame"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+
+            <!-- Compose Content -->
+            <androidx.compose.ui.platform.ComposeView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>

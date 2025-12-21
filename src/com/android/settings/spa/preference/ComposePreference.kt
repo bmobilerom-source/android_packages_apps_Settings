@@ -63,7 +63,11 @@ open class ComposePreference @JvmOverloads constructor(
         holder.isDividerAllowedAbove = false
         holder.isDividerAllowedBelow = false
 
-        (holder.itemView as ComposeView).apply {
+        // Find the ComposeView within the layout (it might be nested)
+        val composeView = findComposeView(holder.itemView)
+            ?: throw IllegalStateException("ComposeView not found in layout")
+
+        composeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 SettingsTheme {
@@ -71,5 +75,25 @@ open class ComposePreference @JvmOverloads constructor(
                 }
             }
         }
+    }
+
+    private fun findComposeView(view: android.view.View): ComposeView? {
+        // If the view itself is a ComposeView, return it
+        if (view is ComposeView) {
+            return view
+        }
+
+        // If it's a ViewGroup, search recursively
+        if (view is android.view.ViewGroup) {
+            for (i in 0 until view.childCount) {
+                val child = view.getChildAt(i)
+                val result = findComposeView(child)
+                if (result != null) {
+                    return result
+                }
+            }
+        }
+
+        return null
     }
 }

@@ -28,16 +28,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/dot_preference_card_background"
-            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginTop="8dp"
+            android:background="?android:attr/activatedBackgroundIndicator"
             android:baselineAligned="false"
             android:clipToPadding="false"
             android:gravity="center_vertical"
             android:minHeight="?android:attr/listPreferredItemHeightSmall"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp">
+            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
             <LinearLayout
                 android:id="@*android:id/icon_frame"
@@ -98,7 +95,7 @@
                     <SeekBar
                         android:id="@*android:id/seekbar"
                         android:layout_width="match_parent"
-                        android:layout_height="264dp"
+                        android:layout_height="88dp"
                         android:layout_gravity="center_vertical"
                         android:background="@android:color/transparent"
                         android:paddingStart="12dp"
