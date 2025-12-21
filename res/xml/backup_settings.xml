@@ -17,14 +17,23 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/privacy_settings_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        app:searchable="false"
+        android:order="-1000"
+        app:lottie_rawRes="@raw/backup_settings"/>
 
     <!-- Backup settings provided by the backup transport or the default settings -->
     <Preference
+        settings:layout="@layout/adaptive_preference_card_top"
         android:key="backup_settings" />
 
     <!-- Backup settings provided by the manufacturer -->
     <Preference
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:key="manufacturer_backup" />
 
 </PreferenceScreen>
