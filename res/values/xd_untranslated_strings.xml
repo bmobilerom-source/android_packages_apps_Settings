@@ -24,5 +24,12 @@
     <string name="xd_gpu_summary">Unknown</string>
     <string name="xd_camera_mp_summary">Unknown</string>
     <string name="xd_screen_type_summary">Unknown</string>
+    
+    <!-- Security Information Summaries -->
+    <string name="xd_security_android_version_summary">Unknown</string>
+    <string name="xd_security_patch_level_summary">Unknown</string>
+    <string name="xd_security_build_number_summary">Unknown</string>
+    <string name="xd_security_api_level_summary">Unknown</string>
+    <string name="xd_security_kernel_version_summary">Unknown</string>
 
 </resources>

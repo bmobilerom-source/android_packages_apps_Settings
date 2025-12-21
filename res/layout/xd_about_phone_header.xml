@@ -47,7 +47,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="@string/xd_device_name"
+                android:text="@string/xd_security_android_version"
                 style="@style/xd_text_primary"/>
             
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="@string/xd_device_name_summary"
+                android:text="@string/xd_security_android_version_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_device"
                 android:layout_alignStart="@id/xd_about_phone_header_device"
@@ -65,7 +65,7 @@
                 android:id="@+id/xd_about_phone_header_chipset"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/xd_chipset_type"
+                android:text="@string/xd_security_patch_level"
                 android:layout_below="@id/xd_about_phone_header_device_desc"
                 android:layout_alignStart="@id/xd_about_phone_header_device_desc"
                 style="@style/xd_text_primary"/>
@@ -75,7 +75,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="@string/xd_chipset_type_summary"
+                android:text="@string/xd_security_patch_level_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_chipset"
                 android:layout_alignStart="@id/xd_about_phone_header_chipset"
@@ -85,7 +85,7 @@
                 android:id="@+id/xd_about_phone_header_gpu"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/xd_gpu"
+                android:text="@string/xd_security_build_number"
                 android:layout_below="@id/xd_about_phone_header_chipset_desc"
                 android:layout_alignStart="@id/xd_about_phone_header_chipset_desc"
                 style="@style/xd_text_primary"/>
@@ -95,7 +95,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="@string/xd_gpu_summary"
+                android:text="@string/xd_security_build_number_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_gpu"
                 android:layout_alignStart="@id/xd_about_phone_header_gpu"
@@ -105,7 +105,7 @@
                 android:id="@+id/xd_about_phone_header_camera"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/xd_camera_mp"
+                android:text="@string/xd_security_api_level"
                 android:layout_below="@id/xd_about_phone_header_gpu_desc"
                 android:layout_alignStart="@id/xd_about_phone_header_gpu_desc"
                 style="@style/xd_text_primary"/>
@@ -115,7 +115,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="@string/xd_camera_mp_summary"
+                android:text="@string/xd_security_api_level_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_camera"
                 android:layout_alignStart="@id/xd_about_phone_header_camera"
@@ -125,7 +125,7 @@
                 android:id="@+id/xd_about_phone_header_screen"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/xd_screen_type"
+                android:text="@string/xd_security_kernel_version"
                 android:layout_below="@id/xd_about_phone_header_camera_desc"
                 android:layout_alignStart="@id/xd_about_phone_header_camera_desc"
                 style="@style/xd_text_primary"/>
@@ -135,7 +135,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:text="@string/xd_screen_type_summary"
+                android:text="@string/xd_security_kernel_version_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_screen"
                 android:layout_alignStart="@id/xd_about_phone_header_screen"
@@ -151,13 +151,13 @@
             app:cardElevation="0dp"
             app:cardCornerRadius="18dp">
 
-            <xyz.xd.ui.frameworks.preferences.XDCardPrefWall
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:elevation="0dp"
                 android:gravity="center"
-                android:orientation="vertical" />
+                android:src="@drawable/ic_settings_wallpaper_filled" />
                 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -123,6 +123,13 @@
     <string name="xd_camera_mp">Camera</string>
     <string name="xd_screen_type">Screen</string>
     
+    <!-- xd. Security Information -->
+    <string name="xd_security_android_version">Android version</string>
+    <string name="xd_security_patch_level">Security patch level</string>
+    <string name="xd_security_build_number">Build number</string>
+    <string name="xd_security_api_level">API level</string>
+    <string name="xd_security_kernel_version">Kernel version</string>
+    
     <!-- xd. Build Status -->
     <string name="xd_build_status">Your device is not officially supported!</string>
     <string name="xd_build_maintained_summary">Maintained by %s</string>

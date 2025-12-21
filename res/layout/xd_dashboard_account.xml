@@ -32,13 +32,13 @@
         app:cardCornerRadius="@dimen/xd_pref_card_radius-outer"
         app:cardElevation="0dp">
             
-        <xyz.xd.ui.frameworks.preferences.XDCardPrefWall
+        <ImageView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:scaleType="centerCrop"
           android:elevation="0dp"
           android:gravity="center"
-          android:orientation="vertical" />
+          android:src="@drawable/ic_settings_wallpaper_filled" />
                 
         <LinearLayout
           android:layout_width="match_parent"
