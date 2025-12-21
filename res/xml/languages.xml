@@ -18,9 +18,17 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/language_picker_title"
     android:key="system_languages">
 
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="auto_brightness_video"
+        settings:searchable="false"
+        android:order="-1999"
+        settings:lottie_rawRes="@raw/Permission"/>
+        
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/desc_introduction_of_language_picker"
         android:persistent="false"
@@ -41,6 +49,7 @@
             android:key="key_terms_of_address"
             android:title="@string/terms_of_address_title"
             android:summary="@string/terms_of_address_summary"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.localepicker.TermsOfAddressController"/>
     </PreferenceCategory>
 

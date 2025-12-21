@@ -18,7 +18,14 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/reset_dashboard_title">
+
+   <com.android.settingslib.widget.IllustrationPreference
+        android:key="access_illust_video"
+        app:searchable="false"
+        android:order="-1000"
+        app:lottie_rawRes="@raw/storage" />
 
     <!-- Mobile Network reset -->
     <com.android.settingslib.RestrictedPreference
@@ -45,6 +52,7 @@
     <Preference
         android:key="erase_euicc_data"
         android:title="@string/reset_esim_title"
+        settings:layout="@layout/adaptive_preference_card_top"
         settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.network.EraseEuiccDataController" />
 
@@ -52,8 +60,24 @@
     <Preference
         android:key="reset_delete_private_space"
         android:title="@string/reset_private_space_delete_title"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:controller="com.android.settings.privatespace.delete.ResetOptionsDeletePrivateSpaceController" />
+  
+  <com.android.settings.widget.CardPreference
+        android:key="reset_delete_private_space"
+        android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card_middle"
+        android:title="@string/storage_free_up_space_title"
+        android:summary="@string/storage_free_up_space_summary"
+        settings:controller="com.android.settings.deviceinfo.storage.ManageStoragePreferenceController"/>
 
+    <Preference
+        android:key="factory_reset_demo_user"
+        android:title="@string/main_clear_title"
+        settings:layout="@layout/adaptive_preference_card_bottom"
+        settings:keywords="@string/keywords_factory_data_reset"
+        settings:controller="com.android.settings.system.FactoryResetDemoUserPreferenceController"
+        android:fragment="com.android.settings.MainClear" />
     <!-- Factory reset -->
     <com.android.settingslib.RestrictedPreference
         android:key="factory_reset"
@@ -64,10 +88,4 @@
         settings:controller="com.android.settings.system.FactoryResetPreferenceController"
         android:fragment="com.android.settings.MainClear" />
 
-    <Preference
-        android:key="factory_reset_demo_user"
-        android:title="@string/main_clear_title"
-        settings:keywords="@string/keywords_factory_data_reset"
-        settings:controller="com.android.settings.system.FactoryResetDemoUserPreferenceController"
-        android:fragment="com.android.settings.MainClear" />
 </PreferenceScreen>
