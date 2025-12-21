@@ -47,12 +47,14 @@
     <Preference
         android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced"
         android:key="battery_usage_summary"
+        settings:layout="@layout/adaptive_preference_card_top"
         android:title="@string/advanced_battery_preference_title"
         settings:keywords="@string/keywords_battery_usage" />
 
     <Preference
         android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
         android:key="battery_saver_summary"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:title="@string/battery_saver"
         settings:keywords="@string/keywords_battery_saver"
         settings:controller="com.android.settings.fuelgauge.BatterySaverController" />
@@ -60,6 +62,7 @@
     <Preference
         android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
         android:key="smart_battery_manager"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:title="@string/smart_battery_manager_title"
         settings:controller="com.android.settings.fuelgauge.batterytip.BatteryManagerPreferenceController"
         settings:keywords="@string/keywords_battery_adaptive_preferences" />
@@ -67,6 +70,7 @@
     <!-- Charging control -->
     <lineageos.preference.LineagePartsPreference
         android:key="charging_control"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:requiresService="lineagehealth" />
 
     <!-- Charging speed -->
@@ -74,6 +78,7 @@
         android:entries="@*lineageos.platform:array/charging_speed_entries"
         android:entryValues="@*lineageos.platform:array/charging_speed_values"
         android:key="charging_speed"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="%s"
         android:title="@*lineageos.platform:string/charging_speed"
         settings:controller="com.android.settings.fuelgauge.ChargingSpeedPreferenceController"
@@ -82,6 +87,7 @@
     <!-- Battery light -->
     <lineageos.preference.LineagePartsPreference
         android:key="battery_lights"
+        settings:layout="@layout/adaptive_preference_card_middle"
         settings:requiresConfig="@*lineageos.platform:integer/config_deviceLightCapabilities"
         settings:requiresConfigMask="64" />
 
@@ -101,6 +107,7 @@
         android:key="battery_info"
         android:title="@string/battery_info"
         android:fragment="com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment"
+        settings:layout="@layout/adaptive_preference_card"
         settings:keywords="@string/keywords_battery_info"/>
 
     <com.android.settingslib.widget.FooterPreference
