@@ -24,6 +24,7 @@
         android:icon="@*android:drawable/ic_settings_bluetooth"
         android:key="bluetooth_switchbar_screen"
         android:order="-10"
+        settings:layout="@layout/adaptive_preference_card_top"
         android:title="@string/bluetooth_settings_title" />
 
     <Preference
@@ -31,6 +32,7 @@
         android:icon="@drawable/ic_bt_le_audio_sharing"
         android:key="audio_sharing_settings"
         android:order="-9"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:title="@string/audio_sharing_title"
         settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"
         settings:searchable="true" />
@@ -51,6 +53,7 @@
         android:icon="@drawable/ic_cast_24dp"
         android:key="wifi_display_settings"
         android:order="-6"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/wifi_display_settings_title"
         settings:controller="com.android.settings.wfd.WifiDisplayPreferenceController"
         settings:keywords="@string/keywords_wifi_display_settings" />

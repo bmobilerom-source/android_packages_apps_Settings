@@ -36,7 +36,8 @@
             android:key="connected_device_audio_sharing_settings"
             android:order="100"
             android:title="@string/audio_sharing_title"
-            settings:searchable="false" />
+            settings:searchable="false"
+            settings:layout="@layout/adaptive_preference_card" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -70,6 +71,7 @@
             android:icon="@drawable/ic_chevron_right_24dp"
             android:key="previously_connected_devices_see_all"
             android:order="10"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/previous_connected_see_all"
             settings:searchable="false" />
     </PreferenceCategory>
@@ -86,6 +88,7 @@
             android:icon="@drawable/ic_chevron_right_24dp"
             android:key="fast_pair_devices_see_all"
             android:order="10"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/connected_device_fast_pair_device_see_all"
             settings:searchable="false" />
     </PreferenceCategory>
@@ -96,6 +99,7 @@
         android:summary="@string/summary_placeholder"
         android:title="@string/connected_device_connections_title"
         settings:allowDividerAbove="true"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
 
     <com.android.settingslib.widget.FooterPreference
