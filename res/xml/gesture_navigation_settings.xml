@@ -19,9 +19,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="gesture_navigation_settings_page"
     android:title="@string/gesture_settings_activity_title"
     settings:keywords="@string/keywords_gesture_navigation_settings">
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="auto_brightness_video"
+        settings:searchable="false"
+        android:order="-1999"
+        settings:lottie_rawRes="@raw/gesture_settings"/>
+        
 
     <lineageos.preference.LineageSystemSettingSwitchPreference
         android:key="navigation_bar_hint"
@@ -52,6 +59,7 @@
             android:key="gesture_left_back_sensitivity"
             android:title="@string/left_edge"
             android:max="2"
+            android:layout="@layout/adaptive_labeled_seekbar_card_progress"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
 
@@ -59,6 +67,7 @@
             android:key="gesture_right_back_sensitivity"
             android:title="@string/right_edge"
             android:max="2"
+            android:layout="@layout/adaptive_labeled_seekbar_card_progress"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
     </PreferenceCategory>
