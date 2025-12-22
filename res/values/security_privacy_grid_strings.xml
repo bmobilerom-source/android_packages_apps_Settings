@@ -14,18 +14,32 @@
     <!-- Wallpapers -->
     <string name="security_privacy_grid_wallpapers_title">Wallpapers</string>
     <string name="security_privacy_grid_wallpapers_summary">Change wallpaper</string>
+    <string name="security_privacy_grid_fingerprint_title">Fingerprint</string>
+    <string name="security_privacy_grid_fingerprint_summary">Fingerprint settings</string>
     
     <!-- Theme Packs -->
     <string name="security_privacy_grid_theme_packs_title">Theme Packs</string>
     <string name="security_privacy_grid_theme_packs_summary">Apply theme packs</string>
     
+    <!-- Pocket Mode -->
+    <string name="security_privacy_grid_pocket_mode_title">Pocket Mode</string>
+    <string name="security_privacy_grid_pocket_mode_summary">Pocket mode settings</string>
+    
     <!-- Statusbar -->
     <string name="security_privacy_grid_statusbar_title">Statusbar</string>
     <string name="security_privacy_grid_statusbar_summary">Customize status bar</string>
     
+    <!-- Disable QS -->
+    <string name="security_privacy_grid_disable_qs_title">Disable QS</string>
+    <string name="security_privacy_grid_disable_qs_summary">Disable Quick Settings</string>
+    
     <!-- QS Panel -->
     <string name="security_privacy_grid_qs_panel_title">QS Panel</string>
     <string name="security_privacy_grid_qs_panel_summary">Quick settings panel</string>
+    
+    <!-- Special Access -->
+    <string name="security_privacy_grid_special_access_title">Special Access</string>
+    <string name="security_privacy_grid_special_access_summary">Special access settings</string>
     
     <!-- AOD Customizations -->
     <string name="security_privacy_grid_aod_title">AOD Customizations</string>
@@ -33,39 +47,71 @@
     
     <!-- Time Display -->
     <string name="security_privacy_grid_time_display_title">Time Display</string>
-    <string name="security_privacy_grid_time_display_summary">Time settings</string>
+    <string name="security_privacy_grid_time_display_summary">Lock screen notifications</string>
     
     <!-- Buttons -->
     <string name="security_privacy_grid_buttons_title">Buttons</string>
     <string name="security_privacy_grid_buttons_summary">Button settings</string>
     
+    <!-- Timeout -->
+    <string name="security_privacy_grid_timeout_title">Timeout</string>
+    <string name="security_privacy_grid_timeout_summary">Screen timeout settings</string>
+    
     <!-- Navigation -->
     <string name="security_privacy_grid_navigation_title">Navigation</string>
     <string name="security_privacy_grid_navigation_summary">Navigation settings</string>
+    
+    <!-- Window Ignore Secure -->
+    <string name="security_privacy_grid_window_ignore_secure_title">Window Ignore Secure</string>
+    <string name="security_privacy_grid_window_ignore_secure_summary">Allow windows to ignore secure flag</string>
     
     <!-- Powermenu -->
     <string name="security_privacy_grid_powermenu_title">Powermenu</string>
     <string name="security_privacy_grid_powermenu_summary">Power menu settings</string>
     
+    <!-- Disable SAF -->
+    <string name="security_privacy_grid_disable_saf_title">Disable SAF</string>
+    <string name="security_privacy_grid_disable_saf_summary">Disable Secure Application Framework</string>
+    
     <!-- Miscellaneous -->
     <string name="security_privacy_grid_miscellaneous_title">Miscellaneous</string>
     <string name="security_privacy_grid_miscellaneous_summary">Miscellaneous settings</string>
+    
+    <!-- Sensor Block -->
+    <string name="security_privacy_grid_sensor_block_title">Sensor Block</string>
+    <string name="security_privacy_grid_sensor_block_summary">Block sensor access</string>
     
     <!-- Notification -->
     <string name="security_privacy_grid_notification_title">Notification</string>
     <string name="security_privacy_grid_notification_summary">Notification settings</string>
     
+    <!-- Cell Security -->
+    <string name="security_privacy_grid_cell_security_title">Cell Security</string>
+    <string name="security_privacy_grid_cell_security_summary">Cellular security settings</string>
+    
     <!-- Team -->
     <string name="security_privacy_grid_team_title">Team</string>
     <string name="security_privacy_grid_team_summary">Team information</string>
+    
+    <!-- USB -->
+    <string name="security_privacy_grid_usb_title">USB</string>
+    <string name="security_privacy_grid_usb_summary">USB settings</string>
     
     <!-- Gestures -->
     <string name="security_privacy_grid_gestures_title">Gestures</string>
     <string name="security_privacy_grid_gestures_summary">Gesture settings</string>
     
+    <!-- Fingerprint Extra -->
+    <string name="security_privacy_grid_fingerprint_extra_title">Fingerprint Extra</string>
+    <string name="security_privacy_grid_fingerprint_extra_summary">Extra fingerprint settings</string>
+    
     <!-- About Us -->
     <string name="security_privacy_grid_about_us_title">About Us</string>
     <string name="security_privacy_grid_about_us_summary">About information</string>
+    
+    <!-- Accessibility Usage -->
+    <string name="security_privacy_grid_accessibility_usage_title">Accessibility Usage</string>
+    <string name="security_privacy_grid_accessibility_usage_summary">Accessibility usage settings</string>
     
     <!-- System Tuner -->
     <string name="system_tuner_not_available">System tuner is not available</string>

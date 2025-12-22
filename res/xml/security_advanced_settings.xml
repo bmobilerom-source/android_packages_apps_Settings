@@ -37,6 +37,7 @@
 
         <Preference
             android:key="manage_device_admin"
+            settings:layout="@layout/adaptive_preference_card_top"
             android:title="@string/manage_device_admin"
             android:summary="@string/summary_placeholder"
             android:fragment=
@@ -46,6 +47,7 @@
 
         <Preference
             android:key="enterprise_privacy"
+            settings:layout="@layout/adaptive_preference_card_middle"
             android:title="@string/enterprise_privacy_settings"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
@@ -53,6 +55,7 @@
 
         <Preference
             android:key="financed_privacy"
+            settings:layout="@layout/adaptive_preference_card_middle"
             android:title="@string/financed_privacy_settings"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
@@ -60,6 +63,7 @@
 
         <Preference
             android:key="financed_device_info"
+            settings:layout="@layout/adaptive_preference_card_bottom"
             android:title="@string/financed_device_info"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.devicelock.DeviceLockPreferenceController">
@@ -70,6 +74,7 @@
     <Preference
         android:order="250"
         android:key="sim_lock_settings"
+        settings:layout="@layout/adaptive_preference_card_top"
         android:title="@string/sim_lock_settings_category"
         settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.security.SimLockPreferenceController">
@@ -84,6 +89,7 @@
     <Preference
         android:order="260"
         android:key="encryption_and_credential"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:title="@string/encryption_and_credential_settings_title"
         android:summary="@string/encryption_and_credential_settings_summary"
         android:fragment="com.android.settings.security.EncryptionAndCredential"
@@ -92,6 +98,7 @@
     <Preference
         android:order="270"
         android:key="manage_trust_agents"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:title="@string/manage_trust_agents"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.trustagent.TrustAgentSettings"
@@ -100,6 +107,7 @@
     <Preference
         android:order="280"
         android:key="screen_pinning_settings"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:title="@string/screen_pinning_title"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.ScreenPinningSettings"

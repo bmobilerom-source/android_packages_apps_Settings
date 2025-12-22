@@ -97,129 +97,160 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
 
             java.util.List<SecurityPrivacyGridAdapter.CardItem> items = new java.util.ArrayList<>();
             
-            // Grid layout matching image exactly:
-            // Row 1: Monet Color (left), LockScreen (right - tall, spans 2 rows visually)
+            // Row 1: Security Header (wide, spans 2 columns, non-clickable)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_MONET_COLOR,
-                    R.string.security_privacy_grid_monet_color_title,
-                    R.string.security_privacy_grid_monet_color_summary,
-                    "com.android.settings.display.MonetColorSettings",
+                    SecurityPrivacyGridAdapter.CARD_TYPE_SECURITY_HEADER,
+                    R.string.xd_security_android_version, // Title not used, but required
+                    R.string.xd_security_android_version_summary, // Summary not used, but required
+                    null, // No destination - this is just a display card
                     null));
             
-            items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_LOCKSCREEN,
-                    R.string.security_privacy_grid_lockscreen_title,
-                    R.string.security_privacy_grid_lockscreen_summary,
-                    "com.epic.fragments.LockScreenSettings",
-                    null));
-            
-            // Row 2: Wallpapers (left), LockScreen continues (right - already added, just tall)
+            // Row 2: Fingerprint (left), empty space (right - was LockScreen)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_WALLPAPERS,
-                    R.string.security_privacy_grid_wallpapers_title,
-                    R.string.security_privacy_grid_wallpapers_summary,
-                    "com.android.settings.display.WallpaperSettings",
+                    R.string.security_privacy_grid_fingerprint_title,
+                    R.string.security_privacy_grid_fingerprint_summary,
+                    "com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment",
                     null));
             
-            // Row 3: Theme Packs (left), QS Panel (right)
+            // Row 3: Pocket Mode (left), Special Access (right)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_THEME_PACKS,
-                    R.string.security_privacy_grid_theme_packs_title,
-                    R.string.security_privacy_grid_theme_packs_summary,
-                    "com.epic.fragments.ThemePacksSettings",
+                    R.string.security_privacy_grid_pocket_mode_title,
+                    R.string.security_privacy_grid_pocket_mode_summary,
+                    "com.epic.fragments.PocketModeSettings",
                     null));
             
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_BUTTON,
-                    R.string.security_privacy_grid_qs_panel_title,
-                    R.string.security_privacy_grid_qs_panel_summary,
-                    "com.epic.fragments.QuickSettings",
+                    R.string.security_privacy_grid_special_access_title,
+                    R.string.security_privacy_grid_special_access_summary,
+                    "com.android.settings.applications.specialaccess.SpecialAccessSettings",
                     null));
             
-            // Row 4: Statusbar (left), Time Display (right)
+            // Row 4: Disable QS (left, toggle), Time Display (right)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_BUTTON,
-                    R.string.security_privacy_grid_statusbar_title,
-                    R.string.security_privacy_grid_statusbar_summary,
-                    "com.epic.fragments.StatusBarSettings",
-                    null));
+                    R.string.security_privacy_grid_disable_qs_title,
+                    R.string.security_privacy_grid_disable_qs_summary,
+                    null, // No destination fragment for toggle
+                    null, // No icon
+                    true, // Is toggle
+                    "secure_lockscreen_qs_disabled")); // Toggle key
             
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_TIME_DISPLAY,
                     R.string.security_privacy_grid_time_display_title,
                     R.string.security_privacy_grid_time_display_summary,
-                    "com.android.settings.datetime.DateTimeSettings",
+                    "com.android.settings.notification.LockScreenNotificationsPreferencePageFragment",
                     null));
             
-            // Row 5: AOD Customizations (wide, spans 2 columns)
+            // Row 5: Lockscreen (wide, spans 2 columns)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_WIDE,
-                    R.string.security_privacy_grid_aod_title,
-                    R.string.security_privacy_grid_aod_summary,
-                    "com.android.settings.display.AmbientDisplaySettings",
+                    R.string.security_privacy_grid_lockscreen_title,
+                    R.string.security_privacy_grid_lockscreen_summary,
+                    "com.android.settings.security.LockscreenDashboardFragment",
                     null));
             
-            // Row 6: Buttons (left), Powermenu (right)
+            // Row 6: Timeout (left), Disable SAF (right, toggle)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_buttons_title,
-                    R.string.security_privacy_grid_buttons_summary,
-                    "com.epic.fragments.ButtonSettings",
-                    R.drawable.ic_button));
+                    R.string.security_privacy_grid_timeout_title,
+                    R.string.security_privacy_grid_timeout_summary,
+                    "com.android.settings.display.ScreenTimeoutSettings",
+                    null)); // No icon
             
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_powermenu_title,
-                    R.string.security_privacy_grid_powermenu_summary,
-                    "com.epic.fragments.PowerMenuSettings",
-                    R.drawable.ic_powermenu));
+                    R.string.security_privacy_grid_disable_saf_title,
+                    R.string.security_privacy_grid_disable_saf_summary,
+                    null, // No destination fragment for toggle
+                    null, // No icon
+                    true, // Is toggle
+                    "no_storage_restrict")); // Toggle key
             
-            // Row 7: Navigation (left), Miscellaneous (right)
+            // Row 7: Window Ignore Secure (left, toggle), Miscellaneous (right)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_navigation_title,
-                    R.string.security_privacy_grid_navigation_summary,
-                    "com.epic.fragments.NavbarSettings",
-                    R.drawable.ic_navigation));
-            
-            items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_miscellaneous_title,
-                    R.string.security_privacy_grid_miscellaneous_summary,
-                    "com.epic.fragments.ExtraSettings",
-                    R.drawable.ic_misc));
-            
-            // Row 8: Gestures (left), Notification (right)
-            items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_gestures_title,
-                    R.string.security_privacy_grid_gestures_summary,
-                    "com.epic.fragments.GestureSettings",
-                    null));
+                    R.string.security_privacy_grid_window_ignore_secure_title,
+                    R.string.security_privacy_grid_window_ignore_secure_summary,
+                    null, // No destination fragment for toggle
+                    null, // No icon
+                    true, // Is toggle
+                    "window_ignore_secure")); // Toggle key
             
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_notification_title,
-                    R.string.security_privacy_grid_notification_summary,
-                    "com.epic.fragments.NotificationSettings",
-                    R.drawable.ic_notification));
+                    R.string.security_privacy_grid_sensor_block_title,
+                    R.string.security_privacy_grid_sensor_block_summary,
+                    "com.epic.fragments.SensorBlockSettings",
+                    null)); // No icon
             
-            // Row 9: About Us (left), Team (right)
+            // Row 8: Fingerprint Extra (left), Cell Security (right)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_about_us_title,
-                    R.string.security_privacy_grid_about_us_summary,
-                    "com.epic.fragments.AboutUsSettings",
+                    R.string.security_privacy_grid_fingerprint_extra_title,
+                    R.string.security_privacy_grid_fingerprint_extra_summary,
+                    "com.epic.fragments.SettingsExtendedSecurity", // Opens extended security settings
                     null));
             
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_team_title,
-                    R.string.security_privacy_grid_team_summary,
-                    "com.epic.fragments.AboutUsSettings",
-                    R.drawable.ic_team));
+                    R.string.security_privacy_grid_cell_security_title,
+                    R.string.security_privacy_grid_cell_security_summary,
+                    "com.android.settings.network.telephony.CellularSecuritySettingsFragment",
+                    null)); // No icon
+            
+            // Row 9: Accessibility Usage (left), USB (right)
+            items.add(new SecurityPrivacyGridAdapter.CardItem(
+                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_privacy_grid_accessibility_usage_title,
+                    R.string.security_privacy_grid_accessibility_usage_summary,
+                    "INTENT:android.intent.action.REVIEW_ACCESSIBILITY_SERVICES", // Special marker for intent launch
+                    null));
+            
+            items.add(new SecurityPrivacyGridAdapter.CardItem(
+                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
+                    R.string.security_privacy_grid_usb_title,
+                    R.string.security_privacy_grid_usb_summary,
+                    "com.android.settings.connecteddevice.usb.UsbDetailsFragment",
+                    null)); // No icon
 
-            rv.setAdapter(new SecurityPrivacyGridAdapter(activity, items, getMetricsCategory()));
+            SecurityPrivacyGridAdapter adapter = new SecurityPrivacyGridAdapter(activity, items, getMetricsCategory());
+            rv.setAdapter(adapter);
+            
+            // Initialize SecurityInfoHeaderController for the security header card
+            // Wait for the RecyclerView to layout, then find and initialize the header
+            rv.post(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        // Find the security header view in the RecyclerView (first item, position 0)
+                        androidx.recyclerview.widget.RecyclerView.ViewHolder vh = 
+                            rv.findViewHolderForAdapterPosition(0);
+                        if (vh != null && vh.itemView != null) {
+                            // The included layout should be directly in the itemView
+                            android.view.View headerView = vh.itemView.findViewById(R.id.security_header_content);
+                            if (headerView == null) {
+                                // Try finding the container from xd_about_phone_header
+                                headerView = vh.itemView.findViewById(R.id.container);
+                            }
+                            if (headerView != null) {
+                                // Initialize SecurityInfoHeaderController to populate the header
+                                com.epic.fragments.SecurityInfoHeaderController headerController = 
+                                    new com.epic.fragments.SecurityInfoHeaderController(getContext());
+                                // The controller will populate the TextViews in the header layout
+                                headerController.updateHeaderView(headerView);
+                            } else {
+                                android.util.Log.w("SecurityPrivacyGrid", "Security header view not found in RecyclerView");
+                            }
+                        }
+                    } catch (Exception e) {
+                        android.util.Log.e("SecurityPrivacyGrid", "Error initializing security header", e);
+                    }
+                }
+            });
         } catch (Exception e) {
             android.util.Log.e("SecurityPrivacyGrid", "Error setting up SecurityPrivacyGrid", e);
         }

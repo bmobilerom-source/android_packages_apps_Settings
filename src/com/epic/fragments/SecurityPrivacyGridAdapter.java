@@ -38,6 +38,7 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
     static final int CARD_TYPE_BUTTON = 7;
     static final int CARD_TYPE_TIME_DISPLAY = 8;
     static final int CARD_TYPE_PLACEHOLDER = 9; // Empty placeholder for grid alignment
+    static final int CARD_TYPE_SECURITY_HEADER = 10; // Security info header card
 
     static class CardItem {
         final int cardType;
@@ -45,13 +46,21 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
         final int summaryResId;
         final String destFragment;
         final Integer iconResId;
+        final boolean isToggle;
+        final String toggleKey; // Settings.Secure or Settings.System key for toggle state
         
         CardItem(int cardType, int titleResId, int summaryResId, String destFragment, Integer iconResId) {
+            this(cardType, titleResId, summaryResId, destFragment, iconResId, false, null);
+        }
+        
+        CardItem(int cardType, int titleResId, int summaryResId, String destFragment, Integer iconResId, boolean isToggle, String toggleKey) {
             this.cardType = cardType;
             this.titleResId = titleResId;
             this.summaryResId = summaryResId;
             this.destFragment = destFragment;
             this.iconResId = iconResId;
+            this.isToggle = isToggle;
+            this.toggleKey = toggleKey;
         }
     }
 
@@ -127,6 +136,9 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
             case CARD_TYPE_PLACEHOLDER:
                 layoutRes = R.layout.security_privacy_grid_card_placeholder;
                 break;
+            case CARD_TYPE_SECURITY_HEADER:
+                layoutRes = R.layout.security_privacy_grid_card_security_header;
+                break;
             default:
                 layoutRes = R.layout.security_privacy_grid_card_standard;
                 break;
@@ -153,7 +165,15 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                 holder.titleView.setText(item.titleResId);
             }
             if (holder.summaryView != null) {
-                holder.summaryView.setText(item.summaryResId);
+                // For toggle cards, update summary based on current state
+                if (item.isToggle && item.toggleKey != null) {
+                    boolean isEnabled = isToggleEnabled(item.toggleKey);
+                    String summary = activity.getString(item.summaryResId);
+                    String state = isEnabled ? activity.getString(android.R.string.yes) : activity.getString(android.R.string.no);
+                    holder.summaryView.setText(summary + " • " + state);
+                } else {
+                    holder.summaryView.setText(item.summaryResId);
+                }
             }
             
             // Handle icon - show icons for small cards, hide for others
@@ -215,11 +235,41 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                 // TextClock is already in the layout, it will update automatically
             }
             
+            // Handle Security Header card - non-clickable, just displays security info
+            if (item.cardType == CARD_TYPE_SECURITY_HEADER) {
+                // Make it non-clickable since it's just informational
+                holder.itemView.setClickable(false);
+                holder.itemView.setFocusable(false);
+                // The xd_about_phone_header layout will be populated by SecurityInfoHeaderController
+                // which should be initialized in the fragment
+            }
+            
             // Ensure all cards are visible (no placeholder cards)
             holder.itemView.setVisibility(View.VISIBLE);
             
-            // Set click listener - following InfinitySuite pattern with proper error handling
-            holder.itemView.setOnClickListener(v -> launchDestination(item.destFragment, item.titleResId));
+            // Handle toggle cards
+            if (item.isToggle && item.toggleKey != null) {
+                // Update card appearance based on toggle state
+                boolean isEnabled = isToggleEnabled(item.toggleKey);
+                updateToggleCardAppearance(holder.itemView, isEnabled);
+                
+                // Set click listener to toggle state
+                holder.itemView.setOnClickListener(v -> {
+                    toggleStatusbarFeature(item.toggleKey);
+                    // Refresh the card appearance
+                    boolean newState = isToggleEnabled(item.toggleKey);
+                    updateToggleCardAppearance(holder.itemView, newState);
+                    // Update summary
+                    if (holder.summaryView != null) {
+                        String summary = activity.getString(item.summaryResId);
+                        String state = newState ? activity.getString(android.R.string.yes) : activity.getString(android.R.string.no);
+                        holder.summaryView.setText(summary + " • " + state);
+                    }
+                });
+            } else if (item.cardType != CARD_TYPE_SECURITY_HEADER && item.destFragment != null) {
+                // Set click listener for regular cards - skip for security header (non-clickable)
+                holder.itemView.setOnClickListener(v -> launchDestination(item.destFragment, item.titleResId));
+            }
         } catch (Exception e) {
             Log.e("SecurityPrivacyGridAdapter", "Error in onBindViewHolder at position " + position, e);
         }
@@ -258,8 +308,8 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                                 CardItem item = items.get(position);
                                 if (item != null) {
                                     int cardType = item.cardType;
-                                    // Wide cards span 2 columns
-                                    if (cardType == CARD_TYPE_WIDE) {
+                                    // Wide cards and security header span 2 columns
+                                    if (cardType == CARD_TYPE_WIDE || cardType == CARD_TYPE_SECURITY_HEADER) {
                                         return 2;
                                     }
                                     // LockScreen card spans 2 rows visually (but still 1 column)
@@ -295,6 +345,15 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
         }
         
         try {
+            // Handle special intent markers
+            if (destFragment != null && destFragment.startsWith("INTENT:")) {
+                String intentAction = destFragment.substring(7); // Remove "INTENT:" prefix
+                if (Intent.ACTION_REVIEW_ACCESSIBILITY_SERVICES.equals(intentAction)) {
+                    launchAccessibilityUsageIntent();
+                    return;
+                }
+            }
+            
             // Handle Wallpaper picker activity (like InfinitySuite)
             if (destFragment.contains("WallpaperSettings") || destFragment.contains("wallpaper")) {
                 launchWallpaperPickerActivity();
@@ -330,6 +389,20 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
             } catch (Exception fallbackException) {
                 showErrorToast();
             }
+        }
+    }
+    
+    private void launchAccessibilityUsageIntent() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_REVIEW_ACCESSIBILITY_SERVICES);
+            String packageName = activity.getPackageManager().getPermissionControllerPackageName();
+            if (packageName != null) {
+                intent.setPackage(packageName);
+            }
+            activity.startActivity(intent);
+        } catch (Exception e) {
+            Log.e("SecurityPrivacyGridAdapter", "Failed to launch accessibility usage", e);
+            showErrorToast();
         }
     }
     
@@ -378,5 +451,89 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
     private void showErrorToast() {
         Toast.makeText(activity, R.string.system_tuner_not_available, 
             Toast.LENGTH_SHORT).show();
+    }
+    
+    /**
+     * Check if a toggle is enabled based on Settings key
+     */
+    private boolean isToggleEnabled(String toggleKey) {
+        try {
+            return android.provider.Settings.Secure.getInt(activity.getContentResolver(), toggleKey, 0) == 1;
+        } catch (Exception e) {
+            Log.e("SecurityPrivacyGridAdapter", "Error reading toggle state for " + toggleKey, e);
+            return false;
+        }
+    }
+    
+    /**
+     * Toggle a feature on/off
+     */
+    private void toggleStatusbarFeature(String toggleKey) {
+        try {
+            boolean currentState = isToggleEnabled(toggleKey);
+            int newState = currentState ? 0 : 1;
+            android.provider.Settings.Secure.putInt(activity.getContentResolver(), toggleKey, newState);
+            Log.d("SecurityPrivacyGridAdapter", "Toggled " + toggleKey + " to " + (newState == 1 ? "enabled" : "disabled"));
+            
+            // Broadcast change so SystemUI/framework can respond
+            String action = getBroadcastActionForToggle(toggleKey);
+            if (action != null) {
+                Intent intent = new Intent(action);
+                intent.putExtra("enabled", newState == 1);
+                intent.putExtra("toggle_key", toggleKey);
+                activity.sendBroadcast(intent);
+            }
+        } catch (Exception e) {
+            Log.e("SecurityPrivacyGridAdapter", "Error toggling " + toggleKey, e);
+        }
+    }
+    
+    /**
+     * Get the broadcast action for a specific toggle key
+     */
+    private String getBroadcastActionForToggle(String toggleKey) {
+        if ("secure_lockscreen_qs_disabled".equals(toggleKey)) {
+            return "com.android.settings.DISABLE_QS_TOGGLE_CHANGED";
+        } else if ("no_storage_restrict".equals(toggleKey)) {
+            return "com.android.settings.DISABLE_SAF_TOGGLE_CHANGED";
+        } else if ("window_ignore_secure".equals(toggleKey)) {
+            return "com.android.settings.WINDOW_IGNORE_SECURE_TOGGLE_CHANGED";
+        } else if ("statusbar_enabled".equals(toggleKey)) {
+            return "com.android.settings.STATUSBAR_TOGGLE_CHANGED";
+        }
+        return null;
+    }
+    
+    /**
+     * Update card appearance based on toggle state
+     * When enabled: brighter color with full opacity
+     * When disabled: dimmed color with reduced opacity
+     */
+    private void updateToggleCardAppearance(View cardView, boolean isEnabled) {
+        try {
+            // Get the card's background drawable
+            android.graphics.drawable.Drawable background = cardView.getBackground();
+            if (background != null) {
+                if (isEnabled) {
+                    // Enabled: Full opacity and brighter color
+                    background.setAlpha(255);
+                    // Add a subtle tint to indicate it's active (green-ish)
+                    background.setColorFilter(
+                        android.graphics.Color.argb(30, 76, 175, 80), // Light green tint
+                        android.graphics.PorterDuff.Mode.OVERLAY);
+                } else {
+                    // Disabled: Reduced opacity and no color filter
+                    background.setAlpha(180);
+                    background.clearColorFilter();
+                }
+            }
+            
+            // Also update the card's elevation to show it's "pressed" when enabled
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                cardView.setElevation(isEnabled ? 4f : 0f);
+            }
+        } catch (Exception e) {
+            Log.e("SecurityPrivacyGridAdapter", "Error updating toggle card appearance", e);
+        }
     }
 }
