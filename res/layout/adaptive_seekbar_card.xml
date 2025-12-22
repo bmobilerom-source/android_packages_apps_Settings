@@ -68,7 +68,7 @@
                 android:maxLines="4"
                 tools:text="Summary text goes here" />
 
-            <!-- Widget Frame - SeekBarPreference will inject SeekBar here -->
+            <!-- SeekBar with Value Display -->
             <LinearLayout
                 android:id="@*android:id/widget_frame"
                 android:layout_width="match_parent"
@@ -79,8 +79,19 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp">
 
-                <!-- SeekBarPreference will create its SeekBar widget here -->
-                <!-- This provides proper spacing and alignment for the SeekBar -->
+                <!-- Current Value TextView - Required by SeekBarPreference -->
+                <TextView
+                    android:id="@+id/seekbar_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="visible" />
+
+                <!-- SeekBarPreference will inject SeekBar here -->
+                <!-- Container for SeekBar widget -->
 
             </LinearLayout>
 
@@ -89,4 +100,5 @@
     </FrameLayout>
 
 </FrameLayout>
+
 
