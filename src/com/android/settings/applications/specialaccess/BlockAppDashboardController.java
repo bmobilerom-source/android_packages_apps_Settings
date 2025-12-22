@@ -45,18 +45,17 @@ public class BlockAppDashboardController extends TogglePreferenceController {
 
     @Override
     public boolean isChecked() {
-        // Default to disabled (0) - allow access by default
-        return Settings.Secure.getInt(mContext.getContentResolver(), SETTINGS_KEY, 0) != 0;
+        // Permanently enabled - always return true
+        return true;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        boolean result = Settings.Secure.putInt(mContext.getContentResolver(), SETTINGS_KEY,
-                isChecked ? 1 : 0);
-        if (result) {
-            Log.d(TAG, "App Dashboard access " + (isChecked ? "blocked" : "allowed"));
-        }
-        return result;
+        // Permanently blocked - prevent any changes, always keep enabled
+        // Force the setting to always be enabled
+        Settings.Secure.putInt(mContext.getContentResolver(), SETTINGS_KEY, 1);
+        Log.d(TAG, "App Dashboard access permanently blocked");
+        return false; // Return false to prevent UI changes
     }
 
     @Override
@@ -67,6 +66,8 @@ public class BlockAppDashboardController extends TogglePreferenceController {
             // Ensure preference is enabled but not selectable
             switchPref.setEnabled(true);
             switchPref.setSelectable(false);
+            // Force the setting to be permanently enabled
+            Settings.Secure.putInt(mContext.getContentResolver(), SETTINGS_KEY, 1);
         }
     }
 

@@ -19,6 +19,9 @@ package com.android.settings.emergency;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.accounts.EmergencyInfoPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -58,6 +61,26 @@ public class EmergencyDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Ensure card layouts are applied to programmatically added preferences
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            // Emergency SOS (Emergency Gesture)
+            Preference emergencySOSPref = screen.findPreference("gesture_emergency_summary");
+            if (emergencySOSPref != null) {
+                emergencySOSPref.setLayoutResource(R.layout.adaptive_preference_card_top);
+            }
+            
+            // Emergency Information
+            Preference emergencyInfoPref = screen.findPreference("emergency_info");
+            if (emergencyInfoPref != null) {
+                emergencyInfoPref.setLayoutResource(R.layout.adaptive_preference_card_bottom);
+            }
+        }
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {

@@ -26,6 +26,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -50,6 +51,15 @@ public class EmergencyInfoPreferenceController extends BasePreferenceController 
             data.title = res.getString(com.android.settings.R.string.emergency_info_title);
             data.screenTitle = res.getString(com.android.settings.R.string.emergency_info_title);
             rawData.add(data);
+        }
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null && isAvailable()) {
+            preference.setLayoutResource(R.layout.adaptive_preference_card_bottom);
         }
     }
 
