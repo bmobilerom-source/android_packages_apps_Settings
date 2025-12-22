@@ -180,11 +180,11 @@ class SystemBasicDefaultsAdapter extends RecyclerView.Adapter<SystemBasicDefault
         }
     }
     
-    /**
-     * Launch destination fragment, activity, or intent
-     * Handles Aurora Store intent, Settings fragments, LineageParts activities,
-     * and special dashboard entries.
-     */
+        /**
+         * Launch destination fragment, activity, or intent
+         * Handles Aurora Store intent, Settings fragments, LineageParts activities,
+         * and special dashboard entries.
+         */
     private void launchDestination(String destFragment, int titleResId) {
         // Handle special keys
         if (destFragment == null || destFragment.isEmpty()) {
