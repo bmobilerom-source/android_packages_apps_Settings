@@ -38,6 +38,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -132,6 +133,27 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     @Override
     public int getHelpResource() {
         return R.string.help_url_sound;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Apply card layouts to programmatically added preferences
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            // Live Caption - already handled by LiveCaptionPreferenceController.displayPreference()
+            // but ensure it's set in case of rebinding
+            Preference liveCaptionPref = screen.findPreference("live_caption");
+            if (liveCaptionPref != null) {
+                liveCaptionPref.setLayoutResource(R.layout.adaptive_preference_card);
+            }
+            
+            // Now Playing - apply card layout programmatically
+            Preference nowPlayingPref = screen.findPreference("now_playing");
+            if (nowPlayingPref != null) {
+                nowPlayingPref.setLayoutResource(R.layout.adaptive_preference_card);
+            }
+        }
     }
 
     @Override
