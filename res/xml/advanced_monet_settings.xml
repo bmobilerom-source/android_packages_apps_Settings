@@ -33,6 +33,7 @@
             android:min="50"
             android:defaultValue="100"
             android:icon="@drawable/ic_settings_display"
+            settings:layout="@layout/adaptive_seekbar_card"
             settings:controller="com.android.settings.display.MonetChromaMultiplierController" />
 
         <ListPreference
