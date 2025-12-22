@@ -184,19 +184,41 @@ public class LocationPrecisionController extends BasePreferenceController implem
         // Precise mode: Enable all GPS features for maximum accuracy
         // Set minimum time and distance for high accuracy
         setLocationAccuracyMode("precise", 1000L, 0.0f); // 1 second, 0 meters
+        
+        // Remove accuracy restrictions for precise mode
+        Settings.Secure.putFloat(
+            mContext.getContentResolver(),
+            "location_max_accuracy",
+            10.0f // 10m maximum accuracy for precise mode (essentially unlimited)
+        );
     }
 
     private void applyApproximateMode() {
         // Approximate mode: Reduce update frequency and accuracy for better battery life
         // Increase minimum time and distance for medium accuracy
         setLocationAccuracyMode("approximate", 5000L, 100.0f); // 5 seconds, 100 meters
+        
+        // Set maximum accuracy to 1km to ensure approximate location is less accurate
+        Settings.Secure.putFloat(
+            mContext.getContentResolver(),
+            "location_max_accuracy",
+            1000.0f // 1km maximum accuracy for approximate mode
+        );
     }
 
     private void applyCoarseMode() {
         // Coarse mode: Maximum privacy protection - severely limit location tracking
         // Very infrequent updates with large distance thresholds for enhanced privacy
         // Reduces tracking frequency to once every 5 minutes minimum
+        // Add significant noise (5km radius) to location coordinates for maximum privacy
         setLocationAccuracyMode("coarse", 300000L, 2000.0f); // 5 minutes, 2 km
+        
+        // Set maximum accuracy to 5km to ensure coarse location is actually less accurate
+        Settings.Secure.putFloat(
+            mContext.getContentResolver(),
+            "location_max_accuracy",
+            5000.0f // 5km maximum accuracy for coarse mode
+        );
     }
 
     /**

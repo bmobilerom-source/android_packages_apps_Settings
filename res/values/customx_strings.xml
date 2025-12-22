@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="userinfo_bubble_setting_description">Welcome to your Control Center - the ultimate hub for device management and personalization! Access powerful tools for app management, accounts, privacy, security, and customization. AtomicHub cards give you instant access to journaling, private space, sessions, and optimization - everything to personalize and secure your device.</string>
+    <string name="userinfo_bubble_setting_description">Welcome to your Control Center - the ultimate hub for device management and personalization! Access powerful tools for app management, accounts, privacy, security, and customization.</string>
     <string name="multiuser_settings_title">Multi User Options</string>
     <string name="accounts_settings_title">Personal Accounts</string>
     <string name="emergency_settings_title">Emergency</string>
