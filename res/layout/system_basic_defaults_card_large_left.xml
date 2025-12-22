@@ -24,20 +24,20 @@
     android:padding="8dp">
 
    
-    <!-- Aurora Store Button - light blue oval -->
+    <!-- Aurora Store Button - light blue oval - 20% lower - thicker -->
     <LinearLayout
         android:id="@+id/system_basic_defaults_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:minHeight="34dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="20dp"
+        android:minHeight="52dp"
         android:background="@drawable/button_oval_light_blue"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:padding="8dp">
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/system_basic_defaults_button"

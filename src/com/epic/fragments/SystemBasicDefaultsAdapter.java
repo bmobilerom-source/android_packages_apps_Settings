@@ -139,10 +139,12 @@ class SystemBasicDefaultsAdapter extends RecyclerView.Adapter<SystemBasicDefault
             }
         }
         
-        // Handle button text for large left card
+        // Handle button text for large left card and enlarge it (19% bigger) via scale
         if (holder.buttonTextView != null && item.buttonText != null) {
             holder.buttonTextView.setText(item.buttonText);
             holder.buttonTextView.setVisibility(View.VISIBLE);
+            holder.buttonTextView.setScaleX(1.19f);
+            holder.buttonTextView.setScaleY(1.19f);
             // Make button container clickable independently
             if (holder.buttonContainer != null) {
                 holder.buttonContainer.setClickable(true);
@@ -163,10 +165,11 @@ class SystemBasicDefaultsAdapter extends RecyclerView.Adapter<SystemBasicDefault
         }
     }
     
-    /**
-     * Launch destination fragment, activity, or intent
-     * Handles Aurora Store intent, Settings fragments, and LineageParts activities
-     */
+        /**
+         * Launch destination fragment, activity, or intent
+         * Handles Aurora Store intent, Settings fragments, LineageParts activities,
+         * and special dashboard entries.
+         */
     private void launchDestination(String destFragment, int titleResId) {
         // Handle special keys
         if (destFragment == null || destFragment.isEmpty()) {

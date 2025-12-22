@@ -93,9 +93,9 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
             }
             
             // Use 3 columns:
-            // - Large left card spans 2 columns (visually 2 rows tall via its own height)
-            // - Right-side cards each take 1 column stacked vertically
-            // - Circular buttons take 1 column each -> 3 per row as in the desired design
+            // - Large left card spans full width (3 columns)
+            // - Default Apps card spans full width below it
+            // - Circular buttons take 1 column each -> 3 per row
             androidx.recyclerview.widget.GridLayoutManager layoutManager =
                     new androidx.recyclerview.widget.GridLayoutManager(context, 3);
             rv.setLayoutManager(layoutManager);
@@ -120,13 +120,13 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     "default_apps")); // Special key for intent launch
             
             // Circular buttons (6 buttons)
-            // 1. Anatolia Settings
+            // 1. Anatolia Settings - Now opens Extended Security
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.anatolia_settings_title,
                     R.string.anatolia_settings_summary,
                     R.drawable.ic_system_basic_defaults_anatolia,
-                    "com.epic.Anatolia"));
+                    "com.epic.fragments.SettingsExtendedSecurity"));
             
             // 2. Gesture Navigation
             items.add(new SystemBasicDefaultsAdapter.CardItem(
@@ -160,13 +160,13 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     R.drawable.ic_system_basic_defaults_dark_theme,
                     "com.android.settings.display.darkmode.DarkModeSettingsFragment"));
             
-            // 6. Placeholder for future expansion
+            // 6. Monet color customization page
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                    R.string.system_basic_defaults_more_title,
-                    R.string.system_basic_defaults_more_summary,
+                    R.string.monet_color_settings_title,
+                    R.string.monet_color_settings_summary,
                     R.drawable.ic_system_basic_defaults_more,
-                    "com.epic.Anatolia"));
+                    "com.android.settings.display.MonetColorSettings"));
 
             rv.setAdapter(new SystemBasicDefaultsAdapter(activity, items, getMetricsCategory()));
         } catch (Exception e) {
