@@ -59,6 +59,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.epic.utils.CardNavigationHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,7 @@ import java.util.List;
  * Provides additional granular security options beyond standard security settings.
  * This page is completely independent and can be transferred to other ROMs.
  */
-public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
+public class SettingsExtendedSecurity extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String TAG = "SettingsExtendedSecurity";
     private SecurityInfoHeaderController mSecurityInfoHeaderController;
@@ -81,6 +82,8 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
     private static final String KEY_NO_STORAGE_RESTRICT = "no_storage_restrict";
     private static final String KEY_WINDOW_IGNORE_SECURE = "window_ignore_secure";
     private static final String KEY_SECURE_LOCKSCREEN_QS_DISABLED = "secure_lockscreen_qs_disabled";
+    private static final String KEY_POCKET_LOCK = "pocket_lock";
+    private CardNavigationHelper mCardHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,8 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
         PreferenceScreen screen = getPreferenceScreen();
         if (screen != null) {
             mSecurityInfoHeaderController.displayPreference(screen);
+        }
+        
         final PreferenceScreen prefScreen = getPreferenceScreen();
         final ContentResolver resolver = getActivity().getContentResolver();
         final Context context = getActivity();
@@ -139,18 +144,23 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
                 return true;
             } else if (KEY_NO_STORAGE_RESTRICT.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.Global.putInt(resolver, KEY_NO_STORAGE_RESTRICT, enabled ? 1 : 0);
+                Settings.Secure.putInt(resolver, KEY_NO_STORAGE_RESTRICT, enabled ? 1 : 0);
                 Log.d(TAG, "no_storage_restrict set to: " + enabled);
                 return true;
             } else if (KEY_WINDOW_IGNORE_SECURE.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.Global.putInt(resolver, KEY_WINDOW_IGNORE_SECURE, enabled ? 1 : 0);
+                Settings.Secure.putInt(resolver, KEY_WINDOW_IGNORE_SECURE, enabled ? 1 : 0);
                 Log.d(TAG, "window_ignore_secure set to: " + enabled);
                 return true;
             } else if (KEY_SECURE_LOCKSCREEN_QS_DISABLED.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.System.putInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, enabled ? 1 : 0);
+                Settings.Secure.putInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, enabled ? 1 : 0);
                 Log.d(TAG, "secure_lockscreen_qs_disabled set to: " + enabled);
+                return true;
+            } else if (KEY_POCKET_LOCK.equals(key)) {
+                boolean enabled = (Boolean) newValue;
+                Settings.Secure.putInt(resolver, KEY_POCKET_LOCK, enabled ? 1 : 0);
+                Log.d(TAG, "pocket_lock set to: " + enabled);
                 return true;
             }
         } catch (Exception e) {
@@ -212,7 +222,7 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
             // Update no storage restrict preference
             Preference noStorageRestrictPref = findPreference(KEY_NO_STORAGE_RESTRICT);
             if (noStorageRestrictPref != null) {
-                int storageRestrictEnabled = Settings.Global.getInt(resolver, KEY_NO_STORAGE_RESTRICT, 0);
+                int storageRestrictEnabled = Settings.Secure.getInt(resolver, KEY_NO_STORAGE_RESTRICT, 0);
                 if (noStorageRestrictPref instanceof androidx.preference.TwoStatePreference) {
                     ((androidx.preference.TwoStatePreference) noStorageRestrictPref)
                             .setChecked(storageRestrictEnabled != 0);
@@ -223,7 +233,7 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
             // Update window ignore secure preference
             Preference windowIgnoreSecurePref = findPreference(KEY_WINDOW_IGNORE_SECURE);
             if (windowIgnoreSecurePref != null) {
-                int windowIgnoreSecureEnabled = Settings.Global.getInt(resolver, KEY_WINDOW_IGNORE_SECURE, 0);
+                int windowIgnoreSecureEnabled = Settings.Secure.getInt(resolver, KEY_WINDOW_IGNORE_SECURE, 0);
                 if (windowIgnoreSecurePref instanceof androidx.preference.TwoStatePreference) {
                     ((androidx.preference.TwoStatePreference) windowIgnoreSecurePref)
                             .setChecked(windowIgnoreSecureEnabled != 0);
@@ -234,16 +244,38 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment {
             // Update secure lockscreen qs disabled preference
             Preference secureLockscreenQsPref = findPreference(KEY_SECURE_LOCKSCREEN_QS_DISABLED);
             if (secureLockscreenQsPref != null) {
-                int qsDisabled = Settings.System.getInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, 0);
+                int qsDisabled = Settings.Secure.getInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, 0);
                 if (secureLockscreenQsPref instanceof androidx.preference.TwoStatePreference) {
                     ((androidx.preference.TwoStatePreference) secureLockscreenQsPref)
                             .setChecked(qsDisabled != 0);
                 }
                 secureLockscreenQsPref.setOnPreferenceChangeListener(this);
             }
+
+            // Update pocket lock preference
+            Preference pocketLockPref = findPreference(KEY_POCKET_LOCK);
+            if (pocketLockPref != null) {
+                int pocketLockEnabled = Settings.Secure.getInt(resolver, KEY_POCKET_LOCK, 0);
+                if (pocketLockPref instanceof androidx.preference.TwoStatePreference) {
+                    ((androidx.preference.TwoStatePreference) pocketLockPref)
+                            .setChecked(pocketLockEnabled != 0);
+                }
+                pocketLockPref.setOnPreferenceChangeListener(this);
+            }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference states", e);
         }
+
+        // Initialize card navigation helper
+        mCardHelper = new CardNavigationHelper(this);
+    }
+
+    @Override
+    public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Setup click handling for navigation cards
+        mCardHelper.setupCardClickHandling(view);
     }
 
     @Override
