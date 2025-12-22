@@ -80,15 +80,7 @@
             settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.display.MonetColorStyleController" />
 
-        <!-- Monochromatic Mode (independent toggle that overrides all styles) -->
-        <SwitchPreference
-            android:key="monet_monochromatic_mode"
-            android:title="@string/monet_monochromatic_title"
-            android:summary="@string/monet_monochromatic_summary"
-            android:defaultValue="false"
-            settings:layout="@layout/adaptive_preference_card"
-            settings:controller="com.android.settings.display.MonetMonochromaticController" />
-
+        <!-- Monochromatic Mode toggle removed: feature is not fully supported in current build -->
     </PreferenceCategory>
 
  <!-- TODO: Settings Background Tint - Will be released in future update -->
