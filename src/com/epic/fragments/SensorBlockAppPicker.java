@@ -92,8 +92,6 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.hide_developer_status_layout, container, false);
-        // Ensure wallpaper background is added
-        ensureWallpaperBackground(rootView);
         return rootView;
     }
 
