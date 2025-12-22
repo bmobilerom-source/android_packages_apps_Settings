@@ -17,9 +17,11 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:maxHeight="200dp"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    android:layout_marginHorizontal="@dimen/xd_pref_card_horizontal_padding"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     android:background="@drawable/xd_pref_card_sin"
     android:clipToPadding="false">
 
@@ -28,8 +30,10 @@
         android:layout_height="wrap_content"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:gravity="center_vertical"
-        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:clipToPadding="false"
         android:baselineAligned="false">
 
@@ -37,16 +41,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:paddingStart="-8dp"
-            android:paddingEnd="16dp">
+            android:paddingEnd="12dp">
 
             <TextView
                 android:id="@+id/xd_about_phone_header_device"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/xd_security_android_version"
                 style="@style/xd_text_primary"/>
             
@@ -54,7 +58,7 @@
                 android:id="@+id/xd_about_phone_header_device_desc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="6dp"
                 android:text="@string/xd_security_android_version_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_device"
@@ -74,7 +78,7 @@
                 android:id="@+id/xd_about_phone_header_chipset_desc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="6dp"
                 android:text="@string/xd_security_patch_level_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_chipset"
@@ -94,7 +98,7 @@
                 android:id="@+id/xd_about_phone_header_gpu_desc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="6dp"
                 android:text="@string/xd_security_build_number_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_gpu"
@@ -114,7 +118,7 @@
                 android:id="@+id/xd_about_phone_header_camera_desc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="6dp"
                 android:text="@string/xd_security_api_level_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_camera"
@@ -134,7 +138,7 @@
                 android:id="@+id/xd_about_phone_header_screen_desc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="6dp"
                 android:text="@string/xd_security_kernel_version_summary"
                 android:singleLine="true"
                 android:layout_below="@id/xd_about_phone_header_screen"
@@ -152,6 +156,7 @@
             app:cardCornerRadius="18dp">
 
             <ImageView
+                android:id="@+id/xd_about_phone_header_wallpaper"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
