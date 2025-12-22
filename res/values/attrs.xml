@@ -208,4 +208,14 @@
     <attr name="units" format="string"/>
     <attr name="interval" format="integer"/>
     <attr name="position" format="integer"/>
+
+    <!-- For StorageItemPreference card background -->
+    <declare-styleable name="StorageItemPreference">
+        <attr name="useCardBackground" format="boolean" />
+        <attr name="cardBackgroundColor" format="color" />
+        <attr name="cardCornerRadius" format="dimension" />
+        <attr name="cardElevation" format="dimension" />
+        <attr name="cardStrokeWidth" format="dimension" />
+        <attr name="cardStrokeColor" format="color" />
+    </declare-styleable>
 </resources>
