@@ -148,22 +148,7 @@
         settings:requiresConfig="@bool/config_show_charging_sounds" 
         settings:layout="@layout/adaptive_preference_card_middle" />
 
-    <!-- Live Caption -110 and Now Playing -105-->
-    <Preference
-        android:key="live_caption"
-        android:title="@string/live_caption_title"
-        android:summary="Automatically caption speech"
-        android:order="-110"
-        settings:layout="@layout/adaptive_preference_card"
-        settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"
-        settings:keywords="@string/keywords_live_caption"/>
-
-    <Preference
-        android:key="now_playing"
-        android:title="Now Playing"
-        android:summary="Identify songs playing nearby"
-        android:order="-105"
-        settings:layout="@layout/adaptive_preference_card"/>
+    <!-- Live Caption and Now Playing are added programmatically via controllers -->
 
     <!-- Spatial audio -->
     <Preference
