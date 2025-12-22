@@ -432,6 +432,46 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mSystemPreference = screen.findPreference(SYSTEM_KEY);
         mTemporaryFilesPreference = screen.findPreference(TEMPORARY_FILES_KEY);
         mTrashPreference = screen.findPreference(TRASH_KEY);
+        
+        // Apply card layouts to storage item preferences
+        applyCardLayouts();
+    }
+    
+    private void applyCardLayouts() {
+        // Apply card layouts to all storage category preferences
+        if (mImagesPreference != null) {
+            mImagesPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mVideosPreference != null) {
+            mVideosPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mAudioPreference != null) {
+            mAudioPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mAppsPreference != null) {
+            mAppsPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mGamesPreference != null) {
+            mGamesPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mDocumentsPreference != null) {
+            mDocumentsPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mOtherPreference != null) {
+            mOtherPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mTrashPreference != null) {
+            mTrashPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mSystemPreference != null) {
+            mSystemPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mTemporaryFilesPreference != null) {
+            mTemporaryFilesPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mPublicStoragePreference != null) {
+            mPublicStoragePreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
     }
 
     /**
