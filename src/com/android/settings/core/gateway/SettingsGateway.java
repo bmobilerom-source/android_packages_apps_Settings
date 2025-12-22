@@ -189,6 +189,7 @@ import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.privacy.PrivacyControlsFragment;
 import com.android.settings.privacy.PrivacyDashboardFragment;
+import com.android.settings.applications.specialaccess.SpecialAccessSettings;
 import com.android.settings.privatespace.delete.PrivateSpaceDeleteFragment;
 import com.android.settings.privatespace.delete.PrivateSpaceDeletionProgressFragment;
 import com.android.settings.privatespace.onelock.PrivateSpaceBiometricSettings;
@@ -221,6 +222,7 @@ import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settings.wifi.tether.WifiTetherSettings;
 import com.epic.fragments.AutoRebootSettings;
+import com.epic.fragments.SecurityPrivacyGrid;
 
 public class SettingsGateway {
 
@@ -271,9 +273,11 @@ public class SettingsGateway {
             WifiScanningFragment.class.getName(),
             PrivacyDashboardFragment.class.getName(),
             PrivacyControlsFragment.class.getName(),
+            SpecialAccessSettings.class.getName(),
             LocationServices.class.getName(),
             SecuritySettings.class.getName(),
             SecurityAdvancedSettings.class.getName(),
+            com.epic.fragments.SecurityFeaturesSettings.class.getName(),
             MoreSecurityPrivacyFragment.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
@@ -334,6 +338,7 @@ public class SettingsGateway {
             ChooseLockPattern.ChooseLockPatternFragment.class.getName(),
             AppInfoDashboardFragment.class.getName(),
             BatterySaverSettings.class.getName(),
+            SecurityPrivacyGrid.class.getName(),
             AppNotificationSettings.class.getName(),
             PoliteNotificationsPreferenceFragment.class.getName(),
             NotificationAssistantPicker.class.getName(),
@@ -428,6 +433,8 @@ public class SettingsGateway {
             ZenModeFragment.class.getName(),
             ContactsStorageSettings.class.getName(),
             com.epic.fragments.SettingsExtendedSecurity.class.getName(),
+            com.epic.fragments.SensorBlockSettings.class.getName(),
+            com.epic.fragments.PocketModeSettings.class.getName(),
             com.epic.fragments.MyPersonalFragment.class.getName(),
             com.epic.fragments.MySessionFragment.class.getName(),
             com.epic.fragments.BMobileSettingsFragment.class.getName(),
@@ -435,15 +442,22 @@ public class SettingsGateway {
             com.epic.fragments.NotificationSettings.class.getName(),
             com.epic.fragments.GestureSettings.class.getName(),
             com.epic.fragments.NavbarSettings.class.getName(),
+            com.epic.fragments.SystemApplicationSettings.class.getName(),
+            com.epic.fragments.SystemSafeApplicationsSettings.class.getName(),
+            com.epic.fragments.SystemGrid.class.getName(),
+            com.epic.fragments.DisplayPageGrid.class.getName(),
+            com.epic.fragments.StatusBarSettings.class.getName(),
             com.android.settings.deviceinfo.BMobileAccountsFragment.class.getName(),
             com.android.settings.deviceinfo.BMobileUserInfoFragment.class.getName(),
             com.palladium.atomichub.Atomichub.class.getName(),
             com.palladium.atomichub.Atomichub2.class.getName(),
             StatusBarSettings.class.getName(),
+            com.epic.fragments.StatusBarSettings.class.getName(),
             QuickSettingsSettings.class.getName(),
             MonetColorSettings.class.getName(),
             com.epic.fragments.SensorBlockSettings.class.getName(),
-            com.epic.fragments.SensorBlockAppPicker.class.getName()
+            com.epic.fragments.SensorBlockAppPicker.class.getName(),
+            com.android.settings.display.AdvancedMonetSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
