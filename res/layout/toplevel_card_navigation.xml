@@ -27,7 +27,8 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background">
+            android:background="@drawable/custom_preference_background"
+            android:tag="privacy_controls">
 
             <RelativeLayout
                 android:id="@+id/card_1_frame"
@@ -42,12 +43,10 @@
                     android:layout_marginTop="16dp"
                     style="@style/mtx_text_style_h6"
                     android:textColor="?android:attr/colorAccent"
-                    android:text="My Journal"
-                    android:textSize="20sp"
+                    android:text="Privacy Controls"
+                    android:textSize="18sp"
                     android:gravity="center"
-                    android:layout_alignParentTop="true" />
-
-       
+                    android:layout_centerVertical="true" />
 
                 <TextView
                     android:id="@+id/card_1_summary"
@@ -55,13 +54,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="View My Journal"
+                    android:text="Manage privacy settings and permissions"
                     android:textSize="12sp"
                     android:textStyle="italic"
                     android:textColor="?android:attr/colorAccent"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone"/>
         
             </RelativeLayout>
 
@@ -83,19 +83,35 @@
             android:clipChildren="true"
             android:clipToPadding="true"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background">
+            android:background="@drawable/custom_preference_background"
+            android:tag="privacy_dashboard">
 
             <TextView
                 android:id="@+id/card_2_title"
                 style="@style/mtx_text_style_h6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MySession"
-                android:textSize="20sp"
-                android:textColor="@color/mtx_text_color_primary"
-                android:layout_marginTop="11dp"
+                android:text="Privacy Dashboard"
+                android:textSize="18sp"
+                android:textColor="?android:attr/colorAccent"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:layout_alignParentTop="true" />
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/card_2_summary"
+                style="@style/mtx_text_style_h6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View privacy status and controls"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:textColor="?android:attr/colorAccent"
+                android:gravity="center"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="16dp"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone" />
 
         </RelativeLayout>
 
@@ -122,7 +138,8 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background">
+            android:background="@drawable/custom_preference_background"
+            android:tag="special_access">
 
             <RelativeLayout
                 android:id="@+id/card_3_frame"
@@ -137,25 +154,25 @@
                     android:layout_marginTop="16dp"
                     style="@style/mtx_text_style_h6"
                     android:textColor="?android:attr/colorAccent"
-                    android:text="Private Space"
-                    android:textSize="20sp"
+                    android:text="Special Access"
+                    android:textSize="18sp"
                     android:gravity="center"
-                    android:layout_alignParentTop="true" />
+                    android:layout_centerVertical="true" />
 
-     
                 <TextView
                     android:id="@+id/card_3_summary"
                     style="@style/mtx_text_style_h6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Activate Private Space"
+                    android:text="App permissions and special access"
                     android:textSize="12sp"
                     android:textStyle="italic"
                     android:textColor="?android:attr/colorAccent"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone"/>
         
             </RelativeLayout>
 
@@ -177,19 +194,35 @@
             android:clipChildren="true"
             android:clipToPadding="true"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background">
+            android:background="@drawable/custom_preference_background"
+            android:tag="security_features">
 
             <TextView
                 android:id="@+id/card_4_title"
                 style="@style/mtx_text_style_h6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Duress"
-                android:textSize="20sp"
-                android:textColor="@color/mtx_text_color_primary"
-                android:layout_marginTop="11dp"
+                android:text="Security Features"
+                android:textSize="18sp"
+                android:textColor="?android:attr/colorAccent"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:layout_alignParentTop="true" />
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/card_4_summary"
+                style="@style/mtx_text_style_h6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View current security settings and status"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:textColor="?android:attr/colorAccent"
+                android:gravity="center"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="16dp"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone" />
 
          
         </RelativeLayout>
