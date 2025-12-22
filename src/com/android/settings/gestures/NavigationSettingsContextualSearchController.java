@@ -27,6 +27,7 @@ import android.provider.Settings;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 
 import com.android.settings.core.TogglePreferenceController;
 
@@ -50,40 +51,39 @@ public class NavigationSettingsContextualSearchController extends TogglePreferen
 
     @Override
     public boolean isChecked() {
-        // First check if native Circle to Search is available
-        if (mContext.getPackageManager().hasSystemFeature(FEATURE_CONTEXTUAL_SEARCH)) {
-            boolean onByDefault = mContext.getResources().getBoolean(
-                    com.android.internal.R.bool.config_searchAllEntrypointsEnabledDefault);
-            return Settings.Secure.getInt(mContext.getContentResolver(),
-                    Settings.Secure.SEARCH_ALL_ENTRYPOINTS_ENABLED, onByDefault ? 1 : 0)
-                    == 1;
-        }
-
-        // On Lineage ROM without native feature, check if drawing app is configured
-        return isDrawingAppAvailable();
+        // Permanently enabled - always return true
+        return true;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        // First check if native Circle to Search is available
+        // Permanently enabled - prevent any changes, always keep enabled
+        // For native Circle to Search, ensure it's enabled
         if (mContext.getPackageManager().hasSystemFeature(FEATURE_CONTEXTUAL_SEARCH)) {
-            return Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.SEARCH_ALL_ENTRYPOINTS_ENABLED, isChecked ? 1 : 0);
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.SEARCH_ALL_ENTRYPOINTS_ENABLED, 1);
         }
-
-        // On Lineage ROM, handle drawing app functionality
-        if (isChecked) {
-            return launchDrawingApp();
-        } else {
-            // When disabled, just return true (setting is "disabled")
-            return true;
-        }
+        // For Lineage ROM, ensure drawing functionality is available
+        return false; // Return false to prevent UI changes
     }
 
     @Override
     public int getAvailabilityStatus() {
         // Always available - either native Circle to Search or drawing app fallback
         return AVAILABLE;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        // Ensure preference is enabled but not selectable (permanently enabled)
+        preference.setEnabled(true);
+        preference.setSelectable(false);
+        // Force the setting to be permanently enabled
+        if (mContext.getPackageManager().hasSystemFeature(FEATURE_CONTEXTUAL_SEARCH)) {
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.SEARCH_ALL_ENTRYPOINTS_ENABLED, 1);
+        }
     }
 
     /**
