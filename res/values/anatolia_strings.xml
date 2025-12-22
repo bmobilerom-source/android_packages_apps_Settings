@@ -39,6 +39,10 @@
     <string name="quicksettings_summary">Quick settings options</string>
     <string name="statusbar_summary">Status bar customizations</string>
     <string name="extras_summary">Some extra options</string>
+    <string name="sensor_block_title">Sensor block per-package</string>
+    <string name="sensor_block_summary">Block access to certain sensors for some apps to save battery</string>
+    <string name="extended_security_title">Extended Security</string>
+    <string name="extended_security_summary">Additional granular security options and features</string>
 
     <!-- General strings -->
     <string name="ok">OK</string>

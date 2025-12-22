@@ -441,7 +441,9 @@ public class SettingsGateway {
             com.palladium.atomichub.Atomichub2.class.getName(),
             StatusBarSettings.class.getName(),
             QuickSettingsSettings.class.getName(),
-            MonetColorSettings.class.getName()
+            MonetColorSettings.class.getName(),
+            com.epic.fragments.SensorBlockSettings.class.getName(),
+            com.epic.fragments.SensorBlockAppPicker.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

@@ -62,5 +62,26 @@
     <!-- Hide on Secure Lock Screen -->
     <string name="quick_settings_secure_lock_screen_title">Hide on secure lock screen</string>
     <string name="quick_settings_secure_lock_screen_summary">Hide all quick settings in the notification shade while the device is locked</string>
+
+ <!-- Sensor Block -->
+    <string name="sensor_block_title">Sensor block per-package</string>
+    <string name="sensor_block_summary">Block access to certain sensors for some apps to save battery and enhance privacy</string>
+    <string name="sensor_block_level_title">Block level</string>
+    <string name="sensor_block_level_summary">Choose which sensors to block for selected apps</string>
+    <string name="sensor_block_level_minimum">Minimum (3 sensors)</string>
+    <string name="sensor_block_level_extreme">Extreme (17 sensors)</string>
+    <string name="sensor_block_app_picker_title">Block sensors for these apps</string>
+    <string name="sensor_block_app_count_title">Blocked apps</string>
+    <string name="sensor_block_app_count_summary_default">No apps selected</string>
+    <string name="sensor_block_app_count_summary">%1$d app(s) selected</string>
+    <string name="add_sensor_block_package_title">Add apps for Sensor block</string>
+    <string name="add_sensor_block_package_summary">Significant motion, accelerometer, linear acceleration sensors will be blocked for these apps</string>
+    <string name="sensor_block_footer">When enabled, the following sensors will be blocked for selected apps: significant motion, accelerometer, and linear acceleration. This can help save battery by preventing apps from accessing these sensors when not needed.\n\nNote: Camera and other apps may still work as they use different sensors (gyroscope, magnetometer, etc.) that are not blocked by this feature.</string>
+    <string name="sensor_block_sensors_list">Blocked sensors: Significant motion, Accelerometer, Linear acceleration</string>
+    <string name="profile_choose_app">Choose app</string>
+    <string name="dialog_delete_title">Delete</string>
+    <string name="dialog_delete_message">Remove selected item?</string>
+
+
 </resources>
 
