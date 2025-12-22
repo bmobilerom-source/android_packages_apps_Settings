@@ -31,8 +31,11 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/extended_security_title">
 
-
-
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="epic_toplevel_card_navigation_lock"
+        android:selectable="false"
+        android:order="-1800"
+        android:layout="@layout/toplevel_card_navigation"/>
     <!-- TopIntro -->
     <com.android.settingslib.widget.TopIntroPreference
         android:key="extended_security_top_intro"
@@ -129,17 +132,11 @@
     </PreferenceCategory>
 
     <!-- Pocket Lock -->
-        <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="pocket_lock"
         android:title="@string/pocket_lock_title"
         android:summary="@string/pocket_lock_summary"
         android:defaultValue="false" />
-        <!-- No Storage Restrict -->
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="no_storage_restrict"
-            android:title="@string/no_storage_restrict_title"
-            android:summary="@string/no_storage_restrict_summary"
-            android:defaultValue="false" />
    <!-- Sensor Block -->
         <Preference
             android:key="sensor_block_settings"
@@ -147,6 +144,17 @@
             settings:layout="@layout/adaptive_preference_card"
             android:summary="@string/sensor_block_summary"
             android:fragment="com.epic.fragments.SensorBlockSettings" />
+
+    <!-- Lock screen & biometrics shortcuts (mirrors security_dashboard_settings.xml) -->
+
+        <!-- Fingerprint settings shortcut -->
+        <Preference
+            android:key="extended_fingerprint_settings"
+            android:title="@string/security_settings_fingerprint_preference_title"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment"
+            settings:keywords="@string/keywords_fingerprint_settings"
+            settings:layout="@layout/adaptive_preference_card_middle" />
 
 </PreferenceScreen>
 
