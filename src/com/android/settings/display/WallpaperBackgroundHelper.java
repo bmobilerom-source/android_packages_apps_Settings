@@ -30,6 +30,7 @@ package com.android.settings.display;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 /**
@@ -55,7 +56,7 @@ public class WallpaperBackgroundHelper {
             return false;
         }
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.getInt(resolver, SETTING_KEY, 0) != 0;
+        return Settings.System.getIntForUser(resolver, SETTING_KEY, 0, UserHandle.USER_CURRENT) != 0;
     }
 
     /**
@@ -76,7 +77,7 @@ public class WallpaperBackgroundHelper {
         }
         
         ContentResolver resolver = context.getContentResolver();
-        Settings.System.putInt(resolver, SETTING_KEY, enabled ? 1 : 0);
+        Settings.System.putIntForUser(resolver, SETTING_KEY, enabled ? 1 : 0, UserHandle.USER_CURRENT);
         return true;
     }
 

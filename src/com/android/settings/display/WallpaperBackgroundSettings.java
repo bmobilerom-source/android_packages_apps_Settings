@@ -29,9 +29,11 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.awaken.fragments.DisplayCustomizationsAdapter;
 import com.android.settings.awaken.fragments.DisplayCustomizationsHelper;
 
+
 /**
  * Settings page for Wallpaper Background feature
  * Includes wallpaper background toggle, blur toggle, and blur radius
+ * All preferences are managed by their controllers defined in XML
  */
 public class WallpaperBackgroundSettings extends SettingsPreferenceFragment {
 
