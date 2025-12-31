@@ -108,6 +108,10 @@
     <string name="location_privacy_score">Privacy Score: %1$d/100</string>
     <string name="location_recent_access_count">Recent access: %1$d apps in last hour</string>
 
+    <!-- BLocation Credential Confirmation -->
+    <string name="blocation_confirm_credential_title">Confirm Device Credentials</string>
+    <string name="blocation_confirm_credential_description">Enter your device credentials to access enhanced location features</string>
+
     <!-- Location Service Status Indicators -->
     <string name="location_status_title">Location Status</string>
     <string name="location_status_gps_active">GPS: Active</string>
