@@ -21,25 +21,22 @@
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
-        android:icon="@*android:drawable/ic_settings_bluetooth"
         android:key="bluetooth_switchbar_screen"
         android:order="-10"
-        settings:layout="@layout/adaptive_preference_card_top"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/bluetooth_settings_title" />
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"
-        android:icon="@drawable/ic_bt_le_audio_sharing"
         android:key="audio_sharing_settings"
         android:order="-9"
-        settings:layout="@layout/adaptive_preference_card_bottom"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/audio_sharing_title"
         settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"
         settings:searchable="true" />
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.connecteddevice.NfcAndPaymentFragment"
-        android:icon="@drawable/ic_nfc"
         android:key="nfc_and_payment_settings"
         android:order="-7"
         android:title="@string/nfc_quick_toggle_title"
@@ -50,7 +47,6 @@
 
     <Preference
         android:fragment="com.android.settings.wfd.WifiDisplaySettings"
-        android:icon="@drawable/ic_cast_24dp"
         android:key="wifi_display_settings"
         android:order="-6"
         settings:layout="@layout/adaptive_preference_card"
@@ -62,7 +58,6 @@
         android:fragment="com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFragment"
         android:key="thread_network_settings"
         android:title="@string/thread_network_settings_title"
-        android:icon="@*android:drawable/ic_thread_network"
         android:order="-5"
         settings:searchable="false"
         settings:controller="com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFragmentController"
@@ -71,7 +66,6 @@
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.print.PrintSettingsFragment"
-        android:icon="@*android:drawable/ic_settings_print"
         android:key="connected_device_printing"
         android:order="-3"
         android:summary="@string/summary_placeholder"

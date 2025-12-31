@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="connected_devices_screen"
     android:title="@string/connected_devices_dashboard_title">
@@ -98,28 +99,36 @@
         android:key="connection_preferences"
         android:summary="@string/summary_placeholder"
         android:title="@string/connected_device_connections_title"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
         settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
 
     <!-- Bluetooth Timeout -->
-    <com.android.settingslib.ListPreference
+    <ListPreference
         android:key="bluetooth_timeout"
         android:title="@string/bluetooth_timeout"
         android:entries="@array/bluetooth_timeout_entries"
         android:entryValues="@array/bluetooth_timeout_values"
         android:defaultValue="0"
         android:summary="%s"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.bluetooth.BluetoothTimeoutPreferenceController" />
 
     <!-- Bluetooth Battery Status -->
-    <lineageos.preference.SystemSettingSwitchPreference
+    <SwitchPreferenceCompat
         android:key="bluetooth_show_battery"
         android:title="@string/status_bar_bluetooth_battery_title"
         android:summary="@string/status_bar_bluetooth_battery_summary"
         android:defaultValue="true"
-        app:position="solo"
-        settings:allowDividerAbove="true" />
+        settings:allowDividerAbove="false"
+        settings:controller="com.android.settings.bluetooth.BluetoothBatteryStatusController" />
+
+    <!-- Bluetooth Discoverable Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:key="discoverable_footer_preference"
+        android:selectable="false"
+        settings:controller="com.android.settings.connecteddevice.DiscoverableFooterPreferenceController"
+        settings:searchable="false" />
 
 </PreferenceScreen>
