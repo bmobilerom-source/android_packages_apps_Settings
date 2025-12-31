@@ -39,7 +39,7 @@
         android:summary="@string/smart_pixels_enable_summary"
         android:defaultValue="false"
         android:order="0"
-        app:position="top" />
+        app:position="0" />
 
     <!-- Smart Pixels on Power Save -->
     <com.android.settings.preferences.ui.AdaptiveSwitchPreference
@@ -48,7 +48,7 @@
         android:summary="@string/smart_pixels_on_power_save_summary"
         android:defaultValue="false"
         android:order="1"
-        app:position="middle" />
+        app:position="1" />
 
     <!-- Smart Pixels Pattern -->
     <ListPreference
@@ -59,7 +59,7 @@
         android:entryValues="@array/smart_pixels_percent_values"
         android:defaultValue="0"
         android:order="2"
-        app:position="middle" />
+        app:position="1" />
 
     <!-- Smart Pixels Shift Time -->
     <ListPreference
@@ -70,7 +70,7 @@
         android:entryValues="@array/smart_pixels_shift_values"
         android:defaultValue="0"
         android:order="3"
-        app:position="bottom" />
+        app:position="2" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="smart_pixels_footer"
