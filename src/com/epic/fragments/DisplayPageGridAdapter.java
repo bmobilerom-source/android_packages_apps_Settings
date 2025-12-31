@@ -280,12 +280,7 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
                 return;
             }
             
-            // Handle Wallpaper Background Settings
-            if (destFragment.contains("WallpaperBackgroundSettings")) {
-                launchSettingsFragment(destFragment, R.string.settings_wallpaper_background_title);
-                return;
-            }
-            
+            // Wallpaper background functionality removed
             // Handle Wallpaper picker activity (like InfinitySuite)
             if (destFragment.contains("WallpaperSettings") || destFragment.contains("wallpaper")) {
                 launchWallpaperPickerActivity();

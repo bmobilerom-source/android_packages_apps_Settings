@@ -114,13 +114,7 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     "com.android.settings.display.WallpaperSettings",
                     null));
             
-            // Row 2: Wallpaper Background (replaces second wallpaper card) and Text reading options
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.settings_wallpaper_background_title,
-                    R.string.settings_wallpaper_background_summary,
-                    "com.android.settings.display.WallpaperBackgroundSettings",
-                    null));
+            // Row 2: Wallpaper Background removed, Text reading options
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_THEME_PACKS,
                     R.string.accessibility_text_reading_options_title,
