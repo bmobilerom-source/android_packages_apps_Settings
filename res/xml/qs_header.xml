@@ -41,7 +41,7 @@
         android:entryValues="@array/custom_header_provider_values"
         android:defaultValue="static"
         android:order="0"
-        app:position="top" />
+        app:position="0" />
 
     <!-- QS Header Visibility -->
     <ListPreference
@@ -52,7 +52,7 @@
         android:entryValues="@array/custom_header_visibility_values"
         android:defaultValue="0"
         android:order="1"
-        app:position="middle" />
+        app:position="1" />
 
     <!-- QS Header Image -->
     <ListPreference
@@ -63,7 +63,7 @@
         android:entryValues="@array/anciui_header_img_values"
         android:defaultValue="0"
         android:order="2"
-        app:position="middle" />
+        app:position="1" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="qs_header_footer"
