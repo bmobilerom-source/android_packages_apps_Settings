@@ -10,6 +10,14 @@
     <string name="display_customizations4_summary">@null</string>
     <string name="display_customizations5_title">Display customizations 5</string>
     <string name="display_customizations5_summary">@null</string>
+    <string name="display_customizations3_intro_title">Display Effects &amp; Animations</string>
+    <string name="display_customizations3_intro_summary">Customize display effects, color temperature, and animation scales</string>
+    <string name="display_customizations4_intro_title">Smart Pixels &amp; Power Saving</string>
+    <string name="display_customizations4_intro_summary">Configure smart pixels for battery optimization</string>
+    <string name="display_customizations5_intro_title">Quick Settings Header</string>
+    <string name="display_customizations5_intro_summary">Customize the Quick Settings panel header image</string>
+    <string name="display_effects_title">Display Effects</string>
+    <string name="display_effects_summary">Apply visual effects to the display</string>
     <string name="skylineui_lab_summary">@null</string>
 </resources>
 
