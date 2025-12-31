@@ -25,7 +25,7 @@
         android:title="@string/status_bar_logo_title"
         android:summary="@string/status_bar_logo_summary"
         android:defaultValue="false"
-        app:position="top"
+        app:position="0"
         settings:controller="com.epic.fragments.StatusBarLogoController" />
 
     <!-- Logo position -->
@@ -36,7 +36,7 @@
         android:entryValues="@array/status_bar_logo_position_values"
         android:defaultValue="0"
         android:dependency="status_bar_logo"
-        app:position="middle"
+        app:position="1"
         settings:controller="com.epic.fragments.StatusBarLogoPositionController" />
 
     <!-- Logo style -->
@@ -47,7 +47,7 @@
         android:entryValues="@array/status_bar_logo_style_values"
         android:defaultValue="0"
         android:dependency="status_bar_logo"
-        app:position="bottom"
+        app:position="2"
         settings:controller="com.epic.fragments.StatusBarLogoStyleController" />
         
 </PreferenceScreen>
