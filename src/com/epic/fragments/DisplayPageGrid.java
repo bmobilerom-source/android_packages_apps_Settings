@@ -180,13 +180,7 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.qs_header_summary,
                     "com.android.settings.awaken.fragments.QsHeader",
                     null));
-            // 4. Custom Themes (replaces first Anatolia settings card)
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.custom_theme_title,
-                    R.string.custom_theme_summary,
-                    "com.android.settings.theme.CustomThemeSettings",
-                    null));
+            // Custom themes removed from ROM
             // 5. Screen saver
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,

@@ -292,11 +292,7 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
                 return;
             }
             
-            // Handle Custom Themes
-            if (destFragment.contains("CustomThemeSettings")) {
-                launchSettingsFragment(destFragment, R.string.custom_theme_title);
-                return;
-            }
+            // Custom themes removed from ROM
             
             // Handle Custom Dashboard
             if (destFragment.contains("DashboardStyleSettings")) {
