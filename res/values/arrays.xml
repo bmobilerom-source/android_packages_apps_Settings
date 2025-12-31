@@ -2146,4 +2146,23 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <!-- Location Time Restrictions -->
+    <string-array name="location_time_period_entries">
+        <item>Always</item>
+        <item>Working hours (9 AM - 5 PM)</item>
+        <item>Evenings (5 PM - 10 PM)</item>
+        <item>Nights (10 PM - 6 AM)</item>
+        <item>Weekends only</item>
+        <item>Custom</item>
+    </string-array>
+
+    <string-array name="location_time_period_values" translatable="false">
+        <item>always</item>
+        <item>work_hours</item>
+        <item>evenings</item>
+        <item>nights</item>
+        <item>weekends</item>
+        <item>custom</item>
+    </string-array>
 </resources>
