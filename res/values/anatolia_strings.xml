@@ -66,6 +66,7 @@
     <string name="dashboard_style_aosp">AOSP Style</string>
     <string name="dashboard_style_epic">Epic Style</string>
     <string name="dashboard_style_fun_display">BMobile Home Settings</string>
+    <string name="dashboard_style_bmobile_expressive">BMobile Expressive Style</string>
     <string name="dashboard_style_v2">V2 Style</string>
     <string name="dashboard_style_compact">Compact Style</string>
     <string name="dashboard_style_material">Material Style</string>
@@ -93,6 +94,15 @@
     <string name="smart_pixels_shift_time_title">Shift Time</string>
     <string name="smart_pixels_shift_time_summary">Time interval to shift the pixel pattern</string>
     <string name="smart_pixels_footer">Smart Pixels helps reduce power consumption by turning off a percentage of pixels in a shifting pattern. This can extend battery life but may slightly affect display quality.</string>
+    <string name="custom_timeout_summary_15secs">15 seconds</string>
+    <string name="custom_timeout_summary_30secs">30 seconds</string>
+    <string name="custom_timeout_summary_1min">1 minute</string>
+    <string name="custom_timeout_summary_2mins">2 minutes</string>
+    <string name="custom_timeout_summary_5mins">5 minutes</string>
+    <string name="custom_timeout_summary_10mins">10 minutes</string>
+    <string name="custom_timeout_summary_20mins">20 minutes</string>
+    <string name="custom_timeout_summary_30mins">30 minutes</string>
+    <string name="custom_timeout_summary_1hour">1 hour</string>
 
     <!-- QS Header Image Customization -->
     <string name="qs_header_title">QS Header Image</string>
