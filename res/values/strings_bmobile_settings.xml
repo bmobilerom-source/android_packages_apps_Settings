@@ -11,5 +11,7 @@
     <string name="bmobile_ad_services_title">Ad services</string>
     <string name="bmobile_ad_services_summary">Ad/privacy service toggles</string>
     <string name="bmobile_expressive_settings_title">BMobile Expressive Settings</string>
+    <string name="bmobile_confirm_credential_title">Confirm BMobile Credentials</string>
+    <string name="bmobile_confirm_credential_description">Enter your BMobile credentials to access enhanced features</string>
 </resources>
 
