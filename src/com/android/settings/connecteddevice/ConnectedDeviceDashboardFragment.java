@@ -28,7 +28,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingDevicePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settings.core.AbstractPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SurveyFeatureProvider;
