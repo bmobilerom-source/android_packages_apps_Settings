@@ -41,7 +41,7 @@
         android:title="@string/display_effects_title"
         android:summary="@string/display_effects_summary"
         android:defaultValue="false"
-        app:position="top"
+        app:position="0"
         settings:controller="com.android.settings.display.DisplayEffectsController" />
 
     <!-- Color Temperature Toggle -->
@@ -50,7 +50,7 @@
         android:title="@string/color_temperature"
         android:summary="@string/color_temperature_desc"
         android:defaultValue="false"
-        app:position="middle"
+        app:position="1"
         settings:controller="com.android.settings.display.ColorTemperatureController" />
 
     <!-- Window Animation Scale -->
@@ -60,7 +60,7 @@
         android:entries="@array/window_animation_scale_entries"
         android:entryValues="@array/window_animation_scale_values"
         android:defaultValue="1"
-        app:position="middle"
+        app:position="1"
         settings:controller="com.android.settings.display.WindowAnimationScaleController" />
 
     <!-- Transition Animation Scale -->
@@ -70,7 +70,7 @@
         android:entries="@array/transition_animation_scale_entries"
         android:entryValues="@array/transition_animation_scale_values"
         android:defaultValue="1"
-        app:position="middle"
+        app:position="1"
         settings:controller="com.android.settings.display.TransitionAnimationScaleController" />
 
     <!-- Animator Duration Scale -->
@@ -80,7 +80,7 @@
         android:entries="@array/animator_duration_scale_entries"
         android:entryValues="@array/animator_duration_scale_values"
         android:defaultValue="1"
-        app:position="middle"
+        app:position="1"
         settings:controller="com.android.settings.display.AnimatorDurationScaleController" />
 
     <!-- System Animation Style -->
@@ -91,7 +91,7 @@
         android:entryValues="@array/system_animation_styles_values"
         android:defaultValue="0"
         android:summary="%s"
-        app:position="bottom"
+        app:position="2"
         settings:controller="com.epic.fragments.SystemAnimationStyleController" />
 
 </PreferenceScreen>
