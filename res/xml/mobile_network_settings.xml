@@ -83,24 +83,28 @@
             settings:allowDividerAbove="true"
             settings:allowDividerBelow="false"/>
 
+        <!-- Data Settings Card -->
         <SwitchPreferenceCompat
             android:key="mobile_data_enable"
             android:title="@string/mobile_data_settings_title"
             android:summary="@string/mobile_data_settings_summary"
             settings:controller="com.android.settings.network.telephony.MobileDataPreferenceController"
-            settings:allowDividerAbove="false"/>
+            settings:allowDividerAbove="false"
+            settings:layout="@layout/adaptive_preference_card_top_switch" />
 
         <SwitchPreferenceCompat
             android:key="auto_data_switch"
             android:title="@string/auto_data_switch_title"
             android:summary="@string/auto_data_switch_summary"
-            settings:controller="com.android.settings.network.telephony.AutoDataSwitchPreferenceController"/>
+            settings:controller="com.android.settings.network.telephony.AutoDataSwitchPreferenceController"
+            settings:layout="@layout/adaptive_preference_card_middle_switch" />
 
         <!-- Settings search is handled by RoamingSearchItem. -->
         <com.android.settings.spa.preference.ComposePreference
             android:key="button_roaming_key"
             settings:searchable="false"
-            settings:controller="com.android.settings.network.telephony.RoamingPreferenceController"/>
+            settings:controller="com.android.settings.network.telephony.RoamingPreferenceController"
+            settings:layout="@layout/adaptive_preference_card_bottom" />
 
         <!-- Settings search is handled by DataUsageSearchItem. -->
         <Preference

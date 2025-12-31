@@ -35,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -171,9 +172,26 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         if (rootView == null || getContext() == null) {
             return;
         }
-        
+
+        // Check if gradients or wallpaper background are enabled
+        boolean gradientEnabled = isGradientEnabledInDarkMode();
+        boolean wallpaperActive = com.android.settings.display.WallpaperBackgroundHelper.isActive(getContext());
+
         // Check if wallpaper background already exists
         View existingWallpaper = rootView.findViewById(R.id.wallpaper_background);
+
+        // If neither gradients nor wallpaper are enabled, remove existing view and return
+        if (!gradientEnabled && !wallpaperActive) {
+            if (existingWallpaper != null) {
+                ViewGroup parent = (ViewGroup) existingWallpaper.getParent();
+                if (parent != null) {
+                    parent.removeView(existingWallpaper);
+                }
+            }
+            return;
+        }
+
+        // If view already exists, just update it
         if (existingWallpaper != null) {
             return;
         }
@@ -193,10 +211,69 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                     new com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView(getContext());
             wallpaperView.setId(R.id.wallpaper_background);
             wallpaperView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+
+            // Configure as background element - ensure it's behind all content
+            wallpaperView.setElevation(0f);
+            wallpaperView.setTranslationZ(0f);
+            wallpaperView.setZ(0f);
+
             // Insert at the beginning so it's behind everything
-            rootContainer.addView(wallpaperView, 0, new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
+            ViewGroup.LayoutParams bgParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            rootContainer.addView(wallpaperView, 0, bgParams);
+
+            // Ensure it's positioned as background
+            wallpaperView.setLayoutParams(bgParams);
+
+            // Force the background view to stay at the back
+            wallpaperView.post(new Runnable() {
+                @Override
+                public void run() {
+                    // Ensure it stays at index 0 (behind everything)
+                    ViewGroup parent = (ViewGroup) wallpaperView.getParent();
+                    if (parent != null && parent.indexOfChild(wallpaperView) != 0) {
+                        parent.removeView(wallpaperView);
+                        parent.addView(wallpaperView, 0, bgParams);
+                    }
+                    wallpaperView.invalidate();
+                }
+            });
+        }
+    }
+
+    /**
+     * Check if gradients are enabled in dark mode only
+     */
+    private boolean isGradientEnabledInDarkMode() {
+        Context context = getContext();
+        if (context == null) return false;
+
+        // Check if gradients are enabled
+        boolean gradientEnabled = android.provider.Settings.System.getInt(context.getContentResolver(),
+                "monet_gradient_enabled", 0) == 1;
+
+        if (!gradientEnabled) return false;
+
+        // Only enable gradients in dark mode
+        android.content.res.Configuration config = context.getResources().getConfiguration();
+        int nightMode = config.uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        return nightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    /**
+     * Update wallpaper background when settings change
+     */
+    protected void updateWallpaperBackground() {
+        View rootView = getView();
+        if (rootView == null) return;
+
+        View wallpaperView = rootView.findViewById(R.id.wallpaper_background);
+        if (wallpaperView instanceof com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView) {
+            ((com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView) wallpaperView).updateBackground();
+        } else {
+            // Re-check if we need to add or remove the view
+            ensureWallpaperBackground(rootView);
         }
     }
 

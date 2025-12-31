@@ -17,9 +17,17 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/night_display_title"
     settings:keywords="@string/keywords_display_night_display">
 
+    <!-- Lottie Animation -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="night_display_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/night_light"/>
+        
     <com.android.settingslib.widget.TopIntroPreference
         android:key="night_display_top_intro"
         android:title="@string/night_display_text"
@@ -39,22 +47,26 @@
         android:key="night_display_auto_mode"
         android:title="@string/night_display_auto_mode_title"
         android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.display.NightDisplayAutoModePreferenceController"/>
 
     <Preference
         android:key="night_display_start_time"
         android:title="@string/night_display_start_time_title"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.display.NightDisplayCustomStartTimePreferenceController"/>
 
     <Preference
         android:key="night_display_end_time"
         android:title="@string/night_display_end_time_title"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.display.NightDisplayCustomEndTimePreferenceController"/>
 
     <com.android.settings.widget.SeekBarPreference
         android:key="night_display_temperature"
         android:title="@string/night_display_temperature_title"
+        android:layout="@layout/adaptive_preference_card_seekbar"
         settings:keywords="@string/keywords_display_night_display"
         settings:controller="com.android.settings.display.NightDisplayIntensityPreferenceController"
         settings:unavailableSliceSubtitle="@string/night_display_not_currently_on"/>

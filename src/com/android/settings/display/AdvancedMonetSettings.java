@@ -29,6 +29,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.ArrayList;
 import java.util.List;
 
+// Controllers are automatically instantiated from XML via settings:controller attribute
+// No manual imports needed
+
 public class AdvancedMonetSettings extends DashboardFragment {
 
     private static final String TAG = "AdvancedMonetSettings";
@@ -62,15 +65,9 @@ public class AdvancedMonetSettings extends DashboardFragment {
             Context context, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        // Advanced Monet controllers (MonetCompat inspired)
-        controllers.add(new MonetChromaMultiplierController(context, "monet_chroma_multiplier"));
-        controllers.add(new MonetWallpaperSourceController(context, "monet_wallpaper_source"));
-        controllers.add(new MonetMenuController(context, "monet_apply_to_menus"));
-        controllers.add(new MonetWindowController(context, "monet_apply_to_window"));
-
-        // Custom color controllers
-        controllers.add(new MonetColorPickerController(context, "monet_custom_color_picker"));
-        controllers.add(new MonetResetCustomController(context, "monet_reset_custom_color"));
+        // Controllers are automatically instantiated from XML via settings:controller attribute
+        // Do NOT manually add them here as it causes double instantiation and crashes
+        // If you need to add controllers programmatically, remove the settings:controller from XML
 
         return controllers;
     }

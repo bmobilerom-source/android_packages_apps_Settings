@@ -25,6 +25,7 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.view.View;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -35,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import com.android.settings.R;
+import com.epic.utils.CardNavigationHelper;
 import androidx.annotation.NonNull;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -47,6 +49,8 @@ import java.util.List;
 public class PowerMenuSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
+    private CardNavigationHelper mCardHelper;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -54,6 +58,17 @@ public class PowerMenuSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.anatolia_settings_power);
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        // Initialize card navigation helper
+        mCardHelper = new CardNavigationHelper(this);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Setup click handling for navigation cards
+        mCardHelper.setupCardClickHandling(view);
     }
 
     @Override

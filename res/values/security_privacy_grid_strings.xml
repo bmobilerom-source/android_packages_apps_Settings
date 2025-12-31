@@ -15,7 +15,7 @@
     <string name="security_privacy_grid_wallpapers_title">Wallpapers</string>
     <string name="security_privacy_grid_wallpapers_summary">Change wallpaper</string>
     <string name="security_privacy_grid_fingerprint_title">Fingerprint</string>
-    <string name="security_privacy_grid_fingerprint_summary">Fingerprint settings</string>
+    <string name="security_privacy_grid_fingerprint_summary">Manage fingerprint settings</string>
     
     <!-- Theme Packs -->
     <string name="security_privacy_grid_theme_packs_title">Theme Packs</string>
@@ -23,7 +23,7 @@
     
     <!-- Pocket Mode -->
     <string name="security_privacy_grid_pocket_mode_title">Pocket Mode</string>
-    <string name="security_privacy_grid_pocket_mode_summary">Pocket mode settings</string>
+    <string name="security_privacy_grid_pocket_mode_summary"></string>
     
     <!-- Statusbar -->
     <string name="security_privacy_grid_statusbar_title">Statusbar</string>

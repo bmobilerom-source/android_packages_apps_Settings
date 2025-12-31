@@ -40,6 +40,21 @@ public class MonetChromaMultiplierController extends BasePreferenceController
     }
 
     @Override
+    public void displayPreference(androidx.preference.PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            // Ensure SeekBarPreference has a valid layout with required views
+            if (preference instanceof SeekBarPreference) {
+                SeekBarPreference seekBarPreference = (SeekBarPreference) preference;
+                // Use adaptive seekbar card layout which has all required views
+                seekBarPreference.setLayoutResource(com.android.settings.R.layout.adaptive_preference_card_seekbar);
+            }
+            preference.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (preference instanceof SeekBarPreference) {
@@ -64,8 +79,9 @@ public class MonetChromaMultiplierController extends BasePreferenceController
                 "monet_chroma_multiplier", progressValue);
 
         if (settingSaved) {
-            // Apply the chroma multiplier change
-            applyChromaMultiplier(progressValue / 100.0f);
+            // Notify content resolver of the change to trigger theme update
+            mContext.getContentResolver().notifyChange(
+                    Settings.Secure.getUriFor("monet_chroma_multiplier"), null);
 
             // Update summary immediately
             float multiplier = progressValue / 100.0f;

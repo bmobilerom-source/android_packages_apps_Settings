@@ -10,6 +10,31 @@
     <!-- Custom themes -->
     <string name="custom_theme_title">Custom themes</string>
     <string name="custom_theme_summary">Choose and manage your custom theme packs</string>
+    <string name="custom_theme_intro_title">Custom Theme Engine</string>
+    <string name="custom_theme_intro_summary">Advanced wallpaper-based theming with custom color controls</string>
+    <string name="custom_theme_category_title">Theme Selection</string>
+    <string name="custom_theme_category_summary">Choose a custom theme to apply</string>
+    <string name="custom_theme_default">Default Theme</string>
+    <string name="custom_theme_default_desc">Standard system theme with default colors</string>
+    <string name="custom_theme_espresso">Espresso Theme</string>
+    <string name="custom_theme_espresso_desc">Dark brown theme inspired by espresso</string>
+    <string name="custom_theme_black">Black Theme</string>
+    <string name="custom_theme_black_desc">Pure black theme for OLED displays</string>
+    <string name="custom_theme_transparent">Transparent Theme</string>
+    <string name="custom_theme_transparent_desc">Semi-transparent theme with glass effects</string>
+    <string name="custom_theme_snowpaint">Snow Paint Theme</string>
+    <string name="custom_theme_snowpaint_desc">Winter theme with snow-like paint effects</string>
+    <string name="custom_theme_custom_blue">Custom Blue Theme</string>
+    <string name="custom_theme_custom_blue_desc">Custom blue color scheme</string>
+    <string name="custom_theme_animated">Animated Theme</string>
+    <string name="custom_theme_animated_desc">Dynamic theme with animated effects</string>
+    <string name="custom_theme_expressive">Expressive Theme</string>
+    <string name="custom_theme_expressive_desc">Bold and expressive color theme</string>
+    <string name="custom_theme_animated_wallpaper_blur">Animated Wallpaper Blur</string>
+    <string name="custom_theme_animated_wallpaper_blur_desc">Dynamic theme with animated wallpaper blur effects</string>
+    <string name="custom_theme_custom_picture">Custom Picture Theme</string>
+    <string name="custom_theme_custom_picture_desc">Theme based on custom picture</string>
+    <string name="wallpaper_background_category_title">Wallpaper Background</string>
 
     <!-- Color contrast -->
     <string name="accessibility_color_contrast_summary">Improve readability with higher contrast</string>
@@ -31,6 +56,21 @@
     <!-- Navigation cards entry -->
     <string name="navigation_cards_title">Navigation cards</string>
     <string name="navigation_cards_summary">Open quick navigation card grid</string>
+
+    <!-- Fun Display Settings -->
+    <string name="fun_display_settings_title">BMobile Home Settings</string>
+
+    <!-- Custom Theme -->
+    <string name="custom_theme_applied">Theme changed to %1$s</string>
+
+    <!-- Image Toolbox -->
+    <string name="image_toolbox_title">Image Toolbox</string>
+    <string name="image_toolbox_summary">Edit and enhance your images</string>
+
+    <!-- Display Color Settings -->
+    <string name="display_color_settings_title">Display Color</string>
+    <string name="display_color_settings_summary">Color customization and display settings</string>
+    <string name="display_color_category_title">Color Settings</string>
 
 </resources>
 

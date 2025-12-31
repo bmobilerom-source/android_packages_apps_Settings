@@ -36,15 +36,15 @@ import android.provider.Settings;
 /**
  * Helper class for Wallpaper Background feature
  * Provides utility methods for checking and managing wallpaper background settings
- * ENFORCES: Wallpaper background only works in dark mode
+ * Only works in dark mode - requires dark mode to be enabled
  */
 public class WallpaperBackgroundHelper {
 
     /**
      * Setting key for wallpaper background enabled state
-     * Update this if your ROM uses a different key
+     * Using Secure namespace for theme-related settings
      */
-    public static final String SETTING_KEY = Settings.System.SETTINGS_WALLPAPER_BACKGROUND_ENABLED;
+    public static final String SETTING_KEY = "settings_wallpaper_background_enabled";
 
     /**
      * Check if wallpaper background is enabled
@@ -56,28 +56,23 @@ public class WallpaperBackgroundHelper {
             return false;
         }
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.getIntForUser(resolver, SETTING_KEY, 0, UserHandle.USER_CURRENT) != 0;
+        return Settings.Secure.getIntForUser(resolver, SETTING_KEY, 0, UserHandle.USER_CURRENT) != 0;
     }
 
     /**
      * Set wallpaper background enabled state
-     * Only allows enabling if dark mode is active
+     * Note: The wallpaper background will only be visible when dark mode is active
      * @param context The context
      * @param enabled true to enable, false to disable
-     * @return true if successful, false if dark mode is required but not active
+     * @return true if successful
      */
     public static boolean setEnabled(Context context, boolean enabled) {
         if (context == null) {
             return false;
         }
-        
-        // If trying to enable, check dark mode first
-        if (enabled && !isDarkMode(context)) {
-            return false; // Cannot enable without dark mode
-        }
-        
+
         ContentResolver resolver = context.getContentResolver();
-        Settings.System.putIntForUser(resolver, SETTING_KEY, enabled ? 1 : 0, UserHandle.USER_CURRENT);
+        Settings.Secure.putIntForUser(resolver, SETTING_KEY, enabled ? 1 : 0, UserHandle.USER_CURRENT);
         return true;
     }
 

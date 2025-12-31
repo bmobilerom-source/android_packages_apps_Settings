@@ -132,6 +132,8 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
         // Ambient text size
         mAmbientTextSize = findPreference(KEY_AMBIENT_TEXT_SIZE);
         if (mAmbientTextSize != null) {
+            // Set layout resource to ensure TextView exists for value display
+            mAmbientTextSize.setLayoutResource(com.android.settings.R.layout.adaptive_preference_card_seekbar);
             mAmbientTextSize.setMin(20);
             mAmbientTextSize.setMax(60);
             mAmbientTextSize.setSeekBarIncrement(1);

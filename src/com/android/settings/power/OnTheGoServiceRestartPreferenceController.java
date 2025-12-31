@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,60 +19,58 @@ package com.android.settings.power;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 /**
- * Controller for OnTheGo service restart preference
+ * Controller for OnTheGo service restart option
  */
-public class OnTheGoServiceRestartPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
+public class OnTheGoServiceRestartPreferenceController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "OnTheGoServiceRestartController";
-    private static final String KEY_ONTHEGO_SERVICE_RESTART = "onthego_service_restart";
-    private static final String SETTINGS_KEY_ONTHEGO_SERVICE_RESTART = "on_the_go_service_restart";
+    private static final String TAG = "OnTheGoServiceRestartPC";
 
-    public OnTheGoServiceRestartPreferenceController(Context context) {
-        super(context);
+    public OnTheGoServiceRestartPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_ONTHEGO_SERVICE_RESTART;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        // Only show if device has front camera
+    public int getAvailabilityStatus() {
+        // Only show if device has front camera (same as camera controller)
         PackageManager pm = mContext.getPackageManager();
-        return pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+        return (pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT))
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public void updateState(Preference preference) {
+        super.updateState(preference);
+
         if (preference instanceof SwitchPreferenceCompat) {
             SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) preference;
-            boolean restartService = Settings.System.getInt(mContext.getContentResolver(),
-                    SETTINGS_KEY_ONTHEGO_SERVICE_RESTART, 0) == 1;
-            switchPreference.setChecked(restartService);
+
+            // Get current service restart setting (default to false = 0)
+            int restartService = Settings.System.getInt(
+                    mContext.getContentResolver(),
+                    Settings.System.ON_THE_GO_SERVICE_RESTART,
+                    0); // 0 = off, 1 = on
+
+            switchPreference.setChecked(restartService == 1);
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference instanceof SwitchPreferenceCompat) {
-            boolean restartService = (Boolean) newValue;
-            Settings.System.putInt(mContext.getContentResolver(),
-                    SETTINGS_KEY_ONTHEGO_SERVICE_RESTART, restartService ? 1 : 0);
-            
-            Log.d(TAG, "Service restart setting updated: " + restartService);
-            return true;
-        }
-        return false;
+        boolean restartService = (Boolean) newValue;
+
+        // Save service restart setting (0 = off, 1 = on)
+        Settings.System.putInt(mContext.getContentResolver(),
+                Settings.System.ON_THE_GO_SERVICE_RESTART,
+                restartService ? 1 : 0);
+
+        return true;
     }
 }

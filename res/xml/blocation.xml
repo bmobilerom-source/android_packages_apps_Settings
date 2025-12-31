@@ -23,7 +23,11 @@
     android:key="blocation_settings"
     android:title="@string/location_privacy_dashboard_title"
     settings:keywords="@string/keywords_location">
-
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="apps_illustration_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/location"/>
     <!-- Location Privacy Dashboard -->
     <PreferenceCategory
         android:key="location_privacy_category"

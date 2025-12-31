@@ -76,14 +76,16 @@
             android:key="fp_success_vibrate"
             android:title="@string/fingerprint_success_vibration_title"
             android:summary="@string/fingerprint_success_vibration_summary"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            settings:controller="com.android.settings.security.FingerprintSuccessVibrateController" />
 
         <!-- Authentication Error Vibration -->
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="fp_error_vibrate"
             android:title="@string/fingerprint_error_vibration_title"
             android:summary="@string/fingerprint_error_vibration_summary"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            settings:controller="com.android.settings.security.FingerprintErrorVibrateController" />
 
     </PreferenceCategory>
 
@@ -98,21 +100,24 @@
             android:key="show_clipboard_overlay"
             android:title="@string/show_clipboard_overlay_title"
             android:summary="@string/show_clipboard_overlay_summary"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            settings:controller="com.android.settings.security.ClipboardOverlayController" />
 
         <!-- No Storage Restrict -->
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="no_storage_restrict"
             android:title="@string/no_storage_restrict_title"
             android:summary="@string/no_storage_restrict_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            settings:controller="com.android.settings.security.NoStorageRestrictController" />
 
         <!-- Ignore Window Secure Flags -->
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="window_ignore_secure"
             android:title="@string/ignore_window_secure_title"
             android:summary="@string/ignore_window_secure_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            settings:controller="com.android.settings.security.WindowIgnoreSecureController" />
 
     </PreferenceCategory>
 
@@ -127,7 +132,23 @@
             android:key="secure_lockscreen_qs_disabled"
             android:title="@string/quick_settings_secure_lock_screen_title"
             android:summary="@string/quick_settings_secure_lock_screen_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            settings:controller="com.android.settings.security.SecureLockscreenQSDisabledController" />
+
+    </PreferenceCategory>
+
+    <!-- Battery Saving Category -->
+    <PreferenceCategory
+        android:title="@string/extended_security_battery_saving_category"
+        android:order="3"
+        android:layout="@layout/settingslib_preference_category_no_title">
+
+        <!-- Sensor Block -->
+        <Preference
+            android:key="sensor_block_settings"
+            android:title="@string/sensor_block_title"
+            android:summary="@string/sensor_block_summary"
+            android:fragment="com.epic.fragments.SensorBlockSettings" />
 
     </PreferenceCategory>
 
@@ -136,14 +157,32 @@
         android:key="pocket_lock"
         android:title="@string/pocket_lock_title"
         android:summary="@string/pocket_lock_summary"
-        android:defaultValue="false" />
-   <!-- Sensor Block -->
+        android:defaultValue="false"
+        settings:controller="com.android.settings.security.PocketLockPreferenceController" />
+
+    <!-- Device & Hardware Category -->
+    <PreferenceCategory
+        android:key="device_hardware_category"
+        android:title="@string/device_hardware_category_title"
+        android:order="4">
+
+        <!-- Battery Lights -->
         <Preference
-            android:key="sensor_block_settings"
-            android:title="@string/sensor_block_title"
-            settings:layout="@layout/adaptive_preference_card"
-            android:summary="@string/sensor_block_summary"
-            android:fragment="com.epic.fragments.SensorBlockSettings" />
+            android:key="battery_lights_anatolia"
+            android:title="@string/battery_lights_title"
+            android:summary="@string/battery_lights_summary"
+            android:fragment="org.lineageos.lineageparts.PartsActivity"
+            settings:layout="@layout/adaptive_preference_card" />
+
+        <!-- Notification Lights -->
+        <Preference
+            android:key="notification_lights_anatolia"
+            android:title="@string/notification_lights_title"
+            android:summary="@string/notification_lights_summary"
+            android:fragment="org.lineageos.lineageparts.PartsActivity"
+            settings:layout="@layout/adaptive_preference_card" />
+
+    </PreferenceCategory>
 
     <!-- Lock screen & biometrics shortcuts (mirrors security_dashboard_settings.xml) -->
 

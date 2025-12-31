@@ -19,29 +19,31 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	   android:title="@string/buttons_title">
 
-  
-     <Preference
-        android:key="system_optimization_entry_buttons"
-        android:title="@string/system_optimization_title"
-        android:summary="@string/system_optimization_intro_summary"
-        android:fragment="com.epic.fragments.SystemOptimizationSettings" />
-  
      <Preference
         android:key="extended_security_launcher"
         android:title="@string/extended_security_title"
         android:summary="@string/extended_security_intro"
         android:fragment="com.epic.fragments.SettingsExtendedSecurity" />
  
-     <Preference
-        android:key="nav_settings_backup_restore"
-        android:title="@string/settings_backup_restore_title"
-        android:summary="@string/settings_backup_restore_intro_summary"
-        android:fragment="com.epic.fragments.SettingsBackupRestore" />
+    <Preference
+        android:key="nav_anatolia_extras"
+        android:title="@string/security_privacy_title"
+        android:summary="@string/security_privacy_intro_summary"
+        android:fragment="com.epic.fragments.AnatoliaSettingsExtras" />
+    <Preference
+        android:key="system_safe_applications"
+        android:title="System Safe Applications"
+        android:summary="Manage system and safe applications"
+        android:order="1"
+        android:fragment="com.epic.fragments.SystemSafeApplicationsSettings"
+        settings:layout="@layout/adaptive_preference_card" />
 
-     <Preference
-        android:key="power_tweaks_entry_buttons"
-        android:title="@string/power_tweaks_title"
-        android:summary="@string/power_tweaks_summary"
-        android:fragment="com.epic.fragments.PowerTweaksSettings" />
+    <Preference
+        android:key="advanced_monet_settings"
+        android:title="Advanced Material You"
+        android:summary="Advanced theming and color customization"
+        android:order="2"
+        android:fragment="com.android.settings.display.AdvancedMonetSettings"
+        settings:layout="@layout/adaptive_preference_card" />
 
 </PreferenceScreen>

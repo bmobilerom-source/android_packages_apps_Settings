@@ -25,8 +25,43 @@
         android:key="wallpaper_background_illustration"
         android:order="-1001"
         android:title="@string/settings_wallpaper_background_title"
-        app:lottie_rawRes="@raw/display"
+        app:lottie_rawRes="@raw/Wallpaper"
         settings:searchable="false" />
 
+<<<<<<< Updated upstream
+=======
+    <!-- Header -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="wallpaper_background_intro"
+        android:order="-1000"
+        android:title="@string/wallpaper_background_info_title"
+        android:summary="@string/wallpaper_background_info_summary" />
+
+    <!-- Wallpaper Background Toggle -->
+    <SwitchPreference
+        android:key="settings_wallpaper_background_enabled"
+        android:title="@string/settings_wallpaper_background_title"
+        android:summary="@string/settings_wallpaper_background_summary"
+        android:defaultValue="false"
+        settings:controller="com.android.settings.display.SettingsWallpaperBackgroundController" />
+
+    <!-- Wallpaper Blur Toggle -->
+    <SwitchPreference
+        android:key="settings_wallpaper_blur_enabled"
+        android:title="@string/wallpaper_blur_title"
+        android:summary="@string/wallpaper_blur_summary"
+        android:defaultValue="false"
+        settings:controller="com.android.settings.display.WallpaperBlurController" />
+
+    <!-- Wallpaper Blur Radius -->
+    <ListPreference
+        android:key="settings_wallpaper_blur_radius"
+        android:title="@string/wallpaper_blur_radius_title"
+        android:summary="@string/wallpaper_blur_radius_summary"
+        android:entries="@array/wallpaper_blur_radius_entries"
+        android:entryValues="@array/wallpaper_blur_radius_values"
+        android:defaultValue="20"
+        settings:controller="com.android.settings.display.WallpaperBlurRadiusController" />
+>>>>>>> Stashed changes
 
 </PreferenceScreen>

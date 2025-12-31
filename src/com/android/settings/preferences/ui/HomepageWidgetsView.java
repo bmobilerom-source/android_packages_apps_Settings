@@ -160,7 +160,6 @@ public class HomepageWidgetsView extends LinearLayout {
     }
 
     private void launchSystemLaunchPad(Activity activity) {
-        if (activity == null) return;
         // Try System Launch Pad app first
         Intent launchPadIntent = new Intent(Intent.ACTION_MAIN);
         launchPadIntent.setClassName("com.devrinth.launchpad",

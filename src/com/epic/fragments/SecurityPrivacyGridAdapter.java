@@ -171,8 +171,13 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                     String summary = activity.getString(item.summaryResId);
                     String state = isEnabled ? activity.getString(android.R.string.yes) : activity.getString(android.R.string.no);
                     holder.summaryView.setText(summary + " • " + state);
-                } else {
+                    holder.summaryView.setVisibility(View.GONE);
+                } else if (item.summaryResId != 0) {
+                    // Show summary if it exists
                     holder.summaryView.setText(item.summaryResId);
+                    holder.summaryView.setVisibility(View.GONE);
+                } else {
+                    holder.summaryView.setVisibility(View.GONE);
                 }
             }
             
@@ -249,26 +254,63 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
             
             // Handle toggle cards
             if (item.isToggle && item.toggleKey != null) {
+                // Make sure card is clickable
+                holder.itemView.setClickable(true);
+                holder.itemView.setFocusable(true);
+                
                 // Update card appearance based on toggle state
                 boolean isEnabled = isToggleEnabled(item.toggleKey);
                 updateToggleCardAppearance(holder.itemView, isEnabled);
                 
+                // Update summary with current state
+                if (holder.summaryView != null) {
+                    String summary = activity.getString(item.summaryResId);
+                    String state = isEnabled ? activity.getString(android.R.string.yes) : activity.getString(android.R.string.no);
+                    holder.summaryView.setText(summary + " • " + state);
+                    holder.summaryView.setVisibility(View.GONE);
+                }
+                
                 // Set click listener to toggle state
                 holder.itemView.setOnClickListener(v -> {
+                    Log.d("SecurityPrivacyGridAdapter", "Toggle card clicked: " + item.toggleKey);
                     toggleStatusbarFeature(item.toggleKey);
-                    // Refresh the card appearance
-                    boolean newState = isToggleEnabled(item.toggleKey);
-                    updateToggleCardAppearance(holder.itemView, newState);
-                    // Update summary
-                    if (holder.summaryView != null) {
-                        String summary = activity.getString(item.summaryResId);
-                        String state = newState ? activity.getString(android.R.string.yes) : activity.getString(android.R.string.no);
-                        holder.summaryView.setText(summary + " • " + state);
+                    
+                    // Small delay to ensure Settings write completes
+                    holder.itemView.postDelayed(() -> {
+                        // Refresh the card appearance
+                        boolean newState = isToggleEnabled(item.toggleKey);
+                        updateToggleCardAppearance(holder.itemView, newState);
+                        
+                        // Update summary
+                        if (holder.summaryView != null) {
+                            String summary = activity.getString(item.summaryResId);
+                            String state = newState ? activity.getString(android.R.string.yes) : activity.getString(android.R.string.no);
+                            holder.summaryView.setText(summary + " • " + state);
+                        }
+                        
+                        // Notify adapter to refresh this item
+                        notifyItemChanged(holder.getAdapterPosition());
+                    }, 100);
+                });
+            } else if (item.cardType != CARD_TYPE_SECURITY_HEADER && item.destFragment != null && !item.destFragment.isEmpty()) {
+                // Set click listener for regular cards - skip for security header (non-clickable)
+                holder.itemView.setClickable(true);
+                holder.itemView.setFocusable(true);
+                holder.itemView.setOnClickListener(v -> {
+                    try {
+                        Log.d("SecurityPrivacyGridAdapter", "Card clicked: " + activity.getString(item.titleResId) + ", launching: " + item.destFragment);
+                        launchDestination(item.destFragment, item.titleResId);
+                    } catch (Exception e) {
+                        Log.e("SecurityPrivacyGridAdapter", "Error launching destination: " + item.destFragment, e);
+                        Toast.makeText(activity, "Error opening " + activity.getString(item.titleResId), 
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
-            } else if (item.cardType != CARD_TYPE_SECURITY_HEADER && item.destFragment != null) {
-                // Set click listener for regular cards - skip for security header (non-clickable)
-                holder.itemView.setOnClickListener(v -> launchDestination(item.destFragment, item.titleResId));
+            } else if (item.cardType != CARD_TYPE_SECURITY_HEADER && (item.destFragment == null || item.destFragment.isEmpty())) {
+                // Card has no destination - make it non-clickable
+                holder.itemView.setClickable(false);
+                holder.itemView.setFocusable(false);
+                Log.w("SecurityPrivacyGridAdapter", "Card has no destination: " + activity.getString(item.titleResId));
             }
         } catch (Exception e) {
             Log.e("SecurityPrivacyGridAdapter", "Error in onBindViewHolder at position " + position, e);
@@ -338,6 +380,7 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
      * Adapted for Settings app using SubSettingLauncher
      */
     private void launchDestination(String destFragment, int titleResId) {
+        Log.d("SecurityPrivacyGridAdapter", "Launching destination: " + destFragment + " with title: " + titleResId);
         // If no destination, use Anatolia main page as fallback
         if (destFragment == null || destFragment.isEmpty()) {
             Log.w("SecurityPrivacyGridAdapter", "Empty destination fragment, using Anatolia as fallback");
@@ -458,7 +501,12 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
      */
     private boolean isToggleEnabled(String toggleKey) {
         try {
-            return android.provider.Settings.Secure.getInt(activity.getContentResolver(), toggleKey, 0) == 1;
+            // Some settings are in Global, others in Secure
+            if ("window_ignore_secure".equals(toggleKey) || "no_storage_restrict".equals(toggleKey)) {
+                return android.provider.Settings.Global.getInt(activity.getContentResolver(), toggleKey, 0) == 1;
+            } else {
+                return android.provider.Settings.Secure.getInt(activity.getContentResolver(), toggleKey, 0) == 1;
+            }
         } catch (Exception e) {
             Log.e("SecurityPrivacyGridAdapter", "Error reading toggle state for " + toggleKey, e);
             return false;
@@ -472,8 +520,38 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
         try {
             boolean currentState = isToggleEnabled(toggleKey);
             int newState = currentState ? 0 : 1;
-            android.provider.Settings.Secure.putInt(activity.getContentResolver(), toggleKey, newState);
-            Log.d("SecurityPrivacyGridAdapter", "Toggled " + toggleKey + " to " + (newState == 1 ? "enabled" : "disabled"));
+            
+            // Write to correct Settings location (Global for some, Secure for others)
+            boolean result;
+            if ("window_ignore_secure".equals(toggleKey) || "no_storage_restrict".equals(toggleKey)) {
+                result = android.provider.Settings.Global.putInt(activity.getContentResolver(), toggleKey, newState);
+                Log.d("SecurityPrivacyGridAdapter", "Toggled " + toggleKey + " to " + (newState == 1 ? "enabled" : "disabled") + " (Global, result: " + result + ")");
+            } else {
+                result = android.provider.Settings.Secure.putInt(activity.getContentResolver(), toggleKey, newState);
+                Log.d("SecurityPrivacyGridAdapter", "Toggled " + toggleKey + " to " + (newState == 1 ? "enabled" : "disabled") + " (Secure, result: " + result + ")");
+            }
+            
+            // Verify the write was successful
+            if (!result) {
+                Log.e("SecurityPrivacyGridAdapter", "Failed to write toggle state! putInt returned false");
+                // Show error toast
+                Toast.makeText(activity, "Failed to update setting", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            
+            // Verify the value was actually written
+            int verifyState;
+            if ("window_ignore_secure".equals(toggleKey) || "no_storage_restrict".equals(toggleKey)) {
+                verifyState = android.provider.Settings.Global.getInt(activity.getContentResolver(), toggleKey, -1);
+            } else {
+                verifyState = android.provider.Settings.Secure.getInt(activity.getContentResolver(), toggleKey, -1);
+            }
+            if (verifyState != newState) {
+                Log.e("SecurityPrivacyGridAdapter", "Failed to write toggle state! Expected " + newState + " but got " + verifyState);
+                // Show error toast
+                Toast.makeText(activity, "Failed to update setting", Toast.LENGTH_SHORT).show();
+                return;
+            }
             
             // Broadcast change so SystemUI/framework can respond
             String action = getBroadcastActionForToggle(toggleKey);
@@ -482,9 +560,15 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
                 intent.putExtra("enabled", newState == 1);
                 intent.putExtra("toggle_key", toggleKey);
                 activity.sendBroadcast(intent);
+                Log.d("SecurityPrivacyGridAdapter", "Broadcast sent: " + action);
             }
+            
+            // Show confirmation toast
+            String message = toggleKey + " " + (newState == 1 ? "enabled" : "disabled");
+            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Log.e("SecurityPrivacyGridAdapter", "Error toggling " + toggleKey, e);
+            Toast.makeText(activity, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
     
@@ -506,31 +590,49 @@ class SecurityPrivacyGridAdapter extends RecyclerView.Adapter<SecurityPrivacyGri
     
     /**
      * Update card appearance based on toggle state
-     * When enabled: brighter color with full opacity
-     * When disabled: dimmed color with reduced opacity
+     * When enabled: green border and brighter background
+     * When disabled: normal appearance
      */
     private void updateToggleCardAppearance(View cardView, boolean isEnabled) {
         try {
-            // Get the card's background drawable
-            android.graphics.drawable.Drawable background = cardView.getBackground();
-            if (background != null) {
-                if (isEnabled) {
-                    // Enabled: Full opacity and brighter color
-                    background.setAlpha(255);
-                    // Add a subtle tint to indicate it's active (green-ish)
-                    background.setColorFilter(
-                        android.graphics.Color.argb(30, 76, 175, 80), // Light green tint
-                        android.graphics.PorterDuff.Mode.OVERLAY);
-                } else {
-                    // Disabled: Reduced opacity and no color filter
-                    background.setAlpha(180);
-                    background.clearColorFilter();
+            // Create a more visible visual indicator
+            if (isEnabled) {
+                // Enabled: Add green border and brighter background
+                cardView.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
+                    android.graphics.Color.argb(40, 76, 175, 80))); // Light green background tint
+                
+                // Add border using padding and background
+                android.graphics.drawable.GradientDrawable border = new android.graphics.drawable.GradientDrawable();
+                border.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
+                border.setCornerRadius(12f); // Match card corner radius
+                border.setColor(android.graphics.Color.argb(40, 76, 175, 80)); // Light green background
+                border.setStroke(3, android.graphics.Color.rgb(76, 175, 80)); // Green border
+                cardView.setBackground(border);
+                
+                // Increase elevation
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    cardView.setElevation(8f);
+                }
+            } else {
+                // Disabled: Normal appearance
+                // Reset to default card background
+                cardView.setBackgroundResource(R.drawable.custom_preference_background);
+                
+                // Reset elevation
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    cardView.setElevation(0f);
                 }
             }
             
-            // Also update the card's elevation to show it's "pressed" when enabled
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                cardView.setElevation(isEnabled ? 4f : 0f);
+            // Also update title text color for better visibility
+            TextView titleView = cardView.findViewById(android.R.id.title);
+            if (titleView != null) {
+                if (isEnabled) {
+                    titleView.setTextColor(android.graphics.Color.rgb(76, 175, 80)); // Green text when enabled
+                } else {
+                    titleView.setTextColor(activity.getResources().getColor(
+                        com.android.settings.R.color.mtx_text_color_primary, null)); // Default text color
+                }
             }
         } catch (Exception e) {
             Log.e("SecurityPrivacyGridAdapter", "Error updating toggle card appearance", e);

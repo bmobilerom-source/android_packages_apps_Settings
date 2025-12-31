@@ -17,9 +17,18 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="contextual_colors_settings_screen"
     android:title="@string/monet_contextual_colors_title">
 
+
+    <!-- Lottie Animation -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="display_customizations3_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/display"/>
+        
     <PreferenceCategory
         android:title="@string/monet_contextual_colors_category"
         android:key="contextual_category">
@@ -28,7 +37,8 @@
             android:key="monet_contextual_enabled"
             android:title="@string/monet_contextual_colors_enable_title"
             android:summary="@string/monet_contextual_colors_enable_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            settings:controller="com.android.settings.display.ContextualColorsController" />
 
         <Preference
             android:key="contextual_last_notification"
@@ -37,10 +47,10 @@
             android:selectable="false" />
 
         <Preference
-            android:key="contextual_supported_apps"
-            android:title="@string/monet_supported_apps_title"
-            android:summary="@string/monet_supported_apps_summary"
-            android:fragment="com.android.settings.display.ContextualColorsSupportedApps" />
+            android:key="contextual_reset_colors"
+            android:title="@string/monet_reset_colors_title"
+            android:summary="@string/monet_reset_colors_summary"
+            settings:layout="@layout/adaptive_preference_card" />
 
     </PreferenceCategory>
 

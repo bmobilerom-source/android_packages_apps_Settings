@@ -42,12 +42,15 @@ import com.android.settings.SettingsPreferenceFragment;
 import java.util.Locale;
 import android.text.TextUtils;
 import android.view.View;
+import com.epic.utils.CardNavigationHelper;
 
 import java.util.List;
 import java.util.ArrayList;
 
 public class QuickSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
+
+    private CardNavigationHelper mCardHelper;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -56,7 +59,18 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.anatolia_settings_quicksettings);
 
         PreferenceScreen prefScreen = getPreferenceScreen();
-        }
+
+        // Initialize card navigation helper
+        mCardHelper = new CardNavigationHelper(this);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Setup click handling for navigation cards
+        mCardHelper.setupCardClickHandling(view);
+    }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {

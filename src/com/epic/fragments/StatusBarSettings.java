@@ -28,6 +28,16 @@ import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 import android.content.ContentResolver;
 import android.content.res.Resources;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
+import com.android.settings.R;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -48,6 +58,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settings.R;
 import android.util.Log;
+import com.epic.utils.CardNavigationHelper;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -56,7 +67,26 @@ import java.util.List;
 @SearchIndexable
 public class StatusBarSettings extends DashboardFragment {
 
-    private static final String TAG = "StatusBarSettings";
+    private CardNavigationHelper mCardHelper;
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        // DashboardFragment automatically loads preferences via getPreferenceScreenResId()
+        // Do NOT call addPreferencesFromResource() here as it causes double-loading and crashes
+
+        // Initialize card navigation helper
+        mCardHelper = new CardNavigationHelper(this);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Setup click handling for navigation cards
+        mCardHelper.setupCardClickHandling(view);
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -65,7 +95,7 @@ public class StatusBarSettings extends DashboardFragment {
 
     @Override
     protected String getLogTag() {
-        return TAG;
+        return "StatusBarSettings";
     }
 
     @Override
@@ -81,9 +111,9 @@ public class StatusBarSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new StatusBarLogoController(context, "status_bar_logo"));
-        controllers.add(new StatusBarLogoPositionController(context, "status_bar_logo_position"));
-        controllers.add(new StatusBarLogoStyleController(context, "status_bar_logo_style"));
+        // Controllers are automatically instantiated from XML via settings:controller attribute
+        // Do NOT manually add them here as it causes double instantiation and crashes
+        // If you need to add controllers programmatically, remove the settings:controller from XML
         return controllers;
     }
 

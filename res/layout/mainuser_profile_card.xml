@@ -43,8 +43,8 @@
                 app:lottie_speed="0.3"
                 android:alpha="1.0"
                 android:scaleType="centerCrop"
-                android:scaleX="0.9"
-                android:scaleY="0.9" />
+                android:scaleX="0.63"
+                android:scaleY="0.63" />
 
 
 

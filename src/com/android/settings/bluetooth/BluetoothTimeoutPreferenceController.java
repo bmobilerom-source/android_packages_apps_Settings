@@ -11,6 +11,7 @@ import android.provider.Settings;
 import android.util.Log;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
@@ -47,6 +48,15 @@ public class BluetoothTimeoutPreferenceController extends BasePreferenceControll
     @Override
     public String getPreferenceKey() {
         return mBluetoothTimeoutKey;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override

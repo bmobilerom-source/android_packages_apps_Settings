@@ -55,11 +55,19 @@
 
 
     <Preference
+        android:key="security_advanced_settings"
+        android:title="@string/security_advanced_settings"
+        android:summary="@string/summary_placeholder"
+        android:order="40"
+        settings:layout="@layout/adaptive_preference_card_top"
+        android:fragment="com.android.settings.security.SecurityAdvancedSettings" />
+
+    <Preference
         android:key="nav_settings_backup_restore"
         android:title="@string/settings_backup_restore_title"
         android:summary="@string/settings_backup_restore_intro_summary"
         android:order="50"
-        settings:layout="@layout/adaptive_preference_card_top"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:fragment="com.epic.fragments.SettingsBackupRestore" />
 
     <Preference

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2025 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <!-- Titles -->
+    <string name="colorblendr_settings_title">Color Customization</string>
+    <string name="colorblendr_settings_summary">Fine-tune Material You colors</string>
+    
+    <!-- Category Titles -->
+    <string name="colorblendr_saturation_title">Saturation</string>
+    <string name="colorblendr_lightness_title">Lightness</string>
+    <string name="colorblendr_theme_title">Theme</string>
+    <string name="colorblendr_manual_title">Manual Override</string>
+    <string name="colorblendr_info_title">Information</string>
+    
+    <!-- Preferences -->
+    <string name="colorblendr_accent_saturation_title">Accent Saturation</string>
+    <string name="colorblendr_accent_saturation_summary">%d%%</string>
+    <string name="colorblendr_background_saturation_title">Background Saturation</string>
+    <string name="colorblendr_background_saturation_summary">%d%%</string>
+    <string name="colorblendr_background_lightness_title">Background Lightness</string>
+    <string name="colorblendr_background_lightness_summary">%d%%</string>
+    <string name="colorblendr_pitch_black_title">Pitch Black Theme</string>
+    <string name="colorblendr_pitch_black_summary">Use pure black in dark mode</string>
+    <string name="colorblendr_manual_color_title">Manual Color Override</string>
+    <string name="colorblendr_manual_color_summary">Override primary color manually</string>
+    
+    <!-- Info -->
+    <string name="colorblendr_info">Adjust saturation and lightness to fine-tune Material You colors. 100% means no change from default.</string>
+</resources>
+
+
+

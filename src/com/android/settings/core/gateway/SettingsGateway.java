@@ -112,6 +112,7 @@ import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
 import com.android.settings.display.ColorContrastFragment;
 import com.android.settings.display.MonetColorSettings;
+import com.android.settings.display.MonetColorBlendrSettingsFragment;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.display.QuickSettingsSettings;
 import com.android.settings.display.StatusBarSettings;
@@ -223,6 +224,8 @@ import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSetting
 import com.android.settings.wifi.tether.WifiTetherSettings;
 import com.epic.fragments.AutoRebootSettings;
 import com.epic.fragments.SecurityPrivacyGrid;
+import com.epic.fragments.AmbientCustomizations;
+import com.epic.fragments.DisplayColorSettings;
 
 public class SettingsGateway {
 
@@ -432,6 +435,7 @@ public class SettingsGateway {
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
             ContactsStorageSettings.class.getName(),
+            com.android.settings.awaken.fragments.SmartPixels.class.getName(),
             com.epic.fragments.SettingsExtendedSecurity.class.getName(),
             com.epic.fragments.SensorBlockSettings.class.getName(),
             com.epic.fragments.PocketModeSettings.class.getName(),
@@ -446,6 +450,7 @@ public class SettingsGateway {
             com.epic.fragments.SystemSafeApplicationsSettings.class.getName(),
             com.epic.fragments.SystemGrid.class.getName(),
             com.epic.fragments.DisplayPageGrid.class.getName(),
+            com.epic.fragments.DisplayColorSettings.class.getName(),
             com.epic.fragments.StatusBarSettings.class.getName(),
             com.android.settings.deviceinfo.BMobileAccountsFragment.class.getName(),
             com.android.settings.deviceinfo.BMobileUserInfoFragment.class.getName(),
@@ -455,9 +460,20 @@ public class SettingsGateway {
             com.epic.fragments.StatusBarSettings.class.getName(),
             QuickSettingsSettings.class.getName(),
             MonetColorSettings.class.getName(),
+            com.android.settings.display.MonetColorPresets.class.getName(),
             com.epic.fragments.SensorBlockSettings.class.getName(),
             com.epic.fragments.SensorBlockAppPicker.class.getName(),
-            com.android.settings.display.AdvancedMonetSettings.class.getName()
+            com.android.settings.display.AdvancedMonetSettings.class.getName(),
+            com.epic.fragments.CustomThemeEngineFragment.class.getName(),
+            // com.android.settings.theme.CustomThemeSettings.class.getName(), // REMOVED - causing boot loops
+            com.android.settings.display.CustomGradientsSettings.class.getName(),
+            com.android.settings.display.WallpaperBackgroundSettings.class.getName(),
+            com.android.settings.display.ContextualColorsSettings.class.getName(),
+            com.android.settings.display.MonetColorBlendrSettingsFragment.class.getName(),
+            com.android.settings.theme.CustomThemeEngineSettings.class.getName(),
+            com.android.settings.sound.AudioEnhancementSettings.class.getName(),
+            com.epic.fragments.SystemSettingsOnthego.class.getName(),
+            AmbientCustomizations.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

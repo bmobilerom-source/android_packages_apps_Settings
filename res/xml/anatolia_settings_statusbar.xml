@@ -25,7 +25,10 @@
         android:title="@string/status_bar_logo_title"
         android:summary="@string/status_bar_logo_summary"
         android:defaultValue="false"
+<<<<<<< Updated upstream
         app:position="0"
+=======
+>>>>>>> Stashed changes
         settings:controller="com.epic.fragments.StatusBarLogoController" />
 
     <!-- Logo position -->
@@ -36,18 +39,24 @@
         android:entryValues="@array/status_bar_logo_position_values"
         android:defaultValue="0"
         android:dependency="status_bar_logo"
+<<<<<<< Updated upstream
         app:position="1"
+=======
+>>>>>>> Stashed changes
         settings:controller="com.epic.fragments.StatusBarLogoPositionController" />
 
     <!-- Logo style -->
-    <Preference
+    <ListPreference
         android:key="status_bar_logo_style"
         android:title="@string/status_bar_logo_style_title"
         android:entries="@array/status_bar_logo_style_entries"
         android:entryValues="@array/status_bar_logo_style_values"
         android:defaultValue="0"
         android:dependency="status_bar_logo"
+<<<<<<< Updated upstream
         app:position="2"
+=======
+>>>>>>> Stashed changes
         settings:controller="com.epic.fragments.StatusBarLogoStyleController" />
         
 </PreferenceScreen>

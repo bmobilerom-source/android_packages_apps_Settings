@@ -17,15 +17,23 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="custom_gradients_settings_screen"
     android:title="@string/monet_custom_gradients_title">
-
-    <!-- Custom container for gradient grid -->
-    <LinearLayout
-        android:id="@+id/gradients_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="16dp" />
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="apps_illustration_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/monet3dots"/>
+    <ListPreference
+        android:key="monet_gradient_type"
+        android:title="@string/monet_custom_gradients_title"
+        android:summary="%s"
+        android:entries="@array/monet_gradient_types"
+        android:entryValues="@array/monet_gradient_type_values"
+        android:defaultValue="none"
+        android:persistent="false"
+        settings:controller="com.android.settings.display.CustomGradientsController"
+        settings:layout="@layout/adaptive_preference_card" />
 
 </PreferenceScreen>

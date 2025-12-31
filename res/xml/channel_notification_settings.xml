@@ -61,6 +61,7 @@
         android:key="convo_promote"
         android:order="7"
         android:icon="@drawable/ic_promote_conversation"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/promote_conversation_title"
         android:summary="@string/promote_conversation_summary" />
 
@@ -116,7 +117,8 @@
         android:order="18"
         android:title="@string/app_settings_link"
         android:icon="@drawable/ic_settings_24dp"
-        settings:allowDividerAbove="true"/>
+        settings:layout="@layout/adaptive_preference_card"
+        settings:allowDividerAbove="false"/>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="block_desc"

@@ -18,6 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="privacy_dashboard_page"
     android:title="@string/privacy_dashboard_title">
 
@@ -39,12 +40,14 @@
     <!-- Accessibility usage -->
     <Preference
         android:key="privacy_accessibility_usage"
+        settings:layout="@layout/adaptive_preference_card_top"
         android:title="@string/accessibility_usage_title"
         settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController"/>
 
     <!-- Permissions usage -->
     <Preference
         android:key="privacy_permissions_usage"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:title="@string/permissions_usage_title"
         android:summary="@string/permissions_usage_summary"
         settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController"/>
@@ -52,6 +55,7 @@
     <!-- App permissions -->
     <Preference
         android:key="privacy_manage_perms"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:title="@string/app_permissions"
         android:summary="@string/runtime_permissions_summary_control_app_access"
         settings:controller="com.android.settings.privacy.ManagePermissionsPreferenceController"/>
@@ -59,6 +63,7 @@
     <!-- App Data Sharing Update -->
     <Preference
         android:key="privacy_app_data_sharing_updates"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:title="@string/app_data_sharing_updates_title"
         android:summary="@string/app_data_sharing_updates_summary"
         settings:controller="com.android.settings.privacy.AppDataSharingUpdatesPreferenceController"/>
@@ -86,11 +91,13 @@
         settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
 
     <!-- On lock screen notifications -->
+     <!-- TODO: Add back if and when needed for privacy dashboard -->
+     <!--
     <com.android.settings.RestrictedListPreference
         android:key="privacy_lock_screen_notifications"
         android:title="@string/lock_screen_notifs_title"
         android:summary="@string/summary_placeholder"/>
-
+-->
     <Preference
         android:key="privacy_lock_screen_notifications_page"
         android:title="@string/lock_screen_notifs_title"

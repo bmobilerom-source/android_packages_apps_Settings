@@ -124,50 +124,111 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
         try {
             if (KEY_AUTH_RIPPLE_ENABLED.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.System.putInt(resolver, KEY_AUTH_RIPPLE_ENABLED, enabled ? 1 : 0);
-                Log.d(TAG, "auth_ripple_enabled set to: " + enabled);
-                return true;
+                boolean saved = Settings.System.putInt(resolver, KEY_AUTH_RIPPLE_ENABLED, enabled ? 1 : 0);
+                Log.d(TAG, "auth_ripple_enabled set to: " + enabled + " (saved: " + saved + ")");
+                
+                // Broadcast change for framework to pick up
+                android.content.Intent intent = new android.content.Intent("com.android.settings.AUTH_RIPPLE_CHANGED");
+                intent.putExtra("enabled", enabled);
+                getActivity().sendBroadcast(intent);
+                
+                return saved;
             } else if (KEY_FP_SUCCESS_VIBRATE.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.System.putInt(resolver, KEY_FP_SUCCESS_VIBRATE, enabled ? 1 : 0);
-                Log.d(TAG, "fp_success_vibrate set to: " + enabled);
-                return true;
+                boolean saved = Settings.System.putInt(resolver, KEY_FP_SUCCESS_VIBRATE, enabled ? 1 : 0);
+                Log.d(TAG, "fp_success_vibrate set to: " + enabled + " (saved: " + saved + ")");
+                
+                // Broadcast change for framework to pick up
+                android.content.Intent intent = new android.content.Intent("com.android.settings.FP_VIBRATION_CHANGED");
+                intent.putExtra("success_vibrate", enabled);
+                getActivity().sendBroadcast(intent);
+                
+                return saved;
             } else if (KEY_FP_ERROR_VIBRATE.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.System.putInt(resolver, KEY_FP_ERROR_VIBRATE, enabled ? 1 : 0);
-                Log.d(TAG, "fp_error_vibrate set to: " + enabled);
-                return true;
+                boolean saved = Settings.System.putInt(resolver, KEY_FP_ERROR_VIBRATE, enabled ? 1 : 0);
+                Log.d(TAG, "fp_error_vibrate set to: " + enabled + " (saved: " + saved + ")");
+                
+                // Broadcast change for framework to pick up
+                android.content.Intent intent = new android.content.Intent("com.android.settings.FP_VIBRATION_CHANGED");
+                intent.putExtra("error_vibrate", enabled);
+                getActivity().sendBroadcast(intent);
+                
+                return saved;
             } else if (KEY_SHOW_CLIPBOARD_OVERLAY.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.Secure.putInt(resolver, KEY_SHOW_CLIPBOARD_OVERLAY, enabled ? 1 : 0);
-                Log.d(TAG, "show_clipboard_overlay set to: " + enabled);
-                return true;
+                boolean saved = Settings.Secure.putInt(resolver, KEY_SHOW_CLIPBOARD_OVERLAY, enabled ? 1 : 0);
+                Log.d(TAG, "show_clipboard_overlay set to: " + enabled + " (saved: " + saved + ")");
+                
+                // Broadcast change for framework to pick up
+                android.content.Intent intent = new android.content.Intent("com.android.settings.CLIPBOARD_OVERLAY_CHANGED");
+                intent.putExtra("enabled", enabled);
+                getActivity().sendBroadcast(intent);
+                
+                return saved;
             } else if (KEY_NO_STORAGE_RESTRICT.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.Secure.putInt(resolver, KEY_NO_STORAGE_RESTRICT, enabled ? 1 : 0);
-                Log.d(TAG, "no_storage_restrict set to: " + enabled);
-                return true;
+                // Framework (ExternalStorageProvider) reads this from Settings.Global
+                boolean saved = Settings.Global.putInt(
+                        resolver, Settings.Global.NO_STORAGE_RESTRICT, enabled ? 1 : 0);
+                Log.d(TAG, "no_storage_restrict (Global) set to: " + enabled + " (saved: " + saved + ")");
+                
+                // Broadcast change for framework / SystemUI to pick up
+                android.content.Intent intent =
+                        new android.content.Intent("com.android.settings.STORAGE_RESTRICT_CHANGED");
+                intent.putExtra("enabled", enabled);
+                getActivity().sendBroadcast(intent);
+                
+                return saved;
             } else if (KEY_WINDOW_IGNORE_SECURE.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.Secure.putInt(resolver, KEY_WINDOW_IGNORE_SECURE, enabled ? 1 : 0);
-                Log.d(TAG, "window_ignore_secure set to: " + enabled);
-                return true;
+                // Framework (Window.java) reads this from Settings.Global
+                boolean saved = Settings.Global.putInt(
+                        resolver, Settings.Global.WINDOW_IGNORE_SECURE, enabled ? 1 : 0);
+                Log.d(TAG, "window_ignore_secure (Global) set to: " + enabled + " (saved: " + saved + ")");
+                
+                // Broadcast change for framework / SystemUI to pick up
+                android.content.Intent intent =
+                        new android.content.Intent("com.android.settings.WINDOW_IGNORE_SECURE_CHANGED");
+                intent.putExtra("enabled", enabled);
+                getActivity().sendBroadcast(intent);
+                
+                return saved;
             } else if (KEY_SECURE_LOCKSCREEN_QS_DISABLED.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.Secure.putInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, enabled ? 1 : 0);
-                Log.d(TAG, "secure_lockscreen_qs_disabled set to: " + enabled);
-                return true;
+                boolean saved = Settings.Secure.putInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, enabled ? 1 : 0);
+                Log.d(TAG, "secure_lockscreen_qs_disabled set to: " + enabled + " (saved: " + saved + ")");
+                
+                // Broadcast change for framework to pick up
+                android.content.Intent intent = new android.content.Intent("com.android.settings.SECURE_LOCKSCREEN_QS_CHANGED");
+                intent.putExtra("disabled", enabled);
+                getActivity().sendBroadcast(intent);
+                
+                return saved;
             } else if (KEY_POCKET_LOCK.equals(key)) {
                 boolean enabled = (Boolean) newValue;
-                Settings.Secure.putInt(resolver, KEY_POCKET_LOCK, enabled ? 1 : 0);
-                Log.d(TAG, "pocket_lock set to: " + enabled);
-                return true;
+                boolean saved = Settings.Secure.putInt(resolver, KEY_POCKET_LOCK, enabled ? 1 : 0);
+                Log.d(TAG, "pocket_lock set to: " + enabled + " (saved: " + saved + ")");
+                
+                // Broadcast change for framework to pick up
+                android.content.Intent intent = new android.content.Intent("com.android.settings.POCKET_LOCK_CHANGED");
+                intent.putExtra("enabled", enabled);
+                getActivity().sendBroadcast(intent);
+                
+                return saved;
             }
         } catch (Exception e) {
             Log.e(TAG, "Error updating preference: " + key, e);
         }
 
         return false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh preference states when returning to this page
+        updatePreferenceStates(getActivity().getContentResolver());
     }
 
     /**
@@ -180,8 +241,15 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
             if (authRipplePref != null) {
                 int rippleEnabled = Settings.System.getInt(resolver, KEY_AUTH_RIPPLE_ENABLED, 1);
                 if (authRipplePref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) authRipplePref)
-                            .setChecked(rippleEnabled != 0);
+                    androidx.preference.TwoStatePreference twoStatePref = 
+                            (androidx.preference.TwoStatePreference) authRipplePref;
+                    twoStatePref.setChecked(rippleEnabled != 0);
+                    twoStatePref.setEnabled(true);
+                }
+                // For RestrictedSwitchPreference, also ensure it's not restricted
+                if (authRipplePref instanceof com.android.settingslib.RestrictedSwitchPreference) {
+                    ((com.android.settingslib.RestrictedSwitchPreference) authRipplePref)
+                            .setDisabledByAdmin(null);
                 }
                 authRipplePref.setOnPreferenceChangeListener(this);
             }
@@ -191,8 +259,15 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
             if (fpSuccessVibratePref != null) {
                 int fpSuccessVibrate = Settings.System.getInt(resolver, KEY_FP_SUCCESS_VIBRATE, 1);
                 if (fpSuccessVibratePref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) fpSuccessVibratePref)
-                            .setChecked(fpSuccessVibrate != 0);
+                    androidx.preference.TwoStatePreference twoStatePref = 
+                            (androidx.preference.TwoStatePreference) fpSuccessVibratePref;
+                    twoStatePref.setChecked(fpSuccessVibrate != 0);
+                    twoStatePref.setEnabled(true);
+                }
+                // For RestrictedSwitchPreference, also ensure it's not restricted
+                if (fpSuccessVibratePref instanceof com.android.settingslib.RestrictedSwitchPreference) {
+                    ((com.android.settingslib.RestrictedSwitchPreference) fpSuccessVibratePref)
+                            .setDisabledByAdmin(null);
                 }
                 fpSuccessVibratePref.setOnPreferenceChangeListener(this);
             }
@@ -202,8 +277,15 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
             if (fpErrorVibratePref != null) {
                 int fpErrorVibrate = Settings.System.getInt(resolver, KEY_FP_ERROR_VIBRATE, 1);
                 if (fpErrorVibratePref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) fpErrorVibratePref)
-                            .setChecked(fpErrorVibrate != 0);
+                    androidx.preference.TwoStatePreference twoStatePref = 
+                            (androidx.preference.TwoStatePreference) fpErrorVibratePref;
+                    twoStatePref.setChecked(fpErrorVibrate != 0);
+                    twoStatePref.setEnabled(true);
+                }
+                // For RestrictedSwitchPreference, also ensure it's not restricted
+                if (fpErrorVibratePref instanceof com.android.settingslib.RestrictedSwitchPreference) {
+                    ((com.android.settingslib.RestrictedSwitchPreference) fpErrorVibratePref)
+                            .setDisabledByAdmin(null);
                 }
                 fpErrorVibratePref.setOnPreferenceChangeListener(this);
             }
@@ -213,30 +295,48 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
             if (clipboardOverlayPref != null) {
                 int overlayEnabled = Settings.Secure.getInt(resolver, KEY_SHOW_CLIPBOARD_OVERLAY, 1);
                 if (clipboardOverlayPref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) clipboardOverlayPref)
-                            .setChecked(overlayEnabled != 0);
+                    androidx.preference.TwoStatePreference twoStatePref = 
+                            (androidx.preference.TwoStatePreference) clipboardOverlayPref;
+                    twoStatePref.setChecked(overlayEnabled != 0);
+                    twoStatePref.setEnabled(true);
                 }
                 clipboardOverlayPref.setOnPreferenceChangeListener(this);
             }
 
-            // Update no storage restrict preference
+            // Update no storage restrict preference (framework uses Settings.Global)
             Preference noStorageRestrictPref = findPreference(KEY_NO_STORAGE_RESTRICT);
             if (noStorageRestrictPref != null) {
-                int storageRestrictEnabled = Settings.Secure.getInt(resolver, KEY_NO_STORAGE_RESTRICT, 0);
+                int storageRestrictEnabled = Settings.Global.getInt(
+                        resolver, Settings.Global.NO_STORAGE_RESTRICT, 0);
                 if (noStorageRestrictPref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) noStorageRestrictPref)
-                            .setChecked(storageRestrictEnabled != 0);
+                    androidx.preference.TwoStatePreference twoStatePref = 
+                            (androidx.preference.TwoStatePreference) noStorageRestrictPref;
+                    twoStatePref.setChecked(storageRestrictEnabled != 0);
+                    twoStatePref.setEnabled(true);
+                }
+                // For RestrictedSwitchPreference, also ensure it's not restricted
+                if (noStorageRestrictPref instanceof com.android.settingslib.RestrictedSwitchPreference) {
+                    ((com.android.settingslib.RestrictedSwitchPreference) noStorageRestrictPref)
+                            .setDisabledByAdmin(null);
                 }
                 noStorageRestrictPref.setOnPreferenceChangeListener(this);
             }
 
-            // Update window ignore secure preference
+            // Update window ignore secure preference (framework uses Settings.Global)
             Preference windowIgnoreSecurePref = findPreference(KEY_WINDOW_IGNORE_SECURE);
             if (windowIgnoreSecurePref != null) {
-                int windowIgnoreSecureEnabled = Settings.Secure.getInt(resolver, KEY_WINDOW_IGNORE_SECURE, 0);
+                int windowIgnoreSecureEnabled = Settings.Global.getInt(
+                        resolver, Settings.Global.WINDOW_IGNORE_SECURE, 0);
                 if (windowIgnoreSecurePref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) windowIgnoreSecurePref)
-                            .setChecked(windowIgnoreSecureEnabled != 0);
+                    androidx.preference.TwoStatePreference twoStatePref = 
+                            (androidx.preference.TwoStatePreference) windowIgnoreSecurePref;
+                    twoStatePref.setChecked(windowIgnoreSecureEnabled != 0);
+                    twoStatePref.setEnabled(true);
+                }
+                // For RestrictedSwitchPreference, also ensure it's not restricted
+                if (windowIgnoreSecurePref instanceof com.android.settingslib.RestrictedSwitchPreference) {
+                    ((com.android.settingslib.RestrictedSwitchPreference) windowIgnoreSecurePref)
+                            .setDisabledByAdmin(null);
                 }
                 windowIgnoreSecurePref.setOnPreferenceChangeListener(this);
             }
@@ -246,8 +346,15 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
             if (secureLockscreenQsPref != null) {
                 int qsDisabled = Settings.Secure.getInt(resolver, KEY_SECURE_LOCKSCREEN_QS_DISABLED, 0);
                 if (secureLockscreenQsPref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) secureLockscreenQsPref)
-                            .setChecked(qsDisabled != 0);
+                    androidx.preference.TwoStatePreference twoStatePref = 
+                            (androidx.preference.TwoStatePreference) secureLockscreenQsPref;
+                    twoStatePref.setChecked(qsDisabled != 0);
+                    twoStatePref.setEnabled(true);
+                }
+                // For RestrictedSwitchPreference, also ensure it's not restricted
+                if (secureLockscreenQsPref instanceof com.android.settingslib.RestrictedSwitchPreference) {
+                    ((com.android.settingslib.RestrictedSwitchPreference) secureLockscreenQsPref)
+                            .setDisabledByAdmin(null);
                 }
                 secureLockscreenQsPref.setOnPreferenceChangeListener(this);
             }
@@ -257,8 +364,15 @@ public class SettingsExtendedSecurity extends SettingsPreferenceFragment impleme
             if (pocketLockPref != null) {
                 int pocketLockEnabled = Settings.Secure.getInt(resolver, KEY_POCKET_LOCK, 0);
                 if (pocketLockPref instanceof androidx.preference.TwoStatePreference) {
-                    ((androidx.preference.TwoStatePreference) pocketLockPref)
-                            .setChecked(pocketLockEnabled != 0);
+                    androidx.preference.TwoStatePreference twoStatePref = 
+                            (androidx.preference.TwoStatePreference) pocketLockPref;
+                    twoStatePref.setChecked(pocketLockEnabled != 0);
+                    twoStatePref.setEnabled(true);
+                }
+                // For RestrictedSwitchPreference, also ensure it's not restricted
+                if (pocketLockPref instanceof com.android.settingslib.RestrictedSwitchPreference) {
+                    ((com.android.settingslib.RestrictedSwitchPreference) pocketLockPref)
+                            .setDisabledByAdmin(null);
                 }
                 pocketLockPref.setOnPreferenceChangeListener(this);
             }

@@ -34,12 +34,13 @@ import com.android.settings.core.TogglePreferenceController;
 import java.util.List;
 
 /**
- * Configures behaviour of Contextual Search setting.
- * On Lineage ROM without native Circle to Search, launches drawing apps instead.
+ * Configures behaviour of Draw Anywhere setting.
+ * Launches drawing/screen annotation apps when tapped.
+ * Supports multiple drawing apps with Draw Anywhere as primary target.
  */
 public class NavigationSettingsContextualSearchController extends TogglePreferenceController {
 
-    private static final String DRAWING_APP_PACKAGE_1 = "com.drawanywhere";
+    private static final String DRAW_ANYWHERE_PACKAGE = "com.drawanywhere"; // Primary: Draw Anywhere app
     private static final String DRAWING_APP_PACKAGE_2 = "com.screen.draw";
     private static final String DRAWING_APP_PACKAGE_3 = "com.annotation.screen";
     private static final String DRAWING_APP_PACKAGE_4 = "com.drawing.screen";
@@ -51,21 +52,22 @@ public class NavigationSettingsContextualSearchController extends TogglePreferen
 
     @Override
     public boolean isChecked() {
-        // Permanently enabled - always return true
-        return true;
+        // Always show as "off" so tapping it will launch the app
+        return false;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        // Permanently enabled - prevent any changes, always keep enabled
-        // For native Circle to Search, ensure it's enabled
-        if (mContext.getPackageManager().hasSystemFeature(FEATURE_CONTEXTUAL_SEARCH)) {
-            Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.SEARCH_ALL_ENTRYPOINTS_ENABLED, 1);
-        }
-        // For Lineage ROM, ensure drawing functionality is available
-        return false; // Return false to prevent UI changes
+        // Always launch Draw Anywhere app when tapped
+        return launchDrawingApp();
     }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        // Launch Draw Anywhere when preference is clicked
+        return launchDrawingApp();
+    }
+
 
     @Override
     public int getAvailabilityStatus() {
@@ -92,9 +94,9 @@ public class NavigationSettingsContextualSearchController extends TogglePreferen
     private boolean isDrawingAppAvailable() {
         PackageManager pm = mContext.getPackageManager();
 
-        // Check for known drawing app packages
+        // Check for known drawing app packages (Draw Anywhere first)
         String[] drawingPackages = {
-            DRAWING_APP_PACKAGE_1,
+            DRAW_ANYWHERE_PACKAGE,  // Primary: Draw Anywhere
             DRAWING_APP_PACKAGE_2,
             DRAWING_APP_PACKAGE_3,
             DRAWING_APP_PACKAGE_4
@@ -124,12 +126,20 @@ public class NavigationSettingsContextualSearchController extends TogglePreferen
     private boolean launchDrawingApp() {
         PackageManager pm = mContext.getPackageManager();
 
-        // Try known drawing app packages first
+        // Try Draw Anywhere first (primary target)
+        if (launchAppByPackage(DRAW_ANYWHERE_PACKAGE)) {
+            showToast("Launching Draw Anywhere");
+            return true;
+        }
+
+        // Try other known drawing app packages as fallback
         String[] drawingPackages = {
-            DRAWING_APP_PACKAGE_1,
             DRAWING_APP_PACKAGE_2,
             DRAWING_APP_PACKAGE_3,
-            DRAWING_APP_PACKAGE_4
+            DRAWING_APP_PACKAGE_4,
+            "com.faendir.lightning_launcher.sketch", // Sketch
+            "com.guoshi.screenmaster", // Screen Master
+            "com.dv.adm" // Touch Paint
         };
 
         for (String packageName : drawingPackages) {
@@ -139,7 +149,7 @@ public class NavigationSettingsContextualSearchController extends TogglePreferen
             }
         }
 
-        // Fallback: Try to find any drawing app
+        // Fallback: Try to find any drawing app via Intent
         if (launchGenericDrawingApp()) {
             showToast("Launching drawing app");
             return true;

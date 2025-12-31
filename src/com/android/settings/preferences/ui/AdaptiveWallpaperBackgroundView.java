@@ -39,6 +39,8 @@ import android.graphics.RenderEffect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.text.TextUtils;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
@@ -47,6 +49,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.internal.graphics.ColorUtils;
+import com.android.settings.awaken.fragments.DisplayCustomizationsHelper;
 
 /**
  * Adaptive Wallpaper Background View
@@ -85,6 +88,13 @@ public class AdaptiveWallpaperBackgroundView extends ImageView {
         mContext = context;
         mHandler = new Handler(Looper.getMainLooper());
         mContentResolver = context.getContentResolver();
+
+        // Configure as background element - don't intercept touches or focus
+        setElevation(0f);
+        setTranslationZ(0f);
+        setZ(0f);
+        setClickable(false);
+        setFocusable(false);
         
         // Observe settings changes
         mSettingsObserver = new ContentObserver(mHandler) {
@@ -100,8 +110,30 @@ public class AdaptiveWallpaperBackgroundView extends ImageView {
             }
         };
         
+        // Observe wallpaper background setting changes
         mContentResolver.registerContentObserver(
-            Settings.System.getUriFor(com.android.settings.display.WallpaperBackgroundHelper.SETTING_KEY), 
+            Settings.System.getUriFor(com.android.settings.display.WallpaperBackgroundHelper.SETTING_KEY),
+            false, mSettingsObserver, android.os.UserHandle.USER_CURRENT);
+
+        // Also observe wallpaper blur setting changes
+        mContentResolver.registerContentObserver(
+            Settings.System.getUriFor(Settings.System.SETTINGS_WALLPAPER_BLUR_ENABLED),
+            false, mSettingsObserver, android.os.UserHandle.USER_CURRENT);
+
+        // Also observe wallpaper blur radius changes
+        mContentResolver.registerContentObserver(
+            Settings.System.getUriFor(Settings.System.SETTINGS_WALLPAPER_BLUR_RADIUS),
+            false, mSettingsObserver, android.os.UserHandle.USER_CURRENT);
+
+        // Also observe gradient settings changes
+        mContentResolver.registerContentObserver(
+            Settings.System.getUriFor("monet_gradient_enabled"),
+            false, mSettingsObserver, android.os.UserHandle.USER_CURRENT);
+        mContentResolver.registerContentObserver(
+            Settings.System.getUriFor("monet_gradient_type"),
+            false, mSettingsObserver, android.os.UserHandle.USER_CURRENT);
+        mContentResolver.registerContentObserver(
+            Settings.System.getUriFor("monet_gradient_colors"),
             false, mSettingsObserver, android.os.UserHandle.USER_CURRENT);
         
         // Update on main thread
@@ -118,94 +150,260 @@ public class AdaptiveWallpaperBackgroundView extends ImageView {
             Log.w(TAG, "Context is null, cannot update wallpaper background");
             return;
         }
-        
-        boolean isEnabled = com.android.settings.display.WallpaperBackgroundHelper.isEnabled(mContext);
-        Log.d(TAG, "Wallpaper background enabled: " + isEnabled);
-        
-        if (!isEnabled) {
+
+        // Check if gradients are enabled (only in dark mode)
+        boolean gradientEnabled = isGradientEnabledInDarkMode();
+        boolean wallpaperActive = com.android.settings.display.WallpaperBackgroundHelper.isActive(mContext);
+
+        Log.d(TAG, "Wallpaper background active: " + wallpaperActive + ", Gradient enabled in dark mode: " + gradientEnabled);
+
+        // Show background if either wallpaper OR gradients are enabled
+        if (!wallpaperActive && !gradientEnabled) {
             setVisibility(GONE);
             setImageBitmap(null);
             setRenderEffect(null);
             setColorFilter(null);
+            setForeground(null);
+            setBackground(null);
             return;
         }
-        
-        // Only enable wallpaper background in dark theme
-        int nightMode = mContext.getResources().getConfiguration().uiMode 
-                & Configuration.UI_MODE_NIGHT_MASK;
-        boolean isDarkMode = (nightMode == Configuration.UI_MODE_NIGHT_YES);
-        Log.d(TAG, "Dark mode: " + isDarkMode);
-        
-        if (!isDarkMode) {
-            setVisibility(GONE);
-            setImageBitmap(null);
-            setRenderEffect(null);
-            setColorFilter(null);
-            return;
-        }
-        
+
         setVisibility(VISIBLE);
-        
+
+        // If gradients are enabled in dark mode, apply them as background only
+        if (gradientEnabled) {
+            applyGradientBackground();
+            Log.d(TAG, "Applied gradient background");
+
+            // If wallpaper is also active, apply it on top of gradient
+            if (wallpaperActive) {
+                applyWallpaperBackground();
+            } else {
+                // Just gradient, no wallpaper
+                setImageBitmap(null);
+                setRenderEffect(null);
+                setColorFilter(null);
+            }
+        } else if (wallpaperActive) {
+            // Only wallpaper, no gradient
+            setForeground(null);
+            setBackground(null);
+            applyWallpaperBackground();
+        }
+    }
+
+    private void applyWallpaperBackground() {
+        // Wallpaper background only works in dark mode
+        Log.d(TAG, "Wallpaper background active in dark mode");
+
         try {
             // Get wallpaper
             WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
             if (wallpaperManager == null) {
                 Log.w(TAG, "WallpaperManager is null");
-                setVisibility(GONE);
                 return;
             }
-            
+
             Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-            
+
             if (wallpaperDrawable == null) {
                 Log.w(TAG, "Wallpaper drawable is null");
-                setVisibility(GONE);
                 return;
             }
-            
+
             // Convert to bitmap
             Bitmap wallpaperBitmap = drawableToBitmap(wallpaperDrawable);
             if (wallpaperBitmap == null) {
                 Log.w(TAG, "Failed to convert wallpaper to bitmap");
-                setVisibility(GONE);
                 return;
             }
-            
+
             setImageBitmap(wallpaperBitmap);
-            
-            // Apply blur effect (reduced by 8% for dark mode: 80 * 0.92 = 73.6)
-            setRenderEffect(RenderEffect.createBlurEffect(73.6f, 73.6f, Shader.TileMode.CLAMP));
-            
+
+            // Check if blur is enabled and apply appropriate blur effect
+            boolean blurEnabled = DisplayCustomizationsHelper.isWallpaperBlurEnabled(mContext);
+            if (blurEnabled) {
+                // Get blur radius from settings (default 20, scale to blur effect)
+                int blurRadius = DisplayCustomizationsHelper.getWallpaperBlurRadius(mContext);
+                // Convert radius to blur effect (scale factor for RenderEffect)
+                float blurEffect = blurRadius * 3.0f; // Scale radius to blur intensity
+                setRenderEffect(RenderEffect.createBlurEffect(blurEffect, blurEffect, Shader.TileMode.CLAMP));
+                Log.d(TAG, "Applied blur effect with radius: " + blurRadius + " (effect: " + blurEffect + ")");
+            } else {
+                // No blur effect
+                setRenderEffect(null);
+                Log.d(TAG, "Blur disabled, no blur effect applied");
+            }
+
             // Apply adaptive tint based on theme
             applyAdaptiveTint();
-            
-            Log.d(TAG, "Wallpaper background updated successfully");
-            
+
+            Log.d(TAG, "Wallpaper background applied successfully");
+
         } catch (SecurityException e) {
             Log.e(TAG, "SecurityException: Missing READ_EXTERNAL_STORAGE permission or wallpaper access", e);
-            setVisibility(GONE);
         } catch (Exception e) {
             Log.e(TAG, "Error setting wallpaper background", e);
-            setVisibility(GONE);
         }
     }
 
     private void applyAdaptiveTint() {
         // Detect light/dark mode
-        int nightMode = mContext.getResources().getConfiguration().uiMode 
+        int nightMode = mContext.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_MASK;
         boolean isDarkMode = (nightMode == Configuration.UI_MODE_NIGHT_YES);
-        
+
         if (isDarkMode) {
-            // Dark mode: apply dark mask (black overlay with medium opacity)
-            // This makes the wallpaper darker so light cards stand out
-            int darkMask = ColorUtils.blendARGB(Color.TRANSPARENT, Color.BLACK, 0.5f);
+            // Dark mode: apply subtle dark mask (black overlay with low opacity)
+            // This makes the wallpaper slightly darker so cards stand out
+            int darkMask = ColorUtils.blendARGB(Color.TRANSPARENT, Color.BLACK, 0.25f);
             setColorFilter(darkMask, PorterDuff.Mode.SRC_ATOP);
         } else {
-            // Light mode: apply light tint (white overlay with low opacity)
-            // This makes the wallpaper lighter so dark cards stand out
-            int lightTint = ColorUtils.blendARGB(Color.TRANSPARENT, Color.WHITE, 0.3f);
+            // Light mode: apply subtle light tint (white overlay with very low opacity)
+            // This makes the wallpaper slightly lighter so dark cards stand out
+            int lightTint = ColorUtils.blendARGB(Color.TRANSPARENT, Color.WHITE, 0.15f);
             setColorFilter(lightTint, PorterDuff.Mode.SRC_ATOP);
+        }
+    }
+
+    private void applyGradientBackground() {
+        // Check if custom gradients are enabled in dark mode
+        boolean gradientEnabled = isGradientEnabledInDarkMode();
+        if (!gradientEnabled) {
+            // No gradient, clear any existing background
+            setForeground(null);
+            setBackground(null);
+            return;
+        }
+
+        // Create gradient drawable
+        GradientDrawable gradient = createGradientBackground();
+        if (gradient != null) {
+            // Apply gradient as background only (not foreground to avoid UI interference)
+            setBackground(gradient);
+            setForeground(null); // Ensure no foreground overlay
+            Log.d(TAG, "Applied gradient background: " + getGradientType());
+
+            // Ensure gradient is visible even without wallpaper
+            setImageBitmap(null);
+            setRenderEffect(null);
+            setColorFilter(null);
+        } else {
+            // Fallback: clear background
+            setBackground(null);
+            Log.w(TAG, "Failed to create gradient background");
+        }
+    }
+
+    private boolean isGradientEnabled() {
+        try {
+            return Settings.System.getInt(mContext.getContentResolver(),
+                    "monet_gradient_enabled", 0) == 1;
+        } catch (Exception e) {
+            Log.e(TAG, "Error reading gradient enabled setting", e);
+            return false;
+        }
+    }
+
+    private boolean isGradientEnabledInDarkMode() {
+        // Only enable gradients in dark mode
+        int nightMode = mContext.getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        boolean isDarkMode = (nightMode == Configuration.UI_MODE_NIGHT_YES);
+
+        return isDarkMode && isGradientEnabled();
+    }
+
+    private String getGradientType() {
+        try {
+            String type = Settings.System.getString(mContext.getContentResolver(),
+                    "monet_gradient_type");
+            return type != null ? type : "none";
+        } catch (Exception e) {
+            Log.e(TAG, "Error reading gradient type setting", e);
+            return "none";
+        }
+    }
+
+    private GradientDrawable createGradientBackground() {
+        try {
+            String colorsString = Settings.System.getString(mContext.getContentResolver(),
+                    "monet_gradient_colors");
+
+            int[] colors;
+            if (TextUtils.isEmpty(colorsString)) {
+                // Use default colors for current type
+                colors = getDefaultColorsForType(getGradientType());
+            } else {
+                String[] colorStrings = colorsString.split(",");
+                colors = new int[colorStrings.length];
+                for (int i = 0; i < colorStrings.length; i++) {
+                    try {
+                        colors[i] = Color.parseColor(colorStrings[i].trim());
+                    } catch (IllegalArgumentException e) {
+                        Log.w(TAG, "Invalid color format: " + colorStrings[i] + ", using transparent");
+                        colors[i] = Color.TRANSPARENT;
+                    }
+                }
+            }
+
+            if (colors == null || colors.length < 2) {
+                return null;
+            }
+
+            GradientDrawable gradient = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                colors
+            );
+            gradient.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            // Use full opacity for background gradient (no distracting alpha mask)
+            gradient.setAlpha(255); // 100% opacity for clean background
+
+            return gradient;
+        } catch (Exception e) {
+            Log.e(TAG, "Error creating gradient background", e);
+            return null;
+        }
+    }
+
+    private int[] getDefaultColorsForType(String type) {
+        switch (type) {
+            case "sunrise":
+                return new int[]{
+                    Color.parseColor("#FFF8E1"),
+                    Color.parseColor("#FFE0B2"),
+                    Color.parseColor("#FFCC02"),
+                    Color.parseColor("#FF9800")
+                };
+            case "ocean":
+                return new int[]{
+                    Color.parseColor("#E3F2FD"),
+                    Color.parseColor("#90CAF9"),
+                    Color.parseColor("#42A5F5"),
+                    Color.parseColor("#1976D2")
+                };
+            case "forest":
+                return new int[]{
+                    Color.parseColor("#E8F5E8"),
+                    Color.parseColor("#81C784"),
+                    Color.parseColor("#4CAF50"),
+                    Color.parseColor("#388E3C")
+                };
+            case "lavender":
+                return new int[]{
+                    Color.parseColor("#F3E5F5"),
+                    Color.parseColor("#BA68C8"),
+                    Color.parseColor("#8E24AA"),
+                    Color.parseColor("#6A1B9A")
+                };
+            case "none":
+            default:
+                // Return transparent colors for "none" - no gradient background
+                return new int[]{
+                    Color.TRANSPARENT,
+                    Color.TRANSPARENT
+                };
         }
     }
 
@@ -231,16 +429,23 @@ public class AdaptiveWallpaperBackgroundView extends ImageView {
         return bitmap;
     }
 
-    @Override
-    protected void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Update wallpaper background when configuration changes (e.g., theme change)
+    /**
+     * Public method to update the background (called externally)
+     */
+    public void updateBackground() {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 updateWallpaperBackground();
             }
         });
+    }
+
+    @Override
+    protected void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Update wallpaper background when configuration changes (e.g., theme change)
+        updateBackground();
     }
     
     @Override

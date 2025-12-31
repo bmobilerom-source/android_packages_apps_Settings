@@ -32,6 +32,9 @@ import android.graphics.Color;
 import android.os.UserHandle;
 import android.provider.Settings;
 
+// Theme overlay management
+import com.android.settings.theme.ThemeOverlayApplier;
+
 /**
  * Helper class for Custom Theme feature
  * Provides utility methods for checking and managing custom theme settings
@@ -45,6 +48,7 @@ import android.provider.Settings;
  */
 public class CustomThemeHelper {
     private static final String TAG = "CustomThemeHelper";
+    private static final boolean DEBUG = android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
     
     /**
      * Setting key for custom theme
@@ -111,7 +115,7 @@ public class CustomThemeHelper {
         if (context == null) {
             return false;
         }
-        if (themeValue < 0 || themeValue > 8) {
+        if (themeValue < 0 || themeValue > 9) {
             return false;
         }
         try {
@@ -119,12 +123,44 @@ public class CustomThemeHelper {
             if (resolver == null) {
                 return false;
             }
+
+            // Save theme setting first
             Settings.Secure.putIntForUser(resolver,
                     SETTING_KEY,
                     themeValue,
                     UserHandle.USER_CURRENT);
+
+            // Apply theme overlay using ThemeOverlayApplier
+            ThemeOverlayApplier overlayApplier = new ThemeOverlayApplier(context);
+            boolean overlayApplied = overlayApplier.applyTheme(themeValue);
+
+            if (!overlayApplied && themeValue != 0) {
+                // Log warning but don't fail - some themes might not have overlays yet
+                android.util.Log.w(TAG, "Failed to apply theme overlay for theme: " + themeValue +
+                        ", continuing with setting save only");
+            }
+
+            // Notify ContentResolver of change to trigger SystemUI ThemeOverlayController observer
+            try {
+                resolver.notifyChange(
+                    Settings.Secure.getUriFor(SETTING_KEY),
+                    null);
+                if (DEBUG) {
+                    android.util.Log.d(TAG, "Notified ContentResolver of theme change: " + themeValue);
+                }
+            } catch (Exception e) {
+                android.util.Log.w(TAG, "Failed to notify ContentResolver of theme change", e);
+            }
+
+            // Broadcast intent to notify SystemUI of theme change
+            android.content.Intent intent = new android.content.Intent(
+                    "com.android.settings.THEME_CHANGED");
+            intent.putExtra("theme_value", themeValue);
+            context.sendBroadcastAsUser(intent, android.os.UserHandle.CURRENT);
+
             return true;
         } catch (Exception e) {
+            android.util.Log.e(TAG, "Error setting theme: " + themeValue, e);
             return false;
         }
     }
@@ -712,6 +748,29 @@ public class CustomThemeHelper {
         }
         int theme = getCurrentTheme(context);
         return theme == THEME_CUSTOM_PICTURE;
+    }
+
+    /**
+     * Get video URI for animated background based on theme
+     * @param context The context
+     * @return Uri of video to use, or null if no animated background
+     */
+    public static android.net.Uri getAnimatedBackgroundVideoUri(Context context) {
+        if (!shouldUseAnimatedBackground(context)) {
+            return null;
+        }
+
+        // For now, return a placeholder URI - this would need to be implemented
+        // with actual video resources packaged with the ROM
+        try {
+            // This is a placeholder - actual implementation would reference
+            // video files included in the overlay packages or system resources
+            return android.net.Uri.parse("android.resource://" +
+                    context.getPackageName() + "/raw/theme_animated_background");
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "Error getting animated background video URI", e);
+            return null;
+        }
     }
 }
 

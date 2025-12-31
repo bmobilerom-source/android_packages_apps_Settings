@@ -34,7 +34,10 @@
      <dimen name="xd_dashboard_header_height">225dp</dimen>
 
      <!-- xd. About Phone -->
-     <dimen name="xd_about_phone_ill_height">275dp</dimen>
-     <dimen name="xd_about_phone_ill_width">125dp</dimen>
+     <!-- About phone security header illustration size (30% smaller height, slightly narrower) -->
+     <dimen name="xd_about_phone_ill_height">133dp</dimen>
+     <dimen name="xd_about_phone_ill_width">110dp</dimen>
+     <!-- Larger horizontal padding for security header card (increased to prevent touching screen edges) -->
+     <dimen name="xd_pref_card_horizontal_padding_large">32dp</dimen>
 
 </resources>

@@ -70,8 +70,9 @@
     <string name="dashboard_style_v2">V2 Style</string>
     <string name="dashboard_style_compact">Compact Style</string>
     <string name="dashboard_style_material">Material Style</string>
-    <string name="dashboard_style_classic">Classic Style</string>
+    <string name="dashboard_style_kids_safe">KidsSafe Style</string>
     <string name="dashboard_style_custom_v2">Custom V2 Style</string>
+    <string name="dashboard_style_bmobile_expressive">BMobile Expressive Style</string>
     <string name="dashboard_style_securityextended">Security Extended Style</string>
     <string name="epic_style_header_title">Epic Style</string>
     <string name="epic_style_header_summary">Customized Settings Experience</string>
@@ -83,12 +84,17 @@
     <string name="classic_style_header_summary">Traditional categorized layout</string>
     <string name="dashboard_style_applied">Dashboard style changed to %1$s</string>
     <string name="compact_dashboard_title">Compact Dashboard</string>
+<<<<<<< Updated upstream
     <string name="compact_dashboard_summary">Use a more compact layout for the dashboard</string>
+=======
+    <string name="compact_dashboard_summary">Enable compact layout for dashboard items</string>
+>>>>>>> Stashed changes
     <string name="dashboard_style_reset_category_title">Reset Options</string>
     <string name="dashboard_style_reset_title">Reset Dashboard Style</string>
     <string name="dashboard_style_reset_summary">Reset dashboard style to default</string>
     <string name="systemui_reset_title">Reset SystemUI</string>
     <string name="systemui_reset_summary">Reset SystemUI settings to default</string>
+<<<<<<< Updated upstream
     <string name="systemui_reset_success">SystemUI reset successfully</string>
     <string name="systemui_reset_failed">SystemUI reset failed</string>
     <string name="fun_display_settings_title">Fun Display Settings</string>
@@ -102,6 +108,11 @@
     <string name="header_category_apps">Apps &amp; Personalization</string>
     <string name="header_category_security">Security &amp; Privacy</string>
      <!-- Smart Pixels -->
+=======
+    <string name="systemui_reset_success">SystemUI settings reset successfully</string>
+    <string name="systemui_reset_failed">Failed to reset SystemUI settings</string>
+         <!-- Smart Pixels -->
+>>>>>>> Stashed changes
     <string name="smart_pixels_title">Smart Pixels</string>
     <string name="smart_pixels_summary">Reduce power consumption by turning off pixels in a pattern</string>
     <string name="smart_pixels_enable_title">Enable Smart Pixels</string>
@@ -137,4 +148,12 @@
     <string name="daylight_header_provider">daylight</string>
     <string name="file_header_provider_title">File</string>
     <string name="file_header_provider">file</string>
+
+    <!-- OnTheGo additional features -->
+    <string name="onthego_transparency">Transparency</string>
+    <string name="onthego_transparency_summary">Adjust the transparency of the camera overlay</string>
+    <string name="onthego_front_camera">Use front camera</string>
+    <string name="onthego_front_camera_summary">Use front camera instead of rear camera</string>
+    <string name="onthego_service_toggle">Auto restart service</string>
+    <string name="onthego_service_toggle_summary">Automatically restart service when camera changes</string>
 </resources>

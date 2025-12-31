@@ -2,10 +2,15 @@
 <!-- Copyright (C) 2025 LineageOS
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
+<<<<<<< Updated upstream
      You may obtain a copy of the License at
 
           http://www.apache.org/licenses/LICENSE-2.0
 
+=======
+     you may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> Stashed changes
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +22,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
+<<<<<<< Updated upstream
 
+=======
+    
+>>>>>>> Stashed changes
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/display_grid_recycler"
         android:layout_width="match_parent"
@@ -28,5 +37,11 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:scrollbars="none"/>
+<<<<<<< Updated upstream
 
 </FrameLayout>
+=======
+    
+</FrameLayout>
+
+>>>>>>> Stashed changes

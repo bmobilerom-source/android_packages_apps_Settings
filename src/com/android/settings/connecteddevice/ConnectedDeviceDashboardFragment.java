@@ -16,7 +16,9 @@
 package com.android.settings.connecteddevice;
 
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,6 +30,10 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingDevicePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
+<<<<<<< Updated upstream
+=======
+import com.android.settingslib.core.AbstractPreferenceController;
+>>>>>>> Stashed changes
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SurveyFeatureProvider;
@@ -90,8 +96,12 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
-        use(SlicePreferenceController.class)
-                .setSliceUri(Uri.parse(getString(R.string.config_nearby_devices_slice_uri)));
+        // Only add nearby slice if URI is available and accessible
+        final String nearbySliceUri = getString(R.string.config_nearby_devices_slice_uri);
+        if (!TextUtils.isEmpty(nearbySliceUri) && isNearbyDevicesSliceAvailable()) {
+            use(SlicePreferenceController.class)
+                    .setSliceUri(Uri.parse(nearbySliceUri));
+        }
         use(DiscoverableFooterPreferenceController.class)
                 .setAlwaysDiscoverable(isAlwaysDiscoverable(callingAppPackageName, action));
 
@@ -103,6 +113,38 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
             if (provider != null) {
                 provider.sendActivityIfAvailable(category);
             }
+        }
+    }
+
+    /**
+     * Check if the nearby devices slice is available and accessible.
+     * This prevents crashes when Google Play Services is not available.
+     */
+    private boolean isNearbyDevicesSliceAvailable() {
+        try {
+            final String nearbySliceUri = getString(R.string.config_nearby_devices_slice_uri);
+            if (TextUtils.isEmpty(nearbySliceUri)) {
+                return false;
+            }
+            // Try to create a content resolver query to check if the provider exists
+            final Uri uri = Uri.parse(nearbySliceUri);
+            final ContentResolver resolver = getContext().getContentResolver();
+            // Check if we can query the content provider without actually executing the query
+            final String authority = uri.getAuthority();
+            if (authority != null) {
+            final java.util.List<android.content.pm.ProviderInfo> providerList =
+                getContext().getPackageManager().queryContentProviders(null, 0, 0);
+            final ProviderInfo[] providers = providerList.toArray(new ProviderInfo[0]);
+                for (ProviderInfo provider : providers) {
+                    if (authority.equals(provider.authority)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            Log.w(TAG, "Error checking nearby devices slice availability", e);
+            return false;
         }
     }
 

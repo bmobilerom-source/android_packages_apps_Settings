@@ -123,9 +123,9 @@ public class CardNavigationHelper {
         // Set click listeners if views exist
         if (card1 != null) {
             card1.setOnClickListener(cardClickListener);
-            android.util.Log.d("CardNavigationHelper", "✅ Set click listener for card1 (Privacy Controls)");
+            android.util.Log.d("CardNavigationHelper", "✅ Set click listener for card1 (Fingerprint)");
         } else {
-            android.util.Log.w("CardNavigationHelper", "❌ Card1 (Privacy Controls) not found");
+            android.util.Log.w("CardNavigationHelper", "❌ Card1 (Fingerprint) not found");
         }
         if (card2 != null) {
             card2.setOnClickListener(cardClickListener);
@@ -141,9 +141,9 @@ public class CardNavigationHelper {
         }
         if (card4 != null) {
             card4.setOnClickListener(cardClickListener);
-            android.util.Log.d("CardNavigationHelper", "✅ Set click listener for card4 (Security Features)");
+            android.util.Log.d("CardNavigationHelper", "✅ Set click listener for card4 (Sensor Block)");
         } else {
-            android.util.Log.w("CardNavigationHelper", "❌ Card4 (Security Features) not found");
+            android.util.Log.w("CardNavigationHelper", "❌ Card4 (Sensor Block) not found");
         }
     }
 
@@ -184,6 +184,16 @@ public class CardNavigationHelper {
 
         try {
             switch (tag) {
+                case "fingerprint_settings":
+                    // Open Fingerprint Settings Fragment
+                    android.util.Log.d("CardNavigationHelper", "👆 Launching Fingerprint Settings Fragment");
+                    launcher.setDestination("com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment")
+                            .setSourceMetricsCategory(mFragment instanceof com.android.settingslib.core.instrumentation.Instrumentable 
+                                    ? ((com.android.settingslib.core.instrumentation.Instrumentable) mFragment).getMetricsCategory()
+                                    : 0)
+                            .launch();
+                    break;
+
                 case "privacy_controls":
                     // Open Privacy Controls Fragment
                     android.util.Log.d("CardNavigationHelper", "📱 Launching Privacy Controls Fragment");
@@ -208,6 +218,16 @@ public class CardNavigationHelper {
                     // Open Special Access Fragment
                     android.util.Log.d("CardNavigationHelper", "🔑 Launching Special Access Fragment");
                     launcher.setDestination(com.android.settings.applications.specialaccess.SpecialAccessSettings.class.getName())
+                            .setSourceMetricsCategory(mFragment instanceof com.android.settingslib.core.instrumentation.Instrumentable 
+                                    ? ((com.android.settingslib.core.instrumentation.Instrumentable) mFragment).getMetricsCategory()
+                                    : 0)
+                            .launch();
+                    break;
+
+                case "sensor_block":
+                    // Open Sensor Block Settings Fragment
+                    android.util.Log.d("CardNavigationHelper", "🔒 Launching Sensor Block Settings Fragment");
+                    launcher.setDestination(com.epic.fragments.SensorBlockSettings.class.getName())
                             .setSourceMetricsCategory(mFragment instanceof com.android.settingslib.core.instrumentation.Instrumentable 
                                     ? ((com.android.settingslib.core.instrumentation.Instrumentable) mFragment).getMetricsCategory()
                                     : 0)

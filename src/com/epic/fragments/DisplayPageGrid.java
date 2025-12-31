@@ -153,12 +153,12 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.display_customizations_summary,
                     "com.android.settings.awaken.fragments.DisplayCustomizations3",
                     null));
-            // 2. Monet Color Settings (replaces extra dim)
+            // 2. Display Color Settings (consolidates all color settings)
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.display_page_grid_monet_color_title,
-                    R.string.display_page_grid_monet_color_summary,
-                    "com.android.settings.display.MonetColorSettings",
+                    R.string.display_color_settings_title,
+                    R.string.display_color_settings_summary,
+                    "com.epic.fragments.DisplayColorSettings",
                     null));
             // 3. Text and size
             items.add(new DisplayPageGridAdapter.CardItem(
@@ -174,7 +174,17 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.qs_header_summary,
                     "com.android.settings.awaken.fragments.QsHeader",
                     null));
+<<<<<<< Updated upstream
             // Custom themes removed from ROM
+=======
+            // 4. Custom Themes - REMOVED (causing boot loops)
+            // items.add(new DisplayPageGridAdapter.CardItem(
+            //         DisplayPageGridAdapter.CARD_TYPE_SMALL,
+            //         R.string.custom_theme_title,
+            //         R.string.custom_theme_summary,
+            //         "com.android.settings.theme.CustomThemeSettings",
+            //         null));
+>>>>>>> Stashed changes
             // 5. Screen saver
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
@@ -182,21 +192,7 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.screensaver_settings_when_to_dream,
                     "com.android.settings.dream.DreamSettings",
                     null));
-            // 6. Color contrast
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.accessibility_color_contrast_title,
-                    R.string.accessibility_color_contrast_summary,
-                    "com.android.settings.display.ColorContrastFragment",
-                    null));
-            // 7. Colors (Color mode)
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.color_mode_title,
-                    R.string.color_mode_option_automatic,
-                    "com.android.settings.display.ColorModePreferenceFragment",
-                    null));
-            // 8. Live display (dynamically injected - use LineageParts intent)
+            // 6. Live display (dynamically injected - use LineageParts intent)
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
                     R.string.color_mode_title, // Use color_mode_title as fallback if livedisplay_title doesn't exist
@@ -210,12 +206,33 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     R.string.dashboard_style_summary,
                     "com.epic.fragments.DashboardStyleSettings",
                     null));
-            // 10. Color and motion
+            // 10. OnTheGo Mode
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.accessibility_color_and_motion_title,
-                    R.string.accessibility_color_and_motion_summary,
-                    "com.android.settings.accessibility.ColorAndMotionFragment",
+                    R.string.onthegomode_title,
+                    R.string.onthegomode_summary,
+                    "com.epic.fragments.SystemSettingsOnthego",
+                    null));
+            // 11. Smart Pixels
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
+                    R.string.smart_pixels_title,
+                    R.string.smart_pixels_summary,
+                    "com.android.settings.awaken.fragments.SmartPixels",
+                    null));
+            // 12. Status Bar
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
+                    R.string.status_bar_settings_title,
+                    R.string.status_bar_settings_summary,
+                    "com.epic.fragments.StatusBarSettings",
+                    null));
+            // 13. Image Toolbox
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
+                    R.string.image_toolbox_title,
+                    R.string.image_toolbox_summary,
+                    "image_toolbox", // Special key for Image Toolbox
                     null));
 
             rv.setAdapter(new DisplayPageGridAdapter(activity, items, getMetricsCategory()));

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <!-- GestureFlow Settings Titles -->
+    <string name="gestureflow_settings_title">Motion Gestures</string>
+    <string name="gestureflow_settings_summary">Control device with motion gestures</string>
+
+    <!-- Accessibility Service -->
+    <string name="gesture_accessibility_description">Provides motion gesture control using device sensors</string>
+
+    <!-- Settings Preferences -->
+    <string name="gestureflow_enable_title">Enable Motion Gestures</string>
+    <string name="gestureflow_enable_summary">Use device motion to control your device</string>
+
+    <string name="gestureflow_sensitivity_title">Gesture Sensitivity</string>
+    <string name="gestureflow_sensitivity_summary">Adjust gesture detection sensitivity</string>
+
+    <!-- Service Status -->
+    <string name="gestureflow_service_title">Service Status</string>
+    <string name="gestureflow_service_summary">Motion gesture service is %s</string>
+    <string name="gestureflow_service_active">active</string>
+    <string name="gestureflow_service_inactive">inactive</string>
+
+    <!-- Gesture Categories -->
+    <string name="gestureflow_gestures_title">Available Gestures</string>
+
+    <!-- Individual Gestures -->
+    <string name="gestureflow_back_gesture_title">Back Gesture</string>
+    <string name="gestureflow_back_gesture_summary">Quick pull towards you</string>
+
+    <string name="gestureflow_recent_gesture_title">Recent Apps Gesture</string>
+    <string name="gestureflow_recent_gesture_summary">Quick swipe to the right</string>
+
+    <string name="gestureflow_notification_gesture_title">Notification Gesture</string>
+    <string name="gestureflow_notification_gesture_summary">Quick downward motion</string>
+
+    <!-- Instructions -->
+    <string name="gestureflow_instructions_title">Gesture Instructions</string>
+    <string name="gestureflow_instructions_summary">How to perform gestures</string>
+    <string name="gestureflow_instructions_text">• Back: Quick pull towards you\n• Recent Apps: Quick swipe right\n• Notifications: Quick downward motion</string>
+
+    <!-- Error Messages -->
+    <string name="gestureflow_sensor_error">Motion sensors not available</string>
+    <string name="gestureflow_accessibility_required">Accessibility service required</string>
+    <string name="gestureflow_enable_accessibility">Enable GestureFlow in Accessibility Settings</string>
+
+    <!-- Sensitivity Levels -->
+    <string name="gestureflow_sensitivity_low">Low (More sensitive)</string>
+    <string name="gestureflow_sensitivity_medium">Medium</string>
+    <string name="gestureflow_sensitivity_high">High (Less sensitive)</string>
+
+    <!-- Navigation -->
+    <string name="gestureflow_accessibility_settings">Accessibility Settings</string>
+    <string name="gestureflow_go_to_accessibility">Go to Accessibility Settings</string>
+</resources>
+

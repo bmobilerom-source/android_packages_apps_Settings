@@ -90,8 +90,12 @@
                     android:layout_marginBottom="8dp"
                     android:visibility="visible" />
 
-                <!-- SeekBarPreference will inject SeekBar here -->
-                <!-- Container for SeekBar widget -->
+                <!-- SeekBar - Used by SeekBarPreference -->
+                <SeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp" />
 
             </LinearLayout>
 

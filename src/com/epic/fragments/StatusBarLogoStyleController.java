@@ -29,6 +29,9 @@ public class StatusBarLogoStyleController extends BasePreferenceController imple
 
     @Override
     public void updateState(Preference preference) {
+        if (!(preference instanceof ListPreference)) {
+            return;
+        }
         ListPreference listPreference = (ListPreference) preference;
         int style = StatusBarLogoHelper.getStatusBarLogoStyle(mContext);
         listPreference.setValue(String.valueOf(style));

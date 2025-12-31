@@ -107,6 +107,15 @@
             android:persistent="false"
             android:title="@string/accessibility_text_reading_options_title"
             settings:controller="com.android.settings.accessibility.TextReadingFragmentForDisplaySettingsController"/>
+
+        <!-- Wallpaper Background -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="settings_wallpaper_background_enabled"
+            android:title="@string/settings_wallpaper_background_title"
+            android:summary="@string/settings_wallpaper_background_summary"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.display.SettingsWallpaperBackgroundController" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

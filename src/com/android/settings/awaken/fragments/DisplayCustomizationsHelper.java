@@ -55,8 +55,8 @@ public class DisplayCustomizationsHelper {
      */
     public static boolean isWallpaperBlurEnabled(Context context) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.getInt(resolver,
-                Settings.System.SETTINGS_WALLPAPER_BLUR_ENABLED, 0) == 1;
+        return Settings.Secure.getIntForUser(resolver,
+                "settings_wallpaper_blur_enabled", 0, UserHandle.USER_CURRENT) == 1;
     }
 
     /**
@@ -64,8 +64,8 @@ public class DisplayCustomizationsHelper {
      */
     public static boolean setWallpaperBlurEnabled(Context context, boolean enabled) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver,
-                Settings.System.SETTINGS_WALLPAPER_BLUR_ENABLED, enabled ? 1 : 0);
+        return Settings.Secure.putIntForUser(resolver,
+                "settings_wallpaper_blur_enabled", enabled ? 1 : 0, UserHandle.USER_CURRENT);
     }
 
     /**
@@ -73,8 +73,8 @@ public class DisplayCustomizationsHelper {
      */
     public static int getWallpaperBlurRadius(Context context) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.getInt(resolver,
-                Settings.System.SETTINGS_WALLPAPER_BLUR_RADIUS, 20);
+        return Settings.Secure.getIntForUser(resolver,
+                "settings_wallpaper_blur_radius", 20, UserHandle.USER_CURRENT);
     }
 
     /**
@@ -82,8 +82,8 @@ public class DisplayCustomizationsHelper {
      */
     public static boolean setWallpaperBlurRadius(Context context, int radius) {
         ContentResolver resolver = context.getContentResolver();
-        return Settings.System.putInt(resolver,
-                Settings.System.SETTINGS_WALLPAPER_BLUR_RADIUS, radius);
+        return Settings.Secure.putIntForUser(resolver,
+                "settings_wallpaper_blur_radius", radius, UserHandle.USER_CURRENT);
     }
 
     /**

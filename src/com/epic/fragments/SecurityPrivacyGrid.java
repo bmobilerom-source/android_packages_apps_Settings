@@ -107,7 +107,7 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
             
             // Row 2: Fingerprint (left), empty space (right - was LockScreen)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_WALLPAPERS,
+                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
                     R.string.security_privacy_grid_fingerprint_title,
                     R.string.security_privacy_grid_fingerprint_summary,
                     "com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment",
@@ -115,7 +115,7 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
             
             // Row 3: Pocket Mode (left), Special Access (right)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_THEME_PACKS,
+                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
                     R.string.security_privacy_grid_pocket_mode_title,
                     R.string.security_privacy_grid_pocket_mode_summary,
                     "com.epic.fragments.PocketModeSettings",
@@ -128,7 +128,7 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
                     "com.android.settings.applications.specialaccess.SpecialAccessSettings",
                     null));
             
-            // Row 4: Disable QS (left, toggle), Time Display (right)
+            // Row 4: Disable QS (left, toggle), empty space (right - Time Display removed)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
                     SecurityPrivacyGridAdapter.CARD_TYPE_BUTTON,
                     R.string.security_privacy_grid_disable_qs_title,
@@ -137,13 +137,6 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
                     null, // No icon
                     true, // Is toggle
                     "secure_lockscreen_qs_disabled")); // Toggle key
-            
-            items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_TIME_DISPLAY,
-                    R.string.security_privacy_grid_time_display_title,
-                    R.string.security_privacy_grid_time_display_summary,
-                    "com.android.settings.notification.LockScreenNotificationsPreferencePageFragment",
-                    null));
             
             // Row 5: Lockscreen (wide, spans 2 columns)
             items.add(new SecurityPrivacyGridAdapter.CardItem(
@@ -180,42 +173,8 @@ public class SecurityPrivacyGrid extends SettingsPreferenceFragment implements
                     true, // Is toggle
                     "window_ignore_secure")); // Toggle key
             
-            items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_sensor_block_title,
-                    R.string.security_privacy_grid_sensor_block_summary,
-                    "com.epic.fragments.SensorBlockSettings",
-                    null)); // No icon
-            
-            // Row 8: Fingerprint Extra (left), Cell Security (right)
-            items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_fingerprint_extra_title,
-                    R.string.security_privacy_grid_fingerprint_extra_summary,
-                    "com.epic.fragments.SettingsExtendedSecurity", // Opens extended security settings
-                    null));
-            
-            items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_cell_security_title,
-                    R.string.security_privacy_grid_cell_security_summary,
-                    "com.android.settings.network.telephony.CellularSecuritySettingsFragment",
-                    null)); // No icon
-            
-            // Row 9: Accessibility Usage (left), USB (right)
-            items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_accessibility_usage_title,
-                    R.string.security_privacy_grid_accessibility_usage_summary,
-                    "INTENT:android.intent.action.REVIEW_ACCESSIBILITY_SERVICES", // Special marker for intent launch
-                    null));
-            
-            items.add(new SecurityPrivacyGridAdapter.CardItem(
-                    SecurityPrivacyGridAdapter.CARD_TYPE_SMALL,
-                    R.string.security_privacy_grid_usb_title,
-                    R.string.security_privacy_grid_usb_summary,
-                    "com.android.settings.connecteddevice.usb.UsbDetailsFragment",
-                    null)); // No icon
+
+            // REMOVED: Cell Security card
 
             SecurityPrivacyGridAdapter adapter = new SecurityPrivacyGridAdapter(activity, items, getMetricsCategory());
             rv.setAdapter(adapter);

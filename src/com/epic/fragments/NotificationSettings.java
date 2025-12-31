@@ -36,11 +36,15 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 
 import com.android.internal.logging.nano.MetricsProto;
 import android.os.Bundle;
+import android.view.View;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.epic.utils.CardNavigationHelper;
 
 public class NotificationSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
+
+    private CardNavigationHelper mCardHelper;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -49,6 +53,17 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.anatolia_settings_notifications);
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        // Initialize card navigation helper
+        mCardHelper = new CardNavigationHelper(this);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Setup click handling for navigation cards
+        mCardHelper.setupCardClickHandling(view);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {

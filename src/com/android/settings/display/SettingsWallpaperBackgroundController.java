@@ -46,11 +46,11 @@ public class SettingsWallpaperBackgroundController extends TogglePreferenceContr
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        // Only allow enabling if dark mode is active
+        // Only allow enabling in dark mode
         if (isChecked && !WallpaperBackgroundHelper.isDarkMode(mContext)) {
             Toast.makeText(mContext, 
-                    R.string.settings_wallpaper_background_dark_mode_required, 
-                    Toast.LENGTH_LONG).show();
+                mContext.getString(R.string.settings_wallpaper_background_dark_mode_required),
+                Toast.LENGTH_LONG).show();
             return false;
         }
         return WallpaperBackgroundHelper.setEnabled(mContext, isChecked);
@@ -59,14 +59,20 @@ public class SettingsWallpaperBackgroundController extends TogglePreferenceContr
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        // Disable preference in light mode if trying to enable
         if (preference != null) {
-            // Disable preference if not in dark mode and enabled
-            boolean enabled = isChecked();
-            boolean darkMode = WallpaperBackgroundHelper.isDarkMode(mContext);
-            if (enabled && !darkMode) {
-                // Auto-disable if light mode is enabled
-                WallpaperBackgroundHelper.setEnabled(mContext, false);
-                preference.setEnabled(true);
+            boolean isDarkMode = WallpaperBackgroundHelper.isDarkMode(mContext);
+            boolean isEnabled = WallpaperBackgroundHelper.isEnabled(mContext);
+            
+            // If enabled but not in dark mode, show it's disabled
+            if (isEnabled && !isDarkMode) {
+                preference.setSummary(R.string.settings_wallpaper_background_dark_mode_required);
+            } else if (!isDarkMode && !isEnabled) {
+                // In light mode and disabled, show requirement message
+                preference.setSummary(R.string.settings_wallpaper_background_dark_mode_required);
+            } else {
+                // In dark mode, show normal summary
+                preference.setSummary(R.string.settings_wallpaper_background_summary);
             }
         }
     }

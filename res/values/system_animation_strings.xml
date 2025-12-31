@@ -20,5 +20,15 @@
     <string name="color_default">Default</string>
     <string name="pie_system_animation_style">Android P</string>
     <string name="scale_system_animation_style">Scale</string>
+
+    <!-- Additional animation styles -->
+    <string name="bounce_system_animation_style">Bounce</string>
+    <string name="fade_system_animation_style">Fade</string>
+    <string name="slide_system_animation_style">Slide</string>
+    <string name="zoom_system_animation_style">Zoom</string>
+    <string name="rotate_system_animation_style">Rotate</string>
+    <string name="flip_system_animation_style">Flip</string>
+    <string name="overshoot_system_animation_style">Overshoot</string>
+    <string name="elastic_system_animation_style">Elastic</string>
 </resources>
 

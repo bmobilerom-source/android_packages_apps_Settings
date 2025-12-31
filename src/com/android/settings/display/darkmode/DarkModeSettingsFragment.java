@@ -17,8 +17,12 @@ package com.android.settings.display.darkmode;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PowerManager;
+import android.os.UserHandle;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -44,6 +48,10 @@ public class DarkModeSettingsFragment extends DashboardFragment {
     private DarkModeObserver mContentObserver;
     private DarkModeCustomPreferenceController mCustomStartController;
     private DarkModeCustomPreferenceController mCustomEndController;
+    private SystemThemeVividPreferenceController mThemeVividController;
+    private SystemThemeSnowpaintPreferenceController mThemeSnowpaintController;
+    private SystemThemeEspressoPreferenceController mThemeEspressoController;
+    private ContentObserver mThemeObserver;
     private static final int DIALOG_START_TIME = 0;
     private static final int DIALOG_END_TIME = 1;
 
@@ -51,7 +59,43 @@ public class DarkModeSettingsFragment extends DashboardFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Context context = getContext();
+        if (context == null) {
+            return;
+        }
         mContentObserver = new DarkModeObserver(context);
+        
+        // Observe SYSTEM_CUSTOM_THEME changes to keep switches in sync
+        // Note: Observer will be registered in onResume() after controllers are initialized
+        mThemeObserver = new ContentObserver(new Handler()) {
+            @Override
+            public void onChange(boolean selfChange) {
+                if (!selfChange) {
+                    // Update all theme preference states
+                    // Use post to ensure this runs after controllers are initialized
+                    new Handler().post(() -> {
+                        if (mThemeVividController != null && 
+                            mThemeSnowpaintController != null && 
+                            mThemeEspressoController != null) {
+                            updateThemePreferenceStates();
+                        }
+                    });
+                }
+            }
+        };
+    }
+    
+    private void updateThemePreferenceStates() {
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null && mThemeVividController != null && 
+            mThemeSnowpaintController != null && mThemeEspressoController != null) {
+            Preference vividPref = screen.findPreference("system_theme_vivid");
+            Preference snowpaintPref = screen.findPreference("system_theme_snowpaint");
+            Preference espressoPref = screen.findPreference("system_theme_espresso");
+            
+            if (vividPref != null) mThemeVividController.updateState(vividPref);
+            if (snowpaintPref != null) mThemeSnowpaintController.updateState(snowpaintPref);
+            if (espressoPref != null) mThemeEspressoController.updateState(espressoPref);
+        }
     }
 
     @Override
@@ -60,21 +104,47 @@ public class DarkModeSettingsFragment extends DashboardFragment {
         // Listen for changes only while visible.
         mContentObserver.subscribe(() -> {
             PreferenceScreen preferenceScreen = getPreferenceScreen();
-            mCustomStartController.displayPreference(preferenceScreen);
-            mCustomEndController.displayPreference(preferenceScreen);
-            updatePreferenceStates();
+            if (preferenceScreen != null && mCustomStartController != null && mCustomEndController != null) {
+                mCustomStartController.displayPreference(preferenceScreen);
+                mCustomEndController.displayPreference(preferenceScreen);
+                updatePreferenceStates();
+            }
         });
+        
+        // Register theme observer after controllers are initialized
+        final Context context = getContext();
+        if (context != null && mThemeObserver != null) {
+            try {
+                context.getContentResolver().registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.SYSTEM_CUSTOM_THEME),
+                        false,
+                        mThemeObserver,
+                        UserHandle.USER_CURRENT);
+            } catch (Exception e) {
+                // Ignore if already registered
+            }
+        }
     }
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        List<AbstractPreferenceController> controllers =  new ArrayList(2);
+        List<AbstractPreferenceController> controllers = new ArrayList<>(5);
         mCustomStartController = new DarkModeCustomPreferenceController(getContext(),
                 DARK_THEME_START_TIME, this);
         mCustomEndController = new DarkModeCustomPreferenceController(getContext(),
                 DARK_THEME_END_TIME, this);
         controllers.add(mCustomStartController);
         controllers.add(mCustomEndController);
+        
+        // Add theme preference controllers
+        mThemeVividController = new SystemThemeVividPreferenceController(context, "system_theme_vivid");
+        mThemeSnowpaintController = new SystemThemeSnowpaintPreferenceController(context, "system_theme_snowpaint");
+        mThemeEspressoController = new SystemThemeEspressoPreferenceController(context, "system_theme_espresso");
+        
+        controllers.add(mThemeVividController);
+        controllers.add(mThemeSnowpaintController);
+        controllers.add(mThemeEspressoController);
+        
         return controllers;
     }
 
@@ -83,6 +153,9 @@ public class DarkModeSettingsFragment extends DashboardFragment {
         super.onStop();
         // Stop listening for state changes.
         mContentObserver.unsubscribe();
+        if (mThemeObserver != null && getContext() != null) {
+            getContext().getContentResolver().unregisterContentObserver(mThemeObserver);
+        }
     }
 
     @Override

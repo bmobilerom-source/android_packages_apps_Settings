@@ -23,6 +23,7 @@
     android:title="@string/reduce_bright_colors_preference_title">
 
 
+
     <!-- Header -->
     <PreferenceCategory
         android:title="@string/reduce_bright_colors_preference_title"
@@ -74,6 +75,7 @@
         android:key="rbc_intensity"
         android:persistent="false"
         android:order="200"
+        android:layout="@layout/adaptive_labeled_seekbar_card_progress"
         android:title="@string/reduce_bright_colors_intensity_preference_title"
         settings:textStart="@string/reduce_bright_colors_intensity_start_label"
         settings:textEnd="@string/reduce_bright_colors_intensity_end_label"

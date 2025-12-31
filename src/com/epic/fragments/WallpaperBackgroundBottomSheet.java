@@ -1,5 +1,6 @@
 package com.epic.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+<<<<<<< Updated upstream
 import androidx.fragment.app.DialogFragment;
 
 import com.android.settings.R;
@@ -22,5 +24,127 @@ public class WallpaperBackgroundBottomSheet extends DialogFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.wallpaper_background_bottom_sheet, container, false);
+=======
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
+
+import com.android.settings.R;
+import com.android.settings.awaken.fragments.DisplayCustomizationsAdapter;
+import com.android.settings.awaken.fragments.DisplayCustomizationsHelper;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+public class WallpaperBackgroundBottomSheet extends BottomSheetDialogFragment {
+
+    public static WallpaperBackgroundBottomSheet newInstance() {
+        return new WallpaperBackgroundBottomSheet();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, 0);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Set transparent background for the bottom sheet dialog container
+        // The content view already has the adaptive background
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            android.view.Window window = getDialog().getWindow();
+            window.setBackgroundDrawableResource(android.R.color.transparent);
+        }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+        try {
+            View view = inflater.inflate(R.layout.wallpaper_background_bottom_sheet, container, false);
+            
+            if (savedInstanceState == null) {
+                try {
+                    androidx.fragment.app.FragmentManager fragmentManager = getChildFragmentManager();
+                    if (fragmentManager != null && !fragmentManager.isStateSaved()) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.wallpaper_background_preference_container, new WallpaperBackgroundPreferenceFragment())
+                                .commitAllowingStateLoss();
+                    }
+                } catch (Exception e) {
+                    android.util.Log.e("WallpaperBackgroundBottomSheet", "Error loading preference fragment", e);
+                }
+            }
+            
+            return view;
+        } catch (Exception e) {
+            android.util.Log.e("WallpaperBackgroundBottomSheet", "Error in onCreateView", e);
+            Context ctx = getContext();
+            if (ctx != null) {
+                return new android.widget.FrameLayout(ctx);
+            }
+            return null;
+        }
+    }
+
+    public static class WallpaperBackgroundPreferenceFragment extends PreferenceFragmentCompat {
+        private DisplayCustomizationsAdapter mAdapter;
+        private SwitchPreference mWallpaperBlurPreference;
+        private ListPreference mWallpaperBlurRadiusPreference;
+
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            try {
+                setPreferencesFromResource(R.xml.wallpaper_background_bottom_sheet, rootKey);
+                
+                Context context = getContext();
+                if (context == null) {
+                    return;
+                }
+                
+                mAdapter = new DisplayCustomizationsAdapter(context);
+                
+                // Setup wallpaper blur preferences using adapter
+                Preference blurPref = findPreference("settings_wallpaper_blur_enabled");
+                if (blurPref instanceof SwitchPreference) {
+                    mWallpaperBlurPreference = (SwitchPreference) blurPref;
+                }
+                mWallpaperBlurRadiusPreference = findPreference("settings_wallpaper_blur_radius");
+                
+                if (mWallpaperBlurPreference != null && mWallpaperBlurRadiusPreference != null) {
+                    // Setup using adapter - this handles state persistence
+                    mAdapter.setupWallpaperBlurPreference(mWallpaperBlurPreference, mWallpaperBlurRadiusPreference);
+                    mAdapter.setupWallpaperBlurRadiusPreference(mWallpaperBlurRadiusPreference);
+                }
+            } catch (Exception e) {
+                android.util.Log.e("WallpaperBackgroundBottomSheet", "Error in onCreatePreferences", e);
+            }
+        }
+        
+        @Override
+        public void onResume() {
+            super.onResume();
+            // Refresh preference states when bottom sheet is shown
+            refreshPreferenceStates();
+        }
+        
+        private void refreshPreferenceStates() {
+            Context context = getContext();
+            if (context == null) {
+                return;
+            }
+            
+            // Refresh wallpaper blur preference state
+            if (mWallpaperBlurPreference != null) {
+                boolean blurEnabled = DisplayCustomizationsHelper.isWallpaperBlurEnabled(context);
+                mWallpaperBlurPreference.setChecked(blurEnabled);
+                if (mWallpaperBlurRadiusPreference != null) {
+                    mWallpaperBlurRadiusPreference.setEnabled(blurEnabled);
+                }
+            }
+        }
+>>>>>>> Stashed changes
     }
 }

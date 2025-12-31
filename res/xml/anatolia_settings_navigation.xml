@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C)  2022 EpicROM-AOSP
+<!-- Copyright (C) 2022 EpicROM-AOSP
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,46 +15,10 @@
 -->
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title=" ">
-
-    <Preference
-        android:key="nav_my_personal"
-        android:title="@string/my_personal_title"
-        android:summary="@string/my_personal_summary"
-        android:fragment="com.epic.fragments.MyPersonalFragment" />
-
-    <Preference
-        android:key="nav_my_session"
-        android:title="@string/my_session_title"
-        android:summary="@string/my_session_summary"
-        android:fragment="com.epic.fragments.MySessionFragment" />
-
-    <Preference
-        android:key="nav_bmobile_settings"
-        android:title="@string/bmobile_settings_title"
-        android:summary="@string/bmobile_settings_summary"
-        android:fragment="com.epic.fragments.BMobileSettingsFragment" />
-
-    <Preference
-        android:key="nav_system_optimization"
-        android:title="@string/system_optimization_title"
-        android:summary="@string/system_optimization_intro_summary"
-        android:fragment="com.epic.fragments.SystemOptimizationSettings" />
-
-
-    <Preference
-        android:key="nav_settings_backup_restore"
-        android:title="@string/settings_backup_restore_title"
-        android:summary="@string/settings_backup_restore_intro_summary"
-        android:fragment="com.epic.fragments.SettingsBackupRestore" />
-
-    <Preference
-        android:key="nav_anatolia_extras"
-        android:title="@string/security_privacy_title"
-        android:summary="@string/security_privacy_intro_summary"
-        android:fragment="com.epic.fragments.AnatoliaSettingsExtras" />
-
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
 
 </PreferenceScreen>
+
+

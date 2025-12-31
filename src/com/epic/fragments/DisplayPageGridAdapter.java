@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -152,8 +153,8 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
             
             // Handle special card types
             if (item.cardType == CARD_TYPE_MONET_COLOR && holder.colorSwatchesLayout != null) {
-                // Color swatches are already in layout
-                holder.colorSwatchesLayout.setVisibility(View.VISIBLE);
+                // Hide color swatches (circles) - user requested removal
+                holder.colorSwatchesLayout.setVisibility(View.GONE);
             }
             
             // Handle LockScreen card - TextClock handles time automatically
@@ -162,24 +163,15 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
                 holder.lockscreenClock.setVisibility(View.VISIBLE);
             }
             
-            // Handle Theme Packs buttons - make them independently clickable
+            // Handle Theme Packs buttons - hide them (user requested removal)
             if (item.cardType == CARD_TYPE_THEME_PACKS) {
-                if (holder.themePackButtonLeft != null) {
-                    holder.themePackButtonLeft.setOnClickListener(v -> {
-                        // Launch left button action (e.g., icon pack)
-                        launchDestination(item.destFragment, item.titleResId);
-                    });
+                // Hide the button layout with icons (user requested removal)
+                if (holder.themePacksButtons != null) {
+                    holder.themePacksButtons.setVisibility(View.GONE);
                 }
-                if (holder.themePackButtonRight != null) {
-                    holder.themePackButtonRight.setOnClickListener(v -> {
-                        // Launch right button action (e.g., font pack)
-                        launchDestination(item.destFragment, item.titleResId);
-                    });
-                }
-                
-                // Make the card itself non-clickable since buttons handle clicks
-                holder.itemView.setClickable(false);
-                holder.itemView.setFocusable(false);
+                // Make the card itself clickable since buttons are hidden
+                holder.itemView.setClickable(true);
+                holder.itemView.setFocusable(true);
             }
             
             // Handle AOD card - TextClock handles time automatically
@@ -280,14 +272,36 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
                 return;
             }
             
+<<<<<<< Updated upstream
             // Wallpaper background functionality removed
+=======
+            if ("image_toolbox".equals(destFragment)) {
+                launchImageToolbox();
+                return;
+            }
+            
+            // Handle Wallpaper Background Settings
+            if (destFragment.contains("WallpaperBackgroundSettings")) {
+                launchSettingsFragment(destFragment, R.string.settings_wallpaper_background_title);
+                return;
+            }
+            
+>>>>>>> Stashed changes
             // Handle Wallpaper picker activity (like InfinitySuite)
             if (destFragment.contains("WallpaperSettings") || destFragment.contains("wallpaper")) {
                 launchWallpaperPickerActivity();
                 return;
             }
             
+<<<<<<< Updated upstream
             // Custom themes removed from ROM
+=======
+            // Handle Custom Themes - REMOVED (causing boot loops)
+            // if (destFragment.contains("CustomThemeSettings")) {
+            //     launchSettingsFragment(destFragment, R.string.custom_theme_title);
+            //     return;
+            // }
+>>>>>>> Stashed changes
             
             // Handle Custom Dashboard
             if (destFragment.contains("DashboardStyleSettings")) {
@@ -584,6 +598,55 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
         intent.setComponent(component);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
+    }
+    
+    private void launchImageToolbox() {
+        try {
+            // Image Toolbox package and main activity from APK analysis
+            String packageName = "ru.tech.imageresizershrinker";
+            String mainActivity = "com.t8rin.imagetoolbox.app.presentation.AppActivity";
+            
+            PackageManager pm = activity.getPackageManager();
+            
+            // Try to launch using exact package and activity
+            try {
+                ComponentName component = new ComponentName(packageName, mainActivity);
+                pm.getActivityInfo(component, 0);
+                Intent intent = new Intent();
+                intent.setComponent(component);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Log.d("DisplayPageGridAdapter", "Launching Image Toolbox: " + component);
+                activity.startActivity(intent);
+                return;
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.w("DisplayPageGridAdapter", "Image Toolbox activity not found, trying intent action", e);
+            }
+            
+            // Fallback: try to resolve by intent action
+            Intent intent = new Intent("android.intent.action.MAIN");
+            intent.addCategory("android.intent.category.LAUNCHER");
+            intent.setPackage(packageName);
+            
+            ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
+            if (resolveInfo != null && resolveInfo.activityInfo != null) {
+                ComponentName component = new ComponentName(
+                    resolveInfo.activityInfo.packageName,
+                    resolveInfo.activityInfo.name);
+                intent = new Intent();
+                intent.setComponent(component);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Log.d("DisplayPageGridAdapter", "Launching Image Toolbox via intent: " + component);
+                activity.startActivity(intent);
+                return;
+            }
+            
+            // Fallback: show error
+            Log.e("DisplayPageGridAdapter", "Image Toolbox not found");
+            showErrorToast();
+        } catch (Exception e) {
+            Log.e("DisplayPageGridAdapter", "Failed to launch Image Toolbox", e);
+            showErrorToast();
+        }
     }
     
     private void launchSettingsFragment(String destFragment, int titleResId) {

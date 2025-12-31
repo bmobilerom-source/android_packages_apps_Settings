@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="?android:attr/textColorPrimary"
-            android:layout_marginBottom="12dp"
             android:gravity="center"
             android:maxLines="2"
             android:ellipsize="end" />
@@ -48,7 +47,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="8dp">
+            android:visibility="gone">
             
             <LinearLayout
                 android:id="@+id/theme_pack_button_left"

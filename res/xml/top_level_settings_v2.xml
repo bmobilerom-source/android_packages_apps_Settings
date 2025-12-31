@@ -87,15 +87,15 @@
         android:order="-120"
         android:key="top_level_personalize_category"
         android:layout="@layout/settingslib_preference_category_no_title">
-        <!-- Apps hidden in V2 -->
-        <!-- <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.applications.AppDashboardFragment"
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.epic.fragments.SystemSafeApplicationsSettings"
             android:icon="@drawable/ic_apps_filled"
             android:key="top_level_apps"
             android:order="-60"
             android:title="@string/apps_dashboard_title"
             android:summary="@string/app_and_notification_dashboard_summary"
-            settings:highlightableMenuKey="@string/menu_key_apps"/> -->
+            android:selectable="true"
+            settings:highlightableMenuKey="@string/menu_key_apps"/>
 
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
@@ -145,6 +145,7 @@
             android:order="-20"
             android:title="@string/display_settings"
             android:summary="@string/display_dashboard_summary"
+            android:selectable="true"
             settings:highlightableMenuKey="@string/menu_key_display"
             settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
@@ -170,6 +171,7 @@
             android:order="-50"
             android:title="@string/storage_settings"
             android:summary="@string/summary_placeholder"
+            android:selectable="true"
             settings:highlightableMenuKey="@string/menu_key_storage"
             settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/>
 
@@ -184,11 +186,12 @@
             settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 
         <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.system.SystemDashboardFragment"
+            android:fragment="com.epic.fragments.SystemGrid"
             android:icon="@drawable/ic_settings_system_dashboard_filled"
             android:key="top_level_system"
             android:order="-20"
             android:title="@string/header_category_system"
+            android:selectable="true"
             android:summary="@string/system_dashboard_summary"
             settings:highlightableMenuKey="@string/menu_key_system"/>
 

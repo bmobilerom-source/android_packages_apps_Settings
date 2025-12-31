@@ -23,6 +23,8 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
+
+import com.android.settings.widget.SeekBarPreference;
 import android.os.UserHandle;
 import android.os.UserManager;
 import androidx.preference.ListPreference;
@@ -77,18 +79,18 @@ public class SystemSettingsOnthego extends SettingsPreferenceFragment implements
             }
         }
         
-        OnTheGoAlphaPreferenceController alphaController = new OnTheGoAlphaPreferenceController(context);
+        OnTheGoAlphaPreferenceController alphaController = new OnTheGoAlphaPreferenceController(context, "onthego_alpha");
         if (alphaController.getAvailabilityStatus() == BasePreferenceController.AVAILABLE) {
-            Preference alphaPref = prefScreen.findPreference("onthego_alpha");
+            SeekBarPreference alphaPref = (SeekBarPreference) prefScreen.findPreference("onthego_alpha");
             if (alphaPref != null) {
                 alphaController.updateState(alphaPref);
-                alphaPref.setOnPreferenceChangeListener(alphaController);
+                alphaPref.setOnSeekBarChangeListener(alphaController);
                 Log.e(TAG, "✓ OnTheGoAlphaPreferenceController initialized");
             }
         }
-        
-        OnTheGoCameraPreferenceController cameraController = new OnTheGoCameraPreferenceController(context);
-        if (cameraController.isAvailable()) {
+
+        OnTheGoCameraPreferenceController cameraController = new OnTheGoCameraPreferenceController(context, "onthego_camera");
+        if (cameraController.getAvailabilityStatus() == BasePreferenceController.AVAILABLE) {
             Preference cameraPref = prefScreen.findPreference("onthego_camera");
             if (cameraPref != null) {
                 cameraController.updateState(cameraPref);
@@ -96,9 +98,9 @@ public class SystemSettingsOnthego extends SettingsPreferenceFragment implements
                 Log.e(TAG, "✓ OnTheGoCameraPreferenceController initialized");
             }
         }
-        
-        OnTheGoServiceRestartPreferenceController restartController = new OnTheGoServiceRestartPreferenceController(context);
-        if (restartController.isAvailable()) {
+
+        OnTheGoServiceRestartPreferenceController restartController = new OnTheGoServiceRestartPreferenceController(context, "onthego_service_restart");
+        if (restartController.getAvailabilityStatus() == BasePreferenceController.AVAILABLE) {
             Preference restartPref = prefScreen.findPreference("onthego_service_restart");
             if (restartPref != null) {
                 restartController.updateState(restartPref);

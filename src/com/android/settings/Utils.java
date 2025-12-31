@@ -1005,13 +1005,19 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Tries to initalize a volume with the given bundle. If it is a valid, private, and readable
-     * {@link VolumeInfo}, it is returned. If it is not valid, null is returned.
+     * Tries to initialize a volume with the given bundle.
+     * If it is a valid, private, and readable {@link VolumeInfo}, it is returned.
+     * If it is not valid, null is returned.
+     *
+     * This helper is defensive against a null bundle, which can happen when
+     * fragments are launched from custom dashboards/widgets without extras.
      */
     @Nullable
-    public static VolumeInfo maybeInitializeVolume(StorageManager sm, Bundle bundle) {
-        final String volumeId = bundle.getString(VolumeInfo.EXTRA_VOLUME_ID,
-                VolumeInfo.ID_PRIVATE_INTERNAL);
+    public static VolumeInfo maybeInitializeVolume(StorageManager sm, @Nullable Bundle bundle) {
+        // If no arguments were provided, fall back to the default internal volume.
+        final String volumeId = (bundle != null)
+                ? bundle.getString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL)
+                : VolumeInfo.ID_PRIVATE_INTERNAL;
         final VolumeInfo volume = sm.findVolumeById(volumeId);
         return isVolumeValid(volume) ? volume : null;
     }

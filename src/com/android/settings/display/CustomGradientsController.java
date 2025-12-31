@@ -39,9 +39,9 @@ public class CustomGradientsController extends BasePreferenceController
         super.updateState(preference);
         if (preference instanceof androidx.preference.ListPreference) {
             androidx.preference.ListPreference listPreference = (androidx.preference.ListPreference) preference;
-            String currentGradient = android.provider.Settings.System.getString(
+            String currentGradient = android.provider.Settings.Secure.getString(
                     mContext.getContentResolver(), "monet_gradient_type");
-            if (currentGradient != null) {
+            if (currentGradient != null && !currentGradient.isEmpty()) {
                 listPreference.setValue(currentGradient);
             } else {
                 listPreference.setValue("none");
@@ -53,17 +53,25 @@ public class CustomGradientsController extends BasePreferenceController
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String gradientType = (String) newValue;
 
-        // Get gradient colors
+        // Handle "none" preset - disable gradients completely
+        if ("none".equals(gradientType)) {
+            return Settings.Secure.putString(mContext.getContentResolver(),
+                        "monet_gradient_type", gradientType) &&
+                   Settings.Secure.putInt(mContext.getContentResolver(),
+                        "monet_gradient_enabled", 0);
+        }
+
+        // Get gradient colors for other presets
         String[] colors = getGradientColors(gradientType);
         if (colors != null) {
             String colorString = String.join(",", colors);
 
-            // Save to system settings
-            return Settings.System.putString(mContext.getContentResolver(),
+            // Save to secure settings for theme preferences
+            return Settings.Secure.putString(mContext.getContentResolver(),
                         "monet_gradient_type", gradientType) &&
-                   Settings.System.putString(mContext.getContentResolver(),
+                   Settings.Secure.putString(mContext.getContentResolver(),
                         "monet_gradient_colors", colorString) &&
-                   Settings.System.putInt(mContext.getContentResolver(),
+                   Settings.Secure.putInt(mContext.getContentResolver(),
                         "monet_gradient_enabled", 1);
         }
 

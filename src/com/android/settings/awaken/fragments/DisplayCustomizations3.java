@@ -24,8 +24,6 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settings.display.AnimatorDurationScaleController;
-import com.android.settings.display.ColorTemperatureController;
-import com.android.settings.display.DisplayEffectsController;
 import com.android.settings.display.TransitionAnimationScaleController;
 import com.android.settings.display.WindowAnimationScaleController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -63,8 +61,6 @@ public class DisplayCustomizations3 extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DisplayEffectsController(context, "display_effects"));
-        controllers.add(new ColorTemperatureController(context, "color_temperature"));
         controllers.add(new WindowAnimationScaleController(context, "window_animation_scale"));
         controllers.add(new TransitionAnimationScaleController(context, "transition_animation_scale"));
         controllers.add(new AnimatorDurationScaleController(context, "animator_duration_scale"));

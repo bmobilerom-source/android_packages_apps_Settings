@@ -34,12 +34,12 @@
         
         <TextView
             android:id="@android:id/title"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:layout_above="@+id/lockscreen_clock_preview"
             android:textColor="@*android:color/system_accent1_100"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:textStyle="normal"
             android:layout_marginBottom="24dp"
             android:layout_centerHorizontal="true" />
 

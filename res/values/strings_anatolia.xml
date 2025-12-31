@@ -2,14 +2,34 @@
 <resources>
     <string name="display_customizations_title">Display customizations</string>
     <string name="display_customizations_summary">@null</string>
+
     <string name="display_customizations2_title">Display customizations 2</string>
     <string name="display_customizations2_summary">@null</string>
+
     <string name="display_customizations3_title">Display customizations 3</string>
     <string name="display_customizations3_summary">@null</string>
+    <string name="display_customizations3_intro_title">System animations</string>
+    <string name="display_customizations3_intro_summary">
+        Tune window, transition, and animator scales to customize how fast
+        system animations feel.
+    </string>
+
+    <string name="display_effects_title">Display effects</string>
+    <string name="display_effects_summary">
+        Enable extra visual effects such as blur and accent treatments
+        on supported pages.
+    </string>
+
     <string name="display_customizations4_title">Display customizations 4</string>
     <string name="display_customizations4_summary">@null</string>
+    <string name="display_customizations4_intro_title">Smart Pixels</string>
+    <string name="display_customizations4_intro_summary">
+        Reduce power usage by turning off a pattern of pixels on OLED screens.
+    </string>
+
     <string name="display_customizations5_title">Display customizations 5</string>
     <string name="display_customizations5_summary">@null</string>
+<<<<<<< Updated upstream
     <string name="display_customizations3_intro_title">Display Effects &amp; Animations</string>
     <string name="display_customizations3_intro_summary">Customize display effects, color temperature, and animation scales</string>
     <string name="display_customizations4_intro_title">Smart Pixels &amp; Power Saving</string>
@@ -18,6 +38,13 @@
     <string name="display_customizations5_intro_summary">Customize the Quick Settings panel header image</string>
     <string name="display_effects_title">Display Effects</string>
     <string name="display_effects_summary">Apply visual effects to the display</string>
+=======
+    <string name="display_customizations5_intro_title">Quick Settings Header</string>
+    <string name="display_customizations5_intro_summary">
+        Customize your Quick Settings header provider, visibility, and imagery.
+    </string>
+
+>>>>>>> Stashed changes
     <string name="skylineui_lab_summary">@null</string>
 </resources>
 

@@ -73,6 +73,9 @@
     <string name="quick_settings_secure_lock_screen_title">Hide on secure lock screen</string>
     <string name="quick_settings_secure_lock_screen_summary">Hide all quick settings in the notification shade while the device is locked</string>
 
+    <!-- Battery Saving Category -->
+    <string name="extended_security_battery_saving_category">Battery Saving</string>
+
  <!-- Sensor Block -->
     <string name="sensor_block_title">Sensor block per-package</string>
     <string name="sensor_block_summary">Block access to certain sensors for some apps to save battery and enhance privacy</string>
@@ -91,6 +94,17 @@
     <string name="profile_choose_app">Choose app</string>
     <string name="dialog_delete_title">Delete</string>
     <string name="dialog_delete_message">Remove selected item?</string>
+
+    <!-- Device & Hardware Category -->
+    <string name="device_hardware_category_title">Device &amp; Hardware</string>
+
+    <!-- Battery Lights -->
+    <string name="battery_lights_title">Battery lights</string>
+    <string name="battery_lights_summary">Customize LED indicators for battery status</string>
+
+    <!-- Notification Lights -->
+    <string name="notification_lights_title">Notification lights</string>
+    <string name="notification_lights_summary">Control LED behavior for incoming notifications</string>
 
 
 </resources>

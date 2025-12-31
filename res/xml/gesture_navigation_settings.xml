@@ -71,6 +71,14 @@
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
     </PreferenceCategory>
+    <!-- Other Preferences -->
+    <Preference
+        android:key="taptap_category"
+        android:title="@string/taptap_title"
+        android:summary="@string/taptap_summary" 
+        settings:layout="@layout/system_features_preference_card"
+        android:order="0"
+        android:fragment="com.epic.fragments.SystemSettingsTaptap" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="gesture_navigation_settings_footer"

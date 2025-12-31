@@ -28,6 +28,8 @@
 
 package com.epic.fragments;
 
+import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -72,6 +74,39 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
 
     private static final String TAG = "SensorBlockAppPicker";
     private static final String SETTING_KEY = "sensor_block_packages";
+
+    /**
+     * Helper method to consistently access sensor block packages setting
+     * Uses Settings.Secure first, falls back to Settings.System
+     */
+    private String getSensorBlockPackages() {
+        if (getActivity() == null) return null;
+        ContentResolver resolver = getActivity().getContentResolver();
+
+        // Try Settings.Secure first
+        String packages = Settings.Secure.getString(resolver, SETTING_KEY);
+        if (packages != null) {
+            return packages;
+        }
+
+        // Fallback to Settings.System
+        return Settings.System.getString(resolver, SETTING_KEY);
+    }
+
+    /**
+     * Helper method to consistently save sensor block packages setting
+     * Tries Settings.Secure first, falls back to Settings.System
+     */
+    private void setSensorBlockPackages(String packages) {
+        if (getActivity() == null) return;
+        ContentResolver resolver = getActivity().getContentResolver();
+
+        // Try Settings.Secure first
+        if (!Settings.Secure.putString(resolver, SETTING_KEY, packages)) {
+            // Fallback to Settings.System
+            Settings.System.putString(resolver, SETTING_KEY, packages);
+        }
+    }
 
     private RecyclerView mRecyclerView;
     private AppAdapter mAdapter;
@@ -208,17 +243,22 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
                 return;
             }
 
+            // Get all installed applications
             List<ApplicationInfo> installedApps = pm.getInstalledApplications(PackageManager.GET_META_DATA);
             if (installedApps == null || installedApps.isEmpty()) {
                 Log.w(TAG, "No installed apps found");
                 return;
             }
-            
+
             mAppList.clear();
             for (ApplicationInfo info : installedApps) {
                 try {
-                    if (info != null) {
-                        mAppList.add(new AppInfo(info, pm));
+                    if (info != null && info.packageName != null && !info.packageName.isEmpty()) {
+                        // Skip apps that can't be launched (no main activity)
+                        Intent launchIntent = pm.getLaunchIntentForPackage(info.packageName);
+                        if (launchIntent != null) {
+                            mAppList.add(new AppInfo(info, pm));
+                        }
                     }
                 } catch (Exception e) {
                     Log.w(TAG, "Error loading app: " + (info != null ? info.packageName : "null"), e);
@@ -235,16 +275,11 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
     }
 
     private void loadSelectedPackages() {
-        if (getActivity() == null) {
-            Log.e(TAG, "Activity is null, cannot load selected packages");
-            return;
-        }
-
         mSelectedPackages.clear();
         try {
-            String packages = Settings.Secure.getString(getActivity().getContentResolver(), SETTING_KEY);
+            String packages = getSensorBlockPackages();
             Log.d(TAG, "Raw packages string from Settings: " + (packages != null ? packages : "null"));
-            
+
             if (packages != null && !packages.isEmpty()) {
                 String[] packageArray = packages.split(",");
                 for (String pkg : packageArray) {
@@ -256,7 +291,7 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
                 }
                 Log.d(TAG, "Loaded " + mSelectedPackages.size() + " selected packages: " + mSelectedPackages);
             } else {
-                Log.d(TAG, "No packages found in Settings.Secure for key: " + SETTING_KEY);
+                Log.d(TAG, "No packages found in Settings for key: " + SETTING_KEY);
             }
         } catch (Exception e) {
             Log.e(TAG, "Error loading selected packages", e);
@@ -265,7 +300,7 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
 
     private void saveSelectedPackages() {
         String packages = TextUtils.join(",", mSelectedPackages);
-        Settings.Secure.putString(getActivity().getContentResolver(), SETTING_KEY, packages);
+        setSensorBlockPackages(packages);
         Log.d(TAG, "Saved selected packages: " + packages);
     }
 
@@ -276,8 +311,9 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
                 boolean matchesSearch = TextUtils.isEmpty(mSearchQuery) ||
                                         app.label.toString().toLowerCase().contains(mSearchQuery) ||
                                         app.packageName.toLowerCase().contains(mSearchQuery);
-                
-                boolean isSystemApp = (app.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+
+                // More accurate system app detection
+                boolean isSystemApp = isSystemApp(app.info);
                 boolean matchesSystemFilter = mShowSystemApps || !isSystemApp;
 
                 if (matchesSearch && matchesSystemFilter) {
@@ -306,6 +342,30 @@ public class SensorBlockAppPicker extends SettingsPreferenceFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
+    }
+
+    /**
+     * Determines if an app is a system app based on multiple criteria
+     */
+    private boolean isSystemApp(ApplicationInfo info) {
+        if (info == null) return false;
+
+        // Check FLAG_SYSTEM flag
+        if ((info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            return true;
+        }
+
+        // Check if it's in system partition
+        if (info.sourceDir != null && info.sourceDir.startsWith("/system/")) {
+            return true;
+        }
+
+        // Check if it's in product partition
+        if (info.sourceDir != null && info.sourceDir.startsWith("/product/")) {
+            return true;
+        }
+
+        return false;
     }
 
     private class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {

@@ -25,15 +25,14 @@
         android:title="Color Customization"
         android:key="advanced_monet_category">
 
-        <SeekBarPreference
+        <com.android.settings.widget.SeekBarPreference
             android:key="monet_chroma_multiplier"
             android:title="Color Vibrancy"
             android:summary="Adjust color saturation intensity (50-200%)"
             android:max="200"
-            android:min="50"
             android:defaultValue="100"
+            android:layout="@layout/adaptive_preference_card_seekbar"
             android:icon="@drawable/ic_settings_display"
-            settings:layout="@layout/adaptive_seekbar_card"
             settings:controller="com.android.settings.display.MonetChromaMultiplierController" />
 
         <ListPreference

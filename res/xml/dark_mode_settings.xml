@@ -45,14 +45,50 @@
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
 
+    <!-- Theme Customization Card -->
     <lineageos.preference.LineageSecureSettingSwitchPreference
         android:key="berry_black_theme"
         android:dependency="dark_ui_activated"
         android:title="@string/berry_black_theme_title"
         android:summary="@string/berry_black_theme_summary"
         android:defaultValue="false"
-        settings:requiresPackage="org.lineageos.overlay.customization.blacktheme" />
-    
+        settings:requiresPackage="org.lineageos.overlay.customization.blacktheme"
+        settings:layout="@layout/adaptive_preference_card_top_switch" />
+
+    <!-- Custom System Themes - REMOVED (causing boot loops) -->
+    <!--
+    <SwitchPreference
+        android:key="system_theme_vivid"
+        android:dependency="dark_ui_activated"
+        android:title="@string/system_theme_vivid_title"
+        android:summary="@string/system_theme_vivid_summary"
+        android:defaultValue="false"
+        settings:controller="com.android.settings.display.darkmode.SystemThemeVividPreferenceController"
+        settings:requiresPackage="com.android.system.theme.vivid"
+        settings:layout="@layout/adaptive_preference_card_middle_switch" />
+
+    <SwitchPreference
+        android:key="system_theme_snowpaint"
+        android:dependency="dark_ui_activated"
+        android:title="@string/system_theme_snowpaint_title"
+        android:summary="@string/system_theme_snowpaint_summary"
+        android:defaultValue="false"
+        settings:controller="com.android.settings.display.darkmode.SystemThemeSnowpaintPreferenceController"
+        settings:requiresPackage="com.android.system.theme.snowpaint"
+        settings:layout="@layout/adaptive_preference_card_middle_switch" />
+
+    <SwitchPreference
+        android:key="system_theme_espresso"
+        android:dependency="dark_ui_activated"
+        android:title="@string/system_theme_espresso_title"
+        android:summary="@string/system_theme_espresso_summary"
+        android:defaultValue="false"
+        settings:controller="com.android.settings.display.darkmode.SystemThemeEspressoPreferenceController"
+        settings:requiresPackage="com.android.system.theme.espresso"
+        settings:layout="@layout/adaptive_preference_card_bottom_switch" />
+    -->
+
+    <!-- Schedule Settings Card -->
     <DropDownPreference
         android:key="dark_ui_auto_mode"
         android:title="@string/dark_ui_auto_mode_title"
@@ -61,17 +97,20 @@
         android:entryValues="@array/dark_ui_scheduler_preference_titles"
         settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
         settings:iconSpaceReserved="false" 
-        settings:keywords="@string/keywords_dark_ui_mode"/>
+        settings:keywords="@string/keywords_dark_ui_mode"
+        settings:layout="@layout/adaptive_preference_card_top" />
 
      <Preference
         android:key="dark_theme_start_time"
         android:title="@string/night_display_start_time_title"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card_middle" />
 
     <Preference
         android:key="dark_theme_end_time"
         android:title="@string/night_display_end_time_title"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card_bottom" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="dark_ui_footer"

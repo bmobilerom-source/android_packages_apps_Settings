@@ -40,7 +40,8 @@
         settings:useAdminDisabledSummary="true"
         settings:searchable="false"
         android:title="@string/mobile_network_list_add_more"
-        android:order="100">
+        android:order="100"
+        settings:layout="@layout/adaptive_preference_card">
         <intent android:action="android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION"
                 android:targetPackage="com.android.phone">
             <extra android:name="android.telephony.euicc.extra.FORCE_PROVISION"

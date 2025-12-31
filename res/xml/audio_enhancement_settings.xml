@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/audio_enhancement_title">
+
+    <!-- Master Toggle -->
+    <SwitchPreferenceCompat
+        android:key="audio_enhancement_enabled"
+        android:title="@string/audio_enhancement_enable_title"
+        android:summary="@string/audio_enhancement_enable_summary"
+        android:order="0"
+        settings:controller="com.android.settings.sound.AudioEnhancementSettings$AudioEnhancementMasterController" />
+
+    <!-- Equalizer -->
+    <Preference
+        android:key="equalizer"
+        android:title="@string/equalizer_title"
+        android:summary="@string/equalizer_summary"
+        android:order="10"
+        settings:controller="com.android.settings.sound.AudioEnhancementSettings$EqualizerPreferenceController" />
+
+    <!-- Bass Boost -->
+    <com.android.settings.widget.SeekBarPreference
+        android:key="bass_boost"
+        android:title="@string/bass_boost_title"
+        android:summary="@string/bass_boost_summary"
+        android:layout="@layout/dot_preference_middle_card_progress"
+        android:order="20"
+        android:max="1000"
+        android:defaultValue="0"
+        app:showSeekBarValue="true"
+        app:seekBarIncrement="1"
+        settings:controller="com.android.settings.sound.AudioEnhancementSettings$BassBoostPreferenceController" />
+
+    <!-- Virtualizer -->
+    <com.android.settings.widget.SeekBarPreference
+        android:key="virtualizer"
+        android:title="@string/virtualizer_title"
+        android:summary="@string/virtualizer_summary"
+        android:layout="@layout/dot_preference_middle_card_progress"
+        android:order="30"
+        android:max="1000"
+        android:defaultValue="0"
+        app:showSeekBarValue="true"
+        app:seekBarIncrement="1"
+        settings:controller="com.android.settings.sound.AudioEnhancementSettings$VirtualizerPreferenceController" />
+
+    <!-- Reverb -->
+    <ListPreference
+        android:key="reverb"
+        android:title="@string/reverb_title"
+        android:summary="@string/reverb_summary"
+        android:order="40"
+        android:entries="@array/reverb_preset_names"
+        android:entryValues="@array/reverb_preset_values"
+        settings:controller="com.android.settings.sound.AudioEnhancementSettings$ReverbPreferenceController" />
+
+    <!-- Dynamics Processing -->
+    <SwitchPreferenceCompat
+        android:key="dynamics_processing"
+        android:title="@string/dynamics_processing_title"
+        android:summary="@string/dynamics_processing_summary"
+        android:order="50"
+        settings:controller="com.android.settings.sound.AudioEnhancementSettings$DynamicsProcessingPreferenceController" />
+
+</PreferenceScreen>
+

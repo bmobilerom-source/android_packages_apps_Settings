@@ -48,8 +48,8 @@ public class CustomThemeSettings extends SettingsPreferenceFragment
     private static final String TAG = "CustomThemeSettings";
     private static final String KEY_CUSTOM_THEME = "custom_theme";
 
-    // All themes work only in dark mode: Default (0), Black (1), Transparent (2), Espresso (4), Custom Blue (5), Expressive (7), Animated (6), Animated Wallpaper Blur (8), Custom Picture (9)
-    private static final int[] DARK_THEMES = {0, 1, 2, 4, 5, 6, 7, 8, 9};
+    // All themes work only in dark mode: Default (0), Black (1), Transparent (2), Snowpaint (3), Espresso (4), Custom Blue (5), Expressive (7), Animated (6), Animated Wallpaper Blur (8), Custom Picture (9)
+    private static final int[] DARK_THEMES = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     private ListPreference mThemePreference;
 
@@ -199,6 +199,12 @@ public class CustomThemeSettings extends SettingsPreferenceFragment
                 String value = (String) newValue;
                 int themeValue = Integer.parseInt(value);
                 
+                // Validate theme value
+                if (!CustomThemeHelper.isValidTheme(themeValue)) {
+                    Log.e(TAG, "Invalid theme value: " + themeValue);
+                    return false;
+                }
+                
                 // Set the theme
                 boolean themeSet = CustomThemeHelper.setTheme(context, themeValue);
                 if (!themeSet) {
@@ -206,9 +212,21 @@ public class CustomThemeSettings extends SettingsPreferenceFragment
                     return false;
                 }
                 
+                Log.d(TAG, "Theme set successfully: " + themeValue);
+                
                 // Only switch to dark mode if not default theme
                 if (themeValue != CustomThemeHelper.THEME_DEFAULT) {
                     switchToDarkMode(context);
+                }
+                
+                // Notify ContentResolver of change to trigger SystemUI observer
+                try {
+                    context.getContentResolver().notifyChange(
+                            android.provider.Settings.Secure.getUriFor(
+                                    android.provider.Settings.Secure.SYSTEM_CUSTOM_THEME),
+                            null);
+                } catch (Exception e) {
+                    Log.w(TAG, "Failed to notify ContentResolver", e);
                 }
                 
                 updatePreferenceSummary(mThemePreference, themeValue);
@@ -331,6 +349,7 @@ public class CustomThemeSettings extends SettingsPreferenceFragment
                 "theme_default_desc",
                 "theme_black_desc",
                 "theme_transparent_desc",
+                "theme_snowpaint_desc",
                 "theme_espresso_desc",
                 "theme_custom_blue_desc",
                 "theme_animated_desc",
@@ -352,6 +371,7 @@ public class CustomThemeSettings extends SettingsPreferenceFragment
                 case 0: currentKey = "theme_default_desc"; break;
                 case 1: currentKey = "theme_black_desc"; break;
                 case 2: currentKey = "theme_transparent_desc"; break;
+                case 3: currentKey = "theme_snowpaint_desc"; break;
                 case 4: currentKey = "theme_espresso_desc"; break;
                 case 5: currentKey = "theme_custom_blue_desc"; break;
                 case 6: currentKey = "theme_animated_desc"; break;

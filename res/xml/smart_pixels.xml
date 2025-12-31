@@ -33,22 +33,30 @@
         android:order="-1000" />
 
     <!-- Smart Pixels Enable -->
-    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="smart_pixels_enable"
         android:title="@string/smart_pixels_enable_title"
         android:summary="@string/smart_pixels_enable_summary"
         android:defaultValue="false"
+<<<<<<< Updated upstream
         android:order="0"
         app:position="0" />
+=======
+        android:order="0" />
+>>>>>>> Stashed changes
 
     <!-- Smart Pixels on Power Save -->
-    <com.android.settings.preferences.ui.AdaptiveSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="smart_pixels_on_power_save"
         android:title="@string/smart_pixels_on_power_save_title"
         android:summary="@string/smart_pixels_on_power_save_summary"
         android:defaultValue="false"
+<<<<<<< Updated upstream
         android:order="1"
         app:position="1" />
+=======
+        android:order="1" />
+>>>>>>> Stashed changes
 
     <!-- Smart Pixels Pattern -->
     <ListPreference
@@ -58,8 +66,12 @@
         android:entries="@array/smart_pixels_percent_strings"
         android:entryValues="@array/smart_pixels_percent_values"
         android:defaultValue="0"
+<<<<<<< Updated upstream
         android:order="2"
         app:position="1" />
+=======
+        android:order="2" />
+>>>>>>> Stashed changes
 
     <!-- Smart Pixels Shift Time -->
     <ListPreference
@@ -69,8 +81,12 @@
         android:entries="@array/smart_pixels_shift_times"
         android:entryValues="@array/smart_pixels_shift_values"
         android:defaultValue="0"
+<<<<<<< Updated upstream
         android:order="3"
         app:position="2" />
+=======
+        android:order="3" />
+>>>>>>> Stashed changes
 
     <com.android.settingslib.widget.FooterPreference
         android:key="smart_pixels_footer"

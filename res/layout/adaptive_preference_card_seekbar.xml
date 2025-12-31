@@ -69,23 +69,14 @@
                 android:maxLines="4"
                 tools:text="Summary text goes here" />
 
-            <!-- Widget Frame -->
+            <!-- Widget Frame - SeekBarPreference will add the SeekBar here programmatically -->
             <LinearLayout
                 android:id="@android:id/widget_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="end|center_vertical"
-                android:orientation="horizontal" />
-
-            <!-- SeekBar -->
-            <SeekBar
-                android:id="@+id/seekbar"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:paddingStart="0dp"
-                android:paddingEnd="0dp" />
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:gravity="center_vertical" />
 
         </LinearLayout>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,71 +20,71 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 /**
- * Controller for OnTheGo camera selection preference
+ * Controller for OnTheGo camera selection (front/rear)
  */
-public class OnTheGoCameraPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
+public class OnTheGoCameraPreferenceController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "OnTheGoCameraController";
-    private static final String KEY_ONTHEGO_CAMERA = "onthego_camera";
-    private static final String SETTINGS_KEY_ONTHEGO_CAMERA = "on_the_go_camera";
+    private static final String TAG = "OnTheGoCameraPC";
 
-    public OnTheGoCameraPreferenceController(Context context) {
-        super(context);
+    public OnTheGoCameraPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_ONTHEGO_CAMERA;
-    }
-
-    @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         // Only show if device has front camera
         PackageManager pm = mContext.getPackageManager();
-        return pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+        return (pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT))
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public void updateState(Preference preference) {
+        super.updateState(preference);
+
         if (preference instanceof SwitchPreferenceCompat) {
             SwitchPreferenceCompat switchPreference = (SwitchPreferenceCompat) preference;
-            boolean useFrontCamera = Settings.System.getInt(mContext.getContentResolver(),
-                    SETTINGS_KEY_ONTHEGO_CAMERA, 0) == 1;
-            switchPreference.setChecked(useFrontCamera);
+
+            // Get current camera setting (default to rear camera = 0)
+            int currentCamera = Settings.System.getInt(
+                    mContext.getContentResolver(),
+                    Settings.System.ON_THE_GO_CAMERA,
+                    0); // 0 = rear, 1 = front
+
+            switchPreference.setChecked(currentCamera == 1);
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference instanceof SwitchPreferenceCompat) {
-            boolean useFrontCamera = (Boolean) newValue;
-            Settings.System.putInt(mContext.getContentResolver(),
-                    SETTINGS_KEY_ONTHEGO_CAMERA, useFrontCamera ? 1 : 0);
-            
-            // Send broadcast to update the service
-            sendCameraBroadcast();
-            return true;
-        }
-        return false;
+        boolean useFrontCamera = (Boolean) newValue;
+
+        // Save camera setting (0 = rear, 1 = front)
+        Settings.System.putInt(mContext.getContentResolver(),
+                Settings.System.ON_THE_GO_CAMERA,
+                useFrontCamera ? 1 : 0);
+
+        // Send broadcast to update the service
+        sendCameraBroadcast();
+
+        return true;
     }
 
     private void sendCameraBroadcast() {
         try {
-            Intent cameraBroadcast = new Intent("toggle_camera");
+            Intent cameraBroadcast = new Intent();
+            cameraBroadcast.setAction("com.android.systemui.epic.onthego.OnTheGoService.ACTION_TOGGLE_CAMERA");
             mContext.sendBroadcast(cameraBroadcast);
-            Log.e(TAG, "Sent camera broadcast");
         } catch (Exception e) {
-            Log.e(TAG, "Error sending camera broadcast: " + e.getMessage());
+            // Ignore broadcast failures
         }
     }
 }

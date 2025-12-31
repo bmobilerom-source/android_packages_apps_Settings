@@ -50,4 +50,10 @@
     <item type="id" name="dark_ui_turn_on_button" />
     <item type="id" name="dark_ui_turn_off_button" />
 
+    <!-- Wallpaper background view ID -->
+    <item type="id" name="wallpaper_background" />
+
+    <!-- Wallpaper background preference container -->
+    <item type="id" name="wallpaper_background_preference_container" />
+
 </resources>

@@ -30,12 +30,14 @@
         <Preference
             android:key="ad_services_direct"
             android:title="Open Ad Services"
+            settings:layout="@layout/adaptive_preference_card_top"
             android:summary="Launch Ad Services settings directly"
             settings:controller="com.epic.fragments.AdServicesPreferenceController" />
 
         <Preference
             android:key="ad_services_privacy"
             android:title="Privacy Settings"
+            settings:layout="@layout/adaptive_preference_card_bottom"
             android:summary="Open system privacy dashboard"
             android:fragment="com.android.settings.privacy.PrivacyDashboardFragment" />
 
@@ -47,6 +49,7 @@
         <Preference
             android:key="ad_services_info"
             android:title="About Ad Services"
+            settings:layout="@layout/adaptive_preference_card"
             android:summary="Learn more about advertising and privacy controls" />
 
     </PreferenceCategory>

@@ -25,5 +25,12 @@
         android:title="@string/monet_color_settings_title"
         android:summary="@string/monet_color_settings_summary"
         android:fragment="com.android.settings.display.MonetColorSettings" />
+   <!-- Color Temperature Toggle -->
+    <SwitchPreference
+        android:key="color_temperature"
+        android:title="@string/color_temperature"
+        android:summary="@string/color_temperature_desc"
+        android:defaultValue="false"
+        settings:controller="com.android.settings.display.ColorTemperatureController" />
 
 </PreferenceScreen>

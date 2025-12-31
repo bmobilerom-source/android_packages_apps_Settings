@@ -21,8 +21,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/dashboard_style_title">
 
-    <!-- Lottie Illustration - removed to prevent crashes if resource doesn't exist -->
-
+  <com.android.settingslib.widget.IllustrationPreference
+        android:key="location"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/aboutphone"/>
     <PreferenceCategory
         android:title="@string/dashboard_style_category_title"
         android:key="dashboard_style_category">
@@ -41,13 +44,13 @@
             android:defaultValue="2"
             android:persistent="false" />
 
-        <!-- Compact Dashboard Toggle -->
-        <androidx.preference.SwitchPreferenceCompat
+        <!-- Compact Dashboard Toggle - COMMENTED OUT -->
+        <!-- <androidx.preference.SwitchPreferenceCompat
             android:key="settings_compact_dashboard_enabled"
             android:title="@string/compact_dashboard_title"
             android:summary="@string/compact_dashboard_summary"
             android:defaultValue="false"
-            android:persistent="false" />
+            android:persistent="false" /> -->
 
     </PreferenceCategory>
 
@@ -59,13 +62,16 @@
             android:key="dashboard_style_reset"
             android:title="@string/dashboard_style_reset_title"
             android:summary="@string/dashboard_style_reset_summary"
+            settings:layout="@layout/adaptive_preference_card_middle"
             android:icon="@drawable/ic_restore" />
 
         <Preference
             android:key="systemui_reset"
             android:title="@string/systemui_reset_title"
             android:summary="@string/systemui_reset_summary"
-            android:icon="@drawable/ic_settings_system_dashboard_white" />
+            android:icon="@drawable/ic_settings_system_dashboard_white"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            android:selectable="true" />
 
     </PreferenceCategory>
 

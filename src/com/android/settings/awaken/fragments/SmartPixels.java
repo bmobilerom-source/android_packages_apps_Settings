@@ -215,16 +215,12 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
             boolean success = Settings.System.putIntForUser(resolver,
                     Settings.System.SMART_PIXELS_SHIFT_TIMEOUT,
                     shiftTime, UserHandle.USER_CURRENT);
-            if (success) {
-                // Notify change to trigger observers
-                resolver.notifyChange(Settings.System.getUriFor(
-                        Settings.System.SMART_PIXELS_SHIFT_TIMEOUT), null, false);
-                updateShiftTimeSummary(shiftTime);
-                Log.d(TAG, "Smart Pixels shift time: " + shiftTime);
-            } else {
-                Log.e(TAG, "Failed to set Smart Pixels shift time: " + shiftTime);
-            }
-            return success;
+            // Notify change to trigger observers
+            resolver.notifyChange(Settings.System.getUriFor(
+                    Settings.System.SMART_PIXELS_SHIFT_TIMEOUT), null, false);
+            updateShiftTimeSummary(shiftTime);
+            Log.d(TAG, "Smart Pixels shift time: " + shiftTime);
+            return true;
         }
         return false;
     }

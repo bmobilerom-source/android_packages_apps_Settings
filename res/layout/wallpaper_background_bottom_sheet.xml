@@ -35,5 +35,12 @@
         android:text="@string/settings_wallpaper_background_info_summary"
         android:textColor="?android:attr/textColorSecondary" />
 
+    <!-- Container for preference fragment -->
+    <FrameLayout
+        android:id="@+id/wallpaper_background_preference_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
 </LinearLayout>
 

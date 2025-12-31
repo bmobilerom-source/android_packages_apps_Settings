@@ -69,14 +69,24 @@
                 android:maxLines="4"
                 tools:text="Summary text goes here" />
 
-            <!-- Widget Frame -->
+            <!-- Widget Frame - Required for ListPreference/DropDownPreference -->
             <LinearLayout
                 android:id="@*android:id/widget_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="end|center_vertical"
-                android:orientation="horizontal" />
+                android:orientation="horizontal">
+                
+                <!-- Spinner for ListPreference/DropDownPreference - Must be in widget_frame -->
+                <!-- Note: ListPreference uses dialog by default, but custom layouts may trigger dropdown mode -->
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="120dp"
+                    android:visibility="gone" />
+            </LinearLayout>
 
         </LinearLayout>
 

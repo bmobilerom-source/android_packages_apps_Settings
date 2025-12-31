@@ -15,8 +15,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="4dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:minHeight="60dp"
@@ -39,12 +39,24 @@
             android:id="@android:id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearance"
+            android:textStyle="normal"
             android:textColor="?android:attr/textColorPrimary"
             android:maxLines="1"
             android:ellipsize="end"
             android:gravity="center" />
+        
+        <TextView
+            android:id="@android:id/summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?android:attr/textColorSecondary"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginTop="4dp"
+            android:visibility="gone" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
 

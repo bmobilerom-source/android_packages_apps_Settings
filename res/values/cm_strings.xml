@@ -36,6 +36,14 @@
     <string name="berry_black_theme_title">Pure black</string>
     <string name="berry_black_theme_summary">Pure black background for dark theme</string>
 
+    <!-- Custom System Themes -->
+    <string name="system_theme_vivid_title">Vivid Theme</string>
+    <string name="system_theme_vivid_summary">Bright and saturated colors with dark backgrounds</string>
+    <string name="system_theme_snowpaint_title">Snow Paint Theme</string>
+    <string name="system_theme_snowpaint_summary">Light gray tones with winter paint effects</string>
+    <string name="system_theme_espresso_title">Espresso Theme</string>
+    <string name="system_theme_espresso_summary">Rich brown and coffee-colored backgrounds</string>
+
     <!-- Device Info screen. LineageOS legal. -->
     <string name="lineagelicense_title">LineageOS legal</string>
 

@@ -28,4 +28,8 @@
         android:order="-1001"
         app:lottie_rawRes="@raw/display" />
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 </PreferenceScreen>

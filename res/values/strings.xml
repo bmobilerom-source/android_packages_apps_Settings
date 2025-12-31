@@ -51,6 +51,9 @@
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
     <string name="header_category_system">System</string>
+    <string name="header_category_network">Network</string>
+    <string name="header_category_apps">Apps &amp; Services</string>
+    <string name="header_category_security">Security &amp; Privacy</string>
 
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_service_in">In Service</string>
@@ -2177,6 +2180,12 @@
     <string name="wifi_wakeup_summary">Wi\u2011Fi will turn back on near high\u2011quality saved networks, like your home network</string>
     <!-- Checkbox summary for auto-wifi when user needs to enable location scanning to toggle it -->
     <string name="wifi_wakeup_summary_no_location">Unavailable because location is turned off. Turn on <annotation id="link">location</annotation>.</string>
+    <!-- Preference title for Wi-Fi timeout setting -->
+    <string name="wifi_timeout">Turn off Wi\u2011Fi when idle</string>
+    <!-- Preference summary for Wi-Fi timeout setting -->
+    <string name="wifi_timeout_summary">Never</string>
+    <!-- Preference summary for Wi-Fi timeout setting with timeout value -->
+    <string name="wifi_timeout_summary_auto">After %1$s</string>
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
@@ -12663,8 +12672,12 @@
 
     <!-- Title for the privacy controls page [CHAR LIMIT=30]-->
     <string name="privacy_controls_title">Controls</string>
+<<<<<<< Updated upstream
     <!-- Summary for the privacy controls page [CHAR LIMIT=NONE]-->
     <string name="privacy_controls_summary">Manage privacy settings and permissions</string>
+=======
+    <string name="privacy_controls_summary">Manage privacy and security controls</string>
+>>>>>>> Stashed changes
 
 
     <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
@@ -13025,6 +13038,13 @@
     <string name="media_controls_show_player">Show player</string>
     <!-- Keywords for the media controls setting [CHAR LIMIT=NONE]-->
     <string name="keywords_media_controls">media</string>
+    <!-- Media controls bubbles descriptions [CHAR LIMIT=NONE] -->
+    <string name="media_controls_bubbles_description">Control media playback directly from bubbles</string>
+    <string name="media_controls_bubbles_description2">Bubbles appear when media is playing and can be customized</string>
+    <string name="media_controls_bubbles_description3">Long press bubbles for more playback options</string>
+    <!-- Ambient music information [CHAR LIMIT=NONE] -->
+    <string name="ambient_music_info_title">Ambient Music Visualizer</string>
+    <string name="ambient_music_info_summary">Real-time audio visualizations on AOD with multiple modes</string>
 
     <!-- Title of toggle to enable or disable the media resumption on lockscreen [CHAR LIMIT=NONE]-->
     <string name="camera_extensions_fallback_title">Allow camera software extensions</string>
@@ -13929,12 +13949,160 @@
     <!-- Circle to Search (shared between all entrypoints) -->
     <!-- Name of Google's new feature to circle to search anything on your phone screen,
          without switching apps. Also used as the setting title. [CHAR LIMIT=60] -->
-    <string name="search_gesture_feature_title">Circle to Search</string>
+    <string name="search_gesture_feature_title">Draw Anywhere</string>
     <!-- Summary text for press and hold nav handle OR home button to invoke Circle to Search. [CHAR LIMIT=NONE] -->
-    <string name="search_gesture_feature_summary">Touch and hold the Home button or the navigation handle to search using the content on your screen.</string>
+    <string name="search_gesture_feature_summary">Tap for settings</string>
 
     <!-- Device Name Dialog -->
     <string name="about_device_nearby">Nearby devices</string>
 
+    <!-- Authentication strings for protected settings pages -->
+    <string name="appsec_confirm_credential_title">Confirm your device credential</string>
+    <string name="appsec_confirm_credential_description">Authentication required to access Application Security settings</string>
+    
+    <string name="blocation_confirm_credential_title">Confirm your device credential</string>
+    <string name="blocation_confirm_credential_description">Authentication required to access Enhanced Location Privacy settings</string>
+    
+    <string name="bmobile_confirm_credential_title">Confirm your device credential</string>
+    <string name="bmobile_confirm_credential_description">Authentication required to access BMobile Settings</string>
+    
+    <string name="bmobile_userinfo_confirm_credential_title">Confirm your device credential</string>
+    <string name="bmobile_userinfo_confirm_credential_description">Authentication required to access User Information settings</string>
+
+    <!-- Status Bar Logo -->
+    <string name="status_bar_settings_title">Status bar</string>
+    <string name="status_bar_settings_summary">Customize status bar appearance and icons</string>
+    <string name="status_bar_logo_title">Status bar logo</string>
+    <string name="status_bar_logo_summary">Show a small logo in the status bar</string>
+
+    <string name="status_bar_logo_position_title">Logo position</string>
+    <string name="status_bar_logo_position_left">Left</string>
+    <string name="status_bar_logo_position_right">Right</string>
+
+    <string name="status_bar_logo_style_title">Logo style</string>
+    <!-- Status Bar Logo Styles -->
+    <string name="status_bar_logo_style_android">Android</string>
+    <string name="status_bar_logo_style_adidas">Adidas</string>
+    <string name="status_bar_logo_style_alien">Alien</string>
+    <string name="status_bar_logo_style_apple">Apple</string>
+    <string name="status_bar_logo_style_avengers">Avengers</string>
+    <string name="status_bar_logo_style_batman">Batman</string>
+    <string name="status_bar_logo_style_batman_tdk">Batman TDK</string>
+    <string name="status_bar_logo_style_beats">Beats</string>
+    <string name="status_bar_logo_style_biohazard">Biohazard</string>
+    <string name="status_bar_logo_style_blackberry">Blackberry</string>
+    <string name="status_bar_logo_style_cannabis">Cannabis</string>
+    <string name="status_bar_logo_style_emoticon_cool">Cool Emoticon</string>
+    <string name="status_bar_logo_style_emoticon_devil">Devil Emoticon</string>
+    <string name="status_bar_logo_style_fire">Fire</string>
+    <string name="status_bar_logo_style_heart">Heart</string>
+    <string name="status_bar_logo_style_nike">Nike</string>
+    <string name="status_bar_logo_style_pacman">Pacman</string>
+    <string name="status_bar_logo_style_puma">Puma</string>
+    <string name="status_bar_logo_style_rog">ROG</string>
+    <string name="status_bar_logo_style_spiderman">Spiderman</string>
+    <string name="status_bar_logo_style_superman">Superman</string>
+    <string name="status_bar_logo_style_windows">Windows</string>
+    <string name="status_bar_logo_style_xbox">Xbox</string>
+    <string name="status_bar_logo_style_ghost">Ghost</string>
+    <string name="status_bar_logo_style_ninja">Ninja</string>
+    <string name="status_bar_logo_style_robot">Robot</string>
+    <string name="status_bar_logo_style_ironman">Iron Man</string>
+    <string name="status_bar_logo_style_captain_america">Captain America</string>
+    <string name="status_bar_logo_style_flash">Flash</string>
+    <string name="status_bar_logo_style_tux">Tux</string>
+    <string name="status_bar_logo_style_ubuntu">Ubuntu</string>
+    <string name="status_bar_logo_style_mint">Mint</string>
+    <string name="status_bar_logo_style_amogus">Amogus</string>
+
+    <!-- Audio Enhancement -->
+    <string name="audio_enhancement_title">Audio Enhancement</string>
+    <string name="audio_enhancement_summary">Enhance your audio experience with built-in effects</string>
+
+    <string name="audio_enhancement_enable_title">Enable Audio Enhancement</string>
+    <string name="audio_enhancement_enable_summary">Apply audio effects to all system audio</string>
+
+    <string name="equalizer_title">Equalizer</string>
+    <string name="equalizer_summary">Adjust audio frequency response</string>
+
+    <string name="bass_boost_title">Bass Boost</string>
+    <string name="bass_boost_summary">Enhance low frequencies</string>
+
+    <string name="virtualizer_title">Virtualizer</string>
+    <string name="virtualizer_summary">Create 3D surround sound effect</string>
+
+    <string name="reverb_title">Reverb</string>
+    <string name="reverb_summary">Add room acoustics to audio</string>
+
+    <string name="dynamics_processing_title">Dynamics Processing</string>
+    <string name="dynamics_processing_summary">Automatic volume leveling and compression</string>
+
+    <string name="keywords_audio_enhancement">audio enhancement, equalizer, bass boost, virtualizer, reverb, dynamics</string>
+
+    <!-- Reverb Preset Names -->
+    <string name="none_reverb">None</string>
+    <string name="small_room_reverb">Small Room</string>
+    <string name="medium_room_reverb">Medium Room</string>
+    <string name="large_room_reverb">Large Room</string>
+    <string name="medium_hall_reverb">Medium Hall</string>
+    <string name="large_hall_reverb">Large Hall</string>
+    <string name="plate_reverb">Plate</string>
+
+    <!-- Monet Theming -->
+    <string name="monet_color_settings_title">Material You Colors</string>
+    <string name="monet_color_settings_summary">Customize Material You color theming</string>
+
+    <string name="monet_color_presets_title">Color Presets</string>
+    <string name="monet_color_presets_summary">Choose from predefined color themes</string>
+
+    <string name="advanced_monet_settings_title">Advanced Material You</string>
+    <string name="advanced_monet_settings_summary">Advanced theming and color customization</string>
+
+    <string name="custom_theme_settings_title">Custom Themes</string>
+    <string name="custom_theme_settings_summary">Create and manage custom themes</string>
+
+    <!-- Custom Theme Engine -->
+    <string name="custom_theme_engine_title">Theme Engine</string>
+    <string name="custom_theme_engine_summary">Advanced theming with blur and transparency effects</string>
+
+    <!-- Custom Gradients -->
+    <string name="monet_custom_gradients_title">Custom Gradients</string>
+    <string name="monet_custom_gradients_summary">Create and apply custom background gradients</string>
+
+    <!-- ColorBlendr -->
+    <string name="colorblendr_settings_title">ColorBlendr</string>
+    <string name="colorblendr_settings_summary">Advanced color customization with saturation and lightness controls</string>
+
+    <string name="colorblendr_saturation_title">Saturation</string>
+    <string name="colorblendr_accent_saturation_title">Accent Saturation</string>
+    <string name="colorblendr_accent_saturation_summary">100% - Adjust accent color saturation</string>
+    <string name="colorblendr_background_saturation_title">Background Saturation</string>
+    <string name="colorblendr_background_saturation_summary">100% - Adjust background color saturation</string>
+
+    <string name="colorblendr_lightness_title">Lightness</string>
+    <string name="colorblendr_background_lightness_title">Background Lightness</string>
+    <string name="colorblendr_background_lightness_summary">100% - Adjust background color lightness</string>
+
+    <string name="colorblendr_theme_title">Theme</string>
+    <string name="colorblendr_pitch_black_title">Pitch Black Theme</string>
+    <string name="colorblendr_pitch_black_summary">Use pure black backgrounds for OLED displays</string>
+
+    <string name="colorblendr_manual_title">Manual Override</string>
+    <string name="colorblendr_manual_color_title">Custom Seed Color</string>
+    <string name="colorblendr_manual_color_summary">Override automatic color generation with custom seed</string>
+
+    <string name="colorblendr_info_title">Information</string>
+    <string name="colorblendr_info">ColorBlendr provides fine-grained control over Material You color generation. Adjust saturation and lightness values to customize your theme colors.</string>
+
+    <!-- Contextual Colors -->
+    <string name="monet_contextual_colors_title">Contextual Colors</string>
+    <string name="monet_contextual_colors_summary">Adaptive colors based on notifications</string>
+    <string name="monet_contextual_colors_category">Settings</string>
+    <string name="monet_contextual_colors_enable_title">Enable Contextual Colors</string>
+    <string name="monet_contextual_colors_enable_summary">Automatically adapt theme colors based on notification content</string>
+    <string name="monet_last_notification_title">Last Notification</string>
+    <string name="monet_last_notification_summary">Shows the source of the last color adaptation</string>
+    <string name="monet_reset_colors_title">Reset Colors</string>
+    <string name="monet_reset_colors_summary">Return to default theme colors</string>
 
 </resources>

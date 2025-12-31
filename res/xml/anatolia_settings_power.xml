@@ -17,8 +17,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-	android:title=" ">
-  
+	android:title="Power Menu">
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="epic_toplevel_card_navigation_lock"

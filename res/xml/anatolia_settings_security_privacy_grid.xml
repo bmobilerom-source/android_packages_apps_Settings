@@ -16,12 +16,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-     <!-- Header -->
-  <PreferenceCategory
-        android:title="Security &amp; Privacy Settings"
-        android:order="-1001"
-        android:layout="@layout/settings_title_header_small">
-  </PreferenceCategory>    
   
     <com.android.settingslib.widget.LayoutPreference
         android:key="security_privacy_grid"

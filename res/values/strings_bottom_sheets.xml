@@ -5,9 +5,21 @@
     <string name="settings_wallpaper_background_summary">Choose wallpaper blur and background options</string>
     <string name="settings_wallpaper_background_info_title">Wallpaper background info</string>
     <string name="settings_wallpaper_background_info_summary">Background will adapt to system theme and blur settings</string>
+<<<<<<< Updated upstream
     <string name="settings_wallpaper_background_dark_mode_required">Dark mode required</string>
     <string name="settings_wallpaper_background_summary_enabled">Enabled</string>
     <string name="settings_wallpaper_background_summary_enabled_light_mode">Enabled (light mode)</string>
+=======
+    <string name="wallpaper_background_info_title">Wallpaper Background</string>
+    <string name="wallpaper_background_info_summary">Customize wallpaper blur and background effects</string>
+    <string name="wallpaper_blur_title">Wallpaper Blur</string>
+    <string name="wallpaper_blur_summary">Apply blur effect to wallpaper background</string>
+    <string name="wallpaper_blur_radius_title">Blur Radius</string>
+    <string name="wallpaper_blur_radius_summary">Adjust the intensity of the blur effect</string>
+    <string name="settings_wallpaper_background_dark_mode_required">Wallpaper background requires dark mode to be enabled</string>
+    <string name="settings_wallpaper_background_summary_enabled">Wallpaper background is enabled</string>
+    <string name="settings_wallpaper_background_summary_enabled_light_mode">Wallpaper background is enabled (works best in dark mode)</string>
+>>>>>>> Stashed changes
 
     <!-- Bottom sheet: security -->
     <string name="device_security_title">Device security</string>
@@ -16,5 +28,9 @@
 
     <!-- System basic defaults -->
     <string name="system_basic_defaults_title">System basics</string>
+    
+    <!-- Statusbar settings -->
+    <string name="statusbar_settings_title">Status Bar</string>
+    <string name="statusbar_settings_summary">Customize status bar appearance and behavior</string>
 </resources>
 

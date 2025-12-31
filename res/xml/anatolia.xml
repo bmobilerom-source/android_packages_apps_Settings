@@ -49,12 +49,19 @@
             android:summary="@string/lockscreen_summary"
    	        android:fragment="com.epic.fragments.LockScreenSettings" />	
 		
-		<!-- Notifications -->
+        <!-- Notifications -->
         <PreferenceScreen
             android:key="notifications_category"
             android:title="@string/notifications_title"
             android:summary="@string/notifications_summary"
             android:fragment="com.epic.fragments.NotificationSettings" />
+
+        <!-- Audio Enhancement -->
+        <PreferenceScreen
+            android:key="audio_enhancement_category"
+            android:title="@string/audio_enhancement_title"
+            android:summary="@string/audio_enhancement_summary"
+            android:fragment="com.android.settings.sound.AudioEnhancementSettings" />
 
         <!-- Gestures -->
         <PreferenceScreen
@@ -62,7 +69,14 @@
             android:title="@string/gestures_title"
             android:summary="@string/gestures_summary"
 	        android:fragment="com.epic.fragments.GestureSettings" />
-       
+
+        <!-- Motion Gestures (GestureFlow) -->
+        <PreferenceScreen
+            android:key="gestureflow_category"
+            android:title="@string/gestureflow_settings_title"
+            android:summary="@string/gestureflow_settings_summary"
+            android:fragment="com.android.settings.accessibility.GestureSettingsFragment" />
+
         <!-- Navigation bar -->
         <PreferenceScreen
             android:key="navigationbar_category"
@@ -129,8 +143,7 @@
             android:key="dashboard_style_category"
             android:title="@string/dashboard_style_title"
             android:summary="@string/dashboard_style_summary"
-            android:fragment="com.epic.fragments.DashboardStyleSettings"
-            android:icon="@drawable/ic_settings_display_white" />
+            android:fragment="com.epic.fragments.DashboardStyleSettings" />
 
     <Preference
         android:key="system_basic_defaults_lock"
@@ -151,4 +164,97 @@
         android:order="85"
         android:fragment="com.epic.fragments.AmbientCustomizations" />
 
+
+    <Preference
+        android:key="security_privacy_grid_launch"
+        android:title="@string/security_privacy_grid_title"
+        android:summary="@string/security_privacy_grid_summary"
+        android:fragment="com.epic.fragments.SecurityPrivacyGrid" />
+
+    <Preference
+        android:key="statusbar_settings_launch"
+        android:title="@string/statusbar_settings_title"
+        android:summary="@string/statusbar_settings_summary"
+        android:fragment="com.epic.fragments.StatusBarSettings" />
+
+
+    <!-- Basic Monet Settings -->
+    <Preference
+        android:key="monet_color_settings_launch"
+        android:title="@string/monet_color_settings_title"
+        android:summary="@string/monet_color_settings_summary"
+        android:icon="@drawable/ic_color_and_motion"
+        android:order="85"
+        android:fragment="com.android.settings.display.MonetColorSettings" />
+
+    <!-- Monet Color Presets -->
+    <Preference
+        android:key="monet_color_presets_launch"
+        android:title="@string/monet_color_presets_title"
+        android:summary="@string/monet_color_presets_summary"
+        android:icon="@drawable/ic_color_and_motion"
+        android:order="86"
+        android:fragment="com.android.settings.display.MonetColorPresets" />
+
+    <!-- Advanced Monet Settings -->
+    <Preference
+        android:key="advanced_monet_settings_launch"
+        android:title="@string/advanced_monet_settings_title"
+        android:summary="@string/advanced_monet_settings_summary"
+        android:icon="@drawable/ic_color_and_motion"
+        android:order="87"
+        android:fragment="com.android.settings.display.AdvancedMonetSettings" />
+
+    <Preference
+        android:key="contextual_colors_launch"
+        android:title="@string/monet_contextual_colors_title"
+        android:summary="@string/monet_contextual_colors_summary"
+        android:icon="@drawable/ic_color_and_motion"
+        android:order="88"
+        android:fragment="com.android.settings.display.ContextualColorsSettings" />
+
+    <Preference
+        android:key="custom_gradients_launch"
+        android:title="@string/monet_custom_gradients_title"
+        android:summary="@string/monet_custom_gradients_summary"
+        android:icon="@drawable/ic_color_and_motion"
+        android:order="89"
+        android:fragment="com.android.settings.display.CustomGradientsSettings" />
+
+    <!-- Custom Theme Settings - REMOVED (causing boot loops) -->
+    <!--
+    <Preference
+        android:key="custom_theme_settings_launch"
+        android:title="@string/custom_theme_settings_title"
+        android:summary="@string/custom_theme_settings_summary"
+        android:icon="@drawable/ic_color_and_motion"
+        android:order="90"
+        android:fragment="com.android.settings.theme.CustomThemeSettings" />
+    -->
+
+    <Preference
+        android:key="custom_theme_engine_launch"
+        android:title="@string/custom_theme_engine_title"
+        android:summary="@string/custom_theme_engine_summary"
+        android:icon="@drawable/ic_color_and_motion"
+        android:order="91"
+        android:fragment="com.android.settings.theme.CustomThemeEngineSettings" />
+
+    <!-- Wallpaper Background Settings -->
+    <Preference
+        android:key="wallpaper_background_settings_launch"
+        android:title="@string/settings_wallpaper_background_title"
+        android:summary="@string/settings_wallpaper_background_summary"
+        android:icon="@drawable/ic_wallpaper"
+        android:order="93"
+        android:fragment="com.android.settings.display.WallpaperBackgroundSettings" />
+
+    <!-- Color Customization (ColorBlendr-style) -->
+    <Preference
+        android:key="colorblendr_category"
+        android:title="@string/colorblendr_settings_title"
+        android:summary="@string/colorblendr_settings_summary"
+        android:icon="@drawable/ic_color_and_motion"
+        android:order="94"
+        android:fragment="com.android.settings.display.MonetColorBlendrSettingsFragment" />
 </PreferenceScreen>

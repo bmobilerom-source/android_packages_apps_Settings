@@ -40,7 +40,11 @@
         android:title="@string/qs_header_title"
         android:summary="@string/qs_header_summary"
         android:fragment="com.android.settings.awaken.fragments.QsHeader"
+<<<<<<< Updated upstream
         android:order="0"
         app:position="0" />
+=======
+        android:order="0" />
+>>>>>>> Stashed changes
 
 </PreferenceScreen>

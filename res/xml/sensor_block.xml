@@ -35,7 +35,7 @@
         app:lottie_rawRes="@raw/sec_illustration" />
 
     <!-- Master switch -->
-    <com.android.settings.preferences.ui.AdaptiveRestrictedSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="sensor_block"
         android:title="@string/sensor_block_title"
         android:summary="@string/sensor_block_summary"
@@ -75,8 +75,11 @@
         <Preference
             android:key="add_sensor_block_packages"
             android:title="@string/add_sensor_block_package_title"
-            android:summary="@string/add_sensor_block_package_summary"
-            android:fragment="com.epic.fragments.SensorBlockAppPicker" />
+            android:summary="@string/add_sensor_block_package_summary">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.android.settings"
+                    android:targetClass="com.android.settings.Settings$SensorBlockAppPickerActivity" />
+        </Preference>
 
     </PreferenceCategory>
 

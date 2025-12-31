@@ -40,8 +40,12 @@
         android:entries="@array/custom_header_provider_entries"
         android:entryValues="@array/custom_header_provider_values"
         android:defaultValue="static"
+<<<<<<< Updated upstream
         android:order="0"
         app:position="0" />
+=======
+        android:order="0" />
+>>>>>>> Stashed changes
 
     <!-- QS Header Visibility -->
     <ListPreference
@@ -51,8 +55,12 @@
         android:entries="@array/custom_header_visibility_entries"
         android:entryValues="@array/custom_header_visibility_values"
         android:defaultValue="0"
+<<<<<<< Updated upstream
         android:order="1"
         app:position="1" />
+=======
+        android:order="1" />
+>>>>>>> Stashed changes
 
     <!-- QS Header Image -->
     <ListPreference
@@ -62,8 +70,12 @@
         android:entries="@array/anciui_header_img_entries"
         android:entryValues="@array/anciui_header_img_values"
         android:defaultValue="0"
+<<<<<<< Updated upstream
         android:order="2"
         app:position="1" />
+=======
+        android:order="2" />
+>>>>>>> Stashed changes
 
     <com.android.settingslib.widget.FooterPreference
         android:key="qs_header_footer"

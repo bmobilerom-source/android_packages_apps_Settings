@@ -204,7 +204,7 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
     }
 
     public void rebuild() {
-        if (!mExtraLoaded) {
+        if (!mExtraLoaded || mSession == null) {
             return;
         }
 

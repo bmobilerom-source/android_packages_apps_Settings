@@ -27,9 +27,8 @@
     <SwitchPreferenceCompat
         android:key="search_gesture_press_hold"
         android:title="@string/search_gesture_feature_title"
-        android:summary="not available"
+        android:summary="@string/search_gesture_feature_summary"
         android:order="100"
-        android:selectable="false"
         settings:allowDividerAbove="false"
         settings:controller="com.android.settings.gestures.NavigationSettingsContextualSearchController"
         settings:highlightableMenuKey="@string/menu_key_system" />

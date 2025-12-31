@@ -18,8 +18,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/battery_info"
     settings:keywords="@string/keywords_battery_info">
+
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="battery_info_illustration"
+        app:lottie_rawRes="@raw/Battery_info"
+        settings:searchable="false" />
+
 
     <Preference
         android:key="battery_info_technology"

@@ -126,6 +126,8 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             int resId = SettingsThemeHelper.isExpressiveTheme(getApplicationContext())
                     ? EXPRESSIVE_LAYOUT_ID : COLLAPSING_LAYOUT_ID;
             super.setContentView(resId);
+            // Add wallpaper background for collapsing toolbar layouts
+            addWallpaperBackground();
             mCollapsingToolbarLayout =
                     findViewById(com.android.settingslib.collapsingtoolbar.R.id.collapsing_toolbar);
             mAppBarLayout = findViewById(R.id.app_bar);
@@ -142,6 +144,8 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             autoSetCollapsingToolbarLayoutScrolling();
         } else {
             super.setContentView(R.layout.settings_base_layout);
+            // Add wallpaper background for regular layouts
+            addWallpaperBackground();
         }
 
         // This is to hide the toolbar from those pages which don't need a toolbar originally.
@@ -315,6 +319,30 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
                 findViewById(com.android.internal.R.id.action_bar_container);
         if (actionBarContainer != null) {
             actionBarContainer.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Adds wallpaper background to the root view for collapsing toolbar layouts.
+     * This ensures the wallpaper appears behind all content even when using settingslib layouts.
+     */
+    private void addWallpaperBackground() {
+        View rootView = findViewById(android.R.id.content);
+        if (rootView instanceof ViewGroup) {
+            ViewGroup rootGroup = (ViewGroup) rootView;
+            // Check if wallpaper background already exists
+            if (rootGroup.findViewById(R.id.wallpaper_background) != null) {
+                return;
+            }
+            // Create wallpaper background view
+            com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView wallpaperView =
+                new com.android.settings.preferences.ui.AdaptiveWallpaperBackgroundView(this);
+            wallpaperView.setId(R.id.wallpaper_background);
+            wallpaperView.setScaleType(android.widget.ImageView.ScaleType.CENTER_CROP);
+            // Insert at the beginning so it's behind everything
+            rootGroup.addView(wallpaperView, 0, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
         }
     }
 }

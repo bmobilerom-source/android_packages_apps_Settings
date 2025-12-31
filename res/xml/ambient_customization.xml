@@ -137,5 +137,88 @@
 
     </PreferenceCategory>
 
+    <!-- AOD Clock & Visualizer Category -->
+    <PreferenceCategory
+        android:key="aod_clock_visualizer_category"
+        android:title="@string/aod_clock_visualizer_category"
+        android:order="3">
+
+        <!-- AOD Clock Style -->
+        <ListPreference
+            android:key="aod_clock_style"
+            android:title="@string/aod_clock_style_title"
+            android:summary="@string/aod_clock_style_summary"
+            android:entries="@array/aod_clock_style_entries"
+            android:entryValues="@array/aod_clock_style_values"
+            android:defaultValue="0"
+            android:order="10"
+            settings:controller="com.android.settings.display.AODClockStyleController" />
+
+        <!-- Ambient Music Visualizer Mode -->
+        <ListPreference
+            android:key="ambient_music_visualizer"
+            android:title="@string/ambient_music_visualizer_title"
+            android:summary="@string/ambient_music_visualizer_summary"
+            android:entries="@array/ambient_music_visualizer_entries"
+            android:entryValues="@array/ambient_music_visualizer_values"
+            android:defaultValue="0"
+            android:order="20"
+            settings:controller="com.android.settings.display.AmbientMusicVisualizerController" />
+
+    </PreferenceCategory>
+
+    <!-- AOD Custom Images Category -->
+    <PreferenceCategory
+        android:key="aod_custom_images_category"
+        android:title="@string/aod_custom_images_category"
+        android:order="4">
+
+        <!-- Custom Clock Enabled -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="custom_clock_enabled"
+            android:title="@string/custom_clock_enabled_title"
+            android:summary="@string/custom_clock_enabled_summary"
+            android:defaultValue="false"
+            android:order="10"
+            settings:controller="com.android.settings.display.CustomClockEnabledController" />
+
+        <!-- Custom AOD Image Enabled -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="custom_aod_image_enabled"
+            android:title="@string/custom_aod_image_enabled_title"
+            android:summary="@string/custom_aod_image_enabled_summary"
+            android:defaultValue="false"
+            android:dependency="custom_clock_enabled"
+            android:order="20"
+            settings:controller="com.android.settings.display.CustomAODImageEnabledController" />
+
+        <!-- Custom AOD Image Path -->
+        <Preference
+            android:key="custom_aod_image_path"
+            android:title="@string/custom_aod_image_path_title"
+            android:summary="@string/custom_aod_image_path_summary"
+            android:dependency="custom_aod_image_enabled"
+            android:order="30"
+            settings:controller="com.android.settings.display.CustomAODImagePathController" />
+
+    </PreferenceCategory>
+
+    <!-- AOD On Charge Category -->
+    <PreferenceCategory
+        android:key="aod_on_charge_category"
+        android:title="@string/aod_on_charge_category"
+        android:order="5">
+
+        <!-- AOD Always On When Charging -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="doze_always_on_charge_mode"
+            android:title="@string/doze_always_on_charge_title"
+            android:summary="@string/doze_always_on_charge_summary"
+            android:defaultValue="false"
+            android:order="10"
+            settings:controller="com.android.settings.display.AODAlwaysOnChargeController" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
 

@@ -91,7 +91,9 @@ public class NetworkProviderSimListController extends BasePreferenceController i
         mPreferences = new ArrayMap<>();
 
         final List<SubscriptionInfoEntity> subscriptions = getAvailablePhysicalSubscriptions();
-        for (SubscriptionInfoEntity info : subscriptions) {
+        final int subscriptionCount = subscriptions.size();
+        for (int i = 0; i < subscriptionCount; i++) {
+            final SubscriptionInfoEntity info = subscriptions.get(i);
             final int subId = Integer.parseInt(info.subId);
             RestrictedPreference pref = existingPreferences.remove(subId);
             if (pref == null) {
@@ -105,6 +107,21 @@ public class NetworkProviderSimListController extends BasePreferenceController i
             final Drawable drawable = mContext.getDrawable(
                     info.isEmbedded ? R.drawable.ic_sim_card_download : R.drawable.ic_sim_card);
             pref.setIcon(drawable);
+            
+            // Set adaptive card layout based on position
+            if (subscriptionCount == 1) {
+                // Single SIM - use top card
+                pref.setLayoutResource(R.layout.adaptive_preference_card_top);
+            } else if (i == 0) {
+                // First SIM - use top card
+                pref.setLayoutResource(R.layout.adaptive_preference_card_top);
+            } else if (i == subscriptionCount - 1) {
+                // Last SIM - use bottom card
+                pref.setLayoutResource(R.layout.adaptive_preference_card_bottom);
+            } else {
+                // Middle SIMs - use middle card
+                pref.setLayoutResource(R.layout.adaptive_preference_card_middle);
+            }
             if (SubscriptionUtil.isConvertedPsimSubscription(mContext, subId)) {
                 // If the subscription has been converted, disable the profile menu.
                 pref.setEnabled(false);

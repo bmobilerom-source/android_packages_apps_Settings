@@ -59,6 +59,27 @@
     
     <!-- Misc -->
     <string name="ambient_color_picker_not_implemented">Color picker will be implemented in framework</string>
+
+    <!-- AOD Clock & Visualizer -->
+    <string name="aod_clock_visualizer_category">Clock &amp; visualizer</string>
+    <string name="aod_clock_style_title">AOD clock style</string>
+    <string name="aod_clock_style_summary">Choose the style for the always-on display clock</string>
+    <string name="ambient_music_visualizer_title">Ambient music visualizer</string>
+    <string name="ambient_music_visualizer_summary">Select the visualization mode for ambient music display</string>
+
+    <!-- AOD Custom Images -->
+    <string name="aod_custom_images_category">Custom AOD images</string>
+    <string name="custom_clock_enabled_title">Enable custom clock</string>
+    <string name="custom_clock_enabled_summary">Use custom clock styles and images on AOD</string>
+    <string name="custom_aod_image_enabled_title">Custom AOD image</string>
+    <string name="custom_aod_image_enabled_summary">Display custom image on always-on display</string>
+    <string name="custom_aod_image_path_title">Select AOD image</string>
+    <string name="custom_aod_image_path_summary">Choose image to display on AOD screen</string>
+
+    <!-- AOD On Charge -->
+    <string name="aod_on_charge_category">AOD on charge</string>
+    <string name="doze_always_on_charge_title">AOD when charging</string>
+    <string name="doze_always_on_charge_summary">Automatically enable AOD when device is plugged in and charging</string>
 </resources>
 
 

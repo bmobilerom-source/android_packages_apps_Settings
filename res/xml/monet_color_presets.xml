@@ -20,12 +20,21 @@
     android:key="monet_color_presets_screen"
     android:title="@string/monet_color_presets_title">
 
-    <!-- Custom container for preset grid -->
-    <LinearLayout
-        android:id="@+id/presets_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="16dp" />
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="monet_presets_intro"
+        android:title="@string/monet_color_presets_title"
+        android:summary="@string/monet_color_presets_summary"
+        settings:searchable="false" />
+
+    <ListPreference
+        android:key="monet_color_preset"
+        android:title="@string/monet_color_presets_title"
+        android:summary="%s"
+        android:entries="@array/monet_color_presets"
+        android:entryValues="@array/monet_color_preset_values"
+        android:defaultValue="wallpaper"
+        android:persistent="false"
+        settings:controller="com.android.settings.display.MonetColorPresetsController"
+        settings:layout="@layout/adaptive_preference_card" />
 
 </PreferenceScreen>

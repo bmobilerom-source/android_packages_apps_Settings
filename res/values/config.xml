@@ -394,7 +394,7 @@
     <bool name="config_show_private_dns_settings">true</bool>
 
     <!-- Whether memory from app_info_settings is available or not. -->
-    <bool name="config_show_app_info_settings_memory">false</bool>
+    <bool name="config_show_app_info_settings_memory">true</bool>
 
     <!-- Whether battery from app_info_settings is available or not. -->
     <bool name="config_show_app_info_settings_battery">true</bool>
@@ -421,7 +421,7 @@
     <bool name="config_show_screen_locking_sounds">true</bool>
 
     <!-- Whether charging_sounds should be shown or not. -->
-    <bool name="config_show_charging_sounds">true</bool>
+    <bool name="config_show_charging_sounds">false</bool>
 
     <!-- Whether touch_sounds should be shown or not. -->
     <bool name="config_show_touch_sounds">true</bool>
@@ -433,7 +433,7 @@
     <bool name="config_show_premium_sms">true</bool>
 
     <!-- Whether data_saver should be shown or not. -->
-    <bool name="config_show_data_saver">true</bool>
+    <bool name="config_show_data_saver">false</bool>
 
     <!-- Whether enabled_vr_listeners should be shown or not. -->
     <bool name="config_show_enabled_vr_listeners">false</bool>
@@ -487,7 +487,7 @@
     <bool name="config_show_reset_dashboard">true</bool>
 
     <!-- Whether system_update_settings should be shown or not. -->
-    <bool name="config_show_system_update_settings">true</bool>
+    <bool name="config_show_system_update_settings">false</bool>
 
     <!-- Whether device_model should be shown or not. -->
     <bool name="config_show_device_model">true</bool>
@@ -571,10 +571,10 @@
     <bool name="config_show_smooth_display">false</bool>
 
     <!-- Whether to show emergency settings in top-level Settings -->
-    <bool name="config_show_emergency_settings">true</bool>
+    <bool name="config_show_emergency_settings">false</bool>
 
     <!-- Whether to show emergency gesture in Settings -->
-    <bool name="config_show_emergency_gesture_settings">true</bool>
+    <bool name="config_show_emergency_gesture_settings">false</bool>
 
     <!-- Optional package name if another 1p app wants to take over the emergency gesture settings UI -->
     <string name="emergency_gesture_settings_package"></string>
