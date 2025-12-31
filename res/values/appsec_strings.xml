@@ -108,6 +108,10 @@
     <string name="location_privacy_score">Privacy Score: %1$d/100</string>
     <string name="location_recent_access_count">Recent access: %1$d apps in last hour</string>
 
+    <!-- AppSec Credential Confirmation -->
+    <string name="appsec_confirm_credential_title">Confirm AppSec Credentials</string>
+    <string name="appsec_confirm_credential_description">Enter your AppSec credentials to access special application features</string>
+
     <!-- BLocation Credential Confirmation -->
     <string name="blocation_confirm_credential_title">Confirm Device Credentials</string>
     <string name="blocation_confirm_credential_description">Enter your device credentials to access enhanced location features</string>

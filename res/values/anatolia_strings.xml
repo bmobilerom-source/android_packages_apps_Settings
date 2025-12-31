@@ -97,6 +97,7 @@
     <string name="media_controls_bubbles_description3">Customize bubble appearance and behavior</string>
     <string name="ambient_music_info_title">Ambient Music</string>
     <string name="ambient_music_info_summary">Play music with screen off and device locked</string>
+    <string name="wallpaper_blur_radius_summary">Blur radius: %1$d</string>
     <string name="header_category_network">Network &amp; Internet</string>
     <string name="header_category_apps">Apps &amp; Personalization</string>
     <string name="header_category_security">Security &amp; Privacy</string>

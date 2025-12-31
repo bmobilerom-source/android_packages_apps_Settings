@@ -5,6 +5,9 @@
     <string name="settings_wallpaper_background_summary">Choose wallpaper blur and background options</string>
     <string name="settings_wallpaper_background_info_title">Wallpaper background info</string>
     <string name="settings_wallpaper_background_info_summary">Background will adapt to system theme and blur settings</string>
+    <string name="settings_wallpaper_background_dark_mode_required">Dark mode required</string>
+    <string name="settings_wallpaper_background_summary_enabled">Enabled</string>
+    <string name="settings_wallpaper_background_summary_enabled_light_mode">Enabled (light mode)</string>
 
     <!-- Bottom sheet: security -->
     <string name="device_security_title">Device security</string>
