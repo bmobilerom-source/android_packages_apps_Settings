@@ -82,6 +82,13 @@
     <string name="classic_style_header_title">Classic Style</string>
     <string name="classic_style_header_summary">Traditional categorized layout</string>
     <string name="dashboard_style_applied">Dashboard style changed to %1$s</string>
+    <string name="compact_dashboard_title">Compact Dashboard</string>
+    <string name="compact_dashboard_summary">Use a more compact layout for the dashboard</string>
+    <string name="dashboard_style_reset_category_title">Reset Options</string>
+    <string name="dashboard_style_reset_title">Reset Dashboard Style</string>
+    <string name="dashboard_style_reset_summary">Reset dashboard style to default</string>
+    <string name="systemui_reset_title">Reset SystemUI</string>
+    <string name="systemui_reset_summary">Reset SystemUI settings to default</string>
      <!-- Smart Pixels -->
     <string name="smart_pixels_title">Smart Pixels</string>
     <string name="smart_pixels_summary">Reduce power consumption by turning off pixels in a pattern</string>
