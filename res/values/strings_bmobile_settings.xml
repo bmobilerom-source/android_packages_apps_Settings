@@ -10,5 +10,6 @@
     <string name="bmobile_firewall_summary">Network firewall controls</string>
     <string name="bmobile_ad_services_title">Ad services</string>
     <string name="bmobile_ad_services_summary">Ad/privacy service toggles</string>
+    <string name="bmobile_expressive_settings_title">BMobile Expressive Settings</string>
 </resources>
 
