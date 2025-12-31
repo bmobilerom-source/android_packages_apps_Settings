@@ -89,6 +89,17 @@
     <string name="dashboard_style_reset_summary">Reset dashboard style to default</string>
     <string name="systemui_reset_title">Reset SystemUI</string>
     <string name="systemui_reset_summary">Reset SystemUI settings to default</string>
+    <string name="systemui_reset_success">SystemUI reset successfully</string>
+    <string name="systemui_reset_failed">SystemUI reset failed</string>
+    <string name="fun_display_settings_title">Fun Display Settings</string>
+    <string name="media_controls_bubbles_description">Media controls allow you to control music playback from any screen</string>
+    <string name="media_controls_bubbles_description2">Enable bubbles to show media controls as floating overlays</string>
+    <string name="media_controls_bubbles_description3">Customize bubble appearance and behavior</string>
+    <string name="ambient_music_info_title">Ambient Music</string>
+    <string name="ambient_music_info_summary">Play music with screen off and device locked</string>
+    <string name="header_category_network">Network &amp; Internet</string>
+    <string name="header_category_apps">Apps &amp; Personalization</string>
+    <string name="header_category_security">Security &amp; Privacy</string>
      <!-- Smart Pixels -->
     <string name="smart_pixels_title">Smart Pixels</string>
     <string name="smart_pixels_summary">Reduce power consumption by turning off pixels in a pattern</string>

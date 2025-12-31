@@ -12663,6 +12663,8 @@
 
     <!-- Title for the privacy controls page [CHAR LIMIT=30]-->
     <string name="privacy_controls_title">Controls</string>
+    <!-- Summary for the privacy controls page [CHAR LIMIT=NONE]-->
+    <string name="privacy_controls_summary">Manage privacy settings and permissions</string>
 
 
     <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
