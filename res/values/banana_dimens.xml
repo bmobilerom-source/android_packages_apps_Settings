@@ -22,4 +22,22 @@
 
     <!-- Dimensions for Contextual Card -->
     <dimen name="contextual_card_content_padding">13dp</dimen>
+
+    <!-- Card radius for wave-style preferences -->
+    <dimen name="card_radius_wave">28dp</dimen>
+
+    <!-- Card radius for XD preferences -->
+    <dimen name="xd_pref_card_radius">24dp</dimen>
+
+    <!-- Card height for wave-style preferences -->
+    <dimen name="card_height_wave">88dp</dimen>
+
+    <!-- Avatar size for OP Control preferences -->
+    <dimen name="op_control_avatar_size3">56dp</dimen>
+
+    <!-- Dashboard icon size -->
+    <dimen name="dashboard_icon_size">36dp</dimen>
+
+    <!-- Top preference start margin -->
+    <dimen name="top_pref_start">16dp</dimen>
 </resources>
