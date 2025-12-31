@@ -41,6 +41,6 @@
         android:summary="@string/qs_header_summary"
         android:fragment="com.android.settings.awaken.fragments.QsHeader"
         android:order="0"
-        app:position="solo" />
+        app:position="0" />
 
 </PreferenceScreen>
