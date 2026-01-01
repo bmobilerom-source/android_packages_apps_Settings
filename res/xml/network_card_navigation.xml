@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 BashaMobile
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="network_card_navigation_screen"
+    android:title="@string/network_card_navigation_title">
+
+    <PreferenceCategory
+        android:key="network_settings_category"
+        android:title="@string/network_settings_category"
+        android:order="-100" />
+
+    <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.network.NetworkProviderSettings"
+        android:key="internet_settings"
+        android:title="@string/provider_internet_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_settings_wireless"
+        android:order="-30"
+        android:clickable="true"
+        settings:allowDividerAbove="true"
+        settings:keywords="@string/keywords_internet"
+        settings:useAdminDisabledSummary="true"
+        settings:userRestriction="no_config_wifi"
+        settings:controller="com.android.settings.network.InternetPreferenceControllerV2" />
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="calls_and_sms"
+        android:title="@string/calls_and_sms"
+        android:icon="@drawable/ic_calls_sms"
+        android:order="-20"
+        android:summary="@string/summary_placeholder"
+        android:clickable="true"
+        android:fragment="com.android.settings.network.NetworkProviderCallsSmsFragment"
+        settings:userRestriction="no_config_mobile_networks"
+        settings:allowDividerBelow="true"
+        settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.network.NetworkProviderCallsSmsController" />
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="mobile_network_list"
+        android:title="@string/provider_network_settings_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_sim_card"
+        android:order="-15"
+        android:clickable="true"
+        settings:keywords="@string/keywords_more_mobile_networks"
+        settings:userRestriction="no_config_mobile_networks"
+        settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.network.MobileNetworkSummaryController" />
+
+    <com.android.settingslib.RestrictedPreference
+        android:fragment="com.android.settings.network.tether.TetherSettings"
+        android:key="tether_settings"
+        android:title="@string/tether_settings_title_all"
+        android:icon="@drawable/ic_wifi_tethering"
+        android:order="5"
+        android:summary="@string/summary_placeholder"
+        android:clickable="true"
+        settings:controller="com.android.settings.network.TetherPreferenceController"
+        settings:keywords="@string/keywords_hotspot_tethering"
+        settings:userRestriction="no_config_tethering"
+        settings:useAdminDisabledSummary="true" />
+
+</PreferenceScreen>
