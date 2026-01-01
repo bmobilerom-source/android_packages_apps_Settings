@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="auto_reboot_interval_entries">
+        <item>@string/auto_reboot_interval_daily</item>
+        <item>@string/auto_reboot_interval_every_2_days</item>
+        <item>@string/auto_reboot_interval_every_3_days</item>
+        <item>@string/auto_reboot_interval_weekly</item>
+    </array>
+    
+    <array name="auto_reboot_interval_values">
+        <item>24</item>
+        <item>48</item>
+        <item>72</item>
+        <item>168</item>
+    </array>
+</resources>
+

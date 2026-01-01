@@ -4231,6 +4231,35 @@
             </intent-filter>
         </activity>
 
+        <!-- BShare Share Activity - Receives files from other apps via Android Sharesheet -->
+        <activity
+            android:name=".bshare.BShareShareActivity"
+            android:label="@string/bshare_settings_title"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true"
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+
+        <!-- Auto Reboot Receiver - Handles scheduled reboot alarms -->
+        <receiver
+            android:name=".epic.fragments.AutoRebootReceiver"
+            android:exported="false"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.android.settings.AUTO_REBOOT" />
+            </intent-filter>
+        </receiver>
+
         <!--
             The Wi-Fi result data will only be returned from WifiDialogActivity if the calling
             package has ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission. (see b/185126813)

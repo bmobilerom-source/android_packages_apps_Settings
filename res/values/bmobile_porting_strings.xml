@@ -179,6 +179,29 @@
     <!-- Auto Reboot -->
     <string name="auto_reboot_title">Auto Reboot</string>
     <string name="auto_reboot_summary">Automatically reboot the device at scheduled times</string>
+    
+    <!-- Auto Reboot Settings -->
+    <string name="auto_reboot_intro_title">Schedule Automatic Reboots</string>
+    <string name="auto_reboot_intro_summary">Automatically reboot your device at scheduled times for security and maintenance. The device will reboot even if the screen is off.</string>
+    
+    <string name="auto_reboot_main_category_title">Schedule</string>
+    <string name="auto_reboot_enabled_title">Enable Auto Reboot</string>
+    <string name="auto_reboot_enabled_summary">Automatically reboot the device at the scheduled time</string>
+    
+    <string name="auto_reboot_interval_title">Reboot Interval</string>
+    <string name="auto_reboot_interval_summary">How often to reboot the device</string>
+    <string name="auto_reboot_interval_daily">Daily</string>
+    <string name="auto_reboot_interval_every_2_days">Every 2 days</string>
+    <string name="auto_reboot_interval_every_3_days">Every 3 days</string>
+    <string name="auto_reboot_interval_weekly">Weekly</string>
+    <string name="auto_reboot_interval_custom">Every %1$d hours</string>
+    
+    <string name="auto_reboot_time_title">Reboot Time</string>
+    <string name="auto_reboot_time_summary">Time of day to reboot (24-hour format)</string>
+    <string name="auto_reboot_time_not_set">Not set</string>
+    <string name="auto_reboot_time_picker_title">Select Reboot Time</string>
+    
+    <string name="auto_reboot_footer">Auto reboot helps maintain device security and performance by periodically restarting the system. The device will reboot even when the screen is off.</string>
 
     <!-- UserInfo Bubble Setting -->
     <string name="userinfo_bubble_setting_description">Configure bubble notification settings</string>
