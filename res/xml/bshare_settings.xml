@@ -47,7 +47,6 @@
             android:key="bshare_start_discovering"
             android:summary="@string/bshare_start_discovering_summary"
             android:order="21"
-            android:icon="@drawable/ic_bshare_send"
             settings:layout="@layout/adaptive_preference_card" />
     </PreferenceCategory>
     
