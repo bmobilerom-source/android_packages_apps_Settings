@@ -64,6 +64,8 @@ public class BLocationSettings extends DashboardFragment {
         LocationPrecisionController precisionController = use(LocationPrecisionController.class);
         LocationServiceStatusController statusController = use(LocationServiceStatusController.class);
         use(LocationPrivacyFooterController.class);
+        use(MockLocationController.class);
+        use(MockLocationWarningController.class);
         
         // Register lifecycle observers for controllers that need them
         getSettingsLifecycle().addObserver(statusController);

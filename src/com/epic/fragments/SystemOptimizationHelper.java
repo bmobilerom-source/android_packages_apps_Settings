@@ -17,9 +17,10 @@
 package com.epic.fragments;
 
 import android.app.ActivityManager;
-import android.app.IActivityManager;
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.PowerManager;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -66,16 +67,24 @@ public class SystemOptimizationHelper {
 
     private static void applyBackgroundAppLimits(Context context, boolean enabled) {
         try {
-            // Use IActivityManager service to set process limit
-            // -1 = default (no limit), 0 = no background processes, 1+ = limit to that many
-            int limit = enabled ? 4 : -1; // -1 means default (no limit)
-            IActivityManager am = ActivityManager.getService();
-            if (am != null) {
-                am.setProcessLimit(limit);
-                Log.d(TAG, "Background app limits set to " + limit + " processes");
+            int limit = enabled ? 4 : -1; // -1 means use default
+            if (limit > 0) {
+                // Use DeviceConfig to set process limit (framework reads this)
+                DeviceConfig.setProperty(
+                    DeviceConfig.NAMESPACE_ACTIVITY_MANAGER,
+                    "max_cached_processes",
+                    String.valueOf(limit),
+                    false); // false = don't make it the default
+                Log.d(TAG, "Background app limits set to " + limit + " processes via DeviceConfig");
+            } else {
+                // Remove the property to use default
+                DeviceConfig.deleteProperty(
+                    DeviceConfig.NAMESPACE_ACTIVITY_MANAGER,
+                    "max_cached_processes");
+                Log.d(TAG, "Background app limits reset to default");
             }
         } catch (Exception e) {
-            Log.e(TAG, "Failed to set background app limits", e);
+            Log.e(TAG, "Failed to set background app limits via DeviceConfig", e);
         }
     }
 
@@ -91,12 +100,26 @@ public class SystemOptimizationHelper {
         boolean result = Settings.System.putInt(context.getContentResolver(),
                 KEY_NETWORK_OPTIMIZATION, enabled ? 1 : 0);
         if (result) {
-            // Enable network optimization settings
-            Settings.Global.putInt(context.getContentResolver(),
-                    "network_optimization_enabled", enabled ? 1 : 0);
-            Log.d(TAG, "Network optimization " + (enabled ? "enabled" : "disabled"));
+            applyNetworkOptimization(context, enabled);
         }
         return result;
+    }
+
+    private static void applyNetworkOptimization(Context context, boolean enabled) {
+        try {
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+            if (cm != null) {
+                cm.setDataSaverEnabled(enabled);
+                Log.d(TAG, "Network optimization (Data Saver) " + 
+                    (enabled ? "enabled" : "disabled"));
+            }
+        } catch (SecurityException e) {
+            // Data saver requires system permissions - cannot set via fallback
+            Log.w(TAG, "Cannot set data saver: requires system permissions", e);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to set network optimization", e);
+        }
     }
 
     /**
@@ -111,12 +134,27 @@ public class SystemOptimizationHelper {
         boolean result = Settings.System.putInt(context.getContentResolver(),
                 KEY_BATTERY_OPTIMIZATION, enabled ? 1 : 0);
         if (result) {
-            // Enable aggressive battery saver mode
-            Settings.Global.putInt(context.getContentResolver(),
-                    "aggressive_battery_saver", enabled ? 1 : 0);
-            Log.d(TAG, "Battery optimization " + (enabled ? "enabled" : "disabled"));
+            applyBatteryOptimization(context, enabled);
         }
         return result;
+    }
+
+    private static void applyBatteryOptimization(Context context, boolean enabled) {
+        try {
+            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            if (pm != null) {
+                pm.setPowerSaveModeEnabled(enabled);
+                Log.d(TAG, "Battery optimization (Power Save Mode) " + 
+                    (enabled ? "enabled" : "disabled"));
+            }
+        } catch (SecurityException e) {
+            // May require system permissions - use Settings.Global as fallback
+            Settings.Global.putInt(context.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE, enabled ? 1 : 0);
+            Log.d(TAG, "Battery optimization set via Settings.Global (fallback)");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to set battery optimization", e);
+        }
     }
 
     /**
@@ -236,7 +274,8 @@ public class SystemOptimizationHelper {
     public static int getBatteryLevel(Context context) {
         try {
             android.content.IntentFilter ifilter = new android.content.IntentFilter(android.content.Intent.ACTION_BATTERY_CHANGED);
-            android.content.Intent batteryStatus = context.registerReceiver(null, ifilter);
+            android.content.Intent batteryStatus = context.registerReceiver(null, ifilter, 
+                Context.RECEIVER_NOT_EXPORTED);
             if (batteryStatus != null) {
                 int level = batteryStatus.getIntExtra(android.os.BatteryManager.EXTRA_LEVEL, -1);
                 int scale = batteryStatus.getIntExtra(android.os.BatteryManager.EXTRA_SCALE, -1);

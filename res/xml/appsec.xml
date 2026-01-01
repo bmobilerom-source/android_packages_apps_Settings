@@ -127,6 +127,30 @@
             android:enabled="true"
             settings:controller="com.android.settings.applications.specialaccess.BlockSafetyCenterController" />
 
+        <!-- Block access to Device Tweaks settings -->
+        <SwitchPreference
+            android:key="block_device_tweaks_toggle"
+            android:title="@string/appsec_block_device_tweaks_title"
+            android:summary="@string/appsec_block_device_tweaks_summary"
+            android:order="37"
+            settings:controller="com.android.settings.applications.specialaccess.BlockDeviceTweaksController" />
+
+        <!-- Block access to System Optimization settings -->
+        <SwitchPreference
+            android:key="block_system_optimization_toggle"
+            android:title="@string/appsec_block_system_optimization_title"
+            android:summary="@string/appsec_block_system_optimization_summary"
+            android:order="39"
+            settings:controller="com.android.settings.applications.specialaccess.BlockSystemOptimizationController" />
+
+        <!-- Block access to Enhanced Location settings -->
+        <SwitchPreference
+            android:key="block_blocation_toggle"
+            android:title="@string/appsec_block_blocation_title"
+            android:summary="@string/appsec_block_blocation_summary"
+            android:order="41"
+            settings:controller="com.android.settings.applications.specialaccess.BlockBLocationController" />
+
     </PreferenceCategory>
 
     <!-- Security Footer -->

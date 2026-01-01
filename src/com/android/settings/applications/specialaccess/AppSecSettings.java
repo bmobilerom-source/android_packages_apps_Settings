@@ -47,6 +47,10 @@ public class AppSecSettings extends DashboardFragment {
     private BlockLocationSettingsController mBlockLocationSettingsController;
     private BlockAccountDashboardController mBlockAccountDashboardController;
     private BlockSafetyCenterController mBlockSafetyCenterController;
+    private BlockDeviceTweaksController mBlockDeviceTweaksController;
+    private BlockSystemOptimizationController mBlockSystemOptimizationController;
+    private BlockBLocationController mBlockBLocationController;
+    private SecurityScoreController mSecurityScoreController;
 
     @Override
     protected String getLogTag() {
@@ -81,7 +85,11 @@ public class AppSecSettings extends DashboardFragment {
                 SwitchPreference blockPref = prefScreen.findPreference("block_app_dashboard_toggle");
                 if (blockPref != null) {
                     mBlockAppDashboardController.updateState(blockPref);
-                    blockPref.setOnPreferenceChangeListener(mBlockAppDashboardController);
+                    blockPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                        boolean result = mBlockAppDashboardController.onPreferenceChange(preference, newValue);
+                        refreshSecurityScore();
+                        return result;
+                    });
                 }
             }
 
@@ -93,7 +101,11 @@ public class AppSecSettings extends DashboardFragment {
                 SwitchPreference whitelistPref = prefScreen.findPreference("install_app_whitelist_toggle");
                 if (whitelistPref != null) {
                     mInstallAppWhitelistController.updateState(whitelistPref);
-                    whitelistPref.setOnPreferenceChangeListener(mInstallAppWhitelistController);
+                    whitelistPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                        boolean result = mInstallAppWhitelistController.onPreferenceChange(preference, newValue);
+                        refreshSecurityScore();
+                        return result;
+                    });
                 }
             }
 
@@ -106,7 +118,11 @@ public class AppSecSettings extends DashboardFragment {
                 if (usbPopupPref != null) {
                     mBlockUsbPopupController.displayPreference(prefScreen);
                     mBlockUsbPopupController.updateState(usbPopupPref);
-                    usbPopupPref.setOnPreferenceChangeListener(mBlockUsbPopupController);
+                    usbPopupPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                        boolean result = mBlockUsbPopupController.onPreferenceChange(preference, newValue);
+                        refreshSecurityScore();
+                        return result;
+                    });
                 }
             }
 
@@ -118,7 +134,11 @@ public class AppSecSettings extends DashboardFragment {
                 SwitchPreference locationPref = prefScreen.findPreference("block_location_settings_toggle");
                 if (locationPref != null) {
                     mBlockLocationSettingsController.updateState(locationPref);
-                    locationPref.setOnPreferenceChangeListener(mBlockLocationSettingsController);
+                    locationPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                        boolean result = mBlockLocationSettingsController.onPreferenceChange(preference, newValue);
+                        refreshSecurityScore();
+                        return result;
+                    });
                 }
             }
 
@@ -130,7 +150,11 @@ public class AppSecSettings extends DashboardFragment {
                 SwitchPreference accountPref = prefScreen.findPreference("block_account_dashboard_toggle");
                 if (accountPref != null) {
                     mBlockAccountDashboardController.updateState(accountPref);
-                    accountPref.setOnPreferenceChangeListener(mBlockAccountDashboardController);
+                    accountPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                        boolean result = mBlockAccountDashboardController.onPreferenceChange(preference, newValue);
+                        refreshSecurityScore();
+                        return result;
+                    });
                 }
             }
 
@@ -142,8 +166,82 @@ public class AppSecSettings extends DashboardFragment {
                 SwitchPreference safetyCenterPref = prefScreen.findPreference("block_safety_center_toggle");
                 if (safetyCenterPref != null) {
                     mBlockSafetyCenterController.updateState(safetyCenterPref);
-                    safetyCenterPref.setOnPreferenceChangeListener(mBlockSafetyCenterController);
+                    safetyCenterPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                        boolean result = mBlockSafetyCenterController.onPreferenceChange(preference, newValue);
+                        refreshSecurityScore();
+                        return result;
+                    });
                 }
+            }
+
+            // Initialize Block Device Tweaks controller
+            mBlockDeviceTweaksController = new BlockDeviceTweaksController(
+                    context, "block_device_tweaks_toggle");
+            if (mBlockDeviceTweaksController.getAvailabilityStatus() ==
+                    com.android.settings.core.BasePreferenceController.AVAILABLE) {
+                SwitchPreference deviceTweaksPref = prefScreen.findPreference("block_device_tweaks_toggle");
+                if (deviceTweaksPref != null) {
+                    mBlockDeviceTweaksController.updateState(deviceTweaksPref);
+                    deviceTweaksPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                        boolean result = mBlockDeviceTweaksController.onPreferenceChange(preference, newValue);
+                        refreshSecurityScore();
+                        return result;
+                    });
+                }
+            }
+
+            // Initialize Block System Optimization controller
+            mBlockSystemOptimizationController = new BlockSystemOptimizationController(
+                    context, "block_system_optimization_toggle");
+            if (mBlockSystemOptimizationController.getAvailabilityStatus() ==
+                    com.android.settings.core.BasePreferenceController.AVAILABLE) {
+                SwitchPreference systemOptPref = prefScreen.findPreference("block_system_optimization_toggle");
+                if (systemOptPref != null) {
+                    mBlockSystemOptimizationController.updateState(systemOptPref);
+                    systemOptPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                        boolean result = mBlockSystemOptimizationController.onPreferenceChange(preference, newValue);
+                        refreshSecurityScore();
+                        return result;
+                    });
+                }
+            }
+
+            // Initialize Block Enhanced Location controller
+            mBlockBLocationController = new BlockBLocationController(
+                    context, "block_blocation_toggle");
+            if (mBlockBLocationController.getAvailabilityStatus() ==
+                    com.android.settings.core.BasePreferenceController.AVAILABLE) {
+                SwitchPreference blocationPref = prefScreen.findPreference("block_blocation_toggle");
+                if (blocationPref != null) {
+                    mBlockBLocationController.updateState(blocationPref);
+                    blocationPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                        boolean result = mBlockBLocationController.onPreferenceChange(preference, newValue);
+                        refreshSecurityScore();
+                        return result;
+                    });
+                }
+            }
+
+            // Initialize Security Score controller
+            mSecurityScoreController = new SecurityScoreController(context, "security_score_indicator");
+            if (mSecurityScoreController.getAvailabilityStatus() ==
+                    com.android.settings.core.BasePreferenceController.AVAILABLE) {
+                androidx.preference.Preference scorePref = prefScreen.findPreference("security_score_indicator");
+                if (scorePref != null) {
+                    mSecurityScoreController.updateState(scorePref);
+                }
+            }
+        }
+    }
+
+    /**
+     * Refresh the security score when any toggle changes.
+     */
+    private void refreshSecurityScore() {
+        if (mSecurityScoreController != null) {
+            androidx.preference.Preference scorePref = getPreferenceScreen().findPreference("security_score_indicator");
+            if (scorePref != null) {
+                mSecurityScoreController.updateState(scorePref);
             }
         }
     }
@@ -171,6 +269,9 @@ public class AppSecSettings extends DashboardFragment {
                 mBlockUsbPopupController.updateState(usbPopupPref);
             }
         }
+        
+        // Refresh security score when returning to the page
+        refreshSecurityScore();
     }
 
     @Override

@@ -100,6 +100,12 @@
     <string name="appsec_block_account_dashboard_summary">Block access to account settings</string>
     <string name="appsec_block_safety_center_title">Block Safety Center</string>
     <string name="appsec_block_safety_center_summary">Block access to Safety Center</string>
+    <string name="appsec_block_device_tweaks_title">Block Device Tweaks</string>
+    <string name="appsec_block_device_tweaks_summary">Block access to Device Tweaks settings</string>
+    <string name="appsec_block_system_optimization_title">Block System Optimization</string>
+    <string name="appsec_block_system_optimization_summary">Block access to System Optimization settings</string>
+    <string name="appsec_block_blocation_title">Block Enhanced Location</string>
+    <string name="appsec_block_blocation_summary">Block access to Enhanced Location settings</string>
     
     <!-- BLocation -->
     <string name="location_privacy_dashboard_title">Enhanced Location Privacy</string>
@@ -131,6 +137,13 @@
     <string name="location_accuracy_high">High accuracy (GPS)</string>
     <string name="location_accuracy_medium">Medium accuracy (Network)</string>
     <string name="location_accuracy_low">Low accuracy (Coarse)</string>
+    
+    <!-- Mock Location -->
+    <string name="mock_location_title">Allow Mock Locations</string>
+    <string name="mock_location_disabled_summary">Prevent apps from using fake GPS locations</string>
+    <string name="mock_location_enabled_warning">⚠️ Warning: Mock locations are enabled. Apps can inject fake GPS data.</string>
+    <string name="mock_location_warning_title">⚠️ Mock Locations Detected</string>
+    <string name="mock_location_warning_summary">Mock location providers are active. Tap to open Developer Settings and disable mock location apps.</string>
     
     <!-- Device Tweaks -->
     <string name="device_tweaks_title">Device Tweaks</string>

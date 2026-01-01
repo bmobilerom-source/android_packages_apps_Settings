@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
+import com.android.settings.applications.specialaccess.BlockChecker;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
@@ -131,6 +132,14 @@ public class SubSettingLauncher {
     }
 
     public void launch() {
+        // Check if destination is blocked BEFORE launching
+        if (mLaunchRequest.mDestinationName != null) {
+            if (BlockChecker.checkAndShowMessage(mContext, mLaunchRequest.mDestinationName)) {
+                // Blocked - don't launch, just return
+                mLaunched = true; // Mark as launched to prevent reuse
+                return;
+            }
+        }
         launchWithIntent(toIntent());
     }
 

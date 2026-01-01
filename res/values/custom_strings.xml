@@ -125,5 +125,16 @@
     <!-- bmobile UserInfo Credential Confirmation -->
     <string name="bmobile_userinfo_confirm_credential_title">Confirm device credentials</string>
     <string name="bmobile_userinfo_confirm_credential_description">Enter your device credentials to access user information</string>
+
+    <!-- Block Messages -->
+    <string name="app_dashboard_blocked_message">App settings access is blocked</string>
+    <string name="location_settings_blocked_message">Location settings access is blocked</string>
+    <string name="account_dashboard_blocked_message">Account settings access is blocked</string>
+    <string name="safety_center_blocked_message">Safety Center access is blocked</string>
+    <string name="device_tweaks_blocked_message">Device Tweaks access is blocked</string>
+    <string name="system_optimization_blocked_message">System Optimization access is blocked</string>
+    <string name="appsec_blocked_message">App Security access is blocked</string>
+    <string name="blocation_blocked_message">Enhanced Location access is blocked</string>
+    <string name="page_blocked_message">This page is blocked</string>
 </resources>
 

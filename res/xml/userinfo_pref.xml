@@ -21,7 +21,8 @@
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/user_info_frag"
         android:key="user_header"
-	android:selectable="false"
+        android:selectable="true"
+        android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
         android:order="10" />
 
 

@@ -78,13 +78,31 @@
             android:summary="@string/location_sharing_controls_summary"
             android:order="10"
             android:fragment="com.android.settings.location.LocationSharingControlsFragment"/>
+
+        <!-- Mock Location Toggle -->
+        <SwitchPreference
+            android:key="mock_location_toggle"
+            android:title="@string/mock_location_title"
+            android:summary="@string/mock_location_disabled_summary"
+            android:order="11"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.location.MockLocationController"/>
+
+        <!-- Mock Location Warning -->
+        <Preference
+            android:key="mock_location_warning"
+            android:title="@string/mock_location_warning_title"
+            android:summary="@string/mock_location_warning_summary"
+            android:order="12"
+            android:selectable="true"
+            settings:controller="com.android.settings.location.MockLocationWarningController"/>
     </PreferenceCategory>
 
     <!-- Location Status Indicators -->
     <PreferenceCategory
         android:key="location_status_category"
         android:title="@string/location_status_title"
-        android:order="11"
+        android:order="13"
         settings:layout="@layout/adaptive_preference_card">
 
         <!-- Service Status -->

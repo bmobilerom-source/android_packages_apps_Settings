@@ -55,11 +55,14 @@ public class SecurityScoreController extends BasePreferenceController {
 
         // Check each security feature and add points if enabled
         if (isInstallWhitelistEnabled()) score += 25;
-        if (isBlockAppDashboardEnabled()) score += 15;
-        if (isBlockUsbPopupEnabled()) score += 15;
-        if (isBlockLocationSettingsEnabled()) score += 15;
-        if (isBlockAccountDashboardEnabled()) score += 15;
-        if (isBlockSafetyCenterEnabled()) score += 15;
+        if (isBlockAppDashboardEnabled()) score += 10;
+        if (isBlockUsbPopupEnabled()) score += 10;
+        if (isBlockLocationSettingsEnabled()) score += 10;
+        if (isBlockAccountDashboardEnabled()) score += 10;
+        if (isBlockSafetyCenterEnabled()) score += 10;
+        if (isBlockDeviceTweaksEnabled()) score += 10;
+        if (isBlockSystemOptimizationEnabled()) score += 10;
+        if (isBlockBLocationEnabled()) score += 10;
 
         return Math.min(100, score);
     }
@@ -102,6 +105,21 @@ public class SecurityScoreController extends BasePreferenceController {
     private boolean isBlockSafetyCenterEnabled() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
             "block_safety_center_enabled", 0) == 1;
+    }
+
+    private boolean isBlockDeviceTweaksEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+            "block_device_tweaks_enabled", 0) == 1;
+    }
+
+    private boolean isBlockSystemOptimizationEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+            "block_system_optimization_enabled", 0) == 1;
+    }
+
+    private boolean isBlockBLocationEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+            "block_blocation_enabled", 0) == 1;
     }
 }
 
