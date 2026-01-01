@@ -15,15 +15,7 @@
         android:key="bmobile_userinfo_desc"
         android:order="20"
         android:title="@string/bmobile_userinfo_summary"/>
-   <!-- Branding Header from anatolia_settings_gestures.xml -->
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="Branding_CustomerOS_view"
-        android:selectable="true"
-        android:enabled="true"
-        android:shouldDisableView="false"
-        android:fragment="com.epic.fragments.SystemSettingsAboutus" 
-        android:layout="@layout/stallion_header"
-        android:order="25" />
+ 
     <!-- Quick Access Preferences -->
     <PreferenceCategory
         android:title="Quick Access"

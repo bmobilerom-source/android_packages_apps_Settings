@@ -150,5 +150,24 @@
     <!-- Mock Locations -->
     <string name="mock_locations_title">Mock Locations</string>
     <string name="mock_locations_summary">Configure mock location settings</string>
+
+        <!-- USB Debugging -->
+    <string name="usb_debugging_title">USB Debugging</string>
+    <string name="usb_debugging_summary">Enable USB debugging for development</string>
+
+    <!-- Developer Options -->
+    <string name="developer_options_title">Developer Options</string>
+    <string name="developer_options_summary">Enable developer options and advanced settings</string>
+
+    <!-- Settings Backup &amp; Restore -->
+    <string name="settings_backup_restore_title">Backup &amp; Restore</string>
+    <string name="settings_backup_restore_intro_summary">Backup and restore your device settings</string>
+
+    <!-- Auto Reboot -->
+    <string name="auto_reboot_title">Auto Reboot</string>
+    <string name="auto_reboot_summary">Automatically reboot the device at scheduled times</string>
+
+    <!-- UserInfo Bubble Setting -->
+    <string name="userinfo_bubble_setting_description">Configure bubble notification settings</string>
 </resources>
 
