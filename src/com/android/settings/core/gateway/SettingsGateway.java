@@ -145,6 +145,7 @@ import com.android.settings.language.LanguageSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationServices;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.location.MockLocationsSettings;
 import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -420,6 +421,7 @@ public class SettingsGateway {
             com.android.settings.deviceinfo.BMobileAccountsFragment.class.getName(),
             com.epic.fragments.MySessionFragment.class.getName(),
             com.android.settings.location.BLocationSettings.class.getName(),
+            com.android.settings.location.MockLocationsSettings.class.getName(),
             com.android.settings.location.LocationTimeRestrictionsFragment.class.getName(),
             com.android.settings.location.LocationSharingControlsFragment.class.getName(),
             com.android.settings.location.LocationAppOverridesFragment.class.getName(),
@@ -430,6 +432,7 @@ public class SettingsGateway {
             com.epic.fragments.DeviceTweaksSettings.class.getName(),
             com.epic.fragments.AutoRebootSettings.class.getName(),
             com.epic.fragments.SystemBasicDefaultsSettings.class.getName(),
+            com.epic.fragments.SettingsBackupRestore.class.getName(),
             com.android.settings.applications.specialaccess.AppSecSettings.class.getName()
     };
 

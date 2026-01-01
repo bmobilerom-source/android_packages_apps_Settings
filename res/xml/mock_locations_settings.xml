@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 The LineageOS Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/mock_locations_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="mock_locations_intro"
+        android:title="@string/mock_locations_intro_title"
+        android:summary="@string/mock_locations_intro_summary"
+        settings:searchable="false" />
+
+    <PreferenceCategory
+        android:key="mock_locations_main_category"
+        android:title="@string/mock_locations_main_category_title"
+        android:order="10">
+
+        <SwitchPreference
+            android:key="mock_location_enabled"
+            android:title="@string/mock_location_enabled_title"
+            android:summary="@string/mock_location_enabled_summary"
+            android:defaultValue="false"
+            android:order="11"
+            settings:controller="com.android.settings.location.MockLocationController"
+            settings:layout="@layout/adaptive_preference_card_top" />
+
+        <com.android.settingslib.widget.FooterPreference
+            android:key="mock_location_warning"
+            android:title="@string/mock_location_warning_text"
+            settings:controller="com.android.settings.location.MockLocationWarningController"
+            settings:searchable="false"
+            android:order="12" />
+
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="mock_locations_footer"
+        android:title="@string/mock_locations_footer"
+        settings:searchable="false"
+        android:order="100" />
+
+</PreferenceScreen>
+
