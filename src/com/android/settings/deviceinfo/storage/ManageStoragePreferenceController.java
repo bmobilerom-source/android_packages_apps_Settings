@@ -61,7 +61,14 @@ public class ManageStoragePreferenceController extends BasePreferenceController 
         super.displayPreference(screen);
 
         Preference preference = screen.findPreference(getPreferenceKey());
-        preference.setIcon(mManageStorageDrawable);
+        if (preference != null) {
+            if (mManageStorageDrawable != null) {
+                preference.setIcon(mManageStorageDrawable);
+                preference.setVisible(true);
+            } else {
+                preference.setVisible(false);
+            }
+        }
     }
 
     @Override

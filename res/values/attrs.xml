@@ -203,4 +203,14 @@
     <declare-styleable name="BackgroundPreference">
         <attr name="background" format="reference" />
     </declare-styleable>
+
+    <!-- For StorageItemPreference card background -->
+    <declare-styleable name="StorageItemPreference">
+        <attr name="useCardBackground" format="boolean" />
+        <attr name="cardBackgroundColor" format="color" />
+        <attr name="cardCornerRadius" format="dimension" />
+        <attr name="cardElevation" format="dimension" />
+        <attr name="cardStrokeWidth" format="dimension" />
+        <attr name="cardStrokeColor" format="color" />
+    </declare-styleable>
 </resources>
