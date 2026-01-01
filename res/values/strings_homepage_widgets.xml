@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Homepage widgets entry -->
+    <string name="homepage_widgets_title">Homepage widgets</string>
+    <string name="homepage_widgets_summary">Show battery and storage widgets</string>
+
+    <!-- Extended homepage widgets entry -->
+    <string name="extended_homepage_widgets_title">Extended homepage widgets</string>
+    <string name="extended_homepage_widgets_summary">Show extended battery and storage widgets</string>
+
+    <!-- Widget content strings -->
+    <string name="homepage_widget_battery_title">Battery</string>
+    <string name="homepage_widget_storage_title">Storage</string>
+    <string name="homepage_widget_battery_percent">%</string>
+    <string name="homepage_widget_battery_charge">Charging</string>
+    <string name="homepage_widget_battery_discharge">Discharging</string>
+
+    <!-- Connected devices title fallback -->
+    <string name="connected_devices_title">Connected devices</string>
+</resources>
+
