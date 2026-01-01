@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="auto_brightness_video"
+        settings:searchable="false"
+        android:order="-1999"
+        settings:lottie_rawRes="@raw/Permission"/>
+        
+    <!-- TODO: On devices with fast charging and stay awake charging enabled, this option will be enabled -->
+    <!--
+    <PreferenceCategory
+        android:title="@string/power_tweaks_category_charging">
+
+        <SwitchPreference
+            android:key="fast_charging"
+            android:title="@string/fast_charging_title"
+            android:summary="@string/fast_charging_summary"
+            android:defaultValue="true"
+            settings:controller="com.epic.fragments.FastChargingController" />
+
+        <SwitchPreference
+            android:key="stay_awake_charging"
+            android:title="@string/stay_awake_charging_title"
+            android:summary="@string/stay_awake_charging_summary"
+            android:defaultValue="true"
+            settings:controller="com.epic.fragments.StayAwakeChargingController" />
+
+    </PreferenceCategory>
+    -->
+
+    <PreferenceCategory
+        android:title="Developer &amp; USB Security"
+        android:key="developer_usb_category">
+
+        <SwitchPreference
+            android:key="usb_debugging"
+            android:title="@string/usb_debugging_title"
+            android:summary="@string/usb_debugging_summary"
+            android:defaultValue="false"
+            settings:controller="com.epic.fragments.UsbDebuggingController" />
+
+        <SwitchPreference
+            android:key="developer_options"
+            android:title="@string/developer_options_title"
+            android:summary="@string/developer_options_summary"
+            android:defaultValue="false"
+            settings:controller="com.epic.fragments.DeveloperOptionsController" />
+
+    </PreferenceCategory>
+
+
+    <Preference
+        android:key="security_advanced_settings"
+        android:title="@string/security_advanced_settings"
+        android:summary="@string/summary_placeholder"
+        android:order="40"
+        settings:layout="@layout/adaptive_preference_card_top"
+        android:fragment="com.android.settings.security.SecurityAdvancedSettings" />
+
+    <Preference
+        android:key="nav_settings_backup_restore"
+        android:title="@string/settings_backup_restore_title"
+        android:summary="@string/settings_backup_restore_intro_summary"
+        android:order="50"
+        settings:layout="@layout/adaptive_preference_card_middle"
+        android:fragment="com.epic.fragments.SettingsBackupRestore" />
+
+    <Preference
+        android:key="auto_reboot_settings"
+        android:title="@string/auto_reboot_title"
+        android:summary="@string/auto_reboot_summary"
+        android:fragment="com.epic.fragments.AutoRebootSettings"
+        android:order="100"
+        settings:layout="@layout/adaptive_preference_card_bottom" />
+
+</PreferenceScreen>

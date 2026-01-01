@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/bmobile_user_info_frag"
+        android:key="bmobile_user_header"
+        android:selectable="false"
+        android:order="10" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="bmobile_userinfo_desc"
+        android:order="20"
+        android:title="@string/bmobile_userinfo_summary"/>
+   <!-- Branding Header from anatolia_settings_gestures.xml -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="Branding_CustomerOS_view"
+        android:selectable="true"
+        android:enabled="true"
+        android:shouldDisableView="false"
+        android:fragment="com.epic.fragments.SystemSettingsAboutus" 
+        android:layout="@layout/stallion_header"
+        android:order="25" />
+    <!-- Quick Access Preferences -->
+    <PreferenceCategory
+        android:title="Quick Access"
+        android:key="quick_access_category"
+        android:order="30">
+
+        <!-- Private Space Access -->
+        <Preference
+            android:key="private_space_access"
+            android:title="Private Space"
+            android:summary="Access your private profile and apps"
+            android:order="31"
+            settings:layout="@layout/adaptive_preference_card_top"
+            android:fragment="com.android.settings.privatespace.PrivateSpaceSetupActivity" />
+
+    <!-- Session Messenger -->
+    <Preference
+        android:key="session_messenger_pref"
+        android:title="@string/session_messenger_title"
+        android:summary="@string/session_messenger_summary"
+        android:order="40"
+        settings:layout="@layout/adaptive_preference_card_middle"
+        settings:controller="com.epic.fragments.SessionMessengerController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="network.loki.messenger"
+            android:targetClass="network.loki.messenger.RoutingActivity" />
+    </Preference>
+    <!-- Daily Journal -->
+    <Preference
+        android:key="daily_journal_pref"
+        android:title="@string/daily_journal_title"
+        android:summary="@string/daily_journal_summary"
+        android:order="50"
+        settings:layout="@layout/adaptive_preference_card_bottom"
+        settings:controller="com.epic.fragments.DailyJournalController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.demizo.daily_you"
+            android:targetClass="com.demizo.daily_you.MainActivity" />
+    </Preference>
+
+    
+    </PreferenceCategory>
+
+</PreferenceScreen>
+

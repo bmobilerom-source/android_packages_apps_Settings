@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2024 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/appsec_category_title">
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="apps_illustration_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/powermenu1"/>
+    <!-- Page Introduction -->
+    <Preference
+        android:key="appsec_intro"
+        android:title="Application Security &amp; Access Control"
+        android:summary="Configure advanced security restrictions and access controls to protect your device from unauthorized applications and system modifications."
+        android:order="0"
+        settings:layout="@layout/adaptive_preference_card"
+        settings:searchable="false"/>
+
+    <!-- Security Status Indicator -->
+    <Preference
+        android:key="security_score_indicator"
+        android:title="@string/appsec_security_score"
+        android:summary="@string/appsec_security_level_advanced"
+        android:order="1"
+        settings:controller="com.android.settings.applications.specialaccess.SecurityScoreController"
+        settings:layout="@layout/adaptive_preference_card_top"/>
+
+    <!-- Installation Security Category -->
+    <PreferenceCategory
+        android:key="installation_security_category"
+        android:title="@string/appsec_installation_security_title"
+        android:summary="@string/appsec_installation_security_summary"
+        android:order="10"
+        settings:layout="@layout/adaptive_preference_card">
+
+        <!-- Restrict app installation to whitelisted sources only -->
+        <SwitchPreference
+            android:key="install_app_whitelist_toggle"
+            android:title="@string/appsec_install_whitelist_title"
+            android:summary="@string/appsec_install_whitelist_summary"
+            android:order="11"
+            android:selectable="true"
+            android:enabled="true"
+            settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController" />
+
+    </PreferenceCategory>
+
+    <!-- Access Control Category -->
+    <PreferenceCategory
+        android:key="access_control_category"
+        android:title="@string/appsec_access_control_title"
+        android:summary="@string/appsec_access_control_summary"
+        android:order="20"
+        settings:layout="@layout/adaptive_preference_card">
+
+        <!-- Block access to the main app settings dashboard -->
+        <SwitchPreference
+            android:key="block_app_dashboard_toggle"
+            android:title="@string/appsec_block_app_dashboard_title"
+            android:summary="@string/appsec_block_app_dashboard_summary"
+            android:order="21"
+            android:selectable="false"
+            android:enabled="true"
+            settings:controller="com.android.settings.applications.specialaccess.BlockAppDashboardController" />
+
+        <!-- Block USB connection permission dialogs -->
+        <SwitchPreference
+            android:key="block_usb_popup_toggle"
+            android:title="@string/appsec_block_usb_popup_title"
+            android:summary="@string/appsec_block_usb_popup_summary"
+            android:order="23"
+            android:selectable="true"
+            android:enabled="true"
+            settings:controller="com.android.settings.applications.specialaccess.BlockUsbPopupController" />
+
+    </PreferenceCategory>
+
+    <!-- System Protection Category -->
+    <PreferenceCategory
+        android:key="system_protection_category"
+        android:title="@string/appsec_system_protection_title"
+        android:summary="@string/appsec_system_protection_summary"
+        android:order="30"
+        settings:layout="@layout/adaptive_preference_card">
+
+        <!-- Block access to location settings and controls -->
+        <SwitchPreference
+            android:key="block_location_settings_toggle"
+            android:title="@string/appsec_block_location_settings_title"
+            android:summary="@string/appsec_block_location_settings_summary"
+            android:order="31"
+            settings:controller="com.android.settings.applications.specialaccess.BlockLocationSettingsController" />
+
+        <!-- Block access to account management and sync settings -->
+        <SwitchPreference
+            android:key="block_account_dashboard_toggle"
+            android:title="@string/appsec_block_account_dashboard_title"
+            android:summary="@string/appsec_block_account_dashboard_summary"
+            android:order="33"
+            settings:controller="com.android.settings.applications.specialaccess.BlockAccountDashboardController" />
+
+        <!-- Block access to device safety and security center -->
+        <SwitchPreference
+            android:key="block_safety_center_toggle"
+            android:title="@string/appsec_block_safety_center_title"
+            android:summary="@string/appsec_block_safety_center_summary"
+            android:order="35"
+            android:selectable="false"
+            android:enabled="true"
+            settings:controller="com.android.settings.applications.specialaccess.BlockSafetyCenterController" />
+
+    </PreferenceCategory>
+
+    <!-- Security Footer -->
+    <com.android.settingslib.widget.FooterPreference
+        android:title="These security features help protect your device from unauthorized access and potential security threats. Use caution when enabling advanced restrictions."
+        android:key="security_footer"
+        settings:searchable="false"
+        settings:controller="com.android.settings.applications.specialaccess.SecurityFooterController"/>
+
+</PreferenceScreen>

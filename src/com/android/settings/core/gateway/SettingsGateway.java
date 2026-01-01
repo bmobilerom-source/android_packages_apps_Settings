@@ -409,7 +409,19 @@ public class SettingsGateway {
             HearingDevicePairingFragment.class.getName(),
             ZenModesListFragment.class.getName(),
             ZenModeFragment.class.getName(),
-            ContactsStorageSettings.class.getName()
+            ContactsStorageSettings.class.getName(),
+            
+            // bMobile User & Accounts + Atomichub Fragments
+            com.android.settings.deviceinfo.BMobileUserInfoFragment.class.getName(),
+            com.android.settings.deviceinfo.BMobileAccountsFragment.class.getName(),
+            com.epic.fragments.MySessionFragment.class.getName(),
+            com.android.settings.location.BLocationSettings.class.getName(),
+            com.epic.fragments.GestureSettings.class.getName(),
+            com.epic.fragments.BMobileSettingsFragment.class.getName(),
+            com.epic.fragments.SystemApplicationSettings.class.getName(),
+            com.epic.fragments.SystemOptimizationSettings.class.getName(),
+            com.epic.fragments.DeviceTweaksSettings.class.getName(),
+            com.android.settings.applications.specialaccess.AppSecSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2025 bmobile
+     Consolidated bMobile User & Accounts + Atomichub Dimensions
+     Source: https://github.com/simplnc/android_packages_apps_Settings/tree/clean-commits
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- XD Dashboard Card Dimensions -->
+    <dimen name="xd_pref_card_horizontal_padding">20dp</dimen>
+    <dimen name="xd_pref_card_vertical_padding">16dp</dimen>
+    <dimen name="xd_pref_card_radius">12dp</dimen>
+    
+    <!-- Add any other dimens used in bMobile layouts -->
+    <!-- Check your dimens.xml for additional values -->
+</resources>
+
