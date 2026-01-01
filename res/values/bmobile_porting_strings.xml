@@ -205,5 +205,25 @@
 
     <!-- UserInfo Bubble Setting -->
     <string name="userinfo_bubble_setting_description">Configure bubble notification settings</string>
+    
+    <!-- System Basic Defaults -->
+    <string name="system_basic_defaults_title">System Defaults</string>
+    
+    <!-- About Us -->
+    <string name="aboutus_bubble_setting_description">Learn more about BashaMobile and our community</string>
+    <string name="about_us_info_system_title">System Information</string>
+    <string name="about_us_info_system_title_summary">View detailed system information</string>
+    <string name="about_us_info">Website</string>
+    <string name="about_us_info_summary">Visit our GitHub repository</string>
+    <string name="aboutus_link_title">Telegram</string>
+    <string name="aboutus_link_summary">Join our Telegram community</string>
+    
+    <!-- Default App Summaries -->
+    <string name="default_browser_summary">Choose your default web browser</string>
+    <string name="default_phone_summary">Choose your default phone app</string>
+    <string name="default_sms_summary">Choose your default SMS app</string>
+    <string name="default_home_summary">Choose your default home launcher</string>
+    <string name="default_autofill_summary">Choose your default autofill service</string>
+    <string name="default_emergency_summary">Choose your default emergency app</string>
 </resources>
 
