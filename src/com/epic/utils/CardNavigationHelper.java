@@ -225,9 +225,9 @@ public class CardNavigationHelper {
                     break;
 
                 case "sensor_block":
-                    // Open Sensor Block Settings Fragment
+                    // Open Sensor Block Settings Fragment (temporarily redirects to Anatolia Settings)
                     android.util.Log.d("CardNavigationHelper", "🔒 Launching Sensor Block Settings Fragment");
-                    launcher.setDestination(com.epic.fragments.SensorBlockSettings.class.getName())
+                    launcher.setDestination(com.epic.Anatolia.class.getName())
                             .setSourceMetricsCategory(mFragment instanceof com.android.settingslib.core.instrumentation.Instrumentable 
                                     ? ((com.android.settingslib.core.instrumentation.Instrumentable) mFragment).getMetricsCategory()
                                     : 0)
@@ -235,9 +235,9 @@ public class CardNavigationHelper {
                     break;
 
                 case "security_features":
-                    // Open Security Features Settings Fragment
+                    // Open Security Features Settings Fragment (temporarily redirects to Anatolia Settings)
                     android.util.Log.d("CardNavigationHelper", "🛡️ Launching Security Features Fragment");
-                    launcher.setDestination(com.epic.fragments.SecurityFeaturesSettings.class.getName())
+                    launcher.setDestination(com.epic.Anatolia.class.getName())
                             .setSourceMetricsCategory(mFragment instanceof com.android.settingslib.core.instrumentation.Instrumentable 
                                     ? ((com.android.settingslib.core.instrumentation.Instrumentable) mFragment).getMetricsCategory()
                                     : 0)

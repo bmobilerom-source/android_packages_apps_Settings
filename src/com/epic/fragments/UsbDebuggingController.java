@@ -52,9 +52,9 @@ public class UsbDebuggingController extends TogglePreferenceController {
         super.updateState(preference);
         if (preference != null) {
             boolean enabled = isChecked();
-            preference.setSummary(enabled ? 
+            preference.setSummary((CharSequence) (enabled ? 
                 mContext.getString(R.string.usb_debugging_summary_on) :
-                mContext.getString(R.string.usb_debugging_summary_off));
+                mContext.getString(R.string.usb_debugging_summary_off)));
         }
     }
 

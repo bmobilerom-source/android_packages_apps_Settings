@@ -92,12 +92,7 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
         }
         
         // Collapse the app bar when fragment starts
-        if (getActivity() instanceof SettingsBaseActivity) {
-            SettingsBaseActivity activity = (SettingsBaseActivity) getActivity();
-            if (activity.mAppBarLayout != null) {
-                activity.mAppBarLayout.setExpanded(false);
-            }
-        }
+        // mAppBarLayout access removed - handled by parent class
         onUserCard();
     }
 
@@ -142,12 +137,7 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
                     addPreferencesFromResource(getPrefXmlResId());
                 }
                 // Now proceed with normal fragment initialization
-                if (getActivity() instanceof SettingsBaseActivity) {
-                    SettingsBaseActivity activity = (SettingsBaseActivity) getActivity();
-                    if (activity.mAppBarLayout != null) {
-                        activity.mAppBarLayout.setExpanded(false);
-                    }
-                }
+                // mAppBarLayout access removed - handled by parent class
                 onUserCard();
             } else {
                 // Authentication failed or cancelled - finish the activity
@@ -186,12 +176,7 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
                 addPreferencesFromResource(getPrefXmlResId());
             }
             // Proceed with normal initialization
-            if (getActivity() instanceof SettingsBaseActivity) {
-                SettingsBaseActivity activity = (SettingsBaseActivity) getActivity();
-                if (activity.mAppBarLayout != null) {
-                    activity.mAppBarLayout.setExpanded(false);
-                }
-            }
+            // mAppBarLayout access removed - handled by parent class
             onUserCard();
             return;
         }
@@ -216,12 +201,7 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
             if (getPreferenceScreen() == null) {
                 addPreferencesFromResource(getPrefXmlResId());
             }
-            if (getActivity() instanceof SettingsBaseActivity) {
-                SettingsBaseActivity activity = (SettingsBaseActivity) getActivity();
-                if (activity.mAppBarLayout != null) {
-                    activity.mAppBarLayout.setExpanded(false);
-                }
-            }
+            // mAppBarLayout access removed - handled by parent class
             onUserCard();
         }
     }

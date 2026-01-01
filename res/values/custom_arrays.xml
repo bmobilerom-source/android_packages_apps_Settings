@@ -55,4 +55,23 @@
           <item>@string/settings_random4</item>
           <item>@string/settings_random5</item>
      </string-array>
+
+     <!-- Status Bar Logo Position Entries -->
+     <string-array name="status_bar_logo_position_entries">
+          <item>Left</item>
+          <item>Center</item>
+          <item>Right</item>
+     </string-array>
+
+     <!-- Status Bar Logo Style Entries -->
+     <string-array name="status_bar_logo_style_entries">
+          <item>Default</item>
+          <item>Minimal</item>
+          <item>Custom</item>
+     </string-array>
+
+     <!-- Allowed Install App Packages -->
+     <string-array name="config_allowed_install_app_packages">
+          <!-- Add package names here if needed -->
+     </string-array>
 </resources>

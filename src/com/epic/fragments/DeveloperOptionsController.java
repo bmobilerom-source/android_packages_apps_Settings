@@ -52,9 +52,9 @@ public class DeveloperOptionsController extends TogglePreferenceController {
         super.updateState(preference);
         if (preference != null) {
             boolean enabled = isChecked();
-            preference.setSummary(enabled ? 
+            preference.setSummary((CharSequence) (enabled ? 
                 mContext.getString(R.string.developer_options_summary_on) :
-                mContext.getString(R.string.developer_options_summary_off));
+                mContext.getString(R.string.developer_options_summary_off)));
         }
     }
 
