@@ -52,9 +52,12 @@ public class HomepageWidgetsView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        // Only bind actions if not used within a preference (which handles its own click listeners)
+        // Always bind search widget click handler to ensure it works on top-level dashboard
+        // Other widgets are bound conditionally based on preference context
+        bindSearchWidget();
+        // Only bind other actions if not used within a preference (which handles its own click listeners)
         if (!isInPreference()) {
-            bindActions();
+            bindOtherActions();
         }
     }
 
@@ -74,16 +77,23 @@ public class HomepageWidgetsView extends LinearLayout {
         return false;
     }
 
-    private void bindActions() {
+    private void bindSearchWidget() {
+        // Always bind search widget to ensure it works on top-level dashboard
+        Activity activity = findActivity(getContext());
+        View search = findViewById(R.id.search_widget);
+        if (search != null) {
+            setInteractiveClick(search, () -> launchSystemLaunchPad(activity));
+        }
+    }
+
+    private void bindOtherActions() {
         Activity activity = findActivity(getContext());
         View battery = findViewById(R.id.battery_widget);
         View storage = findViewById(R.id.storage_widget);
-        View search = findViewById(R.id.search_widget);
         View system = findViewById(R.id.system_widget);
 
         setInteractiveClick(battery, () -> openBattery(activity));
         setInteractiveClick(storage, () -> openStorage(activity));
-        setInteractiveClick(search, () -> launchSystemLaunchPad(activity));
         setInteractiveClick(system, () -> openConnectedDevices(activity));
     }
 
