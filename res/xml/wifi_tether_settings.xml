@@ -35,6 +35,7 @@
     <Preference
         android:key="wifi_hotspot_security"
         android:title="@string/wifi_security"
+        settings:layout="@layout/adaptive_preference_card"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.wifi.tether.WifiHotspotSecuritySettings"
         settings:isPreferenceVisible="@bool/config_show_wifi_hotspot_speed"/>
@@ -55,6 +56,7 @@
 
     <Preference
         android:key="wifi_hotspot_speed"
+        settings:layout="@layout/adaptive_preference_card_top"
         android:title="@string/wifi_hotspot_speed_title"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.wifi.tether.WifiHotspotSpeedSettings"
@@ -62,6 +64,7 @@
 
     <Preference
         android:key="wifi_hotspot_instant"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:title="@string/wifi_hotspot_instant_title"
         android:summary="@string/summary_placeholder"
         settings:isPreferenceVisible="false"/>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.settings.network.NetworkInternetCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- First Row: Two Cards -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <!-- Internet Settings Card -->
+        <LinearLayout
+            android:id="@+id/network_card_internet"
+            android:layout_width="0dp"
+            android:layout_height="111dp"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clipToOutline="true"
+            android:background="@drawable/adaptive_preference_card_background"
+            android:tag="internet_settings">
+
+            <RelativeLayout
+                android:id="@+id/network_card_internet_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/network_card_internet_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    style="@style/mtx_text_style_h6"
+                    android:textColor="?android:attr/colorAccent"
+                    android:text="@string/provider_internet_settings"
+                    android:textAppearance="?android:attr/textAppearance"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/network_card_internet_summary"
+                    style="@style/mtx_text_style_h6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/network_card_internet_title"
+                    android:gravity="center"
+                    android:text="@string/summary_placeholder"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="italic"
+                    android:textColor="?android:attr/colorAccent"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone"/>
+        
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- Calls and SMS Card -->
+        <RelativeLayout
+            android:id="@+id/network_card_calls_sms"
+            android:layout_width="0dp"
+            android:layout_height="111dp"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:clipToOutline="true"
+            android:background="@drawable/adaptive_preference_card_background"
+            android:tag="Data_saver">
+
+            <TextView
+                android:id="@+id/network_card_calls_sms_title"
+                style="@style/mtx_text_style_h6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                    android:text="@string/data_saver_title"
+                android:textAppearance="?android:attr/textAppearance"
+                android:textColor="?android:attr/colorAccent"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/network_card_calls_sms_summary"
+                style="@style/mtx_text_style_h6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/network_card_calls_sms_title"
+                android:text="@string/summary_placeholder"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textStyle="italic"
+                android:textColor="?android:attr/colorAccent"
+                android:gravity="center"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- Second Row: Two Cards -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <!-- Mobile Network List Card -->
+        <LinearLayout
+            android:id="@+id/network_card_mobile_network"
+            android:layout_width="0dp"
+            android:layout_height="111dp"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clipToOutline="true"
+            android:background="@drawable/adaptive_preference_card_background"
+            android:tag="mobile_network_list">
+
+            <RelativeLayout
+                android:id="@+id/network_card_mobile_network_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/network_card_mobile_network_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    style="@style/mtx_text_style_h6"
+                    android:textColor="?android:attr/colorAccent"
+                    android:text="@string/provider_network_settings_title"
+                    android:textAppearance="?android:attr/textAppearance"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/network_card_mobile_network_summary"
+                    style="@style/mtx_text_style_h6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/network_card_mobile_network_title"
+                    android:gravity="center"
+                    android:text="@string/summary_placeholder"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="italic"
+                    android:textColor="?android:attr/colorAccent"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone"/>
+        
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- Tether Settings Card -->
+        <RelativeLayout
+            android:id="@+id/network_card_tether"
+            android:layout_width="0dp"
+            android:layout_height="111dp"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:clipToOutline="true"
+            android:background="@drawable/adaptive_preference_card_background"
+            android:tag="tether_settings">
+
+            <TextView
+                android:id="@+id/network_card_tether_title"
+                style="@style/mtx_text_style_h6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/tether_settings_title_all"
+                android:textAppearance="?android:attr/textAppearance"
+                android:textColor="?android:attr/colorAccent"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/network_card_tether_summary"
+                style="@style/mtx_text_style_h6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/network_card_tether_title"
+                android:text="@string/summary_placeholder"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textStyle="italic"
+                android:textColor="?android:attr/colorAccent"
+                android:gravity="center"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone" />
+
+         
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</com.android.settings.network.NetworkInternetCardView>
+

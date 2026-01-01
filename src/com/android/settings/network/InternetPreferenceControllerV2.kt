@@ -38,6 +38,8 @@ class InternetPreferenceControllerV2(context: Context, preferenceKey: String) :
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
+        // Hide preference - replaced by custom card layout (network_internet_settings_card)
+        preference?.isVisible = false
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {

@@ -56,7 +56,7 @@ open class NetworkProviderCallsSmsController @JvmOverloads constructor(
 ) : BasePreferenceController(context, preferenceKey) {
 
     private lateinit var lazyViewModel: Lazy<SubscriptionInfoListViewModel>
-    private lateinit var preference: RestrictedPreference
+    private var preference: RestrictedPreference? = null
 
     fun init(fragment: Fragment) {
         lazyViewModel = fragment.viewModels()
@@ -71,10 +71,13 @@ open class NetworkProviderCallsSmsController @JvmOverloads constructor(
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
-        preference = screen.findPreference(preferenceKey)!!
+        preference = screen.findPreference(preferenceKey) as? RestrictedPreference
+        // Hide preference if isPreferenceVisible is false (replaced by custom card layout)
+        preference?.isVisible = false
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        val preference = preference ?: return // Exit early if preference is null (hidden)
         val viewModel by lazyViewModel
 
         summaryFlow(viewModel.subscriptionInfoListFlow)

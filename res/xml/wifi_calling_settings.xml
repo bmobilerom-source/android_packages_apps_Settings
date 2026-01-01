@@ -47,7 +47,8 @@
             android:key="emergency_address_key"
             isPreferenceVisible="false"
             android:title="@string/emergency_address_title"
-            android:summary="@string/emergency_address_summary" />
+            android:summary="@string/emergency_address_summary"
+            settings:layout="@layout/adaptive_preference_card" />
 
     <com.android.settings.wifi.calling.LinkifyDescriptionPreference
             android:key="no_options_description"
