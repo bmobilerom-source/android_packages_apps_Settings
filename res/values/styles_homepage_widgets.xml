@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fallback style for homepage/extended widgets -->
+    <style name="mtx_text_style_body1" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+</resources>
+
