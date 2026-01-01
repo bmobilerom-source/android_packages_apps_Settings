@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2022 BananaDroid
+     Copyright (C) 2025 bmobile
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -65,5 +65,10 @@
     <string name="dot_about_device_info">Legal &amp; Information</string>
     <string name="dot_about_device_private">Private Details</string>
 
+    <!-- Wellbeing preference title -->
+    <string name="wellbeing_title">Digital Wellbeing</string>
+
+    <!-- Default user name -->
+    <string name="default_user">User</string>
 
 </resources>

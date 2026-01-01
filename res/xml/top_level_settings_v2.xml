@@ -18,7 +18,14 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/mainuser_profile_card"
+        android:key="top_level_mainuser_profile_card"
+        android:selectable="false"
+        android:order="-200" />
 
     <PreferenceCategory
         android:order="-130"
