@@ -376,42 +376,44 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     
     private String getContextualMessage() {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        // Use current time in milliseconds as seed to ensure different selection each time
+        long seed = System.currentTimeMillis();
         
         try {
             switch (hour) {
                 case 5: case 6: case 7: case 8: case 9: case 10:
                     String[] morningMsg = getResources().getStringArray(R.array.dashboard_morning);
-                    Random genMorningMsg = new Random();
+                    Random genMorningMsg = new Random(seed);
                     int morning = genMorningMsg.nextInt(morningMsg.length);
                     return morningMsg[morning];
 
                 case 18: case 19: case 20: 
                     String[] msgearlyNight = getResources().getStringArray(R.array.dashboard_early_night);
-                    Random genmsgeNight = new Random();
+                    Random genmsgeNight = new Random(seed);
                     int eNight = genmsgeNight.nextInt(msgearlyNight.length);
                     return msgearlyNight[eNight];
 
                 case 21: case 22: case 23: case 0: 
                     String[] msgNight = getResources().getStringArray(R.array.dashboard_night);
-                    Random genmsgNight = new Random();
+                    Random genmsgNight = new Random(seed);
                     int night = genmsgNight.nextInt(msgNight.length);
                     return msgNight[night];
 
                 case 16: case 17:
                     String[] msgNoon = getResources().getStringArray(R.array.dashboard_noon);
-                    Random genmsgNoon = new Random();
+                    Random genmsgNoon = new Random(seed);
                     int noon = genmsgNoon.nextInt(msgNoon.length);
                     return msgNoon[noon];
 
                 case 1: case 2: case 3: case 4:
                     String[] msgMN = getResources().getStringArray(R.array.dashboard_midnight);
-                    Random genmsgMN = new Random();
+                    Random genmsgMN = new Random(seed);
                     int mn = genmsgMN.nextInt(msgMN.length);
                     return msgMN[mn];
 
                 case 11: case 12: case 13: case 14: case 15:
                     String[] msgRD = getResources().getStringArray(R.array.dashboard_random);
-                    Random genmsgRD = new Random();
+                    Random genmsgRD = new Random(seed);
                     int randomm = genmsgRD.nextInt(msgRD.length);
                     return msgRD[randomm];
 
