@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2025 bmobile
+     Consolidated bMobile User & Accounts + Atomichub Strings
+     Source: https://github.com/simplnc/android_packages_apps_Settings/tree/clean-commits
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- bMobile User Info -->
+    <string name="bmobile_userinfo_title">User info</string>
+    <string name="bmobile_userinfo_summary">This is where you can keep things personal. This is for you and only you - no one else but you. This is your own special zone.</string>
+    <string name="bmobile_userinfo_confirm_credential_title">Confirm your device credential</string>
+    <string name="bmobile_userinfo_confirm_credential_description">Authentication required to access User Information settings</string>
+    
+    <!-- bMobile Accounts -->
+    <string name="bmobile_accounts_title">bMobile accounts</string>
+    <string name="bmobile_accounts_summary">View and manage your accounts (Google, Outlook, others)</string>
+    
+    <!-- bMobile Profile -->
+    <string name="bmobile_profile_title">bMobile profile</string>
+    <string name="bmobile_profile_subtitle">Tap for device information</string>
+    <string name="bmobile_profile_build_summary">Build details</string>
+    <string name="bmobile_profile_variant_label">bMobile</string>
+    
+    <!-- bMobile Settings -->
+    <string name="bmobile_settings_title">bMobile settings</string>
+    <string name="bmobile_settings_intro_title">bMobile Services</string>
+    <string name="bmobile_settings_description">Configure privacy-focused mobile services and security features</string>
+    <string name="bmobile_microg_title">MicroG</string>
+    <string name="bmobile_microg_summary">Open-source replacement for Google Play Services</string>
+    <string name="bmobile_aurora_services_title">Aurora Services</string>
+    <string name="bmobile_aurora_services_summary">Privacy-focused app store services</string>
+    <string name="bmobile_firewall_title">Firewall</string>
+    <string name="bmobile_firewall_summary">Network firewall controls</string>
+    <string name="bmobile_ad_services_title">Ad Services</string>
+    <string name="bmobile_ad_services_summary">Advertisement service controls</string>
+    
+    <!-- Session/Journal -->
+    <string name="my_session_title">My Session</string>
+    <string name="session_messenger_title">Session Messenger</string>
+    <string name="session_messenger_summary">Launch Session routing activity</string>
+    <string name="session_messenger_intro_title">Session Messenger</string>
+    <string name="session_messenger_intro_summary">Private messenger overview</string>
+    <string name="daily_journal_title">Daily Journal</string>
+    <string name="daily_journal_summary">Open Daily You journal</string>
+    
+    <!-- Private Space -->
+    <string name="private_space_title">Private space</string>
+    <string name="private_space_description">Create a separate space for your private apps and data</string>
+    <string name="private_space_category_lock">Lock settings</string>
+    <string name="private_space_lock_title">Use one lock</string>
+    <string name="private_space_auto_lock_title">Auto lock</string>
+    <string name="private_space_category_hide">Hide settings</string>
+    <string name="private_space_hide_page_title">Hide Private Space</string>
+    <string name="private_space_category_system">System</string>
+    <string name="private_space_delete_title">Delete Private Space</string>
+    <string name="private_space_settings_footer_text">Private Space provides a secure, isolated environment for your sensitive apps and data.</string>
+    <string name="private_space_unlocked">Private Space unlocked</string>
+    
+    <!-- Gestures -->
+    <string name="gestures_title">Gestures</string>
+    <string name="gestures_summary">Configure system gestures</string>
+    
+    <!-- System Optimization -->
+    <string name="system_optimization_title">System optimization</string>
+    <string name="optimization_status_title">Optimization Status</string>
+    <string name="optimization_status_summary">Current system optimization status</string>
+    <string name="background_app_limits_title">Background App Limits</string>
+    <string name="background_app_limits_summary">Limit background app activity</string>
+    <string name="network_optimization_title">Network Optimization</string>
+    <string name="network_optimization_summary">Optimize network usage</string>
+    <string name="battery_optimization_title">Battery Optimization</string>
+    <string name="battery_optimization_summary">Optimize battery usage</string>
+    <string name="storage_optimization_title">Storage Optimization</string>
+    <string name="storage_optimization_summary">Optimize storage usage</string>
+    <string name="thermal_throttling_title">Thermal Throttling</string>
+    <string name="thermal_throttling_summary">Manage thermal throttling</string>
+    
+    <!-- AppSec -->
+    <string name="appsec_category_title">Application Security</string>
+    <string name="appsec_security_score">Security Score: %1$d</string>
+    <string name="appsec_security_level_maximum">Maximum Security</string>
+    <string name="appsec_security_level_advanced">Advanced</string>
+    <string name="appsec_security_level_basic">Basic Security</string>
+    <string name="appsec_installation_security_title">Installation Security</string>
+    <string name="appsec_installation_security_summary">Control app installation sources</string>
+    <string name="appsec_install_whitelist_title">Install App Whitelist</string>
+    <string name="appsec_install_whitelist_summary">Restrict installation to whitelisted sources</string>
+    <string name="appsec_access_control_title">Access Control</string>
+    <string name="appsec_access_control_summary">Control system access</string>
+    <string name="appsec_block_app_dashboard_title">Block App Dashboard</string>
+    <string name="appsec_block_app_dashboard_summary">Block access to app settings</string>
+    <string name="appsec_block_usb_popup_title">Block USB Popup</string>
+    <string name="appsec_block_usb_popup_summary">Block USB connection dialogs</string>
+    <string name="appsec_system_protection_title">System Protection</string>
+    <string name="appsec_system_protection_summary">Protect system settings</string>
+    <string name="appsec_block_location_settings_title">Block Location Settings</string>
+    <string name="appsec_block_location_settings_summary">Block access to location settings</string>
+    <string name="appsec_block_account_dashboard_title">Block Account Dashboard</string>
+    <string name="appsec_block_account_dashboard_summary">Block access to account settings</string>
+    <string name="appsec_block_safety_center_title">Block Safety Center</string>
+    <string name="appsec_block_safety_center_summary">Block access to Safety Center</string>
+    <string name="appsec_block_device_tweaks_title">Block Device Tweaks</string>
+    <string name="appsec_block_device_tweaks_summary">Block access to Device Tweaks settings</string>
+    <string name="appsec_block_system_optimization_title">Block System Optimization</string>
+    <string name="appsec_block_system_optimization_summary">Block access to System Optimization settings</string>
+    <string name="appsec_block_blocation_title">Block Enhanced Location</string>
+    <string name="appsec_block_blocation_summary">Block access to Enhanced Location settings</string>
+    
+    <!-- BLocation -->
+    <string name="location_privacy_dashboard_title">Enhanced Location Privacy</string>
+    <string name="location_privacy_dashboard_summary">Advanced location controls and privacy indicators</string>
+    <string name="blocation_confirm_credential_title">Confirm your device credential</string>
+    <string name="blocation_confirm_credential_description">Authentication required to access Enhanced Location Privacy settings</string>
+    <string name="keywords_location">location, privacy, gps, tracking</string>
+    <string name="location_apps_with_access">Apps with location access: %1$d</string>
+    <string name="location_recent_access_count">Recent access: %1$d apps in last hour</string>
+    <string name="location_precision_title">Location Precision</string>
+    <string name="location_precision_summary">Choose between precise and approximate location</string>
+    <string name="location_precision_precise">Precise (GPS accuracy)</string>
+    <string name="location_precision_approximate">Approximate (city-level)</string>
+    <string name="location_precision_coarse">Coarse (region-level)</string>
+    <string name="location_time_restrictions_title">Time-Based Access</string>
+    <string name="location_time_restrictions_summary">Only allow location access during specific hours</string>
+    <string name="location_app_overrides_title">App-Specific Permissions</string>
+    <string name="location_app_overrides_summary">Override location permissions for individual apps</string>
+    <string name="location_sharing_controls_title">Location Sharing</string>
+    <string name="location_sharing_controls_summary">Control how location data is shared</string>
+    <string name="location_status_title">Location Status</string>
+    <string name="location_status_gps_active">GPS: Active</string>
+    <string name="location_status_gps_inactive">GPS: Inactive</string>
+    <string name="location_status_gps_acquiring">GPS: Acquiring signal</string>
+    <string name="location_status_network_active">Network: Active</string>
+    <string name="location_status_network_inactive">Network: Inactive</string>
+    <string name="location_status_wifi_active">Wi-Fi: Active</string>
+    <string name="location_status_wifi_inactive">Wi-Fi: Inactive</string>
+    <string name="location_accuracy_high">High accuracy (GPS)</string>
+    <string name="location_accuracy_medium">Medium accuracy (Network)</string>
+    <string name="location_accuracy_low">Low accuracy (Coarse)</string>
+    
+    <!-- Mock Location -->
+    <string name="mock_location_title">Allow Mock Locations</string>
+    <string name="mock_location_disabled_summary">Prevent apps from using fake GPS locations</string>
+    <string name="mock_location_enabled_warning">⚠️ Warning: Mock locations are enabled. Apps can inject fake GPS data.</string>
+    <string name="mock_location_warning_title">⚠️ Mock Locations Detected</string>
+    <string name="mock_location_warning_summary">Mock location providers are active. Tap to open Developer Settings and disable mock location apps.</string>
+    
+    <!-- Device Tweaks -->
+    <string name="device_tweaks_title">Device Tweaks</string>
+    
+    <!-- System Application -->
+    <string name="apps_dashboard_title">Apps</string>
+    <string name="all_apps">All apps</string>
+    <string name="summary_placeholder">Summary</string>
+    <string name="keywords_applications_settings">apps, applications, manage</string>
+    <string name="category_name_general">General</string>
+    <string name="app_default_dashboard_title">Default apps</string>
+    <string name="unused_apps">Unused apps</string>
+    <string name="app_battery_usage_title">App battery usage</string>
+    <string name="app_battery_usage_summary">View battery usage by app</string>
+    <string name="special_access">Special access</string>
+    
+    <!-- Mock Locations -->
+    <string name="mock_locations_title">Mock Locations</string>
+    <string name="mock_locations_summary">Configure mock location settings</string>
+
+        <!-- USB Debugging -->
+    <string name="usb_debugging_title">USB Debugging</string>
+    <string name="usb_debugging_summary">Enable USB debugging for development</string>
+
+    <!-- Developer Options -->
+    <string name="developer_options_title">Developer Options</string>
+    <string name="developer_options_summary">Enable developer options and advanced settings</string>
+
+    <!-- Settings Backup &amp; Restore -->
+    <string name="settings_backup_restore_title">Backup &amp; Restore</string>
+    <string name="settings_backup_restore_intro_summary">Backup and restore your device settings</string>
+
+    <!-- Auto Reboot -->
+    <string name="auto_reboot_title">Auto Reboot</string>
+    <string name="auto_reboot_summary">Automatically reboot the device at scheduled times</string>
+    
+    <!-- Auto Reboot Settings -->
+    <string name="auto_reboot_intro_title">Schedule Automatic Reboots</string>
+    <string name="auto_reboot_intro_summary">Automatically reboot your device at scheduled times for security and maintenance. The device will reboot even if the screen is off.</string>
+    
+    <string name="auto_reboot_main_category_title">Schedule</string>
+    <string name="auto_reboot_enabled_title">Enable Auto Reboot</string>
+    <string name="auto_reboot_enabled_summary">Automatically reboot the device at the scheduled time</string>
+    
+    <string name="auto_reboot_interval_title">Reboot Interval</string>
+    <string name="auto_reboot_interval_summary">How often to reboot the device</string>
+    <string name="auto_reboot_interval_daily">Daily</string>
+    <string name="auto_reboot_interval_every_2_days">Every 2 days</string>
+    <string name="auto_reboot_interval_every_3_days">Every 3 days</string>
+    <string name="auto_reboot_interval_weekly">Weekly</string>
+    <string name="auto_reboot_interval_custom">Every %1$d hours</string>
+    
+    <string name="auto_reboot_time_title">Reboot Time</string>
+    <string name="auto_reboot_time_summary">Time of day to reboot (24-hour format)</string>
+    <string name="auto_reboot_time_not_set">Not set</string>
+    <string name="auto_reboot_time_picker_title">Select Reboot Time</string>
+    
+    <string name="auto_reboot_footer">Auto reboot helps maintain device security and performance by periodically restarting the system. The device will reboot even when the screen is off.</string>
+
+    <!-- UserInfo Bubble Setting -->
+    <string name="userinfo_bubble_setting_description">Configure bubble notification settings</string>
+</resources>
+

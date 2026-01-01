@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="auto_reboot_settings_screen"
+    android:title="@string/auto_reboot_title">
+    
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="auto_reboot_intro"
+        android:title="@string/auto_reboot_intro_title"
+        android:summary="@string/auto_reboot_intro_summary"
+        settings:searchable="false" />
+    
+    <PreferenceCategory
+        android:key="auto_reboot_main_category"
+        android:title="@string/auto_reboot_main_category_title"
+        android:order="10">
+        
+        <SwitchPreference
+            android:key="auto_reboot_enabled"
+            android:title="@string/auto_reboot_enabled_title"
+            android:summary="@string/auto_reboot_enabled_summary"
+            android:defaultValue="false"
+            android:order="11"
+            settings:layout="@layout/adaptive_preference_card_top" />
+        
+        <ListPreference
+            android:key="auto_reboot_interval"
+            android:title="@string/auto_reboot_interval_title"
+            android:summary="@string/auto_reboot_interval_summary"
+            android:entries="@array/auto_reboot_interval_entries"
+            android:entryValues="@array/auto_reboot_interval_values"
+            android:defaultValue="24"
+            android:order="12"
+            android:enabled="false"
+            settings:layout="@layout/adaptive_preference_card_middle" />
+        
+        <Preference
+            android:key="auto_reboot_time"
+            android:title="@string/auto_reboot_time_title"
+            android:summary="@string/auto_reboot_time_summary"
+            android:order="13"
+            android:enabled="false"
+            settings:layout="@layout/adaptive_preference_card_bottom" />
+    </PreferenceCategory>
+    
+    <com.android.settingslib.widget.FooterPreference
+        android:key="auto_reboot_footer"
+        android:title="@string/auto_reboot_footer"
+        settings:searchable="false" />
+    
+</PreferenceScreen>
+

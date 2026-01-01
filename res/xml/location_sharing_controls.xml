@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 bmobile
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/location_sharing_controls_title">
+
+    <Preference
+        android:key="sharing_controls_info"
+        android:title="@string/location_sharing_controls_title"
+        android:summary="@string/location_sharing_controls_summary"
+        android:order="1"
+        android:selectable="false"/>
+
+    <SwitchPreference
+        android:key="location_sharing_enabled"
+        android:title="Enable Location Sharing"
+        android:summary="Allow apps to access your location"
+        android:order="2"
+        android:defaultValue="true"
+        settings:controller="com.android.settings.location.LocationSharingController"/>
+
+    <SwitchPreference
+        android:key="location_background_access_enabled"
+        android:title="Allow Background Location Access"
+        android:summary="Allow apps to access location when running in background"
+        android:order="3"
+        android:defaultValue="true"
+        android:dependency="location_sharing_enabled"
+        settings:controller="com.android.settings.location.LocationBackgroundAccessController"/>
+
+</PreferenceScreen>
+

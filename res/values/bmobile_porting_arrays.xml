@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2025 bmobile
+     Consolidated bMobile User & Accounts + Atomichub Arrays
+     Source: https://github.com/simplnc/android_packages_apps_Settings/tree/clean-commits
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Location Precision Arrays -->
+    <string-array name="location_precision_entries">
+        <item>@string/location_precision_precise</item>
+        <item>@string/location_precision_approximate</item>
+        <item>@string/location_precision_coarse</item>
+    </string-array>
+    
+    <string-array name="location_precision_values" translatable="false">
+        <item>precise</item>
+        <item>approximate</item>
+        <item>coarse</item>
+    </string-array>
+
+    <!-- Location Time Period Arrays -->
+    <string-array name="location_time_period_entries">
+        <item>Always</item>
+        <item>Daytime (6 AM - 10 PM)</item>
+        <item>Business Hours (9 AM - 5 PM)</item>
+        <item>Evening (6 PM - 11 PM)</item>
+    </string-array>
+
+    <string-array name="location_time_period_values" translatable="false">
+        <item>always</item>
+        <item>daytime</item>
+        <item>business</item>
+        <item>evening</item>
+    </string-array>
+</resources>
+

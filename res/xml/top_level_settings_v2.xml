@@ -24,7 +24,8 @@
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/mainuser_profile_card"
         android:key="top_level_mainuser_profile_card"
-        android:selectable="false"
+        android:selectable="true"
+        android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
         android:order="-200" />
 
     <PreferenceCategory

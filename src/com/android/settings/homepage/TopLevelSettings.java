@@ -156,6 +156,17 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             return true;
         }
 
+        // Check if preference's fragment is blocked
+        if (preference instanceof HomepagePreference) {
+            HomepagePreference homepagePref = (HomepagePreference) preference;
+            String fragment = homepagePref.getFragment();
+            if (fragment != null && 
+                com.android.settings.applications.specialaccess.BlockChecker.isBlocked(getContext(), fragment)) {
+                com.android.settings.applications.specialaccess.BlockChecker.checkAndShowMessage(getContext(), fragment);
+                return true; // Consume click
+            }
+        }
+
         // Register SplitPairRule for SubSettings.
         ActivityEmbeddingRulesController.registerSubSettingsPairRule(getContext(),
                 true /* clearTop */);
