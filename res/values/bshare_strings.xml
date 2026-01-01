@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bshare_settings_title">BShare</string>
+    <string name="bshare_settings_summary">Share files over local WiFi network</string>
+    
+    <string name="bshare_intro_title">Share files over WiFi</string>
+    <string name="bshare_intro_summary">Transfer files to nearby devices on the same WiFi network. Fast, secure, and no internet required.</string>
+    
+    <string name="bshare_server_category_title">Server</string>
+    <string name="bshare_server_status_title">Server Status</string>
+    <string name="bshare_server_running">Running on %1$s:%2$d</string>
+    <string name="bshare_server_stopped">Stopped</string>
+    <string name="bshare_start_server_title">Start Server</string>
+    <string name="bshare_start_server_summary">Make your device available to receive files</string>
+    
+    <string name="bshare_discovery_category_title">Discovery</string>
+    <string name="bshare_start_discovering_title">Find Devices</string>
+    <string name="bshare_start_discovering_summary">Search for BShare devices on your network</string>
+    
+    <string name="bshare_file_category_title">File Transfer</string>
+    <string name="bshare_select_file_title">Select File</string>
+    <string name="bshare_select_file_summary">Choose a file to share</string>
+    
+    <string name="bshare_select_download_title">From Downloads</string>
+    <string name="bshare_select_download_summary">Share files from Downloads folder</string>
+    
+    <string name="bshare_share_to_apps_title">Share to Apps</string>
+    <string name="bshare_share_to_apps_summary">Use Android share menu to send files</string>
+    <string name="bshare_share_message">Share via BShare</string>
+    <string name="bshare_error_saving_file">Error saving file for sharing</string>
+    
+    <string name="bshare_status_discovering">Discovering devices...</string>
+    <string name="bshare_status_connected">Connected</string>
+    <string name="bshare_status_transferring">Transferring...</string>
+    <string name="bshare_status_complete">Transfer complete</string>
+</resources>
+

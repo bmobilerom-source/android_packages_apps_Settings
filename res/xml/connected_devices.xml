@@ -98,6 +98,16 @@
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
 
+    <Preference
+        android:fragment="com.android.settings.bshare.BShareSettingsFragment"
+        android:key="bshare_settings"
+        android:title="@string/bshare_settings_title"
+        android:summary="@string/bshare_settings_summary"
+        android:icon="@drawable/ic_bshare"
+        android:order="45"
+        settings:controller="com.android.settings.bshare.BSharePreferenceController"
+        settings:allowDividerAbove="true" />
+
     <com.android.settingslib.widget.FooterPreference
         android:key="discoverable_footer"
         android:selectable="false"

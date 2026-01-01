@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="bshare_settings_screen"
+    android:title="@string/bshare_settings_title">
+    
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="bshare_intro"
+        android:title="@string/bshare_intro_title"
+        android:summary="@string/bshare_intro_summary"
+        settings:searchable="false" />
+    
+    <PreferenceCategory
+        android:key="bshare_server_category"
+        android:title="@string/bshare_server_category_title"
+        android:order="10">
+        
+        <Preference
+            android:key="bshare_server_status"
+            android:title="@string/bshare_server_status_title"
+            android:summary="@string/bshare_server_stopped"
+            android:order="11"
+            android:icon="@drawable/ic_bshare"
+            settings:layout="@layout/adaptive_preference_card_top" />
+        
+        <Preference
+            android:key="bshare_start_server"
+            android:title="@string/bshare_start_server_title"
+            android:summary="@string/bshare_start_server_summary"
+            android:order="12"
+            android:icon="@drawable/ic_bshare_receive"
+            settings:layout="@layout/adaptive_preference_card_bottom" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:key="bshare_discovery_category"
+        android:title="@string/bshare_discovery_category_title"
+        android:order="20">
+        
+        <Preference
+            android:key="bshare_start_discovering"
+            android:title="@string/bshare_start_discovering_title"
+            android:summary="@string/bshare_start_discovering_summary"
+            android:order="21"
+            android:icon="@drawable/ic_bshare_send"
+            settings:layout="@layout/adaptive_preference_card" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:key="bshare_file_category"
+        android:title="@string/bshare_file_category_title"
+        android:order="30">
+        
+        <Preference
+            android:key="bshare_select_file"
+            android:title="@string/bshare_select_file_title"
+            android:summary="@string/bshare_select_file_summary"
+            android:order="31"
+            android:icon="@drawable/ic_file"
+            settings:layout="@layout/adaptive_preference_card_top" />
+        
+        <Preference
+            android:key="bshare_select_download"
+            android:title="@string/bshare_select_download_title"
+            android:summary="@string/bshare_select_download_summary"
+            android:order="32"
+            android:icon="@drawable/ic_download"
+            settings:layout="@layout/adaptive_preference_card_middle" />
+        
+        <Preference
+            android:key="bshare_share_to_apps"
+            android:title="@string/bshare_share_to_apps_title"
+            android:summary="@string/bshare_share_to_apps_summary"
+            android:order="33"
+            android:icon="@drawable/ic_share"
+            settings:layout="@layout/adaptive_preference_card_bottom" />
+    </PreferenceCategory>
+    
+</PreferenceScreen>
+
