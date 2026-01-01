@@ -4249,6 +4249,16 @@
                 <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
+        
+        <!-- BShare Stop Receiver - Handles stop action from notification -->
+        <receiver
+            android:name=".bshare.BShareStopReceiver"
+            android:exported="false"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.android.settings.bshare.STOP_SERVER" />
+            </intent-filter>
+        </receiver>
 
         <!-- Auto Reboot Receiver - Handles scheduled reboot alarms -->
         <receiver
