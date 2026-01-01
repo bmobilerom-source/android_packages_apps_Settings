@@ -10,6 +10,7 @@
     <string name="display_customizations4_summary">@null</string>
     <string name="display_customizations5_title">Display customizations 5</string>
     <string name="display_customizations5_summary">@null</string>
+    <string name="skylineui_lab_title">SkylineUI Lab</string>
     <string name="skylineui_lab_summary">@null</string>
 </resources>
 
