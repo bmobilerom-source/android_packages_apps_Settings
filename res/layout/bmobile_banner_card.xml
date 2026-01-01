@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="8dp"
+    android:background="@drawable/bmobile_card_top"
+    android:clipToPadding="false"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@android:id/icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null" />
+
+</FrameLayout>
+

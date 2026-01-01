@@ -26,6 +26,16 @@
   <!-- Main user info, about phone, accounts, skyline ui, anatolia, wallpaper are hidden -->
   <!-- Connected devices is shown, all text centered, icons added, system changed to SystemGrid -->
 
+  <!-- MainUser: parental action hub (userinfo_pref + Atomichub2) -->
+  <com.android.settings.widget.HomepagePreference
+        android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+        android:icon="@drawable/ic_settings_about_device_filled"
+        android:key="top_level_user_action_hub"
+        android:order="-155"
+        android:title="@string/user_action_hub_title"
+        android:summary="@string/user_action_hub_summary"
+        settings:highlightableMenuKey="@string/menu_key_about_device"/>
+
    <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.network.NetworkDashboardFragment"
         android:icon="@drawable/ic_settings_wireless_filled"
@@ -37,7 +47,7 @@
         settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.CustomDashboardSettings"
+        android:fragment="com.bmobile.fragments.CustomDashboardSettings"
         android:icon="@drawable/ic_custom_dashboard"
         android:key="top_level_custom_dashboard"
         android:order="-148"

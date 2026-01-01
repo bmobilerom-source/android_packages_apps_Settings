@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2025 LineageOS
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/system_optimization_title">
+
+    <!-- Lottie Animation -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="system_optimization_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/optimise" />
+
+ 
+    <!-- Status Summary -->
+    <Preference
+        android:key="optimization_status"
+        android:title="@string/optimization_status_title"
+        android:summary="@string/optimization_status_summary"
+        android:selectable="false"
+        android:order="-990"
+        settings:controller="com.bmobile.fragments.OptimizationStatusController"
+        settings:searchable="false"
+        settings:layout="@layout/adaptive_preference_card" />
+
+    <!-- Optimization Preferences -->
+    <!-- Only features that work out of the box without kernel/framework changes -->
+    
+    <SwitchPreference
+        android:key="background_app_limits"
+        android:title="@string/background_app_limits_title"
+        android:summary="@string/background_app_limits_summary"
+        android:defaultValue="false"
+        settings:controller="com.bmobile.fragments.BackgroundAppLimitsController"
+        settings:searchable="false" />
+
+    <SwitchPreference
+        android:key="network_optimization"
+        android:title="@string/network_optimization_title"
+        android:summary="@string/network_optimization_summary"
+        android:defaultValue="false"
+        settings:controller="com.bmobile.fragments.NetworkOptimizationController"
+        settings:searchable="false" />
+
+    <SwitchPreference
+        android:key="battery_optimization"
+        android:title="@string/battery_optimization_title"
+        android:summary="@string/battery_optimization_summary"
+        android:defaultValue="false"
+        settings:controller="com.bmobile.fragments.BatteryOptimizationController"
+        settings:searchable="false" />
+
+</PreferenceScreen>

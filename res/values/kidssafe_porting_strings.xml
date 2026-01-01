@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2025 BashaMobile - Kids Safe Edition
+    Consolidated Kids Safe User & Accounts + Educational Apps Strings
+    Source: Adapted from bmobile_porting_strings.xml for kid-safe functionality
+    SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Kids Safe User Info -->
+    <string name="kidssafe_userinfo_title">Kids Safe Zone</string>
+    <string name="kidssafe_userinfo_summary">Hi Katheleya this is you zone only for you message your daddy and keep a journal of your happy days.....</string>
+    <string name="kidssafe_userinfo_confirm_credential_title">Confirm Parent Credential</string>
+    <string name="kidssafe_userinfo_confirm_credential_description">Parental authentication required to access Kids Safe settings</string>
+
+    <!-- Kids Safe Accounts -->
+    <string name="kidssafe_accounts_title">Kids Safe Accounts</string>
+    <string name="kidssafe_accounts_summary">Manage educational accounts (Khan Academy, ABCmouse, others)</string>
+
+    <!-- Kids Safe Profile -->
+    <string name="kidssafe_profile_title">Kids Profile</string>
+    <string name="kidssafe_profile_subtitle">Tap for kid-friendly device information</string>
+    <string name="kidssafe_profile_build_summary">Safe build details</string>
+    <string name="kidssafe_profile_variant_label">Kids Safe</string>
+
+    <!-- Kids Safe Settings -->
+    <string name="kidssafe_settings_title">Kids Safe Settings</string>
+    <string name="kidssafe_expressive_settings_title">Katheleya\'s Settings</string>
+    <string name="kidssafe_settings_intro_title">Kids Safe Services</string>
+    <string name="kidssafe_settings_description">Configure parental controls and educational features</string>
+    <string name="kidssafe_educational_title">Educational Apps</string>
+    <string name="kidssafe_educational_summary">Open-source educational applications</string>
+    <string name="kidssafe_learning_services_title">Learning Services</string>
+    <string name="kidssafe_learning_services_summary">Privacy-focused learning platforms</string>
+    <string name="kidssafe_parental_controls_title">Parental Controls</string>
+    <string name="kidssafe_parental_controls_summary">Manage screen time and content restrictions</string>
+    <string name="kidssafe_content_filter_title">Content Filter</string>
+    <string name="kidssafe_content_filter_summary">Filter inappropriate content and websites</string>
+
+    <!-- Educational Apps/Journal -->
+    <string name="kidssafe_session_title">Learning Session</string>
+    <string name="kidssafe_messenger_title">Message Daddy</string>
+    <string name="kidssafe_messenger_summary">Send messages to your daddy and family</string>
+    <string name="kidssafe_messenger_intro_title">Kids Safe Messenger</string>
+    <string name="kidssafe_messenger_intro_summary">Safe messaging overview for family coordination</string>
+    <string name="kidssafe_journal_title">Happy Days Journal</string>
+    <string name="kidssafe_journal_summary">Keep a journal of your happy days and adventures</string>
+
+    <!-- Private Space (adapted for kids) -->
+    <string name="kidssafe_space_title">Kids Learning Space</string>
+    <string name="kidssafe_space_description">Create a dedicated space for educational apps and learning materials</string>
+    <string name="kidssafe_space_category_lock">Access Controls</string>
+    <string name="kidssafe_space_lock_title">Parental Lock</string>
+    <string name="kidssafe_space_auto_lock_title">Auto Learning Sessions</string>
+    <string name="kidssafe_space_category_hide">Content Protection</string>
+    <string name="kidssafe_space_hide_page_title">Hide Learning Space</string>
+    <string name="kidssafe_space_category_system">Educational Settings</string>
+    <string name="kidssafe_space_delete_title">Reset Learning Space</string>
+    <string name="kidssafe_space_settings_footer_text">Learning Space provides a secure, educational environment for age-appropriate apps and content.</string>
+    <string name="kidssafe_space_unlocked">Learning Space unlocked</string>
+
+    <!-- Learning Controls -->
+    <string name="learning_controls_title">Learning Controls</string>
+    <string name="learning_controls_summary">Configure educational settings and parental controls</string>
+
+    <!-- System Basic Defaults (adapted) -->
+    <string name="kidssafe_basic_defaults_title">Learning Defaults</string>
+
+    <!-- Educational Features -->
+    <string name="educational_dashboard_title">Educational Dashboard</string>
+    <string name="educational_dashboard_summary">Access learning tools and parental controls</string>
+
+    <!-- Time Management -->
+    <string name="screen_time_title">Screen Time</string>
+    <string name="screen_time_summary">Monitor and limit device usage time</string>
+    <string name="learning_schedule_title">Learning Schedule</string>
+    <string name="learning_schedule_summary">Set educational app access times</string>
+
+    <!-- Content Safety -->
+    <string name="content_safety_title">Content Safety</string>
+    <string name="content_safety_summary">Filter and monitor content access</string>
+    <string name="app_restrictions_title">App Restrictions</string>
+    <string name="app_restrictions_summary">Control which apps are available</string>
+
+    <!-- Progress Tracking -->
+    <string name="progress_tracking_title">Learning Progress</string>
+    <string name="progress_tracking_summary">Track educational achievements and goals</string>
+
+    <!-- Family Communication -->
+    <string name="family_communication_title">Family Messages</string>
+    <string name="family_communication_summary">Safe communication with family members</string>
+
+</resources>

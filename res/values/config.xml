@@ -278,6 +278,13 @@
         com.android.packageinstaller
     </string>
 
+    <!-- Packages allowed to install apps when AppSec install whitelist is enabled -->
+    <string-array name="config_allowed_install_app_packages" translatable="false">
+        <item>com.aurora.store</item>
+        <item>com.android.vending</item>
+        <item>com.android.packageinstaller</item>
+    </string-array>
+
     <!-- Device lock controller package name -->
     <string name="config_device_lock_controller_package_name" translatable="false">
         com.android.devicelockcontroller

@@ -55,4 +55,22 @@
           <item>@string/settings_random4</item>
           <item>@string/settings_random5</item>
      </string-array>
+
+     <!-- Status Bar Logo Position Entries -->
+     <string-array name="status_bar_logo_position_entries">
+          <item>Left</item>
+          <item>Center</item>
+          <item>Right</item>
+     </string-array>
+
+     <!-- Status Bar Logo Style Entries -->
+     <string-array name="status_bar_logo_style_entries">
+          <item>Default</item>
+          <item>Minimal</item>
+          <item>Custom</item>
+     </string-array>
+
+     <!-- NOTE: do not define config_allowed_install_app_packages here.
+          Keeping a single source-of-truth avoids accidental overrides that would break the
+          Install App Whitelist feature. -->
 </resources>

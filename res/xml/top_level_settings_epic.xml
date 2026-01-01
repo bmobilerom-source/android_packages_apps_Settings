@@ -129,10 +129,9 @@
         settings:highlightableMenuKey="@string/menu_key_emergency"/>
     -->
 
-    <!-- System + YR Custom Dashboard -->
+    <!-- YR Custom Dashboard (no icon — picker lives elsewhere) -->
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.YrCustomDashboardSettings"
-        android:icon="@drawable/ic_custom_dashboard"
+        android:fragment="com.bmobile.fragments.YrCustomDashboardSettings"
         android:key="top_level_yr_custom_dashboard"
         android:order="15"
         android:title="@string/yr_custom_dashboard_title"

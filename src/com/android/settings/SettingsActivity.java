@@ -487,7 +487,17 @@ public class SettingsActivity extends SettingsBaseActivity
     /** Returns the initial fragment name that the activity will launch. */
     @VisibleForTesting
     public String getInitialFragmentName(Intent intent) {
-        return intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
+        String fragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
+        
+        // Check if fragment is blocked
+        if (fragmentName != null && 
+            com.android.settings.applications.specialaccess.BlockChecker.isBlocked(this, fragmentName)) {
+            com.android.settings.applications.specialaccess.BlockChecker.checkAndShowMessage(this, fragmentName);
+            // Return null to prevent fragment from loading
+            return null;
+        }
+        
+        return fragmentName;
     }
 
     @Override
@@ -639,6 +649,15 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     protected boolean isValidFragment(String fragmentName) {
+        // Check if fragment is blocked FIRST
+        if (fragmentName != null) {
+            if (com.android.settings.applications.specialaccess.BlockChecker.isBlocked(this, fragmentName)) {
+                // Show message and return false (invalid fragment)
+                com.android.settings.applications.specialaccess.BlockChecker.checkAndShowMessage(this, fragmentName);
+                return false;
+            }
+        }
+        
         // Almost all fragments are wrapped in this,
         // except for a few that have their own activities.
         for (int i = 0; i < SettingsGateway.ENTRY_FRAGMENTS.length; i++) {
@@ -683,6 +702,19 @@ public class SettingsActivity extends SettingsBaseActivity
                 || "com.android.settings.applications.StorageUse".equals(intentClass)) {
             // Old names of manage apps.
             intentClass = ManageApplications.class.getName();
+        }
+
+        // Convert MoreSecurityPrivacySettingsActivity to its fragment
+        if (intentClass != null && intentClass.contains("MoreSecurityPrivacySettingsActivity")) {
+            intentClass = "com.android.settings.safetycenter.MoreSecurityPrivacyFragment";
+        }
+
+        // Check if the resolved fragment class is blocked
+        if (intentClass != null && 
+            com.android.settings.applications.specialaccess.BlockChecker.isBlocked(this, intentClass)) {
+            com.android.settings.applications.specialaccess.BlockChecker.checkAndShowMessage(this, intentClass);
+            // Return null to prevent fragment from loading
+            return null;
         }
 
         return intentClass;

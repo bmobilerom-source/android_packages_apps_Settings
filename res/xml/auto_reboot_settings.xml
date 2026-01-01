@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="auto_reboot_settings_screen"
+    android:title="@string/auto_reboot_title">
+
+    <PreferenceCategory
+        android:title="@string/auto_reboot_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small">
+    </PreferenceCategory>
+
+    <!-- Main Switch — controllers registered manually in AutoRebootSettings -->
+    <SwitchPreference
+        android:key="auto_reboot_main_switch"
+        android:title="@string/auto_reboot_title"
+        android:order="-1000" />
+
+    <!-- Interval — controller registered manually in AutoRebootSettings -->
+    <ListPreference
+        android:key="auto_reboot_interval"
+        android:title="@string/auto_reboot_interval_title"
+        android:order="0" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="auto_reboot_footer"
+        android:title="@string/auto_reboot_footer"
+        android:selectable="false"
+        android:order="999"
+        settings:searchable="false" />
+
+</PreferenceScreen>

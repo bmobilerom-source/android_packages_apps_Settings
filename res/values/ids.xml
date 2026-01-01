@@ -50,4 +50,10 @@
     <item type="id" name="dark_ui_turn_on_button" />
     <item type="id" name="dark_ui_turn_off_button" />
 
+    <!-- Card navigation IDs -->
+    <item type="id" name="card_1" />
+    <item type="id" name="card_2" />
+    <item type="id" name="card_3" />
+    <item type="id" name="card_4" />
+
 </resources>

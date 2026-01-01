@@ -102,6 +102,7 @@ import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
+import com.android.settings.deviceinfo.UserInfoFragement;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
@@ -129,6 +130,7 @@ import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.PowerMenuSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
+import com.android.settings.gestures.TapScreenGestureSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.KeyboardSettings;
@@ -143,6 +145,7 @@ import com.android.settings.language.LanguageSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationServices;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.location.MockLocationsSettings;
 import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -212,15 +215,15 @@ import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSetting
 import com.android.settings.wifi.tether.WifiTetherSettings;
 
 import com.android.settings.kidssafe.KidsSafeUserInfoFragment;
-import com.epic.fragments.BMobileExpressiveSettings;
-import com.epic.fragments.BMobileDashboardSettings;
-import com.epic.fragments.CustomDashboardSettings;
-import com.epic.fragments.KidsSafeDashboardSettings;
-import com.epic.fragments.YrCustomDashboardSettings;
-import com.epic.fragments.DashboardStyleSettings;
-import com.epic.fragments.ExtendedHomepageWidgetsFragment;
-import com.epic.fragments.FunDisplaySettings;
-import com.epic.fragments.HomepageWidgetsFragment;
+import com.bmobile.fragments.BMobileExpressiveSettings;
+import com.bmobile.fragments.BMobileDashboardSettings;
+import com.bmobile.fragments.CustomDashboardSettings;
+import com.bmobile.fragments.KidsSafeDashboardSettings;
+import com.bmobile.fragments.YrCustomDashboardSettings;
+import com.bmobile.fragments.DashboardStyleSettings;
+import com.bmobile.fragments.ExtendedHomepageWidgetsFragment;
+import com.bmobile.fragments.FunDisplaySettings;
+import com.bmobile.fragments.HomepageWidgetsFragment;
 
 public class SettingsGateway {
 
@@ -306,6 +309,7 @@ public class SettingsGateway {
             PickupGestureSettings.class.getName(),
             DoubleTwistGestureSettings.class.getName(),
             SystemNavigationGestureSettings.class.getName(),
+            TapScreenGestureSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),
             CommunalDashboardFragment.class.getName(),
@@ -431,7 +435,31 @@ public class SettingsGateway {
             BMobileExpressiveSettings.class.getName(),
             KidsSafeUserInfoFragment.class.getName(),
             HomepageWidgetsFragment.class.getName(),
-            ExtendedHomepageWidgetsFragment.class.getName()
+            ExtendedHomepageWidgetsFragment.class.getName(),
+            
+            // bMobile User & Accounts + Atomichub Fragments
+            com.android.settings.deviceinfo.UserInfoFragement.class.getName(),
+            com.android.settings.deviceinfo.BMobileUserInfoFragment.class.getName(),
+            com.android.settings.deviceinfo.BMobileAccountsFragment.class.getName(),
+            com.bmobile.fragments.MySessionFragment.class.getName(),
+            com.android.settings.location.BLocationSettings.class.getName(),
+            com.android.settings.location.MockLocationsSettings.class.getName(),
+            com.android.settings.location.LocationTimeRestrictionsFragment.class.getName(),
+            com.android.settings.location.LocationSharingControlsFragment.class.getName(),
+            com.android.settings.location.LocationAppOverridesFragment.class.getName(),
+            com.android.settings.gestures.GestureSettings.class.getName(),
+            com.bmobile.fragments.BMobileSettingsFragment.class.getName(),
+            com.bmobile.fragments.SystemApplicationSettings.class.getName(),
+            com.bmobile.fragments.SystemOptimizationSettings.class.getName(),
+            com.bmobile.fragments.DeviceTweaksSettings.class.getName(),
+            com.bmobile.fragments.AutoRebootSettings.class.getName(),
+            com.bmobile.fragments.SystemBasicDefaultsSettings.class.getName(),
+            com.bmobile.fragments.KidsSafeBasicDefaultsSettings.class.getName(),
+            com.bmobile.fragments.KidsSafeExpressiveSettings.class.getName(),
+            com.bmobile.fragments.SettingsBackupRestore.class.getName(),
+            com.android.settings.applications.specialaccess.AppSecSettings.class.getName(),
+            com.palladium.atomichub.Atomichub.class.getName(),
+            com.palladium.atomichub.Atomichub2.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

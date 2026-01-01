@@ -12,10 +12,17 @@
     android:title="Settings">
 
     <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/mainuser_profile_card"
+        android:key="about_device_info"
+        android:selectable="true"
+        android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
+        android:order="-2001" />
+
+    <com.android.settingslib.widget.LayoutPreference
         android:key="top_level_homepage_widgets"
         android:selectable="false"
         android:layout="@layout/homepage_widgets"
-        android:order="-2000" />
+        android:order="-1995" />
 
     <PreferenceCategory
         android:order="-120"
@@ -62,7 +69,7 @@
             settings:controller="com.android.settings.sound.TopLevelSoundPreferenceController"/>
 
         <com.android.settings.widget.HomepagePreference
-            android:fragment="com.epic.fragments.BMobileDashboardSettings"
+            android:fragment="com.bmobile.fragments.BMobileDashboardSettings"
             android:icon="@drawable/ic_custom_dashboard"
             android:key="top_level_bmobile_dashboard"
             android:order="-20"

@@ -29,7 +29,7 @@
         android:selectable="true"
         android:enabled="true"
         android:shouldDisableView="false"
-        android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+        android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
         android:layout="@layout/CustomerOS_header"
         android:order="-2000" />
 
@@ -188,7 +188,7 @@
 
         <!-- System hidden in Custom V2 -->
         <!-- <com.android.settings.widget.HomepagePreference
-            android:fragment="com.epic.fragments.SystemGrid" 
+            android:fragment="com.bmobile.fragments.SystemGrid" 
             android:icon="@drawable/ic_settings_system_dashboard_filled"
             android:key="top_level_system"
             android:order="-20"
@@ -294,15 +294,6 @@
             android:summary="@string/accessibility_settings_summary"
             settings:highlightableMenuKey="@string/menu_key_accessibility"
             settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
-
-        <com.android.settings.widget.HomepagePreference
-            android:fragment="com.epic.fragments.BMobileDashboardSettings"
-            android:icon="@drawable/ic_custom_dashboard"
-            android:key="top_level_bmobile_dashboard"
-            android:order="-15"
-            android:title="@string/bmobile_dashboard_title"
-            android:summary="@string/bmobile_dashboard_summary"
-            settings:highlightableMenuKey="@string/menu_key_system"/>
 
         <!-- Tips and Support hidden per user request -->
         <!-- <com.android.settings.widget.HomepagePreference

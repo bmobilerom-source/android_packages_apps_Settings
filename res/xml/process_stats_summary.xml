@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/app_memory_use"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="app_list">
 
     <SwitchPreference
@@ -38,25 +39,25 @@
         <Preference
             android:key="performance"
             android:selectable="false"
-            android:layout="@layout/horizontal_preference"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/memory_performance" />
 
         <Preference
             android:key="total_memory"
             android:selectable="false"
-            android:layout="@layout/horizontal_preference"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/total_memory" />
 
         <Preference
             android:key="average_used"
             android:selectable="false"
-            android:layout="@layout/horizontal_preference"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/average_used" />
 
         <Preference
             android:key="free"
             android:selectable="false"
-            android:layout="@layout/horizontal_preference"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/free_memory" />
 
         <com.android.settings.applications.SpacePreference
@@ -64,6 +65,7 @@
 
         <Preference
             android:key="apps_list"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/memory_usage_apps" />
 
     </PreferenceCategory>

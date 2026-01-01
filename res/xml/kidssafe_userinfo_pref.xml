@@ -15,4 +15,11 @@
         android:order="20"
         android:title="@string/kidssafe_userinfo_summary"/>
 
+    <Preference
+        android:key="kidssafe_basic_defaults"
+        android:title="@string/system_basic_defaults_title"
+        android:summary="@string/system_basic_defaults_summary"
+        android:order="30"
+        android:fragment="com.bmobile.fragments.KidsSafeBasicDefaultsSettings" />
+
 </PreferenceScreen>

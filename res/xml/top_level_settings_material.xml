@@ -23,16 +23,13 @@
     android:key="top_level_settings"
     android:title="Settings">
 
-    <!-- Material Style - Grid layout with cards, similar to DisplayPageGrid -->
-    <!-- User profile card (hidden) -->
-    <!--
+    <!-- Kathaleya — profile opens bMobile user hub (Atomichub2) -->
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/mainuser_profile_card"
         android:key="about_device_info"
         android:selectable="true"
-        android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+        android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
         android:order="-2000"/>
-    -->
 
     <!-- Material Dashboard Grid - All preferences from top_level_settings_v2.xml as cards -->
     <com.android.settingslib.widget.LayoutPreference
