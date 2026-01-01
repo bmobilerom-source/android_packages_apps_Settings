@@ -47,10 +47,15 @@ class StorageCardView(context: Context, attrs: AttributeSet?) : AboutBaseCard(co
         layoutParams = LayoutParams(resources.getDimensionPixelSize(R.dimen.storage_card_min_width), resources.getDimensionPixelSize(R.dimen.storage_card_min_height))
         layout = RelativeLayout(context)
         layout.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, resources.getDimensionPixelSize(R.dimen.storage_card_min_height))
+        
+        // No ripple effect - card is not clickable
+        
         waveView = WaveView(context)
         waveView.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
         waveView.alpha = 0.5f
-        layout.isClickable = true
+        waveView.isClickable = false
+        waveView.isFocusable = false
+        layout.isClickable = false
         val storageTitle = TextView(context)
         storageTitle.textSize = 18f
         storageTitle.setTextColor(Utils.getColorAttrDefaultColor(context, android.R.attr.textColorPrimary))
@@ -62,11 +67,8 @@ class StorageCardView(context: Context, attrs: AttributeSet?) : AboutBaseCard(co
         layout.addView(storageTitle)
         setupStorageInfo(context)
         addView(layout)
-        setTouchListener(layout)
         radius = defaultRadius.toFloat()
-        layout.setOnClickListener {
-            context.startActivity(Intent(Settings.ACTION_INTERNAL_STORAGE_SETTINGS))
-        }
+        // Header card is not clickable
     }
 
     private fun setupStorageInfo(context: Context?) {

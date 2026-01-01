@@ -36,6 +36,7 @@ import android.util.SparseArray;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
@@ -49,6 +50,7 @@ import com.android.settings.deviceinfo.storage.NonCurrentUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageCacheHelper;
 import com.android.settings.deviceinfo.storage.StorageEntry;
+import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController;
@@ -362,6 +364,30 @@ public class StorageDashboardFragment extends DashboardFragment
             refreshUi();
         }
         mStorageManager.registerListener(mStorageEventListener);
+        
+        // Ensure card layouts are applied to storage preferences
+        applyCardLayoutsToStoragePreferences();
+    }
+    
+    private void applyCardLayoutsToStoragePreferences() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null || mPreferenceController == null) {
+            return;
+        }
+        
+        // Apply card layouts to all storage category preferences
+        String[] storageKeys = {
+            "pref_images", "pref_videos", "pref_audio", "pref_apps",
+            "pref_games", "pref_documents", "pref_other", "pref_trash",
+            "pref_system", "temporary_files", "pref_public_storage"
+        };
+        
+        for (String key : storageKeys) {
+            Preference pref = screen.findPreference(key);
+            if (pref != null && pref instanceof StorageItemPreference) {
+                pref.setLayoutResource(R.layout.adaptive_preference_card);
+            }
+        }
     }
 
     @Override
