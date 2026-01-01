@@ -126,6 +126,14 @@
     <string name="location_app_overrides_summary">Override location permissions for individual apps</string>
     <string name="location_sharing_controls_title">Location Sharing</string>
     <string name="location_sharing_controls_summary">Control how location data is shared</string>
+    <string name="location_sharing_enabled_title">Enable Location Sharing</string>
+    <string name="location_sharing_enabled_summary">Allow apps to access your location</string>
+    <string name="location_background_access_title">Allow Background Location Access</string>
+    <string name="location_background_access_summary">Allow apps to access location when running in background</string>
+    <string name="location_sharing_requires_location_enabled">Location must be enabled to use location sharing</string>
+    <string name="location_background_requires_location_enabled">Location must be enabled to use background location access</string>
+    <string name="location_background_requires_sharing_enabled">Location sharing must be enabled to use background location access</string>
+    <string name="location_precision_requires_location_enabled">Location must be enabled to adjust location precision</string>
     <string name="location_status_title">Location Status</string>
     <string name="location_status_gps_active">GPS: Active</string>
     <string name="location_status_gps_inactive">GPS: Inactive</string>
@@ -140,7 +148,6 @@
     
     <!-- Mock Location -->
     <string name="mock_location_title">Allow Mock Locations</string>
-    <string name="mock_location_disabled_summary">Prevent apps from using fake GPS locations</string>
     <string name="mock_location_enabled_warning">⚠️ Warning: Mock locations are enabled. Apps can inject fake GPS data.</string>
     <string name="mock_location_warning_title">⚠️ Mock Locations Detected</string>
     <string name="mock_location_warning_summary">Mock location providers are active. Tap to open Developer Settings and disable mock location apps.</string>

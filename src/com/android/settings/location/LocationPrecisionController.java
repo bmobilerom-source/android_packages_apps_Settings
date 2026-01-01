@@ -71,6 +71,18 @@ public class LocationPrecisionController extends BasePreferenceController implem
 
     @Override
     public int getAvailabilityStatus() {
+        // AOSP Rule: Location precision is only available when location is enabled
+        if (mLocationManager == null) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+        try {
+            if (!mLocationManager.isLocationEnabled()) {
+                return DISABLED_DEPENDENT_SETTING;
+            }
+        } catch (Exception e) {
+            android.util.Log.e("LocationPrecision", "Error checking location enabled state", e);
+            return DISABLED_DEPENDENT_SETTING;
+        }
         return AVAILABLE;
     }
 
@@ -89,6 +101,22 @@ public class LocationPrecisionController extends BasePreferenceController implem
 
         if (preference instanceof ListPreference) {
             ListPreference listPreference = (ListPreference) preference;
+
+            // AOSP Rule: Disable if location is not enabled
+            boolean locationEnabled = false;
+            try {
+                if (mLocationManager != null) {
+                    locationEnabled = mLocationManager.isLocationEnabled();
+                }
+            } catch (Exception e) {
+                android.util.Log.e("LocationPrecision", "Error checking location enabled state", e);
+            }
+            
+            listPreference.setEnabled(locationEnabled);
+            if (!locationEnabled) {
+                listPreference.setSummary(R.string.location_precision_requires_location_enabled);
+                return;
+            }
 
             // Set entries and values from arrays
             listPreference.setEntries(R.array.location_precision_entries);
@@ -117,6 +145,17 @@ public class LocationPrecisionController extends BasePreferenceController implem
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference instanceof ListPreference) {
+            // AOSP Rule: Cannot change precision if location is disabled
+            try {
+                if (mLocationManager != null && !mLocationManager.isLocationEnabled()) {
+                    android.util.Log.w("LocationPrecision", "Cannot change precision: location is disabled");
+                    return false;
+                }
+            } catch (Exception e) {
+                android.util.Log.e("LocationPrecision", "Error checking location enabled state", e);
+                return false;
+            }
+            
             String value = (String) newValue;
 
             // Save to secure settings first
