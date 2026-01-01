@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/bmobile_settings_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="apps_illust_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/bmobSettings"/>
+
+    <Preference
+        android:key="bmobile_description"
+        android:title="@string/bmobile_settings_intro_title"
+        android:summary="@string/bmobile_settings_description"
+        android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card" 
+        android:order="-999" />
+    <Preference
+        android:key="microg_pref"
+        android:title="@string/bmobile_microg_title"
+        android:summary="@string/bmobile_microg_summary"
+        settings:controller="com.bmobile.fragments.MicroGPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_top" />
+
+    <Preference
+        android:key="ad_services_pref"
+        android:title="@string/bmobile_ad_services_title"
+        android:summary="@string/bmobile_ad_services_summary"
+        settings:controller="com.bmobile.fragments.AdServicesPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_middle" />
+   
+    <Preference
+        android:key="system_basic_defaults"
+        android:title="@string/system_basic_defaults_title"
+        android:summary="@string/system_basic_defaults_summary"
+        android:order="3"
+        settings:layout="@layout/adaptive_preference_card_middle"
+        android:fragment="com.bmobile.fragments.SystemBasicDefaultsSettings" />
+
+           <!-- Enhanced Location Privacy & Status -->
+        <Preference
+            android:key="enhanced_location_features"
+            android:title="@string/location_privacy_dashboard_title"
+            android:summary="@string/location_privacy_dashboard_summary"
+            android:icon="@drawable/ic_settings_location_filled"
+            android:order="4"
+            settings:layout="@layout/adaptive_preference_card_middle"
+            android:fragment="com.android.settings.location.BLocationSettings"/>
+    <Preference
+        android:key="dav"
+        android:title="@string/dav_title"
+        android:summary="@string/dav_summary"
+        android:order="220"
+        settings:layout="@layout/system_features_preference_card">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="at.bitfire.davdroid"
+                android:targetClass="at.bitfire.davdroid.ui.account.AccountActivity" />
+    </Preference>
+</PreferenceScreen>
+

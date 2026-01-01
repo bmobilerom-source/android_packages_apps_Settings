@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2022 EpicROM-AOSP
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+ 
+    <!-- System Basic Defaults -->
+    <string name="system_basic_defaults_title">System shortcuts</string>
+    <string name="system_basic_defaults_summary">Quick access to default apps, gestures, and system tools</string>
+    <string name="system_basic_defaults_aurora_store_title">Aurora Store</string>
+    <string name="system_basic_defaults_aurora_store_summary">Alternative app store</string>
+    <string name="system_basic_defaults_default_apps_title">Default Apps</string>
+    <string name="system_basic_defaults_default_apps_summary">Set your default applications</string>
+    <string name="system_basic_defaults_gesture_navigation_title">Gesture Navigation</string>
+    <string name="system_basic_defaults_gesture_navigation_summary">Modern navigation gestures</string>
+    <string name="system_basic_defaults_one_handed_title">One-handed Mode</string>
+    <string name="system_basic_defaults_one_handed_summary">Easy one-handed operation</string>
+    <string name="dark_ui_mode_summary">Dark theme for your eyes</string>
+    <string name="monet_color_settings_title">Monet Colors</string>
+    <string name="monet_color_settings_summary">Customize system colors</string>
+    <string name="system_basic_defaults_photowidget_title">PhotoWidget</string>
+    <string name="system_basic_defaults_photowidget_summary">Home screen photo widgets</string>
+    <string name="taptap_title">Tap to wake</string>
+    <string name="taptap_summary">Wake your screen with a tap</string>
+
+</resources>

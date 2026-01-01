@@ -237,7 +237,7 @@
 
     <!-- YR Custom Dashboard -->
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.YrCustomDashboardSettings"
+        android:fragment="com.bmobile.fragments.YrCustomDashboardSettings"
         android:icon="@drawable/ic_custom_dashboard"
         android:key="top_level_yr_custom_dashboard"
         android:order="95"

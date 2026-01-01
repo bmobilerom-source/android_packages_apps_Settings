@@ -75,7 +75,7 @@
     </PreferenceCategory>
 
         <Preference
-        android:fragment="com.epic.fragments.CustomDashboardSettings"
+        android:fragment="com.bmobile.fragments.CustomDashboardSettings"
         android:icon="@drawable/ic_custom_dashboard"
         android:key="top_level_custom_dashboard"
         android:order="92"

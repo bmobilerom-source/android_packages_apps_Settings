@@ -29,7 +29,7 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
-import com.epic.fragments.CustomDashboardSettings;
+import com.bmobile.fragments.CustomDashboardSettings;
 
 /**
  * Single entry point to open {@link CustomDashboardSettings} from any Settings screen,

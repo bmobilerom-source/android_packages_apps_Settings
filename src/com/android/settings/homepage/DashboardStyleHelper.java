@@ -136,19 +136,31 @@ public class DashboardStyleHelper {
         return style == 5 || style == 16;
     }
 
+    /** Homepage profile card fragment for {@code style}. */
+    @NonNull
+    public static String getHomepageUserInfoFragmentClass(int style) {
+        if (isKidsSafeStyle(style)) {
+            return "com.android.settings.kidssafe.KidsSafeUserInfoFragment";
+        }
+        if (isBmobileStyle(style)) {
+            return "com.android.settings.deviceinfo.BMobileUserInfoFragment";
+        }
+        return "com.android.settings.deviceinfo.UserInfoFragement";
+    }
+
     /** Dashboard picker fragment for the brand that owns {@code style}. */
     @NonNull
     public static String getBrandDashboardFragmentClass(int style) {
         if (isBmobileStyle(style)) {
-            return "com.epic.fragments.BMobileDashboardSettings";
+            return "com.bmobile.fragments.BMobileDashboardSettings";
         }
         if (isYrStyle(style)) {
-            return "com.epic.fragments.YrCustomDashboardSettings";
+            return "com.bmobile.fragments.YrCustomDashboardSettings";
         }
         if (isKidsSafeStyle(style)) {
-            return "com.epic.fragments.KidsSafeDashboardSettings";
+            return "com.bmobile.fragments.KidsSafeDashboardSettings";
         }
-        return "com.epic.fragments.CustomDashboardSettings";
+        return "com.bmobile.fragments.CustomDashboardSettings";
     }
 
     /** Title string for the brand dashboard picker that owns {@code style}. */

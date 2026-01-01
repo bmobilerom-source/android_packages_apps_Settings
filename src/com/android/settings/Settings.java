@@ -109,13 +109,13 @@ public class Settings extends SettingsActivity {
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DarkThemeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
-    /** Opens {@link com.epic.fragments.CustomDashboardSettings} from any launcher or deep link. */
+    /** Opens {@link com.bmobile.fragments.CustomDashboardSettings} from any launcher or deep link. */
     public static class CustomDashboardActivity extends SettingsActivity { /* empty */ }
-    /** Opens {@link com.epic.fragments.YrCustomDashboardSettings}. */
+    /** Opens {@link com.bmobile.fragments.YrCustomDashboardSettings}. */
     public static class YrCustomDashboardActivity extends SettingsActivity { /* empty */ }
-    /** Opens {@link com.epic.fragments.KidsSafeDashboardSettings}. */
+    /** Opens {@link com.bmobile.fragments.KidsSafeDashboardSettings}. */
     public static class KidsSafeDashboardActivity extends SettingsActivity { /* empty */ }
-    /** Opens {@link com.epic.fragments.BMobileDashboardSettings}. */
+    /** Opens {@link com.bmobile.fragments.BMobileDashboardSettings}. */
     public static class BMobileDashboardActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySuggestionActivity extends NightDisplaySettingsActivity { /* empty */ }

@@ -33,6 +33,7 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.applications.specialaccess.InstallAppWhitelistController;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
@@ -75,6 +76,14 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean checked = (Boolean) newValue;
         if (preference == mSwitchPref) {
+            final Context context = getActivity();
+            if (InstallAppWhitelistController.isWhitelistEnabled(context)
+                    && !InstallAppWhitelistController.isPackageWhitelisted(context, mPackageName)) {
+                // Defensive: even if the UI state is stale, do not allow bypassing the whitelist.
+                setCanInstallApps(false);
+                refreshUi();
+                return false;
+            }
             if (mInstallAppsState != null && checked != mInstallAppsState.canInstallApps()) {
                 if (Settings.ManageAppExternalSourcesActivity.class.getName().equals(
                         getIntent().getComponent().getClassName())) {
@@ -137,6 +146,17 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     protected boolean refreshUi() {
         if (mPackageInfo == null || mPackageInfo.applicationInfo == null) {
             return false;
+        }
+        final Context context = getActivity();
+        if (InstallAppWhitelistController.isWhitelistEnabled(context)
+                && !InstallAppWhitelistController.isPackageWhitelisted(context, mPackageName)) {
+            // Enforced policy: non-whitelisted sources must not be allowed to request installs.
+            setCanInstallApps(false);
+            mSwitchPref.setChecked(false);
+            mSwitchPref.setSummary(
+                    R.string.external_source_switch_summary_install_app_whitelist_enabled);
+            mSwitchPref.setEnabled(false);
+            return true;
         }
         if (mUserManager.hasBaseUserRestriction(DISALLOW_INSTALL_UNKNOWN_SOURCES,
                 UserHandle.of(UserHandle.myUserId()))) {

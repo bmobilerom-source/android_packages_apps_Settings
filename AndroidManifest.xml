@@ -1562,7 +1562,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.epic.fragments.CustomDashboardSettings" />
+                android:value="com.bmobile.fragments.CustomDashboardSettings" />
         </activity>
 
         <activity
@@ -1575,7 +1575,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.epic.fragments.YrCustomDashboardSettings" />
+                android:value="com.bmobile.fragments.YrCustomDashboardSettings" />
         </activity>
 
         <activity
@@ -1588,7 +1588,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.epic.fragments.KidsSafeDashboardSettings" />
+                android:value="com.bmobile.fragments.KidsSafeDashboardSettings" />
         </activity>
 
         <activity
@@ -1601,7 +1601,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.epic.fragments.BMobileDashboardSettings" />
+                android:value="com.bmobile.fragments.BMobileDashboardSettings" />
         </activity>
 
         <activity
@@ -4236,6 +4236,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+   
+        <!-- Auto Reboot Receiver - Handles scheduled reboot alarms -->
+        <receiver
+            android:name=".bmobile.fragments.AutoRebootReceiver"
+            android:exported="false"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.android.settings.AUTO_REBOOT" />
+            </intent-filter>
+        </receiver>
 
         <!--
             The Wi-Fi result data will only be returned from WifiDialogActivity if the calling

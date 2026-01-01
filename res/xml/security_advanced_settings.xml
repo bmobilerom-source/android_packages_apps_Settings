@@ -18,7 +18,14 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/security_advanced_settings">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="verification"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/verification"/> 
 
     <PreferenceCategory
         android:order="1"
@@ -38,6 +45,7 @@
         <Preference
             android:key="manage_device_admin"
             android:title="@string/manage_device_admin"
+            settings:layout="@layout/adaptive_preference_card_top"
             android:summary="@string/summary_placeholder"
             android:fragment=
                 "com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
@@ -47,6 +55,7 @@
         <Preference
             android:key="enterprise_privacy"
             android:title="@string/enterprise_privacy_settings"
+            settings:layout="@layout/adaptive_preference_card_middle"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
             settings:controller="com.android.settings.enterprise.EnterprisePrivacyPreferenceController"/>
@@ -54,6 +63,7 @@
         <Preference
             android:key="financed_privacy"
             android:title="@string/financed_privacy_settings"
+            settings:layout="@layout/adaptive_preference_card_middle"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
             settings:controller="com.android.settings.enterprise.FinancedPrivacyPreferenceController"/>
@@ -61,6 +71,7 @@
         <Preference
             android:key="financed_device_info"
             android:title="@string/financed_device_info"
+            settings:layout="@layout/adaptive_preference_card_bottom"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.devicelock.DeviceLockPreferenceController">
             <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"/>
@@ -71,6 +82,7 @@
         android:order="250"
         android:key="sim_lock_settings"
         android:title="@string/sim_lock_settings_category"
+        settings:layout="@layout/adaptive_preference_card_top"
         settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.security.SimLockPreferenceController">
 
@@ -85,6 +97,7 @@
         android:order="260"
         android:key="encryption_and_credential"
         android:title="@string/encryption_and_credential_settings_title"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/encryption_and_credential_settings_summary"
         android:fragment="com.android.settings.security.EncryptionAndCredential"
         settings:controller="com.android.settings.security.EncryptionStatusPreferenceController" />
@@ -93,6 +106,7 @@
         android:order="270"
         android:key="manage_trust_agents"
         android:title="@string/manage_trust_agents"
+        settings:layout="@layout/adaptive_preference_card_middle"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.trustagent.TrustAgentSettings"
         settings:controller="com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController" />
@@ -101,6 +115,7 @@
         android:order="280"
         android:key="screen_pinning_settings"
         android:title="@string/screen_pinning_title"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.ScreenPinningSettings"
         settings:keywords="@string/keywords_app_pinning"

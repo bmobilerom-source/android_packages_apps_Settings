@@ -48,7 +48,7 @@
 
         <com.android.settings.widget.HomepagePreference
 
-            android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+            android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
 
             android:icon="@drawable/ic_settings_about_device_filled"
 

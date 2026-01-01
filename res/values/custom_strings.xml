@@ -95,5 +95,46 @@
     <!-- USB configuration -->
     <string name="usb_default_config_title">USB configuration</string>
     <string name="usb_default_config_summary">Choose the default behavior when connected to a device via USB</string>
+
+    <!-- Auto Reboot Credential Confirmation -->
+    <string name="auto_reboot_confirm_credential_title">Confirm device credentials</string>
+    <string name="auto_reboot_confirm_credential_description">Enter your device credentials to enable auto reboot</string>
+
+    <!-- bmobile Credential Confirmation -->
+    <string name="bmobile_confirm_credential_title">Confirm device credentials</string>
+    <string name="bmobile_confirm_credential_description">Enter your device credentials to continue</string>
+
+    <!-- Developer Options -->
+    <string name="developer_options_enabled_toast">Developer options enabled</string>
+    <string name="developer_options_disabled_toast">Developer options disabled</string>
+    <string name="developer_options_error">Failed to change developer options</string>
+    <string name="developer_options_summary_on">Developer options are enabled</string>
+    <string name="developer_options_summary_off">Developer options are disabled</string>
+
+    <!-- USB Debugging -->
+    <string name="usb_debugging_enabled_toast">USB debugging enabled</string>
+    <string name="usb_debugging_disabled_toast">USB debugging disabled</string>
+    <string name="usb_debugging_error">Failed to change USB debugging</string>
+    <string name="usb_debugging_summary_on">USB debugging is enabled</string>
+    <string name="usb_debugging_summary_off">USB debugging is disabled</string>
+
+    <!-- AppSec Credential Confirmation -->
+    <string name="appsec_confirm_credential_title">Confirm device credentials</string>
+    <string name="appsec_confirm_credential_description">Enter your device credentials to access app security settings</string>
+
+    <!-- bmobile UserInfo Credential Confirmation -->
+    <string name="bmobile_userinfo_confirm_credential_title">Confirm device credentials</string>
+    <string name="bmobile_userinfo_confirm_credential_description">Enter your device credentials to access user information</string>
+
+    <!-- Block Messages -->
+    <string name="app_dashboard_blocked_message">App settings access is blocked</string>
+    <string name="location_settings_blocked_message">Location settings access is blocked</string>
+    <string name="account_dashboard_blocked_message">Account settings access is blocked</string>
+    <string name="safety_center_blocked_message">Safety Center access is blocked</string>
+    <string name="device_tweaks_blocked_message">Device Tweaks access is blocked</string>
+    <string name="system_optimization_blocked_message">System Optimization access is blocked</string>
+    <string name="appsec_blocked_message">App Security access is blocked</string>
+    <string name="blocation_blocked_message">Enhanced Location access is blocked</string>
+    <string name="page_blocked_message">This page is blocked</string>
 </resources>
 

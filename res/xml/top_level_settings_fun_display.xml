@@ -27,7 +27,7 @@
         android:layout="@layout/mainuser_profile_card"
         android:key="about_device_info"
         android:selectable="true"
-        android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+        android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
         android:order="-2000"/>
 
     <!-- Fun Display Settings Grid -->

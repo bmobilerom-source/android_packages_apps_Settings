@@ -27,8 +27,9 @@
 
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/usercard_aosp"
-        android:fragment="com.android.settings.users.UserSettings"
+        android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
         android:key="top_level_usercard"
+        android:selectable="true"
         android:order="-170" />
     <!-- Network + Connected devices (hidden; use bottom bar) -->
     <!--
@@ -226,7 +227,7 @@
         settings:controller="com.android.settings.support.SupportPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.CustomDashboardSettings"
+        android:fragment="com.bmobile.fragments.CustomDashboardSettings"
         android:icon="@drawable/ic_custom_dashboard"
         android:key="top_level_custom_dashboard"
         android:order="90"

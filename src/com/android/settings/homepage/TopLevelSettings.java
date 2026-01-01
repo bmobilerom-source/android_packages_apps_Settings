@@ -849,51 +849,51 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 return;
             }
 
-            java.util.List<com.epic.fragments.MaterialDashboardGridAdapter.CardItem> items = new java.util.ArrayList<>();
+            java.util.List<com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem> items = new java.util.ArrayList<>();
             
             // All preferences from top_level_settings_v2.xml as cards
             // Connectivity Category
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.network_dashboard_title,
                     R.string.summary_placeholder,
                     "com.android.settings.network.NetworkDashboardFragment",
                     R.drawable.ic_settings_wireless_filled));
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.bmobile_dashboard_title,
                     R.string.bmobile_dashboard_summary,
-                    "com.epic.fragments.BMobileDashboardSettings",
+                    "com.bmobile.fragments.BMobileDashboardSettings",
                     R.drawable.ic_custom_dashboard));
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.connected_devices_dashboard_title,
                     R.string.connected_devices_dashboard_default_summary,
                     "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
                     R.drawable.ic_devices_other_filled));
             
             // Personalize Category
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.apps_dashboard_title,
                     R.string.app_and_notification_dashboard_summary,
                     "com.android.settings.applications.AppDashboardFragment",
                     R.drawable.ic_apps_filled));
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.configure_notification_settings,
                     R.string.notification_dashboard_summary,
                     "com.android.settings.notification.ConfigureNotificationSettings",
                     R.drawable.ic_notifications_filled));
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.sound_settings,
                     R.string.sound_dashboard_summary_with_dnd,
                     "com.android.settings.notification.SoundSettings",
                     R.drawable.ic_volume_up_filled));
             // Modes and Communal removed per user request
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.display_settings,
                     R.string.display_dashboard_summary,
                     "com.android.settings.DisplaySettings",
@@ -901,20 +901,20 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             // Wallpaper removed per user request
             
             // System Info Category
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.storage_settings,
                     R.string.summary_placeholder,
                     "com.android.settings.deviceinfo.StorageDashboardFragment",
                     R.drawable.ic_storage_filled));
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.power_usage_summary_title,
                     R.string.summary_placeholder,
                     "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
                     R.drawable.ic_settings_battery_filled));
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.header_category_system,
                     R.string.system_dashboard_summary,
                     "com.android.settings.system.SystemDashboardFragment",
@@ -922,34 +922,34 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             // About Phone, Safety Center, Security, Privacy, Wallpaper, Modes, Communal, Tips and Support removed per user request
             
             // Security & Privacy Category (aligned with V2)
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.security_settings_title,
                     R.string.security_dashboard_summary,
                     "com.android.settings.security.SecuritySettings",
                     R.drawable.ic_settings_security_filled));
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.privacy_controls_title,
                     R.string.privacy_controls_summary,
                     "com.android.settings.privacy.PrivacyControlsFragment",
                     R.drawable.ic_settings_privacy_filled));
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.privacy_dashboard_title,
                     R.string.privacy_dashboard_summary,
                     "com.android.settings.privacy.PrivacyDashboardFragment",
                     R.drawable.ic_settings_privacy_filled));
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.location_settings_title,
                     R.string.location_settings_loading_app_permission_stats,
                     "com.android.settings.location.LocationSettings",
                     R.drawable.ic_settings_location_filled));
             
             // Support Category (only Accessibility remains)
-            items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
+                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.accessibility_settings,
                     R.string.accessibility_settings_summary,
                     "com.android.settings.accessibility.AccessibilitySettings",
@@ -966,9 +966,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             }
             
             // Create adapter with error handling - following DisplayPageGrid pattern
-            com.epic.fragments.MaterialDashboardGridAdapter adapter = null;
+            com.bmobile.fragments.MaterialDashboardGridAdapter adapter = null;
             try {
-                adapter = new com.epic.fragments.MaterialDashboardGridAdapter(activity, items, getMetricsCategory());
+                adapter = new com.bmobile.fragments.MaterialDashboardGridAdapter(activity, items, getMetricsCategory());
             } catch (Exception e) {
                 Log.e(TAG, "Error creating MaterialDashboardGridAdapter", e);
                 return;
@@ -1078,93 +1078,93 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             rv.setLayoutManager(layoutManager);
 
             // Create items list - same as BMobileExpressiveSettings
-            java.util.List<com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem> items = new java.util.ArrayList<>();
+            java.util.List<com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem> items = new java.util.ArrayList<>();
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.network_dashboard_title,
                     R.string.summary_placeholder,
                     "com.android.settings.network.NetworkDashboardFragment",
                     R.drawable.ic_settings_wireless_filled));
 
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.bmobile_dashboard_title,
                     R.string.bmobile_dashboard_summary,
-                    "com.epic.fragments.BMobileDashboardSettings",
+                    "com.bmobile.fragments.BMobileDashboardSettings",
                     R.drawable.ic_settings_system_dashboard_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.connected_devices_dashboard_title,
                     R.string.connected_devices_dashboard_default_summary,
                     "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
                     R.drawable.ic_devices_other_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.configure_notification_settings,
                     R.string.notification_dashboard_summary,
                     "com.android.settings.notification.ConfigureNotificationSettings",
                     R.drawable.ic_notifications_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.sound_settings,
                     R.string.sound_dashboard_summary_with_dnd,
                     "com.android.settings.notification.SoundSettings",
                     R.drawable.ic_volume_up_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.display_settings,
                     R.string.display_dashboard_summary,
                     "com.android.settings.DisplaySettings",
                     R.drawable.ic_settings_display_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.power_usage_summary_title,
                     R.string.summary_placeholder,
                     "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
                     R.drawable.ic_settings_battery_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.header_category_system,
                     R.string.system_dashboard_summary,
                     "com.android.settings.system.SystemDashboardFragment",
                     R.drawable.ic_settings_system_dashboard_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.security_settings_title,
                     R.string.security_dashboard_summary,
                     "com.android.settings.security.SecuritySettings",
                     R.drawable.ic_settings_security_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.privacy_dashboard_title,
                     R.string.privacy_dashboard_summary,
                     "com.android.settings.privacy.PrivacyDashboardFragment",
                     R.drawable.ic_settings_privacy_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.location_settings_title,
                     R.string.location_settings_loading_app_permission_stats,
                     "com.android.settings.location.LocationSettings",
                     R.drawable.ic_settings_location_filled));
             
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.accessibility_settings,
                     R.string.accessibility_settings_summary,
                     "com.android.settings.accessibility.AccessibilitySettings",
                     R.drawable.ic_settings_accessibility_filled));
 
-            rv.setAdapter(new com.epic.fragments.BMobileExpressiveSettingsAdapter(activity, items, getMetricsCategory()));
+            rv.setAdapter(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter(activity, items, getMetricsCategory()));
             Log.d(TAG, "BMobile Expressive grid setup completed successfully with " + items.size() + " items");
         } catch (Exception e) {
             Log.e(TAG, "Error setting up BMobile Expressive grid internal", e);
@@ -1257,11 +1257,11 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     new androidx.recyclerview.widget.GridLayoutManager(context, 2);
             rv.setLayoutManager(layoutManager);
 
-            java.util.List<com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem> items =
+            java.util.List<com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem> items =
                     new java.util.ArrayList<>();
             populateYrExpressiveGridItems(items);
 
-            rv.setAdapter(new com.epic.fragments.BMobileExpressiveSettingsAdapter(activity, items,
+            rv.setAdapter(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter(activity, items,
                     getMetricsCategory()));
             Log.d(TAG, "YR Expressive grid setup completed with " + items.size() + " items");
         } catch (Exception e) {
@@ -1271,44 +1271,44 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     /** Grid cards for YR Expressive (style 14). */
     private void populateYrExpressiveGridItems(
-            java.util.List<com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem> items) {
-        final int type = com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD;
-        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+            java.util.List<com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem> items) {
+        final int type = com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD;
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.yr_custom_dashboard_title,
                 R.string.yr_custom_dashboard_summary,
-                "com.epic.fragments.YrCustomDashboardSettings",
+                "com.bmobile.fragments.YrCustomDashboardSettings",
                 R.drawable.ic_settings_system_dashboard_filled));
-        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.connected_devices_dashboard_title,
                 R.string.connected_devices_dashboard_default_summary,
                 "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
                 R.drawable.ic_devices_other_filled));
-        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.configure_notification_settings, R.string.notification_dashboard_summary,
                 "com.android.settings.notification.ConfigureNotificationSettings",
                 R.drawable.ic_notifications_filled));
-        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.sound_settings, R.string.sound_dashboard_summary_with_dnd,
                 "com.android.settings.notification.SoundSettings",
                 R.drawable.ic_volume_up_filled));
-        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.power_usage_summary_title, R.string.summary_placeholder,
                 "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
                 R.drawable.ic_settings_battery_filled));
-        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.security_settings_title, R.string.security_dashboard_summary,
                 "com.android.settings.security.SecuritySettings",
                 R.drawable.ic_settings_security_filled));
-        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.privacy_dashboard_title, R.string.privacy_dashboard_summary,
                 "com.android.settings.privacy.PrivacyDashboardFragment",
                 R.drawable.ic_settings_privacy_filled));
-        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.location_settings_title,
                 R.string.location_settings_loading_app_permission_stats,
                 "com.android.settings.location.LocationSettings",
                 R.drawable.ic_settings_location_filled));
-        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.accessibility_settings, R.string.accessibility_settings_summary,
                 "com.android.settings.accessibility.AccessibilitySettings",
                 R.drawable.ic_settings_accessibility_filled));
@@ -1497,7 +1497,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             }
 
             // Create items list with error handling
-            java.util.List<com.epic.fragments.FunDisplaySettingsAdapter.CardItem> items = new java.util.ArrayList<>();
+            java.util.List<com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem> items = new java.util.ArrayList<>();
 
             if (currentStyle == AFTERLABS_GRID_STYLE) {
                 populateAfterlabsGridItems(items);
@@ -1506,9 +1506,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             }
 
             // Create adapter with error handling
-            com.epic.fragments.FunDisplaySettingsAdapter adapter = null;
+            com.bmobile.fragments.FunDisplaySettingsAdapter adapter = null;
             try {
-                adapter = new com.epic.fragments.FunDisplaySettingsAdapter(activity, items, getMetricsCategory());
+                adapter = new com.bmobile.fragments.FunDisplaySettingsAdapter(activity, items, getMetricsCategory());
             } catch (Exception e) {
                 Log.e(TAG, "Error creating FunDisplaySettingsAdapter", e);
                 mFunDisplayGridSetupRetries = 0; // Reset on error
@@ -1537,54 +1537,54 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     /** Grid cards for Fun Display / BMobile Home homepage (style 7). */
     private void populateFunDisplayGridItems(
-            java.util.List<com.epic.fragments.FunDisplaySettingsAdapter.CardItem> items) {
-            final int type = com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD;
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            java.util.List<com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem> items) {
+            final int type = com.bmobile.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD;
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.bmobile_dashboard_title,
                     R.string.bmobile_dashboard_summary,
-                    "com.epic.fragments.BMobileDashboardSettings",
+                    "com.bmobile.fragments.BMobileDashboardSettings",
                     R.drawable.ic_settings_system_dashboard_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.connected_devices_dashboard_title,
                     R.string.connected_devices_dashboard_default_summary,
                     "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
                     R.drawable.ic_devices_other_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.configure_notification_settings,
                     R.string.notification_dashboard_summary,
                     "com.android.settings.notification.ConfigureNotificationSettings",
                     R.drawable.ic_notifications_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.sound_settings,
                     R.string.sound_dashboard_summary_with_dnd,
                     "com.android.settings.notification.SoundSettings",
                     R.drawable.ic_volume_up_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.storage_settings,
                     R.string.summary_placeholder,
                     "com.android.settings.deviceinfo.StorageDashboardFragment",
                     R.drawable.ic_storage_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.power_usage_summary_title,
                     R.string.summary_placeholder,
                     "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
                     R.drawable.ic_settings_battery_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.security_settings_title,
                     R.string.security_dashboard_summary,
                     "com.android.settings.security.SecuritySettings",
                     R.drawable.ic_settings_security_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.privacy_dashboard_title,
                     R.string.privacy_dashboard_summary,
                     "com.android.settings.privacy.PrivacyDashboardFragment",
                     R.drawable.ic_settings_privacy_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.location_settings_title,
                     R.string.location_settings_loading_app_permission_stats,
                     "com.android.settings.location.LocationSettings",
                     R.drawable.ic_settings_location_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.accessibility_settings,
                     R.string.accessibility_settings_summary,
                     "com.android.settings.accessibility.AccessibilitySettings",
@@ -1593,51 +1593,51 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     /** Grid cards for AfterLabs grid homepage (style 13): YR dashboard + settings shortcuts. */
     private void populateAfterlabsGridItems(
-            java.util.List<com.epic.fragments.FunDisplaySettingsAdapter.CardItem> items) {
-        final int type = com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD;
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+            java.util.List<com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem> items) {
+        final int type = com.bmobile.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD;
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.yr_custom_dashboard_title,
                 R.string.yr_custom_dashboard_summary,
-                "com.epic.fragments.YrCustomDashboardSettings",
+                "com.bmobile.fragments.YrCustomDashboardSettings",
                 R.drawable.ic_settings_system_dashboard_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.network_dashboard_title, R.string.summary_placeholder,
                 "com.android.settings.network.NetworkDashboardFragment",
                 R.drawable.ic_settings_wireless_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.connected_devices_dashboard_title,
                 R.string.connected_devices_dashboard_default_summary,
                 "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
                 R.drawable.ic_devices_other_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.configure_notification_settings, R.string.notification_dashboard_summary,
                 "com.android.settings.notification.ConfigureNotificationSettings",
                 R.drawable.ic_notifications_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.sound_settings, R.string.sound_dashboard_summary_with_dnd,
                 "com.android.settings.notification.SoundSettings",
                 R.drawable.ic_volume_up_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.display_settings, R.string.display_dashboard_summary,
                 "com.android.settings.DisplaySettings",
                 R.drawable.ic_settings_display_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.storage_settings, R.string.summary_placeholder,
                 "com.android.settings.deviceinfo.StorageDashboardFragment",
                 R.drawable.ic_storage_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.power_usage_summary_title, R.string.summary_placeholder,
                 "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
                 R.drawable.ic_settings_battery_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.header_category_system, R.string.system_dashboard_summary,
                 "com.android.settings.system.SystemDashboardFragment",
                 R.drawable.ic_settings_system_dashboard_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.privacy_controls_title, R.string.privacy_controls_summary,
                 "com.android.settings.privacy.PrivacyControlsFragment",
                 R.drawable.ic_settings_privacy_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+        items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.location_settings_title,
                 R.string.location_settings_loading_app_permission_stats,
                 "com.android.settings.location.LocationSettings",
@@ -1897,6 +1897,17 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             return true;
         }
 
+        // Check if preference's fragment is blocked
+        if (preference instanceof HomepagePreference) {
+            HomepagePreference homepagePref = (HomepagePreference) preference;
+            String fragment = homepagePref.getFragment();
+            if (fragment != null && 
+                com.android.settings.applications.specialaccess.BlockChecker.isBlocked(getContext(), fragment)) {
+                com.android.settings.applications.specialaccess.BlockChecker.checkAndShowMessage(getContext(), fragment);
+                return true; // Consume click
+            }
+        }
+
         // Register SplitPairRule for SubSettings.
         ActivityEmbeddingRulesController.registerSubSettingsPairRule(getContext(),
                 true /* clearTop */);
@@ -2124,6 +2135,15 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                         EntityHeaderController.ActionType.ACTION_NONE);
 
         userCard.setOnClickListener(v -> {
+            if (DashboardStyleHelper.isBmobileStyle(mDashBoardStyle)) {
+                new SubSettingLauncher(context)
+                        .setDestination(DashboardStyleHelper.getHomepageUserInfoFragmentClass(
+                                mDashBoardStyle))
+                        .setTitleRes(R.string.bmobile_userinfo_title)
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .launch();
+                return;
+            }
             final Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.setComponent(new ComponentName(
                     "com.android.settings",

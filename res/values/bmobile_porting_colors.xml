@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2025 bmobile
+     Consolidated bMobile User & Accounts + Atomichub Colors
+     Source: https://github.com/simplnc/android_packages_apps_Settings/tree/clean-commits
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Atomichub Colors -->
+    <color name="atomichub_card_fill">#FFFFFFFF</color>
+    <color name="atomichub_card_stroke">#1AFFFFFF</color>
+    <color name="card_text">#171717</color>
+    <color name="text_color">#000000</color>
+    
+    <!-- Atomichub2 Colors -->
+    <color name="card_text2">#FF000000</color>
+    <color name="purple_200_2">#FFBB86FC</color>
+    <color name="purple_500_2">#FF6200EE</color>
+    <color name="purple_700_2">#FF3700B3</color>
+    <color name="teal_200_2">#FF03DAC5</color>
+    <color name="teal_700_2">#FF018786</color>
+    <color name="black_2">#FF000000</color>
+    <color name="white_2">#FFFFFFFF</color>
+    <color name="bottom_bar_divider_color_2">#1f000000</color>
+    <color name="bottom_navigation_color_2">#FFFFFF</color>
+    <color name="bottom_navigation_ripple_2">#1f000000</color>
+    <color name="teambackground_2">#ececec</color>
+    <color name="system_warning_bg_2">#99C58181</color>
+    <color name="system_features_bg_2">#9922B5AD</color>
+    <color name="system_help_bg_2">#99FDFD96</color>
+    <color name="system_advice_bg_2">#5f626b</color>
+    
+    <!-- bMobile Colors -->
+    <color name="bmobile_text_color_primary">?android:attr/textColorPrimary</color>
+    <color name="bmobile_text_color_secondary">?android:attr/textColorSecondary</color>
+    <color name="bmobile_card_bg">?android:attr/colorBackgroundFloating</color>
+    <color name="bmobile_card_stroke">#26000000</color>
+    <color name="usercardbg">@*android:color/system_accent2_600</color>
+</resources>
+
