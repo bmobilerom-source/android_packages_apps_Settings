@@ -17,12 +17,27 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="network_provider_and_internet_screen"
     android:title="@string/network_dashboard_title">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="network_provider_internet_illustration"
+        settings:searchable="false"
+        android:order="-1999"
+        settings:lottie_rawRes="@raw/net_illustration"/>
+
+    <!-- Extended Homepage Widgets -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="network_internet_settings_card"
+        android:selectable="false"
+        android:layout="@layout/network_internet_settings_card"
+        android:order="-200" />
+        
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.network.NetworkProviderSettings"
         android:key="internet_settings"
+        isPreferenceVisible="false"
         android:title="@string/provider_internet_settings"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_settings_wireless"
@@ -35,6 +50,7 @@
 
     <com.android.settingslib.RestrictedPreference
         android:key="calls_and_sms"
+        isPreferenceVisible="false"
         android:title="@string/calls_and_sms"
         android:icon="@drawable/ic_calls_sms"
         android:order="-20"
@@ -51,6 +67,7 @@
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_sim_card"
         android:order="-15"
+        isPreferenceVisible="false"
         settings:keywords="@string/keywords_more_mobile_networks"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true"
@@ -111,6 +128,7 @@
         android:title="@string/adaptive_connectivity_title"
         android:summary="@string/summary_placeholder"
         android:order="25"
+        settings:isPreferenceVisible="false"
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
 
     <Preference
