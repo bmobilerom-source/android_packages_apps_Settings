@@ -18,8 +18,13 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/location_sharing_controls_title">
-
+   <com.android.settingslib.widget.IllustrationPreference
+        android:key="location"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/location"/>
     <Preference
         android:key="sharing_controls_info"
         android:title="@string/location_sharing_controls_title"
@@ -29,16 +34,16 @@
 
     <SwitchPreference
         android:key="location_sharing_enabled"
-        android:title="Enable Location Sharing"
-        android:summary="Allow apps to access your location"
+        android:title="@string/location_sharing_enabled_title"
+        android:summary="@string/location_sharing_enabled_summary"
         android:order="2"
         android:defaultValue="true"
         settings:controller="com.android.settings.location.LocationSharingController"/>
 
     <SwitchPreference
         android:key="location_background_access_enabled"
-        android:title="Allow Background Location Access"
-        android:summary="Allow apps to access location when running in background"
+        android:title="@string/location_background_access_title"
+        android:summary="@string/location_background_access_summary"
         android:order="3"
         android:defaultValue="true"
         android:dependency="location_sharing_enabled"

@@ -126,6 +126,14 @@
     <string name="location_app_overrides_summary">Override location permissions for individual apps</string>
     <string name="location_sharing_controls_title">Location Sharing</string>
     <string name="location_sharing_controls_summary">Control how location data is shared</string>
+    <string name="location_sharing_enabled_title">Enable Location Sharing</string>
+    <string name="location_sharing_enabled_summary">Allow apps to access your location</string>
+    <string name="location_background_access_title">Allow Background Location Access</string>
+    <string name="location_background_access_summary">Allow apps to access location when running in background</string>
+    <string name="location_sharing_requires_location_enabled">Location must be enabled to use location sharing</string>
+    <string name="location_background_requires_location_enabled">Location must be enabled to use background location access</string>
+    <string name="location_background_requires_sharing_enabled">Location sharing must be enabled to use background location access</string>
+    <string name="location_precision_requires_location_enabled">Location must be enabled to adjust location precision</string>
     <string name="location_status_title">Location Status</string>
     <string name="location_status_gps_active">GPS: Active</string>
     <string name="location_status_gps_inactive">GPS: Inactive</string>
@@ -140,7 +148,6 @@
     
     <!-- Mock Location -->
     <string name="mock_location_title">Allow Mock Locations</string>
-    <string name="mock_location_disabled_summary">Prevent apps from using fake GPS locations</string>
     <string name="mock_location_enabled_warning">⚠️ Warning: Mock locations are enabled. Apps can inject fake GPS data.</string>
     <string name="mock_location_warning_title">⚠️ Mock Locations Detected</string>
     <string name="mock_location_warning_summary">Mock location providers are active. Tap to open Developer Settings and disable mock location apps.</string>
@@ -163,6 +170,14 @@
     <!-- Mock Locations -->
     <string name="mock_locations_title">Mock Locations</string>
     <string name="mock_locations_summary">Configure mock location settings</string>
+    <string name="mock_locations_intro_title">Mock Location Settings</string>
+    <string name="mock_locations_intro_summary">Allow apps to inject fake GPS locations for testing and development purposes. Use with caution as this can affect app functionality and security.</string>
+    <string name="mock_locations_main_category_title">Mock Location Options</string>
+    <string name="mock_location_enabled_title">Allow Mock Locations</string>
+    <string name="mock_location_enabled_summary">Enable mock location providers for apps</string>
+    <string name="mock_location_warning_text">⚠️ Warning: Enabling mock locations allows apps to provide fake GPS data. This may affect location-based services and app functionality.</string>
+    <string name="mock_locations_footer">Mock locations are primarily intended for development and testing. Enabling this feature may impact the accuracy of location-based services.</string>
+    <string name="mock_location_disabled_summary">Mock locations are disabled. Apps cannot inject fake GPS data.</string>
 
         <!-- USB Debugging -->
     <string name="usb_debugging_title">USB Debugging</string>
@@ -175,6 +190,13 @@
     <!-- Settings Backup &amp; Restore -->
     <string name="settings_backup_restore_title">Backup &amp; Restore</string>
     <string name="settings_backup_restore_intro_summary">Backup and restore your device settings</string>
+    <string name="settings_backup_restore_category_title">Backup &amp; Restore Options</string>
+    <string name="settings_backup_title">Backup Settings</string>
+    <string name="settings_backup_summary">Create a backup of your current device settings</string>
+    <string name="settings_restore_title">Restore Settings</string>
+    <string name="settings_restore_summary">Restore device settings from a previous backup</string>
+    <string name="settings_backup_location_title">Backup Location</string>
+    <string name="settings_backup_no_backup">No backup available</string>
 
     <!-- Auto Reboot -->
     <string name="auto_reboot_title">Auto Reboot</string>

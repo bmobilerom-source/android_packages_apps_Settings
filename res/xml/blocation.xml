@@ -55,7 +55,7 @@
             android:defaultValue="precise"
             android:order="7"
             android:selectable="true"
-            android:layout="@layout/adaptive_preference_card_middle"
+            android:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.location.LocationPrecisionController"/>
 
         <Preference
@@ -63,17 +63,20 @@
             android:title="@string/location_time_restrictions_title"
             android:summary="@string/location_time_restrictions_summary"
             android:order="8"
+            settings:layout="@layout/adaptive_preference_card_top"
             android:fragment="com.android.settings.location.LocationTimeRestrictionsFragment"/>
 
         <Preference
             android:key="location_app_overrides"
             android:title="@string/location_app_overrides_title"
+            settings:layout="@layout/adaptive_preference_card_middle"
             android:summary="@string/location_app_overrides_summary"
             android:order="9"
             android:fragment="com.android.settings.location.LocationAppOverridesFragment"/>
 
         <Preference
             android:key="location_sharing_controls"
+            settings:layout="@layout/adaptive_preference_card_bottom"
             android:title="@string/location_sharing_controls_title"
             android:summary="@string/location_sharing_controls_summary"
             android:order="10"
@@ -94,6 +97,7 @@
             android:title="@string/mock_location_warning_title"
             android:summary="@string/mock_location_warning_summary"
             android:order="12"
+            settings:layout="@layout/adaptive_preference_card"
             android:selectable="true"
             settings:controller="com.android.settings.location.MockLocationWarningController"/>
     </PreferenceCategory>

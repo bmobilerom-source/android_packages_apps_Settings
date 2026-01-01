@@ -46,7 +46,7 @@
         settings:controller="com.epic.fragments.AdServicesPreferenceController"
         settings:layout="@layout/adaptive_preference_card_middle" />
     <!-- Mock Locations -->
-    <PreferenceScreen
+    <Preference
         android:key="mock_locations_category"
         android:title="@string/mock_locations_title"
         android:summary="@string/mock_locations_summary"

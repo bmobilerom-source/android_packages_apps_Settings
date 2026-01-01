@@ -18,11 +18,17 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/location_app_overrides_title">
-
+   <com.android.settingslib.widget.IllustrationPreference
+        android:key="location"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/location"/>
     <Preference
         android:key="app_overrides_info"
         android:title="@string/location_app_overrides_title"
+        settings:layout="@layout/adaptive_preference_card"
         android:summary="Per-app location precision overrides are not yet supported. Framework support is required."
         android:order="1"
         android:selectable="false"/>
