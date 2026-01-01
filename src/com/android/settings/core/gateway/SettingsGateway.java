@@ -429,6 +429,7 @@ public class SettingsGateway {
             com.epic.fragments.SystemOptimizationSettings.class.getName(),
             com.epic.fragments.DeviceTweaksSettings.class.getName(),
             com.epic.fragments.AutoRebootSettings.class.getName(),
+            com.epic.fragments.SystemBasicDefaultsSettings.class.getName(),
             com.android.settings.applications.specialaccess.AppSecSettings.class.getName()
     };
 
