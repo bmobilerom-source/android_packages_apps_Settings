@@ -72,7 +72,7 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.userinfo_pref);
 	context = getActivity();
-	((SettingsBaseActivity)getActivity()).mAppBarLayout.setExpanded(false);
+	// mAppBarLayout access removed - handled by parent class
     }
 
 

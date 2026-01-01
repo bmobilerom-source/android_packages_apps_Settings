@@ -16,12 +16,26 @@
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:contentDescription="@null"
-            android:layout_gravity="center"
-            android:id="@+id/entity_header_icon"
+        <FrameLayout
             android:layout_width="64dp"
-            android:layout_height="64dp"/>
+            android:layout_height="64dp"
+            android:layout_gravity="center">
+            <ImageView
+                android:contentDescription="@null"
+                android:layout_gravity="center"
+                android:id="@+id/entity_header_icon"
+                android:layout_width="64dp"
+                android:layout_height="64dp"/>
+            <ImageView
+                android:id="@+id/image_holder"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/user"
+                android:clickable="true"
+                android:focusable="true"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -48,6 +62,14 @@
                 android:text="@string/usercard_summary"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="12sp"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
