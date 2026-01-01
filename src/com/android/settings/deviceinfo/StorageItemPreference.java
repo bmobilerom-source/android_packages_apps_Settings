@@ -46,7 +46,10 @@ public class StorageItemPreference extends Preference {
 
     public StorageItemPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(R.layout.storage_item);
+        // Only set default layout if not already specified in XML
+        if (getLayoutResource() == 0) {
+            setLayoutResource(R.layout.storage_item);
+        }
     }
 
     @VisibleForTesting
