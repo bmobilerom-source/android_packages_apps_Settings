@@ -55,7 +55,7 @@
             android:defaultValue="precise"
             android:order="7"
             android:selectable="true"
-            android:layout="@layout/adaptive_preference_card"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.location.LocationPrecisionController"/>
 
         <Preference
@@ -72,7 +72,8 @@
             settings:layout="@layout/adaptive_preference_card_middle"
             android:summary="@string/location_app_overrides_summary"
             android:order="9"
-            android:fragment="com.android.settings.location.LocationAppOverridesFragment"/>
+            android:fragment="com.android.settings.location.LocationAppOverridesFragment"
+            settings:isPreferenceVisible="false"/>
 
         <Preference
             android:key="location_sharing_controls"
@@ -89,7 +90,8 @@
             android:summary="@string/mock_location_disabled_summary"
             android:order="11"
             android:defaultValue="false"
-            settings:controller="com.android.settings.location.MockLocationController"/>
+            settings:controller="com.android.settings.location.MockLocationController"
+            settings:isPreferenceVisible="false"/>
 
         <!-- Mock Location Warning -->
         <Preference
@@ -99,7 +101,8 @@
             android:order="12"
             settings:layout="@layout/adaptive_preference_card"
             android:selectable="true"
-            settings:controller="com.android.settings.location.MockLocationWarningController"/>
+            settings:controller="com.android.settings.location.MockLocationWarningController"
+            settings:isPreferenceVisible="false"/>
     </PreferenceCategory>
 
     <!-- Location Status Indicators -->

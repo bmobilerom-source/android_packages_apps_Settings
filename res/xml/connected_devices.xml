@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="connected_devices_screen"
     android:title="@string/connected_devices_dashboard_title">
 
@@ -70,6 +71,7 @@
             android:icon="@drawable/ic_chevron_right_24dp"
             android:key="previously_connected_devices_see_all"
             android:order="10"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/previous_connected_see_all"
             settings:searchable="false" />
     </PreferenceCategory>
@@ -86,6 +88,7 @@
             android:icon="@drawable/ic_chevron_right_24dp"
             android:key="fast_pair_devices_see_all"
             android:order="10"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/connected_device_fast_pair_device_see_all"
             settings:searchable="false" />
     </PreferenceCategory>
@@ -93,7 +96,8 @@
     <Preference
         android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
         android:key="connection_preferences"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/summary_placeholder"   
+        settings:layout="@layout/adaptive_preference_card_top"
         android:title="@string/connected_device_connections_title"
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
@@ -101,9 +105,9 @@
     <Preference
         android:fragment="com.android.settings.bshare.BShareSettingsFragment"
         android:key="bshare_settings"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         android:title="@string/bshare_settings_title"
         android:summary="@string/bshare_settings_summary"
-        android:icon="@drawable/ic_bshare"
         android:order="45"
         settings:controller="com.android.settings.bshare.BSharePreferenceController"
         settings:allowDividerAbove="true" />

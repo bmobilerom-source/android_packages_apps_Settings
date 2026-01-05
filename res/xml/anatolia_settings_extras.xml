@@ -18,5 +18,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/extras_title">
+
+    <!-- Homepage Widgets -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="extras_homepage_widgets"
+        android:selectable="false"
+        android:layout="@layout/homepage_widgets"
+        android:order="-200" />
   
 </PreferenceScreen>

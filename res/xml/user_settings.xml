@@ -17,8 +17,15 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="user_settings_screen"
     android:title="@string/user_settings_title">
+
+   <com.android.settingslib.widget.IllustrationPreference
+        android:key="network_provider_internet_illustration"
+        settings:searchable="false"
+        android:order="-1999"
+        settings:lottie_rawRes="@raw/multiple_user"/>
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="multiuser_top_intro"
@@ -34,12 +41,14 @@
     <Preference
         android:key="guest_exit"
         android:title="@string/guest_exit_button"
+        settings:layout="@layout/adaptive_preference_card"
         android:icon="@drawable/ic_guest_exit"
         android:order="3"/>
 
     <Preference
         android:key="guest_reset"
         android:title="@string/guest_reset_button"
+        settings:layout="@layout/adaptive_preference_card"
         android:icon="@drawable/ic_guest_reset"
         android:order="4"/>
 

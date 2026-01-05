@@ -52,12 +52,17 @@ public class HomepageWidgetsView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        // Always bind search widget click handler to ensure it works on top-level dashboard
-        // Other widgets are bound conditionally based on preference context
-        bindSearchWidget();
-        // Only bind other actions if not used within a preference (which handles its own click listeners)
-        if (!isInPreference()) {
-            bindOtherActions();
+        try {
+            // Always bind search widget click handler to ensure it works on top-level dashboard
+            // Other widgets are bound conditionally based on preference context
+            bindSearchWidget();
+            // Only bind other actions if not used within a preference (which handles its own click listeners)
+            if (!isInPreference()) {
+                bindOtherActions();
+            }
+        } catch (Exception e) {
+            // Silently handle exceptions to prevent crashes during view inflation
+            android.util.Log.w("HomepageWidgetsView", "Failed to initialize widgets", e);
         }
     }
 
@@ -79,22 +84,32 @@ public class HomepageWidgetsView extends LinearLayout {
 
     private void bindSearchWidget() {
         // Always bind search widget to ensure it works on top-level dashboard
-        Activity activity = findActivity(getContext());
-        View search = findViewById(R.id.search_widget);
-        if (search != null) {
-            setInteractiveClick(search, () -> launchSystemLaunchPad(activity));
+        try {
+            Activity activity = findActivity(getContext());
+            View search = findViewById(R.id.search_widget);
+            if (search != null) {
+                setInteractiveClick(search, () -> launchSystemLaunchPad(activity));
+            }
+        } catch (Exception e) {
+            // Silently handle exceptions to prevent crashes during initialization
+            android.util.Log.w("HomepageWidgetsView", "Failed to bind search widget", e);
         }
     }
 
     private void bindOtherActions() {
-        Activity activity = findActivity(getContext());
-        View battery = findViewById(R.id.battery_widget);
-        View storage = findViewById(R.id.storage_widget);
-        View system = findViewById(R.id.system_widget);
+        try {
+            Activity activity = findActivity(getContext());
+            View battery = findViewById(R.id.battery_widget);
+            View storage = findViewById(R.id.storage_widget);
+            View system = findViewById(R.id.system_widget);
 
-        setInteractiveClick(battery, () -> openBattery(activity));
-        setInteractiveClick(storage, () -> openStorage(activity));
-        setInteractiveClick(system, () -> openConnectedDevices(activity));
+            setInteractiveClick(battery, () -> openBattery(activity));
+            setInteractiveClick(storage, () -> openStorage(activity));
+            setInteractiveClick(system, () -> openConnectedDevices(activity));
+        } catch (Exception e) {
+            // Silently handle exceptions to prevent crashes during initialization
+            android.util.Log.w("HomepageWidgetsView", "Failed to bind other actions", e);
+        }
     }
 
     private void setInteractiveClick(View v, Runnable action) {

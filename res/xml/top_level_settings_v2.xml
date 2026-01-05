@@ -26,8 +26,14 @@
         android:key="top_level_mainuser_profile_card"
         android:selectable="true"
         android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
-        android:order="-200" />
-
+        android:order="-300" />
+    <!-- Extended Homepage Widgets -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="extended_homepage_widgets"
+        android:selectable="false"
+        android:layout="@layout/homepage_widgets"
+        android:order="-200"
+        settings:isPreferenceVisible="false" />
     <PreferenceCategory
         android:order="-130"
         android:key="top_level_connectivity_category"
@@ -43,14 +49,12 @@
             settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
 
         <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
-            android:icon="@drawable/ic_devices_other_filled"
-            android:key="top_level_connected_devices"
+            android:fragment="com.epic.fragments.SystemBasicDefaultsSettings"
+            android:icon="@drawable/ic_settings_system_dashboard_filled"
+            android:key="top_level_system_basic_defaults"
             android:order="-10"
-            android:title="@string/connected_devices_dashboard_title"
-            android:summary="@string/connected_devices_dashboard_default_summary"
-            settings:highlightableMenuKey="@string/menu_key_connected_devices"
-            settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
+            android:title="@string/system_basic_defaults_title"
+            android:summary="@string/summary_placeholder"/>
     </PreferenceCategory>
 
     <PreferenceCategory

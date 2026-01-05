@@ -17,11 +17,20 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/data_saver_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="data_saver"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/data_saver"/>
 
     <Preference
         android:key="unrestricted_access"
         android:title="@string/unrestricted_data_saver"
+        settings:layout="@layout/adaptive_preference_card"
+        android:order="10"
         android:summary="@string/summary_two_lines_placeholder"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
         settings:searchable="false"

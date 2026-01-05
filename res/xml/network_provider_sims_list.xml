@@ -33,7 +33,6 @@
         settings:useAdminDisabledSummary="true"
         settings:searchable="false"
         android:title="@string/mobile_network_list_add_more"
-        android:icon="@drawable/ic_menu_add_activated_tint"
         android:order="100">
         <intent android:action="android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION"
                 android:targetPackage="com.android.phone">

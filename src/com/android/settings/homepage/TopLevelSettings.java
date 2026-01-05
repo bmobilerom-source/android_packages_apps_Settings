@@ -327,56 +327,65 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     }
 
     private void onUserCard() {
-        final Preference pref = getPreferenceScreen() != null
-                ? getPreferenceScreen().findPreference(KEY_USER_CARD)
-                : null;
-        if (!(pref instanceof LayoutPreference)) {
-            return;
-        }
+        try {
+            final Preference pref = getPreferenceScreen() != null
+                    ? getPreferenceScreen().findPreference(KEY_USER_CARD)
+                    : null;
+            if (!(pref instanceof LayoutPreference)) {
+                return;
+            }
 
-        final LayoutPreference headerPreference = (LayoutPreference) pref;
-        final View userCard = headerPreference.findViewById(R.id.entity_header);
-        if (userCard == null) {
-            return;
-        }
+            final LayoutPreference headerPreference = (LayoutPreference) pref;
+            final View userCard = headerPreference.findViewById(R.id.entity_header);
+            if (userCard == null) {
+                return;
+            }
 
-        final Activity context = getActivity();
-        if (context == null) {
-            return;
-        }
+            final Activity context = getActivity();
+            if (context == null) {
+                return;
+            }
 
-        final TextView textview = headerPreference.findViewById(R.id.summary);
-        final Bundle bundle = getArguments();
+            final TextView textview = headerPreference.findViewById(R.id.summary);
+            final Bundle bundle = getArguments();
 
-        final EntityHeaderController controller = EntityHeaderController
-                .newInstance(context, this, userCard)
-                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
-                        EntityHeaderController.ActionType.ACTION_NONE);
+            final EntityHeaderController controller = EntityHeaderController
+                    .newInstance(context, this, userCard)
+                    .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
+                            EntityHeaderController.ActionType.ACTION_NONE);
 
-        userCard.setOnClickListener(v -> {
-            final Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setComponent(new ComponentName(
-                    "com.android.settings",
-                    "com.android.settings.Settings$UserSettingsActivity"));
-            startActivity(intent);
-        });
+            userCard.setOnClickListener(v -> {
+                try {
+                    final Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setComponent(new ComponentName(
+                            "com.android.settings",
+                            "com.android.settings.Settings$UserSettingsActivity"));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to start UserSettingsActivity", e);
+                }
+            });
 
-        final int iconId = bundle != null ? bundle.getInt("icon_id", 0) : 0;
-        if (iconId == 0) {
-            final UserManager userManager = (UserManager) context.getSystemService(
-                    Context.USER_SERVICE);
-            if (userManager != null) {
-                final UserInfo info = Utils.getExistingUser(userManager,
-                        android.os.Process.myUserHandle());
-                if (info != null) {
-                    controller.setLabel(info.name);
-                    controller.setIcon(
-                            com.android.settingslib.Utils.getUserIcon(context, userManager, info));
+            final int iconId = bundle != null ? bundle.getInt("icon_id", 0) : 0;
+            if (iconId == 0) {
+                final UserManager userManager = (UserManager) context.getSystemService(
+                        Context.USER_SERVICE);
+                if (userManager != null) {
+                    final UserInfo info = Utils.getExistingUser(userManager,
+                            android.os.Process.myUserHandle());
+                    if (info != null) {
+                        controller.setLabel(info.name);
+                        controller.setIcon(
+                                com.android.settingslib.Utils.getUserIcon(context, userManager, info));
+                    }
                 }
             }
-        }
 
-        controller.done(context);
+            controller.done(context);
+        } catch (Exception e) {
+            // Silently handle exceptions to prevent crashes
+            Log.w(TAG, "Failed to initialize user card", e);
+        }
     }
 
     @Override

@@ -50,6 +50,10 @@ public class BlockChecker {
         "com.android.settings.applications.specialaccess.AppSecSettings";
     private static final String FRAGMENT_BLOCATION = 
         "com.android.settings.location.BLocationSettings";
+    private static final String FRAGMENT_USB_DETAILS = 
+        "com.android.settings.connecteddevice.usb.UsbDetailsFragment";
+    private static final String FRAGMENT_MANAGE_APPLICATIONS = 
+        "com.android.settings.applications.manageapplications.ManageApplications";
     
     /**
      * Check if a fragment is blocked.
@@ -74,6 +78,16 @@ public class BlockChecker {
             
             if (FRAGMENT_ACCOUNT_DASHBOARD.equals(fragmentName)) {
                 return BlockAccountDashboardController.isBlocked(context);
+            }
+            
+            // Block USB popup page
+            if (FRAGMENT_USB_DETAILS.equals(fragmentName)) {
+                return BlockUsbPopupController.isBlocked(context);
+            }
+            
+            // Block ManageApplications when install whitelist is enabled
+            if (FRAGMENT_MANAGE_APPLICATIONS.equals(fragmentName)) {
+                return InstallAppWhitelistController.isWhitelistEnabled(context);
             }
             
             // Block Safety Center and all related fragments

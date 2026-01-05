@@ -19,4 +19,35 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	   android:title="@string/buttons_title">
 
+    <PreferenceCategory
+        android:order="10"
+        android:key="buttons_homepage_widgets_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.gestures.ButtonNavigationSettingsFragment"
+            android:icon="@drawable/ic_settings_system_dashboard_filled"
+            android:key="buttons_navigation_settings"
+            android:order="11"
+            android:title="@string/button_navigation_settings_activity_title"
+            android:summary="@string/summary_placeholder" />
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
+            android:icon="@drawable/ic_settings_system_dashboard_filled"
+            android:key="buttons_gesture_navigation"
+            android:order="12"
+            android:title="@string/system_navigation_title"
+            android:summary="@string/summary_placeholder" />
+
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.gestures.OneHandedSettings"
+            android:icon="@drawable/ic_settings_system_dashboard_filled"
+            android:key="buttons_one_handed"
+            android:order="13"
+            android:title="@string/one_handed_title"
+            android:summary="@string/summary_placeholder" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

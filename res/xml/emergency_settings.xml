@@ -18,19 +18,27 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="safety_and_emergency_screen"
     android:title="@string/emergency_settings_preference_title">
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="emergency"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/emergancy"/>
     <com.android.settingslib.widget.LayoutPreference
         android:key="more_emergency_settings"
         android:layout="@layout/more_settings_button"
         android:order="0"
         android:selectable="false"
-        settings:controller="com.android.settings.emergency.MoreSettingsPreferenceController" />
+        settings:controller="com.android.settings.emergency.MoreSettingsPreferenceController"
+        settings:isPreferenceVisible="false" />
     <Preference
         android:key="gesture_emergency_summary"
         android:title="@string/emergency_gesture_screen_title"
         android:icon="@drawable/ic_emergency_gesture_24dp"
         android:order="100"
+        settings:layout="@layout/adaptive_preference_card"
         android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
         settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
     <PreferenceCategory

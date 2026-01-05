@@ -85,19 +85,25 @@ public class MoreSettingsPreferenceController extends BasePreferenceController i
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        final Button button = mPreference.findViewById(R.id.button);
-        final Drawable icon = getIcon();
-        button.setText(getButtonText());
-        if (icon != null) {
-            button.setCompoundDrawablesWithIntrinsicBounds(
-                    /* left= */ icon,
-                    /* top= */null,
-                    /* right= */ null,
-                    /* bottom= */ null);
-            button.setVisibility(View.VISIBLE);
-        }
+        if (mPreference != null) {
+            // Hide preference as requested
+            mPreference.setVisible(false);
+            final Button button = mPreference.findViewById(R.id.button);
+            if (button != null) {
+                final Drawable icon = getIcon();
+                button.setText(getButtonText());
+                if (icon != null) {
+                    button.setCompoundDrawablesWithIntrinsicBounds(
+                            /* left= */ icon,
+                            /* top= */null,
+                            /* right= */ null,
+                            /* bottom= */ null);
+                    button.setVisibility(View.VISIBLE);
+                }
 
-        button.setOnClickListener(this);
+                button.setOnClickListener(this);
+            }
+        }
     }
 
     @Override

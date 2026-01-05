@@ -68,6 +68,9 @@ class TetherPreferenceController(
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
+        // Hide preference initially - replaced by custom card layout
+        // Visibility will be updated in onViewCreated if tethering is available
+        preference?.isVisible = false
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {

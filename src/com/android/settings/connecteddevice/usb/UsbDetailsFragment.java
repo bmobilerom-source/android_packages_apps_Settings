@@ -24,6 +24,8 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.view.View;
 
+import com.android.settings.applications.specialaccess.BlockUsbPopupController;
+
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -66,7 +68,26 @@ public class UsbDetailsFragment extends DashboardFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // Check if access is blocked before creating the fragment
+        if (BlockUsbPopupController.isBlocked(getContext())) {
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onStart() {
+        // Double-check blocking in onStart as well
+        if (BlockUsbPopupController.isBlocked(getContext())) {
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
         super.onStart();
         mUserAuthenticated = false;
     }

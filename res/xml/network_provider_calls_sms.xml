@@ -17,16 +17,23 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="provider_model_calls_and_sms_screen"
     android:title="@string/calls_and_sms">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="calls_and_sms"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/call_sms"/>
 
     <ListPreference
         android:key="provider_model_calls_preference"
         android:title="@string/calls_preference_title"
         settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
         android:order="10"
-        android:icon="@drawable/ic_phone"
         android:enabled="false"
+        settings:layout="@layout/adaptive_preference_card"
         />
 
     <ListPreference
@@ -34,15 +41,16 @@
         android:title="@string/sms_preference_title"
         settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"
         android:order="15"
-        android:icon="@drawable/ic_sms"
         android:enabled="false"
+        settings:layout="@layout/adaptive_preference_card"
         />
 
     <PreferenceCategory
         android:key="provider_model_calling_category"
         android:title="@string/calls_and_sms_category"
         android:order="20"
+        settings:layout="@layout/preference_category_no_label"
         settings:controller="com.android.settings.network.telephony.NetworkProviderWifiCallingPreferenceController"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
         />
 </PreferenceScreen>

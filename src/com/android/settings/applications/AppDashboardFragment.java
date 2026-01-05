@@ -18,11 +18,13 @@ package com.android.settings.applications;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController;
+import com.android.settings.applications.specialaccess.BlockAppDashboardController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
@@ -77,8 +79,27 @@ public class AppDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // Check if access is blocked before creating the fragment
+        if (BlockAppDashboardController.isBlocked(getContext())) {
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        // Double-check blocking in onAttach as well
+        if (BlockAppDashboardController.isBlocked(context)) {
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
         mAppsPreferenceController = use(AppsPreferenceController.class);
         mAppsPreferenceController.setFragment(this /* fragment */);
         getSettingsLifecycle().addObserver(mAppsPreferenceController);

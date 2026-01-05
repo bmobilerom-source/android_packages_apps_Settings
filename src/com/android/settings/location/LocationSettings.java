@@ -29,6 +29,8 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.android.settings.applications.specialaccess.BlockLocationSettingsController;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
@@ -89,6 +91,21 @@ public class LocationSettings extends DashboardFragment implements
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // Check if access is blocked before creating the fragment
+        if (BlockLocationSettingsController.isBlocked(getContext())) {
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
+        super.onCreate(savedInstanceState);
+        
+        replaceEnterpriseStringTitle("managed_profile_location_switch",
+                WORK_PROFILE_LOCATION_SWITCH_TITLE, R.string.managed_profile_location_switch_title);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final SettingsActivity activity = (SettingsActivity) getActivity();
@@ -134,14 +151,6 @@ public class LocationSettings extends DashboardFragment implements
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.location_settings;
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        replaceEnterpriseStringTitle("managed_profile_location_switch",
-                WORK_PROFILE_LOCATION_SWITCH_TITLE, R.string.managed_profile_location_switch_title);
     }
 
     @Override

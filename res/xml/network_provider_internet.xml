@@ -25,7 +25,7 @@
         android:key="network_provider_internet_illustration"
         settings:searchable="false"
         android:order="-1999"
-        settings:lottie_rawRes="@raw/net_illustration"/>
+        settings:lottie_rawRes="@raw/TowerSignal"/>
 
     <!-- Extended Homepage Widgets -->
     <com.android.settingslib.widget.LayoutPreference
@@ -37,10 +37,9 @@
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.network.NetworkProviderSettings"
         android:key="internet_settings"
-        isPreferenceVisible="false"
+        settings:isPreferenceVisible="false"
         android:title="@string/provider_internet_settings"
         android:summary="@string/summary_placeholder"
-        android:icon="@drawable/ic_settings_wireless"
         android:order="-30"
         settings:allowDividerAbove="true"
         settings:keywords="@string/keywords_internet"
@@ -50,9 +49,8 @@
 
     <com.android.settingslib.RestrictedPreference
         android:key="calls_and_sms"
-        isPreferenceVisible="false"
+        settings:isPreferenceVisible="false"
         android:title="@string/calls_and_sms"
-        android:icon="@drawable/ic_calls_sms"
         android:order="-20"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.network.NetworkProviderCallsSmsFragment"
@@ -65,9 +63,8 @@
         android:key="mobile_network_list"
         android:title="@string/provider_network_settings_title"
         android:summary="@string/summary_placeholder"
-        android:icon="@drawable/ic_sim_card"
         android:order="-15"
-        isPreferenceVisible="false"
+        settings:isPreferenceVisible="false"
         settings:keywords="@string/keywords_more_mobile_networks"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true"
@@ -76,7 +73,6 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="airplane_mode_on"
         android:title="@string/airplane_mode"
-        android:icon="@drawable/ic_airplanemode_active"
         android:order="-5"
         settings:controller="com.android.settings.network.AirplaneModePreferenceController"
         settings:userRestriction="no_airplane_mode"/>
@@ -85,9 +81,9 @@
         android:fragment="com.android.settings.network.tether.TetherSettings"
         android:key="tether_settings"
         android:title="@string/tether_settings_title_all"
-        android:icon="@drawable/ic_wifi_tethering"
         android:order="5"
         android:summary="@string/summary_placeholder"
+        settings:isPreferenceVisible="false"
         settings:controller="com.android.settings.network.TetherPreferenceController"
         settings:keywords="@string/keywords_hotspot_tethering"
         settings:userRestriction="no_config_tethering"
@@ -99,6 +95,7 @@
         android:icon="@drawable/ic_settings_data_usage"
         android:order="10"
         android:persistent="false"
+        settings:layout="@layout/adaptive_preference_card"
         settings:isPreferenceVisible="@bool/config_show_data_saver"
         android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 
@@ -106,16 +103,15 @@
         android:fragment="com.android.settings.vpn2.VpnSettings"
         android:key="vpn_settings"
         android:title="@string/vpn_settings_title"
-        android:icon="@drawable/ic_vpn_key"
         android:order="15"
         android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card"
         settings:userRestriction="no_config_vpn"
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settings.network.PrivateDnsModeDialogPreference
         android:key="private_dns_settings"
         android:title="@string/select_private_dns_configuration_title"
-        android:icon="@drawable/ic_settings_private_dns"
         android:order="20"
         android:dialogTitle="@string/select_private_dns_configuration_dialog_title"
         android:dialogLayout="@layout/private_dns_mode_dialog"
@@ -128,6 +124,7 @@
         android:title="@string/adaptive_connectivity_title"
         android:summary="@string/summary_placeholder"
         android:order="25"
+        settings:layout="@layout/adaptive_preference_card"
         settings:isPreferenceVisible="false"
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
 

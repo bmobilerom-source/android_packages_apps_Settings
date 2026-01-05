@@ -243,5 +243,10 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
             mManager.stopServer();
         }
     }
+    
+    @Override
+    public int getMetricsCategory() {
+        return com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
+    }
 }
 
