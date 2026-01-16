@@ -33,5 +33,10 @@
     <string name="bshare_status_connected">Connected</string>
     <string name="bshare_status_transferring">Transferring...</string>
     <string name="bshare_status_complete">Transfer complete</string>
+    <string name="bshare_device_found">Found: %1$s (%2$s)</string>
+    
+    <string name="bshare_hotspot_mode_title">Hotspot Mode</string>
+    <string name="bshare_hotspot_mode_summary">Create ad-hoc WiFi network (no router needed)</string>
+    <string name="bshare_hotspot_running">Hotspot: %1$s\nPassword: %2$s\nIP: %3$s</string>
 </resources>
 

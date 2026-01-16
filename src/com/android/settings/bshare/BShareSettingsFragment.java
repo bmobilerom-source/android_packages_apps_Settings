@@ -10,9 +10,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -25,18 +28,21 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
     private static final int REQUEST_CODE_PERMISSIONS = 1002;
     
     private BShareManager mManager;
+    private Handler mHandler;
     private Preference mStartServerPref;
     private Preference mStartDiscoveringPref;
     private Preference mSelectFilePref;
     private Preference mSelectDownloadPref;
     private Preference mShareToAppsPref;
     private Preference mServerStatusPref;
+    private SwitchPreference mHotspotModePref;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.bshare_settings);
         
+        mHandler = new Handler(Looper.getMainLooper());
         mManager = new BShareManager(getContext());
         mManager.setCallback(mCallback);
         
@@ -52,6 +58,7 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
         mSelectDownloadPref = screen.findPreference("bshare_select_download");
         mShareToAppsPref = screen.findPreference("bshare_share_to_apps");
         mServerStatusPref = screen.findPreference("bshare_server_status");
+        mHotspotModePref = screen.findPreference("bshare_hotspot_mode");
         
         if (mStartServerPref != null) {
             mStartServerPref.setOnPreferenceClickListener(pref -> {
@@ -92,6 +99,14 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
             });
         }
         
+        if (mHotspotModePref != null) {
+            mHotspotModePref.setOnPreferenceChangeListener((pref, newValue) -> {
+                boolean enabled = (Boolean) newValue;
+                mManager.setUseHotspotMode(enabled);
+                return true;
+            });
+        }
+        
         updateServerStatus();
     }
     
@@ -112,10 +127,19 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
     }
     
     private void startDiscovering() {
-        mManager.discoverDevices();
         if (mStartDiscoveringPref != null) {
             mStartDiscoveringPref.setSummary(getString(R.string.bshare_status_discovering));
+            mStartDiscoveringPref.setEnabled(false);
         }
+        mManager.discoverDevices();
+        
+        // Re-enable after discovery completes
+        mHandler.postDelayed(() -> {
+            if (mStartDiscoveringPref != null) {
+                mStartDiscoveringPref.setEnabled(true);
+                mStartDiscoveringPref.setSummary(getString(R.string.bshare_start_discovering_summary));
+            }
+        }, 12000); // 12 seconds timeout
     }
     
     private void updateServerStatus() {
@@ -213,6 +237,10 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
             @Override
             public void onDeviceFound(String deviceName, String ipAddress) {
                 Log.d(TAG, "Device found: " + deviceName + " @ " + ipAddress);
+                if (mStartDiscoveringPref != null) {
+                    String summary = getString(R.string.bshare_device_found, deviceName, ipAddress);
+                    mStartDiscoveringPref.setSummary(summary);
+                }
             }
             
             @Override
@@ -233,6 +261,21 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
             @Override
             public void onError(String error) {
                 Log.e(TAG, "Error: " + error);
+            }
+            
+            @Override
+            public void onHotspotStarted(String ssid, String password, String ipAddress) {
+                Log.d(TAG, "Hotspot started: " + ssid + " @ " + ipAddress);
+                // Update UI with hotspot info
+                if (mServerStatusPref != null) {
+                    mServerStatusPref.setSummary(
+                        getString(R.string.bshare_hotspot_running, ssid, password, ipAddress));
+                }
+            }
+            
+            @Override
+            public void onHotspotStopped() {
+                Log.d(TAG, "Hotspot stopped");
             }
         };
     

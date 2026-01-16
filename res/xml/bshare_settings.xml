@@ -30,11 +30,18 @@
             android:order="11"
             settings:layout="@layout/adaptive_preference_card_top" />
         
+        <SwitchPreference
+            android:key="bshare_hotspot_mode"
+            android:title="@string/bshare_hotspot_mode_title"
+            android:summary="@string/bshare_hotspot_mode_summary"
+            android:order="12"
+            settings:layout="@layout/adaptive_preference_card_middle" />
+        
         <Preference
             android:key="bshare_start_server"
             android:title="@string/bshare_start_server_title"
             android:summary="@string/bshare_start_server_summary"
-            android:order="12"
+            android:order="13"
             settings:layout="@layout/adaptive_preference_card_bottom" />
     </PreferenceCategory>
     
