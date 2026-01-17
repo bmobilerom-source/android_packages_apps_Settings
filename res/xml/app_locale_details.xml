@@ -30,7 +30,7 @@
         android:layout="@layout/app_locale_details_description"
         android:selectable="false"
         android:visibility="gone"
-        settings:allowDividerBelow="true"
+        settings:allowDividerBelow="false"
         settings:searchable="false"/>
 
 </PreferenceScreen>

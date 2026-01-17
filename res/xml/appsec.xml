@@ -43,13 +43,6 @@
         settings:controller="com.android.settings.applications.specialaccess.SecurityScoreController"
         settings:layout="@layout/adaptive_preference_card_top"/>
 
-    <!-- Installation Security Category -->
-    <PreferenceCategory
-        android:key="installation_security_category"
-        android:title="@string/appsec_installation_security_title"
-        android:summary="@string/appsec_installation_security_summary"
-        android:order="10"
-        settings:layout="@layout/adaptive_preference_card">
 
         <!-- Restrict app installation to whitelisted sources only -->
         <SwitchPreference
@@ -61,16 +54,9 @@
             android:enabled="true"
             settings:controller="com.android.settings.applications.specialaccess.InstallAppWhitelistController" />
 
-    </PreferenceCategory>
 
     <!-- Access Control Category -->
-    <PreferenceCategory
-        android:key="access_control_category"
-        android:title="@string/appsec_access_control_title"
-        android:summary="@string/appsec_access_control_summary"
-        android:order="20"
-        settings:layout="@layout/adaptive_preference_card">
-
+  
         <!-- Block access to the main app settings dashboard -->
         <SwitchPreference
             android:key="block_app_dashboard_toggle"
@@ -91,16 +77,9 @@
             android:enabled="true"
             settings:controller="com.android.settings.applications.specialaccess.BlockUsbPopupController" />
 
-    </PreferenceCategory>
 
     <!-- System Protection Category -->
-    <PreferenceCategory
-        android:key="system_protection_category"
-        android:title="@string/appsec_system_protection_title"
-        android:summary="@string/appsec_system_protection_summary"
-        android:order="30"
-        settings:layout="@layout/adaptive_preference_card">
-
+ 
         <!-- Block access to location settings and controls -->
         <SwitchPreference
             android:key="block_location_settings_toggle"
@@ -151,7 +130,6 @@
             android:order="41"
             settings:controller="com.android.settings.applications.specialaccess.BlockBLocationController" />
 
-    </PreferenceCategory>
 
     <!-- Security Footer -->
     <com.android.settingslib.widget.FooterPreference

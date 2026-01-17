@@ -25,12 +25,6 @@
         android:order="-1001"
         app:lottie_rawRes="@raw/system" />
 
-    <!-- Header -->
-    <PreferenceCategory
-        android:title="@string/auto_reboot_title"
-        android:order="-1000"
-        android:layout="@layout/settings_title_header_small">
-    </PreferenceCategory>
 
     <!-- Main Switch -->
     <com.android.settingslib.widget.MainSwitchPreference
@@ -40,7 +34,7 @@
         settings:controller="com.epic.fragments.AutoRebootMainSwitchController" />
 
     <!-- Auto Reboot Interval -->
-    <com.android.settings.preferences.ui.AdaptiveListPreference
+    <ListPreference
         android:key="auto_reboot_interval"
         android:title="@string/auto_reboot_interval_title"
         android:summary="@string/auto_reboot_interval_summary"
@@ -48,7 +42,6 @@
         android:entryValues="@array/auto_reboot_interval_values"
         android:defaultValue="3600000"
         android:order="0"
-        app:position="top"
         settings:controller="com.epic.fragments.AutoRebootIntervalController" />
 
     <!-- Footer -->

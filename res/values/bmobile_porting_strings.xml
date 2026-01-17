@@ -225,6 +225,11 @@
     <string name="auto_reboot_interval_every_3_days">Every 3 days</string>
     <string name="auto_reboot_interval_weekly">Weekly</string>
     <string name="auto_reboot_interval_custom">Every %1$d hours</string>
+    <string name="auto_reboot_interval_one_hour">1 hour</string>
+    <string name="auto_reboot_interval_hours">%1$d hours</string>
+    <string name="auto_reboot_interval_one_day">1 day</string>
+    <string name="auto_reboot_interval_days">%1$d days</string>
+    <string name="auto_reboot_interval_minutes">%1$d minutes</string>
     
     <string name="auto_reboot_time_title">Reboot Time</string>
     <string name="auto_reboot_time_summary">Time of day to reboot (24-hour format)</string>
@@ -232,6 +237,8 @@
     <string name="auto_reboot_time_picker_title">Select Reboot Time</string>
     
     <string name="auto_reboot_footer">Auto reboot helps maintain device security and performance by periodically restarting the system. The device will reboot even when the screen is off.</string>
+    <string name="auto_reboot_confirm_credential_title">Confirm device credentials</string>
+    <string name="auto_reboot_confirm_credential_description">Enter your device credentials to change auto reboot settings</string>
 
     <!-- UserInfo Bubble Setting -->
     <string name="userinfo_bubble_setting_description">Configure bubble notification settings</string>

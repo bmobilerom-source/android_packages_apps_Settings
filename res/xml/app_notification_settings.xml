@@ -47,7 +47,7 @@
     <Preference
         android:key="bubble_pref_link"
         android:title="@string/notification_bubbles_title"
-        android:icon="@drawable/ic_create_bubble"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
     </Preference>
 
@@ -65,7 +65,8 @@
     <Preference
         android:key="more"
         android:title="@string/no_recent_channels"
-        android:icon="@drawable/ic_expand"/>
+        settings:layout="@layout/adaptive_preference_card"
+        settings:controller="com.android.settings.notification.app.MoreChannelsPreferenceController"/>
 
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
@@ -111,17 +112,17 @@
 
     <Preference
         android:key="app_link"
-        android:icon="@drawable/ic_settings_24dp"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/app_settings_link"
         android:order="1003"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="deleted"
         android:icon="@drawable/ic_trash_can"
         android:order="8000"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
         settings:allowDividerBelow="false" />
 
 </PreferenceScreen>
