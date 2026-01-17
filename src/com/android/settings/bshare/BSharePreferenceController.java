@@ -8,6 +8,7 @@ package com.android.settings.bshare;
 
 import android.content.Context;
 import androidx.preference.Preference;
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /**

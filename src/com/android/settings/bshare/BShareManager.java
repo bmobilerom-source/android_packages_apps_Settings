@@ -262,6 +262,9 @@ public class BShareManager {
                         if (ipAddress == null) {
                             ipAddress = "192.168.43.1"; // Default hotspot IP
                         }
+                        final String finalIpAddress = ipAddress;
+                        final String finalSsid = ssid;
+                        final String finalPass = pass;
                         
                         mExecutor.execute(() -> {
                             try {
@@ -276,16 +279,16 @@ public class BShareManager {
                                 acquireWakeLock();
                                 
                                 // Show notification
-                                showNotification(ipAddress, DEFAULT_PORT, ssid, pass);
-                                
+                                showNotification(finalIpAddress, DEFAULT_PORT, finalSsid, finalPass);
+
                                 if (mCallback != null) {
                                     mHandler.post(() -> {
-                                        mCallback.onHotspotStarted(ssid, pass, ipAddress);
-                                        mCallback.onServerStarted(ipAddress, DEFAULT_PORT);
+                                        mCallback.onHotspotStarted(finalSsid, finalPass, finalIpAddress);
+                                        mCallback.onServerStarted(finalIpAddress, DEFAULT_PORT);
                                     });
                                 }
-                                
-                                Log.d(TAG, "BShare hotspot started: " + ssid + " @ " + ipAddress);
+
+                                Log.d(TAG, "BShare hotspot started: " + finalSsid + " @ " + finalIpAddress);
                                 
                                 // Accept connections
                                 while (mIsRunning && !mServerSocket.isClosed()) {
@@ -333,8 +336,9 @@ public class BShareManager {
                                 errorMsg += "Generic error (code " + reason + ")";
                                 break;
                         }
+                        final String finalErrorMsg = errorMsg;
                         if (mCallback != null) {
-                            mHandler.post(() -> mCallback.onError(errorMsg));
+                            mHandler.post(() -> mCallback.onError(finalErrorMsg));
                         }
                         Log.e(TAG, errorMsg);
                     }
@@ -961,10 +965,13 @@ public class BShareManager {
                         }
                     }
                 }
-                
+
+                final String finalDeviceName = deviceName;
+                final String finalIp = ip;
+
                 // Server found!
                 if (mCallback != null) {
-                    mHandler.post(() -> mCallback.onDeviceFound(deviceName, ip));
+                    mHandler.post(() -> mCallback.onDeviceFound(finalDeviceName, finalIp));
                 }
                 
                 Log.d(TAG, "BShare device found: " + deviceName + " @ " + ip);
