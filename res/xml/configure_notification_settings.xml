@@ -84,6 +84,20 @@
             settings:controller="com.android.settings.notification.BubbleSummaryNotificationPreferenceController"
             android:fragment="com.android.settings.notification.BubbleNotificationSettings"
         />
+
+        <!-- SpeakThat App -->
+        <Preference
+            android:key="speakthat_app"
+            android:order="3"
+            android:title="SpeakThat"
+            settings:layout="@layout/system_features_preference_card"
+            android:summary="Text-to-speech accessibility app">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.micoyc.speakthat"
+                android:targetClass="com.micoyc.speakthat.MainActivity" />
+        </Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -215,19 +229,6 @@
             android:order="25"
             android:title="@string/snooze_options_title"
             settings:controller="com.android.settings.notification.SnoozeNotificationPreferenceController" />
-
-        <!-- SpeakThat App -->
-        <Preference
-            android:key="speakthat_app"
-            android:order="26"
-            android:title="SpeakThat"
-            settings:layout="@layout/system_features_preference_card"
-            android:summary="Text-to-speech accessibility app">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.micoyc.speakthat"
-                android:targetClass="com.micoyc.speakthat.MainActivity" />
-        </Preference>
 
         <!-- Notification badging -->
         <SwitchPreferenceCompat
