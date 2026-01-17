@@ -120,53 +120,53 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     "default_apps")); // Special key for intent launch
             
             // Circular buttons (6 buttons)
-            // 1. Anatolia Settings - Now opens Extended Security
-            items.add(new SystemBasicDefaultsAdapter.CardItem(
-                    SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                    R.string.anatolia_settings_title,
-                    R.string.anatolia_settings_summary,
-                    R.drawable.ic_system_basic_defaults_anatolia,
-                    "com.epic.fragments.SettingsExtendedSecurity"));
-            
-            // 2. Gesture Navigation
+            // 1. Gesture Navigation - Now first button
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.system_basic_defaults_gesture_navigation_title,
                     R.string.system_basic_defaults_gesture_navigation_summary,
                     R.drawable.ic_system_basic_defaults_gesture,
                     "com.android.settings.gestures.SystemNavigationGestureSettings"));
-            
-            // 3. One-handed Mode
+
+            // 2. One-handed Mode
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.system_basic_defaults_one_handed_title,
                     R.string.system_basic_defaults_one_handed_summary,
                     R.drawable.ic_system_basic_defaults_one_handed,
                     "com.android.settings.gestures.OneHandedSettings"));
-            
-            // 4. Brightness Level
+
+            // 3. Brightness Level
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.brightness,
                     R.string.auto_brightness_description,
                     R.drawable.ic_system_basic_defaults_brightness,
                     "com.android.settings.display.AutoBrightnessSettings"));
-            
-            // 5. Dark Theme
+
+            // 4. Dark Theme
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.dark_ui_mode,
                     R.string.dark_ui_mode_summary,
                     R.drawable.ic_system_basic_defaults_dark_theme,
                     "com.android.settings.display.darkmode.DarkModeSettingsFragment"));
-            
-            // 6. Monet color customization page
+
+            // 5. Anatolia Settings - Now 5th button
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                    R.string.monet_color_settings_title,
-                    R.string.monet_color_settings_summary,
+                    R.string.anatolia_settings_title,
+                    R.string.anatolia_settings_summary,
+                    R.drawable.ic_system_basic_defaults_anatolia,
+                    "com.epic.fragments.SettingsExtendedSecurity"));
+
+            // 6. Anatolia Settings - Now 6th button
+            items.add(new SystemBasicDefaultsAdapter.CardItem(
+                    SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
+                    R.string.anatolia_settings_title,
+                    R.string.anatolia_settings_summary,
                     R.drawable.ic_system_basic_defaults_more,
-                    "com.android.settings.display.MonetColorSettings"));
+                    "com.epic.fragments.SettingsExtendedSecurity"));
 
             rv.setAdapter(new SystemBasicDefaultsAdapter(activity, items, getMetricsCategory()));
         } catch (Exception e) {

@@ -61,6 +61,7 @@
         android:textColor="?android:textColorSecondary"
         android:gravity="center"
         android:maxLines="3"
-        android:ellipsize="end" />
+        android:ellipsize="end"
+        android:visibility="gone" />
 </LinearLayout>
 
