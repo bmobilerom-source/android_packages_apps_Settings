@@ -20,18 +20,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settingslib.widget.LayoutPreference;
+
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * System Basic Defaults Settings Fragment
- * Displays default app cards in a RecyclerView
+ * Displays default app cards in a RecyclerView with grid layout
  */
 public class SystemBasicDefaultsSettings extends SettingsPreferenceFragment {
     private static final String TAG = "SystemBasicDefaultsSettings";
@@ -41,24 +44,52 @@ public class SystemBasicDefaultsSettings extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.system_basic_defaults);
+        try {
+            addPreferencesFromResource(R.xml.system_basic_defaults);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to load preferences", e);
+        }
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         
-        // Find the LayoutPreference view and then the RecyclerView
-        View rootView = getView();
-        if (rootView != null) {
-            // The LayoutPreference is embedded in the preference list
-            // We need to find it by traversing the view hierarchy
-            findAndSetupRecyclerView(rootView);
+        try {
+            // Find the LayoutPreference view and then the RecyclerView
+            View rootView = getView();
+            if (rootView != null) {
+                findAndSetupRecyclerView(rootView);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to setup RecyclerView", e);
         }
     }
     
     private void findAndSetupRecyclerView(View rootView) {
-        // Look for the RecyclerView in the view hierarchy
+        // Look for the LayoutPreference first
+        android.app.Activity activity = getActivity();
+        if (activity == null) {
+            Log.e(TAG, "Activity is null");
+            return;
+        }
+
+        // Try to find via preference screen
+        androidx.preference.PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            androidx.preference.Preference layoutPref = screen.findPreference("system_basic_defaults");
+            if (layoutPref instanceof LayoutPreference) {
+                LayoutPreference lp = (LayoutPreference) layoutPref;
+                RecyclerView rv = lp.findViewById(R.id.system_basic_defaults_recycler);
+                if (rv != null) {
+                    mRecyclerView = rv;
+                    setupRecyclerView();
+                    return;
+                }
+            }
+        }
+        
+        // Fallback: search recursively in view hierarchy
         View recyclerView = rootView.findViewById(R.id.system_basic_defaults_recycler);
         if (recyclerView instanceof RecyclerView) {
             mRecyclerView = (RecyclerView) recyclerView;
@@ -88,14 +119,91 @@ public class SystemBasicDefaultsSettings extends SettingsPreferenceFragment {
 
     private void setupRecyclerView() {
         if (mRecyclerView == null || getContext() == null) {
+            Log.e(TAG, "RecyclerView or context is null");
             return;
         }
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new SystemBasicDefaultsAdapter(getContext(), this);
-        mRecyclerView.setAdapter(mAdapter);
-        
-        Log.d(TAG, "RecyclerView setup complete");
+        android.app.Activity activity = getActivity();
+        if (activity == null) {
+            Log.e(TAG, "Activity is null");
+            return;
+        }
+
+        try {
+            // Use 3 columns: Large left card spans 2 columns, others span 1
+            GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+            mRecyclerView.setLayoutManager(layoutManager);
+
+            // Create card items - all bottom cards lead to Anatolia settings
+            List<SystemBasicDefaultsAdapter.CardItem> items = new ArrayList<>();
+            
+            // Large left card - Aurora Store (biggest card)
+            items.add(new SystemBasicDefaultsAdapter.CardItem(
+                    SystemBasicDefaultsAdapter.CARD_TYPE_LARGE_LEFT,
+                    R.string.anatolia_settings_title, // Use available string
+                    R.string.anatolia_settings_summary, // Use available string
+                    null,
+                    "aurora_store", // Special key for intent launch
+                    "Aurora Store"));
+            
+            // Second card - Default Apps
+            items.add(new SystemBasicDefaultsAdapter.CardItem(
+                    SystemBasicDefaultsAdapter.CARD_TYPE_ABOUT_US,
+                    R.string.anatolia_settings_title, // Use available string
+                    R.string.anatolia_settings_summary, // Use available string
+                    android.R.drawable.ic_menu_preferences, // Use system icon
+                    "default_apps")); // Special key for intent launch
+            
+            // Circular buttons - all lead to Anatolia settings for now
+            items.add(new SystemBasicDefaultsAdapter.CardItem(
+                    SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
+                    R.string.anatolia_settings_title,
+                    R.string.anatolia_settings_summary,
+                    android.R.drawable.ic_menu_preferences, // Use system icon
+                    "com.epic.Anatolia"));
+            
+            items.add(new SystemBasicDefaultsAdapter.CardItem(
+                    SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
+                    R.string.anatolia_settings_title,
+                    R.string.anatolia_settings_summary,
+                    android.R.drawable.ic_menu_preferences, // Use system icon
+                    "com.epic.Anatolia"));
+            
+            items.add(new SystemBasicDefaultsAdapter.CardItem(
+                    SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
+                    R.string.anatolia_settings_title,
+                    R.string.anatolia_settings_summary,
+                    android.R.drawable.ic_menu_preferences, // Use system icon
+                    "com.epic.Anatolia"));
+            
+            items.add(new SystemBasicDefaultsAdapter.CardItem(
+                    SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
+                    R.string.anatolia_settings_title,
+                    R.string.anatolia_settings_summary,
+                    android.R.drawable.ic_menu_preferences, // Use system icon
+                    "com.epic.Anatolia"));
+            
+            items.add(new SystemBasicDefaultsAdapter.CardItem(
+                    SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
+                    R.string.anatolia_settings_title,
+                    R.string.anatolia_settings_summary,
+                    android.R.drawable.ic_menu_preferences, // Use system icon
+                    "com.epic.Anatolia"));
+            
+            items.add(new SystemBasicDefaultsAdapter.CardItem(
+                    SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
+                    R.string.anatolia_settings_title,
+                    R.string.anatolia_settings_summary,
+                    android.R.drawable.ic_menu_preferences, // Use system icon
+                    "com.epic.Anatolia"));
+
+            mAdapter = new SystemBasicDefaultsAdapter(activity, items, getMetricsCategory());
+            mRecyclerView.setAdapter(mAdapter);
+            
+            Log.d(TAG, "RecyclerView setup complete with " + items.size() + " items");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to setup RecyclerView", e);
+        }
     }
 
     @Override
@@ -103,4 +211,3 @@ public class SystemBasicDefaultsSettings extends SettingsPreferenceFragment {
         return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
     }
 }
-
