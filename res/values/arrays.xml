@@ -1630,4 +1630,36 @@
     <!-- Packages that will not show Display over other apps permission -->
     <string-array name="display_over_apps_permission_change_exempt">
     </string-array>
+
+    <!-- Allowed app installer packages when install app whitelist is enabled -->
+    <!-- Google Play Store -->
+    <string-array name="config_allowed_install_app_packages" translatable="false">
+        <item>com.android.vending</item>
+        <item>com.aurora.store</item>
+    </string-array>
+
+    <!-- Font family selection -->
+    <string-array name="font_family_entries">
+        <item>@string/font_family_default</item>
+        <item>@string/font_family_accuratist</item>
+        <item>@string/font_family_hercules</item>
+        <item>@string/font_family_ios</item>
+        <item>@string/font_family_nothing</item>
+        <item>@string/font_family_oneplus</item>
+        <item>@string/font_family_sanfranciscopro</item>
+        <item>@string/font_family_samsungone</item>
+        <item>@string/font_family_slim</item>
+    </string-array>
+
+    <string-array name="font_family_values" translatable="false">
+        <item>default</item>
+        <item>accuratist</item>
+        <item>hercules</item>
+        <item>ios</item>
+        <item>nothing</item>
+        <item>oneplus</item>
+        <item>sanfranciscopro</item>
+        <item>samsungone</item>
+        <item>slim</item>
+    </string-array>
 </resources>
