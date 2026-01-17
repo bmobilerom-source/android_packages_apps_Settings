@@ -20,6 +20,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.NetworkProviderSettings;
 import com.android.settings.network.NetworkProviderCallsSmsFragment;
 import com.android.settings.network.tether.TetherSettings;
+import com.android.settings.datausage.DataSaverSummary;
 
 /**
  * Custom view for network internet settings card navigation
@@ -105,17 +106,17 @@ public class NetworkInternetCardView extends LinearLayout {
     }
 
     /**
-     * Launch Calls and SMS Settings (NetworkProviderCallsSmsFragment)
-     * Corresponds to network_provider_internet.xml lines 36-47
+     * Launch Data Saver Settings (DataSaverSummary)
+     * Changed from Calls and SMS Settings to Data Saver page
      */
     private void launchCallsSmsSettings() {
         try {
             new SubSettingLauncher(getContext())
-                    .setDestination(NetworkProviderCallsSmsFragment.class.getName())
+                    .setDestination(DataSaverSummary.class.getName())
                     .setSourceMetricsCategory(0)
                     .launch();
         } catch (Exception e) {
-            Log.e(TAG, "Failed to launch Calls and SMS Settings", e);
+            Log.e(TAG, "Failed to launch Data Saver Settings", e);
         }
     }
 

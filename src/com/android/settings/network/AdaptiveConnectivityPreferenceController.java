@@ -36,6 +36,11 @@ public class AdaptiveConnectivityPreferenceController extends BasePreferenceCont
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        // Hide preference - replaced by custom card layout
+        androidx.preference.Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setVisible(false);
+        }
     }
 
     @Override

@@ -64,6 +64,8 @@ constructor(
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)
+        // Hide preference - replaced by custom card layout
+        preference?.isVisible = false
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {

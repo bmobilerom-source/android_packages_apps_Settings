@@ -25,7 +25,7 @@
         android:key="network_provider_internet_illustration"
         settings:searchable="false"
         android:order="-1999"
-        settings:lottie_rawRes="@raw/net_illustration"/>
+        settings:lottie_rawRes="@raw/TowerSignal"/>
 
     <!-- network internet settings card Homepage Widgets -->
     <com.android.settingslib.widget.LayoutPreference
@@ -37,7 +37,7 @@
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.network.NetworkProviderSettings"
         android:key="internet_settings"
-        isPreferenceVisible="false"
+        settings:isPreferenceVisible="false"
         android:title="@string/provider_internet_settings"
         android:summary="@string/summary_placeholder"
         android:order="-30"
@@ -49,7 +49,7 @@
 
     <com.android.settingslib.RestrictedPreference
         android:key="calls_and_sms"
-        isPreferenceVisible="false"
+        settings:isPreferenceVisible="false"
         android:title="@string/calls_and_sms"
         android:order="-20"
         android:summary="@string/summary_placeholder"
@@ -64,7 +64,7 @@
         android:title="@string/provider_network_settings_title"
         android:summary="@string/summary_placeholder"
         android:order="-15"
-        isPreferenceVisible="false"
+        settings:isPreferenceVisible="false"
         settings:keywords="@string/keywords_more_mobile_networks"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true"
@@ -83,6 +83,7 @@
         android:title="@string/tether_settings_title_all"
         android:order="5"
         android:summary="@string/summary_placeholder"
+        settings:isPreferenceVisible="false"
         settings:controller="com.android.settings.network.TetherPreferenceController"
         settings:keywords="@string/keywords_hotspot_tethering"
         settings:userRestriction="no_config_tethering"
@@ -93,8 +94,8 @@
         android:title="@string/data_saver_title"
         android:order="10"
         android:persistent="false"
-        settings:isPreferenceVisible="@bool/config_show_data_saver"
         settings:layout="@layout/adaptive_preference_card"
+        settings:isPreferenceVisible="@bool/config_show_data_saver"
         android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 
     <com.android.settings.vpn2.VpnInfoPreference
@@ -103,6 +104,7 @@
         android:title="@string/vpn_settings_title"
         android:order="15"
         android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card"
         settings:userRestriction="no_config_vpn"
         settings:useAdminDisabledSummary="true" />
 
@@ -122,6 +124,7 @@
         android:title="@string/adaptive_connectivity_title"
         android:summary="@string/summary_placeholder"
         android:order="25"
+        settings:layout="@layout/adaptive_preference_card"
         settings:isPreferenceVisible="false"
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
 
