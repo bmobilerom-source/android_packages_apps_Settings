@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
      Copyright (C) 2020 Wave-OS
+     Copyright (C) 2025 BmobileExpression
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,7 +17,29 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="display_customizations4"
     android:title=" ">
+
+   <com.android.settingslib.widget.IllustrationPreference
+        android:key="location"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/location"/>
+    <PreferenceCategory
+        android:key="font_settings"
+        android:title="@string/font_settings_title"
+        android:order="100">
+
+        <ListPreference
+            android:key="font_family_selection"
+            android:title="@string/font_family_title"
+            android:summary="@string/font_family_summary"
+            android:entries="@array/font_family_entries"
+            android:entryValues="@array/font_family_values"
+            android:defaultValue="default"
+            android:persistent="true" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
