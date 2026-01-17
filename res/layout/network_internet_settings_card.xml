@@ -28,7 +28,7 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background"
+            android:background="@drawable/adaptive_preference_card_background"
             android:tag="internet_settings">
 
             <RelativeLayout
@@ -87,8 +87,8 @@
             android:clipChildren="true"
             android:clipToPadding="true"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background"
-            android:tag="calls_and_sms">
+            android:background="@drawable/adaptive_preference_card_background"
+            android:tag="Data_saver">
 
             <TextView
                 android:id="@+id/network_card_calls_sms_title"
@@ -96,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/calls_and_sms"
+                    android:text="@string/data_saver_title"
                 android:textAppearance="?android:attr/textAppearance"
                 android:textColor="?android:attr/colorAccent"
                 android:gravity="center"
@@ -145,7 +145,7 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background"
+            android:background="@drawable/adaptive_preference_card_background"
             android:tag="mobile_network_list">
 
             <RelativeLayout
@@ -204,7 +204,7 @@
             android:clipChildren="true"
             android:clipToPadding="true"
             android:clipToOutline="true"
-            android:background="@drawable/custom_preference_background"
+            android:background="@drawable/adaptive_preference_card_background"
             android:tag="tether_settings">
 
             <TextView
