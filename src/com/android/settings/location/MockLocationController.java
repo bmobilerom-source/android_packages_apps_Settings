@@ -62,9 +62,13 @@ public class MockLocationController extends TogglePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        if (mPreference != null && mPreference instanceof SwitchPreference) {
-            SwitchPreference switchPref = (SwitchPreference) mPreference;
-            updateSummary(switchPref);
+        if (mPreference != null) {
+            // Hide preference as requested
+            mPreference.setVisible(false);
+            if (mPreference instanceof SwitchPreference) {
+                SwitchPreference switchPref = (SwitchPreference) mPreference;
+                updateSummary(switchPref);
+            }
         }
     }
 
@@ -137,4 +141,5 @@ public class MockLocationController extends TogglePreferenceController {
         }
     }
 }
+
 

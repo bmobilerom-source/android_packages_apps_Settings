@@ -65,6 +65,8 @@ public class MockLocationWarningController extends BasePreferenceController {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
         if (mPreference != null) {
+            // Hide preference as requested
+            mPreference.setVisible(false);
             updatePreference();
         }
     }
@@ -123,4 +125,5 @@ public class MockLocationWarningController extends BasePreferenceController {
         }
     }
 }
+
 
