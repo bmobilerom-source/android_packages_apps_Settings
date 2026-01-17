@@ -19,6 +19,7 @@ package com.android.settings.awaken.fragments;
 import android.os.Bundle;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
+import com.android.settings.display.FontFamilyPreferenceController;
 
 public class DisplayCustomizations4 extends SettingsPreferenceFragment {
 
@@ -28,6 +29,11 @@ public class DisplayCustomizations4 extends SettingsPreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.display_customizations4);
+
+        // Initialize font family controller
+        FontFamilyPreferenceController fontController =
+                new FontFamilyPreferenceController(getContext(), "font_family_selection");
+        fontController.displayPreference(getPreferenceScreen());
     }
 
     @Override
