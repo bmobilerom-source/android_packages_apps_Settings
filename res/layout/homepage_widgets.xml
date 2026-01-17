@@ -31,10 +31,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                style="@style/mtx_text_style_h6"
-                android:textColor="@color/mtx_text_color_primary"
+                android:textColor="?android:attr/textColorPrimary"
                 android:text="@string/homepage_widget_battery_title"
                 android:textSize="20sp"
+                android:textStyle="normal"
+                android:textAppearance="?android:attr/textAppearanceListItem"
                 android:layout_marginStart="20dp"
                 android:layout_alignParentTop="true" />
 
@@ -55,20 +56,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:textStyle="normal"
                 android:layout_marginStart="20dp"
                 android:layout_below="@+id/battery_progress"
                 android:layout_marginTop="18dp"
-                style="@style/mtx_text_style_body1"
-                android:textColor="@color/mtx_text_color_primary"/>
+                android:textColor="?android:attr/textColorPrimary"/>
                 
             <com.android.settings.preferences.ui.ChargingStatusTextView
                 android:id="@+id/battery_status"
-                style="@style/mtx_text_style_body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:textSize="13sp"
-                android:textColor="@color/mtx_text_color_secondary"
+                android:textStyle="normal"
+                android:textColor="?android:attr/textColorSecondary"
                 android:layout_below="@+id/battery_percent"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="9dp"/>
@@ -113,12 +114,11 @@
             
                     <TextView
                         android:id="@+id/storage_title"
-                        style="@style/mtx_text_style_h6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/homepage_widget_storage_title"
                         android:textSize="20sp"
-                        android:textColor="@color/mtx_text_color_primary"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:layout_marginTop="16dp"
                         android:layout_marginStart="20dp"
                         android:layout_alignParentTop="true" />

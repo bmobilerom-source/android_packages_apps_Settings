@@ -34,12 +34,12 @@ public class ChargingStatusTextView extends TextView {
     }
 
     public ChargingStatusTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        super(context, attrs, android.R.attr.textViewStyle);
         mContext = context;
     }
 
     public ChargingStatusTextView(Context context, AttributeSet attrs, int defStyleAttr) {                                                                      
-        super(context, attrs, defStyleAttr);
+        super(context, attrs, defStyleAttr != 0 ? defStyleAttr : android.R.attr.textViewStyle);
         mContext = context;
     }
 
