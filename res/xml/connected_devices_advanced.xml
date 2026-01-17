@@ -19,18 +19,23 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"        
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/connected_device_connections_title">
-
+  
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="apps_illustration_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/bluetooth_pair"/>
     <Preference
         android:fragment="com.android.settings.connecteddevice.BluetoothDashboardFragment"
         android:key="bluetooth_switchbar_screen"
-        settings:layout="@layout/adaptive_preference_card_top"
+        settings:layout="@layout/adaptive_preference_card"
         android:order="-10"
         android:title="@string/bluetooth_settings_title" />
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment"
         android:key="audio_sharing_settings"
-        settings:layout="@layout/adaptive_preference_card_bottom"
+        settings:layout="@layout/adaptive_preference_card"
         android:order="-9"
         android:title="@string/audio_sharing_title"
         settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingPreferenceController"
