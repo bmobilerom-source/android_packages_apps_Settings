@@ -23,9 +23,12 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.credentials.CredentialManager;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+
+import com.android.settings.applications.specialaccess.BlockAccountDashboardController;
 
 import com.android.settings.R;
 import com.android.settings.applications.autofill.PasswordsPreferenceController;
@@ -75,7 +78,26 @@ public class AccountDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        // Check if access is blocked before creating the fragment
+        if (BlockAccountDashboardController.isBlocked(getContext())) {
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void onAttach(Context context) {
+        // Double-check blocking in onAttach as well
+        if (BlockAccountDashboardController.isBlocked(context)) {
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
         super.onAttach(context);
         if (CredentialManager.isServiceEnabled(context)) {
             CredentialManagerPreferenceController cmpp =
