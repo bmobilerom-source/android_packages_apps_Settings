@@ -40,6 +40,19 @@
     <string name="statusbar_summary">Status bar customizations</string>
     <string name="extras_summary">Some extra options</string>
 
+    <!-- System Basic Defaults -->
+    <string name="system_basic_defaults_aurora_store_title">Aurora Store</string>
+    <string name="system_basic_defaults_aurora_store_summary">Alternative app store</string>
+    <string name="system_basic_defaults_default_apps_title">Default Apps</string>
+    <string name="system_basic_defaults_default_apps_summary">Set your default applications</string>
+    <string name="system_basic_defaults_gesture_navigation_title">Gesture Navigation</string>
+    <string name="system_basic_defaults_gesture_navigation_summary">Modern navigation gestures</string>
+    <string name="system_basic_defaults_one_handed_title">One-handed Mode</string>
+    <string name="system_basic_defaults_one_handed_summary">Easy one-handed operation</string>
+    <string name="dark_ui_mode_summary">Dark theme for your eyes</string>
+    <string name="monet_color_settings_title">Monet Colors</string>
+    <string name="monet_color_settings_summary">Customize system colors</string>
+
     <!-- General strings -->
     <string name="ok">OK</string>
     <string name="reset">Reset</string>
