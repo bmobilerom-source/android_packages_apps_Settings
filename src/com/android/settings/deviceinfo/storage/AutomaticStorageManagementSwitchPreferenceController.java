@@ -67,10 +67,8 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
-        if (!mContext.getResources().getBoolean(R.bool.config_show_smart_storage_toggle)) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-        return !ActivityManager.isLowRamDeviceStatic() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        // Always hide this preference - controlled by XML visibility setting
+        return UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
