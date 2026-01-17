@@ -55,6 +55,7 @@ import com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreference
 import com.android.settings.deviceinfo.storage.StorageUtils;
 import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
+import com.android.settings.deviceinfo.VolumeOptionMenuController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -226,9 +227,13 @@ public class StorageDashboardFragment extends DashboardFragment
     };
 
     private void refreshUi() {
-        mStorageSelectionController.setStorageEntries(mStorageEntries);
-        mStorageSelectionController.setSelectedStorageEntry(mSelectedStorageEntry);
-        mStorageUsageProgressBarController.setSelectedStorageEntry(mSelectedStorageEntry);
+        if (mStorageSelectionController != null) {
+            mStorageSelectionController.setStorageEntries(mStorageEntries);
+            mStorageSelectionController.setSelectedStorageEntry(mSelectedStorageEntry);
+        }
+        if (mStorageUsageProgressBarController != null) {
+            mStorageUsageProgressBarController.setSelectedStorageEntry(mSelectedStorageEntry);
+        }
 
         mOptionMenuController.setSelectedStorageEntry(mSelectedStorageEntry);
         getActivity().invalidateOptionsMenu();
@@ -315,17 +320,19 @@ public class StorageDashboardFragment extends DashboardFragment
         use(AutomaticStorageManagementSwitchPreferenceController.class).setFragmentManager(
                 getFragmentManager());
         mStorageSelectionController = use(StorageSelectionPreferenceController.class);
-        mStorageSelectionController.setOnItemSelectedListener(storageEntry -> {
-            mSelectedStorageEntry = storageEntry;
-            refreshUi();
+        if (mStorageSelectionController != null) {
+            mStorageSelectionController.setOnItemSelectedListener(storageEntry -> {
+                mSelectedStorageEntry = storageEntry;
+                refreshUi();
 
-            if (storageEntry.isDiskInfoUnsupported() || storageEntry.isUnmountable()) {
-                DiskInitFragment.show(this, R.string.storage_dialog_unmountable,
-                        storageEntry.getDiskId());
-            } else if (storageEntry.isVolumeRecordMissed()) {
-                StorageUtils.launchForgetMissingVolumeRecordFragment(getContext(), storageEntry);
-            }
-        });
+                if (storageEntry.isDiskInfoUnsupported() || storageEntry.isUnmountable()) {
+                    DiskInitFragment.show(this, R.string.storage_dialog_unmountable,
+                            storageEntry.getDiskId());
+                } else if (storageEntry.isVolumeRecordMissed()) {
+                    StorageUtils.launchForgetMissingVolumeRecordFragment(getContext(), storageEntry);
+                }
+            });
+        }
         mStorageUsageProgressBarController = use(StorageUsageProgressBarPreferenceController.class);
 
         ManageStoragePreferenceController manageStoragePreferenceController =
