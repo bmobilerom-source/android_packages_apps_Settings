@@ -29,11 +29,11 @@
     <Preference
         android:key="unrestricted_access"
         android:title="@string/unrestricted_data_saver"
+        settings:layout="@layout/adaptive_preference_card"
+        android:order="10"
         android:summary="@string/summary_two_lines_placeholder"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
         settings:searchable="false"
-        android:order="-800"
-        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
 
     <com.android.settingslib.widget.FooterPreference

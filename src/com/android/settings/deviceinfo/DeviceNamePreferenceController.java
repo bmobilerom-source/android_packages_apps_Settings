@@ -72,8 +72,46 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        // DeviceCardView was removed from device_info_header.xml
-        // Device name functionality is no longer available in the header
+        if (mPreference != null && mPreference instanceof LayoutPreference) {
+            LayoutPreference layoutPref = (LayoutPreference) mPreference;
+            // Try to find DeviceCardView using various methods
+            mDeviceCard = layoutPref.findViewById(android.R.id.widget_frame);
+            if (mDeviceCard == null) {
+                // Try to find DeviceCardView as the root view
+                android.view.View rootView = layoutPref.findViewById(android.R.id.content);
+                if (rootView instanceof DeviceCardView) {
+                    mDeviceCard = (DeviceCardView) rootView;
+                } else if (rootView != null) {
+                    // Search recursively in the root view
+                    mDeviceCard = findDeviceCardView(rootView);
+                }
+            }
+            if (mDeviceCard != null) {
+                final CharSequence deviceName = getSummary();
+                mDeviceCard.setDeviceName(deviceName.toString(), mWifiDeviceNameTextValidator.isTextValid(deviceName.toString()));
+                mDeviceCard.setListener(s -> {
+                    setDeviceName(s);
+                    return Unit.INSTANCE;
+                });
+            }
+        }
+        // If not a LayoutPreference or DeviceCardView not found, preference will work normally
+    }
+
+    private DeviceCardView findDeviceCardView(android.view.View view) {
+        if (view instanceof DeviceCardView) {
+            return (DeviceCardView) view;
+        }
+        if (view instanceof android.view.ViewGroup) {
+            android.view.ViewGroup group = (android.view.ViewGroup) view;
+            for (int i = 0; i < group.getChildCount(); i++) {
+                DeviceCardView found = findDeviceCardView(group.getChildAt(i));
+                if (found != null) {
+                    return found;
+                }
+            }
+        }
+        return null;
     }
 
     private void initializeDeviceName() {
@@ -121,7 +159,9 @@ public class DeviceNamePreferenceController extends BasePreferenceController
             setSettingsGlobalDeviceName(deviceName);
             setBluetoothDeviceName(deviceName);
             setTetherSsidName(deviceName);
-            // DeviceCard removed, no longer setting device name on card
+            if (mDeviceCard != null) {
+                mDeviceCard.setDeviceName(deviceName);
+            }
         }
     }
 
