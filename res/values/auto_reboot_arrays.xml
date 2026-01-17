@@ -8,10 +8,10 @@
     </array>
     
     <array name="auto_reboot_interval_values">
-        <item>24</item>
-        <item>48</item>
-        <item>72</item>
-        <item>168</item>
+        <item>86400000</item>  <!-- 24 hours in milliseconds -->
+        <item>172800000</item> <!-- 48 hours in milliseconds -->
+        <item>259200000</item> <!-- 72 hours in milliseconds -->
+        <item>1209600000</item> <!-- 168 hours (1 week) in milliseconds -->
     </array>
 </resources>
 

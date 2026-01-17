@@ -26,10 +26,10 @@
         android:order="10" />
 
 
-    <com.android.settingslib.widget.TopIntroPreference
-            android:key="userinfo_bubbles_desc"
-            android:order="20"
-            android:title="@string/userinfo_bubble_setting_description"/>
+       <com.android.settingslib.widget.TopIntroPreference
+        android:key="bmobile_userinfo_desc"
+        android:order="20"
+        android:title="@string/bmobile_userinfo_summary"/>
 
     <!-- TODO: When making cheaper level of ROM, include and hide atomichub2 -->
     <!--

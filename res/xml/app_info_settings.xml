@@ -39,17 +39,20 @@
     <Preference
         android:key="app_settings_link"
         android:title="@string/app_settings_link"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.applications.appinfo.AppSettingPreferenceController" />
 
     <Preference
         android:key="all_services_settings"
         android:title="@string/app_info_all_services_label"
         android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.applications.appinfo.AppAllServicesPreferenceController" />
 
     <Preference
         android:key="notification_settings"
         android:title="@string/notifications_label"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.applications.appinfo.AppNotificationPreferenceController" />
 
     <com.android.settings.widget.FixedLineSummaryPreference
@@ -63,6 +66,7 @@
         android:key="storage_settings"
         android:title="@string/storage_settings_for_app"
         android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.applications.appinfo.AppStoragePreferenceController" />
 
     <com.android.settings.applications.AppDomainsPreference
@@ -75,6 +79,7 @@
         android:key="data_settings"
         android:title="@string/data_usage_app_summary_title"
         android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceController" />
 
     <Preference
@@ -86,12 +91,14 @@
     <Preference
         android:key="battery"
         android:title="@string/battery_details_title"
-        android:summary="@string/summary_placeholder" />
+        android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card" />
 
     <Preference
         android:key="app_language_setting"
         android:title="@string/app_locale_preference_title"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/summary_placeholder"   
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.applications.appinfo.AppLocalePreferenceController" />
 
     <Preference
@@ -99,39 +106,46 @@
         android:title="@string/launch_by_default"
         android:summary="@string/summary_placeholder"
         android:selectable="true"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.applications.appinfo.AppOpenByDefaultPreferenceController" />
 
     <Preference
         android:key="memory"
         android:title="@string/memory_settings_title"
         android:summary="@string/summary_placeholder"
-        android:enabled="false" />
+        android:enabled="false"
+        settings:layout="@layout/adaptive_preference_card" />
 
     <!-- Default apps shortcuts -->
     <Preference
         android:key="default_home"
         android:title="@string/home_app"
-        android:summary="@string/summary_placeholder" />
+        android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card" />
 
     <Preference
         android:key="default_browser"
         android:title="@string/default_browser_title"
-        android:summary="@string/summary_placeholder" />
+        android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card" />
 
     <Preference
         android:key="default_phone_app"
         android:title="@string/default_phone_title"
-        android:summary="@string/default_phone_title" />
+        android:summary="@string/default_phone_title"
+        settings:layout="@layout/adaptive_preference_card" />
 
     <Preference
         android:key="default_emergency_app"
         android:title="@string/default_emergency_app"
-        android:summary="@string/summary_placeholder" />
+        android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card" />
 
     <Preference
         android:key="default_sms_app"
         android:title="@string/sms_application_title"
-        android:summary="@string/summary_placeholder" />
+        android:summary="@string/summary_placeholder"
+        settings:layout="@layout/adaptive_preference_card" />
 
     <PreferenceCategory
         android:key="app_hibernation_info"
@@ -157,42 +171,49 @@
             android:key="system_alert_window"
             android:title="@string/draw_overlay"
             android:summary="@string/summary_placeholder"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.applications.appinfo.DrawOverlayDetailPreferenceController" />
 
         <Preference
             android:key="write_settings_apps"
             android:title="@string/write_settings"
             android:summary="@string/summary_placeholder"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.applications.appinfo.WriteSystemSettingsPreferenceController" />
 
         <Preference
             android:key="picture_in_picture"
             android:title="@string/picture_in_picture_app_detail_title"
             android:summary="@string/summary_placeholder"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetailPreferenceController" />
 
         <Preference
             android:key="install_other_apps"
             android:title="@string/install_other_apps"
-            android:summary="@string/summary_placeholder"
+            android:summary="@string/summary_placeholder"   
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.applications.appinfo.ExternalSourceDetailPreferenceController" />
 
         <Preference
             android:key="interact_across_profiles"
             android:title="@string/interact_across_profiles_title"
-            android:summary="@string/summary_placeholder"
+            android:summary="@string/summary_placeholder"   
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetailsPreferenceController" />
 
         <Preference
             android:key="alarms_and_reminders"
             android:title="@string/alarms_and_reminders_title"
             android:summary="@string/summary_placeholder"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.applications.appinfo.AlarmsAndRemindersDetailPreferenceController" />
 
         <Preference
             android:key="long_background_tasks"
             android:title="@string/long_background_tasks_title"
             android:summary="@string/summary_placeholder"
+            settings:layout="@layout/adaptive_preference_card"
             settings:isPreferenceVisible="false"
             settings:searchable="false"
             settings:controller="com.android.settings.applications.appinfo.LongBackgroundTasksDetailsPreferenceController" />
@@ -208,6 +229,7 @@
         <Preference
             android:key="app_info_store"
             android:title="@string/app_install_details_title"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.applications.appinfo.AppInstallerInfoPreferenceController" />
 
     </PreferenceCategory>
@@ -216,8 +238,9 @@
         android:key="app_version"
         android:selectable="false"
         android:order="9999"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.applications.appinfo.AppVersionPreferenceController"
-        settings:allowDividerAbove="true"
+        settings:allowDividerAbove="false"
         settings:enableCopying="true"/>
 
 </PreferenceScreen>

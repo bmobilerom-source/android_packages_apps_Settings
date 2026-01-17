@@ -16,8 +16,11 @@
 
 package com.epic.fragments;
 
+import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -28,6 +31,8 @@ import com.android.settings.core.BasePreferenceController;
 public class AuroraServicesPreferenceController extends BasePreferenceController {
 
     private static final String PACKAGE_NAME = "com.aurora.services";
+    private static final String AURORA_STORE_PACKAGE = "com.aurora.store";
+    private static final String TAG = "AuroraServicesController";
 
     public AuroraServicesPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -61,6 +66,37 @@ public class AuroraServicesPreferenceController extends BasePreferenceController
         }
     }
 
+    /**
+     * Grant REQUEST_INSTALL_PACKAGES AppOps permission to Aurora Store
+     * This is required for background installation to work.
+     */
+    private void grantInstallPermission(String packageName) {
+        try {
+            final PackageManager pm = mContext.getPackageManager();
+            final ApplicationInfo appInfo = pm.getApplicationInfo(packageName, 0);
+            final AppOpsManager appOpsManager = mContext.getSystemService(AppOpsManager.class);
+            
+            // Check if app has the REQUEST_INSTALL_PACKAGES permission
+            if (pm.checkPermission(
+                    android.Manifest.permission.REQUEST_INSTALL_PACKAGES,
+                    packageName) == PackageManager.PERMISSION_GRANTED) {
+                
+                // Grant AppOps permission for background installation
+                appOpsManager.setMode(
+                        AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
+                        appInfo.uid,
+                        packageName,
+                        AppOpsManager.MODE_ALLOWED);
+                
+                Log.d(TAG, "Granted REQUEST_INSTALL_PACKAGES permission to " + packageName);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, "Package not found: " + packageName, e);
+        } catch (Exception e) {
+            Log.e(TAG, "Error granting install permission to " + packageName, e);
+        }
+    }
+
     @Override
     public boolean handlePreferenceTreeClick(androidx.preference.Preference preference) {
         if (!preference.getKey().equals(getPreferenceKey())) {
@@ -73,6 +109,9 @@ public class AuroraServicesPreferenceController extends BasePreferenceController
                 "Aurora Services app is not installed", android.widget.Toast.LENGTH_LONG).show();
             return true; // Consume the click
         }
+        
+        // Grant install permission to Aurora Store for background installation
+        grantInstallPermission(AURORA_STORE_PACKAGE);
         
         // Try to launch the app
         if (launchApp()) {
@@ -88,7 +127,7 @@ public class AuroraServicesPreferenceController extends BasePreferenceController
             mContext.startActivity(intent);
             return true;
         } catch (Exception e) {
-            android.util.Log.e("AuroraServicesPreferenceController", "Error opening Aurora Services", e);
+            Log.e(TAG, "Error opening Aurora Services", e);
             return super.handlePreferenceTreeClick(preference);
         }
     }

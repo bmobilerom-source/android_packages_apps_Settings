@@ -178,6 +178,10 @@
     <string name="mock_location_warning_text">⚠️ Warning: Enabling mock locations allows apps to provide fake GPS data. This may affect location-based services and app functionality.</string>
     <string name="mock_locations_footer">Mock locations are primarily intended for development and testing. Enabling this feature may impact the accuracy of location-based services.</string>
     <string name="mock_location_disabled_summary">Mock locations are disabled. Apps cannot inject fake GPS data.</string>
+    <string name="mock_location_apps_title">Mock Location App</string>
+    <string name="mock_location_app_set">%1$s</string>
+    <string name="mock_location_app_not_set">No app selected</string>
+    <string name="mock_location_app_picker_unavailable">App picker not available</string>
 
         <!-- USB Debugging -->
     <string name="usb_debugging_title">USB Debugging</string>
@@ -197,6 +201,10 @@
     <string name="settings_restore_summary">Restore device settings from a previous backup</string>
     <string name="settings_backup_location_title">Backup Location</string>
     <string name="settings_backup_no_backup">No backup available</string>
+    <string name="settings_backup_success">Settings backed up successfully</string>
+    <string name="settings_backup_error">Failed to backup settings</string>
+    <string name="settings_restore_success">Settings restored successfully</string>
+    <string name="settings_restore_error">Failed to restore settings</string>
 
     <!-- Auto Reboot -->
     <string name="auto_reboot_title">Auto Reboot</string>
@@ -217,6 +225,11 @@
     <string name="auto_reboot_interval_every_3_days">Every 3 days</string>
     <string name="auto_reboot_interval_weekly">Weekly</string>
     <string name="auto_reboot_interval_custom">Every %1$d hours</string>
+    <string name="auto_reboot_interval_one_hour">1 hour</string>
+    <string name="auto_reboot_interval_hours">%1$d hours</string>
+    <string name="auto_reboot_interval_one_day">1 day</string>
+    <string name="auto_reboot_interval_days">%1$d days</string>
+    <string name="auto_reboot_interval_minutes">%1$d minutes</string>
     
     <string name="auto_reboot_time_title">Reboot Time</string>
     <string name="auto_reboot_time_summary">Time of day to reboot (24-hour format)</string>
@@ -224,6 +237,8 @@
     <string name="auto_reboot_time_picker_title">Select Reboot Time</string>
     
     <string name="auto_reboot_footer">Auto reboot helps maintain device security and performance by periodically restarting the system. The device will reboot even when the screen is off.</string>
+    <string name="auto_reboot_confirm_credential_title">Confirm device credentials</string>
+    <string name="auto_reboot_confirm_credential_description">Enter your device credentials to change auto reboot settings</string>
 
     <!-- UserInfo Bubble Setting -->
     <string name="userinfo_bubble_setting_description">Configure bubble notification settings</string>

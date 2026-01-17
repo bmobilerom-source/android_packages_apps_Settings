@@ -100,7 +100,7 @@ public class AppSecSettings extends DashboardFragment {
                     com.android.settings.core.BasePreferenceController.AVAILABLE) {
                 SwitchPreference whitelistPref = prefScreen.findPreference("install_app_whitelist_toggle");
                 if (whitelistPref != null) {
-                    mInstallAppWhitelistController.updateState(whitelistPref);
+                    mInstallAppWhitelistController.displayPreference(prefScreen);
                     whitelistPref.setOnPreferenceChangeListener((preference, newValue) -> {
                         boolean result = mInstallAppWhitelistController.onPreferenceChange(preference, newValue);
                         refreshSecurityScore();

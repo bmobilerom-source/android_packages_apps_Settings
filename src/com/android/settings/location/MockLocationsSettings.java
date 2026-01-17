@@ -23,6 +23,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,16 +51,27 @@ public class MockLocationsSettings extends DashboardFragment {
         return R.xml.mock_locations_settings;
     }
 
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
-    }
-
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            MockLocationsSettings fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new MockLocationController(context, "mock_location_enabled"));
         controllers.add(new MockLocationWarningController(context, "mock_location_warning"));
+        controllers.add(new MockLocationAppPreferenceController(context, "mock_location_app", fragment));
+        return controllers;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = buildPreferenceControllers(context, this);
+        // Add lifecycle observers for controllers that need it
+        final Lifecycle lifecycle = getSettingsLifecycle();
+        for (AbstractPreferenceController controller : controllers) {
+            if (controller instanceof com.android.settingslib.core.lifecycle.LifecycleObserver) {
+                lifecycle.addObserver((com.android.settingslib.core.lifecycle.LifecycleObserver) controller);
+            }
+        }
         return controllers;
     }
 }
+
 

@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="provider_model_calls_and_sms_screen"
     android:title=" ">
     <com.android.settingslib.widget.IllustrationPreference
@@ -47,7 +48,7 @@
         android:key="provider_model_calling_category"
         android:title="@string/calls_and_sms_category"
         android:order="20"
+        settings:layout="@layout/preference_category_no_label"
         settings:controller="com.android.settings.network.telephony.NetworkProviderWifiCallingPreferenceController"
-        settings:allowDividerAbove="false"
-        settings:layout="@layout/adaptive_preference_card" />
+        settings:allowDividerAbove="false" />
 </PreferenceScreen>

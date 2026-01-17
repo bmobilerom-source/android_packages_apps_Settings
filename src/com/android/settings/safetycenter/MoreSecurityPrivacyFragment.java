@@ -26,6 +26,7 @@ import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.applications.specialaccess.BlockSafetyCenterController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.LockUnificationPreferenceController;
@@ -71,6 +72,13 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
 
     @Override
     public void onCreate(Bundle icicle) {
+        // Check if access is blocked before creating the fragment
+        if (BlockSafetyCenterController.isBlocked(getContext())) {
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return;
+        }
         super.onCreate(icicle);
         SafetyCenterUtils.replaceEnterpriseStringsForPrivacyEntries(this);
         SafetyCenterUtils.replaceEnterpriseStringsForSecurityEntries(this);

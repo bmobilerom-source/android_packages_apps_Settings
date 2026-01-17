@@ -54,6 +54,14 @@
             settings:searchable="false"
             android:order="12" />
 
+        <Preference
+            android:key="mock_location_app"
+            android:title="@string/mock_location_apps_title"
+            android:summary="@string/mock_location_app_not_set"
+            android:order="13"
+            settings:controller="com.android.settings.location.MockLocationAppPreferenceController"
+            settings:layout="@layout/adaptive_preference_card_middle" />
+
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
@@ -63,4 +71,5 @@
         android:order="100" />
 
 </PreferenceScreen>
+
 

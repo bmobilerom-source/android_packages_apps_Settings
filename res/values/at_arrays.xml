@@ -1,0 +1,16 @@
+<resources>
+
+        <!-- Auto Reboot Interval Options -->
+    <string-array name="auto_reboot_interval_entries">
+        <item>1 hour</item>
+        <item>6 hours</item>
+        <item>1 day</item>
+    </string-array>
+
+    <string-array name="auto_reboot_interval_values" translatable="false">
+        <item>3600000</item> <!-- 1 hour in milliseconds -->
+        <item>21600000</item> <!-- 6 hours -->
+        <item>86400000</item> <!-- 1 day (24 hours) -->
+    </string-array>
+
+</resources>

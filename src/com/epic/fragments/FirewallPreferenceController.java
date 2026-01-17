@@ -27,7 +27,8 @@ import com.android.settings.core.BasePreferenceController;
  */
 public class FirewallPreferenceController extends BasePreferenceController {
 
-    private static final String PACKAGE_NAME = "com.kin.athena";
+    private static final String PACKAGE_NAME = "io.github.dorumrr.de1984";
+    private static final String ACTIVITY_NAME = "io.github.dorumrr.de1984.ui.MainActivity";
 
     public FirewallPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -50,14 +51,23 @@ public class FirewallPreferenceController extends BasePreferenceController {
 
     private boolean launchApp() {
         try {
-            android.content.Intent intent =
-                    mContext.getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
-            if (intent == null) return false;
+            android.content.Intent intent = new android.content.Intent();
+            intent.setClassName(PACKAGE_NAME, ACTIVITY_NAME);
             intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(intent);
             return true;
         } catch (Exception e) {
-            return false;
+            // Fallback to package launcher if specific activity fails
+            try {
+                android.content.Intent intent =
+                        mContext.getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
+                if (intent == null) return false;
+                intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+                return true;
+            } catch (Exception e2) {
+                return false;
+            }
         }
     }
 

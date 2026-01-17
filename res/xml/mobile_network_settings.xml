@@ -42,45 +42,45 @@
 
         <ListPreference
             android:key="calls_preference"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/calls_preference"
             android:summary="@string/summary_placeholder"
             android:enabled="false"
             settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
-            settings:allowDividerAbove="false"
-            settings:layout="@layout/adaptive_preference_card"/>
+            settings:allowDividerAbove="false" />
 
         <ListPreference
             android:key="sms_preference"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/sms_preference"
             android:summary="@string/summary_placeholder"
             android:enabled="false"
-            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"/>
 
         <Preference
             android:key="mobile_network_spn"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/mobile_network_spn_title"
             android:summary="@string/summary_placeholder"
             android:selectable="false"
-            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.network.telephony.MobileNetworkSpnPreferenceController"
             settings:allowDividerAbove="false" />
 
         <Preference
             android:key="phone_number"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/status_number"
             android:summary="@string/summary_placeholder"
             android:selectable="false"
             settings:controller="com.android.settings.network.telephony.MobileNetworkPhoneNumberPreferenceController"
             settings:allowDividerBelow="false"
-            settings:layout="@layout/adaptive_preference_card"
             settings:enableCopying="true"/>
 
         <Preference
             android:key="cdma_lte_data_service_key"
             android:title="@string/cdma_lte_data_service"
             settings:controller="com.android.settings.network.telephony.DataServiceSetupPreferenceController"
-            settings:allowDividerAbove="true"
+            settings:allowDividerAbove="false"
             settings:allowDividerBelow="false"/>
 
         <SwitchPreferenceCompat
@@ -125,9 +125,9 @@
 
         <Preference
             android:key="carrier_wifi_network"
-            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/carrier_wifi_network_title"
             android:selectable="false"
+            settings:layout="@layout/adaptive_preference_card"
             settings:searchable="false"/>
 
         <!-- Settings search is handled by MmsMessageSearchItem. -->
@@ -342,18 +342,21 @@
         android:key="convert_to_esim"
         android:persistent="false"
         android:title="@string/convert_to_esim_title"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.network.telephony.ConvertToEsimPreferenceController"/>
 
     <Preference
         android:key="transfer_esim"
         android:persistent="false"
         android:title="@string/transfer_esim_to_another_device_title"
+        settings:layout="@layout/adaptive_preference_card"
         settings:controller="com.android.settings.network.telephony.TransferEsimPreferenceController"/>
 
     <Preference
         android:key="erase_sim"
         android:persistent="false"
         android:title="@string/mobile_network_erase_sim"
+        settings:layout="@layout/adaptive_preference_card"
         settings:allowDividerBelow="false"
         settings:controller="com.android.settings.network.telephony.DeleteSimProfilePreferenceController"/>
 

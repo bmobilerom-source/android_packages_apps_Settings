@@ -17,9 +17,12 @@
 package com.epic.fragments;
 
 import android.app.Activity;
+import android.app.AppOpsManager;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -96,6 +99,45 @@ public class BMobileSettingsFragment extends DashboardFragment {
         if (!mIsAuthenticated) {
             checkAndRequestAuthentication();
             return;
+        }
+        
+        // Automatically grant install permission to Aurora Store for background installation
+        grantAuroraStoreInstallPermission();
+    }
+
+    /**
+     * Grant REQUEST_INSTALL_PACKAGES AppOps permission to Aurora Store
+     * This is required for background installation to work.
+     */
+    private void grantAuroraStoreInstallPermission() {
+        final String AURORA_STORE_PACKAGE = "com.aurora.store";
+        try {
+            Context context = getContext();
+            if (context == null) return;
+            
+            final PackageManager pm = context.getPackageManager();
+            final ApplicationInfo appInfo = pm.getApplicationInfo(AURORA_STORE_PACKAGE, 0);
+            final AppOpsManager appOpsManager = context.getSystemService(AppOpsManager.class);
+            
+            // Check if app has the REQUEST_INSTALL_PACKAGES permission
+            if (pm.checkPermission(
+                    android.Manifest.permission.REQUEST_INSTALL_PACKAGES,
+                    AURORA_STORE_PACKAGE) == PackageManager.PERMISSION_GRANTED) {
+                
+                // Grant AppOps permission for background installation
+                appOpsManager.setMode(
+                        AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
+                        appInfo.uid,
+                        AURORA_STORE_PACKAGE,
+                        AppOpsManager.MODE_ALLOWED);
+                
+                Log.d(TAG, "Granted REQUEST_INSTALL_PACKAGES permission to " + AURORA_STORE_PACKAGE);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            // Aurora Store not installed - this is fine, just log it
+            Log.d(TAG, "Aurora Store not installed");
+        } catch (Exception e) {
+            Log.w(TAG, "Error granting install permission to Aurora Store", e);
         }
     }
 

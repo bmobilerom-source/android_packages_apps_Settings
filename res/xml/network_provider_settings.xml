@@ -87,16 +87,16 @@
 
     <Preference
         android:key="configure_network_settings"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/network_and_internet_preferences_title"
         settings:allowDividerAbove="false"
-        settings:layout="@layout/adaptive_preference_card"
         android:fragment="com.android.settings.wifi.ConfigureWifiSettings"/>
 
     <Preference
         android:key="saved_networks"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/wifi_saved_access_points_label"
-        android:fragment="com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2"
-        settings:layout="@layout/adaptive_preference_card"/>
+        android:fragment="com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2" />
 
     <com.android.settings.datausage.DataUsagePreference
         android:key="non_carrier_data_usage"
