@@ -21,6 +21,11 @@
     android:key="connected_devices_screen"
     android:title="@string/connected_devices_dashboard_title">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="apps_illustration_video"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/bluetooth_pair"/>
     <com.android.settings.slices.SlicePreference
         android:key="bt_nearby_slice"
         android:title="@string/summary_placeholder"
@@ -102,23 +107,15 @@
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController" />
 
-    <Preference
-        android:fragment="com.android.settings.bshare.BShareSettingsFragment"
-        android:key="bshare_settings"
-        settings:layout="@layout/adaptive_preference_card_bottom"
-        android:title="@string/bshare_settings_title"
-        android:summary="@string/bshare_settings_summary"
-        android:order="45"
-        settings:controller="com.android.settings.bshare.BSharePreferenceController"
-        settings:allowDividerAbove="false" />
     <!-- Bluetooth Timeout -->
-    <com.android.settingslib.ListPreference
+    <ListPreference
         android:key="bluetooth_timeout"
         android:title="@string/bluetooth_timeout"
         android:entries="@array/bluetooth_timeout_entries"
         android:entryValues="@array/bluetooth_timeout_values"
         android:defaultValue="0"
         android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         settings:allowDividerAbove="false"
         settings:controller="com.android.settings.bluetooth.BluetoothTimeoutPreferenceController" />
     <com.android.settingslib.widget.FooterPreference
@@ -134,7 +131,6 @@
         android:title="@string/status_bar_bluetooth_battery_title"
         android:summary="@string/status_bar_bluetooth_battery_summary"
         android:defaultValue="true"
-        app:position="solo"
         settings:allowDividerAbove="true" />
 
 </PreferenceScreen>

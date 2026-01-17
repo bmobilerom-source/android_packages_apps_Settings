@@ -5,6 +5,12 @@
     
     <string name="bshare_intro_title">Share files over WiFi</string>
     <string name="bshare_intro_summary">Transfer files to nearby devices on the same WiFi network. Fast, secure, and no internet required.</string>
+
+    <string name="bshare_network_status_title">Network Status</string>
+    <string name="bshare_network_checking">Checking…</string>
+    <string name="bshare_network_compatible">Compatible (IP: %1$s)</string>
+    <string name="bshare_network_incompatible">Incompatible network</string>
+    <string name="bshare_network_unknown">Unknown</string>
     
     <string name="bshare_server_category_title">Server</string>
     <string name="bshare_server_status_title">Server Status</string>

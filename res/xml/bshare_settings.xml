@@ -17,7 +17,14 @@
         android:title="@string/bshare_intro_title"
         android:summary="@string/bshare_intro_summary"
         settings:searchable="false" />
-    
+
+    <Preference
+        android:key="bshare_network_status"
+        android:title="@string/bshare_network_status_title"
+        android:summary="@string/bshare_network_checking"
+        android:order="5"
+        settings:layout="@layout/adaptive_preference_card" />
+
     <PreferenceCategory
         android:key="bshare_server_category"
         android:title="@string/bshare_server_category_title"

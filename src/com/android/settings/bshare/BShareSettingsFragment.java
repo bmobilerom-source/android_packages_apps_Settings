@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -35,6 +36,7 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
     private Preference mSelectDownloadPref;
     private Preference mShareToAppsPref;
     private Preference mServerStatusPref;
+    private Preference mNetworkStatusPref;
     private SwitchPreference mHotspotModePref;
     
     @Override
@@ -58,6 +60,7 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
         mSelectDownloadPref = screen.findPreference("bshare_select_download");
         mShareToAppsPref = screen.findPreference("bshare_share_to_apps");
         mServerStatusPref = screen.findPreference("bshare_server_status");
+        mNetworkStatusPref = screen.findPreference("bshare_network_status");
         mHotspotModePref = screen.findPreference("bshare_hotspot_mode");
         
         if (mStartServerPref != null) {
@@ -106,8 +109,9 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
                 return true;
             });
         }
-        
+
         updateServerStatus();
+        updateNetworkStatus();
     }
     
     private boolean checkPermissions() {
@@ -122,8 +126,14 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
     }
     
     private void startServer() {
+        Log.d(TAG, "Starting BShare server...");
         mManager.startServer();
         updateServerStatus();
+        // Check status after a short delay
+        mHandler.postDelayed(() -> {
+            updateServerStatus();
+            Log.d(TAG, "Server status after start: running=" + mManager.isServerRunning());
+        }, 2000);
     }
     
     private void startDiscovering() {
@@ -139,7 +149,7 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
                 mStartDiscoveringPref.setEnabled(true);
                 mStartDiscoveringPref.setSummary(getString(R.string.bshare_start_discovering_summary));
             }
-        }, 12000); // 12 seconds timeout
+        }, 15000); // 15 seconds timeout for LocalSend discovery
     }
     
     private void updateServerStatus() {
@@ -152,6 +162,42 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
             } else {
                 mServerStatusPref.setSummary(getString(R.string.bshare_server_stopped));
             }
+        }
+    }
+
+    private void updateNetworkStatus() {
+        if (mNetworkStatusPref != null) {
+            // Check network compatibility in background
+            mHandler.post(() -> {
+                try {
+                    boolean compatible = mManager.checkNetworkCompatibilityForWindows();
+                    String localIp = mManager.getLocalIpAddress();
+                    android.app.Activity activity = getActivity();
+                    if (activity == null) {
+                        return;
+                    }
+                    activity.runOnUiThread(() -> {
+                        if (compatible && localIp != null) {
+                            mNetworkStatusPref.setSummary(
+                                getString(R.string.bshare_network_compatible, localIp));
+                            mNetworkStatusPref.setIcon(R.drawable.ic_check_circle_24px);
+                        } else {
+                            mNetworkStatusPref.setSummary(
+                                getString(R.string.bshare_network_incompatible));
+                            mNetworkStatusPref.setIcon(R.drawable.ic_warning_24dp);
+                        }
+                    });
+                } catch (Exception e) {
+                    android.app.Activity activity = getActivity();
+                    if (activity == null) {
+                        return;
+                    }
+                    activity.runOnUiThread(() -> {
+                        mNetworkStatusPref.setSummary(getString(R.string.bshare_network_unknown));
+                        mNetworkStatusPref.setIcon(R.drawable.ic_info);
+                    });
+                }
+            });
         }
     }
     
@@ -225,7 +271,10 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
             @Override
             public void onServerStarted(String ipAddress, int port) {
                 Log.d(TAG, "Server started: " + ipAddress + ":" + port);
-                updateServerStatus();
+                getActivity().runOnUiThread(() -> {
+                    updateServerStatus();
+                    Toast.makeText(getContext(), "BShare server started on " + ipAddress + ":" + port, Toast.LENGTH_SHORT).show();
+                });
             }
             
             @Override
@@ -261,6 +310,9 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
             @Override
             public void onError(String error) {
                 Log.e(TAG, "Error: " + error);
+                getActivity().runOnUiThread(() -> {
+                    Toast.makeText(getContext(), "BShare error: " + error, Toast.LENGTH_LONG).show();
+                });
             }
             
             @Override
@@ -282,8 +334,10 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        // Don't stop the server when navigating away - let it run in background
+        // The server will show a notification and can be stopped from there
         if (mManager != null) {
-            mManager.stopServer();
+            mManager.unregisterCallback();
         }
     }
     
