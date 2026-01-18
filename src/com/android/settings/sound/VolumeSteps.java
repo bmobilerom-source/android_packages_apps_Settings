@@ -31,7 +31,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import org.lunaris.settings.preferences.CustomSeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 
 /**
  * volume steps settings under sound
@@ -53,12 +53,12 @@ public class VolumeSteps extends SettingsPreferenceFragment implements
         final int count = screen.getPreferenceCount();
         for (int i = 0; i < count; i++) {
             Preference pref = screen.getPreference(i);
-            if (!(pref instanceof CustomSeekBarPreference))
+            if (!(pref instanceof SeekBarPreference))
                 continue;
             String key = pref.getKey();
             final int def = Settings.System.getIntForUser(resolver, "default_" + key, 15, UserHandle.USER_CURRENT);
             final int value = Settings.System.getIntForUser(resolver, key, def, UserHandle.USER_CURRENT);
-            CustomSeekBarPreference sbPref = (CustomSeekBarPreference) pref;
+            SeekBarPreference sbPref = (SeekBarPreference) pref;
             sbPref.setDefaultValue(def);
             sbPref.setValue(value);
             sbPref.setOnPreferenceChangeListener(this);
@@ -67,7 +67,7 @@ public class VolumeSteps extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (!(preference instanceof CustomSeekBarPreference))
+        if (!(preference instanceof SeekBarPreference))
             return false;
         Settings.System.putIntForUser(getActivity().getContentResolver(),
                 preference.getKey(), (Integer) newValue, UserHandle.USER_CURRENT);

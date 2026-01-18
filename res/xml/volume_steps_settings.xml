@@ -18,29 +18,23 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/volume_steps_title">
 
-    <org.lunaris.settings.preferences.CustomSeekBarPreference
+    <SeekBarPreference
         android:key="max_music_volume"
         android:title="@string/max_music_volume_title"
         android:max="100"
         android:defaultValue="15"
-        settings:min="15"
-        settings:interval="5"
-        settings:units="@string/steps_unit" />
+        android:min="15" />
 
-    <org.lunaris.settings.preferences.CustomSeekBarPreference
+    <SeekBarPreference
         android:key="max_call_volume"
         android:title="@string/max_call_volume_title"
         android:max="30"
-        settings:min="5"
-        settings:interval="1"
-        settings:units="@string/steps_unit" />
+        android:min="5" />
 
-    <org.lunaris.settings.preferences.CustomSeekBarPreference
+    <SeekBarPreference
         android:key="max_alarm_volume"
         android:title="@string/max_alarm_volume_title"
         android:max="30"
-        settings:min="7"
-        settings:interval="1"
-        settings:units="@string/steps_unit" />
+        android:min="7" />
 
 </PreferenceScreen>
