@@ -19,5 +19,19 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/gestures_title">
 
-   
+    <!-- Security & Power -->
+    <PreferenceCategory
+        android:key="security_power_category"
+        android:title="@string/security_power_category_title"
+        android:order="-10">
+
+        <Preference
+            android:key="power_off_verify"
+            android:title="@string/power_off_verify_title"
+            android:summary="@string/power_off_verify_summary"
+            android:fragment="com.epic.fragments.PowerOffVerifyFragment"
+            android:order="-5" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
