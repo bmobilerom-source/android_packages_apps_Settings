@@ -131,15 +131,17 @@ public class BShareSettingsFragment extends SettingsPreferenceFragment {
             mStartDiscoveringPref.setSummary(getString(R.string.bshare_status_discovering));
             mStartDiscoveringPref.setEnabled(false);
         }
+        Log.d(TAG, "Starting device discovery...");
         mManager.discoverDevices();
-        
-        // Re-enable after discovery completes
+
+        // Re-enable after discovery completes (longer timeout for network scanning)
         mHandler.postDelayed(() -> {
             if (mStartDiscoveringPref != null) {
                 mStartDiscoveringPref.setEnabled(true);
                 mStartDiscoveringPref.setSummary(getString(R.string.bshare_start_discovering_summary));
+                Log.d(TAG, "Discovery timeout reached");
             }
-        }, 12000); // 12 seconds timeout
+        }, 20000); // 20 seconds timeout for network scanning
     }
     
     private void updateServerStatus() {

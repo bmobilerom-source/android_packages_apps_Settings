@@ -14,12 +14,16 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
+import android.net.TetheringManager;
+import android.net.nsd.NsdManager;
+import android.net.nsd.NsdServiceInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.SoftApConfiguration;
-import android.net.wifi.WifiManager.LocalOnlyHotspotCallback;
-import android.net.wifi.WifiManager.LocalOnlyHotspotReservation;
+import android.net.wifi.WifiNetworkSpecifier;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -33,8 +37,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.MulticastSocket;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -42,7 +49,9 @@ import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -65,13 +74,23 @@ public class BShareManager {
     private ServerSocket mServerSocket;
     private ExecutorService mExecutor;
     private boolean mIsRunning = false;
-    private LocalOnlyHotspotReservation mHotspotReservation;
     private WifiManager mWifiManager;
+    private TetheringManager mTetheringManager;
+    private NsdManager mNsdManager;
+    private ConnectivityManager mConnectivityManager;
     private boolean mUseHotspotMode = false;
     private PowerManager.WakeLock mWakeLock;
     private NotificationManager mNotificationManager;
     private static final String NOTIFICATION_CHANNEL_ID = "bshare_server_channel";
     private static final int NOTIFICATION_ID = 1001;
+
+    // NSD (Network Service Discovery) - AOSP proper way
+    private static final String SERVICE_TYPE = "_localsend._tcp.";
+    private static final String SERVICE_NAME = "BShare";
+    private NsdManager.RegistrationListener mRegistrationListener;
+    private NsdManager.DiscoveryListener mDiscoveryListener;
+    private ExecutorService mNsdExecutor;
+    private boolean mServiceRegistered = false;
     
     public interface BShareCallback {
         void onServerStarted(String ipAddress, int port);
@@ -89,11 +108,102 @@ public class BShareManager {
         mContext = context;
         mHandler = new Handler(Looper.getMainLooper());
         mExecutor = Executors.newCachedThreadPool();
+        mNsdExecutor = Executors.newSingleThreadExecutor();
         mWifiManager = (WifiManager) context.getApplicationContext()
             .getSystemService(Context.WIFI_SERVICE);
+        mTetheringManager = (TetheringManager) context.getSystemService(Context.TETHERING_SERVICE);
+        mNsdManager = (NsdManager) context.getSystemService(Context.NSD_SERVICE);
+        mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         createNotificationChannel();
+        initializeNsdListeners();
         setInstance(this); // Register instance for notification receiver
+    }
+
+    /**
+     * Initialize NSD listeners following AOSP patterns
+     */
+    private void initializeNsdListeners() {
+        // Service registration listener
+        mRegistrationListener = new NsdManager.RegistrationListener() {
+            @Override
+            public void onRegistrationFailed(NsdServiceInfo serviceInfo, int errorCode) {
+                Log.e(TAG, "NSD registration failed: " + errorCode);
+                mServiceRegistered = false;
+            }
+
+            @Override
+            public void onUnregistrationFailed(NsdServiceInfo serviceInfo, int errorCode) {
+                Log.e(TAG, "NSD unregistration failed: " + errorCode);
+            }
+
+            @Override
+            public void onServiceRegistered(NsdServiceInfo serviceInfo) {
+                Log.d(TAG, "NSD service registered: " + serviceInfo.getServiceName());
+                mServiceRegistered = true;
+            }
+
+            @Override
+            public void onServiceUnregistered(NsdServiceInfo serviceInfo) {
+                Log.d(TAG, "NSD service unregistered: " + serviceInfo.getServiceName());
+                mServiceRegistered = false;
+            }
+        };
+
+        // Service discovery listener
+        mDiscoveryListener = new NsdManager.DiscoveryListener() {
+            @Override
+            public void onStartDiscoveryFailed(String serviceType, int errorCode) {
+                Log.e(TAG, "NSD discovery start failed: " + errorCode);
+            }
+
+            @Override
+            public void onStopDiscoveryFailed(String serviceType, int errorCode) {
+                Log.e(TAG, "NSD discovery stop failed: " + errorCode);
+            }
+
+            @Override
+            public void onDiscoveryStarted(String serviceType) {
+                Log.d(TAG, "NSD discovery started for: " + serviceType);
+            }
+
+            @Override
+            public void onDiscoveryStopped(String serviceType) {
+                Log.d(TAG, "NSD discovery stopped for: " + serviceType);
+            }
+
+            @Override
+            public void onServiceFound(NsdServiceInfo serviceInfo) {
+                Log.d(TAG, "NSD service found: " + serviceInfo.getServiceName());
+                // Resolve the service to get IP and port
+                mNsdManager.resolveService(serviceInfo, new NsdManager.ResolveListener() {
+                    @Override
+                    public void onResolveFailed(NsdServiceInfo serviceInfo, int errorCode) {
+                        Log.e(TAG, "NSD resolve failed: " + errorCode);
+                    }
+
+                    @Override
+                    public void onServiceResolved(NsdServiceInfo serviceInfo) {
+                        Log.d(TAG, "NSD service resolved: " + serviceInfo.getHost() + ":" + serviceInfo.getPort());
+                        String deviceName = serviceInfo.getServiceName();
+                        String ipAddress = serviceInfo.getHost().getHostAddress();
+                        int port = serviceInfo.getPort();
+
+                        // Verify this is a BShare service
+                        if (verifyBShareDevice(ipAddress, port)) {
+                            if (mCallback != null) {
+                                mHandler.post(() -> mCallback.onDeviceFound(deviceName, ipAddress));
+                            }
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onServiceLost(NsdServiceInfo serviceInfo) {
+                Log.d(TAG, "NSD service lost: " + serviceInfo.getServiceName());
+            }
+        };
     }
     
     /**
@@ -224,9 +334,11 @@ public class BShareManager {
         
         if (mUseHotspotMode && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Use LocalOnlyHotspot (ad-hoc WiFi) - inspired by FlyingCarpet
+            Log.d(TAG, "Using hotspot mode for server");
             startServerWithHotspot();
         } else {
             // Use existing WiFi network
+            Log.d(TAG, "Using regular WiFi network for server");
             startServerOnNetwork();
         }
     }
@@ -244,6 +356,7 @@ public class BShareManager {
         }
         
         try {
+
             // Request LocalOnlyHotspot
             // Note: Android generates SSID and password automatically for LocalOnlyHotspot
             // We can't set custom SSID/password, but we can read them from the reservation
@@ -260,7 +373,11 @@ public class BShareManager {
                         // Get IP address from hotspot
                         String ipAddress = getHotspotIpAddress();
                         if (ipAddress == null) {
-                            ipAddress = "192.168.43.1"; // Default hotspot IP
+                            // Try to get IP from network interfaces
+                            ipAddress = getLocalIpAddress();
+                            if (ipAddress == null) {
+                                ipAddress = "192.168.43.1"; // Default hotspot IP
+                            }
                         }
                         final String finalIpAddress = ipAddress;
                         final String finalSsid = ssid;
@@ -271,7 +388,8 @@ public class BShareManager {
                                 // Start HTTP server
                                 mServerSocket = new ServerSocket();
                                 mServerSocket.setReuseAddress(true);
-                                mServerSocket.bind(new InetSocketAddress(DEFAULT_PORT), 50);
+                                // CRITICAL: Bind to 0.0.0.0 (all interfaces) not just the port
+                                mServerSocket.bind(new InetSocketAddress("0.0.0.0", DEFAULT_PORT), 50);
                                 mServerSocket.setSoTimeout(1000);
                                 mIsRunning = true;
                                 
@@ -345,11 +463,78 @@ public class BShareManager {
                 },
                 new android.os.Handler(Looper.getMainLooper()));
         } catch (Exception e) {
-            Log.e(TAG, "Exception starting hotspot", e);
+            Log.e(TAG, "Exception starting tethering", e);
             if (mCallback != null) {
                 mHandler.post(() -> mCallback.onError("Exception: " + e.getMessage()));
             }
         }
+    }
+
+    /**
+     * Start server on hotspot network (called after tethering starts)
+     */
+    private void startServerOnHotspotNetwork() {
+        mExecutor.execute(() -> {
+            try {
+                // Wait for tethering to fully initialize
+                Thread.sleep(3000);
+
+                // Get IP address from tethering interface
+                String ipAddress = getHotspotIpAddress();
+                if (ipAddress == null) {
+                    ipAddress = "192.168.43.1"; // Default tethering IP
+                }
+
+                // Start HTTP server
+                mServerSocket = new ServerSocket();
+                mServerSocket.setReuseAddress(true);
+                mServerSocket.bind(new InetSocketAddress("0.0.0.0", DEFAULT_PORT), 50);
+                mServerSocket.setSoTimeout(1000);
+                mIsRunning = true;
+
+                // Acquire wakelock to prevent sleep during transfers
+                acquireWakeLock();
+
+                // Start NSD service registration
+                startNsdRegistration();
+
+                // Get hotspot credentials (this is approximate - AOSP way)
+                String ssid = "AndroidAP"; // Default SSID pattern
+                String password = "12345678"; // Default password
+
+                // Show notification
+                showNotification(ipAddress, DEFAULT_PORT, ssid, password);
+
+                if (mCallback != null) {
+                    mHandler.post(() -> {
+                        mCallback.onHotspotStarted(ssid, password, ipAddress);
+                        mCallback.onServerStarted(ipAddress, DEFAULT_PORT);
+                    });
+                }
+
+                Log.d(TAG, "BShare tethering server started: " + ssid + " @ " + ipAddress);
+
+                // Accept connections
+                while (mIsRunning && !mServerSocket.isClosed()) {
+                    try {
+                        Socket clientSocket = mServerSocket.accept();
+                        handleClientConnection(clientSocket);
+                    } catch (SocketTimeoutException e) {
+                        continue;
+                    } catch (IOException e) {
+                        if (mIsRunning) {
+                            Log.e(TAG, "Error accepting connection", e);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to start server on tethering", e);
+                mIsRunning = false;
+                if (mCallback != null) {
+                    mHandler.post(() -> mCallback.onError("Failed to start server: " + e.getMessage()));
+                }
+            }
+        });
     }
     
     /**
@@ -369,20 +554,24 @@ public class BShareManager {
                 // Bind to all interfaces (0.0.0.0) so it's accessible from network
                 mServerSocket = new ServerSocket();
                 mServerSocket.setReuseAddress(true);
-                mServerSocket.bind(new InetSocketAddress(DEFAULT_PORT), 50);
+                // CRITICAL: Bind to 0.0.0.0 (all interfaces) not just the port
+                mServerSocket.bind(new InetSocketAddress("0.0.0.0", DEFAULT_PORT), 50);
                 mServerSocket.setSoTimeout(1000); // 1 second timeout for accept
                 mIsRunning = true;
                 
                 // Acquire wakelock to prevent sleep during transfers
                 acquireWakeLock();
-                
+
+                // Start NSD service registration for discovery
+                startNsdRegistration();
+
                 // Show notification
                 showNotification(ipAddress, DEFAULT_PORT, null, null);
-                
+
                 if (mCallback != null) {
                     mHandler.post(() -> mCallback.onServerStarted(ipAddress, DEFAULT_PORT));
                 }
-                
+
                 Log.d(TAG, "BShare server started on " + ipAddress + ":" + DEFAULT_PORT);
                 
                 // Accept connections
@@ -409,38 +598,38 @@ public class BShareManager {
         });
     }
     
-    /**
-     * Generate random password for hotspot
-     */
-    private String generateRandomPassword() {
-        String chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // Avoid ambiguous chars
-        StringBuilder password = new StringBuilder(8);
-        java.util.Random random = new java.util.Random();
-        for (int i = 0; i < 8; i++) {
-            password.append(chars.charAt(random.nextInt(chars.length())));
-        }
-        return password.toString();
-    }
     
     /**
      * Get IP address from LocalOnlyHotspot
      */
     private String getHotspotIpAddress() {
         try {
+            // Wait a moment for hotspot to fully initialize
+            Thread.sleep(2000);
+
             // LocalOnlyHotspot typically uses 192.168.43.1 or similar
             // Try to get actual IP from network interface
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
             while (interfaces.hasMoreElements()) {
                 NetworkInterface networkInterface = interfaces.nextElement();
-                if (networkInterface.getName().contains("wlan") || 
-                    networkInterface.getName().contains("ap")) {
+                String name = networkInterface.getName().toLowerCase();
+                Log.d(TAG, "Checking interface: " + name);
+
+                // Look for hotspot interfaces (ap0, wlan0, softap, p2p, etc.)
+                if (name.contains("ap") || name.contains("wlan") || name.contains("softap") ||
+                    name.contains("p2p") || name.contains("tether")) {
                     Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
                     while (addresses.hasMoreElements()) {
                         InetAddress address = addresses.nextElement();
                         if (!address.isLoopbackAddress() && address instanceof java.net.Inet4Address) {
                             String ip = address.getHostAddress();
-                            if (ip.startsWith("192.168.") || ip.startsWith("10.0.")) {
-                                return ip;
+                            Log.d(TAG, "Found IP on hotspot interface " + name + ": " + ip);
+                            // Hotspot IPs are typically in 192.168.43.x, 192.168.49.x, or 10.0.0.x range
+                            if (ip.startsWith("192.168.") || ip.startsWith("10.") || ip.startsWith("172.")) {
+                                // Verify this IP is accessible by testing server binding
+                                if (testServerBinding(ip)) {
+                                    return ip;
+                                }
                             }
                         }
                     }
@@ -449,7 +638,33 @@ public class BShareManager {
         } catch (Exception e) {
             Log.e(TAG, "Error getting hotspot IP", e);
         }
+        Log.d(TAG, "No hotspot IP found, using default");
         return "192.168.43.1"; // Default fallback
+    }
+
+    /**
+     * Test if server can bind to given IP
+     */
+    private boolean testServerBinding(String ip) {
+        ServerSocket testSocket = null;
+        try {
+            testSocket = new ServerSocket();
+            testSocket.bind(new InetSocketAddress(ip, DEFAULT_PORT), 50);
+            testSocket.close();
+            Log.d(TAG, "Successfully bound to " + ip + ":" + DEFAULT_PORT);
+            return true;
+        } catch (Exception e) {
+            Log.d(TAG, "Cannot bind to " + ip + ":" + DEFAULT_PORT + ": " + e.getMessage());
+            return false;
+        } finally {
+            if (testSocket != null && !testSocket.isClosed()) {
+                try {
+                    testSocket.close();
+                } catch (Exception e) {
+                    // Ignore
+                }
+            }
+        }
     }
     
     /**
@@ -458,12 +673,15 @@ public class BShareManager {
     public void stopServer() {
         mIsRunning = false;
         
+        // Stop NSD service registration
+        stopNsdRegistration();
+
         // Release wakelock
         releaseWakeLock();
-        
+
         // Hide notification
         hideNotification();
-        
+
         // Close server socket
         if (mServerSocket != null && !mServerSocket.isClosed()) {
             try {
@@ -472,21 +690,21 @@ public class BShareManager {
                 Log.e(TAG, "Error closing server", e);
             }
         }
-        
-        // Stop hotspot if running
-        if (mHotspotReservation != null) {
+
+        // Stop tethering if running (AOSP proper way)
+        if (mUseHotspotMode && mTetheringManager != null) {
             try {
-                mHotspotReservation.close();
-                mHotspotReservation = null;
+                mTetheringManager.stopTethering(TetheringManager.TETHERING_WIFI);
+                Log.d(TAG, "Stopped tethering");
             } catch (Exception e) {
-                Log.e(TAG, "Error closing hotspot", e);
+                Log.e(TAG, "Error stopping tethering", e);
             }
         }
         
         if (mCallback != null) {
             mHandler.post(() -> {
                 mCallback.onServerStopped();
-                if (mHotspotReservation == null) {
+                if (mHotspotReservation != null) {
                     mCallback.onHotspotStopped();
                 }
             });
@@ -518,8 +736,8 @@ public class BShareManager {
     }
     
     /**
-     * Discover devices on local network
-     * Scans local network for other BShare servers
+     * Discover devices using NSD (Network Service Discovery) - AOSP proper method
+     * Falls back to IP scanning if NSD fails
      */
     public void discoverDevices() {
         mExecutor.execute(() -> {
@@ -530,46 +748,163 @@ public class BShareManager {
                 }
                 return;
             }
-            
-            // Simple network scan - check common IP range
-            // In production, use mDNS/Bonjour for proper discovery
-            scanLocalNetwork(localIp);
+
+            Log.d(TAG, "Starting device discovery on IP: " + localIp);
+
+            // Try NSD discovery first (AOSP proper method)
+            try {
+                mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, mDiscoveryListener);
+                // Wait for discovery results
+                mNsdExecutor.execute(() -> {
+                    try {
+                        Thread.sleep(8000); // Wait 8 seconds for discovery
+                        mNsdManager.stopServiceDiscovery(mDiscoveryListener);
+                        Log.d(TAG, "NSD discovery completed");
+                    } catch (InterruptedException e) {
+                        Log.e(TAG, "NSD discovery interrupted", e);
+                    }
+                });
+            } catch (Exception e) {
+                Log.e(TAG, "NSD discovery failed, falling back to IP scanning", e);
+                // Fallback to IP scanning
+                scanLocalNetwork(localIp);
+            }
         });
+    }
+
+    /**
+     * Start NSD service registration (AOSP proper way)
+     */
+    private void startNsdRegistration() {
+        mNsdExecutor.execute(() -> {
+            try {
+                // Create service info
+                NsdServiceInfo serviceInfo = new NsdServiceInfo();
+                serviceInfo.setServiceName(SERVICE_NAME + "_" + Build.MODEL.replaceAll("\\s+", "_"));
+                serviceInfo.setServiceType(SERVICE_TYPE);
+                serviceInfo.setPort(DEFAULT_PORT);
+
+                // Get current IP address for the service
+                String ipAddress = getLocalIpAddress();
+                if (ipAddress != null) {
+                    serviceInfo.setHost(InetAddress.getByName(ipAddress));
+                }
+
+                // Add TXT records with device info
+                Map<String, byte[]> attributes = new HashMap<>();
+                attributes.put("name", Build.MODEL.getBytes(StandardCharsets.UTF_8));
+                attributes.put("version", "1.0".getBytes(StandardCharsets.UTF_8));
+                attributes.put("type", "bshare".getBytes(StandardCharsets.UTF_8));
+                serviceInfo.setAttributes(attributes);
+
+                Log.d(TAG, "Registering NSD service: " + serviceInfo.getServiceName());
+                mNsdManager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD, mRegistrationListener);
+
+            } catch (Exception e) {
+                Log.e(TAG, "NSD registration failed", e);
+            }
+        });
+    }
+
+
+
+
+    /**
+     * Verify device is actually running BShare by making HTTP request
+     */
+    private boolean verifyBShareDevice(String ip, int port) {
+        Socket testSocket = null;
+        try {
+            testSocket = new Socket();
+            testSocket.connect(new InetSocketAddress(ip, port), 2000);
+
+            PrintWriter writer = new PrintWriter(testSocket.getOutputStream(), true);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(testSocket.getInputStream()));
+
+            writer.println("GET /api/info HTTP/1.1");
+            writer.println("Host: " + ip + ":" + port);
+            writer.println("User-Agent: BShare/1.0");
+            writer.println();
+            writer.flush();
+
+            String responseLine = reader.readLine();
+            testSocket.close();
+
+            return responseLine != null && responseLine.contains("200");
+
+        } catch (Exception e) {
+            Log.v(TAG, "Device verification failed for " + ip + ":" + port);
+            return false;
+        } finally {
+            if (testSocket != null) {
+                try {
+                    testSocket.close();
+                } catch (Exception e) {
+                    // Ignore
+                }
+            }
+        }
     }
     
     /**
-     * Get local IP address - improved method that works on all Android versions
+     * Get local IP address - improved method that prioritizes WiFi interfaces
      */
     private String getLocalIpAddress() {
         try {
-            // Method 1: Try WiFiManager (works on older Android)
+            // Method 1: Prioritize WiFi interfaces (most reliable for local network)
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = interfaces.nextElement();
+                String interfaceName = networkInterface.getName().toLowerCase();
+
+                // Prioritize wlan interfaces (WiFi)
+                if (interfaceName.contains("wlan") || interfaceName.startsWith("eth")) {
+                    Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
+                    while (addresses.hasMoreElements()) {
+                        InetAddress address = addresses.nextElement();
+                        if (!address.isLoopbackAddress() && address instanceof java.net.Inet4Address) {
+                            String ip = address.getHostAddress();
+                            // Filter out link-local and APIPA addresses
+                            if (!ip.startsWith("169.254.") && !ip.startsWith("127.")) {
+                                Log.d(TAG, "Found IP on interface " + interfaceName + ": " + ip);
+                                return ip;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Method 2: Try WiFiManager (fallback)
             WifiManager wifiManager = (WifiManager) mContext.getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
             if (wifiManager != null) {
                 WifiInfo wifiInfo = wifiManager.getConnectionInfo();
                 int ipAddress = wifiInfo.getIpAddress();
-                
+
                 if (ipAddress != 0) {
-                    return String.format("%d.%d.%d.%d",
+                    String ip = String.format("%d.%d.%d.%d",
                         (ipAddress & 0xff),
                         (ipAddress >> 8 & 0xff),
                         (ipAddress >> 16 & 0xff),
                         (ipAddress >> 24 & 0xff));
+                    Log.d(TAG, "WiFiManager IP: " + ip);
+                    return ip;
                 }
             }
-            
-            // Method 2: Use NetworkInterface (works on all Android versions)
-            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+
+            // Method 3: Any non-loopback IPv4 address
+            interfaces = NetworkInterface.getNetworkInterfaces();
             while (interfaces.hasMoreElements()) {
                 NetworkInterface networkInterface = interfaces.nextElement();
                 Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
-                
+
                 while (addresses.hasMoreElements()) {
                     InetAddress address = addresses.nextElement();
                     if (!address.isLoopbackAddress() && address instanceof java.net.Inet4Address) {
                         String ip = address.getHostAddress();
-                        // Filter out link-local addresses
-                        if (!ip.startsWith("169.254.")) {
+                        // Filter out link-local and APIPA addresses
+                        if (!ip.startsWith("169.254.") && !ip.startsWith("127.")) {
+                            Log.d(TAG, "Fallback IP: " + ip);
                             return ip;
                         }
                     }
@@ -578,6 +913,7 @@ public class BShareManager {
         } catch (Exception e) {
             Log.e(TAG, "Error getting IP address", e);
         }
+        Log.e(TAG, "No suitable IP address found");
         return null;
     }
     
@@ -672,21 +1008,21 @@ public class BShareManager {
     private void sendHttpInfo(PrintWriter writer, OutputStream outputStream) throws IOException {
         String deviceName = Build.MODEL;
         String ipAddress = getLocalIpAddress();
-        
+
         String jsonResponse = String.format(
             "{\"name\":\"%s\",\"ip\":\"%s\",\"port\":%d,\"type\":\"bshare\"}",
             deviceName, ipAddress != null ? ipAddress : "unknown", DEFAULT_PORT);
-        
+
         writer.println("HTTP/1.1 200 OK");
         writer.println("Content-Type: application/json");
         writer.println("Access-Control-Allow-Origin: *");
         writer.println("Content-Length: " + jsonResponse.length());
         writer.println();
         writer.flush();
-        
+
         outputStream.write(jsonResponse.getBytes(StandardCharsets.UTF_8));
         outputStream.flush();
-        
+
         Log.d(TAG, "Sent info response: " + jsonResponse);
     }
     
@@ -883,39 +1219,47 @@ public class BShareManager {
             }
             return;
         }
-        
+
         String networkPrefix = parts[0] + "." + parts[1] + "." + parts[2] + ".";
-        
+
+        Log.d(TAG, "Scanning network: " + networkPrefix + "1-254");
+
         // Use parallel scanning for faster discovery
         List<String> ipList = new ArrayList<>();
         for (int i = 1; i <= 254; i++) {
             String testIp = networkPrefix + i;
-            if (!testIp.equals(localIp)) {
+            // Skip our own IP and broadcast addresses
+            if (!testIp.equals(localIp) && !testIp.endsWith(".255") && !testIp.endsWith(".0")) {
                 ipList.add(testIp);
             }
         }
-        
-        // Scan in parallel batches
-        int batchSize = 20; // Scan 20 IPs at a time
+
+        // Scan in smaller batches to avoid overwhelming the network
+        int batchSize = 10; // Scan 10 IPs at a time
         CountDownLatch latch = new CountDownLatch(ipList.size());
-        
-        for (String ip : ipList) {
+
+        for (int i = 0; i < ipList.size(); i += batchSize) {
+            int endIndex = Math.min(i + batchSize, ipList.size());
+            List<String> batch = ipList.subList(i, endIndex);
+
             mExecutor.execute(() -> {
-                try {
+                for (String ip : batch) {
                     checkBShareServer(ip, DEFAULT_PORT);
-                } finally {
                     latch.countDown();
                 }
             });
         }
-        
+
         // Wait for all scans to complete (with timeout)
         try {
-            latch.await(10, TimeUnit.SECONDS);
+            boolean completed = latch.await(15, TimeUnit.SECONDS);
+            if (!completed) {
+                Log.w(TAG, "Discovery scan timed out");
+            }
         } catch (InterruptedException e) {
             Log.e(TAG, "Discovery interrupted", e);
         }
-        
+
         Log.d(TAG, "Discovery scan completed");
     }
     
@@ -999,6 +1343,21 @@ public class BShareManager {
     
     public int getServerPort() {
         return DEFAULT_PORT;
+    }
+
+    /**
+     * Stop NSD service registration
+     */
+    private void stopNsdRegistration() {
+        if (mServiceRegistered && mNsdManager != null) {
+            try {
+                mNsdManager.unregisterService(mRegistrationListener);
+                Log.d(TAG, "NSD service unregistered");
+            } catch (Exception e) {
+                Log.e(TAG, "Error unregistering NSD service", e);
+            }
+            mServiceRegistered = false;
+        }
     }
     
     /**
