@@ -18,5 +18,21 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/extras_title">
-  
+
+    <!-- Themes and Customization -->
+    <PreferenceCategory
+        android:key="extras_themes_category"
+        android:title="@string/themes_settings_title"
+        android:order="-10">
+
+        <com.android.settingslib.RestrictedPreference
+            android:fragment="com.epic.fragments.VideoWallpaperFragment"
+            android:icon="@drawable/video_wallpaper_thumbnail"
+            android:key="video_wallpaper"
+            android:title="@string/video_wallpaper_category_title"
+            android:summary="@string/video_wallpaper_category_summary"
+            android:clickable="true" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
