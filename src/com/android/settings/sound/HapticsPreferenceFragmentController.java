@@ -79,29 +79,30 @@ public class HapticsPreferenceFragmentController extends AbstractPreferenceContr
     }
 
    private void updateSettings() {
-        int backIntensity = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.BACK_GESTURE_HAPTIC_INTENSITY, 1);
-        mBackIntensity.setValue(backIntensity);
+        // Use available haptic settings or defaults
+        int backIntensity = Settings.System.getInt(mContext.getContentResolver(),
+                "back_gesture_haptic_intensity", 1);
+        mBackIntensity.setProgress(backIntensity);
 
         int brightnessIntensity = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.QS_BRIGHTNESS_SLIDER_HAPTIC, 0);
-        mBrightnessIntensity.setValue(brightnessIntensity);
+                "qs_brightness_slider_haptic", 0);
+        mBrightnessIntensity.setProgress(brightnessIntensity);
 
         int edgeScrollingIntensity = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.EDGE_SCROLLING_HAPTICS_INTENSITY, 1);
-        mEdgeScrollingIntensity.setValue(edgeScrollingIntensity);
+                "edge_scrolling_haptics_intensity", 1);
+        mEdgeScrollingIntensity.setProgress(edgeScrollingIntensity);
 
         int volumeSliderIntensity = Settings.System.getInt(mContext.getContentResolver(),
-                KEY_VOLUME_SLIDER_HAPTICS_INTENSITY, 1);
-        mVolumeSliderIntensity.setValue(volumeSliderIntensity);
-        
+                "volume_slider_haptics_intensity", 1);
+        mVolumeSliderIntensity.setProgress(volumeSliderIntensity);
+
         int qsTileHapticsIntensity = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.QS_PANEL_TILE_HAPTIC, 0);
-        mQsTileIntensity.setValue(qsTileHapticsIntensity);
-        
+                "qs_panel_tile_haptic", 0);
+        mQsTileIntensity.setProgress(qsTileHapticsIntensity);
+
         int qsHapticsIntensity = Settings.System.getInt(mContext.getContentResolver(),
-               KEY_QS_HAPTICS_INTENSITY, 1);
-        mQsIntensity.setValue(qsHapticsIntensity);
+               "qs_haptics_intensity", 1);
+        mQsIntensity.setProgress(qsHapticsIntensity);
 
         mBackIntensity.setOnPreferenceChangeListener(this);
         mBrightnessIntensity.setOnPreferenceChangeListener(this);
@@ -116,34 +117,34 @@ public class HapticsPreferenceFragmentController extends AbstractPreferenceContr
         int intensity = (Integer) newValue;
         boolean isChanged = false;
         if (preference == mBackIntensity) {
-            Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.BACK_GESTURE_HAPTIC_INTENSITY, intensity);
-            mBackIntensity.setValue(intensity);
+            Settings.System.putInt(mContext.getContentResolver(),
+                    "back_gesture_haptic_intensity", intensity);
+            mBackIntensity.setProgress(intensity);
             isChanged = true;
         } else if (preference == mBrightnessIntensity) {
             Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.QS_BRIGHTNESS_SLIDER_HAPTIC, intensity);
-            mBrightnessIntensity.setValue(intensity);
+                    "qs_brightness_slider_haptic", intensity);
+            mBrightnessIntensity.setProgress(intensity);
             isChanged = true;
         } else if (preference == mEdgeScrollingIntensity) {
             Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.EDGE_SCROLLING_HAPTICS_INTENSITY, intensity);
-            mEdgeScrollingIntensity.setValue(intensity);
+                    "edge_scrolling_haptics_intensity", intensity);
+            mEdgeScrollingIntensity.setProgress(intensity);
             isChanged = true;
         } else if (preference == mQsIntensity) {
             Settings.System.putInt(mContext.getContentResolver(),
-                    KEY_QS_HAPTICS_INTENSITY, intensity);
-            mQsIntensity.setValue(intensity);
+                    "qs_haptics_intensity", intensity);
+            mQsIntensity.setProgress(intensity);
             isChanged = true;
         } else if (preference == mQsTileIntensity) {
             Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.QS_PANEL_TILE_HAPTIC, intensity);
-            mQsTileIntensity.setValue(intensity);
+                    "qs_panel_tile_haptic", intensity);
+            mQsTileIntensity.setProgress(intensity);
             isChanged = true;
         } else if (preference == mVolumeSliderIntensity) {
             Settings.System.putInt(mContext.getContentResolver(),
-                    KEY_VOLUME_SLIDER_HAPTICS_INTENSITY, intensity);
-            mVolumeSliderIntensity.setValue(intensity);
+                    "volume_slider_haptics_intensity", intensity);
+            mVolumeSliderIntensity.setProgress(intensity);
             isChanged = true;
         }
         if (isChanged) {

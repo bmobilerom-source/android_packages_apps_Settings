@@ -17,6 +17,11 @@
 package com.android.settings.display;
 
 import android.content.Context;
+import android.content.om.IOverlayManager;
+import android.content.om.OverlayIdentifier;
+import android.content.om.OverlayManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 
@@ -71,8 +76,11 @@ public class FontFamilyPreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        android.util.Log.i(TAG, "displayPreference called, found preference: " + (mPreference != null));
         if (mPreference != null) {
-            updatePreferenceSummary();
+            mPreference.setOnPreferenceChangeListener(this);
+            updateState(mPreference);
+            android.util.Log.i(TAG, "Set preference change listener");
         }
     }
 
@@ -81,6 +89,7 @@ public class FontFamilyPreferenceController extends BasePreferenceController
         String fontValue = (String) newValue;
 
         android.util.Log.i(TAG, "Font preference changed to: " + fontValue);
+        android.util.Log.i(TAG, "onPreferenceChange called for preference: " + preference.getKey());
 
         // Update theme customization overlay packages setting
         updateThemeCustomizationOverlays(fontValue);
@@ -91,17 +100,30 @@ public class FontFamilyPreferenceController extends BasePreferenceController
 
     private void updateThemeCustomizationOverlays(String fontValue) {
         try {
-            JSONObject themeCustomization = new JSONObject();
+            IOverlayManager overlayManager = IOverlayManager.Stub.asInterface(
+                    ServiceManager.getService(Context.OVERLAY_SERVICE));
 
             if (!"default".equals(fontValue)) {
                 String overlayPackage = FONT_OVERLAY_MAP.get(fontValue);
                 if (overlayPackage != null) {
-                    // Set the font overlay for the android.theme.customization.font category
+                    // Use setEnabledExclusiveInCategory to enable this font and disable all others
+                    // Font overlays use category "android.theme.customization.font"
+                    overlayManager.setEnabledExclusiveInCategory(overlayPackage, UserHandle.myUserId());
+                    android.util.Log.i(TAG, "Enabled font overlay exclusively: " + overlayPackage + " for font: " + fontValue);
+                }
+            } else {
+                // Disable all font overlays for default
+                disableAllFontOverlays();
+            }
+
+            // Update theme customization for persistence
+            JSONObject themeCustomization = new JSONObject();
+            if (!"default".equals(fontValue)) {
+                String overlayPackage = FONT_OVERLAY_MAP.get(fontValue);
+                if (overlayPackage != null) {
                     themeCustomization.put("android.theme.customization.font", overlayPackage);
-                    android.util.Log.i(TAG, "Setting font overlay: " + overlayPackage + " for font: " + fontValue);
                 }
             }
-            // For "default", we don't set any font overlay, letting the system use defaults
 
             String themeJson = themeCustomization.toString();
             Settings.Secure.putStringForUser(mContext.getContentResolver(),
@@ -110,8 +132,37 @@ public class FontFamilyPreferenceController extends BasePreferenceController
 
             android.util.Log.i(TAG, "Updated THEME_CUSTOMIZATION_OVERLAY_PACKAGES: " + themeJson);
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             android.util.Log.e(TAG, "Failed to update theme customization overlays", e);
+        }
+    }
+
+    private void disableAllFontOverlays() {
+        try {
+            IOverlayManager overlayManager = IOverlayManager.Stub.asInterface(
+                    ServiceManager.getService(Context.OVERLAY_SERVICE));
+
+            for (String overlayPackage : FONT_OVERLAY_MAP.values()) {
+                // Use package name directly - setEnabled expects String packageName
+                overlayManager.setEnabled(overlayPackage, false, UserHandle.myUserId());
+                android.util.Log.d(TAG, "Disabled font overlay: " + overlayPackage);
+            }
+        } catch (RemoteException e) {
+            android.util.Log.e(TAG, "Failed to disable font overlays", e);
+        }
+    }
+
+    private void enableFontOverlay(String overlayPackage) {
+        try {
+            IOverlayManager overlayManager = IOverlayManager.Stub.asInterface(
+                    ServiceManager.getService(Context.OVERLAY_SERVICE));
+
+            // Use setEnabledExclusiveInCategory to enable this font and disable all others in the category
+            // This ensures only one font overlay is active at a time
+            overlayManager.setEnabledExclusiveInCategory(overlayPackage, UserHandle.myUserId());
+            android.util.Log.d(TAG, "Enabled font overlay exclusively: " + overlayPackage);
+        } catch (RemoteException e) {
+            android.util.Log.e(TAG, "Failed to enable font overlay: " + overlayPackage, e);
         }
     }
 
@@ -139,27 +190,54 @@ public class FontFamilyPreferenceController extends BasePreferenceController
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        // Read current theme customization setting to determine active font
+        // Read current overlay state to determine active font
         String currentFont = "default";
         try {
-            String themeJson = Settings.Secure.getStringForUser(mContext.getContentResolver(),
-                    Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
-                    UserHandle.myUserId());
-            if (themeJson != null && !themeJson.isEmpty()) {
-                JSONObject themeCustomization = new JSONObject(themeJson);
-                String fontOverlay = themeCustomization.optString("android.theme.customization.font", null);
-                if (fontOverlay != null) {
-                    // Find which font this overlay corresponds to
-                    for (Map.Entry<String, String> entry : FONT_OVERLAY_MAP.entrySet()) {
-                        if (entry.getValue().equals(fontOverlay)) {
-                            currentFont = entry.getKey();
-                            break;
+            IOverlayManager overlayManager = IOverlayManager.Stub.asInterface(
+                    ServiceManager.getService(Context.OVERLAY_SERVICE));
+
+            // Check which font overlay is currently enabled
+            for (Map.Entry<String, String> entry : FONT_OVERLAY_MAP.entrySet()) {
+                String overlayPackage = entry.getValue();
+                // Use package name directly for getOverlayInfo
+                try {
+                    android.content.om.OverlayInfo info = overlayManager.getOverlayInfo(overlayPackage, UserHandle.myUserId());
+                    if (info != null && info.isEnabled()) {
+                        currentFont = entry.getKey();
+                        android.util.Log.d(TAG, "Found enabled font overlay: " + overlayPackage + " -> " + currentFont);
+                        break;
+                    }
+                } catch (RemoteException e) {
+                    // Overlay might not exist, continue checking others
+                    android.util.Log.d(TAG, "Overlay not found or error checking: " + overlayPackage);
+                } catch (Exception e) {
+                    // Overlay might not exist, continue checking others
+                    android.util.Log.d(TAG, "Overlay not found or error checking: " + overlayPackage);
+                }
+            }
+        } catch (Exception e) {
+            android.util.Log.e(TAG, "Failed to read current overlay state", e);
+            // Fallback to theme customization setting
+            try {
+                String themeJson = Settings.Secure.getStringForUser(mContext.getContentResolver(),
+                        Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
+                        UserHandle.myUserId());
+                if (themeJson != null && !themeJson.isEmpty()) {
+                    JSONObject themeCustomization = new JSONObject(themeJson);
+                    String fontOverlay = themeCustomization.optString("android.theme.customization.font", null);
+                    if (fontOverlay != null) {
+                        // Find which font this overlay corresponds to
+                        for (Map.Entry<String, String> entry : FONT_OVERLAY_MAP.entrySet()) {
+                            if (entry.getValue().equals(fontOverlay)) {
+                                currentFont = entry.getKey();
+                                break;
+                            }
                         }
                     }
                 }
+            } catch (JSONException e2) {
+                android.util.Log.e(TAG, "Failed to parse current theme customization", e2);
             }
-        } catch (JSONException e) {
-            android.util.Log.e(TAG, "Failed to parse current theme customization", e);
         }
 
         if (mPreference != null) {

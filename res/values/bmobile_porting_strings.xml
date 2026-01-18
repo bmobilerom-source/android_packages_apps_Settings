@@ -236,6 +236,7 @@
     <string name="auto_reboot_time_not_set">Not set</string>
     <string name="auto_reboot_time_picker_title">Select Reboot Time</string>
     
+    <string name="empty_summary" translatable="false"></string>
     <string name="auto_reboot_footer">Auto reboot helps maintain device security and performance by periodically restarting the system. The device will reboot even when the screen is off.</string>
     <string name="auto_reboot_confirm_credential_title">Confirm device credentials</string>
     <string name="auto_reboot_confirm_credential_description">Enter your device credentials to change auto reboot settings</string>

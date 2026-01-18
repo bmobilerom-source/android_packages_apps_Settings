@@ -18,7 +18,10 @@ package com.epic.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto;
@@ -39,6 +42,7 @@ public class AutoRebootSettings extends DashboardFragment {
 
     private AutoRebootMainSwitchController mMainSwitchController;
     private AutoRebootIntervalController mIntervalController;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,15 +53,41 @@ public class AutoRebootSettings extends DashboardFragment {
     public void onResume() {
         super.onResume();
         
-        // Refresh preference states when returning to the screen
-        Preference intervalPref = findPreference(KEY_AUTO_REBOOT_INTERVAL);
-        if (intervalPref != null) {
-            AutoRebootIntervalController controller = 
-                    (AutoRebootIntervalController) use(AutoRebootIntervalController.class);
-            if (controller != null) {
-                controller.updateState(intervalPref);
-            }
+        // Defer preference state update to avoid blocking predictive back animation
+        // Post to handler to ensure it runs after the activity transition completes
+        View rootView = getView();
+        if (rootView != null) {
+            rootView.post(() -> {
+                // Refresh preference states when returning to the screen
+                Preference intervalPref = findPreference(KEY_AUTO_REBOOT_INTERVAL);
+                if (intervalPref != null) {
+                    AutoRebootIntervalController controller = 
+                            (AutoRebootIntervalController) use(AutoRebootIntervalController.class);
+                    if (controller != null) {
+                        controller.updateState(intervalPref);
+                    }
+                }
+            });
+        } else {
+            // Fallback: use Handler if view is not yet available
+            mHandler.post(() -> {
+                Preference intervalPref = findPreference(KEY_AUTO_REBOOT_INTERVAL);
+                if (intervalPref != null) {
+                    AutoRebootIntervalController controller = 
+                            (AutoRebootIntervalController) use(AutoRebootIntervalController.class);
+                    if (controller != null) {
+                        controller.updateState(intervalPref);
+                    }
+                }
+            });
         }
+    }
+    
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Cancel any pending preference updates when pausing
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     @Override

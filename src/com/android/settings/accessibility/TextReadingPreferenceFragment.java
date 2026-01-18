@@ -114,6 +114,28 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Set custom layout for labeled seekbar preferences
+        initSeekBarPreferences();
+    }
+
+    private void initSeekBarPreferences() {
+        final com.android.settings.widget.LabeledSeekBarPreference fontSizePref =
+                getPreferenceScreen().findPreference(FONT_SIZE_KEY);
+        if (fontSizePref != null) {
+            fontSizePref.setLayoutResource(R.layout.adaptive_labeled_seekbar_card_progress);
+        }
+
+        final com.android.settings.widget.LabeledSeekBarPreference displaySizePref =
+                getPreferenceScreen().findPreference(DISPLAY_SIZE_KEY);
+        if (displaySizePref != null) {
+            displaySizePref.setLayoutResource(R.layout.adaptive_labeled_seekbar_card_progress);
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final View rootView = getActivity().getWindow().peekDecorView();

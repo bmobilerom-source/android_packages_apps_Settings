@@ -113,8 +113,6 @@ import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
 import com.android.settings.display.ColorContrastFragment;
 import com.android.settings.display.NightDisplaySettings;
-import com.android.settings.display.QuickSettingsSettings;
-import com.android.settings.display.StatusBarSettings;
 import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.display.SmartAutoRotatePreferenceFragment;
 import com.android.settings.display.darkmode.DarkModeSettingsFragment;
@@ -146,6 +144,7 @@ import com.android.settings.inputmethod.TouchpadAndMouseSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageSettings;
+import com.epic.fragments.PowerOffVerifyFragment;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationServices;
 import com.android.settings.location.LocationSettings;
@@ -330,6 +329,7 @@ public class SettingsGateway {
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
             PoliteNotificationsPreferenceFragment.class.getName(),
+            PowerOffVerifyFragment.class.getName(),
             NotificationAssistantPicker.class.getName(),
             ChannelNotificationSettings.class.getName(),
             SatelliteSetting.class.getName(),
@@ -432,6 +432,7 @@ public class SettingsGateway {
             com.android.settings.location.LocationAppOverridesFragment.class.getName(),
             com.epic.fragments.GestureSettings.class.getName(),
             com.epic.fragments.BMobileSettingsFragment.class.getName(),
+            com.epic.fragments.SystemGrid.class.getName(),
             com.epic.fragments.SystemApplicationSettings.class.getName(),
             com.epic.fragments.SystemOptimizationSettings.class.getName(),
             com.epic.fragments.DeviceTweaksSettings.class.getName(),
@@ -440,7 +441,6 @@ public class SettingsGateway {
             com.epic.fragments.SettingsBackupRestore.class.getName(),
             com.android.settings.applications.specialaccess.AppSecSettings.class.getName(),
             com.epic.fragments.BMobileSettingsFragment.class.getName(),
-            com.epic.fragments.AnatoliaSettingsExtras.class.getName(),
             com.epic.fragments.NotificationSettings.class.getName(),
             com.epic.fragments.GestureSettings.class.getName(),
             com.epic.fragments.NavbarSettings.class.getName(),

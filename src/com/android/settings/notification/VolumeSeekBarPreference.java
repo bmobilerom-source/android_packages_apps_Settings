@@ -71,21 +71,60 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setLayoutResource(R.layout.preference_volume_slider);
+        // Check if layout is specified in XML attributes
+        if (attrs != null) {
+            android.content.res.TypedArray a = context.obtainStyledAttributes(attrs,
+                    new int[]{android.R.attr.layout});
+            int xmlLayoutResId = a.getResourceId(0, 0);
+            a.recycle();
+            // Only set our default layout if no layout was specified in XML
+            if (xmlLayoutResId == 0) {
+                setLayoutResource(R.layout.preference_volume_slider);
+            }
+            // If XML specified a layout, the parent class already set it
+        } else {
+            setLayoutResource(R.layout.preference_volume_slider);
+        }
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setLayoutResource(R.layout.preference_volume_slider);
+        // Check if layout is specified in XML attributes
+        if (attrs != null) {
+            android.content.res.TypedArray a = context.obtainStyledAttributes(attrs,
+                    new int[]{android.R.attr.layout});
+            int xmlLayoutResId = a.getResourceId(0, 0);
+            a.recycle();
+            // Only set our default layout if no layout was specified in XML
+            if (xmlLayoutResId == 0) {
+                setLayoutResource(R.layout.preference_volume_slider);
+            }
+            // If XML specified a layout, the parent class already set it
+        } else {
+            setLayoutResource(R.layout.preference_volume_slider);
+        }
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(R.layout.preference_volume_slider);
+        // Check if layout is specified in XML attributes
+        if (attrs != null) {
+            android.content.res.TypedArray a = context.obtainStyledAttributes(attrs,
+                    new int[]{android.R.attr.layout});
+            int xmlLayoutResId = a.getResourceId(0, 0);
+            a.recycle();
+            // Only set our default layout if no layout was specified in XML
+            if (xmlLayoutResId == 0) {
+                setLayoutResource(R.layout.preference_volume_slider);
+            }
+            // If XML specified a layout, the parent class already set it
+        } else {
+            setLayoutResource(R.layout.preference_volume_slider);
+        }
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }

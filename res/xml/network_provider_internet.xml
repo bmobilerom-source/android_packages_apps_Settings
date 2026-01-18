@@ -95,7 +95,7 @@
         android:order="10"
         android:persistent="false"
         settings:layout="@layout/adaptive_preference_card"
-        settings:isPreferenceVisible="@bool/config_show_data_saver"
+        settings:isPreferenceVisible="false"
         android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 
     <com.android.settings.vpn2.VpnInfoPreference

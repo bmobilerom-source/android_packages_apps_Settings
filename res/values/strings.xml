@@ -1914,6 +1914,12 @@
     <!-- Phonebook sharing toggle detailed message in pairing dialogs.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_pairing_phonebook_toggle_details">Info will be used for call announcements and more</string>
 
+    <!-- Title for the dialog to confirm PIN. [CHAR LIMIT=40] -->
+    <string name="bluetooth_pairing_confirmation_title">Check pairing codes</string>
+
+    <!-- Message for the dialog to confirm PIN. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_pairing_confirmation_msg">Check if this code matches the one on <xliff:g id="device_name" example="device_name">%1$s</xliff:g>.\n\nFor your security, do not enter this code anywhere.</string>
+
     <!-- Title for BT error dialogs. -->
     <string name="bluetooth_error_title"></string>
 
@@ -13281,6 +13287,9 @@
     <!-- Content description of the next button to bring user to the next preview page. -->
     <string name="next_page_content_description">Next</string>
 
+    <!-- Content description for accessibility next button indicator (chevron icon) -->
+    <string name="accessibility_next_button">Next</string>
+
     <!-- Content description of preview pager in colors preview -->
     <string name="colors_viewpager_content_description">Color preview</string>
 
@@ -13934,4 +13943,37 @@
     <string name="wifi_timeout_1_hour">1 hour</string>
     <string name="wifi_timeout_4_hours">4 hours</string>
     <string name="wifi_timeout_8_hours">8 hours</string>
+    <!-- Font Settings -->
+    <string name="font_settings_title">Font</string>
+    <string name="font_family_title">Font Family</string>
+    <string name="font_family_summary">Choose your preferred font style</string>
+    <string name="font_family_default">Default (Roboto)</string>
+    <string name="font_family_accuratist">Accuratist</string>
+    <string name="font_family_hercules">Hercules</string>
+    <string name="font_family_ios">iOS</string>
+    <string name="font_family_nothing">Nothing</string>
+    <string name="font_family_oneplus">OnePlus Sans</string>
+    <string name="font_family_sanfranciscopro">San Francisco Pro</string>
+    <string name="font_family_samsungone">Samsung One</string>
+    <string name="font_family_slim">Slim</string>
+
+    <!-- Media Controls -->
+    <string name="media_controls_bubbles_description">Media controls appear as bubbles that you can move around your screen</string>
+    <string name="media_controls_bubbles_description2">Use bubbles to quickly access playback controls without leaving your current app</string>
+    <string name="media_controls_bubbles_description3">Bubbles can be dismissed by tapping the X or by using the close button</string>
+    <string name="ambient_music_info_title">Ambient Music</string>
+    <string name="ambient_music_info_summary">Play music from compatible apps in the background</string>
+    <string name="system_summary">Configure system-wide settings and preferences</string>
+    <string name="category_system_title">System</string>
+    <string name="category_buttons_title">Buttons</string>
+    <string name="system_grid_statusbar_summary">Configure status bar appearance and behavior</string>
+    <string name="system_grid_backup_transport_summary">Manage backup and restore settings</string>
+    <string name="system_grid_emergency_summary">Configure emergency contacts and information</string>
+    <string name="about_us_info">About Us</string>
+    <string name="about_us_info_summary">Information about the development team</string>
+    <string name="system_reset_summary">Reset device settings and data</string>
+    <string name="enable">Enable</string>
+    <string name="live_caption_intro">Automatically caption media</string>
+    <string name="adaptive_playback_timeout_title">Timeout</string>
+    <string name="unit_seconds">seconds</string>
 </resources>

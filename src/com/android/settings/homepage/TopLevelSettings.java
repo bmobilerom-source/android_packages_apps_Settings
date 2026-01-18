@@ -67,6 +67,7 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settings.deviceinfo.UserInfoFragement;
 
 @SearchIndexable(forTarget = MOBILE)
 public class TopLevelSettings extends DashboardFragment implements SplitLayoutListener,
@@ -154,6 +155,11 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     public boolean onPreferenceTreeClick(Preference preference) {
         if (isDuplicateClick(preference)) {
             return true;
+        }
+
+        // Handle main user profile card - LayoutPreference doesn't automatically handle android:fragment
+        if ("top_level_mainuser_profile_card".equals(preference.getKey()) && preference.getFragment() != null) {
+            return onPreferenceStartFragment(this, preference);
         }
 
         // Check if preference's fragment is blocked

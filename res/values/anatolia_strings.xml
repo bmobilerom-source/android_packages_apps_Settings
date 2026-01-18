@@ -96,6 +96,7 @@
     <string name="video_wallpaper_tips_summary">• Videos are muted automatically\n• Lower resolution videos use less battery\n• Shorter loops are recommended for better performance\n• If videos wallpaper doesnt load select live wallpaper from Wallpaper and style after selecting video wallpaper\n• You have to reapply live wallpaper after restart device</string>
 
     <string name="video_wallpaper_description">Animated video and GIF wallpaper</string>
+    <string name="video_wallpaper_intro">Set animated video wallpapers from your device. Supports MP4, GIF, and WebP formats.</string>
     <string name="basha_mobile">BashaMobile</string>
 
     <!-- Video Wallpaper Strings -->

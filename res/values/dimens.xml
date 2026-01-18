@@ -545,4 +545,7 @@
 
     <!-- Material Design Card -->
     <dimen name="cardStrokeWidth">1dp</dimen>
+
+    <!-- Volume card progress radius -->
+    <dimen name="dot_pref_radius">27dp</dimen>
 </resources>

@@ -31,7 +31,7 @@ public class SkylineLabFragment extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return -1;
+        return 8900; // CUSTOM_SETTINGS
     }
 }
 

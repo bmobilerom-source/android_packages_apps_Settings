@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility;
+package com.android.settings.sound;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,23 +27,22 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
-public class LiveCaptionPreferenceController extends BasePreferenceController {
+public class NowPlayingPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
-    static final Intent LIVE_CAPTION_INTENT = new Intent(
-            "com.android.settings.action.live_caption");
+    static final Intent NOW_PLAYING_INTENT = new Intent(
+            "android.settings.AMBIENT_MUSIC_SETTINGS");
 
     private final PackageManager mPackageManager;
 
-    public LiveCaptionPreferenceController(Context context, String preferenceKey) {
+    public NowPlayingPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mPackageManager = context.getPackageManager();
-        LIVE_CAPTION_INTENT.setPackage(mPackageManager.getSystemCaptionsServicePackageName());
     }
 
     @Override
     public int getAvailabilityStatus() {
-        // Hide Live Caption preference
+        // Hide Now Playing preference
         return UNSUPPORTED_ON_DEVICE;
     }
 
@@ -52,13 +51,13 @@ public class LiveCaptionPreferenceController extends BasePreferenceController {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
         if (preference != null && isAvailable()) {
-            preference.setLayoutResource(R.layout.adaptive_preference_card_top);
+            preference.setLayoutResource(R.layout.adaptive_preference_card_middle);
         }
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setIntent(LIVE_CAPTION_INTENT);
+        preference.setIntent(NOW_PLAYING_INTENT);
     }
 }

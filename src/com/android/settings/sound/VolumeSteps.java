@@ -58,10 +58,10 @@ public class VolumeSteps extends SettingsPreferenceFragment implements
             String key = pref.getKey();
             final int def = Settings.System.getIntForUser(resolver, "default_" + key, 15, UserHandle.USER_CURRENT);
             final int value = Settings.System.getIntForUser(resolver, key, def, UserHandle.USER_CURRENT);
-        SeekBarPreference sbPref = (SeekBarPreference) pref;
-        sbPref.setDefaultProgress(def);
-        sbPref.setProgress(value);
-        sbPref.setOnPreferenceChangeListener(this);
+            SeekBarPreference sbPref = (SeekBarPreference) pref;
+            sbPref.setDefaultProgress(def);
+            sbPref.setProgress(value);
+            sbPref.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -76,7 +76,7 @@ public class VolumeSteps extends SettingsPreferenceFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.LUNARIS;
+        return MetricsEvent.CUSTOM_SETTINGS;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

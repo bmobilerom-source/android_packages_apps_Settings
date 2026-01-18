@@ -1649,6 +1649,19 @@
         <item>@string/font_family_sanfranciscopro</item>
         <item>@string/font_family_samsungone</item>
         <item>@string/font_family_slim</item>
+        <item>Inter</item>
+        <item>Roboto</item>
+        <item>Atkinson Hyperlegible</item>
+        <item>Circular Std</item>
+        <item>Comic Neue</item>
+        <item>Exo 2</item>
+        <item>Finlandica</item>
+        <item>Jakarta Plus</item>
+        <item>Leon Sans</item>
+        <item>Now</item>
+        <item>Open Sauce</item>
+        <item>Reem Kufi</item>
+        <item>Sofia Sans</item>
     </string-array>
 
     <string-array name="font_family_values" translatable="false">
@@ -1661,6 +1674,19 @@
         <item>sanfranciscopro</item>
         <item>samsungone</item>
         <item>slim</item>
+        <item>inter-regular</item>
+        <item>sans-serif</item>
+        <item>atkinson-regular</item>
+        <item>circular-std-text</item>
+        <item>comic-neue</item>
+        <item>exo2-regular</item>
+        <item>finlandica</item>
+        <item>jakarta-plus</item>
+        <item>leonsans-regular</item>
+        <item>now-regular</item>
+        <item>open-sauce</item>
+        <item>reemkufi</item>
+        <item>sofia-sans-regular</item>
     </string-array>
 
     <string-array name="playback_speed_entries">
@@ -1704,4 +1730,33 @@
         <item>28800000</item>
     </string-array>
 
+    <!-- Bluetooth Timeout -->
+    <string-array name="bluetooth_timeout_entries" translatable="false">
+        <item>@string/bluetooth_timeout_summary_never</item>
+        <item>@string/bluetooth_timeout_summary_15secs</item>
+        <item>@string/bluetooth_timeout_summary_30secs</item>
+        <item>@string/bluetooth_timeout_summary_1min</item>
+        <item>@string/bluetooth_timeout_summary_2mins</item>
+        <item>@string/bluetooth_timeout_summary_5mins</item>
+        <item>@string/bluetooth_timeout_summary_10mins</item>
+        <item>@string/bluetooth_timeout_summary_30mins</item>
+        <item>@string/bluetooth_timeout_summary_1hour</item>
+        <item>@string/bluetooth_timeout_summary_2hours</item>
+        <item>@string/bluetooth_timeout_summary_4hours</item>
+        <item>@string/bluetooth_timeout_summary_8hours</item>
+    </string-array>
+    <string-array name="bluetooth_timeout_values" translatable="false">
+        <item>0</item>
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>14400000</item>
+        <item>28800000</item>
+    </string-array>
 </resources>

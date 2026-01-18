@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/power_off_verify_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="power_off_verify_intro"
+        android:title="@string/power_off_verify_summary" />
+
+    <PreferenceCategory android:title="@string/security_power_category_title">
+
+        <lineageos.preference.SystemSettingMainSwitchPreference
+            android:key="power_off_verify_enabled"
+            android:title="@string/power_off_verify_title"
+            android:summary="@string/power_off_verify_summary"
+            settings:defaultValue="false"
+            android:order="1" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/power_off_verify_footer">
+        <com.android.settingslib.widget.FooterPreference
+            android:key="power_off_verify_footer"
+            android:title="@string/power_off_verify_footer"
+            android:selectable="false"
+            android:order="2" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

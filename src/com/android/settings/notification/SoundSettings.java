@@ -137,22 +137,7 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     @Override
     public void onResume() {
         super.onResume();
-        // Apply card layouts to programmatically added preferences
-        final PreferenceScreen screen = getPreferenceScreen();
-        if (screen != null) {
-            // Live Caption - already handled by LiveCaptionPreferenceController.displayPreference()
-            // but ensure it's set in case of rebinding
-            Preference liveCaptionPref = screen.findPreference("live_caption");
-            if (liveCaptionPref != null) {
-                liveCaptionPref.setLayoutResource(R.layout.adaptive_preference_card);
-            }
-            
-            // Now Playing - apply card layout programmatically
-            Preference nowPlayingPref = screen.findPreference("now_playing");
-            if (nowPlayingPref != null) {
-                nowPlayingPref.setLayoutResource(R.layout.adaptive_preference_card);
-            }
-        }
+        // Live Caption and Now Playing are now handled by XML and controllers
     }
 
     @Override
@@ -298,6 +283,7 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
 
         // === Live Caption & Now Playing ===
         controllers.add(new com.android.settings.accessibility.LiveCaptionPreferenceController(context, "live_caption"));
+        controllers.add(new com.android.settings.sound.NowPlayingPreferenceController(context, "now_playing"));
 
         // === Other Sound Settings ===
         final DialPadTonePreferenceController dialPadTonePreferenceController =

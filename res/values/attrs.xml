@@ -82,6 +82,8 @@
             <enum name="prepend" value="0" />
             <enum name="append" value="1" />
         </attr>
+        <!-- Source metrics category for analytics -->
+        <attr name="sourceMetricsCategory" format="integer" />
     </declare-styleable>
 
     <!-- For DotsPageIndicator -->

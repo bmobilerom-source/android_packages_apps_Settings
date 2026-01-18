@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/video_wallpaper_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="video_wallpaper_intro"
+        android:title="@string/video_wallpaper_description" />
+
+    <!-- Current Wallpaper Status -->
+    <PreferenceCategory android:title="@string/video_wallpaper_current_title">
+        <Preference
+            android:key="current_wallpaper_status"
+            android:title="@string/video_wallpaper_current_title"
+            android:summary="@string/video_wallpaper_current_none"
+            android:selectable="false" />
+    </PreferenceCategory>
+
+    <!-- Wallpaper Selection -->
+    <PreferenceCategory android:title="@string/video_wallpaper_category_title">
+        <Preference
+            android:key="pick_wallpaper"
+            android:title="@string/video_wallpaper_pick_title"
+            android:summary="@string/video_wallpaper_pick_summary" />
+
+        <SwitchPreferenceCompat
+            android:key="enable_wallpaper"
+            android:title="@string/video_wallpaper_enable_title"
+            android:summary="@string/video_wallpaper_enable_summary"
+            android:defaultValue="false" />
+
+        <Preference
+            android:key="clear_wallpaper"
+            android:title="@string/video_wallpaper_clear_title"
+            android:summary="@string/video_wallpaper_clear_summary" />
+    </PreferenceCategory>
+
+    <!-- Playback Settings -->
+    <PreferenceCategory android:title="@string/video_wallpaper_playback">
+        <SwitchPreferenceCompat
+            android:key="pause_on_lock"
+            android:title="@string/video_wallpaper_pause_lock"
+            android:summary="@string/video_wallpaper_pause_lock_summary"
+            android:defaultValue="true" />
+
+        <ListPreference
+            android:key="playback_speed"
+            android:title="@string/video_wallpaper_speed"
+            android:entries="@array/playback_speed_entries"
+            android:entryValues="@array/playback_speed_values"
+            android:defaultValue="1.0" />
+    </PreferenceCategory>
+
+    <!-- Information -->
+    <PreferenceCategory android:title="@string/video_wallpaper_info_category_title">
+        <Preference
+            android:key="supported_formats"
+            android:title="@string/video_wallpaper_info_title"
+            android:summary="@string/video_wallpaper_info_summary"
+            android:selectable="false" />
+
+        <Preference
+            android:key="tips"
+            android:title="@string/video_wallpaper_tips_title"
+            android:summary="@string/video_wallpaper_tips_summary"
+            android:selectable="false" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

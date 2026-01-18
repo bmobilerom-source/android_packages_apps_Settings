@@ -68,7 +68,9 @@ public class BalanceSeekBarPreference extends SeekBarPreference {
         super.onBindViewHolder(view);
         mSeekBar = (BalanceSeekBar) view.findViewById(com.android.internal.R.id.seekbar);
         mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
-        init();
+        if (mSeekBar != null) {
+            init();
+        }
     }
 
     private void init() {

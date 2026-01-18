@@ -23,18 +23,27 @@
         android:title="@string/max_music_volume_title"
         android:max="100"
         android:defaultValue="15"
-        android:min="15" />
+        settings:min="15"
+        settings:interval="5"
+        settings:units="@string/steps_unit"
+        android:layout="@layout/adaptive_volume_card_progress_top" />
 
-    <SeekBarPreference
+    <com.android.settings.widget.SeekBarPreference
         android:key="max_call_volume"
         android:title="@string/max_call_volume_title"
         android:max="30"
-        android:min="5" />
+        settings:min="5"
+        settings:interval="1"
+        settings:units="@string/steps_unit"
+        android:layout="@layout/adaptive_volume_card_progress_middle" />
 
-    <SeekBarPreference
+    <com.android.settings.widget.SeekBarPreference
         android:key="max_alarm_volume"
         android:title="@string/max_alarm_volume_title"
         android:max="30"
-        android:min="7" />
+        settings:min="7"
+        settings:interval="1"
+        settings:units="@string/steps_unit"
+        android:layout="@layout/adaptive_volume_card_progress_bottom" />
 
 </PreferenceScreen>

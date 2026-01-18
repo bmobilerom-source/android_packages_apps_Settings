@@ -108,15 +108,33 @@ public class NetworkInternetCardView extends LinearLayout {
     /**
      * Launch Data Saver Settings (DataSaverSummary)
      * Changed from Calls and SMS Settings to Data Saver page
+     * Uses proper intent action to ensure Data Saver opens correctly
      */
     private void launchCallsSmsSettings() {
         try {
-            new SubSettingLauncher(getContext())
-                    .setDestination(DataSaverSummary.class.getName())
-                    .setSourceMetricsCategory(0)
-                    .launch();
+            // Use the proper intent action for Data Saver settings
+            Intent intent = new Intent(android.provider.Settings.ACTION_DATA_SAVER_SETTINGS);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(intent);
         } catch (Exception e) {
-            Log.e(TAG, "Failed to launch Data Saver Settings", e);
+            Log.e(TAG, "Failed to launch Data Saver Settings with intent action", e);
+            // Fallback: try direct activity launch
+            try {
+                Intent intent = new Intent(getContext(), com.android.settings.Settings.DataSaverSummaryActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(intent);
+            } catch (Exception e2) {
+                Log.e(TAG, "Failed to launch Data Saver Settings with direct activity", e2);
+                // Final fallback: try fragment launcher
+                try {
+                    new SubSettingLauncher(getContext())
+                            .setDestination(DataSaverSummary.class.getName())
+                            .setSourceMetricsCategory(0)
+                            .launch();
+                } catch (Exception e3) {
+                    Log.e(TAG, "All Data Saver launch methods failed", e3);
+                }
+            }
         }
     }
 

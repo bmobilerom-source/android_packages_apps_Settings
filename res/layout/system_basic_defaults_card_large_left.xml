@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="?android:attr/textColorPrimary"
             android:gravity="center" />
     </LinearLayout>
 </LinearLayout>

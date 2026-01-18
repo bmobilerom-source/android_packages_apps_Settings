@@ -95,7 +95,6 @@
 
     <com.android.settingslib.widget.FooterPreference
         android:key="battery_info_footer"
-        settings:isPreferenceVisible="false"
         android:title="@string/battery_cycle_count_footer"
         android:selectable="false"
         settings:isPreferenceVisible="false"

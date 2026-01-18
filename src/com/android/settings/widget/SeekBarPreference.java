@@ -132,52 +132,54 @@ public class SeekBarPreference extends RestrictedPreference
         view.itemView.setOnHoverListener(this);
         mSeekBar = (SeekBar) view.findViewById(
                 com.android.internal.R.id.seekbar);
-        mSeekBar.setOnSeekBarChangeListener(this);
-        mSeekBar.setMax(mMax);
-        mSeekBar.setMin(mMin);
-        mSeekBar.setProgress(mProgress);
-        mSeekBar.setEnabled(isEnabled());
-        final CharSequence title = getTitle();
-        if (!TextUtils.isEmpty(mSeekBarContentDescription)) {
-            mSeekBar.setContentDescription(mSeekBarContentDescription);
-        } else if (!TextUtils.isEmpty(title)) {
-            mSeekBar.setContentDescription(title);
-        }
-        if (!TextUtils.isEmpty(mSeekBarStateDescription)) {
-            mSeekBar.setStateDescription(mSeekBarStateDescription);
-        }
-        if (mSeekBar instanceof DefaultIndicatorSeekBar) {
-            ((DefaultIndicatorSeekBar) mSeekBar).setDefaultProgress(mDefaultProgress);
-        }
-        if (mShouldBlink) {
-            View v = view.itemView;
-            v.post(() -> {
-                if (v.getBackground() != null) {
-                    final int centerX = v.getWidth() / 2;
-                    final int centerY = v.getHeight() / 2;
-                    v.getBackground().setHotspot(centerX, centerY);
+        if (mSeekBar != null) {
+            mSeekBar.setOnSeekBarChangeListener(this);
+            mSeekBar.setMax(mMax);
+            mSeekBar.setMin(mMin);
+            mSeekBar.setProgress(mProgress);
+            mSeekBar.setEnabled(isEnabled());
+            final CharSequence title = getTitle();
+            if (!TextUtils.isEmpty(mSeekBarContentDescription)) {
+                mSeekBar.setContentDescription(mSeekBarContentDescription);
+            } else if (!TextUtils.isEmpty(title)) {
+                mSeekBar.setContentDescription(title);
+            }
+            if (!TextUtils.isEmpty(mSeekBarStateDescription)) {
+                mSeekBar.setStateDescription(mSeekBarStateDescription);
+            }
+            if (mSeekBar instanceof DefaultIndicatorSeekBar) {
+                ((DefaultIndicatorSeekBar) mSeekBar).setDefaultProgress(mDefaultProgress);
+            }
+            if (mShouldBlink) {
+                View v = view.itemView;
+                v.post(() -> {
+                    if (v.getBackground() != null) {
+                        final int centerX = v.getWidth() / 2;
+                        final int centerY = v.getHeight() / 2;
+                        v.getBackground().setHotspot(centerX, centerY);
+                    }
+                    v.setPressed(true);
+                    v.setPressed(false);
+                    mShouldBlink = false;
+                });
+            }
+            mSeekBar.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+                @Override
+                public void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo info) {
+                    super.onInitializeAccessibilityNodeInfo(view, info);
+                    // Update the range info with the correct type
+                    AccessibilityNodeInfo.RangeInfo rangeInfo = info.getRangeInfo();
+                    if (rangeInfo != null) {
+                        info.setRangeInfo(AccessibilityNodeInfo.RangeInfo.obtain(
+                                        mAccessibilityRangeInfoType, rangeInfo.getMin(),
+                                        rangeInfo.getMax(), rangeInfo.getCurrent()));
+                    }
+                    if (mOverrideSeekBarStateDescription != null) {
+                        info.setStateDescription(mOverrideSeekBarStateDescription);
+                    }
                 }
-                v.setPressed(true);
-                v.setPressed(false);
-                mShouldBlink = false;
             });
         }
-        mSeekBar.setAccessibilityDelegate(new View.AccessibilityDelegate() {
-            @Override
-            public void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo info) {
-                super.onInitializeAccessibilityNodeInfo(view, info);
-                // Update the range info with the correct type
-                AccessibilityNodeInfo.RangeInfo rangeInfo = info.getRangeInfo();
-                if (rangeInfo != null) {
-                    info.setRangeInfo(AccessibilityNodeInfo.RangeInfo.obtain(
-                                    mAccessibilityRangeInfoType, rangeInfo.getMin(),
-                                    rangeInfo.getMax(), rangeInfo.getCurrent()));
-                }
-                if (mOverrideSeekBarStateDescription != null) {
-                    info.setStateDescription(mOverrideSeekBarStateDescription);
-                }
-            }
-        });
     }
 
     @Override

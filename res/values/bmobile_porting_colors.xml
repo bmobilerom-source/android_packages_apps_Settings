@@ -35,6 +35,6 @@
     <color name="bmobile_text_color_secondary">?android:attr/textColorSecondary</color>
     <color name="bmobile_card_bg">?android:attr/colorBackgroundFloating</color>
     <color name="bmobile_card_stroke">#26000000</color>
-    <color name="usercardbg">@*android:color/system_accent2_600</color>
+    <color name="usercardbg">?android:attr/colorPrimary</color>
 </resources>
 

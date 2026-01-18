@@ -23,6 +23,7 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="auto_reboot_illustration"
         android:order="-1001"
+        android:summary="@string/empty_summary"
         app:lottie_rawRes="@raw/system" />
 
 
@@ -30,6 +31,7 @@
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="auto_reboot_main_switch"
         android:title="@string/auto_reboot_title"
+        android:summary="@string/empty_summary"
         android:order="-1000"
         settings:controller="com.epic.fragments.AutoRebootMainSwitchController" />
 
@@ -48,6 +50,7 @@
     <com.android.settingslib.widget.FooterPreference
         android:key="auto_reboot_footer"
         android:title="@string/auto_reboot_footer"
+        android:summary="@string/empty_summary"
         android:selectable="false"
         android:order="999"
         settings:searchable="false" />

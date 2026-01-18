@@ -44,7 +44,12 @@ public class AutoRebootIntervalController extends BasePreferenceController
     @Override
     public String getSummary() {
         long intervalMs = PrivacySecurityHelper.getAutoRebootInterval(mContext);
-        return formatInterval(intervalMs);
+        if (intervalMs <= 0) {
+            // Return default summary if interval is invalid
+            return mContext.getString(R.string.auto_reboot_interval_summary);
+        }
+        String summary = formatInterval(intervalMs);
+        return summary != null ? summary : mContext.getString(R.string.auto_reboot_interval_summary);
     }
 
     @Override
@@ -75,7 +80,12 @@ public class AutoRebootIntervalController extends BasePreferenceController
             }
             
             listPreference.setValue(value);
-            listPreference.setSummary(formatInterval(intervalMs));
+            String summary = formatInterval(intervalMs);
+            if (summary != null && !summary.isEmpty()) {
+                listPreference.setSummary(summary);
+            } else {
+                listPreference.setSummary(mContext.getString(R.string.auto_reboot_interval_summary));
+            }
             
             // Enable/disable based on auto reboot toggle
             boolean autoRebootEnabled = PrivacySecurityHelper.isAutoRebootEnabled(mContext);
@@ -160,7 +170,12 @@ public class AutoRebootIntervalController extends BasePreferenceController
                 if (mPreference != null) {
                     String valueStr = String.valueOf(mPendingIntervalMs);
                     mPreference.setValue(valueStr);
-                    mPreference.setSummary(formatInterval(mPendingIntervalMs));
+                    String summary = formatInterval(mPendingIntervalMs);
+                    if (summary != null && !summary.isEmpty()) {
+                        mPreference.setSummary(summary);
+                    } else {
+                        mPreference.setSummary(mContext.getString(R.string.auto_reboot_interval_summary));
+                    }
                 }
                 
                 android.util.Log.d("AutoRebootIntervalController", 
@@ -203,6 +218,10 @@ public class AutoRebootIntervalController extends BasePreferenceController
     }
 
     private String formatInterval(long intervalMs) {
+        if (intervalMs <= 0) {
+            return mContext.getString(R.string.auto_reboot_interval_summary);
+        }
+        
         long hours = intervalMs / (60 * 60 * 1000);
         long days = hours / 24;
         
@@ -220,6 +239,9 @@ public class AutoRebootIntervalController extends BasePreferenceController
             }
         } else {
             long minutes = intervalMs / (60 * 1000);
+            if (minutes <= 0) {
+                minutes = 1; // Minimum 1 minute
+            }
             return mContext.getString(R.string.auto_reboot_interval_minutes, minutes);
         }
     }

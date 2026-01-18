@@ -43,4 +43,17 @@
         android:order="-91"
         android:fragment="com.android.settings.sound.HapticsPreferenceFragment"/>
 
+    <!-- Homepage Widgets -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="extras_homepage_widgets"
+        android:selectable="false"
+        android:layout="@layout/homepage_widgets"
+        android:order="-200" />
+  
+    <!-- Homepage Widgets -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="extras_homepage_widgets"
+        android:selectable="false"
+        android:layout="@layout/extended_homepage_widgets"
+        android:order="-200" />
 </PreferenceScreen>
