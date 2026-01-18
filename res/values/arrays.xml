@@ -1662,4 +1662,46 @@
         <item>samsungone</item>
         <item>slim</item>
     </string-array>
+
+    <string-array name="playback_speed_entries">
+        <item>0.25x (Very slow)</item>
+        <item>0.5x (Slow)</item>
+        <item>0.75x (Slightly slow)</item>
+        <item>1.0x (Normal)</item>
+        <item>1.25x (Slightly fast)</item>
+        <item>1.5x (Fast)</item>
+        <item>2.0x (Very fast)</item>
+    </string-array>
+
+    <string-array name="playback_speed_values" translatable="false">
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>0.75</item>
+        <item>1.0</item>
+        <item>1.25</item>
+        <item>1.5</item>
+        <item>2.0</item>
+    </string-array>
+    <!-- WiFi timeout arrays -->
+    <string-array name="custom_timeout_entries">
+        <item>@string/wifi_timeout_disabled</item>
+        <item>@string/wifi_timeout_5_min</item>
+        <item>@string/wifi_timeout_10_min</item>
+        <item>@string/wifi_timeout_15_min</item>
+        <item>@string/wifi_timeout_30_min</item>
+        <item>@string/wifi_timeout_1_hour</item>
+        <item>@string/wifi_timeout_4_hours</item>
+        <item>@string/wifi_timeout_8_hours</item>
+    </string-array>
+    <string-array name="custom_timeout_values">
+        <item>0</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>900000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>14400000</item>
+        <item>28800000</item>
+    </string-array>
+
 </resources>

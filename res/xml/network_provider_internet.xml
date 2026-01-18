@@ -128,6 +128,13 @@
         settings:isPreferenceVisible="false"
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
 
+    <ListPreference
+        android:key="wifi_timeout"
+        android:title="@string/wifi_timeout"
+        android:summary="@string/wifi_timeout_summary"
+        android:entries="@array/custom_timeout_entries"
+        android:entryValues="@array/custom_timeout_values"
+        settings:controller="com.android.settings.wifi.WifiTimeoutPreferenceController"/>
     <Preference
         android:key="cellular_security_network_internet"
         android:title="@string/cellular_security_title"
