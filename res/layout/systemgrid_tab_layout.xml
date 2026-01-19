@@ -35,6 +35,6 @@
         app:tabMaxWidth="0.0dip"
         app:tabMode="fixed"
         app:tabRippleColor="@null"
-        app:tabTextAppearance="@style/TextAppearance.Material3.TitleSmall"
+        app:tabTextAppearance="?android:attr/textAppearanceListItem"
         app:tabTextColor="@color/settingslib_tabs_text_color" />
 </LinearLayout>

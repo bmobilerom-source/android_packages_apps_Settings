@@ -262,5 +262,36 @@
     <string name="default_home_summary">Choose your default home launcher</string>
     <string name="default_autofill_summary">Choose your default autofill service</string>
     <string name="default_emergency_summary">Choose your default emergency app</string>
+
+    <!-- WiFi Timeout Strings -->
+    <string name="wifi_timeout_disabled">Never</string>
+    <string name="wifi_timeout_5_min">5 minutes</string>
+    <string name="wifi_timeout_10_min">10 minutes</string>
+    <string name="wifi_timeout_15_min">15 minutes</string>
+    <string name="wifi_timeout_30_min">30 minutes</string>
+    <string name="wifi_timeout_1_hour">1 hour</string>
+    <string name="wifi_timeout_4_hours">4 hours</string>
+    <string name="wifi_timeout_8_hours">8 hours</string>
+
+    <!-- Font Family Strings -->
+    <string name="font_family_default">Default</string>
+    <string name="font_family_accuratist">Accuratist</string>
+    <string name="font_family_hercules">Hercules</string>
+    <string name="font_family_ios">iOS</string>
+    <string name="font_family_nothing">Nothing</string>
+    <string name="font_family_oneplus">OnePlus</string>
+    <string name="font_family_sanfranciscopro">San Francisco Pro</string>
+    <string name="font_family_samsungone">Samsung One</string>
+    <string name="font_family_slim">Slim</string>
+
+    <!-- Missing Strings -->
+    <string name="accessibility_next_button">Next</string>
+    <string name="system_grid_gesture_summary">Configure gesture navigation and shortcuts</string>
+    <string name="system_grid_navigation_summary">Choose navigation method and customize</string>
+    <string name="system_grid_power_usage_summary">Monitor battery usage and performance</string>
+    <string name="system_grid_statusbar_summary">Customize status bar appearance and icons</string>
+    <string name="system_grid_backup_transport_summary">Manage backup and restore settings</string>
+    <string name="system_grid_emergency_summary">Emergency contacts and information</string>
+    <string name="empty_summary" translatable="false"></string>
 </resources>
 

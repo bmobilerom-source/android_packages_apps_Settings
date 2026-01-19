@@ -22,13 +22,13 @@ import com.android.settings.core.SubSettingLauncher;
 
 import java.util.List;
 
-class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
-    static class CardItem {
+public class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
+    public static class CardItem {
         final int iconResId;
         final int titleResId;
         final int summaryResId;
         final String destFragment;
-        CardItem(int iconResId, int titleResId, int summaryResId, String destFragment) {
+        public CardItem(int iconResId, int titleResId, int summaryResId, String destFragment) {
             this.iconResId = iconResId;
             this.titleResId = titleResId;
             this.summaryResId = summaryResId;
@@ -36,7 +36,7 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
         }
     }
 
-    static class CardVH extends RecyclerView.ViewHolder {
+    public static class CardVH extends RecyclerView.ViewHolder {
         final ImageView iconView;
         final TextView titleView;
         final TextView summaryView;
@@ -52,7 +52,7 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
     private final List<CardItem> items;
     private final int sourceMetrics;
 
-    SystemGridAdapter(Context context, List<CardItem> items, int sourceMetrics) {
+    public SystemGridAdapter(Context context, List<CardItem> items, int sourceMetrics) {
         this.context = context;
         this.items = items;
         this.sourceMetrics = sourceMetrics;
@@ -217,5 +217,11 @@ class SystemGridAdapter extends RecyclerView.Adapter<SystemGridAdapter.CardVH> {
 
     @Override
     public int getItemCount() { return items.size(); }
+
+    private int getSafeMetrics() {
+        return sourceMetrics > 0
+                ? sourceMetrics
+                : com.android.internal.logging.nano.MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
+    }
 }
 

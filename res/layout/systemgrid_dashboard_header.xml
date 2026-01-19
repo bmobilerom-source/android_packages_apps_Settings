@@ -26,12 +26,10 @@
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="26.0dip"
         app:cardElevation="0.0dip">
-        <com.afterlife.preferences.WallpaperBlurView
-            android:gravity="center"
-            android:orientation="vertical"
+        <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:foreground="@drawable/systemgrid_card_header"
+            android:src="@drawable/systemgrid_card_header"
             android:scaleType="centerCrop"
             android:elevation="0.0dip"/>
         <LinearLayout
@@ -49,37 +47,31 @@
                 android:tint="@android:color/white"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"/>
-            <declan.prjct.settings.widget.UserName
-                android:gravity="center"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@android:id/icon"
-                android:layout_centerHorizontal="true">
+                android:gravity="center">
                 <TextView
                     android:textAppearance="?android:textAppearanceListItem"
                     android:textColor="@android:color/white"
                     android:ellipsize="marquee"
                     android:gravity="center"
-                    android:layout_gravity="center_horizontal"
                     android:id="@android:id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:layout_centerHorizontal="true"
-                    android:textAlignment="inherit"/>
+                    android:textAlignment="center"/>
                 <TextView
                     android:textAppearance="?android:textAppearanceListItemSecondary"
                     android:textColor="@android:color/white"
                     android:gravity="center"
-                    android:layout_gravity="center_horizontal"
                     android:id="@android:id/summary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@android:id/title"
-                    android:layout_centerHorizontal="true"
-                    android:textAlignment="inherit"/>
-            </declan.prjct.settings.widget.UserName>
+                    android:textAlignment="center"/>
+            </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

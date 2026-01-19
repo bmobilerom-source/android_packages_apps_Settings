@@ -36,6 +36,14 @@
         android:summary="@string/show_navbar_hint_summary"
         android:defaultValue="true" />
 
+    <!-- TapTap Settings -->
+    <Preference
+        android:key="system_settings_taptap"
+        android:title="@string/taptap_title"
+        android:summary="@string/taptap_summary"
+        android:fragment="com.epic.fragments.TapTapSettings"
+        settings:layout="@layout/system_features_preference_card"/>
+
     <PreferenceCategory
         android:key="assistant_gesture_category"
         android:persistent="false"
@@ -59,7 +67,7 @@
             android:key="gesture_left_back_sensitivity"
             android:title="@string/left_edge"
             android:max="2"
-            android:layout="@layout/adaptive_labeled_seekbar_card_progress"
+            settings:layout="@layout/adaptive_labeled_seekbar_card_progress"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
 
@@ -67,7 +75,7 @@
             android:key="gesture_right_back_sensitivity"
             android:title="@string/right_edge"
             android:max="2"
-            android:layout="@layout/adaptive_labeled_seekbar_card_progress"
+            settings:layout="@layout/adaptive_labeled_seekbar_card_progress"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
     </PreferenceCategory>
