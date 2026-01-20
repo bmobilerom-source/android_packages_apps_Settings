@@ -1,4 +1,8 @@
 <resources>
+    <!-- System Grid Title and Summary -->
+    <string name="system_grid_title">System Grid</string>
+    <string name="system_grid_summary">Access essential system settings and tools</string>
+
     <!-- Gesture Settings -->
     <string name="system_grid_gesture_summary">Configure touch gestures and shortcuts</string>
     

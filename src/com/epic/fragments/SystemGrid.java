@@ -54,11 +54,12 @@ public class SystemGrid extends SettingsPreferenceFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.anatolia_settings_system_grid);
-        }
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
         PreferenceScreen screen = getPreferenceScreen();
         androidx.preference.Preference layoutPref = screen.findPreference("system_grid");
         if (layoutPref instanceof com.android.settingslib.widget.LayoutPreference) {

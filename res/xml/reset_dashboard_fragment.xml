@@ -93,7 +93,7 @@
             android:key="erase_euicc_data"
             android:title="@string/reset_esim_title"
             android:order="20"
-            settings:layout="@layout/system_preference_independant"
+            settings:layout="@layout/adaptive_preference_card"
             settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:controller="com.android.settings.network.EraseEuiccDataController" />
 
@@ -102,7 +102,7 @@
             android:key="reset_delete_private_space"
             android:title="@string/reset_private_space_delete_title"
             android:order="21"
-            settings:layout="@layout/system_preference_independant"
+            settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.android.settings.privatespace.delete.ResetOptionsDeletePrivateSpaceController" />
 
         <!-- Factory reset demo user -->
@@ -110,7 +110,7 @@
             android:key="factory_reset_demo_user"
             android:title="@string/main_clear_title"
             android:order="22"
-            settings:layout="@layout/system_preference_independant"
+            settings:layout="@layout/adaptive_preference_card"
             settings:keywords="@string/keywords_factory_data_reset"
             settings:controller="com.android.settings.system.FactoryResetDemoUserPreferenceController"
             android:fragment="com.android.settings.MainClear" />
@@ -119,7 +119,7 @@
         <Preference
             android:key="remove_items"
             android:title="File Deletion"
-            settings:layout="@layout/system_preference_independant"
+        settings:layout="@layout/adaptive_preference_card"
             android:summary="Delete unnecessary files and free up space"
             android:order="23">
             <intent
