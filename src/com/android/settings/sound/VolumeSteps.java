@@ -60,7 +60,7 @@ public class VolumeSteps extends SettingsPreferenceFragment implements
             final int value = Settings.System.getIntForUser(resolver, key, def, UserHandle.USER_CURRENT);
             SeekBarPreference sbPref = (SeekBarPreference) pref;
             sbPref.setDefaultValue(def);
-            sbPref.setValue(value);
+            sbPref.setProgress(value);
             sbPref.setOnPreferenceChangeListener(this);
         }
     }
@@ -76,7 +76,7 @@ public class VolumeSteps extends SettingsPreferenceFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.LUNARIS;
+        return MetricsEvent.CUSTOM_SETTINGS;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
