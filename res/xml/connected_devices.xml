@@ -139,7 +139,6 @@
         android:title="@string/status_bar_bluetooth_battery_title"
         android:summary="@string/status_bar_bluetooth_battery_summary"
         android:defaultValue="true"
-        app:position="solo"
         settings:allowDividerAbove="true" />
 
 </PreferenceScreen>
