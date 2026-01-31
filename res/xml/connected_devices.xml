@@ -117,7 +117,7 @@
         settings:controller="com.android.settings.bshare.BSharePreferenceController"
         settings:allowDividerAbove="false" />
     <!-- Bluetooth Timeout -->
-    <com.android.settingslib.ListPreference
+    <ListPreference
         android:key="bluetooth_timeout"
         android:title="@string/bluetooth_timeout"
         android:entries="@array/bluetooth_timeout_entries"

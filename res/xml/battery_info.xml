@@ -98,6 +98,5 @@
         settings:isPreferenceVisible="false"
         android:title="@string/battery_cycle_count_footer"
         android:selectable="false"
-        settings:isPreferenceVisible="false"
         settings:searchable="false" />
 </PreferenceScreen>

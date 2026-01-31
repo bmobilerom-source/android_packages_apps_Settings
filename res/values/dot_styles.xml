@@ -6,28 +6,45 @@
         <attr name="extra_title" format="string"/>
     </declare-styleable>
 
-       <!-- Basic text style used by main user profile card -->
-    <style name="mtx_text_style_h6">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/mtx_text_color_primary</item>
+    <style name="DotPreferenceFullCard">
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:background">@drawable/dot_pref_full</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
-    <!-- custom Action Bar -->
-    <style name="custom_toolbar.Expanded" parent="custom_toolbar.Collapsed">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:layout_marginBottom">@dimen/homepage_title_margin_bottom</item>
-        <item name="android:layout_marginStart">@dimen/homepage_title_margin_horizontal</item>
-        <item name="android:layout_marginEnd">75dp</item>
-        <item name="android:textSize">38dp</item>
-        <item name="android:textColor">?android:attr/colorAccent</item>
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
+    <style name="DotPreferenceTopCard">
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:background">@drawable/dot_pref_top</item>
+        <item name="android:clipToPadding">false</item>
     </style>
-    <style name="custom_toolbar.Collapsed" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
-        <item name="android:fontFamily">@string/settingslib_config_headlineFontFamily</item>
-        <item name="android:textSize">20dp</item>
-        <item name="android:textColor">@color/settingslib_text_color_primary_device_default</item>
-    </style> 
-</resources>
+
+    <style name="DotPreferenceMiddleCard">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:background">@drawable/dot_pref_middle</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="DotPreferenceBottomCard">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:background">@drawable/dot_pref_bottom</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="ToolbarText.Collapsed" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title"/>
+
+    <style name="ToolbarText.Expanded" parent="ToolbarText.Collapsed">
+        <item name="android:textSize">34sp</item>
+    </style>
+</resources>  

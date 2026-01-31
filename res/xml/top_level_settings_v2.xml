@@ -26,6 +26,12 @@
         android:key="top_level_mainuser_profile_card"
         android:selectable="true"
         android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+        android:order="-300" />
+    <!-- Homepage Widgets -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="extras_homepage_widgets"
+        android:selectable="false"
+        android:layout="@layout/homepage_widgets"
         android:order="-200" />
 
     <PreferenceCategory

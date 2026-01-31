@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -30,8 +31,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-
-import com.android.settings.widget.SeekBarPreference;
 
 /**
  * volume steps settings under sound
@@ -53,24 +52,45 @@ public class VolumeSteps extends SettingsPreferenceFragment implements
         final int count = screen.getPreferenceCount();
         for (int i = 0; i < count; i++) {
             Preference pref = screen.getPreference(i);
-            if (!(pref instanceof SeekBarPreference))
+            if (!(pref instanceof ListPreference))
                 continue;
             String key = pref.getKey();
-            final int def = Settings.System.getIntForUser(resolver, "default_" + key, 15, UserHandle.USER_CURRENT);
+            final int def = Settings.System.getIntForUser(resolver, "default_" + key, getDefaultValue(key), UserHandle.USER_CURRENT);
             final int value = Settings.System.getIntForUser(resolver, key, def, UserHandle.USER_CURRENT);
-            SeekBarPreference sbPref = (SeekBarPreference) pref;
-            sbPref.setDefaultValue(def);
-            sbPref.setProgress(value);
-            sbPref.setOnPreferenceChangeListener(this);
+            ListPreference listPref = (ListPreference) pref;
+            listPref.setValue(String.valueOf(value));
+            listPref.setSummary(String.valueOf(value));
+            listPref.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    private int getDefaultValue(String key) {
+        switch (key) {
+            case "max_music_volume":
+                return 15;
+            case "max_call_volume":
+                return 7;
+            case "max_alarm_volume":
+                return 7;
+            default:
+                return 15;
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (!(preference instanceof SeekBarPreference))
+        if (!(preference instanceof ListPreference))
             return false;
+
+        String valueStr = (String) newValue;
+        int value = Integer.parseInt(valueStr);
+
         Settings.System.putIntForUser(getActivity().getContentResolver(),
-                preference.getKey(), (Integer) newValue, UserHandle.USER_CURRENT);
+                preference.getKey(), value, UserHandle.USER_CURRENT);
+
+        // Update summary
+        preference.setSummary(valueStr);
+
         return true;
     }
 

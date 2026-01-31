@@ -44,13 +44,5 @@
         android:order="0"
         settings:controller="com.epic.fragments.AutoRebootIntervalController" />
 
-    <!-- Footer -->
-    <com.android.settingslib.widget.FooterPreference
-        android:key="auto_reboot_footer"
-        android:title="@string/auto_reboot_footer"
-        android:selectable="false"
-        android:order="999"
-        settings:searchable="false" />
-
 </PreferenceScreen>
 

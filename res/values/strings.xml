@@ -44,6 +44,9 @@
     <!-- [CHAR LIMIT=NONE] Toast message when user attempts to launch developer options before enabling it. -->
     <string name="dev_settings_disabled_warning">Please enable developer options first.</string>
 
+    <!-- Generic enable string -->
+    <string name="enable">Enable</string>
+
     <!-- [CHAR LIMIT=NONE] Toast message when non-admin user attempts to launch developer options. -->
     <string name="dev_settings_available_to_admin_only_warning">Only the admin users can access developer settings.</string>
 
@@ -13921,4 +13924,66 @@
 
     <!-- Device Name Dialog -->
     <string name="about_device_nearby">Nearby devices</string>
+
+    <!-- Adaptive Playback Settings -->
+    <string name="adaptive_playback_timeout_title">Timeout</string>
+    <string name="unit_seconds">seconds</string>
+
+    <!-- Font Settings -->
+    <string name="font_settings_title">Font</string>
+    <string name="font_family_title">Font family</string>
+    <string name="font_family_summary">Change system font</string>
+
+    <!-- Media Controls -->
+    <string name="media_controls_bubbles_description">Show media controls as bubbles for quick access</string>
+
+    <!-- System/Skyline UI -->
+    <string name="system_summary">System settings and information</string>
+    <string name="category_system_title">System</string>
+    <string name="category_buttons_title">Buttons</string>
+
+    <!-- Media Controls -->
+    <string name="media_controls_bubbles_description2">Bubbles appear when media is playing and can be customized</string>
+    <string name="media_controls_bubbles_description3">Long press bubbles for more playback options</string>
+    <string name="ambient_music_info_title">Ambient Music Visualizer</string>
+    <string name="ambient_music_info_summary">Real-time audio visualizations on AOD with multiple modes</string>
+
+    <!-- WiFi Timeout -->
+    <string name="wifi_timeout">Turn off Wi‑Fi when idle</string>
+    <string name="wifi_timeout_summary">Never</string>
+    <string name="wifi_timeout_summary_auto">After %1$s</string>
+
+    <!-- Install App Whitelist -->
+    <string name="appsec_install_whitelist_title">Install App Whitelist</string>
+    <string name="appsec_install_whitelist_summary">Only allow Aurora Store and Google Play Store to install apps</string>
+
+    <!-- TTS Settings -->
+    <string name="tts_settings_title">Text-to-speech</string>
+    <string name="tts_default_lang_title">Language</string>
+    <string name="tts_default_lang_summary">Choose the language for text-to-speech output</string>
+
+    <!-- Volume Steps -->
+    <string name="volume_steps_title">Volume Steps</string>
+    <string name="volume_steps_summary">Adjust maximum volume levels for different audio streams</string>
+    <string name="max_music_volume_title">Maximum Music Volume</string>
+    <string name="max_call_volume_title">Maximum Call Volume</string>
+    <string name="max_alarm_volume_title">Maximum Alarm Volume</string>
+
+    <!-- Bluetooth Pairing -->
+    <string name="bluetooth_pairing_confirmation_title">Pair with this device?</string>
+    <string name="bluetooth_pairing_confirmation_msg">Confirm pairing with %1$s</string>
+
+    <!-- Biometric Timeout -->
+    <string name="biometric_timeout_summary_on">Biometric authentication timeout is enabled</string>
+    <string name="biometric_timeout_summary_off">Biometric authentication timeout is disabled</string>
+
+    <!-- Auto Reboot -->
+    <string name="auto_reboot_title">Auto Reboot</string>
+    <string name="auto_reboot_summary">Automatically reboot device at scheduled intervals</string>
+    <string name="auto_reboot_interval_title">Reboot Interval</string>
+    <string name="auto_reboot_interval_summary">Set how often the device should reboot automatically</string>
+    <string name="auto_reboot_interval_one_hour">1 hour</string>
+    <string name="auto_reboot_interval_hours">%d hours</string>
+    <string name="auto_reboot_interval_one_day">1 day</string>
+    <string name="auto_reboot_interval_days">%d days</string>
 </resources>

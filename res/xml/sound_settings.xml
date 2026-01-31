@@ -51,7 +51,8 @@
         android:key="media_output"
         android:title="@string/media_output_title"
         android:dialogTitle="@string/media_output_title"
-        android:order="-175"
+        android:order="-133"
+        settings:layout="@layout/adaptive_preference_card"
         settings:searchable="false"
         settings:controller="com.android.settings.sound.MediaOutputPreferenceController"/>
 
@@ -111,6 +112,7 @@
         android:key="volume_steps"
         android:title="@string/volume_steps_title"
         android:summary="@string/volume_steps_summary"
+        settings:layout="@layout/adaptive_preference_card"
         android:fragment="com.android.settings.sound.VolumeSteps"
         android:order="-135"/>
 
@@ -225,6 +227,7 @@
     <lineageos.preference.LineagePartsPreference
         android:key="charging_sounds_settings"
         settings:replacesKey="charging_sounds"
+        settings:layout="@layout/adaptive_preference_card"
         settings:requiresConfig="@bool/config_show_charging_sounds" />
 
     <!-- Docking sounds -->

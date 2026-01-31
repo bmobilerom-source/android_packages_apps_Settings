@@ -14,27 +14,56 @@
      limitations under the License.
 -->
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+ xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/volume_steps_title">
 
-    <SeekBarPreference
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="sounds"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/mediaplayer"/>
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="media_controls_bubbles_desc"
+        android:order="-996"
+        android:title="@string/media_controls_bubbles_description" />    
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="media_controls_bubbles_desc2"
+        android:order="-995"
+        android:title="@string/media_controls_bubbles_description2" />
+
+    <ListPreference
         android:key="max_music_volume"
         android:title="@string/max_music_volume_title"
-        android:max="100"
+        android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
+        android:entries="@array/volume_steps_music_entries"
+        android:entryValues="@array/volume_steps_music_values"
         android:defaultValue="15"
-        android:min="15" />
+        android:order="0" />
 
-    <SeekBarPreference
+    <ListPreference
         android:key="max_call_volume"
         android:title="@string/max_call_volume_title"
-        android:max="30"
-        android:min="5" />
+        android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
+        android:entries="@array/volume_steps_call_entries"
+        android:entryValues="@array/volume_steps_call_values"
+        android:defaultValue="7"
+        android:order="1" />
 
-    <SeekBarPreference
+    <ListPreference
         android:key="max_alarm_volume"
         android:title="@string/max_alarm_volume_title"
-        android:max="30"
-        android:min="7" />
+        android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card"
+        android:entries="@array/volume_steps_alarm_entries"
+        android:entryValues="@array/volume_steps_alarm_values"
+        android:defaultValue="7"
+        android:order="2" />
 
 </PreferenceScreen>

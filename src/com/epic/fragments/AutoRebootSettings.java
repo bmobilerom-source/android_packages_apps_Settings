@@ -60,26 +60,7 @@ public class AutoRebootSettings extends DashboardFragment {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        
-        if (requestCode == REQUEST_CODE_CONFIRM_CREDENTIAL) {
-            // Handle main switch PIN verification
-            AutoRebootMainSwitchController controller = 
-                    (AutoRebootMainSwitchController) use(AutoRebootMainSwitchController.class);
-            if (controller != null) {
-                controller.handleActivityResult(requestCode, resultCode, data);
-            }
-        } else if (requestCode == REQUEST_CODE_CONFIRM_CREDENTIAL_INTERVAL) {
-            // Handle interval change PIN verification
-            AutoRebootIntervalController controller = 
-                    (AutoRebootIntervalController) use(AutoRebootIntervalController.class);
-            if (controller != null) {
-                controller.handleActivityResult(requestCode, resultCode, data);
-            }
-        }
-    }
+    // Simplified - removed PIN verification for now to prevent crashes
 
     @Override
     public int getMetricsCategory() {
