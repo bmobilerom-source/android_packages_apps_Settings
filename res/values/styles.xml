@@ -476,6 +476,23 @@
         <item name="rippleColor">?android:attr/colorControlHighlight</item>
     </style>
 
+    <style name="DotPreferenceTopCard">
+        <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
+        <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
+        <item name="android:layout_marginTop">@dimen/contextual_card_vertical_margin</item>
+    </style>
+
+    <style name="DotPreferenceMiddleCard">
+        <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
+        <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
+    </style>
+
+    <style name="DotPreferenceBottomCard">
+        <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
+        <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
+        <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
+    </style>
+
     <style name="SearchBarStyle">
         <item name="android:theme">@style/Theme.MaterialComponents.DayNight</item>
         <item name="cardCornerRadius">@dimen/search_bar_corner_radius</item>

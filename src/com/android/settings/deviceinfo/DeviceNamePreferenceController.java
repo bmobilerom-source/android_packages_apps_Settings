@@ -145,7 +145,10 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         if (update && mPendingDeviceName != null) {
             setDeviceName(mPendingDeviceName);
         } else {
-            setDeviceName(getSummary().toString());
+            CharSequence summary = getSummary();
+            if (summary != null) {
+                setDeviceName(summary.toString());
+            }
         }
     }
 
