@@ -27,14 +27,10 @@
         app:lottie_rawRes="@raw/mediaplayer"/>
 
     <com.android.settingslib.widget.TopIntroPreference
-        android:key="media_controls_bubbles_desc"
+        android:key="media_steps"
         android:order="-996"
-        android:title="@string/media_controls_bubbles_description" />    
-
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="media_controls_bubbles_desc2"
-        android:order="-995"
-        android:title="@string/media_controls_bubbles_description2" />
+        android:title="@string/media_steps_intro"
+        settings:layout="@layout/adaptive_preference_card" />    
 
     <ListPreference
         android:key="max_music_volume"

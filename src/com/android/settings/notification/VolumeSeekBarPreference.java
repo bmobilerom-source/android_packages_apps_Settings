@@ -20,6 +20,7 @@ import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_SLID
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.preference.SeekBarVolumizer;
@@ -71,21 +72,21 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setLayoutResource(R.layout.preference_volume_slider);
+        maybeApplyDefaultLayout(context, attrs);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setLayoutResource(R.layout.preference_volume_slider);
+        maybeApplyDefaultLayout(context, attrs);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(R.layout.preference_volume_slider);
+        maybeApplyDefaultLayout(context, attrs);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
     }
@@ -95,6 +96,24 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         setLayoutResource(R.layout.preference_volume_slider);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mSeekBarVolumizerFactory = new SeekBarVolumizerFactory(context);
+    }
+
+    private void maybeApplyDefaultLayout(Context context, AttributeSet attrs) {
+        if (attrs == null) {
+            setLayoutResource(R.layout.preference_volume_slider);
+            return;
+        }
+        // If XML explicitly specifies a layout (e.g. card layout in sound_settings.xml),
+        // do not override it.
+        TypedArray a = context.obtainStyledAttributes(attrs, new int[] {android.R.attr.layout});
+        int xmlLayoutResId = a.getResourceId(0, 0);
+        a.recycle();
+
+        int currentLayout = getLayoutResource();
+        int parentDefaultLayout = com.android.internal.R.layout.preference_widget_seekbar;
+        if (xmlLayoutResId == 0 && currentLayout == parentDefaultLayout) {
+            setLayoutResource(R.layout.preference_volume_slider);
+        }
     }
 
     public void setStream(int stream) {

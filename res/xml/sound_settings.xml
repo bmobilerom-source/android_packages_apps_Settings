@@ -49,9 +49,10 @@
     <!-- Media output switcher -->
     <Preference
         android:key="media_output"
+        settings:layout="@layout/system_features_preference_card"
         android:title="@string/media_output_title"
         android:dialogTitle="@string/media_output_title"
-        android:order="-175"
+        android:order="-135"
         settings:searchable="false"
         settings:controller="com.android.settings.sound.MediaOutputPreferenceController"/>
 
@@ -106,13 +107,6 @@
         settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
 
 
-    <!-- Volume steps -->
-    <Preference
-        android:key="volume_steps"
-        android:title="@string/volume_steps_title"
-        android:summary="@string/volume_steps_summary"
-        android:fragment="com.android.settings.sound.VolumeSteps"
-        android:order="-135"/>
 
     <!-- TODO(b/174964721): make this a PrimarySwitchPreference -->
     <!-- Interruptions -->
@@ -220,12 +214,6 @@
         android:key="charging_sounds"
         android:title="@string/charging_sounds_title"
         android:order="-40"/>
-
-    <!-- Custom charging sounds -->
-    <lineageos.preference.LineagePartsPreference
-        android:key="charging_sounds_settings"
-        settings:replacesKey="charging_sounds"
-        settings:requiresConfig="@bool/config_show_charging_sounds" />
 
     <!-- Docking sounds -->
     <SwitchPreferenceCompat
