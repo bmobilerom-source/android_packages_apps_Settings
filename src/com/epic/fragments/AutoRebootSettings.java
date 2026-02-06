@@ -18,8 +18,6 @@ package com.epic.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -36,9 +34,6 @@ public class AutoRebootSettings extends DashboardFragment {
     private static final String KEY_AUTO_REBOOT_INTERVAL = "auto_reboot_interval";
     private static final int REQUEST_CODE_CONFIRM_CREDENTIAL = 1001;
     private static final int REQUEST_CODE_CONFIRM_CREDENTIAL_INTERVAL = 1002;
-
-    private AutoRebootMainSwitchController mMainSwitchController;
-    private AutoRebootIntervalController mIntervalController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,18 +58,10 @@ public class AutoRebootSettings extends DashboardFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
         if (requestCode == REQUEST_CODE_CONFIRM_CREDENTIAL) {
-            // Handle main switch PIN verification
-            AutoRebootMainSwitchController controller = 
+            // Handle main switch credential verification
+            AutoRebootMainSwitchController controller =
                     (AutoRebootMainSwitchController) use(AutoRebootMainSwitchController.class);
-            if (controller != null) {
-                controller.handleActivityResult(requestCode, resultCode, data);
-            }
-        } else if (requestCode == REQUEST_CODE_CONFIRM_CREDENTIAL_INTERVAL) {
-            // Handle interval change PIN verification
-            AutoRebootIntervalController controller = 
-                    (AutoRebootIntervalController) use(AutoRebootIntervalController.class);
             if (controller != null) {
                 controller.handleActivityResult(requestCode, resultCode, data);
             }

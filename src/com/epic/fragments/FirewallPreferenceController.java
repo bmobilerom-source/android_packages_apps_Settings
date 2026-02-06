@@ -73,14 +73,23 @@ public class FirewallPreferenceController extends BasePreferenceController {
 
     @Override
     public boolean handlePreferenceTreeClick(androidx.preference.Preference preference) {
-        if (!preference.getKey().equals(getPreferenceKey())) {
+        if (preference == null || !preference.getKey().equals(getPreferenceKey())) {
             return super.handlePreferenceTreeClick(preference);
+        }
+
+        if (mContext == null) {
+            android.util.Log.e("FirewallPreferenceController", "Context is null, cannot handle preference click");
+            return false;
         }
 
         if (!isAppInstalled()) {
             // App not installed - show message
-            android.widget.Toast.makeText(mContext,
-                "Firewall app is not installed", android.widget.Toast.LENGTH_LONG).show();
+            try {
+                android.widget.Toast.makeText(mContext,
+                    "Firewall app is not installed", android.widget.Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                android.util.Log.e("FirewallPreferenceController", "Failed to show toast", e);
+            }
             return true; // Consume the click
         }
         

@@ -63,7 +63,7 @@
             android:title="@string/appsec_block_app_dashboard_title"
             android:summary="@string/appsec_block_app_dashboard_summary"
             android:order="21"
-            android:selectable="false"
+            android:selectable="true"
             android:enabled="true"
             settings:controller="com.android.settings.applications.specialaccess.BlockAppDashboardController" />
 

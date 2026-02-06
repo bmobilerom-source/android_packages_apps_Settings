@@ -49,7 +49,7 @@ public class AutoRebootMainSwitchController extends TogglePreferenceController
     public boolean setChecked(boolean isChecked) {
         // Store the desired state
         mPendingCheckedState = isChecked;
-        
+
         // Get the fragment to launch credential confirmation
         if (mContext instanceof Activity) {
             Activity activity = (Activity) mContext;
@@ -57,7 +57,7 @@ public class AutoRebootMainSwitchController extends TogglePreferenceController
             android.app.KeyguardManager km = activity.getSystemService(android.app.KeyguardManager.class);
             if (km != null && !km.isKeyguardSecure()) {
                 // No lock screen, allow directly without PIN verification
-                android.util.Log.d("AutoRebootMainSwitchController", 
+                android.util.Log.d("AutoRebootMainSwitchController",
                         "No secure lock screen, enabling auto reboot directly");
                 return applyPendingChange();
             }
@@ -68,7 +68,7 @@ public class AutoRebootMainSwitchController extends TogglePreferenceController
         } else {
             // If not an Activity context, try to find the fragment
             // For now, require PIN verification
-            android.util.Log.w("AutoRebootMainSwitchController", 
+            android.util.Log.w("AutoRebootMainSwitchController",
                     "Cannot verify PIN - context is not an Activity");
             return false;
         }

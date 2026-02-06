@@ -26,33 +26,12 @@
         settings:layout="@layout/adaptive_preference_card_top" />
 
     <Preference
-        android:key="aurora_services_pref"
-        android:title="@string/bmobile_aurora_services_title"
-        android:summary="@string/bmobile_aurora_services_summary"
-        settings:controller="com.epic.fragments.AuroraServicesPreferenceController"
-        settings:layout="@layout/adaptive_preference_card_middle" />
-
-    <Preference
-        android:key="firewall_pref"
-        android:title="@string/bmobile_firewall_title"
-        android:summary="@string/bmobile_firewall_summary"
-        settings:controller="com.epic.fragments.FirewallPreferenceController"
-        settings:layout="@layout/adaptive_preference_card_middle" />
-
-    <Preference
         android:key="ad_services_pref"
         android:title="@string/bmobile_ad_services_title"
         android:summary="@string/bmobile_ad_services_summary"
         settings:controller="com.epic.fragments.AdServicesPreferenceController"
         settings:layout="@layout/adaptive_preference_card_middle" />
-    <!-- Mock Locations -->
-    <Preference
-        android:key="mock_locations_category"
-        android:title="@string/mock_locations_title"
-        android:summary="@string/mock_locations_summary"
-        android:fragment="com.android.settings.location.MockLocationsSettings"
-        settings:layout="@layout/adaptive_preference_card_bottom"/>
-
+   
            <!-- Enhanced Location Privacy & Status -->
         <Preference
             android:key="enhanced_location_features"
@@ -62,6 +41,16 @@
             android:order="4"
             settings:layout="@layout/adaptive_preference_card_middle"
             android:fragment="com.android.settings.location.BLocationSettings"/>
-
+    <Preference
+        android:key="dav"
+        android:title="@string/dav_title"
+        android:summary="@string/dav_summary"
+        android:order="220"
+        settings:layout="@layout/system_features_preference_card">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="at.bitfire.davdroid"
+                android:targetClass="at.bitfire.davdroid.ui.account.AccountActivity" />
+    </Preference>
 </PreferenceScreen>
 

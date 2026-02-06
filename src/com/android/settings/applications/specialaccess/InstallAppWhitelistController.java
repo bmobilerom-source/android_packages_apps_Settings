@@ -15,20 +15,17 @@
  */
 package com.android.settings.applications.specialaccess;
 
-import static android.os.UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES;
-
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.TogglePreferenceController;
@@ -38,8 +35,8 @@ import java.util.List;
 
 /**
  * Controller for toggling the install app whitelist restriction.
- * When enabled, only whitelisted apps (Aurora Store, Google Play) can install apps.
- * When disabled, all apps can install apps (default behavior).
+ * When enabled: Downloads are allowed, but only whitelisted apps (Aurora Store, Google Play) can install apps.
+ * When disabled: All apps can download and install apps (default behavior).
  */
 public class InstallAppWhitelistController extends TogglePreferenceController {
 
@@ -47,6 +44,12 @@ public class InstallAppWhitelistController extends TogglePreferenceController {
 
     public InstallAppWhitelistController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        initializeIfNeeded(mContext);
     }
 
     @Override
@@ -68,21 +71,23 @@ public class InstallAppWhitelistController extends TogglePreferenceController {
                 isChecked ? 1 : 0);
         if (result) {
             if (isChecked) {
-                // When enabling whitelist:
-                // Revoke permissions for all non-whitelisted apps
-                // Note: We don't set DISALLOW_INSTALL_UNKNOWN_SOURCES restriction because
-                // it would block ALL apps including whitelisted ones. Instead, we rely on
-                // AppOps permission revocation which blocks non-whitelisted apps while
-                // allowing whitelisted apps (Aurora Store, Google Play) to install.
+                // When enabling whitelist: Allow downloads but block installations from non-whitelisted apps
+                // Don't set global user restrictions - allow downloads, block at install time
                 enforceWhitelist();
-                Log.d("InstallAppWhitelist", "Whitelist enabled - permissions revoked for non-whitelisted apps");
+                Log.d("InstallAppWhitelist", "Whitelist enabled - downloads allowed, installations blocked for non-whitelisted apps");
             } else {
-                // When disabling whitelist, allow all apps to install
-                Log.d("InstallAppWhitelist", "Whitelist disabled - all apps can install");
+                // When disabling whitelist: Allow everything
+                Log.d("InstallAppWhitelist", "Whitelist disabled - all downloads and installations allowed");
             }
         }
         return result;
     }
+
+    /**
+     * Note: We don't use global user restrictions anymore.
+     * Downloads are allowed, but installations are blocked at PackageInstaller level
+     * for non-whitelisted apps. This allows APK downloads while preventing installs.
+     */
 
     /**
      * Enforce the whitelist by revoking permissions for all non-whitelisted apps
@@ -95,6 +100,7 @@ public class InstallAppWhitelistController extends TogglePreferenceController {
     
     /**
      * Internal method to enforce the whitelist.
+     * With strict global restriction enabled, this ensures whitelisted apps can still install.
      * Made package-private to allow calling from initializeIfNeeded.
      */
     void enforceWhitelistInternal() {
@@ -106,15 +112,40 @@ public class InstallAppWhitelistController extends TogglePreferenceController {
                     R.array.config_allowed_install_app_packages);
 
             if (allowedPackages == null || allowedPackages.length == 0) {
-                return; // No whitelist defined
+                Log.w("InstallAppWhitelist", "No allowed packages configured");
+                return;
             }
 
-            // Get all installed packages
+            Log.d("InstallAppWhitelist", "Enforcing whitelist for " + allowedPackages.length + " allowed packages");
+
+            // Ensure whitelisted apps have installation permissions
+            for (String allowedPackage : allowedPackages) {
+                try {
+                    ApplicationInfo appInfo = packageManager.getApplicationInfo(allowedPackage,
+                            PackageManager.MATCH_ALL);
+                    if (appInfo != null) {
+                        // Grant installation permission to whitelisted apps
+                        appOpsManager.setMode(
+                                AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
+                                appInfo.uid,
+                                allowedPackage,
+                                AppOpsManager.MODE_ALLOWED);
+                        Log.d("InstallAppWhitelist", "Granted install permission for whitelisted app: " + allowedPackage);
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    // Package not installed, skip
+                    Log.d("InstallAppWhitelist", "Whitelisted package not installed: " + allowedPackage);
+                }
+            }
+
+            // Get all installed packages and revoke permissions for non-whitelisted ones
             final List<ApplicationInfo> apps = packageManager.getInstalledApplications(
                     PackageManager.MATCH_ALL);
 
+            int revokedCount = 0;
             for (ApplicationInfo appInfo : apps) {
                 final String packageName = appInfo.packageName;
+
                 // Check if package is whitelisted
                 boolean isWhitelisted = false;
                 for (String allowedPackage : allowedPackages) {
@@ -123,40 +154,27 @@ public class InstallAppWhitelistController extends TogglePreferenceController {
                         break;
                     }
                 }
-                
-                // Check if app has the permission
-                final int mode = appOpsManager.checkOpNoThrow(
-                        AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
-                        appInfo.uid,
-                        packageName);
 
-                if (isWhitelisted) {
-                    // Ensure whitelisted apps have permission to install
-                    if (mode != AppOpsManager.MODE_ALLOWED) {
-                        // Check if app has REQUEST_INSTALL_PACKAGES permission
-                        if (packageManager.checkPermission(
-                                android.Manifest.permission.REQUEST_INSTALL_PACKAGES,
-                                packageName) == PackageManager.PERMISSION_GRANTED) {
-                            appOpsManager.setMode(
-                                    AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
-                                    appInfo.uid,
-                                    packageName,
-                                    AppOpsManager.MODE_ALLOWED);
-                            Log.d("InstallAppWhitelist", "Granted install permission for whitelisted app: " + packageName);
-                        }
-                    }
-                } else {
+                if (!isWhitelisted) {
                     // Revoke permission for non-whitelisted apps
+                    final int mode = appOpsManager.checkOpNoThrow(
+                            AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
+                            appInfo.uid,
+                            packageName);
+
                     if (mode == AppOpsManager.MODE_ALLOWED) {
                         appOpsManager.setMode(
                                 AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
                                 appInfo.uid,
                                 packageName,
                                 AppOpsManager.MODE_ERRORED);
-                        Log.d("InstallAppWhitelist", "Revoked install permission for: " + packageName);
+                        revokedCount++;
                     }
                 }
             }
+
+            Log.d("InstallAppWhitelist", "Whitelist enforced - revoked permissions for " + revokedCount + " non-whitelisted apps");
+
         } catch (Exception e) {
             Log.e("InstallAppWhitelist", "Error enforcing whitelist", e);
         }
@@ -179,6 +197,29 @@ public class InstallAppWhitelistController extends TogglePreferenceController {
         // Default to enabled (1) - only allow whitelisted stores initially
         return Settings.Secure.getInt(context.getContentResolver(), SETTINGS_KEY, 1) != 0;
     }
+
+    /**
+     * Returns whether {@code packageName} is in {@link R.array#config_allowed_install_app_packages}.
+     *
+     * <p>When the whitelist restriction is enabled, only these packages should be able to request
+     * install (unknown sources) permission.</p>
+     */
+    public static boolean isPackageWhitelisted(Context context, String packageName) {
+        if (context == null || TextUtils.isEmpty(packageName)) {
+            return false;
+        }
+        final String[] allowedPackages = context.getResources().getStringArray(
+                R.array.config_allowed_install_app_packages);
+        if (allowedPackages == null || allowedPackages.length == 0) {
+            return false;
+        }
+        for (String allowedPackage : allowedPackages) {
+            if (TextUtils.equals(packageName, allowedPackage)) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     /**
      * Initialize the whitelist restriction on first boot or when not set.
@@ -190,13 +231,13 @@ public class InstallAppWhitelistController extends TogglePreferenceController {
         }
         // Check if setting exists by trying to get it with a sentinel value
         // If the key doesn't exist, getInt returns the default (-1)
-        final int currentValue = Settings.Secure.getInt(context.getContentResolver(), 
+        final int currentValue = Settings.Secure.getInt(context.getContentResolver(),
                 SETTINGS_KEY, -1);
         if (currentValue == -1) {
             // Setting not set yet, initialize to enabled (1) by default
             Settings.Secure.putInt(context.getContentResolver(), SETTINGS_KEY, 1);
-            // Enforce whitelist on first boot - use a valid preference key
-            final InstallAppWhitelistController controller = 
+            // Enforce whitelist on first boot (downloads allowed, installs blocked)
+            final InstallAppWhitelistController controller =
                     new InstallAppWhitelistController(context, "install_app_whitelist_toggle");
             controller.enforceWhitelistInternal();
             Log.d("InstallAppWhitelist", "Initialized whitelist restriction to enabled by default");

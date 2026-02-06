@@ -120,6 +120,14 @@
             android:order="12"
             settings:controller="com.android.settings.location.LocationServiceStatusController"
             settings:layout="@layout/adaptive_preference_card_top"/>
+ <!-- Mock Locations -->
+    <Preference
+        android:key="mock_locations_category"
+        android:title="@string/mock_locations_title"
+        android:summary="@string/mock_locations_summary"
+        android:order="15"
+        android:fragment="com.android.settings.location.MockLocationsSettings"
+        settings:layout="@layout/adaptive_preference_card_bottom"/>
 
     </PreferenceCategory>
 

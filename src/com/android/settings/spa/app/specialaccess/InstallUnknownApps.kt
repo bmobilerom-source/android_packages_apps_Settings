@@ -25,6 +25,7 @@ import android.content.pm.ApplicationInfo
 import android.os.UserManager
 import androidx.compose.runtime.Composable
 import com.android.settings.R
+import com.android.settings.applications.specialaccess.InstallAppWhitelistController
 import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
 import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
@@ -80,10 +81,22 @@ class InstallUnknownAppsListModel(private val context: Context) :
         record.appOpsController.isAllowed.collectAsCallbackWithLifecycle()
 
     override fun isChangeable(record: InstallUnknownAppsRecord) =
-        isChangeable(record, getPotentialPackageNames(record.app.userId))
+        isChangeable(record, getPotentialPackageNames(record.app.userId)) &&
+            !isRestrictedByInstallAppWhitelist(record.app.packageName)
 
     override fun setAllowed(record: InstallUnknownAppsRecord, newAllowed: Boolean) {
+        if (isRestrictedByInstallAppWhitelist(record.app.packageName)) {
+            record.appOpsController.setAllowed(false)
+            return
+        }
         record.appOpsController.setAllowed(newAllowed)
+    }
+
+    private fun isRestrictedByInstallAppWhitelist(packageName: String): Boolean {
+        if (!InstallAppWhitelistController.isWhitelistEnabled(context)) {
+            return false
+        }
+        return !InstallAppWhitelistController.isPackageWhitelisted(context, packageName)
     }
 
     companion object {

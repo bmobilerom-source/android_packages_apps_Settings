@@ -70,8 +70,7 @@
           <item>Custom</item>
      </string-array>
 
-     <!-- Allowed Install App Packages -->
-     <string-array name="config_allowed_install_app_packages">
-          <!-- Add package names here if needed -->
-     </string-array>
+     <!-- NOTE: do not define config_allowed_install_app_packages here.
+          Keeping a single source-of-truth avoids accidental overrides that would break the
+          Install App Whitelist feature. -->
 </resources>
