@@ -1631,77 +1631,660 @@
     <string-array name="display_over_apps_permission_change_exempt">
     </string-array>
 
-    <!-- Allowed app installer packages when install app whitelist is enabled -->
-    <!-- Google Play Store -->
-    <string-array name="config_allowed_install_app_packages" translatable="false">
-        <item>com.android.vending</item>
-        <item>com.aurora.store</item>
+    <!-- Monet color presets (36 researched colors) -->
+    <string-array name="monet_color_presets">
+        <item>Wallpaper (Dynamic)</item>
+        <!-- Researched Color Collection -->
+        <item>French Violet</item>
+        <item>Rose Bonbon</item>
+        <item>Vivid Sky Blue</item>
+        <item>Orange (Pantone)</item>
+        <item>Off Red (RGB)</item>
+        <item>Blue Orchid</item>
+        <item>Screamin\' Green</item>
+        <item>Orange (Crayola)</item>
+        <item>Spring Green</item>
+        <item>Lime Green</item>
+        <item>Palatinate Blue</item>
+        <item>Federal Blue</item>
+        <item>Steel Pink</item>
+        <item>Ultramarine</item>
+        <item>Dark Purple</item>
+        <item>Pear</item>
+        <item>Pastel Pink</item>
+        <item>Tan</item>
+        <item>Lilac</item>
+        <item>Steel Blue</item>
+        <item>Deep Moss Green</item>
+        <item>Dark Sea Green</item>
+        <item>American Blue</item>
+        <!-- Additional Material Design Accent Colors -->
+        <item>Red Accent</item>
+        <item>Purple Accent</item>
+        <item>Indigo Accent</item>
+        <item>Cyan Accent</item>
+        <item>Green Accent</item>
+        <item>Yellow Accent</item>
     </string-array>
 
-    <!-- Font family selection -->
+    <string-array name="monet_color_preset_values" translatable="false">
+        <item>wallpaper</item>
+        <!-- Researched Color Collection -->
+        <item>french_violet</item>
+        <item>rose_bonbon</item>
+        <item>vivid_sky_blue</item>
+        <item>orange_pantone</item>
+        <item>off_red_rgb</item>
+        <item>blue_orchid</item>
+        <item>screamin_green</item>
+        <item>orange_crayola</item>
+        <item>spring_green</item>
+        <item>lime_green</item>
+        <item>palatinate_blue</item>
+        <item>federal_blue</item>
+        <item>steel_pink</item>
+        <item>ultramarine</item>
+        <item>dark_purple</item>
+        <item>pear</item>
+        <item>pastel_pink</item>
+        <item>tan</item>
+        <item>lilac</item>
+        <item>steel_blue</item>
+        <item>deep_moss_green</item>
+        <item>dark_sea_green</item>
+        <item>american_blue</item>
+        <!-- Additional Material Design Accent Colors -->
+        <item>red_accent</item>
+        <item>purple_accent</item>
+        <item>indigo_accent</item>
+        <item>cyan_accent</item>
+        <item>green_accent</item>
+        <item>yellow_accent</item>
+    </string-array>
+
+    <!-- Power menu buttons -->
+    <string-array name="power_menu_button_entries">
+        <item>Power Off</item>
+        <item>Restart</item>
+        <item>Screenshot</item>
+        <item>Emergency</item>
+        <item>Lockdown</item>
+        <item>Reboot Recovery</item>
+        <item>Reboot Bootloader</item>
+        <item>Reboot Fastboot</item>
+        <item>Soft Reboot</item>
+        <item>Airplane Mode</item>
+    </string-array>
+
+    <string-array name="power_menu_button_values" translatable="false">
+        <item>power_off</item>
+        <item>restart</item>
+        <item>screenshot</item>
+        <item>emergency</item>
+        <item>lockdown</item>
+        <item>recovery</item>
+        <item>bootloader</item>
+        <item>fastboot</item>
+        <item>soft_reboot</item>
+        <item>airplane</item>
+    </string-array>
+
+    <!-- Monet wallpaper sources (MonetCompat inspired) -->
+    <string-array name="monet_wallpaper_source_entries">
+        <item>Home Screen Wallpaper</item>
+        <item>Lock Screen Wallpaper</item>
+    </string-array>
+
+    <string-array name="monet_wallpaper_source_values" translatable="false">
+        <item>system</item>
+        <item>lock_screen</item>
+    </string-array>
+
+    <!-- Monet gradient types -->
+    <string-array name="monet_gradient_types">
+        <item>None</item>
+        <item>Sunrise</item>
+        <item>Ocean</item>
+        <item>Forest</item>
+        <item>Lavender</item>
+    </string-array>
+
+    <string-array name="monet_gradient_type_values" translatable="false">
+        <item>none</item>
+        <item>sunrise</item>
+        <item>ocean</item>
+        <item>forest</item>
+        <item>lavender</item>
+    </string-array>
+
+    <!-- Custom theme styles -->
+    <string-array name="custom_theme_styles">
+        <item>Default</item>
+        <item>Black Theme</item>
+        <item>Transparent</item>
+        <item>Vivid</item>
+    </string-array>
+
+    <string-array name="custom_theme_style_values" translatable="false">
+        <item>default</item>
+        <item>black</item>
+        <item>transparent</item>
+        <item>vivid</item>
+    </string-array>
+
+    <!-- Settings background modes -->
+    <string-array name="settings_background_modes">
+        <item>Wallpaper</item>
+        <item>Solid Color</item>
+        <item>Gradient</item>
+        <item>Monet</item>
+    </string-array>
+
+    <string-array name="settings_background_mode_values" translatable="false">
+        <item>wallpaper</item>
+        <item>solid</item>
+        <item>gradient</item>
+        <item>monet</item>
+    </string-array>
+
+    <!-- Ripple Animation Styles -->
+    <string-array name="ripple_animation_entries">
+        <item>Default</item>
+        <item>Fluent</item>
+        <item>No Sparkles</item>
+        <item>Legacy</item>
+    </string-array>
+
+    <string-array name="ripple_animation_values" translatable="false">
+        <item>default</item>
+        <item>fluent</item>
+        <item>no_sparkles</item>
+        <item>legacy</item>
+    </string-array>
+
+
+  
+    <!-- Bluetooth timeout preferences -->
+    <string-array name="bluetooth_timeout_entries">
+        <item>Never</item>
+        <item>15 seconds</item>
+        <item>30 seconds</item>
+        <item>1 minute</item>
+        <item>2 minutes</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>4 hours</item>
+        <item>8 hours</item>
+    </string-array>
+
+    <!-- Do not translate. Bluetooth timeout values in milliseconds -->
+    <string-array name="bluetooth_timeout_values" translatable="false">
+        <item>0</item>      <!-- Never -->
+        <item>15000</item>   <!-- 15 seconds -->
+        <item>30000</item>   <!-- 30 seconds -->
+        <item>60000</item>   <!-- 1 minute -->
+        <item>120000</item>  <!-- 2 minutes -->
+        <item>300000</item>  <!-- 5 minutes -->
+        <item>600000</item>  <!-- 10 minutes -->
+        <item>1800000</item> <!-- 30 minutes -->
+        <item>3600000</item> <!-- 1 hour -->
+        <item>7200000</item> <!-- 2 hours -->
+        <item>14400000</item> <!-- 4 hours -->
+        <item>28800000</item> <!-- 8 hours -->
+    </string-array>
+
+    <!-- Smart Pixels: percentage of pixels turned off -->
+    <string-array name="smart_pixels_percent_strings" translatable="false">
+        <item>12</item>
+        <item>25</item>
+        <item>38</item>
+        <item>50</item>
+        <item>62</item>
+        <item>75</item>
+        <item>88</item>
+    </string-array>
+
+    <string-array name="smart_pixels_percent_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <!-- Smart Pixels: shift time presets (index is stored in SMART_PIXELS_SHIFT_TIMEOUT) -->
+    <string-array name="smart_pixels_shift_times" translatable="false">
+        <item>15 seconds</item>
+        <item>30 seconds</item>
+        <item>1 minute</item>
+        <item>2 minutes</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+    </string-array>
+
+    <string-array name="smart_pixels_shift_values" translatable="false">
+        <!-- These are indices used by SmartPixels.java; SystemUI maps them internally -->
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <!-- Ambient Text Customization -->
+    <string-array name="ambient_text_alignment_entries">
+        <item>Left</item>
+        <item>Center</item>
+        <item>Right</item>
+    </string-array>
+
+    <string-array name="ambient_text_alignment_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="ambient_text_type_color_entries">
+        <item>Default</item>
+        <item>Custom</item>
+    </string-array>
+
+    <string-array name="ambient_text_type_color_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- AOD Clock Styles -->
+    <string-array name="aod_clock_style_entries">
+        <item>Classic</item>
+        <item>Morphing</item>
+        <item>Particle</item>
+        <item>Liquid</item>
+        <item>Geometric</item>
+    </string-array>
+
+    <string-array name="aod_clock_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Ambient Music Visualizer Modes -->
+    <string-array name="ambient_music_visualizer_entries">
+        <item>Spectrum</item>
+        <item>Waveform</item>
+        <item>Particle</item>
+        <item>Circle</item>
+        <item>Bars</item>
+    </string-array>
+
+    <string-array name="ambient_music_visualizer_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- QS Header Customization -->
+    <string-array name="custom_header_provider_entries">
+        <item>Daylight</item>
+        <item>Static</item>
+        <item>File</item>
+    </string-array>
+
+    <string-array name="custom_header_provider_values" translatable="false">
+        <item>daylight</item>
+        <item>static</item>
+        <item>file</item>
+    </string-array>
+
+    <string-array name="custom_header_visibility_entries" translatable="false">
+        <item>Always Show</item>
+        <item>Collapse QS Panel</item>
+        <item>Expanded QS Panel</item>
+    </string-array>
+
+    <string-array name="custom_header_visibility_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="anciui_header_img_entries" translatable="false">
+        <item>anime1</item>
+        <item>anime2</item>
+        <item>anime3</item>
+        <item>anime4</item>
+        <item>anime5</item>
+        <item>anime6</item>
+        <item>anime7</item>
+        <item>anime8</item>
+        <item>anime9</item>
+        <item>anime10</item>
+        <item>anime11</item>
+        <item>anime12</item>
+        <item>anime13</item>
+        <item>anime14</item>
+        <item>anime15</item>
+        <item>banner1</item>
+        <item>banner2</item>
+        <item>flower1</item>
+        <item>flower2</item>
+        <item>planetary1</item>
+        <item>planetary2</item>
+        <item>scene1</item>
+        <item>scene2</item>
+        <item>scene3</item>
+        <item>white1</item>
+    </string-array>
+
+    <string-array name="anciui_header_img_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+    </string-array>
+
+    <!-- Location Precision -->
+    <string-array name="location_precision_entries">
+        <item>@string/location_precision_precise</item>
+        <item>@string/location_precision_approximate</item>
+        <item>@string/location_precision_coarse</item>
+    </string-array>
+
+    <string-array name="location_precision_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Location Time Restrictions -->
+    <string-array name="location_time_period_entries">
+        <item>Always</item>
+        <item>Working hours (9 AM - 5 PM)</item>
+        <item>Evenings (5 PM - 10 PM)</item>
+        <item>Nights (10 PM - 6 AM)</item>
+        <item>Weekends only</item>
+        <item>Custom</item>
+    </string-array>
+
+    <string-array name="location_time_period_values" translatable="false">
+        <item>always</item>
+        <item>work_hours</item>
+        <item>evenings</item>
+        <item>nights</item>
+        <item>weekends</item>
+        <item>custom</item>
+    </string-array>
+
+    <!-- Wi-Fi timeout preferences. The delay after Wi-Fi is idle before it is turned off. -->
+    <string-array name="custom_timeout_entries">
+        <item>Never</item>
+        <item>5 minutes</item>
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+    </string-array>
+
+    <!-- Do not translate. -->
+    <string-array name="custom_timeout_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>0</item>
+        <!-- Do not translate. -->
+        <item>300000</item>
+        <!-- Do not translate. -->
+        <item>900000</item>
+        <!-- Do not translate. -->
+        <item>1800000</item>
+        <!-- Do not translate. -->
+        <item>3600000</item>
+    </string-array>
+
+    <!-- Font Family Options -->
     <string-array name="font_family_entries">
-        <item>@string/font_family_default</item>
-        <item>@string/font_family_accuratist</item>
-        <item>@string/font_family_hercules</item>
-        <item>@string/font_family_ios</item>
-        <item>@string/font_family_nothing</item>
-        <item>@string/font_family_oneplus</item>
-        <item>@string/font_family_sanfranciscopro</item>
-        <item>@string/font_family_samsungone</item>
-        <item>@string/font_family_slim</item>
+        <item>Default</item>
+        <item>Sans Serif</item>
+        <item>Serif</item>
+        <item>Monospace</item>
     </string-array>
 
     <string-array name="font_family_values" translatable="false">
-        <item>default</item>
-        <item>accuratist</item>
-        <item>hercules</item>
-        <item>ios</item>
-        <item>nothing</item>
-        <item>oneplus</item>
-        <item>sanfranciscopro</item>
-        <item>samsungone</item>
-        <item>slim</item>
-    </string-array>
-
-    <string-array name="playback_speed_entries">
-        <item>0.25x (Very slow)</item>
-        <item>0.5x (Slow)</item>
-        <item>0.75x (Slightly slow)</item>
-        <item>1.0x (Normal)</item>
-        <item>1.25x (Slightly fast)</item>
-        <item>1.5x (Fast)</item>
-        <item>2.0x (Very fast)</item>
-    </string-array>
-
-    <string-array name="playback_speed_values" translatable="false">
-        <item>0.25</item>
-        <item>0.5</item>
-        <item>0.75</item>
-        <item>1.0</item>
-        <item>1.25</item>
-        <item>1.5</item>
-        <item>2.0</item>
-    </string-array>
-    <!-- WiFi timeout arrays -->
-    <string-array name="custom_timeout_entries">
-        <item>@string/wifi_timeout_disabled</item>
-        <item>@string/wifi_timeout_5_min</item>
-        <item>@string/wifi_timeout_10_min</item>
-        <item>@string/wifi_timeout_15_min</item>
-        <item>@string/wifi_timeout_30_min</item>
-        <item>@string/wifi_timeout_1_hour</item>
-        <item>@string/wifi_timeout_4_hours</item>
-        <item>@string/wifi_timeout_8_hours</item>
-    </string-array>
-    <string-array name="custom_timeout_values">
         <item>0</item>
-        <item>300000</item>
-        <item>600000</item>
-        <item>900000</item>
-        <item>1800000</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Install App Whitelist - allowed packages that can install apps when whitelist is enabled -->
+    <string-array name="config_allowed_install_app_packages" translatable="false">
+        <item>com.aurora.store</item>
+        <item>com.android.vending</item>
+        <item>com.google.android.packageinstaller</item>
+    </string-array>
+
+    <!-- Auto Reboot Intervals -->
+    <string-array name="auto_reboot_interval_entries">
+        <item>1 hour</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>1 day</item>
+        <item>3 days</item>
+        <item>1 week</item>
+    </string-array>
+
+    <string-array name="auto_reboot_interval_values" translatable="false">
         <item>3600000</item>
-        <item>14400000</item>
-        <item>28800000</item>
+        <item>21600000</item>
+        <item>43200000</item>
+        <item>86400000</item>
+        <item>259200000</item>
+        <item>604800000</item>
+    </string-array>
+
+    <!-- Volume Steps -->
+    <string-array name="volume_steps_music_entries">
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="volume_steps_music_values" translatable="false">
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="volume_steps_call_entries">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+    </string-array>
+
+    <string-array name="volume_steps_call_values" translatable="false">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+    </string-array>
+
+    <string-array name="volume_steps_alarm_entries">
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+    </string-array>
+
+    <string-array name="volume_steps_alarm_values" translatable="false">
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+    </string-array>
+
+    <!-- TTS Languages -->
+    <string-array name="tts_language_entries">
+        <item>English (US)</item>
+        <item>English (UK)</item>
+        <item>Spanish</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Italian</item>
+        <item>Portuguese</item>
+        <item>Chinese</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+    </string-array>
+
+    <string-array name="tts_language_values" translatable="false">
+        <item>en-US</item>
+        <item>en-GB</item>
+        <item>es-ES</item>
+        <item>fr-FR</item>
+        <item>de-DE</item>
+        <item>it-IT</item>
+        <item>pt-BR</item>
+        <item>zh-CN</item>
+        <item>ja-JP</item>
+        <item>ko-KR</item>
     </string-array>
 
 </resources>

@@ -603,7 +603,11 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
             return;
         }
 
-        String description = getCurrentHtmlDescription().toString();
+        CharSequence htmlDesc = getCurrentHtmlDescription();
+        if (htmlDesc == null) {
+            return;
+        }
+        String description = htmlDesc.toString();
         final CharSequence htmlDescription = Html.fromHtml(description,
                 Html.FROM_HTML_MODE_COMPACT, mImageGetter, /* tagHandler= */ null);
         mHtmlFooterPreference.setSummary(htmlDescription);

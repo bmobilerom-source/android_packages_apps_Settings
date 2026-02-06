@@ -113,8 +113,8 @@ import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
 import com.android.settings.display.ColorContrastFragment;
 import com.android.settings.display.NightDisplaySettings;
-import com.android.settings.display.QuickSettingsSettings;
-import com.android.settings.display.StatusBarSettings;
+import com.epic.fragments.QuickSettings;
+import com.epic.fragments.StatusBarSettings;
 import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.display.SmartAutoRotatePreferenceFragment;
 import com.android.settings.display.darkmode.DarkModeSettingsFragment;
@@ -437,10 +437,11 @@ public class SettingsGateway {
             com.epic.fragments.DeviceTweaksSettings.class.getName(),
             com.epic.fragments.AutoRebootSettings.class.getName(),
             com.epic.fragments.SystemBasicDefaultsSettings.class.getName(),
+            com.android.settings.display.HeaderImageSettings.class.getName(),
+            com.android.settings.awaken.fragments.QsHeader.class.getName(),
             com.epic.fragments.SettingsBackupRestore.class.getName(),
             com.android.settings.applications.specialaccess.AppSecSettings.class.getName(),
             com.epic.fragments.BMobileSettingsFragment.class.getName(),
-            com.epic.fragments.AnatoliaSettingsExtras.class.getName(),
             com.epic.fragments.NotificationSettings.class.getName(),
             com.epic.fragments.GestureSettings.class.getName(),
             com.epic.fragments.NavbarSettings.class.getName(),
