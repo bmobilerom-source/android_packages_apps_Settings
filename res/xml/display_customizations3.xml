@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
      Copyright (C) 2020 Wave-OS
+     Copyright (C) 2025 LineageOS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +16,73 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="display_customizations3"
-    android:title=" ">
+    android:title="@string/display_customizations3_title">
+
+    <!-- Lottie Animation -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="display_customizations3_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/display"/>
+
+    <!-- Header -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="display_customizations3_intro"
+        android:title="@string/display_customizations3_intro_title"
+        android:summary="@string/display_customizations3_intro_summary"
+        android:order="-1000" />
+
+    <!-- Color Temperature Toggle -->
+    <SwitchPreference
+        android:key="color_temperature"
+        android:title="@string/color_temperature"
+        android:summary="@string/color_temperature_desc"
+        android:defaultValue="false"
+        app:position="0"
+        settings:controller="com.android.settings.display.ColorTemperatureController" />
+
+    <!-- Window Animation Scale -->
+    <ListPreference
+        android:key="window_animation_scale"
+        android:title="@string/window_animation_scale_title"
+        android:entries="@array/window_animation_scale_entries"
+        android:entryValues="@array/window_animation_scale_values"
+        android:defaultValue="1"
+        app:position="1"
+        settings:controller="com.android.settings.display.WindowAnimationScaleController" />
+
+    <!-- Transition Animation Scale -->
+    <ListPreference
+        android:key="transition_animation_scale"
+        android:title="@string/transition_animation_scale_title"
+        android:entries="@array/transition_animation_scale_entries"
+        android:entryValues="@array/transition_animation_scale_values"
+        android:defaultValue="1"
+        app:position="2"
+        settings:controller="com.android.settings.display.TransitionAnimationScaleController" />
+
+    <!-- Animator Duration Scale -->
+    <ListPreference
+        android:key="animator_duration_scale"
+        android:title="@string/animator_duration_scale_title"
+        android:entries="@array/animator_duration_scale_entries"
+        android:entryValues="@array/animator_duration_scale_values"
+        android:defaultValue="1"
+        app:position="3"
+        settings:controller="com.android.settings.display.AnimatorDurationScaleController" />
+
+    <!-- System Animation Style -->
+    <ListPreference
+        android:key="system_animation_style"
+        android:title="@string/system_animation_style_title"
+        android:entries="@array/system_animation_styles_entries"
+        android:entryValues="@array/system_animation_styles_values"
+        android:defaultValue="0"
+        android:summary="%s"
+        app:position="4"
+        settings:controller="com.epic.fragments.SystemAnimationStyleController" />
 
 </PreferenceScreen>

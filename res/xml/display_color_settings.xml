@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 LineageOS
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/display_color_settings_title">
+
+    <!-- Lottie Animation -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="display_color_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/display"/>
+
+    <!-- Header -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="display_color_intro"
+        android:title="@string/display_color_settings_title"
+        android:summary="@string/display_color_settings_summary"
+        android:order="-1000" />
+
+    <!-- Color Temperature -->
+    <SwitchPreference
+        android:key="color_temperature"
+        android:title="@string/color_temperature"
+        android:summary="@string/color_temperature_desc"
+        android:defaultValue="false"
+        app:position="0"
+        settings:controller="com.android.settings.display.ColorTemperatureController" />
+
+    <!-- Live Display / Color Mode -->
+    <ListPreference
+        android:key="color_mode"
+        android:title="@string/color_mode_title"
+        android:summary="@string/color_mode_option_natural"
+        android:entries="@array/color_mode_entries"
+        android:entryValues="@array/color_mode_values"
+        android:defaultValue="0"
+        settings:controller="com.android.settings.display.ColorModePreferenceController" />
+
+    <!-- Clock Style -->
+    <ListPreference
+        android:key="clock_style"
+        android:title="Clock Style"
+        android:summary="Choose lockscreen clock style"
+        android:entries="@array/clock_style_entries"
+        android:entryValues="@array/clock_style_values"
+        android:defaultValue="1"
+        app:position="1"
+        settings:controller="com.android.settings.display.ClockStyleController" />
+
+    <!-- Display Size -->
+    <Preference
+        android:key="display_size"
+        android:title="@string/display_size_title"
+        android:summary="@string/display_size_summary"
+        android:fragment="com.android.settings.display.DisplaySizeAndTextFragment"
+        settings:layout="@layout/adaptive_preference_card" />
+
+</PreferenceScreen>

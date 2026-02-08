@@ -447,7 +447,10 @@ public class SettingsGateway {
             com.epic.fragments.NavbarSettings.class.getName(),
             com.android.settings.deviceinfo.BMobileAccountsFragment.class.getName(),
             com.android.settings.deviceinfo.BMobileUserInfoFragment.class.getName(),
-            VolumeSteps.class.getName()
+            VolumeSteps.class.getName(),
+            "com.epic.fragments.DisplayPageGrid",
+            "com.android.settings.awaken.fragments.DisplayCustomizations3",
+            "com.epic.fragments.DisplayColorSettings"
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

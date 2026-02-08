@@ -1940,15 +1940,13 @@
 
     <!-- QS Header Customization -->
     <string-array name="custom_header_provider_entries">
-        <item>Daylight</item>
-        <item>Static</item>
-        <item>File</item>
+        <item>Auto</item>
+        <item>Gallery</item>
     </string-array>
 
     <string-array name="custom_header_provider_values" translatable="false">
         <item>daylight</item>
         <item>static</item>
-        <item>file</item>
     </string-array>
 
     <string-array name="custom_header_visibility_entries" translatable="false">
@@ -2285,6 +2283,76 @@
         <item>zh-CN</item>
         <item>ja-JP</item>
         <item>ko-KR</item>
+    </string-array>
+
+    <!-- System Animation Styles -->
+    <string-array name="system_animation_styles_entries">
+        <item>Default</item>
+        <item>Fade</item>
+        <item>Slide</item>
+        <item>Zoom</item>
+        <item>Rotate</item>
+    </string-array>
+
+    <string-array name="system_animation_styles_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Settings Dashboard Style -->
+    <string-array name="settings_dashboard_style_entries">
+        <item>Classic</item>
+        <item>Modern</item>
+        <item>Grid</item>
+        <item>Cards</item>
+    </string-array>
+
+    <string-array name="settings_dashboard_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Color Mode -->
+    <string-array name="color_mode_entries">
+        <item>Natural</item>
+        <item>Boosted</item>
+        <item>Saturated</item>
+        <item>Adaptive</item>
+    </string-array>
+
+    <string-array name="color_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Clock Style -->
+    <string-array name="clock_style_entries">
+        <item>Default</item>
+        <item>OnePlus/OOS</item>
+        <item>Centered</item>
+        <item>Simple</item>
+        <item>IDE</item>
+        <item>MIUI</item>
+        <item>Motorola</item>
+        <item>Presentation</item>
+    </string-array>
+
+    <string-array name="clock_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
     </string-array>
 
 </resources>

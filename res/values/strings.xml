@@ -14011,6 +14011,24 @@
     <!-- QS Header customization screen -->
     <string name="qs_header_title">QS Header</string>
     <string name="qs_header_summary">Customize the Quick Settings header image and visibility</string>
+
+    <!-- Display Page Grid -->
+    <string name="display_customizations3_title">Display Effects</string>
+    <string name="display_customizations_summary">Color temperature, animation scales</string>
+    <string name="display_color_settings_title">Display Color</string>
+    <string name="display_color_settings_summary">Color calibration and modes</string>
+    <string name="dashboard_style_title">Dashboard Style</string>
+    <string name="dashboard_style_summary">Customize settings appearance</string>
+    <string name="onthegomode_title">On-The-Go Mode</string>
+    <string name="onthegomode_summary">Optimized settings for travel</string>
+    <string name="smart_pixels_title">Smart Pixels</string>
+    <string name="smart_pixels_summary">Adaptive pixel management</string>
+    <string name="image_toolbox_title">Image Toolbox</string>
+    <string name="image_toolbox_summary">Advanced image processing tools</string>
+
+    <!-- Display Page Grid -->
+    <string name="display_page_grid_title">Display Page Grid</string>
+    <string name="display_page_grid_summary">Modern card-based display settings interface</string>
     <string name="qs_header_provider_title">Header Provider</string>
     <string name="qs_header_provider_summary">Choose header image source</string>
     <string name="qs_header_visibility_title">Header Visibility</string>
@@ -14021,4 +14039,55 @@
     <string name="qs_header_file_pick_title">Choose image file</string>
     <string name="qs_header_file_pick_summary">Pick an image from storage for file provider</string>
     <string name="qs_header_footer">Customize the Quick Settings panel header with different images and control when they are displayed.</string>
+
+    <!-- Display Customizations 3 -->
+    <string name="display_customizations3_intro_title">Display Effects</string>
+    <string name="display_customizations3_intro_summary">Customize display effects and animations</string>
+
+    <!-- System Animation Style -->
+    <string name="system_animation_style_title">System Animation Style</string>
+
+    <!-- Smart Pixels -->
+    <string name="smart_pixels_enable_title">Enable Smart Pixels</string>
+    <string name="smart_pixels_enable_summary">Automatically turn off pixels to save battery</string>
+    <string name="smart_pixels_on_power_save_title">Smart Pixels on Power Save</string>
+    <string name="smart_pixels_on_power_save_summary">Enable smart pixels when battery saver is active</string>
+    <string name="smart_pixels_pattern_title">Smart Pixels Pattern</string>
+    <string name="smart_pixels_pattern_summary">Choose which pixels to turn off</string>
+    <string name="smart_pixels_shift_time_title">Shift Time</string>
+    <string name="smart_pixels_shift_time_summary">How often to shift pixel patterns</string>
+    <string name="smart_pixels_footer">Smart Pixels can help save battery by turning off unused pixels. Use with caution as it may affect display quality.</string>
+
+    <!-- Dashboard Style -->
+    <string name="dashboard_style_category_title">Dashboard Style</string>
+    <string name="dashboard_style_reset_category_title">Reset Options</string>
+    <string name="dashboard_style_reset_title">Reset Dashboard Style</string>
+    <string name="dashboard_style_reset_summary">Reset all dashboard customizations to default</string>
+    <string name="systemui_reset_title">Reset SystemUI</string>
+    <string name="systemui_reset_summary">Reset SystemUI customizations to default</string>
+
+    <!-- On-The-Go Mode -->
+    <string name="onthegomode_bubble_setting_description">Configure On-The-Go Mode bubble appearance</string>
+    <string name="onthegomode_bubble_setting_description2">Bubbles appear when On-The-Go Mode is active</string>
+    <string name="onthegomode_bubble_setting_description4">Long press bubbles for more On-The-Go options</string>
+    <string name="onthego_transparency">Transparency</string>
+    <string name="onthego_transparency_summary">Adjust transparency level for On-The-Go interface</string>
+    <string name="onthego_front_camera">Front Camera</string>
+    <string name="onthego_front_camera_summary">Use front camera for On-The-Go Mode</string>
+    <string name="onthego_service_toggle">Service Toggle</string>
+    <string name="onthego_service_toggle_summary">Enable or disable On-The-Go Mode service</string>
+
+    <!-- Accessibility Text Reading -->
+    <string name="accessibility_text_reading_options_summary">Adjust text size, style, and reading preferences</string>
+
+    <!-- Status Bar Settings -->
+    <string name="status_bar_settings_title">Status Bar</string>
+    <string name="status_bar_settings_summary">Customize status bar appearance and behavior</string>
+
+    <!-- Display Rotation -->
+    <string name="display_rotation_title">Display Rotation</string>
+
+    <!-- Display Size -->
+    <string name="display_size_title">Display Size</string>
+    <string name="display_size_summary">Adjust the size of text, apps, and other items</string>
 </resources>
