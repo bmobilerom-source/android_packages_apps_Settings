@@ -105,6 +105,13 @@
             android:summary="@string/display_customizations5_summary"
             android:fragment="com.android.settings.awaken.fragments.DisplayCustomizations5" />
 
+        <!-- Display Page Grid -->
+        <PreferenceScreen
+            android:key="display_page_grid_category"
+            android:title="@string/display_page_grid_title"
+            android:summary="@string/display_page_grid_summary"
+            android:fragment="com.epic.fragments.DisplayPageGrid" />
+
         <!-- Skyline UI -->
         <PreferenceScreen
             android:key="skylineui_lab_category"
@@ -118,6 +125,13 @@
             android:title="@string/extras_title"
             android:summary="@string/extras_summary"
             android:fragment="com.epic.fragments.ExtraSettings" />
-  
+
+        <!-- System Grid -->
+        <PreferenceScreen
+            android:key="system_grid_category"
+            android:title="@string/system_grid_title"
+            android:summary="@string/system_grid_summary"
+            android:fragment="com.epic.fragments.SystemGrid" />
+
 
 </PreferenceScreen>

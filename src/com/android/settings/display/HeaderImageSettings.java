@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Wave-OS
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 
-package com.android.settings.awaken.fragments;
+package com.android.settings.display;
 
+import android.content.Intent;
 import android.os.Bundle;
-import com.android.settings.SettingsPreferenceFragment;
+
 import com.android.settings.R;
-import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.SettingsPreferenceFragment;
 
-public class DisplayCustomizations2 extends SettingsPreferenceFragment {
-
-    private static final String TAG = "Display Customizations2";
+/**
+ * Settings fragment for QS header image selection
+ */
+public class HeaderImageSettings extends SettingsPreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.display_customizations2);
+        addPreferencesFromResource(R.xml.header_image_settings);
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
+        return 0; // Replace with appropriate metrics category
     }
 }

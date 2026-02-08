@@ -19,4 +19,12 @@
     android:key="display_customizations2"
     android:title=" ">
 
+    <!-- QS Header Image -->
+    <Preference
+        android:key="qs_header_image"
+        android:title="@string/qs_header_image_title"
+        android:summary="@string/qs_header_image_summary"
+        android:fragment="com.android.settings.awaken.fragments.QsHeader"
+        settings:layout="@layout/adaptive_preference_card" />
+
 </PreferenceScreen>
