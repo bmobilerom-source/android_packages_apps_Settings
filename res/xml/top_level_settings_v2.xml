@@ -26,6 +26,12 @@
         android:key="top_level_mainuser_profile_card"
         android:selectable="true"
         android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+        android:order="-300" />
+    <!-- Homepage Widgets -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="extras_homepage_widgets"
+        android:selectable="false"
+        android:layout="@layout/homepage_widgets"
         android:order="-200" />
 
     <PreferenceCategory
@@ -159,6 +165,15 @@
             settings:highlightableMenuKey="@string/menu_key_system"/>
 
         <com.android.settings.widget.HomepagePreference
+            android:fragment="com.epic.fragments.SystemBasicDefaults"
+            android:icon="@drawable/ic_settings_system_dashboard_white"
+            android:key="top_level_system_basic_defaults"
+            android:order="-15"
+            android:title="@string/system_basic_defaults_title"
+            android:summary="Basic system defaults and settings"
+            settings:highlightableMenuKey="system_basic_defaults"/>
+
+        <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
             android:icon="@drawable/ic_settings_about_device_filled"
             android:key="top_level_about_device"
@@ -174,13 +189,13 @@
         android:key="top_level_security_privacy_category"
         android:layout="@layout/settingslib_preference_category_no_title">
         <com.android.settings.widget.HomepagePreference
-            android:icon="@drawable/ic_settings_safety_center_filled"
-            android:key="top_level_safety_center"
+            android:fragment="com.epic.fragments.SystemGrid"
+            android:icon="@drawable/ic_settings_system_dashboard_white"
+            android:key="top_level_system_grid"
             android:order="-50"
-            android:title="@string/safety_center_title"
-            android:summary="@string/safety_center_summary"
-            settings:highlightableMenuKey="@string/menu_key_safety_center"
-            settings:controller="com.android.settings.safetycenter.TopLevelSafetyCenterEntryPreferenceController"/>
+            android:title="System"
+            android:summary="System settings and optimizations"
+            settings:highlightableMenuKey="system_grid"/>
 
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.security.SecuritySettings"
