@@ -271,6 +271,16 @@
                   android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
                   android:taskAffinity="com.android.settings.root" />
 
+        <activity android:name=".display.HeaderImageGalleryActivity"
+                  android:exported="false"
+                  android:theme="@style/Theme.SubSettings"
+                  android:label="@string/qs_header_image_gallery_title" />
+
+        <activity android:name=".display.HeaderFilePickerActivity"
+                  android:exported="false"
+                  android:theme="@style/Theme.SubSettings"
+                  android:label="@string/qs_header_file_pick_title" />
+
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
                   android:label="@string/settings_shortcut">

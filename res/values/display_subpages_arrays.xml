@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Arrays for display sub-pages stubbed until a later commit.
+     Arrays for display sub-pages.
 
      QS Header (com.bmobile.fragments.QsHeader / res/xml/qs_header.xml):
        - custom_header_provider_entries
@@ -28,12 +28,14 @@
     </string-array>
 
     <string-array name="custom_header_provider_entries">
-        <item>Auto</item>
-        <item>Gallery</item>
+        <item>@string/qs_header_provider_daisy</item>
+        <item>@string/qs_header_provider_rose</item>
+        <item>@string/qs_header_provider_fern</item>
     </string-array>
 
     <string-array name="custom_header_provider_values" translatable="false">
         <item>daylight</item>
         <item>static</item>
+        <item>file</item>
     </string-array>
 </resources>

@@ -2,11 +2,6 @@
 <!--
   Copyright (C) 2025 LineageOS
 
-  QS Header — blank stub. Add preferences here in a later commit.
-  Arrays: @array/custom_header_provider_* in res/values/display_subpages_arrays.xml
-  Strings: qs_header_* in res/values/anatolia_strings.xml
-  Logic: com.bmobile.fragments.QsHeader
-
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
@@ -22,7 +17,57 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="qs_header_screen"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/qs_header_title">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="qs_header_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/display" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="qs_header_intro"
+        android:title="@string/qs_header_title"
+        android:summary="@string/qs_header_summary"
+        android:order="-1000" />
+
+    <ListPreference
+        android:key="qs_header_provider"
+        android:title="@string/qs_header_provider_title"
+        android:summary="@string/qs_header_provider_summary"
+        android:entries="@array/custom_header_provider_entries"
+        android:entryValues="@array/custom_header_provider_values"
+        android:defaultValue="static"
+        android:order="0" />
+
+    <Preference
+        android:key="qs_header_image_gallery"
+        android:title="@string/qs_header_image_title"
+        android:summary="@string/qs_header_image_summary"
+        android:order="1"
+        settings:layout="@layout/adaptive_preference_card" />
+
+    <Preference
+        android:key="qs_header_file_pick"
+        android:title="@string/qs_header_file_pick_title"
+        android:summary="@string/qs_header_file_pick_summary"
+        android:order="2"
+        settings:layout="@layout/adaptive_preference_card" />
+
+    <ListPreference
+        android:key="qs_header_daylight_pack"
+        android:title="@string/qs_header_daylight_pack_title"
+        android:summary="@string/qs_header_daylight_pack_summary"
+        android:order="3" />
+
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="qs_header_footer"
+        android:title="@string/qs_header_footer"
+        android:selectable="false"
+        android:order="999"
+        settings:searchable="false" />
+
 </PreferenceScreen>
+

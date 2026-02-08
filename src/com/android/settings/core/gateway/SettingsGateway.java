@@ -227,6 +227,7 @@ import com.bmobile.fragments.ExtendedHomepageWidgetsFragment;
 import com.bmobile.fragments.DeviceControlsSettingsFragment;
 import com.bmobile.fragments.DisplayCustomizationsSettings;
 import com.bmobile.fragments.LockscreenClockStyleFragment;
+import com.bmobile.fragments.QsHeader;
 import com.bmobile.fragments.FunDisplaySettings;
 import com.bmobile.fragments.HomepageWidgetsFragment;
 import com.bmobile.fragments.KsDisplayPageGrid;
@@ -467,6 +468,7 @@ public class SettingsGateway {
             com.bmobile.fragments.AutoRebootSettings.class.getName(),
             DisplayCustomizationsSettings.class.getName(),
             LockscreenClockStyleFragment.class.getName(),
+            QsHeader.class.getName(),
             DeviceControlsSettingsFragment.class.getName(),
             com.bmobile.fragments.SystemBasicDefaultsSettings.class.getName(),
             com.bmobile.fragments.KidsSafeBasicDefaultsSettings.class.getName(),

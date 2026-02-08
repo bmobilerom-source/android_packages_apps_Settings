@@ -58,8 +58,11 @@
     <string name="qs_header_image_custom_selected">Custom image selected</string>
     <string name="qs_header_image_none">None</string>
     <string name="qs_header_image_selected">Selected</string>
-    <string name="qs_header_provider_title">Header Provider</string>
-    <string name="qs_header_provider_summary">Choose header image source</string>
+    <string name="qs_header_provider_title">Header bloom</string>
+    <string name="qs_header_provider_summary">Choose your flower header style</string>
+    <string name="qs_header_provider_daisy">Daisy — daylight header pack</string>
+    <string name="qs_header_provider_rose">Rose — gallery image</string>
+    <string name="qs_header_provider_fern">Fern — image from storage</string>
     <string name="qs_header_visibility_title">Header Visibility</string>
     <string name="qs_header_visibility_summary">When to show the header image</string>
     <string name="qs_header_daylight_pack_title">Daylight header pack</string>
