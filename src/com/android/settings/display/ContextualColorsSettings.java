@@ -211,7 +211,7 @@ public class ContextualColorsSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ContextualColorsController(context));
+        controllers.add(new ContextualColorsController(context, "monet_contextual_enabled"));
         return controllers;
     }
 

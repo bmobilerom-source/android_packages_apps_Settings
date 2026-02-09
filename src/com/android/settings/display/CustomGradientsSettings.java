@@ -18,6 +18,7 @@ package com.android.settings.display;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;

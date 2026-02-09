@@ -232,7 +232,7 @@ public class TimeBasedColorsSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new TimeBasedColorsController(context));
+        controllers.add(new TimeBasedColorsController(context, "monet_time_based_enabled"));
         return controllers;
     }
 
