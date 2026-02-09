@@ -300,6 +300,11 @@
                   android:theme="@style/Theme.SubSettings"
                   android:label="@string/qs_header_image_gallery_title" />
 
+        <activity android:name=".display.MonetPresetGalleryActivity"
+                  android:exported="false"
+                  android:theme="@style/Theme.SubSettings"
+                  android:label="Select Color Preset" />
+
         <activity android:name=".display.HeaderFilePickerActivity"
                   android:exported="false"
                   android:theme="@style/Theme.SubSettings"

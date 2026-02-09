@@ -14090,4 +14090,21 @@
     <!-- Display Size -->
     <string name="display_size_title">Display Size</string>
     <string name="display_size_summary">Adjust the size of text, apps, and other items</string>
+
+    <!-- Monet Colors -->
+    <string name="monet_color_settings_title">System Background</string>
+    <string name="monet_color_settings_summary">Customize system colors and themes</string>
+    <string name="monet_color_presets_title">Color Presets</string>
+    <string name="monet_color_presets_category">Choose a color preset</string>
+    <string name="monet_contextual_colors_title">Contextual Colors</string>
+    <string name="monet_contextual_colors_category">Contextual Colors</string>
+    <string name="monet_contextual_colors_enable_title">Enable Contextual Colors</string>
+    <string name="monet_contextual_colors_enable_summary">Colors adapt based on content and notifications</string>
+    <string name="monet_last_notification_title">Last Notification</string>
+    <string name="monet_last_notification_summary">Color scheme from last notification</string>
+    <string name="monet_supported_apps_title">Supported Apps</string>
+    <string name="monet_supported_apps_summary">Apps that support contextual colors</string>
+    <string name="monet_custom_gradients_title">Custom Gradients</string>
+    <string name="custom_theme_engine_title">Theme Engine</string>
+    <string name="monet_current_style">Current style: %s</string>
 </resources>

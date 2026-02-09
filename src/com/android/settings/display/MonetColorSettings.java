@@ -28,6 +28,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,21 +95,6 @@ public class MonetColorSettings extends DashboardFragment {
         loadWallpaperColors();
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-
-        // Initialize UI components
-        initializeViews(view);
-
-        return view;
-    }
-
-    private void initializeViews(View view) {
-        // Monet UI components - views removed from XML for compatibility
-        // All functionality now handled through preference controllers
-    }
 
     private void loadWallpaperColors() {
         mExecutor.execute(() -> {
@@ -236,6 +222,46 @@ public class MonetColorSettings extends DashboardFragment {
         // This would need to be implemented to read current monet style
         // For now, return default
         return "TONAL_SPOT";
+    }
+
+    public static List<MonetPresetInfo> loadMonetPresets(Context context) {
+        List<MonetPresetInfo> presets = new ArrayList<>();
+        if (context == null) return presets;
+
+        // Load preset names and values from arrays
+        String[] presetNames = context.getResources().getStringArray(R.array.monet_color_presets);
+        String[] presetValues = context.getResources().getStringArray(R.array.monet_color_preset_values);
+
+        if (presetNames.length != presetValues.length) {
+            return presets; // Safety check
+        }
+
+        // Create MonetColorPresetsController to get colors
+        MonetColorPresetsController controller = new MonetColorPresetsController(context, "temp");
+
+        for (int i = 0; i < presetNames.length && i < presetValues.length; i++) {
+            String name = presetNames[i];
+            String value = presetValues[i];
+
+            // Get the color for this preset
+            int color = controller.getPresetSeedColor(value);
+            if (color != 0) {
+                presets.add(new MonetPresetInfo(name, value, color));
+            }
+        }
+
+        return presets;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if ("monet_color_presets".equals(preference.getKey())) {
+            // Launch the preset gallery activity
+            Intent intent = new Intent(getContext(), MonetPresetGalleryActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override

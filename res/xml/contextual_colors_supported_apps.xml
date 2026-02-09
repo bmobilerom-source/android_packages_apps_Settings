@@ -17,23 +17,18 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="monet_color_presets_screen"
-    android:title="@string/monet_color_presets_title">
+    android:key="contextual_colors_supported_apps_screen"
+    android:title="@string/monet_supported_apps_title">
 
-    <PreferenceCategory android:title="@string/monet_color_presets_category">
+    <PreferenceCategory
+        android:title="Supported Apps"
+        android:key="supported_apps_category">
 
-        <!-- Preset grid container -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/monet_preset_grid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:clipToPadding="false"
-            android:scrollbars="none"
-            android:overScrollMode="never" />
+        <Preference
+            android:key="supported_apps_info"
+            android:title="Contextual Colors"
+            android:summary="List of apps that support contextual color theming"
+            android:selectable="false" />
 
     </PreferenceCategory>
 

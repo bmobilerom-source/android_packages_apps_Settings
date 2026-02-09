@@ -207,7 +207,7 @@ public class MonetColorPresetsController extends BasePreferenceController
         }
     }
 
-    private int getPresetSeedColor(String name) {
+    public int getPresetSeedColor(String name) {
         int baseColor;
         switch (name) {
             case "wallpaper": baseColor = 0xFF4285F4; break;           // Default - use wallpaper colors
