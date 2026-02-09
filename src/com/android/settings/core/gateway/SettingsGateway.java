@@ -115,6 +115,7 @@ import com.android.settings.display.ColorContrastFragment;
 import com.android.settings.display.NightDisplaySettings;
 import com.epic.fragments.QuickSettings;
 import com.epic.fragments.StatusBarSettings;
+import com.epic.fragments.SystemSettingsTaptapFragment;
 import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.display.SmartAutoRotatePreferenceFragment;
 import com.android.settings.display.darkmode.DarkModeSettingsFragment;
@@ -304,6 +305,7 @@ public class SettingsGateway {
             PickupGestureSettings.class.getName(),
             DoubleTwistGestureSettings.class.getName(),
             SystemNavigationGestureSettings.class.getName(),
+            SystemSettingsTaptapFragment.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),
             CommunalDashboardFragment.class.getName(),

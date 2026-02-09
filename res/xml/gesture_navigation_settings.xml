@@ -41,7 +41,7 @@
         android:key="system_settings_taptap"
         android:title="@string/taptap_title"
         android:summary="@string/taptap_summary"
-        android:fragment="com.epic.fragments.TapTapSettings"
+        android:fragment="com.epic.fragments.SystemSettingsTaptapFragment"
         settings:layout="@layout/system_features_preference_card"/>
 
     <PreferenceCategory
