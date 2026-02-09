@@ -80,13 +80,11 @@
 
         <!-- ComposePreference items -->
         <!-- Bluetooth and WiFi reset -->
-        <com.android.settings.spa.preference.ComposePreference
+        <com.android.settings.spa.preference.ComposeCardPreference
             android:key="network_reset_bluetooth_wifi_pref"
             android:title="@string/reset_bluetooth_wifi_title"
             android:persistent="false"
             android:order="10"
-            settings:isPreferenceVisible="false"
-            android:layout="@layout/preference_compose_top_intro"
             settings:searchable="false"
             settings:controller="com.android.settings.network.BluetoothWiFiResetPreferenceController" />
 

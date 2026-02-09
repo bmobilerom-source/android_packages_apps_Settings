@@ -70,7 +70,7 @@
     <!-- Charging control -->
     <lineageos.preference.LineagePartsPreference
         android:key="charging_control"
-        settings:layout="@layout/adaptive_preference_card_middle"
+        settings:layout="@layout/adaptive_preference_card_bottom"
         settings:requiresService="lineagehealth" />
 
     <!-- Charging speed -->

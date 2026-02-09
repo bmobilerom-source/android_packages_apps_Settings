@@ -33,6 +33,7 @@
         android:title="@string/emergency_gesture_screen_title"
         settings:layout="@layout/adaptive_preference_card_top"
         android:order="100"
+        settings:isPreferenceVisible="false"
         android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
         settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
 
