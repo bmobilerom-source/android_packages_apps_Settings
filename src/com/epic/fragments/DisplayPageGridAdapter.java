@@ -272,6 +272,11 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
                 return;
             }
 
+            if ("image_toolbox".equals(destFragment)) {
+                launchImageToolbox();
+                return;
+            }
+
             // Wallpaper background functionality removed
             // Handle Wallpaper picker activity (like InfinitySuite)
             if (destFragment.contains("WallpaperSettings") || destFragment.contains("wallpaper")) {
@@ -438,7 +443,7 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
     private void launchWallpaperPickerActivity() {
         try {
             Intent intent = new Intent();
-            intent.setClassName("com.android.wallpaper", 
+            intent.setClassName("com.android.wallpaper",
                 "com.android.customization.picker.CustomizationPickerActivity");
             activity.startActivity(intent);
         } catch (Exception e) {
@@ -446,6 +451,7 @@ class DisplayPageGridAdapter extends RecyclerView.Adapter<DisplayPageGridAdapter
             showErrorToast();
         }
     }
+
     
     private void launchLineagePartsActivity(String className) {
         try {

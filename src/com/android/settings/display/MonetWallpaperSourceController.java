@@ -41,6 +41,15 @@ public class MonetWallpaperSourceController extends BasePreferenceController
     }
 
     @Override
+    public void displayPreference(androidx.preference.PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (preference instanceof ListPreference) {
@@ -67,8 +76,9 @@ public class MonetWallpaperSourceController extends BasePreferenceController
                 "monet_wallpaper_source", wallpaperSource);
 
         if (settingSaved) {
-            // Apply the wallpaper source change
-            applyWallpaperSourceChange(wallpaperSource);
+            // Notify content resolver of the change to trigger theme update
+            mContext.getContentResolver().notifyChange(
+                    Settings.Secure.getUriFor("monet_wallpaper_source"), null);
 
             // Update summary immediately
             updateSummary(preference, wallpaperSource);

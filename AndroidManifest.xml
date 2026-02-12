@@ -290,10 +290,16 @@
                   android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight"/>
 
         <activity android:name=".SubSettings"
-                  android:exported="false"
+                  android:label="@string/onthegomode_title"
+                  android:exported="true"
                   android:theme="@style/Theme.SubSettings"
                   android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
-                  android:taskAffinity="com.android.settings.root" />
+                  android:taskAffinity="com.android.settings.root">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SYSTEM_SETTINGS_ONTHEGO" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".display.HeaderImageGalleryActivity"
                   android:exported="false"

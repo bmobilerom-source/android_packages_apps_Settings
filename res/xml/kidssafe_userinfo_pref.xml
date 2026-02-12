@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/kidssafe_user_info_frag"
+        android:key="kidssafe_user_header"
+        android:selectable="false"
+        android:order="10" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="bmobile_userinfo_desc"
+        android:order="20"
+        android:title="@string/kidssafe_userinfo_summary"/>
+
+    <!-- Quick Access Preferences -->
+    <PreferenceCategory
+        android:title="Katheleyas Zone"
+        android:key="quick_access_category"
+        android:order="30">
+
+    <!-- Session Messenger -->
+    <Preference
+        android:key="session_messenger_pref"
+        android:title="@string/kidssafe_messenger_title"
+        android:summary="@string/kidssafe_messenger_summary"
+        android:order="40"
+        settings:layout="@layout/adaptive_preference_card_middle"
+        settings:controller="com.epic.fragments.SessionMessengerController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="network.loki.messenger"
+            android:targetClass="network.loki.messenger.RoutingActivity" />
+    </Preference>
+    <!-- Daily Journal -->
+    <Preference
+        android:key="daily_journal_pref"
+        android:title="@string/kidssafe_journal_title"
+        android:summary="@string/kidssafe_journal_summary"
+        android:order="50"
+        settings:layout="@layout/adaptive_preference_card_bottom"
+        settings:controller="com.epic.fragments.DailyJournalController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.demizo.daily_you"
+            android:targetClass="com.demizo.daily_you.MainActivity" />
+    </Preference>
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -24,21 +24,21 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Controller for OnTheGo service restart preference
  */
-public class OnTheGoServiceRestartPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
+public class OnTheGoServiceRestartPreferenceController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "OnTheGoServiceRestartController";
     private static final String KEY_ONTHEGO_SERVICE_RESTART = "onthego_service_restart";
     private static final String SETTINGS_KEY_ONTHEGO_SERVICE_RESTART = "on_the_go_service_restart";
 
     public OnTheGoServiceRestartPreferenceController(Context context) {
-        super(context);
+        super(context, KEY_ONTHEGO_SERVICE_RESTART);
     }
 
     @Override
@@ -47,10 +47,11 @@ public class OnTheGoServiceRestartPreferenceController extends AbstractPreferenc
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         // Only show if device has front camera
         PackageManager pm = mContext.getPackageManager();
-        return pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+        return (pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT))
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

@@ -37,13 +37,28 @@ public class MonetColorCyclingController extends BasePreferenceController
     private static final int CYCLE_INTERVAL_MINUTES = 1; // 1 minute
     private static final int CYCLE_INTERVAL_MS = CYCLE_INTERVAL_MINUTES * 60 * 1000;
 
-    // Ultra-dark colors to cycle through
-    private static final int[] DARK_COLORS = {
-        0xFF000000, // Jet Black
-        0xFF000051, // Midnight Blue
-        0xFF8B0000, // Blood Red
-        0xFF004D40, // Evergreen
-        0xFF263238  // Slate Gray
+    // Curated vibrant colors to cycle through (matching the preset colors)
+    private static final int[] CYCLE_COLORS = {
+        0xFFAD1457, // French Violet
+        0xFFC2185B, // Rose Bonbon
+        0xFF00695C, // Turquoise
+        0xFFE65100, // Orange Pantone
+        0xFFB71C1C, // Off Red RGB
+        0xFF0D47A1, // Blue Orchid
+        0xFF1B5E20, // Screamin Green
+        0xFFD84315, // Orange Crayola
+        0xFF33691E, // Lime Green
+        0xFF0D47A1, // Palestine Blue
+        0xFFAD1457, // Steel Pink
+        0xFF311B92, // Dark Purple
+        0xFFC2185B, // Pastel Pink
+        0xFF7B1FA2, // Lilac
+        0xFF1B5E20, // Dark Moss Green
+        0xFF2E7D32, // Dark Sea Green
+        0xFFB71C1C, // Katheleya
+        0xFF4A148C, // Purple Accent
+        0xFF00695C, // Cyan Accent
+        0xFFE65100  // Yellow Accent
     };
 
     private AlarmManager mAlarmManager;
@@ -75,7 +90,7 @@ public class MonetColorCyclingController extends BasePreferenceController
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         // Check if cycling should be active and start it if needed
-        boolean isEnabled = Settings.System.getInt(mContext.getContentResolver(),
+        boolean isEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 "monet_color_cycling", 0) == 1;
         if (isEnabled) {
             android.util.Log.d("MonetColorCyclingController", "Cycling was enabled, restarting...");
@@ -94,7 +109,7 @@ public class MonetColorCyclingController extends BasePreferenceController
         super.updateState(preference);
         if (preference instanceof SwitchPreference) {
             SwitchPreference switchPreference = (SwitchPreference) preference;
-            boolean isEnabled = Settings.System.getInt(mContext.getContentResolver(),
+            boolean isEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
                     "monet_color_cycling", 0) == 1;
             switchPreference.setChecked(isEnabled);
             android.util.Log.d("MonetColorCyclingController", "Switch state set to: " + isEnabled);
@@ -112,7 +127,7 @@ public class MonetColorCyclingController extends BasePreferenceController
             stopColorCycling();
         }
 
-        boolean result = Settings.System.putInt(mContext.getContentResolver(),
+        boolean result = Settings.Secure.putInt(mContext.getContentResolver(),
                 "monet_color_cycling", isEnabled ? 1 : 0);
         android.util.Log.d("MonetColorCyclingController", "Settings saved: " + result);
         return result;
@@ -192,8 +207,8 @@ public class MonetColorCyclingController extends BasePreferenceController
     }
 
     private void cycleToNextColor() {
-        mCurrentColorIndex = (mCurrentColorIndex + 1) % DARK_COLORS.length;
-        android.util.Log.d("MonetColorCyclingController", "Cycling to next color: index " + mCurrentColorIndex + ", color: " + String.format("0x%08X", DARK_COLORS[mCurrentColorIndex]));
+        mCurrentColorIndex = (mCurrentColorIndex + 1) % CYCLE_COLORS.length;
+        android.util.Log.d("MonetColorCyclingController", "Cycling to next color: index " + mCurrentColorIndex + ", color: " + String.format("0x%08X", CYCLE_COLORS[mCurrentColorIndex]));
         applyCurrentColor();
 
         // Schedule the next alarm for repeating behavior
@@ -201,16 +216,16 @@ public class MonetColorCyclingController extends BasePreferenceController
     }
 
     private void applyCurrentColor() {
-        int color = DARK_COLORS[mCurrentColorIndex];
+        int color = CYCLE_COLORS[mCurrentColorIndex];
         android.util.Log.d("MonetColorCyclingController", "Applying color: " + String.format("0x%08X", color));
 
         try {
             // Apply the color using the same method as presets
-            boolean colorSaved = Settings.System.putInt(mContext.getContentResolver(),
+            boolean colorSaved = Settings.Secure.putInt(mContext.getContentResolver(),
                     "monet_seed_color", color);
-            boolean presetSaved = Settings.System.putString(mContext.getContentResolver(),
+            boolean presetSaved = Settings.Secure.putString(mContext.getContentResolver(),
                     "monet_color_preset", "cycling_" + mCurrentColorIndex);
-            boolean modeSaved = Settings.System.putInt(mContext.getContentResolver(),
+            boolean modeSaved = Settings.Secure.putInt(mContext.getContentResolver(),
                     "monet_preset_enabled", 1);
 
             android.util.Log.d("MonetColorCyclingController", "Settings saved - color: " + colorSaved + ", preset: " + presetSaved + ", mode: " + modeSaved);

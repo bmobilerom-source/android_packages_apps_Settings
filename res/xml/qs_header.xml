@@ -55,12 +55,5 @@
         android:order="2" />
 
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="qs_header_footer"
-        android:title="@string/qs_header_footer"
-        android:selectable="false"
-        android:order="999"
-        settings:searchable="false" />
-
 </PreferenceScreen>
 

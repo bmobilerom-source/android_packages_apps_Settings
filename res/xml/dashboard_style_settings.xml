@@ -38,7 +38,7 @@
             android:summary="@string/dashboard_style_summary"
             android:entries="@array/settings_dashboard_style_entries"
             android:entryValues="@array/settings_dashboard_style_values"
-            android:defaultValue="2"
+            android:defaultValue="6"
             android:persistent="false" />
 
         <!-- Compact Dashboard Toggle -->
@@ -51,23 +51,6 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/dashboard_style_reset_category_title"
-        android:key="dashboard_style_reset_category">
-
-        <Preference
-            android:key="dashboard_style_reset"
-            android:title="@string/dashboard_style_reset_title"
-            android:summary="@string/dashboard_style_reset_summary"
-            android:icon="@drawable/ic_restore" />
-
-        <Preference
-            android:key="systemui_reset"
-            android:title="@string/systemui_reset_title"
-            android:summary="@string/systemui_reset_summary"
-            android:icon="@drawable/ic_settings_system_dashboard_white" />
-
-    </PreferenceCategory>
-
+ 
 </PreferenceScreen>
 

@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.content.Intent;
 import android.util.Log;
 
 /**
@@ -34,5 +35,17 @@ public class SubSettings extends SettingsActivity {
     protected boolean isValidFragment(String fragmentName) {
         Log.d("SubSettings", "Launching fragment " + fragmentName);
         return true;
+    }
+
+    @Override
+    public Intent getIntent() {
+        Intent intent = super.getIntent();
+        // Handle SYSTEM_SETTINGS_ONTHEGO action by setting the appropriate fragment
+        if ("android.settings.SYSTEM_SETTINGS_ONTHEGO".equals(intent.getAction())) {
+            if (!intent.hasExtra(EXTRA_SHOW_FRAGMENT)) {
+                intent.putExtra(EXTRA_SHOW_FRAGMENT, "com.epic.fragments.SystemSettingsOnthego");
+            }
+        }
+        return intent;
     }
 }

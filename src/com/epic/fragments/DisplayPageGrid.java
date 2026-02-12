@@ -99,124 +99,127 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
             rv.setLayoutManager(layoutManager);
 
             java.util.List<DisplayPageGridAdapter.CardItem> items = new java.util.ArrayList<>();
-            
-            // Row 1: Dark mode (Monet/Dark UI) and Wallpapers (tall with live wallpaper preview)
+
+            // Reordered according to user's specification:
+
+            // 1. Dark mode
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_MONET_COLOR,
                     R.string.dark_ui_mode,
                     R.string.dark_ui_mode_summary,
                     "com.android.settings.display.darkmode.DarkModeSettingsFragment",
                     null));
+
+            // 2. Wallpaper
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_LOCKSCREEN,
                     R.string.wallpaper_settings_title,
                     R.string.wallpaper_dashboard_summary,
                     "com.android.settings.display.WallpaperSettings",
                     null));
-            
-            // Row 2: Wallpaper Background removed, Text reading options
+
+            // 3. Display text
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_THEME_PACKS,
-                    R.string.accessibility_text_reading_options_title,
+                    R.string.display_text_title,
                     R.string.accessibility_text_reading_options_summary,
                     "com.android.settings.accessibility.TextReadingPreferenceFragment",
                     null));
-            
-            // Row 3: Night display and Auto-rotate
+
+            // 4. Night light
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_STANDARD,
                     R.string.night_display_title,
                     R.string.night_display_text,
                     "com.android.settings.display.NightDisplaySettings",
                     null));
-            // Auto-rotate: Try device state based first, fallback handled in adapter
+
+            // 5. Auto rotate
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_STANDARD,
                     R.string.accelerometer_title,
                     R.string.auto_rotate_settings_primary_switch_title,
                     "auto_rotate", // Special key for auto rotate
                     null));
-            
-            // Row 4: AOD Customizations (wide) - use intent action for LineageOS
+
+            // 6. Lockscreen (AOD Customizations)
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_WIDE,
                     R.string.ambient_display_screen_title,
                     R.string.ambient_display_category_triggers,
                     "ambient_display", // Special key for ambient display
                     null));
-            
-            // Last 10 cards (ordered as specified):
-            // 1. Display customizations (replaces adaptive brightness)
+
+            // 7. Rename QS Header
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.display_customizations3_title,
+                    R.string.qs_header_title, // Renamed QS Header
+                    R.string.qs_header_summary,
+                    "com.android.settings.awaken.fragments.QsHeader",
+                    null));
+
+            // 8. Animation
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
+                    R.string.display_color_settings_title, // Animation
                     R.string.display_customizations_summary,
                     "com.android.settings.awaken.fragments.DisplayCustomizations3",
                     null));
-            // 2. Display Color Settings (consolidates all color settings)
+
+            // 9. B color (Brightness color)
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.display_color_settings_title,
-                    R.string.display_color_settings_summary,
-                    "com.epic.fragments.DisplayColorSettings",
-                    null));
-            // 3. Text and size
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.accessibility_text_reading_options_title,
+                    R.string.accessibility_text_reading_options_title, // B color / Text reading options
                     R.string.accessibility_text_reading_options_summary,
-                    "com.android.settings.accessibility.TextReadingPreferenceFragment",
+                    "com.android.settings.display.MonetColorSettings",
                     null));
-            // QS Header functionality excluded - user has custom implementation
-            // Custom themes removed from ROM
-            // 5. Screen saver
+
+            // 10. Rename to dashboard
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.screensaver_settings_title,
-                    R.string.screensaver_settings_when_to_dream,
-                    "com.android.settings.dream.DreamSettings",
-                    null));
-            // 6. Live display (dynamically injected - use LineageParts intent)
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.color_mode_title, // Use color_mode_title as fallback if livedisplay_title doesn't exist
-                    R.string.color_mode_option_natural,
-                    "livedisplay", // Special key for live display - will use LineageParts intent
-                    null));
-            // 9. Custom Dashboard (replaces second Anatolia settings card at bottom)
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.dashboard_style_title,
+                    R.string.dashboard_style_title, // Dashboard Style
                     R.string.dashboard_style_summary,
-                    "com.android.settings.awaken.fragments.DisplayCustomizations3",
+                    "com.epic.fragments.DashboardStyleSettings",
                     null));
-            // 10. OnTheGo Mode
+
+            // 11. Colors
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.onthegomode_title,
-                    R.string.onthegomode_summary,
-                    "com.android.settings.awaken.fragments.DisplayCustomizations3",
+                    R.string.monet_color_settings_title,
+                    R.string.monet_color_settings_summary,
+                    "com.android.settings.display.MonetColorSettings",
                     null));
-            // 11. Smart Pixels
+
+            // 12. Rename to timeout and launch screen timeout settings
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
+                    R.string.screen_timeout, // Screen timeout
+                    R.string.screen_timeout_summary,
+                    "com.android.settings.display.ScreenTimeoutSettings",
+                    null));
+
+            // 13. Smart pixels
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
                     R.string.smart_pixels_title,
                     R.string.smart_pixels_summary,
                     "com.android.settings.awaken.fragments.SmartPixels",
                     null));
-            // 12. Status Bar
+
+            // 14. Rename to image edit
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.status_bar_settings_title,
-                    R.string.status_bar_settings_summary,
-                    "com.epic.fragments.StatusBarSettings",
-                    null));
-            // 13. Image Toolbox
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.image_toolbox_title,
+                    R.string.image_toolbox_title, // Image Toolbox
                     R.string.image_toolbox_summary,
-                    "image_toolbox", // Special key for Image Toolbox
+                    "image_toolbox",
+                    null));
+
+            // 15. Statusbar
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
+                    R.string.display_grid_status_bar_title, // Status Bar
+                    R.string.display_grid_status_bar_summary,
+                    "com.epic.fragments.StatusBarSettings",
                     null));
 
             rv.setAdapter(new DisplayPageGridAdapter(activity, items, getMetricsCategory()));

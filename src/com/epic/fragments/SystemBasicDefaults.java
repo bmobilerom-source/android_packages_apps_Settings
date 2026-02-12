@@ -128,21 +128,21 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     R.drawable.ic_system_basic_defaults_gesture,
                     "com.android.settings.gestures.SystemNavigationGestureSettings"));
 
-            // 2. One-handed Mode
+            // 2. WiFi Hotspot (from tether_prefs.xml 34-39)
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                    R.string.system_basic_defaults_one_handed_title,
-                    R.string.system_basic_defaults_one_handed_summary,
+                    R.string.wifi_hotspot_checkbox_text,
+                    R.string.wifi_hotspot_off_subtext,
                     R.drawable.ic_system_basic_defaults_one_handed,
-                    "com.android.settings.gestures.OneHandedSettings"));
+                    "com.android.settings.wifi.tether.WifiTetherSettings"));
 
-            // 3. Brightness Level
+            // 3. Media Controls (from sound_settings.xml 162-170)
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                    R.string.brightness,
-                    R.string.auto_brightness_description,
+                    R.string.media_controls_title,
+                    R.string.keywords_media_controls,
                     R.drawable.ic_system_basic_defaults_brightness,
-                    "com.android.settings.display.AutoBrightnessSettings"));
+                    "com.android.settings.sound.MediaControlsSettings"));
 
             // 4. Dark Theme
             items.add(new SystemBasicDefaultsAdapter.CardItem(
@@ -152,21 +152,21 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     R.drawable.ic_system_basic_defaults_dark_theme,
                     "com.android.settings.display.darkmode.DarkModeSettingsFragment"));
 
-            // 5. Anatolia Settings - Now 5th button
+            // 5. PhotoWidget App (package: com.fibelatti.photowidget, class: com.fibelatti.photowidget.home.HomeActivity)
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                    R.string.anatolia_settings_title,
-                    R.string.anatolia_settings_summary,
+                    R.string.system_basic_defaults_photowidget_title,
+                    R.string.system_basic_defaults_photowidget_summary,
                     R.drawable.ic_system_basic_defaults_anatolia,
-                    "com.epic.fragments.SettingsExtendedSecurity"));
+                    "photowidget_app")); // Special key for PhotoWidget intent
 
-            // 6. Anatolia Settings - Now 6th button
+            // 6. TapTap Settings (from gesture_navigation_settings.xml 40-46)
             items.add(new SystemBasicDefaultsAdapter.CardItem(
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
-                    R.string.anatolia_settings_title,
-                    R.string.anatolia_settings_summary,
+                    R.string.taptap_title,
+                    R.string.taptap_summary,
                     R.drawable.ic_system_basic_defaults_more,
-                    "com.epic.fragments.SettingsExtendedSecurity"));
+                    "com.epic.fragments.SystemSettingsTaptapFragment"));
 
             rv.setAdapter(new SystemBasicDefaultsAdapter(activity, items, getMetricsCategory()));
         } catch (Exception e) {

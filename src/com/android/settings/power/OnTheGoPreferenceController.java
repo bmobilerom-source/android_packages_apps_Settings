@@ -27,16 +27,15 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
 
 /**
  * Controller for "On the Go mode" preference
  */
-public class OnTheGoPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
+public class OnTheGoPreferenceController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "OnTheGoPreferenceController";
     private static final String KEY_ON_THE_GO = "global_actions_onthego";
@@ -47,7 +46,7 @@ public class OnTheGoPreferenceController extends AbstractPreferenceController
             "com.android.systemui.epic.onthego.OnTheGoService");
 
     public OnTheGoPreferenceController(Context context) {
-        super(context);
+        super(context, KEY_ON_THE_GO);
     }
 
     @Override
@@ -56,8 +55,8 @@ public class OnTheGoPreferenceController extends AbstractPreferenceController
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override

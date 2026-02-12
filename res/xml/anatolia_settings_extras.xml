@@ -18,5 +18,21 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title="@string/extras_title">
-  
+
+    <!-- Lockscreen Clock Style -->
+    <PreferenceCategory
+        android:title="@string/lockscreen_clock_category"
+        android:key="lockscreen_clock_category">
+
+    <ListPreference
+        android:key="clock_style"
+        android:title="@string/clock_style_title"
+        android:summary="%s"
+        android:entries="@array/clock_style_entries"
+        android:entryValues="@array/clock_style_values"
+        android:defaultValue="0"
+        settings:controller="com.android.settings.display.ClockStyleController" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

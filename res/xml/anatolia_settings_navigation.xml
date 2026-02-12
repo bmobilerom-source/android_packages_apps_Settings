@@ -18,5 +18,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	android:title=" ">
+
+    <!-- Custom Gradients Settings -->
+    <Preference
+        android:key="custom_gradients_settings"
+        android:title="@string/monet_custom_gradients_title"
+        android:summary="@string/monet_custom_gradients_summary"
+        android:fragment="com.android.settings.display.CustomGradientsSettings"
+        settings:layout="@layout/adaptive_preference_card" />
  
 </PreferenceScreen>

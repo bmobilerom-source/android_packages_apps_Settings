@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="top_level_settings_grid_screen"
+    android:title="@string/top_level_settings_grid_title">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="top_level_settings_grid"
+        android:layout="@layout/top_level_settings_grid_recycler_view"
+        settings:allowDividerAbove="false"
+        settings:allowDividerBelow="false" />
+
+</PreferenceScreen>

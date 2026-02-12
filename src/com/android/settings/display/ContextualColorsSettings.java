@@ -142,7 +142,7 @@ public class ContextualColorsSettings extends DashboardFragment {
     private void updateLastNotificationDisplay() {
         String lastPackage = android.provider.Settings.Secure.getString(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_LAST_NOTIFICATION_PACKAGE);
+            MonetSettingsConstants.MONET_LAST_NOTIFICATION_PACKAGE);
 
         if (lastPackage != null && !lastPackage.isEmpty()) {
             ContextualColor color = CONTEXTUAL_COLORS.get(lastPackage);
@@ -160,14 +160,14 @@ public class ContextualColorsSettings extends DashboardFragment {
                            color.colors[2] + "," + color.colors[3];
         android.provider.Settings.Secure.putString(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_CONTEXTUAL_COLORS,
+            MonetSettingsConstants.MONET_CONTEXTUAL_COLORS,
             colorString);
     }
 
     private void handleNotificationReceived(String packageName) {
         boolean enabled = android.provider.Settings.Secure.getInt(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_CONTEXTUAL_ENABLED, 0) == 1;
+            MonetSettingsConstants.MONET_CONTEXTUAL_ENABLED, 0) == 1;
 
         if (!enabled) return;
 
@@ -179,7 +179,7 @@ public class ContextualColorsSettings extends DashboardFragment {
             // Save last notification package
             android.provider.Settings.Secure.putString(
                 getContext().getContentResolver(),
-                android.provider.Settings.Secure.MONET_LAST_NOTIFICATION_PACKAGE,
+                MonetSettingsConstants.MONET_LAST_NOTIFICATION_PACKAGE,
                 packageName);
 
             mLastNotificationPackage = packageName;
@@ -194,7 +194,7 @@ public class ContextualColorsSettings extends DashboardFragment {
                            color.colors[2] + "," + color.colors[3];
         android.provider.Settings.Secure.putString(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_CONTEXTUAL_COLORS,
+            MonetSettingsConstants.MONET_CONTEXTUAL_COLORS,
             colorString);
     }
 

@@ -27,6 +27,7 @@
    <ListPreference
        android:key="tts_default_lang"
        android:title="@string/tts_default_lang_title"
+       settings:layout="@layout/adaptive_preference_card"
        android:summary="@string/tts_default_lang_summary"
        android:persistent="false" />
 

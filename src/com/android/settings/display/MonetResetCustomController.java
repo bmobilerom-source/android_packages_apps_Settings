@@ -60,8 +60,8 @@ public class MonetResetCustomController extends BasePreferenceController {
             // Remove custom seed color setting
             Settings.Secure.putString(mContext.getContentResolver(), "monet_custom_seed_color", null);
 
-            // Reset chroma multiplier to default
-            Settings.Secure.putInt(mContext.getContentResolver(), "monet_chroma_multiplier", 100);
+            // Reset chroma multiplier to default (325% / 3.25x)
+            Settings.Secure.putInt(mContext.getContentResolver(), "monet_chroma_multiplier", 325);
 
             // Reset wallpaper source to default
             Settings.Secure.putString(mContext.getContentResolver(), "monet_wallpaper_source", "system");

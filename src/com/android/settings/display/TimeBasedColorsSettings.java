@@ -125,7 +125,7 @@ public class TimeBasedColorsSettings extends DashboardFragment {
     private void updateCurrentTimeSlot() {
         boolean enabled = android.provider.Settings.Secure.getInt(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_TIME_BASED_ENABLED, 0) == 1;
+            MonetSettingsConstants.MONET_TIME_BASED_ENABLED, 0) == 1;
 
         if (!enabled) return;
 
@@ -164,21 +164,21 @@ public class TimeBasedColorsSettings extends DashboardFragment {
         // Save current time slot
         android.provider.Settings.Secure.putString(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_CURRENT_TIME_SLOT,
+            MonetSettingsConstants.MONET_CURRENT_TIME_SLOT,
             slot.id);
 
         // Apply colors (this would need framework implementation)
         // For now, just save the preference
         android.provider.Settings.Secure.putString(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_TIME_SLOT_COLORS,
+            MonetSettingsConstants.MONET_TIME_SLOT_COLORS,
             slot.colors[0] + "," + slot.colors[1] + "," + slot.colors[2] + "," + slot.colors[3]);
     }
 
     private void scheduleNextColorChange() {
         boolean enabled = android.provider.Settings.Secure.getInt(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_TIME_BASED_ENABLED, 0) == 1;
+            MonetSettingsConstants.MONET_TIME_BASED_ENABLED, 0) == 1;
 
         if (!enabled) return;
 

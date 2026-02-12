@@ -226,7 +226,7 @@ public class CustomGradientsSettings extends DashboardFragment {
         // Apply the gradient like wallpaper picker applies colors
         android.provider.Settings.Secure.putString(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_COLOR_GRADIENT,
+            MonetSettingsConstants.MONET_COLOR_GRADIENT,
             preset.id);
 
         // Save gradient colors as comma-separated values
@@ -237,13 +237,13 @@ public class CustomGradientsSettings extends DashboardFragment {
         }
         android.provider.Settings.Secure.putString(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_GRADIENT_COLORS,
+            MonetSettingsConstants.MONET_GRADIENT_COLORS,
             colorString.toString());
 
         // Enable gradient override
         android.provider.Settings.Secure.putInt(
             getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_GRADIENT_ENABLED, 1);
+            MonetSettingsConstants.MONET_GRADIENT_ENABLED, 1);
 
         // Notify system of gradient change
         notifyGradientChange();

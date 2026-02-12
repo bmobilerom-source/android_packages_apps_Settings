@@ -28,7 +28,7 @@ import android.util.Log;
  */
 public class DashboardStyleHelper {
     private static final String TAG = "DashboardStyleHelper";
-    private static final int DEFAULT_STYLE = 7; // BMobile Home Settings (Fun Display style)
+    private static final int DEFAULT_STYLE = 6; // Kids Safe Expressive
 
     /**
      * Reads the current dashboard style from Settings.
@@ -106,6 +106,9 @@ public class DashboardStyleHelper {
             case 8:
                 Log.d(TAG, "Returning BMobile Expressive style XML");
                 return com.android.settings.R.xml.top_level_settings_bmobile_expressive;
+            case 6:
+                Log.d(TAG, "Returning Kids Safe Expressive style XML");
+                return com.android.settings.R.xml.top_level_settings_kidssafe_expressive;
             default:
                 Log.d(TAG, "Returning default Clean (Epic) style XML");
                 return com.android.settings.R.xml.top_level_settings_epic;
@@ -139,7 +142,7 @@ public class DashboardStyleHelper {
      * @return true if valid (0-5, 7-8), false otherwise
      */
     public static boolean isValidStyle(int style) {
-        return (style >= 0 && style <= 5) || style == 7 || style == 8;
+        return (style >= 0 && style <= 5) || style == 6 || style == 7 || style == 8;
     }
 }
 

@@ -21,6 +21,7 @@ import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -294,12 +295,12 @@ public class SmartPixels extends SettingsPreferenceFragment implements OnPrefere
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<com.android.settingslib.search.SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
-                    ArrayList<com.android.settingslib.search.SearchIndexableResource> result =
-                            new ArrayList<com.android.settingslib.search.SearchIndexableResource>();
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
 
-                    com.android.settingslib.search.SearchIndexableResource sir = new com.android.settingslib.search.SearchIndexableResource(context);
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.smart_pixels;
                     result.add(sir);
                     return result;

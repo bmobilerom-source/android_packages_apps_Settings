@@ -208,6 +208,12 @@ class SystemBasicDefaultsAdapter extends RecyclerView.Adapter<SystemBasicDefault
             launchDefaultApps();
             return;
         }
+
+        // Special handling for PhotoWidget app
+        if ("photowidget_app".equals(destFragment)) {
+            launchPhotoWidget();
+            return;
+        }
         
         try {
             // Handle LineageParts activities
@@ -253,7 +259,25 @@ class SystemBasicDefaultsAdapter extends RecyclerView.Adapter<SystemBasicDefault
             showErrorToast();
         }
     }
-    
+
+    /**
+     * Launch PhotoWidget app via intent
+     */
+    private void launchPhotoWidget() {
+        try {
+            Intent intent = new Intent();
+            intent.setComponent(new ComponentName(
+                "com.fibelatti.photowidget",
+                "com.fibelatti.photowidget.home.HomeActivity"));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(intent);
+            Log.d("SystemBasicDefaultsAdapter", "PhotoWidget launched successfully");
+        } catch (Exception e) {
+            Log.e("SystemBasicDefaultsAdapter", "Failed to launch PhotoWidget", e);
+            showErrorToast();
+        }
+    }
+
     /**
      * Launch Aurora Store via intent
      */

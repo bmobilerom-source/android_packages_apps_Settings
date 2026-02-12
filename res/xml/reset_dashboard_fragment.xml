@@ -78,15 +78,17 @@
             settings:controller="com.android.settings.system.FactoryResetPreferenceController"
             android:fragment="com.android.settings.MainClear" />
 
-        <!-- ComposePreference items -->
+        <!-- Regular Preference items -->
         <!-- Bluetooth and WiFi reset -->
-        <com.android.settings.spa.preference.ComposeCardPreference
+        <Preference
             android:key="network_reset_bluetooth_wifi_pref"
             android:title="@string/reset_bluetooth_wifi_title"
+            android:summary="@string/reset_bluetooth_wifi_desc"
             android:persistent="false"
             android:order="10"
+            settings:layout="@layout/adaptive_preference_card"
             settings:searchable="false"
-            settings:controller="com.android.settings.network.BluetoothWiFiResetPreferenceController" />
+            android:fragment="com.android.settings.ResetNetworkConfirm" />
 
         <!-- Preference items -->
         <!-- Erase Euicc data -->

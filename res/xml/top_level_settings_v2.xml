@@ -54,6 +54,15 @@
             settings:highlightableMenuKey="@string/menu_key_system"/>
 
         <com.android.settings.widget.HomepagePreference
+            android:fragment="com.epic.fragments.SystemSettingsOnthego"
+            android:icon="@drawable/ic_homepage_about"
+            android:key="top_level_onthego"
+            android:order="-18"
+            android:title="@string/onthegomode_title"
+            android:summary="@string/onthegomode_summary"
+            settings:highlightableMenuKey="@string/menu_key_system"/>
+
+        <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"
             android:icon="@drawable/ic_devices_other_filled"
             android:key="top_level_connected_devices"

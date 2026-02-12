@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class StatusBarLogoPositionController extends BasePreferenceController implements Preference.OnPreferenceChangeListener {
@@ -22,6 +23,14 @@ public class StatusBarLogoPositionController extends BasePreferenceController im
         super.displayPreference(screen);
         Preference pref = screen.findPreference(getPreferenceKey());
         if (pref instanceof ListPreference) {
+            ListPreference listPref = (ListPreference) pref;
+            // Ensure entries and values are set from arrays
+            if (listPref.getEntries() == null) {
+                listPref.setEntries(R.array.status_bar_logo_position_entries);
+            }
+            if (listPref.getEntryValues() == null) {
+                listPref.setEntryValues(R.array.status_bar_logo_position_values);
+            }
             pref.setOnPreferenceChangeListener(this);
             updateState(pref);
         }

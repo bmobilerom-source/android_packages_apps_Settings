@@ -20,6 +20,7 @@
 
     <PreferenceCategory
         android:key="supported_links_radio_group"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/app_link_open_always">
     </PreferenceCategory>
 

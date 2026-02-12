@@ -141,5 +141,19 @@
             android:summary="@string/system_grid_summary"
             android:fragment="com.epic.fragments.SystemGrid" />
 
+        <!-- Kids Safe Settings -->
+        <PreferenceScreen
+            android:key="kids_safe_category"
+            android:title="@string/kidssafe_settings_title"
+            android:summary="@string/kidssafe_settings_description"
+            android:fragment="com.android.settings.deviceinfo.KidsSafeUserInfoFragment" />
+
+        <!-- Kids Safe Basic Defaults -->
+        <PreferenceScreen
+            android:key="kids_safe_defaults_category"
+            android:title="@string/kidssafe_basic_defaults_title"
+            android:summary="Configure educational app defaults"
+            android:fragment="com.epic.fragments.KidsSafeBasicDefaults" />
+
 
 </PreferenceScreen>

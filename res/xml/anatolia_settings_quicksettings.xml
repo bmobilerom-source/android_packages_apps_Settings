@@ -19,6 +19,44 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title=" ">
 
- 
+    <!-- Flash Notifications Settings -->
+    <Preference
+        android:key="flash_notifications"
+        android:title="@string/flash_notifications_title"
+        android:summary="Flash camera or screen for notifications"
+        android:fragment="com.android.settings.accessibility.FlashNotificationsSettings"
+        settings:layout="@layout/adaptive_preference_card" />
+
+    <!-- Linux Terminal Settings -->
+    <Preference
+        android:key="linux_terminal"
+        android:title="@string/enable_linux_terminal_title"
+        android:summary="@string/enable_linux_terminal_summary"
+        android:fragment="com.android.settings.development.linuxterminal.LinuxTerminalDashboardFragment"
+        settings:layout="@layout/adaptive_preference_card" />
+
+    <!-- Lock Screen Notifications Settings -->
+    <Preference
+        android:key="lock_screen_notifications"
+        android:title="@string/lock_screen_notifs_title"
+        android:summary="Control lock screen notification display"
+        android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
+        settings:layout="@layout/adaptive_preference_card" />
+
+    <!-- Process Stats Summary -->
+    <Preference
+        android:key="process_stats"
+        android:title="@string/app_memory_use"
+        android:summary="View memory usage by apps"
+        android:fragment="com.android.settings.applications.ProcessStatsSummary"
+        settings:layout="@layout/adaptive_preference_card" />
+
+    <!-- Cellular Security -->
+    <Preference
+        android:key="cellular_security"
+        android:title="@string/cellular_security_settings_title"
+        android:summary="@string/cellular_security_top_intro"
+        android:fragment="com.android.settings.network.telephony.CellularSecuritySettingsFragment"
+        settings:layout="@layout/adaptive_preference_card" />
 
 </PreferenceScreen>

@@ -42,6 +42,7 @@
         android:title="@string/emergency_info_title"
         settings:layout="@layout/adaptive_preference_card_bottom"
         android:order="101"
+        settings:isPreferenceVisible="false"
         settings:controller="com.android.settings.accounts.EmergencyInfoPreferenceController" />
 
     <PreferenceCategory

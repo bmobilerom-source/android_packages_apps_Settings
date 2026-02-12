@@ -23,14 +23,17 @@ import android.provider.Settings;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.systemui.clocks.ClockStyle;
 
 public class ClockStyleController extends AbstractPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
+    // Clock style constants (matching SystemUI ClockStyle)
     private static final String CLOCK_STYLE_KEY = "clock_style";
+    private static final int DEFAULT_STYLE = 0;
 
     public ClockStyleController(Context context, String key) {
         super(context);
@@ -50,12 +53,26 @@ public class ClockStyleController extends AbstractPreferenceController
     public void updateState(Preference preference) {
         if (preference instanceof ListPreference) {
             final ListPreference listPreference = (ListPreference) preference;
+
+            // Ensure entries and values are set
+            if (listPreference.getEntries() == null) {
+                listPreference.setEntries(com.android.settings.R.array.clock_style_entries);
+            }
+            if (listPreference.getEntryValues() == null) {
+                listPreference.setEntryValues(com.android.settings.R.array.clock_style_values);
+            }
+
             final int currentValue = Settings.Secure.getIntForUser(
                     mContext.getContentResolver(),
-                    ClockStyle.CLOCK_STYLE_KEY,
-                    ClockStyle.DEFAULT_STYLE,
+                    CLOCK_STYLE_KEY,
+                    DEFAULT_STYLE,
                     UserHandle.USER_CURRENT);
             listPreference.setValue(String.valueOf(currentValue));
+            // Set summary to show selected clock style
+            int index = listPreference.findIndexOfValue(String.valueOf(currentValue));
+            if (index >= 0 && index < listPreference.getEntries().length) {
+                listPreference.setSummary(listPreference.getEntries()[index]);
+            }
         }
     }
 
@@ -64,7 +81,7 @@ public class ClockStyleController extends AbstractPreferenceController
         final int value = Integer.parseInt((String) newValue);
         Settings.Secure.putIntForUser(
                 mContext.getContentResolver(),
-                ClockStyle.CLOCK_STYLE_KEY,
+                CLOCK_STYLE_KEY,
                 value,
                 UserHandle.USER_CURRENT);
         updateState(preference);

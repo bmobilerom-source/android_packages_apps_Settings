@@ -34,17 +34,7 @@
         android:title="@string/display_customizations3_intro_title"
         android:summary="@string/display_customizations3_intro_summary"
         android:order="-1000" />
-
-    <!-- Color Temperature Toggle -->
-    <SwitchPreference
-        android:key="color_temperature"
-        android:title="@string/color_temperature"
-        android:summary="@string/color_temperature_desc"
-        android:defaultValue="false"
-        app:position="0"
-        settings:controller="com.android.settings.display.ColorTemperatureController" />
-
-    <!-- Window Animation Scale -->
+!-- Window Animation Scale -->
     <ListPreference
         android:key="window_animation_scale"
         android:title="@string/window_animation_scale_title"

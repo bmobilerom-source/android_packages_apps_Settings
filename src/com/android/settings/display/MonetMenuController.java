@@ -22,6 +22,15 @@ public class MonetMenuController extends BasePreferenceController
     public int getAvailabilityStatus() { return AVAILABLE; }
 
     @Override
+    public void displayPreference(androidx.preference.PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (preference instanceof SwitchPreference) {
@@ -40,6 +49,10 @@ public class MonetMenuController extends BasePreferenceController
                 "monet_apply_to_menus", isEnabled ? 1 : 0);
 
         if (settingSaved) {
+            // Notify content resolver of the change
+            mContext.getContentResolver().notifyChange(
+                    Settings.Secure.getUriFor("monet_apply_to_menus"), null);
+
             // Apply menu theming change
             applyMenuThemingChange(isEnabled);
         }

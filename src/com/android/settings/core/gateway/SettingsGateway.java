@@ -24,6 +24,9 @@ import com.android.settings.ResetNetwork;
 import com.android.settings.Settings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TrustedCredentialsSettings;
+import com.android.settings.accessibility.FlashNotificationsSettings;
+import com.android.settings.development.linuxterminal.LinuxTerminalDashboardFragment;
+import com.android.settings.notification.LockScreenNotificationsPreferencePageFragment;
 import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilityHearingAidsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
@@ -110,6 +113,8 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
+import com.android.settings.display.AdvancedMonetSettings;
+import com.android.settings.display.ContextualColorsSettings;
 import com.android.settings.display.AutoBrightnessSettings;
 import com.android.settings.display.ColorContrastFragment;
 import com.android.settings.display.NightDisplaySettings;
@@ -220,6 +225,8 @@ import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settings.wifi.tether.WifiTetherSettings;
 
+import com.android.settings.display.CustomGradientsSettings;
+
 public class SettingsGateway {
 
     /**
@@ -254,6 +261,8 @@ public class SettingsGateway {
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
             DisplaySettings.class.getName(),
+            AdvancedMonetSettings.class.getName(),
+            ContextualColorsSettings.class.getName(),
             MyDeviceInfoFragment.class.getName(),
             ModuleLicensesDashboard.class.getName(),
             ManageApplications.class.getName(),
@@ -452,7 +461,17 @@ public class SettingsGateway {
             VolumeSteps.class.getName(),
             "com.epic.fragments.DisplayPageGrid",
             "com.android.settings.awaken.fragments.DisplayCustomizations3",
-            "com.epic.fragments.DisplayColorSettings"
+            "com.epic.fragments.DisplayColorSettings",
+            "com.android.settings.display.MonetColorSettings",
+            "com.android.settings.awaken.fragments.SmartPixels",
+            "com.epic.fragments.SystemSettingsOnthego",
+            "com.android.settings.deviceinfo.KidsSafeUserInfoFragment",
+            "com.epic.fragments.KidsSafeBasicDefaults",
+            "com.epic.fragments.KidsSafeExpressiveSettings",
+            FlashNotificationsSettings.class.getName(),
+            LinuxTerminalDashboardFragment.class.getName(),
+            LockScreenNotificationsPreferencePageFragment.class.getName(),
+            CustomGradientsSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

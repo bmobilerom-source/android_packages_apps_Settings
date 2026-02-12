@@ -1,49 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2025 The Android Open Source Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="?android:attr/colorBackground">
+    android:background="?android:colorBackground">
 
     <!-- Title -->
     <TextView
+        android:id="@+id/monet_preset_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Color Preset"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:padding="16dp"
-        android:gravity="center"
-        android:textColor="?android:attr/textColorPrimary" />
+        android:text="@string/monet_color_presets_title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:padding="24dp"
+        android:gravity="center" />
 
-    <!-- Preset Grid -->
+    <!-- Grid RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/monet_preset_grid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_margin="16dp"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        android:overScrollMode="ifContentScrolls" />
+        android:padding="16dp"
+        android:scrollbars="vertical" />
 
-    <!-- Buttons -->
+    <!-- Action Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,19 +33,19 @@
         android:gravity="end">
 
         <Button
-            android:id="@+id/btn_cancel"
+            android:id="@+id/monet_preset_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@android:string/cancel"
             android:layout_marginEnd="8dp"
-            style="?android:attr/buttonBarButtonStyle" />
+            style="?android:buttonStyle" />
 
         <Button
-            android:id="@+id/btn_apply"
+            android:id="@+id/monet_preset_apply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apply"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="@string/monet_color_presets_apply"
+            style="?android:buttonBarPositiveButtonStyle" />
 
     </LinearLayout>
 

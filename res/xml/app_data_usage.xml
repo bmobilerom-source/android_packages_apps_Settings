@@ -34,6 +34,7 @@
 
         <Preference
             android:key="app_settings"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/data_usage_app_settings"
             settings:controller="com.android.settings.datausage.AppDataUsageAppSettingsController" />
 

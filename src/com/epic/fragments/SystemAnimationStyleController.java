@@ -22,21 +22,20 @@ import android.provider.Settings;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
-public class SystemAnimationStyleController extends AbstractPreferenceController
-        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+public class SystemAnimationStyleController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String SYSTEM_ANIMATION_STYLE_KEY = "system_animation_style";
 
     public SystemAnimationStyleController(Context context, String key) {
-        super(context);
+        super(context, key);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override
@@ -51,6 +50,11 @@ public class SystemAnimationStyleController extends AbstractPreferenceController
             final int currentValue = Settings.System.getInt(mContext.getContentResolver(),
                     "system_animation_style", 0);
             listPreference.setValue(String.valueOf(currentValue));
+            // Set summary to show selected animation style
+            int index = listPreference.findIndexOfValue(String.valueOf(currentValue));
+            if (index >= 0 && index < listPreference.getEntries().length) {
+                listPreference.setSummary(listPreference.getEntries()[index]);
+            }
         }
     }
 

@@ -22,17 +22,21 @@
 
     <PreferenceCategory
         android:key="usb_details_data_role"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/usb_control_title"/>
 
     <PreferenceCategory
         android:key="usb_details_functions"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/usb_use"/>
 
     <PreferenceCategory
         android:key="usb_transcode_mtp"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/usb_file_transfer_title"/>
 
     <PreferenceCategory
         android:key="usb_details_power_role"
+        settings:layout="@layout/adaptive_preference_card"
         android:title="@string/usb_power_title"/>
 </PreferenceScreen>

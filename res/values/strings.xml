@@ -3112,7 +3112,7 @@
     <string name="lift_to_wake_title">Lift to wake</string>
 
     <!-- [CHAR LIMIT=30] Title of the preference that opens the Ambient display settings screen. -->
-    <string name="ambient_display_screen_title">Ambient display</string>
+    <string name="ambient_display_screen_title">Lockscreen</string>
 
     <!-- [CHAR LIMIT=30] Category title for the settings that control when Ambient display shows. -->
     <string name="ambient_display_category_triggers">When to show</string>
@@ -5127,7 +5127,7 @@
     <!-- Title for the footer text to explain what accessibility service does. [CHAR LIMIT=35] -->
     <string name="accessibility_introduction_title">About <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
     <!-- Title for the accessibility preference to adjust the display size, font size, bold text, and high contrast text features. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_options_title">Display size and text</string>
+    <string name="accessibility_text_reading_options_title">Bcolor</string>
     <!-- Title for the entry of the text reading options. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_options_suggestion_title">Change how text displays</string>
     <!-- Subject for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
@@ -12926,6 +12926,10 @@
     <!-- Label at the highest end of duration slider for long press power invocation of assistant. [CHAR LIMIT=30] -->
     <string name="power_menu_long_press_for_assist_sensitivity_high_label">Long</string>
 
+    <!-- Power menu On-The-Go mode -->
+    <string name="power_menu_onthego_title">On-The-Go Mode</string>
+    <string name="power_menu_onthego_summary">Show On-The-Go mode option in power menu</string>
+
     <!-- Wallet (formerly Cards and passes) toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_wallet_setting_toggle">Show wallet</string>
     <!-- Wallet (formerly Cards and passes) summary [CHAR LIMIT=NONE] -->
@@ -12998,6 +13002,7 @@
 
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>
+    <string name="media_controls_summary">Media controls and audio enhancements</string>
     <!-- Title of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=50]-->
     <string name="media_controls_resume_title">Pin media player</string>
     <!-- Description of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=NONE]-->
@@ -14013,9 +14018,9 @@
     <string name="qs_header_summary">Customize the Quick Settings header image and visibility</string>
 
     <!-- Display Page Grid -->
-    <string name="display_customizations3_title">Display Effects</string>
+    <string name="display_customizations3_title">QS Header</string>
     <string name="display_customizations_summary">Color temperature, animation scales</string>
-    <string name="display_color_settings_title">Display Color</string>
+    <string name="display_color_settings_title">Animation</string>
     <string name="display_color_settings_summary">Color calibration and modes</string>
     <string name="dashboard_style_title">Dashboard Style</string>
     <string name="dashboard_style_summary">Customize settings appearance</string>
@@ -14066,6 +14071,17 @@
     <string name="systemui_reset_title">Reset SystemUI</string>
     <string name="systemui_reset_summary">Reset SystemUI customizations to default</string>
 
+    <!-- Individual Dashboard Styles -->
+    <string name="dashboard_style_aosp">AOSP</string>
+    <string name="dashboard_style_material">Material</string>
+    <string name="dashboard_style_kids_safe">Classic</string>
+    <string name="dashboard_style_fun_display">Fun Display</string>
+    <string name="dashboard_style_bmobile_expressive">Expressive</string>
+    <string name="dashboard_style_kidssafe_expressive">Kids Safe Expressive</string>
+
+    <!-- Dashboard Style Applied Message -->
+    <string name="dashboard_style_applied">Dashboard style changed to %s</string>
+
     <!-- On-The-Go Mode -->
     <string name="onthegomode_bubble_setting_description">Configure On-The-Go Mode bubble appearance</string>
     <string name="onthegomode_bubble_setting_description2">Bubbles appear when On-The-Go Mode is active</string>
@@ -14084,6 +14100,48 @@
     <string name="status_bar_settings_title">Status Bar</string>
     <string name="status_bar_settings_summary">Customize status bar appearance and behavior</string>
 
+    <!-- Status Bar Logo -->
+    <string name="status_bar_logo_title">Status Bar Logo</string>
+    <string name="status_bar_logo_summary">Show custom logo in status bar</string>
+    <string name="status_bar_logo_position_title">Logo Position</string>
+    <string name="status_bar_logo_position_right">Right</string>
+    <string name="status_bar_logo_position_left">Left</string>
+    <string name="status_bar_logo_position_center">Center</string>
+    <string name="status_bar_logo_style_title">Logo Style</string>
+    <string name="status_bar_logo_style_android">Android</string>
+    <string name="status_bar_logo_style_adidas">Adidas</string>
+    <string name="status_bar_logo_style_alien">Alien</string>
+    <string name="status_bar_logo_style_apple">Apple</string>
+    <string name="status_bar_logo_style_avengers">Avengers</string>
+    <string name="status_bar_logo_style_batman">Batman</string>
+    <string name="status_bar_logo_style_batman_tdk">Batman TDK</string>
+    <string name="status_bar_logo_style_beats">Beats</string>
+    <string name="status_bar_logo_style_biohazard">Biohazard</string>
+    <string name="status_bar_logo_style_blackberry">Blackberry</string>
+    <string name="status_bar_logo_style_cannabis">Cannabis</string>
+    <string name="status_bar_logo_style_emoticon_cool">Cool Emoticon</string>
+    <string name="status_bar_logo_style_emoticon_devil">Devil Emoticon</string>
+    <string name="status_bar_logo_style_fire">Fire</string>
+    <string name="status_bar_logo_style_heart">Heart</string>
+    <string name="status_bar_logo_style_nike">Nike</string>
+    <string name="status_bar_logo_style_pacman">Pacman</string>
+    <string name="status_bar_logo_style_puma">Puma</string>
+    <string name="status_bar_logo_style_rog">ROG</string>
+    <string name="status_bar_logo_style_spiderman">Spiderman</string>
+    <string name="status_bar_logo_style_superman">Superman</string>
+    <string name="status_bar_logo_style_windows">Windows</string>
+    <string name="status_bar_logo_style_xbox">Xbox</string>
+    <string name="status_bar_logo_style_ghost">Ghost</string>
+    <string name="status_bar_logo_style_ninja">Ninja</string>
+    <string name="status_bar_logo_style_robot">Robot</string>
+    <string name="status_bar_logo_style_ironman">Ironman</string>
+    <string name="status_bar_logo_style_captain_america">Captain America</string>
+    <string name="status_bar_logo_style_flash">Flash</string>
+    <string name="status_bar_logo_style_tux">Tux</string>
+    <string name="status_bar_logo_style_ubuntu">Ubuntu</string>
+    <string name="status_bar_logo_style_mint">Mint</string>
+    <string name="status_bar_logo_style_amogus">Amogus</string>
+
     <!-- Display Rotation -->
     <string name="display_rotation_title">Display Rotation</string>
 
@@ -14096,6 +14154,31 @@
     <string name="monet_color_settings_summary">Customize system colors and themes</string>
     <string name="monet_color_presets_title">Color Presets</string>
     <string name="monet_color_presets_category">Choose a color preset</string>
+    <string name="monet_color_presets_apply">Apply</string>
+    <string name="monet_color_preset_color_description">Color preset swatch</string>
+
+    <!-- Color Source -->
+    <string name="color_source_title">Color Source</string>
+    <string name="color_source_both">Both Wallpapers</string>
+    <string name="color_source_home">Home Wallpaper</string>
+    <string name="color_source_lock">Lock Wallpaper</string>
+    <string name="color_source_preset">Custom Preset</string>
+
+    <!-- Custom Colors -->
+    <string name="accent_color_title">Accent Color</string>
+    <string name="accent_color_summary">Choose a custom accent color</string>
+    <string name="bg_color_title">Background Color</string>
+    <string name="bg_color_summary">Choose a custom background color</string>
+
+    <!-- Color Adjustments -->
+    <string name="luminance_factor_title">Luminance Factor</string>
+    <string name="luminance_factor_summary">Adjust the brightness of generated colors</string>
+    <string name="chroma_factor_title">Chroma Factor</string>
+    <string name="chroma_factor_summary">Adjust the saturation of generated colors</string>
+
+    <!-- Background Options -->
+    <string name="tint_background_title">Tint Background</string>
+    <string name="tint_background_summary">Apply additional tinting to background colors</string>
     <string name="monet_contextual_colors_title">Contextual Colors</string>
     <string name="monet_contextual_colors_category">Contextual Colors</string>
     <string name="monet_contextual_colors_enable_title">Enable Contextual Colors</string>
@@ -14107,4 +14190,82 @@
     <string name="monet_custom_gradients_title">Custom Gradients</string>
     <string name="custom_theme_engine_title">Theme Engine</string>
     <string name="monet_current_style">Current style: %s</string>
+
+    <!-- System Basic Defaults -->
+    <string name="system_basic_defaults_summary">Basic system defaults and settings</string>
+
+    <!-- SystemUI Reset -->
+    <string name="systemui_reset_success">SystemUI reset successfully</string>
+    <string name="systemui_reset_failed">SystemUI reset failed</string>
+
+    <!-- System Basic Defaults -->
+    <string name="system_basic_defaults_photowidget_title">PhotoWidget</string>
+    <string name="system_basic_defaults_photowidget_summary">Photo widget for home screen</string>
+
+    <!-- Top Level Settings Grid -->
+    <string name="top_level_settings_grid_title">Settings</string>
+
+    <!-- BMobile Expressive Settings -->
+    <string name="bmobile_expressive_settings_title">Expressive Settings</string>
+
+    <!-- Dashboard Style -->
+    <string name="compact_dashboard_title">Compact Dashboard</string>
+    <string name="compact_dashboard_summary">Use compact layout for dashboard</string>
+
+    <!-- Display Customizations -->
+    <string name="display_customizations4_intro_title">Display Customizations</string>
+    <string name="display_customizations4_intro_summary">Customize your display settings</string>
+
+    <!-- Fun Display -->
+    <string name="fun_display_settings_title">Fun Display</string>
+
+    <!-- Header Categories -->
+    <string name="header_category_network">Network</string>
+    <string name="header_category_apps">Apps</string>
+    <string name="header_category_security">Security</string>
+    <string name="display_grid_quick_settings_title">Quick Settings</string>
+    <string name="display_grid_quick_settings_summary">Customize quick settings tiles</string>
+    <string name="display_grid_about_us_title">About Us</string>
+    <string name="display_grid_about_us_summary">Device information and credits</string>
+    <string name="display_grid_status_bar_title">Status Bar</string>
+    <string name="display_grid_status_bar_summary">Status bar customization</string>
+    <string name="display_grid_lock_title">Lock Screen</string>
+    <string name="display_grid_lock_summary">Lock screen settings</string>
+    <string name="display_grid_messages_title">Messages</string>
+    <string name="display_grid_messages_summary">Messaging preferences</string>
+    <string name="display_grid_connection_title">Connection</string>
+    <string name="display_grid_connection_summary">Network and connectivity</string>
+    <string name="display_grid_edit_title">Edit</string>
+    <string name="display_grid_edit_summary">Customize settings grid</string>
+    <string name="display_grid_location_title">Location</string>
+    <string name="display_grid_location_summary">Location services</string>
+    <string name="display_grid_team_title">Team</string>
+    <string name="display_grid_team_summary">Development team</string>
+
+    <!-- Privacy Controls -->
+    <string name="privacy_controls_summary">Manage your privacy settings and permissions</string>
+
+    <!-- Animation Scale Titles -->
+    <string name="window_animation_scale_title">Window animation scale</string>
+    <string name="transition_animation_scale_title">Transition animation scale</string>
+    <string name="animator_duration_scale_title">Animator duration scale</string>
+
+    <!-- Display Text -->
+    <string name="display_text_title">Display Text</string>
+
+    <!-- AOD -->
+    <string name="aod_title">AOD</string>
+    <string name="aod_summary">Always on Display settings</string>
+
+    <!-- Widget -->
+    <string name="widget_title">Widget</string>
+    <string name="widget_summary">Widget settings</string>
+
+    <!-- Extras Settings -->
+    <string name="extras_title">Extras &amp; Testing</string>
+
+    <!-- Lockscreen Clock -->
+    <string name="lockscreen_clock_category">Lockscreen Clock Styles</string>
+    <string name="clock_style_title">Clock Style</string>
+    <string name="clock_style_summary">Choose lockscreen clock appearance</string>
 </resources>

@@ -19,4 +19,15 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
 	   android:title="@string/buttons_title">
 
+        <!-- Advanced Monet Settings - Temporarily disabled due to missing controllers -->
+        <!-- TODO: Re-enable after implementing preference controllers for monet settings -->
+        <!--
+        <Preference
+            android:key="advanced_monet_settings"
+            android:title="Advanced Material You"
+            android:summary="Advanced theming and color customization"
+            android:fragment="com.android.settings.display.AdvancedMonetSettings"
+            settings:layout="@layout/adaptive_preference_card" />
+        -->
+
 </PreferenceScreen>

@@ -78,6 +78,7 @@
 
         <Preference
             android:key="cdma_lte_data_service_key"
+            settings:layout="@layout/adaptive_preference_card"
             android:title="@string/cdma_lte_data_service"
             settings:controller="com.android.settings.network.telephony.DataServiceSetupPreferenceController"
             settings:allowDividerAbove="false"

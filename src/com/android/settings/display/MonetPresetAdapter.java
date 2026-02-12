@@ -135,8 +135,8 @@ public class MonetPresetAdapter extends RecyclerView.Adapter<MonetPresetAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            colorSwatch = itemView.findViewById(R.id.color_swatch);
-            presetName = itemView.findViewById(R.id.preset_name);
+            colorSwatch = itemView.findViewById(R.id.monet_preset_color_swatch);
+            presetName = itemView.findViewById(R.id.monet_preset_name);
         }
     }
 }

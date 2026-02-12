@@ -24,11 +24,10 @@ import android.view.IWindowManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
-public class TransitionAnimationScaleController extends AbstractPreferenceController
-        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+public class TransitionAnimationScaleController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
     private static final int TRANSITION_ANIMATION_SCALE_SELECTOR = 1;
@@ -39,7 +38,7 @@ public class TransitionAnimationScaleController extends AbstractPreferenceContro
     private final String[] mListSummaries;
 
     public TransitionAnimationScaleController(Context context, String key) {
-        super(context);
+        super(context, key);
         mWindowManager = IWindowManager.Stub.asInterface(
                 ServiceManager.getService(Context.WINDOW_SERVICE));
         mListValues = context.getResources().getStringArray(
@@ -49,8 +48,8 @@ public class TransitionAnimationScaleController extends AbstractPreferenceContro
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override
