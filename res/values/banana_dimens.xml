@@ -28,6 +28,7 @@
 
     <!-- Card radius for XD preferences -->
     <dimen name="xd_pref_card_radius">24dp</dimen>
+    <dimen name="xd_pref_card_radius-outer">4dp</dimen>
 
     <!-- Card height for wave-style preferences -->
     <dimen name="card_height_wave">88dp</dimen>

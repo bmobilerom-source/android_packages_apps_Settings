@@ -65,5 +65,14 @@
     <string name="dot_about_device_info">Legal &amp; Information</string>
     <string name="dot_about_device_private">Private Details</string>
 
+    <!-- User card -->
+    <string name="usercard_summary">Tap for more info</string>
+
+    <!-- Wellbeing -->
+    <string name="wellbeing_title">Wellbeing</string>
+
+    <!-- User info -->
+    <string name="userinfo_bubble_setting_description">Welcome to your Control Center - the ultimate hub for device management and personalization! Access powerful tools for app management, accounts, privacy, security, and customization.</string>
+    <string name="default_user">Default User</string>
 
 </resources>

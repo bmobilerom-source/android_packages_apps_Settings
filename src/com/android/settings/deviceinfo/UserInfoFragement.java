@@ -44,11 +44,12 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import android.net.Uri;
 import com.android.internal.util.UserIcons;
-import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.widget.LayoutPreference;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -71,8 +72,11 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.userinfo_pref);
-	context = getActivity();
-	((SettingsBaseActivity)getActivity()).mAppBarLayout.setExpanded(false);
+        context = getActivity();
+        final AppBarLayout appBarLayout = getActivity().findViewById(R.id.app_bar);
+        if (appBarLayout != null) {
+            appBarLayout.setExpanded(false, false);
+        }
     }
 
 
@@ -119,7 +123,7 @@ public class UserInfoFragement extends SettingsPreferenceFragment {
             try {
                 iv.setImageBitmap(BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.parse(path))));
             } catch (FileNotFoundException e) {
-                iv.setImageResource(R.drawable.user);
+                iv.setImageResource(R.drawable.user_png);
             }
             context.getSharedPreferences("image_path", Context.MODE_PRIVATE).edit().putString("image_path", path).commit();
         }

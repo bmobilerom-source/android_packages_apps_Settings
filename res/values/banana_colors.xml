@@ -13,4 +13,8 @@
     <!-- BananaDroid settings icon background-->
     <color name="homepage_bananagear_background">#f3d324</color>
 
+    <!-- XD preference card styling -->
+    <color name="xd_pref_card_color">@color/contextual_card_background</color>
+    <color name="xd_pref_ripple">@*android:color/ripple_material_light</color>
+
 </resources>
