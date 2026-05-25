@@ -98,7 +98,6 @@ import com.android.settings.Settings.AlarmsAndRemindersActivity;
 import com.android.settings.Settings.AppBatteryUsageActivity;
 import com.android.settings.Settings.ChangeNfcTagAppsActivity;
 import com.android.settings.Settings.ChangeWifiStateActivity;
-import com.android.settings.applications.specialaccess.InstallAppWhitelistController;
 import com.android.settings.Settings.ClonedAppsListActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.LongBackgroundTasksActivity;
@@ -323,13 +322,6 @@ public class ManageApplications extends InstrumentedFragment
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // Check if install app whitelist is enabled and block ManageApplications
-        if (InstallAppWhitelistController.isWhitelistEnabled(getContext())) {
-            if (getActivity() != null) {
-                getActivity().finish();
-            }
-            return;
-        }
         super.onCreate(savedInstanceState);
         final Activity activity = getActivity();
         if (activity.isFinishing()) {
