@@ -26,4 +26,7 @@
     <dimen name="card_view_end_margin">15dp</dimen>
     <dimen name="card_height_settings">75dp</dimen>
 
+    <!-- Grouped preference card ripples / progress (dot drawables) -->
+    <dimen name="dot_pref_radius">26dp</dimen>
+
 </resources> 
