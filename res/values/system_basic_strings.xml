@@ -82,4 +82,9 @@
     <string name="classic_style_header_title">Classic Style</string>
     <string name="classic_style_header_summary">Traditional categorized layout</string>
 
+    <!-- CustomerOS / Arcana headers -->
+    <string name="customeros_header_title">Customer OS</string>
+    <string name="customeros_header_summary">Customized Android experience</string>
+    <string name="connectivity_category_title">Connectivity</string>
+
 </resources>

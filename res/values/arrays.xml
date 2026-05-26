@@ -1631,7 +1631,7 @@
     <string-array name="display_over_apps_permission_change_exempt">
     </string-array>
 
-        <!-- Settings dashboard styles -->
+    <!-- Settings dashboard styles -->
     <string-array name="settings_dashboard_style_entries">
         <item>@string/dashboard_style_aosp</item>
         <item>@string/dashboard_style_epic</item>
