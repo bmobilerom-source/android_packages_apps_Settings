@@ -47,6 +47,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -98,6 +99,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     private static final String KEY_AFTERLABS_TAB_STRIP = "afterlabs_tab_strip";
     private static final String SAVE_AFTERLABS_TAB_INDEX = "afterlabs_tab_index";
     private static final int EPIC_STYLE = 1;
+    private static final int OOS11_STYLE = 11;
     private static final int AFTERLABS_STYLE = 12;
     private static final int AFTERLABS_GRID_STYLE = 13;
 
@@ -112,20 +114,20 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     /** Preference keys shown per tab (must match {@code top_level_settings_afterlabs_tab.xml}). */
     private static final String[][] AFTERLABS_TAB_PREFERENCE_KEYS = {
             {
-                    "top_level_network",
-                    "top_level_custom_dashboard",
-                    "top_level_connected_devices",
+                    "top_level_user",
                     "top_level_extras_navigation",
                     "top_level_homepage_widgets",
             },
             {
-                    "top_level_notifications",
                     "top_level_sound",
+                    "top_level_media_controls",
                     "top_level_display",
+                    "top_level_wallpaper",
             },
             {
-                    "top_level_storage",
-                    "top_level_battery",
+                    "top_level_aurora_store",
+                    "top_level_backup",
+                    "top_level_notifications",
                     "top_level_system",
             },
             {
@@ -214,59 +216,116 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     private View createTopLevelViewWithBottomBar(@NonNull LayoutInflater inflater,
             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        final View content = super.onCreateView(inflater, container, savedInstanceState);
+        final Context styleContext = getContext();
+        final boolean useBottomBar = shouldShowTopLevelBottomBar(styleContext);
+        final int style = styleContext != null
+                ? DashboardStyleHelper.getDashboardStyle(styleContext) : -1;
+
+        if (useBottomBar && style == OOS11_STYLE) {
+            return createOos11HomepageView(inflater, content);
+        }
+
         final FrameLayout wrapper = new FrameLayout(requireContext());
         wrapper.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        final View content = super.onCreateView(inflater, wrapper, savedInstanceState);
         if (content != null) {
             wrapper.addView(content, new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
         }
 
-        final Context styleContext = getContext();
-        final boolean useBottomBar = shouldShowTopLevelBottomBar(styleContext);
+        attachFixedTopLevelBottomBar(inflater, wrapper, useBottomBar);
+        return wrapper;
+    }
 
-        final View bottomBar = useBottomBar
-                ? TopLevelDashboardBottomBarHelper.inflate(inflater, wrapper)
-                : null;
-        if (bottomBar != null) {
-            wrapper.addView(bottomBar, new FrameLayout.LayoutParams(
+    /**
+     * OOS11 only: CoordinatorLayout + {@link ExpandableBottomBarScrollableBehavior} so the bar
+     * floats and hides/shows while scrolling the preference list.
+     */
+    private View createOos11HomepageView(@NonNull LayoutInflater inflater, @Nullable View content) {
+        final CoordinatorLayout coordinator = new CoordinatorLayout(requireContext());
+        coordinator.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        if (content != null) {
+            coordinator.addView(content, new CoordinatorLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    Gravity.BOTTOM));
-
-            TopLevelDashboardBottomBarHelper.bind(bottomBar, requireContext(),
-                    new TopLevelDashboardBottomBarHelper.Listener() {
-                        @Override
-                        public void onNetworkSelected() {
-                            launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_NETWORK,
-                                    FRAGMENT_NETWORK, R.string.network_dashboard_title);
-                        }
-
-                        @Override
-                        public void onDisplaySelected() {
-                            launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_DISPLAY,
-                                    FRAGMENT_DISPLAY, R.string.display_settings);
-                        }
-
-                        @Override
-                        public void onSystemSelected() {
-                            launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_SYSTEM,
-                                    FRAGMENT_SYSTEM, R.string.header_category_system);
-                        }
-
-                        @Override
-                        public void onWallpaperSelected() {
-                            launchWallpaperSettings();
-                        }
-                    });
-        } else {
-            Log.w(TAG, "Bottom bar unavailable; homepage preferences still shown");
+                    ViewGroup.LayoutParams.MATCH_PARENT));
         }
 
-        return wrapper;
+        final View bottomBar = TopLevelDashboardBottomBarHelper.inflateOos11Floating(inflater,
+                coordinator);
+        if (bottomBar != null) {
+            CoordinatorLayout.LayoutParams barLp;
+            if (bottomBar.getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
+                barLp = (CoordinatorLayout.LayoutParams) bottomBar.getLayoutParams();
+            } else {
+                barLp = new CoordinatorLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+            barLp.gravity = Gravity.BOTTOM;
+            if (barLp.getBehavior() == null) {
+                try {
+                    barLp.setBehavior(new github.com.st235.lib_expandablebottombar.behavior
+                            .ExpandableBottomBarScrollableBehavior());
+                } catch (Throwable t) {
+                    Log.w(TAG, "ExpandableBottomBarScrollableBehavior unavailable", t);
+                }
+            }
+            coordinator.addView(bottomBar, barLp);
+            bindTopLevelBottomBar(bottomBar);
+        } else {
+            Log.w(TAG, "OOS11 floating bottom bar unavailable");
+        }
+        return coordinator;
+    }
+
+    private void attachFixedTopLevelBottomBar(@NonNull LayoutInflater inflater,
+            @NonNull FrameLayout wrapper, boolean useBottomBar) {
+        if (!useBottomBar) {
+            return;
+        }
+        final View bottomBar = TopLevelDashboardBottomBarHelper.inflate(inflater, wrapper);
+        if (bottomBar == null) {
+            Log.w(TAG, "Bottom bar unavailable; homepage preferences still shown");
+            return;
+        }
+        wrapper.addView(bottomBar, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                Gravity.BOTTOM));
+        bindTopLevelBottomBar(bottomBar);
+    }
+
+    private void bindTopLevelBottomBar(@NonNull View bottomBar) {
+        TopLevelDashboardBottomBarHelper.bind(bottomBar, requireContext(),
+                new TopLevelDashboardBottomBarHelper.Listener() {
+                    @Override
+                    public void onNetworkSelected() {
+                        launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_NETWORK,
+                                FRAGMENT_NETWORK, R.string.network_dashboard_title);
+                    }
+
+                    @Override
+                    public void onDisplaySelected() {
+                        launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_DISPLAY,
+                                FRAGMENT_DISPLAY, R.string.display_settings);
+                    }
+
+                    @Override
+                    public void onSystemSelected() {
+                        launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_SYSTEM,
+                                FRAGMENT_SYSTEM, R.string.header_category_system);
+                    }
+
+                    @Override
+                    public void onWallpaperSelected() {
+                        launchWallpaperSettings();
+                    }
+                });
     }
 
     /**
@@ -326,6 +385,14 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 list.getPaddingRight(), pad);
     }
 
+    /** Required for {@code ExpandableBottomBarScrollableBehavior} on OOS11. */
+    private void enableOos11NestedScrolling() {
+        final RecyclerView list = getListView();
+        if (list != null) {
+            list.setNestedScrollingEnabled(true);
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -358,6 +425,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             }
             if (TopLevelDashboardBottomBarHelper.findBottomBar(view) != null) {
                 applyTopLevelBottomBarPadding();
+            }
+            if (currentStyle == OOS11_STYLE) {
+                enableOos11NestedScrolling();
             }
         }
         
@@ -449,6 +519,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     && DashboardStyleHelper.getDashboardStyle(getContext()) == AFTERLABS_STYLE;
             TopLevelCardNavigationHelper.setup(getContext(), screen, getMetricsCategory(),
                     afterlabsTab);
+            if (afterlabsTab) {
+                TopLevelCardNavigationHelper.setupAuroraStorePreference(getContext(), screen);
+            }
         } catch (Exception e) {
             Log.e(TAG, "Error in setupHomepageWidgetsClickListeners", e);
         }
@@ -1386,6 +1459,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 }
             }
             applyAfterlabsTabVisibility(mAfterlabsTabIndex);
+            TopLevelCardNavigationHelper.setupAuroraStorePreference(getContext(), screen);
         } catch (Exception e) {
             Log.e(TAG, "Error setting up AfterLabs tab strip", e);
         }

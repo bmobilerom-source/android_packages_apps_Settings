@@ -43,7 +43,7 @@
     <!-- style 10 → top_level_settings_aosp.xml -->
     <string name="dashboard_style_top_level_aosp">Arcana AOSP · top_level_settings_aosp.xml</string>
     <!-- style 11 -->
-    <string name="dashboard_style_top_level_oos11">Arcana OOS11 · top_level_settings_oos11.xml</string>
+    <string name="dashboard_style_top_level_oos11">YR Social</string>
     <!-- style 12 -->
     <string name="dashboard_style_top_level_afterlabs_tab">DynamicTabs</string>
     <!-- style 13 -->
@@ -90,6 +90,11 @@
     <string name="material_style_header_summary">Material Design 3 inspired interface</string>
     <string name="classic_style_header_title">Classic Style</string>
     <string name="classic_style_header_summary">Traditional categorized layout</string>
+
+    <string name="afterlabs_card_bluetooth_title">Bluetooth</string>
+    <string name="afterlabs_user_title">User</string>
+    <string name="aurora_store_title">Aurora Store</string>
+    <string name="aurora_store_summary">Open Aurora Store app</string>
 
     <!-- CustomerOS / Arcana headers -->
     <string name="customeros_header_title">Customer OS</string>

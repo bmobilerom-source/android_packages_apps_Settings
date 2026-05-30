@@ -69,6 +69,24 @@ public final class TopLevelDashboardBottomBarHelper {
         }
     }
 
+    /**
+     * Inflates the OOS11-only floating bar ({@code dashboard_expandable_bottom_bar_oos11.xml}).
+     * Caller must attach inside a {@link androidx.coordinatorlayout.widget.CoordinatorLayout}.
+     */
+    @Nullable
+    public static View inflateOos11Floating(@NonNull LayoutInflater inflater,
+            @NonNull ViewGroup parent) {
+        try {
+            return inflater.inflate(R.layout.dashboard_expandable_bottom_bar_oos11, parent, false);
+        } catch (Throwable t) {
+            Log.e(TAG, "OOS11 floating ExpandableBottomBar failed", t);
+            return inflate(inflater, parent);
+        }
+    }
+
+    /**
+     * Binds an already-inflated bar root (ExpandableBottomBar or fallback shell).
+     */
     public static void bind(@NonNull View root, @NonNull Context context,
             @NonNull Listener listener) {
         final ExpandableBottomBar expandable = root.findViewById(R.id.dashboard_expandable_bottom_bar);

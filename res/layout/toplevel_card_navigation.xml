@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Quick navigation row for Custom V2 / Security Extended / AfterLabs tab homepages.
+  Quick navigation row — same card background as homepage_widgets (@drawable/custom_preference_background).
 
   Copyright (C) 2025 BashaMobile
 -->
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipToPadding="false"
@@ -20,72 +19,69 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- 1. Network and Internet -->
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:id="@+id/card_network"
             android:layout_width="120dp"
             android:layout_height="72dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/custom_preference_background"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <TextView
+                android:id="@+id/card_network_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="8dp"
                 android:text="@string/network_dashboard_title"
-                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-                android:textAlignment="center" />
-        </com.google.android.material.card.MaterialCardView>
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+        </LinearLayout>
 
-        <!-- 2. Display -->
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:id="@+id/card_display"
             android:layout_width="120dp"
             android:layout_height="72dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/custom_preference_background"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <TextView
+                android:id="@+id/card_display_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="8dp"
                 android:text="@string/display_settings"
-                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-                android:textAlignment="center" />
-        </com.google.android.material.card.MaterialCardView>
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+        </LinearLayout>
 
-        <!-- 3. Custom Dashboard -->
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:id="@+id/card_custom_dashboard"
             android:layout_width="120dp"
             android:layout_height="72dp"
+            android:background="@drawable/custom_preference_background"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <TextView
+                android:id="@+id/card_custom_dashboard_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="8dp"
                 android:text="@string/custom_dashboard_title"
-                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-                android:textAlignment="center" />
-        </com.google.android.material.card.MaterialCardView>
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
+        </LinearLayout>
     </LinearLayout>
 </HorizontalScrollView>

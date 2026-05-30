@@ -7,8 +7,10 @@ package com.android.settings.homepage;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +37,7 @@ public final class TopLevelCardNavigationHelper {
             "com.epic.fragments.CustomDashboardSettings";
     private static final String FRAGMENT_CONNECTED_DEVICES =
             "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment";
+    private static final String AURORA_STORE_PACKAGE = "com.aurora.store";
 
     private TopLevelCardNavigationHelper() {}
 
@@ -44,8 +47,8 @@ public final class TopLevelCardNavigationHelper {
     }
 
     /**
-     * @param afterlabsExtrasOnTab when true, {@code top_level_extras_navigation} display card
-     *        opens Connected devices instead of Display settings.
+     * @param afterlabsExtrasOnTab when true, middle card label is Bluetooth and opens Connected
+     *        devices (AfterLabs tab 0 only).
      */
     public static void setup(@NonNull Context context, @Nullable PreferenceScreen screen,
             int sourceMetricsCategory, boolean afterlabsExtrasOnTab) {
@@ -62,20 +65,62 @@ public final class TopLevelCardNavigationHelper {
             return;
         }
         final Activity activity = (Activity) context;
-        final boolean extrasDisplayOpensConnected =
-                afterlabsExtrasOnTab && isExtrasNav;
+        final boolean displayOpensConnected = afterlabsExtrasOnTab && isExtrasNav;
+
+        if (displayOpensConnected) {
+            final TextView displayTitle = layoutPref.findViewById(R.id.card_display_title);
+            if (displayTitle != null) {
+                displayTitle.setText(R.string.afterlabs_card_bluetooth_title);
+            }
+        }
 
         bindCard(layoutPref, R.id.card_network, () -> launchFragment(activity,
                 FRAGMENT_NETWORK, R.string.network_dashboard_title, sourceMetricsCategory));
         bindCard(layoutPref, R.id.card_display, () -> launchFragment(activity,
-                extrasDisplayOpensConnected ? FRAGMENT_CONNECTED_DEVICES : FRAGMENT_DISPLAY,
-                extrasDisplayOpensConnected
+                displayOpensConnected ? FRAGMENT_CONNECTED_DEVICES : FRAGMENT_DISPLAY,
+                displayOpensConnected
                         ? R.string.connected_devices_dashboard_title
                         : R.string.display_settings,
                 sourceMetricsCategory));
         bindCard(layoutPref, R.id.card_custom_dashboard, () -> launchFragment(activity,
                 FRAGMENT_CUSTOM_DASHBOARD, R.string.custom_dashboard_title,
                 sourceMetricsCategory));
+    }
+
+    /** Aurora Store tile on AfterLabs tab 2 (no fragment in XML). */
+    public static void setupAuroraStorePreference(@NonNull Context context,
+            @Nullable PreferenceScreen screen) {
+        if (screen == null || !(context instanceof Activity)) {
+            return;
+        }
+        androidx.preference.Preference pref = screen.findPreference("top_level_aurora_store");
+        if (pref == null) {
+            return;
+        }
+        pref.setOnPreferenceClickListener(preference -> {
+            launchAuroraStore((Activity) context);
+            return true;
+        });
+    }
+
+    private static void launchAuroraStore(@NonNull Activity activity) {
+        try {
+            Intent launch = activity.getPackageManager().getLaunchIntentForPackage(
+                    AURORA_STORE_PACKAGE);
+            if (launch != null) {
+                launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(launch);
+                return;
+            }
+            Intent market = new Intent(Intent.ACTION_VIEW);
+            market.setData(android.net.Uri.parse("market://details?id=" + AURORA_STORE_PACKAGE));
+            market.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(market);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to launch Aurora Store", e);
+            android.widget.Toast.makeText(activity, R.string.aurora_store_summary,
+                    android.widget.Toast.LENGTH_SHORT).show();
+        }
     }
 
     private static void bindCard(@NonNull LayoutPreference layoutPref, int viewId,
