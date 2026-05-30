@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Floating ExpandableBottomBar for Arcana OOS11 homepage only (style 11).
-  Used inside CoordinatorLayout — see TopLevelSettings.createOos11HomepageView().
+  Inflated into settings_homepage_container by TopLevelSettings.attachOos11ActivityBottomBar().
 
   Copyright (C) 2025 BashaMobile
 -->
@@ -20,4 +20,4 @@
     app:exb_backgroundCornerRadius="24dp"
     app:exb_itemInactiveColor="?android:attr/textColorPrimary"
     app:exb_itemBackgroundCornerRadius="20dp"
-    app:layout_behavior="github.com.st235.lib_expandablebottombar.behavior.ExpandableBottomBarScrollableBehavior" />
+    android:elevation="12dp" />

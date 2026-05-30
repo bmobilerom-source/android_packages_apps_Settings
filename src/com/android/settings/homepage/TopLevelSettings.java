@@ -48,6 +48,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -100,6 +101,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     private static final String SAVE_AFTERLABS_TAB_INDEX = "afterlabs_tab_index";
     private static final int EPIC_STYLE = 1;
     private static final int OOS11_STYLE = 11;
+    private static final String OOS11_BOTTOM_BAR_TAG = "oos11_floating_bottom_bar";
     private static final int AFTERLABS_STYLE = 12;
     private static final int AFTERLABS_GRID_STYLE = 13;
 
@@ -140,6 +142,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     private int mDashBoardStyle = -1; // -1 means not initialized yet, will be read from Settings
     private int mAfterlabsTabIndex = 0;
+    @Nullable
+    private NestedScrollView mOos11ScrollContainer;
     private int mMaterialGridSetupRetries = 0;
     private int mFunDisplayGridSetupRetries = 0;
     private boolean mIsEmbeddingActivityEnabled;
@@ -223,7 +227,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 ? DashboardStyleHelper.getDashboardStyle(styleContext) : -1;
 
         if (useBottomBar && style == OOS11_STYLE) {
-            return createOos11HomepageView(inflater, content);
+            // Bar is pinned on the activity CoordinatorLayout in onViewCreated (not here).
+            return content;
         }
 
         final FrameLayout wrapper = new FrameLayout(requireContext());
@@ -240,47 +245,65 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         return wrapper;
     }
 
-    /**
-     * OOS11 only: CoordinatorLayout + {@link ExpandableBottomBarScrollableBehavior} so the bar
-     * floats and hides/shows while scrolling the preference list.
-     */
-    private View createOos11HomepageView(@NonNull LayoutInflater inflater, @Nullable View content) {
-        final CoordinatorLayout coordinator = new CoordinatorLayout(requireContext());
-        coordinator.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        if (content != null) {
-            coordinator.addView(content, new CoordinatorLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
+    /** OOS11: bottom bar is a sibling of the homepage NestedScrollView, not inside it. */
+    private void attachOos11ActivityBottomBar() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        final CoordinatorLayout homepageRoot = activity.findViewById(R.id.settings_homepage_container);
+        if (homepageRoot == null) {
+            Log.w(TAG, "OOS11 bottom bar: settings_homepage_container not found");
+            return;
         }
 
-        final View bottomBar = TopLevelDashboardBottomBarHelper.inflateOos11Floating(inflater,
-                coordinator);
-        if (bottomBar != null) {
-            CoordinatorLayout.LayoutParams barLp;
-            if (bottomBar.getLayoutParams() instanceof CoordinatorLayout.LayoutParams) {
-                barLp = (CoordinatorLayout.LayoutParams) bottomBar.getLayoutParams();
-            } else {
-                barLp = new CoordinatorLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-            }
-            barLp.gravity = Gravity.BOTTOM;
-            if (barLp.getBehavior() == null) {
-                try {
-                    barLp.setBehavior(new github.com.st235.lib_expandablebottombar.behavior
-                            .ExpandableBottomBarScrollableBehavior());
-                } catch (Throwable t) {
-                    Log.w(TAG, "ExpandableBottomBarScrollableBehavior unavailable", t);
-                }
-            }
-            coordinator.addView(bottomBar, barLp);
-            bindTopLevelBottomBar(bottomBar);
-        } else {
+        detachOos11ActivityBottomBar();
+
+        final View bottomBar = TopLevelDashboardBottomBarHelper.inflateOos11Floating(
+                LayoutInflater.from(activity), homepageRoot);
+        if (bottomBar == null) {
             Log.w(TAG, "OOS11 floating bottom bar unavailable");
+            return;
         }
-        return coordinator;
+        bottomBar.setTag(OOS11_BOTTOM_BAR_TAG);
+        final CoordinatorLayout.LayoutParams barLp = new CoordinatorLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        barLp.gravity = Gravity.BOTTOM;
+        homepageRoot.addView(bottomBar, barLp);
+        bindTopLevelBottomBar(bottomBar);
+    }
+
+    private void detachOos11ActivityBottomBar() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        final CoordinatorLayout homepageRoot = activity.findViewById(R.id.settings_homepage_container);
+        if (homepageRoot == null) {
+            return;
+        }
+        final View existing = homepageRoot.findViewWithTag(OOS11_BOTTOM_BAR_TAG);
+        if (existing != null) {
+            homepageRoot.removeView(existing);
+        }
+    }
+
+    @Nullable
+    private View findOos11BottomBar() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return null;
+        }
+        final CoordinatorLayout homepageRoot = activity.findViewById(R.id.settings_homepage_container);
+        if (homepageRoot == null) {
+            return null;
+        }
+        final View tagged = homepageRoot.findViewWithTag(OOS11_BOTTOM_BAR_TAG);
+        if (tagged != null) {
+            return tagged;
+        }
+        return TopLevelDashboardBottomBarHelper.findBottomBar(homepageRoot);
     }
 
     private void attachFixedTopLevelBottomBar(@NonNull LayoutInflater inflater,
@@ -385,12 +408,23 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 list.getPaddingRight(), pad);
     }
 
-    /** Required for {@code ExpandableBottomBarScrollableBehavior} on OOS11. */
-    private void enableOos11NestedScrolling() {
-        final RecyclerView list = getListView();
-        if (list != null) {
-            list.setNestedScrollingEnabled(true);
+    /** OOS11: homepage scroll lives in the activity NestedScrollView, not the preference list. */
+    private void attachOos11FloatingBottomBarScroll() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
         }
+        Oos11FloatingBottomBarScrollHelper.detach(mOos11ScrollContainer);
+        mOos11ScrollContainer = Oos11FloatingBottomBarScrollHelper.attach(activity,
+                findOos11BottomBar());
+    }
+
+    @Override
+    public void onDestroyView() {
+        Oos11FloatingBottomBarScrollHelper.detach(mOos11ScrollContainer);
+        mOos11ScrollContainer = null;
+        detachOos11ActivityBottomBar();
+        super.onDestroyView();
     }
 
     @Override
@@ -423,11 +457,13 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             if (currentStyle == 5) { // Classic style
                 hideSearchBar();
             }
-            if (TopLevelDashboardBottomBarHelper.findBottomBar(view) != null) {
+            if (TopLevelDashboardBottomBarHelper.findBottomBar(view) != null
+                    || currentStyle == OOS11_STYLE) {
                 applyTopLevelBottomBarPadding();
             }
             if (currentStyle == OOS11_STYLE) {
-                enableOos11NestedScrolling();
+                attachOos11ActivityBottomBar();
+                attachOos11FloatingBottomBarScroll();
             }
         }
         
