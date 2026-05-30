@@ -1566,6 +1566,45 @@
         </activity>
 
         <activity
+            android:name="Settings$YrCustomDashboardActivity"
+            android:label="@string/yr_custom_dashboard_title"
+            android:exported="true"
+            android:icon="@drawable/ic_custom_dashboard">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.YR_CUSTOM_DASHBOARD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.epic.fragments.YrCustomDashboardSettings" />
+        </activity>
+
+        <activity
+            android:name="Settings$KidsSafeDashboardActivity"
+            android:label="@string/kidssafe_dashboard_title"
+            android:exported="true"
+            android:icon="@drawable/ic_custom_dashboard">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.KIDSSAFE_DASHBOARD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.epic.fragments.KidsSafeDashboardSettings" />
+        </activity>
+
+        <activity
+            android:name="Settings$BMobileDashboardActivity"
+            android:label="@string/bmobile_dashboard_title"
+            android:exported="true"
+            android:icon="@drawable/ic_custom_dashboard">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.BMOBILE_DASHBOARD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.epic.fragments.BMobileDashboardSettings" />
+        </activity>
+
+        <activity
             android:name="Settings$DisplaySettingsActivity"
             android:label="@string/display_settings"
             android:exported="true"

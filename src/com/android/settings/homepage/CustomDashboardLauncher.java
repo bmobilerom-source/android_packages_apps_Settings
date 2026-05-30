@@ -112,6 +112,9 @@ public final class CustomDashboardLauncher {
         return !TextUtils.isEmpty(fragmentName)
                 && (FRAGMENT_CLASS.equals(fragmentName)
                 || fragmentName.contains("CustomDashboardSettings")
-                || fragmentName.contains("DashboardStyleSettings"));
+                || fragmentName.contains("DashboardStyleSettings")
+                || fragmentName.contains("YrCustomDashboardSettings")
+                || fragmentName.contains("KidsSafeDashboardSettings")
+                || fragmentName.contains("BMobileDashboardSettings"));
     }
 }

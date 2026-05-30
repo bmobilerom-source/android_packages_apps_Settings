@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  HOMEPAGE: style 6 | @string/dashboard_style_top_level_custom_v2
+  HOMEPAGE: style 6 | @string/dashboard_style_top_level_custom_v2 (BMobile Cards)
 
   Copyright (C) 2025 The Android Open Source Project
 
@@ -29,7 +29,7 @@
         android:selectable="true"
         android:enabled="true"
         android:shouldDisableView="false"
-        android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment" 
+        android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
         android:layout="@layout/CustomerOS_header"
         android:order="-2000" />
 
@@ -64,13 +64,6 @@
             android:selectable="false"
             android:layout="@layout/toplevel_card_navigation"
             android:order="-1995" />
-
-        <!-- Lockscreen Display Grid from anatolia_settings_lockscreen.xml -->
-        <com.android.settingslib.widget.LayoutPreference
-            android:key="display_grid"
-            android:selectable="false"
-            android:layout="@layout/display_grid_layout"
-            android:order="-1994" />
 
         <!-- Connected Devices -->
         <com.android.settings.widget.HomepagePreference
@@ -139,6 +132,8 @@
             settings:highlightableMenuKey="@string/menu_key_communal"
             settings:controller="com.android.settings.communal.CommunalPreferenceController"/> -->
 
+        <!-- Display (hidden) -->
+        <!--
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.DisplaySettings"
             android:icon="@drawable/ic_settings_display_filled"
@@ -148,6 +143,7 @@
             android:summary="@string/display_dashboard_summary"
             settings:highlightableMenuKey="@string/menu_key_display"
             settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
+        -->
 
         <!-- Wallpaper hidden in Custom V2 -->
         <!-- <com.android.settings.widget.RestrictedHomepagePreference
@@ -175,6 +171,8 @@
             settings:highlightableMenuKey="@string/menu_key_storage"
             settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/> -->
 
+        <!-- Battery (hidden) -->
+        <!--
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"
             android:icon="@drawable/ic_settings_battery_filled"
@@ -184,6 +182,7 @@
             android:summary="@string/summary_placeholder"
             settings:highlightableMenuKey="@string/menu_key_battery"
             settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
+        -->
 
         <!-- System hidden in Custom V2 -->
         <!-- <com.android.settings.widget.HomepagePreference

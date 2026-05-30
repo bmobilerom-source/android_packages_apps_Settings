@@ -14,8 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 
-  HOMEPAGE: style 10 | @string/dashboard_style_top_level_aosp
-  (Arcana AOSP — this file IS top_level_settings_aosp.xml)
+  HOMEPAGE: style 10 | @string/dashboard_style_top_level_aosp (BMobile Icons)
   -->
 
 <PreferenceScreen
@@ -76,6 +75,8 @@
         settings:controller="com.android.settings.display.TopLevelWallpaperPreferenceController"/>
     -->
         
+    <!-- Apps (hidden) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.applications.AppDashboardFragment"
         android:icon="@drawable/ic_homepage_apps"
@@ -84,6 +85,7 @@
         android:title="@string/apps_dashboard_title"
         android:summary="@string/app_and_notification_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_apps"/>
+    -->
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
@@ -165,6 +167,8 @@
         settings:highlightableMenuKey="@string/menu_key_location"
         settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"/>
 
+    <!-- Emergency (hidden) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:key="top_level_emergency"
         android:title="@string/emergency_settings_preference_title"
@@ -173,6 +177,7 @@
         android:order="-20"
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"
         settings:highlightableMenuKey="@string/menu_key_emergency"/>
+    -->
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.accounts.AccountDashboardFragment"
@@ -196,6 +201,8 @@
         settings:highlightableMenuKey="@string/menu_key_system"/>
     -->
 
+    <!-- About phone (hidden) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
         android:icon="@drawable/ic_homepage_about"
@@ -205,6 +212,7 @@
         android:summary="@string/summary_placeholder"
         settings:highlightableMenuKey="@string/menu_key_about_device"
         settings:controller="com.android.settings.deviceinfo.aboutphone.TopLevelAboutDevicePreferenceController"/>
+    -->
 
     <!-- Support + Custom Dashboard (hidden) -->
     <!--

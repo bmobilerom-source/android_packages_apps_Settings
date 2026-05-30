@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  HOMEPAGE: style 7 (default) | @string/dashboard_style_top_level_fun_display
+  HOMEPAGE: style 16 | @string/dashboard_style_top_level_ks_fun
 
   Copyright (C) 2025 LineageOS
 
@@ -15,35 +15,41 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-  -->
+-->
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
-   
-    <!-- Main User Profile Card -->
+
+    <!-- KidsSafe user profile card -->
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/mainuser_profile_card"
         android:key="about_device_info"
         android:selectable="true"
-        android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
+        android:fragment="com.android.settings.kidssafe.KidsSafeUserInfoFragment"
         android:order="-2000"/>
 
-    <!-- Fun Display Settings Grid -->
+    <!-- Extended Homepage Widgets -->
     <com.android.settingslib.widget.LayoutPreference
-        android:key="fun_display_grid"
+        android:key="extended_homepage_widgets"
         android:selectable="false"
-        android:layout="@layout/fundisplaysettings_two_column_grid" />
+        android:layout="@layout/extended_homepage_widgets"
+        android:order="-1999" />
+
+    <!-- KS Fun expressive grid -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="ks_fun_expressive_grid"
+        android:selectable="false"
+        android:layout="@layout/kidssafe_expressive_two_column_grid" />
 
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.BMobileDashboardSettings"
+        android:fragment="com.epic.fragments.KidsSafeDashboardSettings"
         android:icon="@drawable/ic_custom_dashboard"
-        android:key="top_level_bmobile_dashboard"
+        android:key="top_level_kidssafe_dashboard"
         android:order="99"
-        android:title="@string/bmobile_dashboard_title"
-        android:summary="@string/bmobile_dashboard_summary"
+        android:title="@string/kidssafe_dashboard_title"
+        android:summary="@string/kidssafe_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_system"/>
 
 </PreferenceScreen>
-

@@ -10,29 +10,29 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.android.settings.R;
-import com.android.settings.homepage.CustomDashboardLauncher;
 import com.android.settings.homepage.DashboardStyleHelper;
 
-/** Full dashboard style picker (all layouts). */
-public class CustomDashboardSettings extends BrandDashboardSettings {
+/** BMobile-branded dashboard picker (Cards, Home, Expressive, Icons, DynamicTabs, Neo). */
+public class BMobileDashboardSettings extends BrandDashboardSettings {
 
-    public static void launchFrom(Context context) {
-        CustomDashboardLauncher.launch(context);
+    public static void launchFrom(@NonNull Context context) {
+        launchFragment(context, BMobileDashboardSettings.class.getName(),
+                R.string.bmobile_dashboard_title);
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.custom_dashboard_settings;
+        return R.xml.bmobile_dashboard_settings;
     }
 
     @Override
     protected int getPageTitleResId() {
-        return R.string.custom_dashboard_title;
+        return R.string.bmobile_dashboard_title;
     }
 
     @Override
     protected int getLoadErrorResId() {
-        return R.string.custom_dashboard_load_error;
+        return R.string.bmobile_dashboard_load_error;
     }
 
     @Override
@@ -42,6 +42,6 @@ public class CustomDashboardSettings extends BrandDashboardSettings {
 
     @Override
     protected String getLogTag() {
-        return "CustomDashboardSettings";
+        return "BMobileDashboardSettings";
     }
 }

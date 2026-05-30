@@ -100,10 +100,17 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     private static final String KEY_AFTERLABS_TAB_STRIP = "afterlabs_tab_strip";
     private static final String SAVE_AFTERLABS_TAB_INDEX = "afterlabs_tab_index";
     private static final int EPIC_STYLE = 1;
+    private static final int CLASSIC_STYLE = 5;
+    private static final int BMOBILE_NEO_STYLE = 15;
+    private static final int FUN_DISPLAY_STYLE = 7;
+    private static final int BMOBILE_EXPRESSIVE_STYLE = 8;
+    private static final int BMOBILE_CARDS_STYLE = 6;
     private static final int OOS11_STYLE = 11;
     private static final String OOS11_BOTTOM_BAR_TAG = "oos11_floating_bottom_bar";
     private static final int AFTERLABS_STYLE = 12;
     private static final int AFTERLABS_GRID_STYLE = 13;
+    private static final int YR_EXPRESSIVE_STYLE = 14;
+    private static final int KS_FUN_STYLE = 16;
 
     /** Category keys — index matches tab order in {@code bmobile_afterlabs_tab_layout}. */
     private static final String[] AFTERLABS_CATEGORY_KEYS = {
@@ -207,13 +214,17 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         return createTopLevelViewWithBottomBar(inflater, container, savedInstanceState);
     }
 
-    /** Epic (1), AfterLabs tab (12), and grid (13) omit the expandable bottom bar. */
+    /** Epic (1), KS School (5), BMobile Home (7), BMobile Expressive (8), AfterLabs tab/grid omit bottom bar. */
     private static boolean shouldShowTopLevelBottomBar(@Nullable Context context) {
         if (context == null) {
             return true;
         }
         final int style = DashboardStyleHelper.getDashboardStyle(context);
         return style != EPIC_STYLE
+                && style != CLASSIC_STYLE
+                && style != FUN_DISPLAY_STYLE
+                && style != BMOBILE_EXPRESSIVE_STYLE
+                && style != KS_FUN_STYLE
                 && style != AFTERLABS_STYLE
                 && style != AFTERLABS_GRID_STYLE;
     }
@@ -427,6 +438,33 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         super.onDestroyView();
     }
 
+    /** BMobile Cards (6): remove hidden prefs and card-row Display shortcut. */
+    private void removeBmobileCardsDisplayGrid() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
+        for (String key : new String[] {
+                "display_grid",
+                "top_level_display",
+                "top_level_battery",
+                "top_level_wallpaper",
+                "top_level_priority_modes"
+        }) {
+            final Preference pref = screen.findPreference(key);
+            if (pref != null) {
+                screen.removePreference(pref);
+            }
+        }
+        final LayoutPreference cardNav = screen.findPreference("top_level_card_navigation");
+        if (cardNav != null) {
+            final View displayCard = cardNav.findViewById(R.id.card_display);
+            if (displayCard != null) {
+                displayCard.setVisibility(View.GONE);
+            }
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -454,7 +492,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         Context context = getContext();
         if (context != null) {
             int currentStyle = DashboardStyleHelper.getDashboardStyle(context);
-            if (currentStyle == 5) { // Classic style
+            if (currentStyle == CLASSIC_STYLE || currentStyle == BMOBILE_NEO_STYLE
+                    || currentStyle == KS_FUN_STYLE) {
                 hideSearchBar();
             }
             if (TopLevelDashboardBottomBarHelper.findBottomBar(view) != null
@@ -464,6 +503,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             if (currentStyle == OOS11_STYLE) {
                 attachOos11ActivityBottomBar();
                 attachOos11FloatingBottomBarScroll();
+            }
+            if (currentStyle == BMOBILE_CARDS_STYLE) {
+                removeBmobileCardsDisplayGrid();
             }
         }
         
@@ -492,6 +534,12 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             } else if (currentStyle == 8) {
                 mDashBoardStyle = 8;
                 view.postDelayed(() -> setupBMobileExpressiveGrid(), 50);
+            } else if (currentStyle == YR_EXPRESSIVE_STYLE) {
+                mDashBoardStyle = YR_EXPRESSIVE_STYLE;
+                view.postDelayed(() -> setupYrExpressiveGrid(), 50);
+            } else if (currentStyle == KS_FUN_STYLE) {
+                mDashBoardStyle = KS_FUN_STYLE;
+                view.postDelayed(() -> setupKsFunGrid(), 50);
             } else if (currentStyle == 12) {
                 mDashBoardStyle = 12;
                 view.postDelayed(() -> setupAfterlabsTabStrip(), 50);
@@ -518,6 +566,12 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                                 setupFunDisplayGrid();
                             }
                         }, 50);
+                    } else if (mDashBoardStyle == 8) {
+                        rootView.postDelayed(() -> setupBMobileExpressiveGrid(), 50);
+                    } else if (mDashBoardStyle == YR_EXPRESSIVE_STYLE) {
+                        rootView.postDelayed(() -> setupYrExpressiveGrid(), 50);
+                    } else if (mDashBoardStyle == KS_FUN_STYLE) {
+                        rootView.postDelayed(() -> setupKsFunGrid(), 50);
                     }
                 }
             }
@@ -1056,13 +1110,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             
             items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
                     com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.custom_dashboard_title,
-                    R.string.custom_dashboard_summary,
-                    "com.epic.fragments.CustomDashboardSettings",
-                    R.drawable.ic_settings_system_dashboard_filled));
-            
-            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
-                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.connected_devices_dashboard_title,
                     R.string.connected_devices_dashboard_default_summary,
                     "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
@@ -1136,6 +1183,228 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         } catch (Exception e) {
             Log.e(TAG, "Error setting up BMobile Expressive grid internal", e);
         }
+    }
+
+    /**
+     * Sets up the RecyclerView grid for YR Expressive dashboard style (14).
+     * Same shell as BMobile Expressive; grid items omit network, display, system, and
+     * custom dashboard.
+     */
+    private void setupYrExpressiveGrid() {
+        try {
+            Context context = getContext();
+            if (context == null) {
+                context = getActivity();
+            }
+            if (context == null) {
+                Log.w(TAG, "Context is null, cannot setup YR Expressive grid");
+                return;
+            }
+
+            final Context finalContext = context;
+
+            if (DashboardStyleHelper.getDashboardStyle(context) != YR_EXPRESSIVE_STYLE) {
+                Log.d(TAG, "Not YR Expressive style, skipping setup");
+                return;
+            }
+
+            if (android.os.Looper.myLooper() != android.os.Looper.getMainLooper()) {
+                View view = getView();
+                if (view != null) {
+                    view.post(this::setupYrExpressiveGrid);
+                }
+                return;
+            }
+
+            PreferenceScreen screen = getPreferenceScreen();
+            if (screen == null) {
+                Log.w(TAG, "PreferenceScreen is null");
+                return;
+            }
+
+            androidx.preference.Preference layoutPref = screen.findPreference("yr_expressive_grid");
+            if (layoutPref == null || !(layoutPref instanceof com.android.settingslib.widget.LayoutPreference)) {
+                Log.w(TAG, "YR Expressive grid LayoutPreference not found");
+                return;
+            }
+
+            com.android.settingslib.widget.LayoutPreference lp =
+                    (com.android.settingslib.widget.LayoutPreference) layoutPref;
+
+            androidx.recyclerview.widget.RecyclerView rv =
+                    lp.findViewById(R.id.yr_expressive_grid_recycler);
+            if (rv == null) {
+                Log.w(TAG, "YR Expressive grid RecyclerView not found, retrying...");
+                View rootView = getView();
+                if (rootView != null) {
+                    rootView.postDelayed(() -> {
+                        try {
+                            androidx.recyclerview.widget.RecyclerView delayedRv =
+                                    lp.findViewById(R.id.yr_expressive_grid_recycler);
+                            if (delayedRv != null) {
+                                setupYrExpressiveGridInternal(delayedRv, finalContext);
+                            }
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error in retry setupYrExpressiveGrid", e);
+                        }
+                    }, 300);
+                }
+                return;
+            }
+
+            setupYrExpressiveGridInternal(rv, finalContext);
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting up YR Expressive grid", e);
+        }
+    }
+
+    private void setupYrExpressiveGridInternal(androidx.recyclerview.widget.RecyclerView rv,
+            Context context) {
+        try {
+            android.app.Activity activity = getActivity();
+            if (activity == null) {
+                Log.w(TAG, "Activity is null");
+                return;
+            }
+
+            androidx.recyclerview.widget.GridLayoutManager layoutManager =
+                    new androidx.recyclerview.widget.GridLayoutManager(context, 2);
+            rv.setLayoutManager(layoutManager);
+
+            java.util.List<com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem> items =
+                    new java.util.ArrayList<>();
+            populateYrExpressiveGridItems(items);
+
+            rv.setAdapter(new com.epic.fragments.BMobileExpressiveSettingsAdapter(activity, items,
+                    getMetricsCategory()));
+            Log.d(TAG, "YR Expressive grid setup completed with " + items.size() + " items");
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting up YR Expressive grid internal", e);
+        }
+    }
+
+    /** Grid cards for YR Expressive (style 14) — no network, display, system, or custom dashboard. */
+    private void populateYrExpressiveGridItems(
+            java.util.List<com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem> items) {
+        final int type = com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD;
+        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.connected_devices_dashboard_title,
+                R.string.connected_devices_dashboard_default_summary,
+                "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
+                R.drawable.ic_devices_other_filled));
+        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.configure_notification_settings, R.string.notification_dashboard_summary,
+                "com.android.settings.notification.ConfigureNotificationSettings",
+                R.drawable.ic_notifications_filled));
+        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.sound_settings, R.string.sound_dashboard_summary_with_dnd,
+                "com.android.settings.notification.SoundSettings",
+                R.drawable.ic_volume_up_filled));
+        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.power_usage_summary_title, R.string.summary_placeholder,
+                "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
+                R.drawable.ic_settings_battery_filled));
+        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.security_settings_title, R.string.security_dashboard_summary,
+                "com.android.settings.security.SecuritySettings",
+                R.drawable.ic_settings_security_filled));
+        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.privacy_dashboard_title, R.string.privacy_dashboard_summary,
+                "com.android.settings.privacy.PrivacyDashboardFragment",
+                R.drawable.ic_settings_privacy_filled));
+        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.location_settings_title,
+                R.string.location_settings_loading_app_permission_stats,
+                "com.android.settings.location.LocationSettings",
+                R.drawable.ic_settings_location_filled));
+        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.accessibility_settings, R.string.accessibility_settings_summary,
+                "com.android.settings.accessibility.AccessibilitySettings",
+                R.drawable.ic_settings_accessibility_filled));
+    }
+
+    /**
+     * Sets up the RecyclerView grid for KS Fun dashboard style (16).
+     * KidsSafe profile card + extended widgets + Sound / Display / Privacy / Location grid.
+     */
+    private void setupKsFunGrid() {
+        try {
+            Context context = getContext();
+            if (context == null) {
+                context = getActivity();
+            }
+            if (context == null) {
+                Log.w(TAG, "Context is null, cannot setup KS Fun grid");
+                return;
+            }
+
+            final Context finalContext = context;
+
+            if (DashboardStyleHelper.getDashboardStyle(context) != KS_FUN_STYLE) {
+                Log.d(TAG, "Not KS Fun style, skipping setup");
+                return;
+            }
+
+            if (android.os.Looper.myLooper() != android.os.Looper.getMainLooper()) {
+                View view = getView();
+                if (view != null) {
+                    view.post(this::setupKsFunGrid);
+                }
+                return;
+            }
+
+            PreferenceScreen screen = getPreferenceScreen();
+            if (screen == null) {
+                Log.w(TAG, "PreferenceScreen is null");
+                return;
+            }
+
+            androidx.preference.Preference layoutPref =
+                    screen.findPreference(KsFunDashboardHelper.GRID_PREF_KEY);
+            if (layoutPref == null
+                    || !(layoutPref instanceof com.android.settingslib.widget.LayoutPreference)) {
+                Log.w(TAG, "KS Fun grid LayoutPreference not found");
+                return;
+            }
+
+            com.android.settingslib.widget.LayoutPreference lp =
+                    (com.android.settingslib.widget.LayoutPreference) layoutPref;
+
+            androidx.recyclerview.widget.RecyclerView rv =
+                    lp.findViewById(R.id.kidssafe_expressive_grid_recycler);
+            if (rv == null) {
+                Log.w(TAG, "KS Fun grid RecyclerView not found, retrying...");
+                View rootView = getView();
+                if (rootView != null) {
+                    rootView.postDelayed(() -> {
+                        try {
+                            androidx.recyclerview.widget.RecyclerView delayedRv =
+                                    lp.findViewById(R.id.kidssafe_expressive_grid_recycler);
+                            if (delayedRv != null) {
+                                setupKsFunGridInternal(delayedRv, finalContext);
+                            }
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error in retry setupKsFunGrid", e);
+                        }
+                    }, 300);
+                }
+                return;
+            }
+
+            setupKsFunGridInternal(rv, finalContext);
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting up KS Fun grid", e);
+        }
+    }
+
+    private void setupKsFunGridInternal(androidx.recyclerview.widget.RecyclerView rv,
+            Context context) {
+        android.app.Activity activity = getActivity();
+        if (activity == null) {
+            Log.w(TAG, "Activity is null");
+            return;
+        }
+        KsFunDashboardHelper.setupGrid(rv, activity, context, getMetricsCategory());
     }
 
     /**
@@ -1275,108 +1544,60 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         }
     }
 
-    /** Grid cards for Fun Display homepage (style 7). */
+    /** Grid cards for Fun Display / BMobile Home homepage (style 7). */
     private void populateFunDisplayGridItems(
             java.util.List<com.epic.fragments.FunDisplaySettingsAdapter.CardItem> items) {
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.network_dashboard_title,
-                    R.string.summary_placeholder,
-                    "com.android.settings.network.NetworkDashboardFragment",
-                    R.drawable.ic_settings_wireless_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            final int type = com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD;
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.custom_dashboard_title,
                     R.string.custom_dashboard_summary,
                     "com.epic.fragments.CustomDashboardSettings",
                     R.drawable.ic_settings_system_dashboard_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.connected_devices_dashboard_title,
                     R.string.connected_devices_dashboard_default_summary,
                     "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
                     R.drawable.ic_devices_other_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.configure_notification_settings,
                     R.string.notification_dashboard_summary,
                     "com.android.settings.notification.ConfigureNotificationSettings",
                     R.drawable.ic_notifications_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.sound_settings,
                     R.string.sound_dashboard_summary_with_dnd,
                     "com.android.settings.notification.SoundSettings",
                     R.drawable.ic_volume_up_filled));
-            // Communal removed per user request
-            // items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-            //         com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-            //         R.string.communal_settings_title,
-            //         R.string.communal_settings_summary,
-            //         "com.android.settings.communal.CommunalDashboardFragment",
-            //         R.drawable.ia_settings_communal));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.display_dashboard_summary,
-                    "com.android.settings.DisplaySettings",
-                    R.drawable.ic_settings_display_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.storage_settings,
                     R.string.summary_placeholder,
                     "com.android.settings.deviceinfo.StorageDashboardFragment",
                     R.drawable.ic_storage_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.power_usage_summary_title,
                     R.string.summary_placeholder,
                     "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
                     R.drawable.ic_settings_battery_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.header_category_system,
-                    R.string.system_dashboard_summary,
-                    "com.android.settings.system.SystemDashboardFragment",
-                    R.drawable.ic_settings_system_dashboard_filled));
-            // Safety Center removed per user request
-            // items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-            //         com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-            //         R.string.safety_center_title,
-            //         R.string.safety_center_summary,
-            //         null,
-            //         R.drawable.ic_settings_safety_center_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.security_settings_title,
                     R.string.security_dashboard_summary,
                     "com.android.settings.security.SecuritySettings",
                     R.drawable.ic_settings_security_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.privacy_dashboard_title,
                     R.string.privacy_dashboard_summary,
                     "com.android.settings.privacy.PrivacyDashboardFragment",
                     R.drawable.ic_settings_privacy_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.location_settings_title,
                     R.string.location_settings_loading_app_permission_stats,
                     "com.android.settings.location.LocationSettings",
                     R.drawable.ic_settings_location_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.emergency_settings_preference_title,
-                    R.string.emergency_dashboard_summary,
-                    "com.android.settings.emergency.EmergencyDashboardFragment",
-                    R.drawable.ic_settings_emergency_filled));
-            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
-                    com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+            items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.accessibility_settings,
                     R.string.accessibility_settings_summary,
                     "com.android.settings.accessibility.AccessibilitySettings",
                     R.drawable.ic_settings_accessibility_filled));
-            // Tips and Support removed per user request
     }
 
     /**
@@ -1390,10 +1611,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 R.string.network_dashboard_title, R.string.summary_placeholder,
                 "com.android.settings.network.NetworkDashboardFragment",
                 R.drawable.ic_settings_wireless_filled));
-        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
-                R.string.custom_dashboard_title, R.string.custom_dashboard_summary,
-                "com.epic.fragments.CustomDashboardSettings",
-                R.drawable.ic_settings_system_dashboard_filled));
         items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.connected_devices_dashboard_title,
                 R.string.connected_devices_dashboard_default_summary,

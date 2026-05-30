@@ -66,7 +66,7 @@ public class DashboardStyleHelper {
     /**
      * Maps {@code settings_dashboard_style} id → homepage XML.
      * Picker strings: {@code dashboard_style_top_level_*} in system_basic_strings.xml
-     * (name matches XML basename). Removed ids: 3 Compact, 9 Security Extended, 14 Infinity.
+     * (name matches XML basename). Removed ids: 3 Compact, 9 Security Extended.
      */
     public static int getPreferenceScreenResIdForStyle(int style) {
         switch (style) {
@@ -94,6 +94,12 @@ public class DashboardStyleHelper {
                 return com.android.settings.R.xml.top_level_settings_afterlabs_tab;
             case 13: // dashboard_style_top_level_afterlabs_grid
                 return com.android.settings.R.xml.top_level_settings_afterlabs_grid;
+            case 14: // dashboard_style_top_level_yr_expressive
+                return com.android.settings.R.xml.top_level_settings_yr_expressive;
+            case 15: // dashboard_style_top_level_bmobile_neo
+                return com.android.settings.R.xml.top_level_settings_bmobile_neo;
+            case 16: // dashboard_style_top_level_ks_fun
+                return com.android.settings.R.xml.top_level_settings_ks_fun;
             default:
                 Log.w(TAG, "Unknown or removed style " + style + ", using default");
                 return com.android.settings.R.xml.top_level_settings_fun_display;
@@ -108,10 +114,10 @@ public class DashboardStyleHelper {
     }
 
     public static boolean isValidStyle(int style) {
-        if (style == 3 || style == 9 || style == 14) {
+        if (style == 3 || style == 9) {
             return false;
         }
-        return (style >= 0 && style <= 8) || (style >= 10 && style <= 13);
+        return (style >= 0 && style <= 8) || (style >= 10 && style <= 16);
     }
 
     /**
