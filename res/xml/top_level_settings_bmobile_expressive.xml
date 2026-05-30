@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+  HOMEPAGE: style 8 | @string/dashboard_style_top_level_bmobile_expressive
+
   Copyright (C) 2025 LineageOS
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,13 +22,15 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
    
-    <!-- Main User Profile Card -->
+    <!-- Main User Profile Card (hidden for now) -->
+    <!--
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/mainuser_profile_card"
         android:key="about_device_info"
         android:selectable="true"
         android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
         android:order="-2000"/>
+    -->
 
     <!-- Extended Homepage Widgets -->
     <com.android.settingslib.widget.LayoutPreference

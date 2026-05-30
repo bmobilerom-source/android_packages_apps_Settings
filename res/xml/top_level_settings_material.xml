@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+  HOMEPAGE: style 4 | @string/dashboard_style_top_level_material
+
   Copyright (C) 2025 LineageOS
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,13 +24,15 @@
     android:title="Settings">
 
     <!-- Material Style - Grid layout with cards, similar to DisplayPageGrid -->
-    <!-- Keep user profile card at the top (wallpaper card) -->
+    <!-- User profile card (hidden) -->
+    <!--
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/mainuser_profile_card"
         android:key="about_device_info"
         android:selectable="true"
         android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
         android:order="-2000"/>
+    -->
 
     <!-- Material Dashboard Grid - All preferences from top_level_settings_v2.xml as cards -->
     <com.android.settingslib.widget.LayoutPreference

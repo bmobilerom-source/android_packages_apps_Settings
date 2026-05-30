@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  AfterLabs-style grid homepage (2-column cards, V2 destinations via TopLevelSettings).
+  HOMEPAGE: style 13 | @string/dashboard_style_top_level_afterlabs_grid (YR School)
+  AfterLabs grid — 2-column cards via TopLevelSettings.populateAfterlabsGridItems().
 
   Copyright (C) 2025 BashaMobile
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,14 +23,5 @@
         android:layout="@layout/afterlabs_grid_two_column_grid"
         android:order="-1990"
         android:selectable="false" />
-
-    <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.CustomDashboardSettings"
-        android:icon="@drawable/ic_custom_dashboard"
-        android:key="top_level_custom_dashboard"
-        android:order="-100"
-        android:title="@string/custom_dashboard_title"
-        android:summary="@string/custom_dashboard_summary"
-        settings:highlightableMenuKey="@string/menu_key_system" />
 
 </PreferenceScreen>

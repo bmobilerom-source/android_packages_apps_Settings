@@ -1631,41 +1631,35 @@
     <string-array name="display_over_apps_permission_change_exempt">
     </string-array>
 
-    <!-- Settings dashboard styles -->
+    <!-- Settings dashboard styles — entry order must match settings_dashboard_style_values -->
     <string-array name="settings_dashboard_style_entries">
-        <item>@string/dashboard_style_aosp</item>
-        <item>@string/dashboard_style_epic</item>
-        <item>@string/dashboard_style_v2</item>
-        <item>@string/dashboard_style_compact</item>
-        <item>@string/dashboard_style_material</item>
-        <item>@string/dashboard_style_classic</item>
-        <item>@string/dashboard_style_custom_v2</item>
-        <item>@string/dashboard_style_fun_display</item>
-        <item>@string/dashboard_style_bmobile_expressive</item>
-        <item>@string/dashboard_style_securityextended</item>
-        <item>@string/dashboard_style_arcana_aosp</item>
-        <item>@string/dashboard_style_arcana_oos11</item>
-        <item>@string/dashboard_style_afterlabs_tab</item>
-        <item>@string/dashboard_style_afterlabs_grid</item>
-        <item>@string/dashboard_style_infinity_home</item>
+        <item>@string/dashboard_style_top_level_settings</item>      <!-- 0 -->
+        <item>@string/dashboard_style_top_level_epic</item>          <!-- 1 -->
+        <item>@string/dashboard_style_top_level_v2</item>            <!-- 2 -->
+        <item>@string/dashboard_style_top_level_material</item>     <!-- 4 -->
+        <item>@string/dashboard_style_top_level_classic</item>      <!-- 5 -->
+        <item>@string/dashboard_style_top_level_custom_v2</item>     <!-- 6 -->
+        <item>@string/dashboard_style_top_level_fun_display</item>  <!-- 7 default -->
+        <item>@string/dashboard_style_top_level_bmobile_expressive</item> <!-- 8 -->
+        <item>@string/dashboard_style_top_level_aosp</item>         <!-- 10 -->
+        <item>@string/dashboard_style_top_level_oos11</item>        <!-- 11 -->
+        <item>@string/dashboard_style_top_level_afterlabs_tab</item><!-- 12 -->
+        <item>@string/dashboard_style_top_level_afterlabs_grid</item><!-- 13 -->
     </string-array>
 
     <string-array name="settings_dashboard_style_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
-        <item>3</item>
         <item>4</item>
         <item>5</item>
         <item>6</item>
         <item>7</item>
         <item>8</item>
-        <item>9</item>
         <item>10</item>
         <item>11</item>
         <item>12</item>
         <item>13</item>
-        <item>14</item>
     </string-array>
 
     <string-array name="customize_layout_mode_entries">

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 BashaMobile
+ * Copyright (C) 2025 LineageOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
@@ -25,25 +25,33 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function3;
 
 /**
- * Wires the Custom Dashboard bottom bar (ExpandableBottomBar with Material fallback).
+ * Expandable bottom bar on the Settings homepage ({@link TopLevelSettings}).
+ * Opens Network, Display, System, and Wallpaper destinations.
  */
-public final class CustomDashboardBottomBarHelper {
+public final class TopLevelDashboardBottomBarHelper {
 
-    private static final String TAG = "CustomDashboardBottomBar";
+    private static final String TAG = "TopLevelDashboardBottomBar";
+
+    /** Standard top-level preference keys (present on most {@code top_level_settings_*.xml}). */
+    public static final String KEY_NETWORK = "top_level_network";
+    public static final String KEY_DISPLAY = "top_level_display";
+    public static final String KEY_SYSTEM = "top_level_system";
+    public static final String KEY_WALLPAPER = "top_level_wallpaper";
 
     public interface Listener {
-        void onResetDashboardStyle();
-
-        void onResetSystemUi();
+        void onNetworkSelected();
 
         void onDisplaySelected();
+
+        void onSystemSelected();
+
+        void onWallpaperSelected();
     }
 
-    private CustomDashboardBottomBarHelper() {}
+    private TopLevelDashboardBottomBarHelper() {}
 
     /**
-     * Inflates the bottom bar, falling back to Material {@link BottomNavigationView} if the
-     * ExpandableBottomBar AAR view fails to inflate.
+     * Inflates the homepage bottom bar, falling back to Material if ExpandableBottomBar fails.
      */
     @Nullable
     public static View inflate(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
@@ -53,7 +61,8 @@ public final class CustomDashboardBottomBarHelper {
             Log.e(TAG, "ExpandableBottomBar layout failed, using material fallback", t);
         }
         try {
-            return inflater.inflate(R.layout.dashboard_expandable_bottom_bar_material, parent, false);
+            return inflater.inflate(R.layout.dashboard_expandable_bottom_bar_material, parent,
+                    false);
         } catch (Throwable t) {
             Log.e(TAG, "Material bottom bar layout failed", t);
             return null;
@@ -80,26 +89,33 @@ public final class CustomDashboardBottomBarHelper {
     private static boolean bindExpandableBar(@NonNull ExpandableBottomBar bar,
             @NonNull Context context, @NonNull Listener listener) {
         try {
-            final int resetColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 0);
-            final int systemUiColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 1);
-            final int displayColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 2);
+            final int networkColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 0);
+            final int displayColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 1);
+            final int systemColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 2);
+            final int wallpaperColor = DashboardExpandableBottomBarUi.readableAccentColor(context, 3);
             bar.getMenu().add(new MenuItemDescriptor.Builder(context)
-                    .id(R.id.custom_dashboard_nav_reset)
-                    .icon(R.drawable.ic_restore)
-                    .textRes(R.string.dashboard_style_reset_title)
-                    .color(resetColor)
+                    .id(R.id.top_level_dashboard_nav_network)
+                    .icon(R.drawable.ic_settings_wireless_filled)
+                    .textRes(R.string.top_level_dashboard_nav_network)
+                    .color(networkColor)
                     .build());
             bar.getMenu().add(new MenuItemDescriptor.Builder(context)
-                    .id(R.id.custom_dashboard_nav_systemui)
-                    .icon(R.drawable.ic_settings_system_dashboard_filled)
-                    .textRes(R.string.systemui_reset_title)
-                    .color(systemUiColor)
-                    .build());
-            bar.getMenu().add(new MenuItemDescriptor.Builder(context)
-                    .id(R.id.custom_dashboard_nav_display)
+                    .id(R.id.top_level_dashboard_nav_display)
                     .icon(R.drawable.ic_settings_display_filled)
-                    .textRes(R.string.display_settings)
+                    .textRes(R.string.top_level_dashboard_nav_display)
                     .color(displayColor)
+                    .build());
+            bar.getMenu().add(new MenuItemDescriptor.Builder(context)
+                    .id(R.id.top_level_dashboard_nav_system)
+                    .icon(R.drawable.ic_settings_system_dashboard_filled)
+                    .textRes(R.string.top_level_dashboard_nav_system)
+                    .color(systemColor)
+                    .build());
+            bar.getMenu().add(new MenuItemDescriptor.Builder(context)
+                    .id(R.id.top_level_dashboard_nav_wallpaper)
+                    .icon(R.drawable.ic_settings_wallpaper_filled)
+                    .textRes(R.string.top_level_dashboard_nav_wallpaper)
+                    .color(wallpaperColor)
                     .build());
             bar.setOnItemSelectedListener(
                     (Function3<View, MenuItem, Boolean, Unit>) (view, menuItem, reselected) -> {
@@ -119,7 +135,7 @@ public final class CustomDashboardBottomBarHelper {
             @NonNull Listener listener) {
         nav.setVisibility(View.VISIBLE);
         nav.getMenu().clear();
-        nav.inflateMenu(R.menu.custom_dashboard_bottom_nav);
+        nav.inflateMenu(R.menu.top_level_dashboard_bottom_nav);
         DashboardExpandableBottomBarUi.applyMaterialNavColors(nav);
         nav.setOnItemSelectedListener(item -> {
             dispatchSelection(item.getItemId(), listener);
@@ -128,12 +144,14 @@ public final class CustomDashboardBottomBarHelper {
     }
 
     private static void dispatchSelection(int itemId, @NonNull Listener listener) {
-        if (itemId == R.id.custom_dashboard_nav_reset) {
-            listener.onResetDashboardStyle();
-        } else if (itemId == R.id.custom_dashboard_nav_systemui) {
-            listener.onResetSystemUi();
-        } else if (itemId == R.id.custom_dashboard_nav_display) {
+        if (itemId == R.id.top_level_dashboard_nav_network) {
+            listener.onNetworkSelected();
+        } else if (itemId == R.id.top_level_dashboard_nav_display) {
             listener.onDisplaySelected();
+        } else if (itemId == R.id.top_level_dashboard_nav_system) {
+            listener.onSystemSelected();
+        } else if (itemId == R.id.top_level_dashboard_nav_wallpaper) {
+            listener.onWallpaperSelected();
         }
     }
 

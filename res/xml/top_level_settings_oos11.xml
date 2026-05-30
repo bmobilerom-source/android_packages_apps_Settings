@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+  HOMEPAGE: style 11 | @string/dashboard_style_top_level_oos11
+
   Copyright (C) 2018 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -64,6 +66,8 @@
         settings:highlightableMenuKey="@string/menu_key_display"
         settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
+    <!-- Wallpaper (hidden) -->
+    <!--
     <com.android.settings.widget.RestrictedHomepagePreference
         android:icon="@drawable/ic_settings_wallpaper_filled"
         android:key="top_level_wallpaper"
@@ -72,6 +76,7 @@
         android:summary="@string/wallpaper_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_wallpaper"
         settings:controller="com.android.settings.display.TopLevelWallpaperPreferenceController"/>
+    -->
         
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.applications.AppDashboardFragment"
@@ -140,6 +145,8 @@
         settings:highlightableMenuKey="@string/menu_key_security"
         settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 
+    <!-- Privacy (hidden) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
         android:icon="@drawable/ic_settings_privacy_filled"
@@ -148,6 +155,7 @@
         android:title="@string/privacy_dashboard_title"
         android:summary="@string/privacy_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_privacy"/>
+    -->
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.location.LocationSettings"
@@ -159,6 +167,8 @@
         settings:highlightableMenuKey="@string/menu_key_location"
         settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"/>
 
+    <!-- Emergency (hidden) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:key="top_level_emergency"
         android:title="@string/emergency_settings_preference_title"
@@ -167,6 +177,7 @@
         android:order="-20"
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"
         settings:highlightableMenuKey="@string/menu_key_emergency"/>
+    -->
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.accounts.AccountDashboardFragment"
@@ -187,6 +198,8 @@
         android:summary="@string/system_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_system"/>
 
+    <!-- About device (hidden) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
         android:icon="@drawable/ic_settings_about_device_filled"
@@ -196,6 +209,7 @@
         android:summary="@string/summary_placeholder"
         settings:highlightableMenuKey="@string/menu_key_about_device"
         settings:controller="com.android.settings.deviceinfo.aboutphone.TopLevelAboutDevicePreferenceController"/>
+    -->
 
     <com.android.settings.widget.HomepagePreference
         android:icon="@drawable/ic_help_filled"
@@ -206,6 +220,8 @@
         settings:highlightableMenuKey="@string/menu_key_support"
         settings:controller="com.android.settings.support.SupportPreferenceController"/>
 
+    <!-- Custom Dashboard (hidden) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.epic.fragments.CustomDashboardSettings"
         android:icon="@drawable/ic_custom_dashboard"
@@ -214,5 +230,6 @@
         android:title="@string/custom_dashboard_title"
         android:summary="@string/custom_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_system"/>
+    -->
 
 </PreferenceScreen>

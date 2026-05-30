@@ -5,7 +5,6 @@
  */
 package com.epic.fragments;
 
-import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
@@ -21,17 +20,19 @@ import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreferenceCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.homepage.CustomDashboardBottomBarHelper;
 import com.android.settings.homepage.CustomDashboardLauncher;
 import com.android.settings.homepage.CustomizeLayoutModeHelper;
 import com.android.settings.homepage.DashboardStyleHelper;
 import com.android.settings.homepage.DashboardSystemKeys;
+import com.android.settings.homepage.SystemUiRestarter;
 import com.android.settingslib.widget.LayoutPreference;
 
 import android.widget.TextView;
@@ -40,7 +41,7 @@ import android.widget.TextView;
  * Settings page to pick and manage custom Settings homepage dashboard layouts.
  */
 public class CustomDashboardSettings extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+        implements Preference.OnPreferenceChangeListener {
 
     /** Launch from any {@link android.content.Context} (fragment, activity, adapter). */
     public static void launchFrom(Context context) {
@@ -48,21 +49,18 @@ public class CustomDashboardSettings extends SettingsPreferenceFragment
     }
 
     private static final String KEY_DASHBOARD_STYLE = DashboardSystemKeys.DASHBOARD_STYLE;
-    private static final String KEY_COMPACT_DASHBOARD = DashboardSystemKeys.COMPACT_DASHBOARD;
     private static final String KEY_HEADER = "custom_dashboard_header";
     private static final String KEY_LAYOUT_MODE = CustomizeLayoutModeHelper.SECURE_KEY;
     private static final String KEY_DASHBOARD_STYLE_RESET = "dashboard_style_reset";
     private static final String KEY_SYSTEMUI_RESET = "systemui_reset";
     private static final String KEY_CURRENT_STYLE = "custom_dashboard_current_style";
+    private static final String FRAGMENT_DISPLAY = "com.android.settings.DisplaySettings";
     private static final String TAG = "CustomDashboardSettings";
     private static final int DEFAULT_DASHBOARD_STYLE = DashboardStyleHelper.getDefaultStyle();
     private static final int BOTTOM_NAV_PADDING_DP = 88;
 
     private ListPreference mDashboardStyle;
     private ListPreference mLayoutMode;
-    private SwitchPreferenceCompat mCompactDashboard;
-    private Preference mResetPreference;
-    private Preference mSystemUIResetPreference;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -79,12 +77,13 @@ public class CustomDashboardSettings extends SettingsPreferenceFragment
             }
         }
 
-        if (getActivity() == null) {
-            Log.e(TAG, "Activity is null in onCreate");
+        final Context context = getContext();
+        if (context == null) {
+            Log.e(TAG, "Context is null in onCreate");
             return;
         }
 
-        final ContentResolver resolver = getActivity().getContentResolver();
+        final ContentResolver resolver = context.getContentResolver();
         PreferenceScreen screen = getPreferenceScreen();
         if (screen == null) {
             Log.e(TAG, "PreferenceScreen is null after loading XML");
@@ -117,23 +116,6 @@ public class CustomDashboardSettings extends SettingsPreferenceFragment
             mDashboardStyle.setOnPreferenceChangeListener(this);
         }
 
-        mCompactDashboard = findPreference(KEY_COMPACT_DASHBOARD);
-        if (mCompactDashboard != null) {
-            boolean compactEnabled = DashboardSystemKeys.isCompactDashboardEnabled(resolver);
-            mCompactDashboard.setChecked(compactEnabled);
-            mCompactDashboard.setOnPreferenceChangeListener(this);
-        }
-
-        mResetPreference = findPreference(KEY_DASHBOARD_STYLE_RESET);
-        if (mResetPreference != null) {
-            mResetPreference.setOnPreferenceClickListener(this);
-        }
-
-        mSystemUIResetPreference = findPreference(KEY_SYSTEMUI_RESET);
-        if (mSystemUIResetPreference != null) {
-            mSystemUIResetPreference.setOnPreferenceClickListener(this);
-        }
-
         refreshCurrentStyleSummary();
     }
 
@@ -151,32 +133,34 @@ public class CustomDashboardSettings extends SettingsPreferenceFragment
                     ViewGroup.LayoutParams.MATCH_PARENT));
         }
 
-        final View bottomBar = inflater.inflate(R.layout.custom_dashboard_bottom_bar, wrapper, false);
-        final FrameLayout.LayoutParams bottomLp = new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                Gravity.BOTTOM);
-        wrapper.addView(bottomBar, bottomLp);
+        final View bottomBar = CustomDashboardBottomBarHelper.inflate(inflater, wrapper);
+        if (bottomBar != null) {
+            final FrameLayout.LayoutParams bottomLp = new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    Gravity.BOTTOM);
+            wrapper.addView(bottomBar, bottomLp);
 
-        CustomDashboardBottomBarHelper.bind(bottomBar, requireContext(),
-                new CustomDashboardBottomBarHelper.Listener() {
-                    @Override
-                    public void onStylesSelected() {
-                        scrollToPreference(KEY_DASHBOARD_STYLE);
-                        showToast(R.string.custom_dashboard_nav_styles_hint);
-                    }
+            CustomDashboardBottomBarHelper.bind(bottomBar, requireContext(),
+                    new CustomDashboardBottomBarHelper.Listener() {
+                        @Override
+                        public void onResetDashboardStyle() {
+                            resetDashboardStyle();
+                        }
 
-                    @Override
-                    public void onLayoutModeSelected() {
-                        scrollToPreference(KEY_LAYOUT_MODE);
-                        showToast(R.string.custom_dashboard_nav_layout_hint);
-                    }
+                        @Override
+                        public void onResetSystemUi() {
+                            reloadSystemUI();
+                        }
 
-                    @Override
-                    public void onApplyAndHome() {
-                        applyCurrentSelectionsAndGoHome();
-                    }
-                });
+                        @Override
+                        public void onDisplaySelected() {
+                            launchDisplaySettings();
+                        }
+                    });
+        } else {
+            Log.w(TAG, "Bottom bar unavailable; preferences still shown");
+        }
 
         return wrapper;
     }
@@ -200,24 +184,24 @@ public class CustomDashboardSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void scrollToPreference(String key) {
-        final Preference pref = findPreference(key);
-        if (pref != null) {
-            scrollToPreference(pref);
+    private void showToast(int resId, Object... formatArgs) {
+        Context context = getContext();
+        if (context != null) {
+            android.widget.Toast.makeText(context, getString(resId, formatArgs),
+                    android.widget.Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void applyCurrentSelectionsAndGoHome() {
+    private void launchDisplaySettings() {
         final Context context = getContext();
         if (context == null) {
             return;
         }
-        notifyDashboardStyleChanged();
-        android.widget.Toast.makeText(context,
-                getString(R.string.dashboard_style_applied,
-                        CustomDashboardLauncher.getCurrentStyleLabel(context)),
-                android.widget.Toast.LENGTH_SHORT).show();
-        CustomDashboardLauncher.reopenSettingsHome(getActivity());
+        new SubSettingLauncher(context)
+                .setDestination(FRAGMENT_DISPLAY)
+                .setTitleRes(R.string.display_settings)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     @Override
@@ -297,27 +281,6 @@ public class CustomDashboardSettings extends SettingsPreferenceFragment
             CustomDashboardLauncher.reopenSettingsHome(getActivity());
             return true;
         }
-        if (preference == mCompactDashboard) {
-            boolean enabled = (Boolean) newValue;
-            DashboardSystemKeys.putCompactDashboardEnabled(resolver, enabled);
-            android.widget.Toast.makeText(getContext(),
-                    enabled ? getString(R.string.compact_dashboard_enabled_toast)
-                            : getString(R.string.compact_dashboard_disabled_toast),
-                    android.widget.Toast.LENGTH_SHORT).show();
-            getActivity().sendBroadcast(
-                    new android.content.Intent("com.android.settings.COMPACT_DASHBOARD_CHANGED"));
-            View rootView = getView();
-            if (rootView != null) {
-                rootView.post(() -> {
-                    if (getActivity() != null) {
-                        getActivity().recreate();
-                    }
-                });
-            } else if (getActivity() != null) {
-                getActivity().recreate();
-            }
-            return true;
-        }
         return false;
     }
 
@@ -338,16 +301,17 @@ public class CustomDashboardSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceClick(Preference preference) {
-        if (preference == mResetPreference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
+        final String key = preference.getKey();
+        if (KEY_DASHBOARD_STYLE_RESET.equals(key)) {
             resetDashboardStyle();
             return true;
         }
-        if (preference == mSystemUIResetPreference) {
+        if (KEY_SYSTEMUI_RESET.equals(key)) {
             reloadSystemUI();
             return true;
         }
-        return false;
+        return super.onPreferenceTreeClick(preference);
     }
 
     private void notifyDashboardStyleChanged() {
@@ -358,24 +322,30 @@ public class CustomDashboardSettings extends SettingsPreferenceFragment
     }
 
     private void resetDashboardStyle() {
-        ContentResolver resolver = getActivity().getContentResolver();
+        Context context = getContext();
+        if (context == null) {
+            return;
+        }
+        ContentResolver resolver = context.getContentResolver();
         if (resolver == null) {
             return;
         }
         DashboardSystemKeys.putDashboardStyle(resolver, DEFAULT_DASHBOARD_STYLE);
-        CustomizeLayoutModeHelper.setLayoutMode(getContext(),
-                CustomizeLayoutModeHelper.MODE_GRID);
+        DashboardSystemKeys.putCompactDashboardEnabled(resolver, false);
+        CustomizeLayoutModeHelper.setLayoutMode(context, CustomizeLayoutModeHelper.MODE_GRID);
         if (mDashboardStyle != null) {
             mDashboardStyle.setValue(String.valueOf(DEFAULT_DASHBOARD_STYLE));
             updateSummary(DEFAULT_DASHBOARD_STYLE);
         }
         if (mLayoutMode != null) {
             mLayoutMode.setValue(String.valueOf(CustomizeLayoutModeHelper.MODE_GRID));
-            mLayoutMode.setSummary(CustomizeLayoutModeHelper.getModeLabel(getContext(),
+            mLayoutMode.setSummary(CustomizeLayoutModeHelper.getModeLabel(context,
                     CustomizeLayoutModeHelper.MODE_GRID));
         }
         notifyDashboardStyleChanged();
         refreshCurrentStyleSummary();
+        showToast(R.string.dashboard_style_applied,
+                getStyleLabel(DEFAULT_DASHBOARD_STYLE));
         CustomDashboardLauncher.reopenSettingsHome(getActivity());
     }
 
@@ -388,33 +358,8 @@ public class CustomDashboardSettings extends SettingsPreferenceFragment
             return;
         }
 
-        boolean success = false;
-        try {
-            java.lang.Process process =
-                    Runtime.getRuntime().exec("am force-stop com.android.systemui");
-            if (process.waitFor() == 0) {
-                success = true;
-            }
-        } catch (Exception e) {
-            Log.d(TAG, "Force-stop failed", e);
-        }
-
-        if (!success) {
-            try {
-                ActivityManager am = context.getSystemService(ActivityManager.class);
-                if (am != null) {
-                    am.killBackgroundProcesses("com.android.systemui");
-                    success = true;
-                }
-            } catch (Exception e) {
-                Log.d(TAG, "ActivityManager kill failed", e);
-            }
-        }
-
-        android.widget.Toast.makeText(context,
-                context.getString(success ? R.string.systemui_reset_success
-                        : R.string.systemui_reset_failed),
-                android.widget.Toast.LENGTH_SHORT).show();
+        final boolean success = SystemUiRestarter.restart(context);
+        showToast(success ? R.string.systemui_reset_success : R.string.systemui_reset_failed);
     }
 
     private void updateSummary(int dashboardStyle) {

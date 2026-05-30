@@ -13,6 +13,9 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
+
+  HOMEPAGE: style 0 | @string/dashboard_style_top_level_settings
+  (picker label MainUser — this file is top_level_settings.xml, NOT top_level_settings_aosp.xml)
   -->
 
 <PreferenceScreen

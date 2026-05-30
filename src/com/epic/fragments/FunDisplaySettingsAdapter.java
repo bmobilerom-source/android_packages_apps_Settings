@@ -71,18 +71,25 @@ public class FunDisplaySettingsAdapter extends RecyclerView.Adapter<FunDisplaySe
         int layoutRes;
         switch (viewType) {
             case CARD_TYPE_WIDE:
-                layoutRes = R.layout.fun_display_grid_card_wide;
+                layoutRes = R.layout.display_page_grid_card_wide;
                 break;
             case CARD_TYPE_SMALL:
-                layoutRes = R.layout.fun_display_grid_card_small;
+                layoutRes = R.layout.display_page_grid_card_small;
                 break;
             default:
-                layoutRes = R.layout.fun_display_grid_card_standard;
+                layoutRes = R.layout.display_page_grid_card_standard;
                 break;
         }
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(layoutRes, parent, false);
-        return new CardVH(view);
+        try {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(layoutRes, parent, false);
+            return new CardVH(view);
+        } catch (RuntimeException e) {
+            Log.e("FunDisplaySettingsAdapter", "Failed to inflate card layout " + layoutRes, e);
+            View fallback = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.display_page_grid_card_standard, parent, false);
+            return new CardVH(fallback);
+        }
     }
 
     @Override

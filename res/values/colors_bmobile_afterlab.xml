@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ripple">#1FFFFFFF</color>
+    <color name="card_bg_1">#1AFFFFFF</color>
+    <color name="icon_bg">#26FFFFFF</color>
+    <color name="icon_tint">#FFFFFFFF</color>
+    <color name="text_tint">#FFFFFFFF</color>
+</resources>
+

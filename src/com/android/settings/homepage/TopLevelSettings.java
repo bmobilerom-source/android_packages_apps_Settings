@@ -19,12 +19,12 @@ package com.android.settings.homepage;
 import static com.android.settings.search.actionbar.SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR;
 import static com.android.settingslib.search.SearchIndexable.MOBILE;
 
+import android.annotation.StringRes;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.res.Configuration;
 import android.text.TextUtils;
 import android.util.Log;
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.ComponentName;
@@ -39,6 +39,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.Gravity;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -64,6 +66,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.display.TopLevelWallpaperPreferenceController;
 import com.android.settings.support.SupportPreferenceController;
 import com.android.settings.widget.HomepagePreference;
 import com.android.settings.widget.HomepagePreferenceLayoutHelper.HomepagePreferenceLayout;
@@ -83,8 +86,58 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     private static final String KEY_USER_CARD = "top_level_usercard";
     private static final int MAX_MATERIAL_GRID_SETUP_RETRIES = 5;
     private static final int MAX_FUN_DISPLAY_GRID_SETUP_RETRIES = 5;
+    /** Bottom inset so the last preference clears the ExpandableBottomBar. */
+    private static final int TOP_LEVEL_BOTTOM_NAV_PADDING_DP = 96;
+
+    private static final String FRAGMENT_NETWORK =
+            "com.android.settings.network.NetworkDashboardFragment";
+    private static final String FRAGMENT_DISPLAY = "com.android.settings.DisplaySettings";
+    private static final String FRAGMENT_SYSTEM =
+            "com.android.settings.system.SystemDashboardFragment";
+
+    private static final String KEY_AFTERLABS_TAB_STRIP = "afterlabs_tab_strip";
+    private static final String SAVE_AFTERLABS_TAB_INDEX = "afterlabs_tab_index";
+    private static final int EPIC_STYLE = 1;
+    private static final int AFTERLABS_STYLE = 12;
+    private static final int AFTERLABS_GRID_STYLE = 13;
+
+    /** Category keys — index matches tab order in {@code bmobile_afterlabs_tab_layout}. */
+    private static final String[] AFTERLABS_CATEGORY_KEYS = {
+            "top_level_connectivity_category",
+            "top_level_personalize_category",
+            "top_level_system_info_category",
+            "top_level_security_privacy_category"
+    };
+
+    /** Preference keys shown per tab (must match {@code top_level_settings_afterlabs_tab.xml}). */
+    private static final String[][] AFTERLABS_TAB_PREFERENCE_KEYS = {
+            {
+                    "top_level_network",
+                    "top_level_custom_dashboard",
+                    "top_level_connected_devices",
+                    "top_level_extras_navigation",
+                    "top_level_homepage_widgets",
+            },
+            {
+                    "top_level_notifications",
+                    "top_level_sound",
+                    "top_level_display",
+            },
+            {
+                    "top_level_storage",
+                    "top_level_battery",
+                    "top_level_system",
+            },
+            {
+                    "top_level_security",
+                    "top_level_privacy_controls",
+                    "top_level_location",
+                    "top_level_emergency",
+            },
+    };
 
     private int mDashBoardStyle = -1; // -1 means not initialized yet, will be read from Settings
+    private int mAfterlabsTabIndex = 0;
     private int mMaterialGridSetupRetries = 0;
     private int mFunDisplayGridSetupRetries = 0;
     private boolean mIsEmbeddingActivityEnabled;
@@ -143,6 +196,137 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     }
 
     @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+        return createTopLevelViewWithBottomBar(inflater, container, savedInstanceState);
+    }
+
+    /** Epic (1), AfterLabs tab (12), and grid (13) omit the expandable bottom bar. */
+    private static boolean shouldShowTopLevelBottomBar(@Nullable Context context) {
+        if (context == null) {
+            return true;
+        }
+        final int style = DashboardStyleHelper.getDashboardStyle(context);
+        return style != EPIC_STYLE
+                && style != AFTERLABS_STYLE
+                && style != AFTERLABS_GRID_STYLE;
+    }
+
+    private View createTopLevelViewWithBottomBar(@NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        final FrameLayout wrapper = new FrameLayout(requireContext());
+        wrapper.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        final View content = super.onCreateView(inflater, wrapper, savedInstanceState);
+        if (content != null) {
+            wrapper.addView(content, new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+
+        final Context styleContext = getContext();
+        final boolean useBottomBar = shouldShowTopLevelBottomBar(styleContext);
+
+        final View bottomBar = useBottomBar
+                ? TopLevelDashboardBottomBarHelper.inflate(inflater, wrapper)
+                : null;
+        if (bottomBar != null) {
+            wrapper.addView(bottomBar, new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    Gravity.BOTTOM));
+
+            TopLevelDashboardBottomBarHelper.bind(bottomBar, requireContext(),
+                    new TopLevelDashboardBottomBarHelper.Listener() {
+                        @Override
+                        public void onNetworkSelected() {
+                            launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_NETWORK,
+                                    FRAGMENT_NETWORK, R.string.network_dashboard_title);
+                        }
+
+                        @Override
+                        public void onDisplaySelected() {
+                            launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_DISPLAY,
+                                    FRAGMENT_DISPLAY, R.string.display_settings);
+                        }
+
+                        @Override
+                        public void onSystemSelected() {
+                            launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_SYSTEM,
+                                    FRAGMENT_SYSTEM, R.string.header_category_system);
+                        }
+
+                        @Override
+                        public void onWallpaperSelected() {
+                            launchWallpaperSettings();
+                        }
+                    });
+        } else {
+            Log.w(TAG, "Bottom bar unavailable; homepage preferences still shown");
+        }
+
+        return wrapper;
+    }
+
+    /**
+     * Opens a top-level destination: uses the homepage tile when present, otherwise launches
+     * the standard Settings sub-screen directly.
+     */
+    private void launchTopLevelPage(String preferenceKey, String fallbackFragment,
+            @StringRes int titleResId) {
+        final Context context = getContext();
+        if (context == null) {
+            return;
+        }
+        final Preference pref = findPreference(preferenceKey);
+        if (pref != null && !TextUtils.isEmpty(pref.getFragment())) {
+            onPreferenceStartFragment(this, pref);
+            return;
+        }
+        if (TextUtils.isEmpty(fallbackFragment)) {
+            Log.w(TAG, "Bottom bar: no destination for " + preferenceKey);
+            return;
+        }
+        new SubSettingLauncher(context)
+                .setDestination(fallbackFragment)
+                .setTitleRes(titleResId)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
+    }
+
+    private void launchWallpaperSettings() {
+        final Context context = getContext();
+        if (context == null) {
+            return;
+        }
+        Preference pref = findPreference(TopLevelDashboardBottomBarHelper.KEY_WALLPAPER);
+        if (pref == null) {
+            pref = new Preference(context);
+            pref.setKey(TopLevelDashboardBottomBarHelper.KEY_WALLPAPER);
+        }
+        final TopLevelWallpaperPreferenceController controller =
+                new TopLevelWallpaperPreferenceController(context,
+                        TopLevelDashboardBottomBarHelper.KEY_WALLPAPER);
+        if (controller.handlePreferenceTreeClick(pref)) {
+            return;
+        }
+        Log.w(TAG, "Bottom bar: wallpaper picker unavailable");
+    }
+
+    private void applyTopLevelBottomBarPadding() {
+        final RecyclerView list = getListView();
+        if (list == null) {
+            return;
+        }
+        final int pad = (int) (TOP_LEVEL_BOTTOM_NAV_PADDING_DP
+                * getResources().getDisplayMetrics().density);
+        list.setClipToPadding(false);
+        list.setPadding(list.getPaddingLeft(), list.getPaddingTop(),
+                list.getPaddingRight(), pad);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         onUserCard();
@@ -172,30 +356,16 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             if (currentStyle == 5) { // Classic style
                 hideSearchBar();
             }
+            if (TopLevelDashboardBottomBarHelper.findBottomBar(view) != null) {
+                applyTopLevelBottomBarPadding();
+            }
         }
         
-        // Set up compact dashboard grid if enabled (independent toggle)
-        // Set up material dashboard grid if style is material (4)
-        // Delay setup to ensure view hierarchy is fully created
+        // Set up material / fun display / expressive / afterlabs grids when applicable
         if (context != null) {
-            // Check compact dashboard toggle (independent of style)
-            boolean compactEnabled = Settings.System.getIntForUser(
-                    context.getContentResolver(),
-                    Settings.System.SETTINGS_COMPACT_DASHBOARD_ENABLED,
-                    0,
-                    android.os.UserHandle.USER_CURRENT) == 1;
-            
             int currentStyle = DashboardStyleHelper.getDashboardStyle(context);
-            
-            if (compactEnabled) {
-                // Post to main thread to ensure view is fully inflated
-                view.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        setupCompactDashboardGrid();
-                    }
-                });
-            } else if (currentStyle == 4) {
+
+            if (currentStyle == 4) {
                 mDashBoardStyle = 4;
                 // Post to main thread with a small delay to ensure view is fully inflated
                 view.postDelayed(new Runnable() {
@@ -218,36 +388,17 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 view.postDelayed(() -> setupBMobileExpressiveGrid(), 50);
             } else if (currentStyle == 12) {
                 mDashBoardStyle = 12;
-                view.postDelayed(() -> {
-                    setupAfterlabsTabStrip();
-                }, 50);
+                view.postDelayed(() -> setupAfterlabsTabStrip(), 50);
             } else if (currentStyle == 13) {
                 mDashBoardStyle = 13;
                 view.postDelayed(() -> setupAfterlabsGrid(), 50);
-            } else if (currentStyle == 14) {
-                mDashBoardStyle = 14;
-                view.postDelayed(() -> setupInfinityHomeGrid(), 50);
             }
         } else {
-            // Fallback: check if compact was enabled or material style
             View rootView = getView();
             if (rootView != null) {
                 Context fallbackContext = getActivity();
                 if (fallbackContext != null) {
-                    boolean compactEnabled = Settings.System.getIntForUser(
-                            fallbackContext.getContentResolver(),
-                            Settings.System.SETTINGS_COMPACT_DASHBOARD_ENABLED,
-                            0,
-                            android.os.UserHandle.USER_CURRENT) == 1;
-                    
-                    if (compactEnabled) {
-                        rootView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                setupCompactDashboardGrid();
-                            }
-                        });
-                    } else if (mDashBoardStyle == 4) {
+                    if (mDashBoardStyle == 4) {
                         rootView.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -293,6 +444,11 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             if (extendedHomepageWidgetsPref != null) {
                 setupHomepageWidgetsClickListenersInternal(extendedHomepageWidgetsPref, rootView);
             }
+
+            final boolean afterlabsTab = getContext() != null
+                    && DashboardStyleHelper.getDashboardStyle(getContext()) == AFTERLABS_STYLE;
+            TopLevelCardNavigationHelper.setup(getContext(), screen, getMetricsCategory(),
+                    afterlabsTab);
         } catch (Exception e) {
             Log.e(TAG, "Error in setupHomepageWidgetsClickListeners", e);
         }
@@ -381,25 +537,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                             storageWidget.setFocusable(true);
                             storageWidget.setEnabled(true);
                             storageWidget.setOnClickListener(v -> {
-                                try {
-                                    com.android.settings.core.SubSettingLauncher launcher = 
-                                            new com.android.settings.core.SubSettingLauncher(activity);
-                                    launcher.setDestination("com.android.settings.deviceinfo.StorageDashboardFragment")
-                                            .setTitleRes(R.string.storage_settings)
-                                            .setSourceMetricsCategory(getMetricsCategory());
-                                    launcher.launch();
-                                } catch (android.content.ActivityNotFoundException e) {
-                                    Log.e(TAG, "Storage fragment not found", e);
-                                    try {
-                                        android.content.Intent intent = new android.content.Intent(
-                                                android.provider.Settings.ACTION_INTERNAL_STORAGE_SETTINGS);
-                                        activity.startActivity(intent);
-                                    } catch (Exception e2) {
-                                        Log.e(TAG, "Error opening storage via intent", e2);
-                                    }
-                                } catch (Exception e) {
-                                    Log.e(TAG, "Error launching storage page", e);
-                                }
+                                launchStorageSettings(activity);
                             });
                         }
                         
@@ -471,6 +609,28 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         }
     }
     
+    /** Opens storage via system intent first to avoid StorageDashboardFragment crashes. */
+    private void launchStorageSettings(@NonNull Activity activity) {
+        try {
+            android.content.Intent intent = new android.content.Intent(
+                    android.provider.Settings.ACTION_INTERNAL_STORAGE_SETTINGS);
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(intent);
+            return;
+        } catch (Exception e) {
+            Log.w(TAG, "Storage intent failed, trying fragment", e);
+        }
+        try {
+            new SubSettingLauncher(activity)
+                    .setDestination("com.android.settings.deviceinfo.StorageDashboardFragment")
+                    .setTitleRes(R.string.storage_settings)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .launch();
+        } catch (Exception e) {
+            Log.e(TAG, "Error launching storage page", e);
+        }
+    }
+
     /**
      * Hides the search bar for classic style
      */
@@ -493,184 +653,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             }
         } catch (Exception e) {
             Log.e(TAG, "Error hiding search bar", e);
-        }
-    }
-
-    /**
-     * Sets up the RecyclerView grid for compact dashboard style.
-     * Based on DisplayPageGrid implementation.
-     */
-    private void setupCompactDashboardGrid() {
-        try {
-            // Check if compact dashboard is enabled (independent toggle)
-            Context context = getContext();
-            if (context == null) {
-                context = getActivity();
-            }
-            if (context == null) {
-                Log.w(TAG, "Context is null, cannot setup compact grid");
-                return;
-            }
-            
-            boolean compactEnabled = Settings.System.getIntForUser(
-                    context.getContentResolver(),
-                    Settings.System.SETTINGS_COMPACT_DASHBOARD_ENABLED,
-                    0,
-                    android.os.UserHandle.USER_CURRENT) == 1;
-            
-            if (!compactEnabled) {
-                Log.d(TAG, "Compact dashboard is disabled, skipping setup");
-                return;
-            }
-            
-            // Ensure we're on the main thread
-            if (android.os.Looper.myLooper() != android.os.Looper.getMainLooper()) {
-                View view = getView();
-                if (view != null) {
-                    view.post(() -> setupCompactDashboardGrid());
-                }
-                return;
-            }
-            
-            PreferenceScreen screen = getPreferenceScreen();
-            if (screen == null) {
-                Log.w(TAG, "PreferenceScreen is null, cannot setup compact grid");
-                return;
-            }
-            
-            // Find compact dashboard grid in current screen - following DisplayPageGrid pattern
-            androidx.preference.Preference layoutPrefPref = screen.findPreference("compact_dashboard_grid");
-            if (layoutPrefPref == null || !(layoutPrefPref instanceof com.android.settingslib.widget.LayoutPreference)) {
-                Log.w(TAG, "compact_dashboard_grid LayoutPreference not found");
-                return;
-            }
-            
-            com.android.settingslib.widget.LayoutPreference layoutPref = 
-                    (com.android.settingslib.widget.LayoutPreference) layoutPrefPref;
-            
-            // Find RecyclerView - following DisplayPageGrid pattern
-            androidx.recyclerview.widget.RecyclerView rv = layoutPref.findViewById(R.id.compact_dashboard_grid_recycler);
-            if (rv == null) {
-                Log.w(TAG, "compact_dashboard_grid_recycler RecyclerView not found");
-                return;
-            }
-            
-            android.app.Activity activity = getActivity();
-            if (activity == null) {
-                Log.w(TAG, "Activity is null, cannot setup compact grid");
-                return;
-            }
-            
-            // Setup layout manager with error handling
-            try {
-                androidx.recyclerview.widget.GridLayoutManager layoutManager = 
-                        new androidx.recyclerview.widget.GridLayoutManager(context, 2);
-                rv.setLayoutManager(layoutManager);
-            } catch (Exception e) {
-                Log.e(TAG, "Error setting up GridLayoutManager", e);
-                return;
-            }
-
-            java.util.List<com.epic.fragments.CompactDashboardGridAdapter.CardItem> items = new java.util.ArrayList<>();
-            
-            // Row 1: Network and Connected Devices
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.network_dashboard_title,
-                    R.string.summary_placeholder,
-                    "com.android.settings.network.NetworkDashboardFragment",
-                    R.drawable.ic_settings_wireless_filled));
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.custom_dashboard_title,
-                    R.string.custom_dashboard_summary,
-                    "com.epic.fragments.CustomDashboardSettings",
-                    R.drawable.ic_custom_dashboard));
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.connected_devices_dashboard_title,
-                    R.string.summary_placeholder,
-                    "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
-                    R.drawable.ic_devices_other_filled));
-            
-            // Row 2: Apps and Notifications
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.apps_dashboard_title,
-                    R.string.summary_placeholder,
-                    "com.android.settings.applications.AppDashboardFragment",
-                    R.drawable.ic_apps));
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.configure_notification_settings,
-                    R.string.summary_placeholder,
-                    "com.android.settings.notification.ConfigureNotificationSettings",
-                    R.drawable.ic_notifications));
-            
-            // Row 3: Battery and Display
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.power_usage_summary_title,
-                    R.string.summary_placeholder,
-                    "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
-                    R.drawable.ic_settings_battery_white));
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.summary_placeholder,
-                    "com.android.settings.DisplaySettings",
-                    R.drawable.ic_settings_display_white));
-            
-            // Row 4: Privacy (Storage, About Phone, Tips and Support, Anatolia Settings removed per user request)
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.security_settings_title,
-                    R.string.security_dashboard_summary,
-                    "com.android.settings.security.SecuritySettings",
-                    R.drawable.ic_settings_security_filled));
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.privacy_dashboard_title,
-                    R.string.summary_placeholder,
-                    "com.android.settings.privacy.PrivacyDashboardFragment",
-                    R.drawable.ic_settings_privacy_filled));
-            
-            // Row 5: Accessibility (Anatolia Settings, About Phone, Tips and Support removed per user request)
-            items.add(new com.epic.fragments.CompactDashboardGridAdapter.CardItem(
-                    com.epic.fragments.CompactDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.accessibility_settings,
-                    R.string.summary_placeholder,
-                    "com.android.settings.accessibility.AccessibilitySettings",
-                    R.drawable.ic_settings_accessibility));
-
-            if (items.isEmpty()) {
-                Log.w(TAG, "No items to display in compact grid");
-                return;
-            }
-            
-            // Create adapter with error handling
-            com.epic.fragments.CompactDashboardGridAdapter adapter = null;
-            try {
-                adapter = new com.epic.fragments.CompactDashboardGridAdapter(activity, items, getMetricsCategory());
-            } catch (Exception e) {
-                Log.e(TAG, "Error creating CompactDashboardGridAdapter", e);
-                return;
-            }
-            
-            if (adapter == null) {
-                Log.e(TAG, "Adapter is null after creation");
-                return;
-            }
-            
-            // Set adapter with error handling - following DisplayPageGrid pattern
-            try {
-                rv.setAdapter(adapter);
-                Log.d(TAG, "Compact dashboard grid setup completed successfully with " + items.size() + " items");
-            } catch (Exception e) {
-                Log.e(TAG, "Error setting adapter on RecyclerView", e);
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error setting up compact dashboard grid", e);
         }
     }
 
@@ -1071,9 +1053,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             } else if (currentStyle == 13) {
                 gridPrefKey = "afterlabs_grid";
                 gridRecyclerId = R.id.afterlabs_grid_recycler;
-            } else if (currentStyle == 14) {
-                gridPrefKey = "infinity_home_grid";
-                gridRecyclerId = R.id.bmobile_expressive_grid_recycler;
             } else {
                 Log.d(TAG, "Not a grid homepage style, skipping setup");
                 mFunDisplayGridSetupRetries = 0;
@@ -1150,8 +1129,46 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
             // Create items list with error handling
             java.util.List<com.epic.fragments.FunDisplaySettingsAdapter.CardItem> items = new java.util.ArrayList<>();
+
+            if (currentStyle == AFTERLABS_GRID_STYLE) {
+                populateAfterlabsGridItems(items);
+            } else {
+                populateFunDisplayGridItems(items);
+            }
+
+            // Create adapter with error handling
+            com.epic.fragments.FunDisplaySettingsAdapter adapter = null;
+            try {
+                adapter = new com.epic.fragments.FunDisplaySettingsAdapter(activity, items, getMetricsCategory());
+            } catch (Exception e) {
+                Log.e(TAG, "Error creating FunDisplaySettingsAdapter", e);
+                mFunDisplayGridSetupRetries = 0; // Reset on error
+                return;
+            }
             
-            // Map all HomepagePreferences from top_level_settings_v2.xml to grid cards
+            if (adapter == null) {
+                Log.e(TAG, "Adapter is null after creation");
+                mFunDisplayGridSetupRetries = 0; // Reset on error
+                return;
+            }
+            
+            // Set adapter with error handling
+            try {
+                rv.setAdapter(adapter);
+                Log.d(TAG, "Fun Display grid setup completed successfully with " + items.size() + " items");
+            } catch (Exception e) {
+                Log.e(TAG, "Error setting adapter on RecyclerView for fun display grid", e);
+                mFunDisplayGridSetupRetries = 0; // Reset on error
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting up fun display grid", e);
+            mFunDisplayGridSetupRetries = 0; // Reset on error
+        }
+    }
+
+    /** Grid cards for Fun Display homepage (style 7). */
+    private void populateFunDisplayGridItems(
+            java.util.List<com.epic.fragments.FunDisplaySettingsAdapter.CardItem> items) {
             items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(
                     com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.network_dashboard_title,
@@ -1251,64 +1268,87 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     "com.android.settings.accessibility.AccessibilitySettings",
                     R.drawable.ic_settings_accessibility_filled));
             // Tips and Support removed per user request
+    }
 
-            // Create adapter with error handling
-            com.epic.fragments.FunDisplaySettingsAdapter adapter = null;
-            try {
-                adapter = new com.epic.fragments.FunDisplaySettingsAdapter(activity, items, getMetricsCategory());
-            } catch (Exception e) {
-                Log.e(TAG, "Error creating FunDisplaySettingsAdapter", e);
-                mFunDisplayGridSetupRetries = 0; // Reset on error
-                return;
-            }
-            
-            if (adapter == null) {
-                Log.e(TAG, "Adapter is null after creation");
-                mFunDisplayGridSetupRetries = 0; // Reset on error
-                return;
-            }
-            
-            // Set adapter with error handling
-            try {
-                rv.setAdapter(adapter);
-                Log.d(TAG, "Fun Display grid setup completed successfully with " + items.size() + " items");
-            } catch (Exception e) {
-                Log.e(TAG, "Error setting adapter on RecyclerView for fun display grid", e);
-                mFunDisplayGridSetupRetries = 0; // Reset on error
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error setting up fun display grid", e);
-            mFunDisplayGridSetupRetries = 0; // Reset on error
-        }
+    /**
+     * Grid cards for AfterLabs grid homepage (style 13): no safety/security, emergency,
+     * or accessibility; privacy opens {@link com.android.settings.privacy.PrivacyControlsFragment}.
+     */
+    private void populateAfterlabsGridItems(
+            java.util.List<com.epic.fragments.FunDisplaySettingsAdapter.CardItem> items) {
+        final int type = com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD;
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.network_dashboard_title, R.string.summary_placeholder,
+                "com.android.settings.network.NetworkDashboardFragment",
+                R.drawable.ic_settings_wireless_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.custom_dashboard_title, R.string.custom_dashboard_summary,
+                "com.epic.fragments.CustomDashboardSettings",
+                R.drawable.ic_settings_system_dashboard_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.connected_devices_dashboard_title,
+                R.string.connected_devices_dashboard_default_summary,
+                "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
+                R.drawable.ic_devices_other_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.configure_notification_settings, R.string.notification_dashboard_summary,
+                "com.android.settings.notification.ConfigureNotificationSettings",
+                R.drawable.ic_notifications_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.sound_settings, R.string.sound_dashboard_summary_with_dnd,
+                "com.android.settings.notification.SoundSettings",
+                R.drawable.ic_volume_up_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.display_settings, R.string.display_dashboard_summary,
+                "com.android.settings.DisplaySettings",
+                R.drawable.ic_settings_display_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.storage_settings, R.string.summary_placeholder,
+                "com.android.settings.deviceinfo.StorageDashboardFragment",
+                R.drawable.ic_storage_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.power_usage_summary_title, R.string.summary_placeholder,
+                "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
+                R.drawable.ic_settings_battery_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.header_category_system, R.string.system_dashboard_summary,
+                "com.android.settings.system.SystemDashboardFragment",
+                R.drawable.ic_settings_system_dashboard_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.privacy_controls_title, R.string.privacy_controls_summary,
+                "com.android.settings.privacy.PrivacyControlsFragment",
+                R.drawable.ic_settings_privacy_filled));
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.location_settings_title,
+                R.string.location_settings_loading_app_permission_stats,
+                "com.android.settings.location.LocationSettings",
+                R.drawable.ic_settings_location_filled));
     }
 
     /** AfterLabs tab strip on V2 categories (style 12). */
     private void setupAfterlabsTabStrip() {
         try {
-            if (DashboardStyleHelper.getDashboardStyle(getContext()) != 12) {
+            if (DashboardStyleHelper.getDashboardStyle(getContext()) != AFTERLABS_STYLE) {
                 return;
             }
-            PreferenceScreen screen = getPreferenceScreen();
+            final PreferenceScreen screen = getPreferenceScreen();
             if (screen == null) {
                 return;
             }
-            androidx.preference.Preference tabPref = screen.findPreference("afterlabs_tab_strip");
+            screen.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
+
+            final androidx.preference.Preference tabPref =
+                    screen.findPreference(KEY_AFTERLABS_TAB_STRIP);
             if (!(tabPref instanceof com.android.settingslib.widget.LayoutPreference)) {
                 return;
             }
-            com.android.settingslib.widget.LayoutPreference lp =
+            final com.android.settingslib.widget.LayoutPreference lp =
                     (com.android.settingslib.widget.LayoutPreference) tabPref;
-            com.google.android.material.tabs.TabLayout tabLayout =
+            final com.google.android.material.tabs.TabLayout tabLayout =
                     lp.findViewById(R.id.bmobile_afterlabs_tab_layout);
             if (tabLayout == null) {
                 return;
             }
-            final String[] categoryKeys = {
-                    "top_level_connectivity_category",
-                    "top_level_personalize_category",
-                    "top_level_system_info_category",
-                    "top_level_security_privacy_category"
-            };
             final int[] tabTitles = {
                     R.string.afterlabs_tab_connectivity,
                     R.string.afterlabs_tab_personalize,
@@ -1319,34 +1359,12 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             for (int titleRes : tabTitles) {
                 tabLayout.addTab(tabLayout.newTab().setText(titleRes));
             }
-            androidx.preference.Preference accountCat =
-                    screen.findPreference("top_level_account_category");
-            androidx.preference.Preference supportCat =
-                    screen.findPreference("top_level_support_category");
-            java.util.function.Consumer<Integer> showTab = index -> {
-                for (int i = 0; i < categoryKeys.length; i++) {
-                    androidx.preference.Preference cat = screen.findPreference(categoryKeys[i]);
-                    if (cat != null) {
-                        if (i == index) {
-                            screen.addPreference(cat);
-                        } else {
-                            screen.removePreference(cat);
-                        }
-                    }
-                }
-                if (accountCat != null) {
-                    screen.removePreference(accountCat);
-                }
-                if (supportCat != null) {
-                    screen.removePreference(supportCat);
-                }
-            };
-            showTab.accept(0);
+            tabLayout.clearOnTabSelectedListeners();
             tabLayout.addOnTabSelectedListener(new com.google.android.material.tabs.TabLayout
                     .OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(com.google.android.material.tabs.TabLayout.Tab tab) {
-                    showTab.accept(tab.getPosition());
+                    applyAfterlabsTabVisibility(tab.getPosition());
                 }
                 @Override
                 public void onTabUnselected(com.google.android.material.tabs.TabLayout.Tab tab) {
@@ -1355,8 +1373,99 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 public void onTabReselected(com.google.android.material.tabs.TabLayout.Tab tab) {
                 }
             });
+
+            if (mAfterlabsTabIndex < 0
+                    || mAfterlabsTabIndex >= AFTERLABS_CATEGORY_KEYS.length) {
+                mAfterlabsTabIndex = 0;
+            }
+            if (tabLayout.getTabCount() > mAfterlabsTabIndex) {
+                final com.google.android.material.tabs.TabLayout.Tab tab =
+                        tabLayout.getTabAt(mAfterlabsTabIndex);
+                if (tab != null && !tab.isSelected()) {
+                    tab.select();
+                }
+            }
+            applyAfterlabsTabVisibility(mAfterlabsTabIndex);
         } catch (Exception e) {
             Log.e(TAG, "Error setting up AfterLabs tab strip", e);
+        }
+    }
+
+    private void applyAfterlabsTabVisibility(int tabIndex) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
+        if (tabIndex < 0 || tabIndex >= AFTERLABS_CATEGORY_KEYS.length) {
+            tabIndex = 0;
+        }
+        mAfterlabsTabIndex = tabIndex;
+
+        for (int t = 0; t < AFTERLABS_CATEGORY_KEYS.length; t++) {
+            setAfterlabsCategoryVisible(screen, AFTERLABS_CATEGORY_KEYS[t], t == tabIndex);
+        }
+
+        for (int t = 0; t < AFTERLABS_TAB_PREFERENCE_KEYS.length; t++) {
+            for (String key : AFTERLABS_TAB_PREFERENCE_KEYS[t]) {
+                final Preference pref = screen.findPreference(key);
+                if (pref != null) {
+                    pref.setVisible(t == tabIndex);
+                }
+            }
+        }
+
+        final Preference tabStrip = screen.findPreference(KEY_AFTERLABS_TAB_STRIP);
+        if (tabStrip != null) {
+            tabStrip.setVisible(true);
+        }
+
+        refreshAfterlabsTabList();
+
+        if (tabIndex == 0) {
+            final View root = getView();
+            if (root != null) {
+                root.post(() -> setupHomepageWidgetsClickListeners(root));
+            }
+        }
+    }
+
+    private void setAfterlabsCategoryVisible(PreferenceScreen screen, String categoryKey,
+            boolean visible) {
+        final Preference cat = screen.findPreference(categoryKey);
+        if (cat == null) {
+            return;
+        }
+        cat.setVisible(visible);
+        setAfterlabsGroupVisible(cat, visible);
+    }
+
+    private void setAfterlabsGroupVisible(Preference pref, boolean visible) {
+        if (!(pref instanceof PreferenceGroup)) {
+            return;
+        }
+        final PreferenceGroup group = (PreferenceGroup) pref;
+        for (int i = 0; i < group.getPreferenceCount(); i++) {
+            final Preference child = group.getPreference(i);
+            if (child == null) {
+                continue;
+            }
+            child.setVisible(visible);
+            setAfterlabsGroupVisible(child, visible);
+        }
+    }
+
+    @Override
+    protected void updatePreferenceStates() {
+        super.updatePreferenceStates();
+        if (DashboardStyleHelper.getDashboardStyle(getContext()) == AFTERLABS_STYLE) {
+            applyAfterlabsTabVisibility(mAfterlabsTabIndex);
+        }
+    }
+
+    private void refreshAfterlabsTabList() {
+        final RecyclerView list = getListView();
+        if (list != null && list.getAdapter() != null) {
+            list.getAdapter().notifyDataSetChanged();
         }
     }
 
@@ -1401,25 +1510,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         // Use helper to detect changes and recreate activity if needed
         Context context = getContext();
         
-        // Check compact dashboard setting again in case it was changed
-        if (context != null) {
-            boolean compactEnabled = Settings.System.getIntForUser(
-                    context.getContentResolver(),
-                    Settings.System.SETTINGS_COMPACT_DASHBOARD_ENABLED,
-                    0,
-                    android.os.UserHandle.USER_CURRENT) == 1;
-            
-            View rootView = getView();
-            if (rootView != null && compactEnabled) {
-                rootView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        setupCompactDashboardGrid();
-                    }
-                });
-            }
-        }
-        
         if (context != null) {
             int currentStyle = DashboardStyleHelper.getDashboardStyle(context);
             if (currentStyle != mDashBoardStyle) {
@@ -1444,6 +1534,12 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                             centerTextInViews();
                         }
                     });
+                }
+            }
+            if (currentStyle == 12) {
+                final View rootView = getView();
+                if (rootView != null) {
+                    rootView.postDelayed(() -> setupAfterlabsTabStrip(), 50);
                 }
             }
         }
@@ -1547,6 +1643,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         if (mHighlightMixin != null) {
             outState.putParcelable(SAVED_HIGHLIGHT_MIXIN, mHighlightMixin);
         }
+        outState.putInt(SAVE_AFTERLABS_TAB_INDEX, mAfterlabsTabIndex);
     }
 
     @Override
@@ -1554,6 +1651,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         // getPreferenceScreenResId() will be called by super.onCreatePreferences()
         // It now reads from Settings directly if needed, so we don't need to set it here
         // This simplifies the code and ensures consistency
+        if (savedInstanceState != null) {
+            mAfterlabsTabIndex = savedInstanceState.getInt(SAVE_AFTERLABS_TAB_INDEX, 0);
+        }
         super.onCreatePreferences(savedInstanceState, rootKey);
         if (Flags.homepageRevamp()) {
             return;

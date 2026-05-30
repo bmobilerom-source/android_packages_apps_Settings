@@ -18,26 +18,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/custom_dashboard_title"
+    android:title=" "
     android:key="custom_dashboard_screen">
-
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="custom_dashboard_header"
-        android:selectable="false"
-        android:layout="@layout/bmobile_afterlab_header" />
 
     <Preference
         android:key="custom_dashboard_current_style"
         android:title="@string/custom_dashboard_current_style_title"
-        android:selectable="false"
-        android:icon="@drawable/ic_custom_dashboard" />
+        android:selectable="false"/>
 
-    <Preference
-        android:key="custom_dashboard_access"
-        android:title="@string/custom_dashboard_access_title"
-        android:summary="@string/custom_dashboard_access_summary"
-        android:selectable="false" />
-
+    <!-- AfterLabs layout mode (hidden; use dashboard style list) -->
+    <!--
     <ListPreference
         android:key="declanxafterlab_style"
         android:title="@string/customize_layout_mode_title"
@@ -46,6 +36,7 @@
         android:entryValues="@array/customize_layout_mode_values"
         android:defaultValue="0"
         android:persistent="false" />
+    -->
 
     <ListPreference
         android:key="settings_dashboard_style"
@@ -55,24 +46,5 @@
         android:entryValues="@array/settings_dashboard_style_values"
         android:defaultValue="7"
         android:persistent="false" />
-
-    <androidx.preference.SwitchPreferenceCompat
-        android:key="settings_compact_dashboard_enabled"
-        android:title="@string/compact_dashboard_title"
-        android:summary="@string/compact_dashboard_summary"
-        android:defaultValue="false"
-        android:persistent="false" />
-
-    <Preference
-        android:key="dashboard_style_reset"
-        android:title="@string/dashboard_style_reset_title"
-        android:summary="@string/dashboard_style_reset_summary"
-        android:icon="@drawable/ic_restore" />
-
-    <Preference
-        android:key="systemui_reset"
-        android:title="@string/systemui_reset_title"
-        android:summary="@string/systemui_reset_summary"
-        android:icon="@drawable/ic_settings_system_dashboard_white" />
 
 </PreferenceScreen>

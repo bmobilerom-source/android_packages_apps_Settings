@@ -75,4 +75,10 @@
     <string name="userinfo_bubble_setting_description">Welcome to your Control Center - the ultimate hub for device management and personalization! Access powerful tools for app management, accounts, privacy, security, and customization.</string>
     <string name="default_user">Default User</string>
 
+    <!-- Privacy -->
+    <string name="privacy_controls_summary">Manage privacy settings and permissions</string>
+
+    <!-- Dashboard grid -->
+    <string name="system_tuner_not_available">System tuner is not available</string>
+
 </resources>

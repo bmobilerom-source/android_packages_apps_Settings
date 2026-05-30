@@ -64,43 +64,38 @@ public class DashboardStyleHelper {
     }
 
     /**
-     * @param style 0–8 BMobile, 9 Security Extended, 10–11 Arcana,
-     *              12 AfterLabs tab+V2, 13 AfterLabs grid, 14 Infinity home
+     * Maps {@code settings_dashboard_style} id → homepage XML.
+     * Picker strings: {@code dashboard_style_top_level_*} in system_basic_strings.xml
+     * (name matches XML basename). Removed ids: 3 Compact, 9 Security Extended, 14 Infinity.
      */
     public static int getPreferenceScreenResIdForStyle(int style) {
         switch (style) {
-            case 0:
+            case 0: // dashboard_style_top_level_settings — NOT aosp file
                 return com.android.settings.R.xml.top_level_settings;
-            case 1:
+            case 1: // dashboard_style_top_level_epic
                 return com.android.settings.R.xml.top_level_settings_epic;
-            case 2:
+            case 2: // dashboard_style_top_level_v2
                 return com.android.settings.R.xml.top_level_settings_v2;
-            case 3:
-                return com.android.settings.R.xml.top_level_settings_compact;
-            case 4:
+            case 4: // dashboard_style_top_level_material
                 return com.android.settings.R.xml.top_level_settings_material;
-            case 5:
+            case 5: // dashboard_style_top_level_classic
                 return com.android.settings.R.xml.top_level_settings_classic;
-            case 6:
+            case 6: // dashboard_style_top_level_custom_v2
                 return com.android.settings.R.xml.top_level_settings_custom_v2;
-            case 7:
+            case 7: // dashboard_style_top_level_fun_display (default)
                 return com.android.settings.R.xml.top_level_settings_fun_display;
-            case 8:
+            case 8: // dashboard_style_top_level_bmobile_expressive
                 return com.android.settings.R.xml.top_level_settings_bmobile_expressive;
-            case 9:
-                return com.android.settings.R.xml.top_level_settings_securityextended;
-            case 10:
+            case 10: // dashboard_style_top_level_aosp → top_level_settings_aosp.xml
                 return com.android.settings.R.xml.top_level_settings_aosp;
-            case 11:
+            case 11: // dashboard_style_top_level_oos11
                 return com.android.settings.R.xml.top_level_settings_oos11;
-            case 12:
+            case 12: // dashboard_style_top_level_afterlabs_tab
                 return com.android.settings.R.xml.top_level_settings_afterlabs_tab;
-            case 13:
+            case 13: // dashboard_style_top_level_afterlabs_grid
                 return com.android.settings.R.xml.top_level_settings_afterlabs_grid;
-            case 14:
-                return com.android.settings.R.xml.top_level_settings_infinity_home;
             default:
-                Log.w(TAG, "Unknown style " + style + ", using default");
+                Log.w(TAG, "Unknown or removed style " + style + ", using default");
                 return com.android.settings.R.xml.top_level_settings_fun_display;
         }
     }
@@ -113,7 +108,10 @@ public class DashboardStyleHelper {
     }
 
     public static boolean isValidStyle(int style) {
-        return (style >= 0 && style <= 9) || (style >= 10 && style <= 14);
+        if (style == 3 || style == 9 || style == 14) {
+            return false;
+        }
+        return (style >= 0 && style <= 8) || (style >= 10 && style <= 13);
     }
 
     /**

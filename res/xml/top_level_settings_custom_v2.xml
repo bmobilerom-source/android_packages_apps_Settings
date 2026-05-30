@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+  HOMEPAGE: style 6 | @string/dashboard_style_top_level_custom_v2
+
   Copyright (C) 2025 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,19 +33,12 @@
         android:layout="@layout/CustomerOS_header"
         android:order="-2000" />
 
-    <!-- Main User Profile Card -->
-    <com.android.settingslib.widget.LayoutPreference
-        android:layout="@layout/mainuser_profile_card"
-        android:key="about_device_info"
-        android:selectable="true"
-        android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
-        android:order="-1999"/>
-
     <PreferenceCategory
         android:order="-130"
         android:key="top_level_connectivity_category"
         android:layout="@layout/settingslib_preference_category_no_title">
-        <!-- Network and Internet -->
+        <!-- Network and Internet (use card navigation row instead) -->
+        <!--
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.network.NetworkDashboardFragment"
             android:icon="@drawable/ic_settings_wireless_filled"
@@ -53,17 +48,9 @@
             android:summary="@string/summary_placeholder"
             settings:highlightableMenuKey="@string/menu_key_network"
             settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
+        -->
 
-        <!-- System Basic Defaults -->
-        <com.android.settings.widget.HomepagePreference
-            android:fragment="com.epic.fragments.CustomDashboardSettings"
-            android:icon="@drawable/ic_custom_dashboard"
-            android:key="top_level_custom_dashboard"
-            android:order="-1997"
-            android:title="@string/custom_dashboard_title"
-            android:summary="@string/custom_dashboard_summary"
-            settings:highlightableMenuKey="@string/menu_key_system"/>
-
+      
         <!-- Homepage Widgets from anatolia_settings_statusbar.xml -->
         <com.android.settingslib.widget.LayoutPreference
             android:layout="@layout/homepage_widgets"

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+  HOMEPAGE: style 5 | @string/dashboard_style_top_level_classic
+
   Copyright (C) 2025 LineageOS
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -149,14 +151,5 @@
             settings:highlightableMenuKey="@string/menu_key_support"
             settings:controller="com.android.settings.support.SupportPreferenceController"/> -->
     </PreferenceCategory>
-
-    <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.CustomDashboardSettings"
-        android:icon="@drawable/ic_custom_dashboard"
-        android:key="top_level_custom_dashboard"
-        android:order="100"
-        android:title="@string/custom_dashboard_title"
-        android:summary="@string/custom_dashboard_summary"
-        settings:highlightableMenuKey="@string/menu_key_system"/>
 
 </PreferenceScreen>

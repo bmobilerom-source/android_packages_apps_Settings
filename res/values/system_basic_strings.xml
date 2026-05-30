@@ -21,33 +21,37 @@
     <string name="custom_dashboard_summary">Choose the Settings home page layout</string>
     <string name="custom_dashboard_current_style_title">Active layout</string>
     <string name="custom_dashboard_load_error">Could not open Custom Dashboard: %1$s</string>
-    <string name="compact_dashboard_enabled_toast">Compact dashboard enabled</string>
-    <string name="compact_dashboard_disabled_toast">Compact dashboard disabled</string>
-
-    <!-- Dashboard style picker -->
+    <!-- Dashboard style picker — string name matches res/xml/top_level_settings_*.xml basename -->
     <string name="dashboard_style_title">Dashboard style</string>
     <string name="dashboard_style_summary">Applies when you open Settings home</string>
-    <string name="dashboard_style_aosp">AOSP Style</string>
-    <string name="dashboard_style_epic">Epic Style</string>
-    <string name="dashboard_style_v2">V2 Style</string>
-    <string name="dashboard_style_compact">Compact Style</string>
-    <string name="dashboard_style_material">Material Style</string>
-    <string name="dashboard_style_classic">Classic Style</string>
-    <string name="dashboard_style_custom_v2">Custom V2 Style</string>
-    <string name="dashboard_style_fun_display">BMobile Home Settings</string>
-    <string name="dashboard_style_bmobile_expressive">BMobile Expressive Style</string>
-    <string name="dashboard_style_securityextended">Security Extended Style</string>
-    <string name="dashboard_style_arcana_aosp">Arcana AOSP Style</string>
-    <string name="dashboard_style_arcana_oos11">Arcana OOS11 Style</string>
-    <string name="dashboard_style_afterlabs_tab">AfterLabs Tab (V2)</string>
-    <string name="dashboard_style_afterlabs_grid">AfterLabs Grid</string>
-    <string name="dashboard_style_infinity_home">Infinity Home</string>
-    <string name="afterlabs_tab_connectivity">Connect</string>
-    <string name="afterlabs_tab_personalize">Personal</string>
+    <!-- style 0 → top_level_settings.xml (NOT top_level_settings_aosp.xml) -->
+    <string name="dashboard_style_top_level_settings">MainUser</string>
+    <!-- style 1 -->
+    <string name="dashboard_style_top_level_epic">Epic · top_level_settings_epic.xml</string>
+    <!-- style 2 -->
+    <string name="dashboard_style_top_level_v2">V2 · top_level_settings_v2.xml</string>
+    <!-- style 4 -->
+    <string name="dashboard_style_top_level_material">Material · top_level_settings_material.xml</string>
+    <!-- style 5 -->
+    <string name="dashboard_style_top_level_classic">Classic · top_level_settings_classic.xml</string>
+    <!-- style 6 -->
+    <string name="dashboard_style_top_level_custom_v2">Custom V2 · top_level_settings_custom_v2.xml</string>
+    <!-- style 7 (default) -->
+    <string name="dashboard_style_top_level_fun_display">BMobile Home</string>
+    <!-- style 8 -->
+    <string name="dashboard_style_top_level_bmobile_expressive">BMobile Expressive</string>
+    <!-- style 10 → top_level_settings_aosp.xml -->
+    <string name="dashboard_style_top_level_aosp">Arcana AOSP · top_level_settings_aosp.xml</string>
+    <!-- style 11 -->
+    <string name="dashboard_style_top_level_oos11">Arcana OOS11 · top_level_settings_oos11.xml</string>
+    <!-- style 12 -->
+    <string name="dashboard_style_top_level_afterlabs_tab">DynamicTabs</string>
+    <!-- style 13 -->
+    <string name="dashboard_style_top_level_afterlabs_grid">YR School</string>
+    <string name="afterlabs_tab_connectivity">Main</string>
+    <string name="afterlabs_tab_personalize">Media</string>
     <string name="afterlabs_tab_system">System</string>
     <string name="afterlabs_tab_security">Security</string>
-    <string name="compact_dashboard_title">Compact dashboard overlay</string>
-    <string name="compact_dashboard_summary">Extra compact grid (Compact layout only)</string>
     <string name="dashboard_style_reset_title">Reset dashboard style</string>
     <string name="dashboard_style_reset_summary">Restore default layout</string>
     <string name="systemui_reset_title">Restart SystemUI</string>
@@ -67,6 +71,13 @@
     <string name="custom_dashboard_nav_apply">Apply &amp; home</string>
     <string name="custom_dashboard_nav_styles_hint">Scroll to dashboard style</string>
     <string name="custom_dashboard_nav_layout_hint">Scroll to layout mode</string>
+
+    <!-- AOSP homepage bottom bar (dashboard style 10) -->
+    <string name="top_level_dashboard_nav_network">Network</string>
+    <string name="top_level_dashboard_nav_display">Display</string>
+    <string name="top_level_dashboard_nav_system">System</string>
+    <string name="top_level_dashboard_nav_wallpaper">Wallpaper</string>
+
     <string name="custom_dashboard_access_title">Open this page</string>
     <string name="custom_dashboard_access_summary">Settings tile, Infinity Suite, or: adb shell am start -a com.android.settings.CUSTOM_DASHBOARD_SETTINGS -p com.android.settings</string>
 
@@ -75,8 +86,6 @@
     <string name="bmobile_expressive_settings_title">BMobile Expressive Settings</string>
     <string name="epic_style_header_title">Epic Style</string>
     <string name="epic_style_header_summary">Customized Settings Experience</string>
-    <string name="compact_style_header_title">Compact Style</string>
-    <string name="compact_style_header_summary">Minimal layout for quick access</string>
     <string name="material_style_header_title">Material Style</string>
     <string name="material_style_header_summary">Material Design 3 inspired interface</string>
     <string name="classic_style_header_title">Classic Style</string>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+  HOMEPAGE: style 1 | @string/dashboard_style_top_level_epic
+
   Copyright (C) 2018 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,12 +41,15 @@
         settings:highlightableMenuKey="@string/menu_key_connected_devices"
         settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
 		
+	<!-- Apps hidden per user request -->
+	<!--
 	<com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.applications.AppDashboardFragment"
         android:key="top_level_apps"
         android:order="-110"
         android:title="@string/apps_dashboard_title"
         settings:highlightableMenuKey="@string/menu_key_apps"/>
+	-->
 		
 	<com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
@@ -75,6 +80,8 @@
         android:title="@string/display_settings"
         settings:highlightableMenuKey="@string/menu_key_display"/>
 		
+	<!-- Accessibility hidden per user request -->
+	<!--
 	<com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.accessibility.AccessibilitySettings"
         android:key="top_level_accessibility"
@@ -82,6 +89,7 @@
         android:title="@string/accessibility_settings"
         settings:highlightableMenuKey="@string/menu_key_accessibility"
         settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
+	-->
 		
 	<com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.security.SecuritySettings"
@@ -91,6 +99,8 @@
         settings:highlightableMenuKey="@string/menu_key_security"
         settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 		
+	<!-- Privacy (hidden) -->
+	<!--
 	<com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
         android:key="top_level_privacy"
@@ -98,6 +108,7 @@
         android:title="@string/privacy_dashboard_title"
         settings:highlightableMenuKey="@string/menu_key_privacy"
         settings:controller="com.android.settings.privacy.TopLevelPrivacyEntryPreferenceController"/>
+	-->
 		
 	<com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.location.LocationSettings"
@@ -107,6 +118,8 @@
         settings:highlightableMenuKey="@string/menu_key_location"
         settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"/>
 
+    <!-- Emergency (hidden) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:key="top_level_emergency"
         android:title="@string/emergency_settings_preference_title"
@@ -114,7 +127,10 @@
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"
         settings:isPreferenceVisible="@bool/config_show_emergency_settings"
         settings:highlightableMenuKey="@string/menu_key_emergency"/>
+    -->
 
+    <!-- System + Custom Dashboard (hidden) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.system.SystemDashboardFragment"
         android:key="top_level_system"
@@ -130,6 +146,7 @@
         android:title="@string/custom_dashboard_title"
         android:summary="@string/custom_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_system"/>
+    -->
 
     <!-- Tips and Support hidden per user request -->
     <!-- <com.android.settings.widget.HomepagePreference
