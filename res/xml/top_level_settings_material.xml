@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  HOMEPAGE: style 4 | @string/dashboard_style_top_level_material
+  HOMEPAGE: style 4 (Kathaleya) | @string/dashboard_style_top_level_material
 
   Copyright (C) 2025 LineageOS
 
@@ -39,15 +39,6 @@
         android:key="material_dashboard_grid"
         android:selectable="false"
         android:layout="@layout/material_dashboard_two_column_grid" />
-
-    <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.CustomDashboardSettings"
-        android:icon="@drawable/ic_custom_dashboard"
-        android:key="top_level_custom_dashboard"
-        android:order="-100"
-        android:title="@string/custom_dashboard_title"
-        android:summary="@string/custom_dashboard_summary"
-        settings:highlightableMenuKey="@string/menu_key_system" />
 
 </PreferenceScreen>
 

@@ -40,7 +40,7 @@
     <!-- style 2 -->
     <string name="dashboard_style_top_level_v2">V2 · top_level_settings_v2.xml</string>
     <!-- style 4 -->
-    <string name="dashboard_style_top_level_material">Material · top_level_settings_material.xml</string>
+    <string name="dashboard_style_top_level_material">Kathaleya</string>
     <!-- style 5 -->
     <string name="dashboard_style_top_level_classic">KS School</string>
     <!-- style 6 -->
@@ -101,8 +101,8 @@
     <string name="bmobile_expressive_settings_title">BMobile Expressive Settings</string>
     <string name="epic_style_header_title">Epic Style</string>
     <string name="epic_style_header_summary">Customized Settings Experience</string>
-    <string name="material_style_header_title">Material Style</string>
-    <string name="material_style_header_summary">Material Design 3 inspired interface</string>
+    <string name="material_style_header_title">Kathaleya</string>
+    <string name="material_style_header_summary">Grid cards with BMobile dashboard layouts</string>
     <string name="classic_style_header_title">Classic Style</string>
     <string name="classic_style_header_summary">Traditional categorized layout</string>
 

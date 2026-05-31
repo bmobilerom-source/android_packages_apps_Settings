@@ -861,9 +861,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     R.drawable.ic_settings_wireless_filled));
             items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
                     com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.custom_dashboard_title,
-                    R.string.custom_dashboard_summary,
-                    "com.epic.fragments.CustomDashboardSettings",
+                    R.string.bmobile_dashboard_title,
+                    R.string.bmobile_dashboard_summary,
+                    "com.epic.fragments.BMobileDashboardSettings",
                     R.drawable.ic_custom_dashboard));
             items.add(new com.epic.fragments.MaterialDashboardGridAdapter.CardItem(
                     com.epic.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
@@ -1086,6 +1086,13 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     R.string.summary_placeholder,
                     "com.android.settings.network.NetworkDashboardFragment",
                     R.drawable.ic_settings_wireless_filled));
+
+            items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
+                    com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
+                    R.string.bmobile_dashboard_title,
+                    R.string.bmobile_dashboard_summary,
+                    "com.epic.fragments.BMobileDashboardSettings",
+                    R.drawable.ic_settings_system_dashboard_filled));
             
             items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(
                     com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
@@ -1262,10 +1269,15 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         }
     }
 
-    /** Grid cards for YR Expressive (style 14) — no network, display, system, or custom dashboard. */
+    /** Grid cards for YR Expressive (style 14). */
     private void populateYrExpressiveGridItems(
             java.util.List<com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem> items) {
         final int type = com.epic.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD;
+        items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.yr_custom_dashboard_title,
+                R.string.yr_custom_dashboard_summary,
+                "com.epic.fragments.YrCustomDashboardSettings",
+                R.drawable.ic_settings_system_dashboard_filled));
         items.add(new com.epic.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.connected_devices_dashboard_title,
                 R.string.connected_devices_dashboard_default_summary,
@@ -1528,9 +1540,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             java.util.List<com.epic.fragments.FunDisplaySettingsAdapter.CardItem> items) {
             final int type = com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD;
             items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
-                    R.string.custom_dashboard_title,
-                    R.string.custom_dashboard_summary,
-                    "com.epic.fragments.CustomDashboardSettings",
+                    R.string.bmobile_dashboard_title,
+                    R.string.bmobile_dashboard_summary,
+                    "com.epic.fragments.BMobileDashboardSettings",
                     R.drawable.ic_settings_system_dashboard_filled));
             items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.connected_devices_dashboard_title,
@@ -1579,13 +1591,15 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     R.drawable.ic_settings_accessibility_filled));
     }
 
-    /**
-     * Grid cards for AfterLabs grid homepage (style 13): no safety/security, emergency,
-     * or accessibility; privacy opens {@link com.android.settings.privacy.PrivacyControlsFragment}.
-     */
+    /** Grid cards for AfterLabs grid homepage (style 13): YR dashboard + settings shortcuts. */
     private void populateAfterlabsGridItems(
             java.util.List<com.epic.fragments.FunDisplaySettingsAdapter.CardItem> items) {
         final int type = com.epic.fragments.FunDisplaySettingsAdapter.CARD_TYPE_STANDARD;
+        items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
+                R.string.yr_custom_dashboard_title,
+                R.string.yr_custom_dashboard_summary,
+                "com.epic.fragments.YrCustomDashboardSettings",
+                R.drawable.ic_settings_system_dashboard_filled));
         items.add(new com.epic.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.network_dashboard_title, R.string.summary_placeholder,
                 "com.android.settings.network.NetworkDashboardFragment",

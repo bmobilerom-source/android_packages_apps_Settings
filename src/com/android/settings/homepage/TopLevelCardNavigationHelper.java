@@ -33,8 +33,6 @@ public final class TopLevelCardNavigationHelper {
     private static final String FRAGMENT_NETWORK =
             "com.android.settings.network.NetworkDashboardFragment";
     private static final String FRAGMENT_DISPLAY = "com.android.settings.DisplaySettings";
-    private static final String FRAGMENT_CUSTOM_DASHBOARD =
-            "com.epic.fragments.CustomDashboardSettings";
     private static final String FRAGMENT_CONNECTED_DEVICES =
             "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment";
     private static final String AURORA_STORE_PACKAGE = "com.aurora.store";
@@ -82,9 +80,19 @@ public final class TopLevelCardNavigationHelper {
                         ? R.string.connected_devices_dashboard_title
                         : R.string.display_settings,
                 sourceMetricsCategory));
-        bindCard(layoutPref, R.id.card_custom_dashboard, () -> launchFragment(activity,
-                FRAGMENT_CUSTOM_DASHBOARD, R.string.custom_dashboard_title,
-                sourceMetricsCategory));
+        bindCard(layoutPref, R.id.card_custom_dashboard, () -> {
+            final int style = DashboardStyleHelper.getDashboardStyle(context);
+            launchFragment(activity,
+                    DashboardStyleHelper.getBrandDashboardFragmentClass(style),
+                    DashboardStyleHelper.getBrandDashboardTitleResId(style),
+                    sourceMetricsCategory);
+        });
+
+        final TextView dashboardTitle = layoutPref.findViewById(R.id.card_custom_dashboard_title);
+        if (dashboardTitle != null) {
+            final int style = DashboardStyleHelper.getDashboardStyle(context);
+            dashboardTitle.setText(DashboardStyleHelper.getBrandDashboardTitleResId(style));
+        }
     }
 
     /** Aurora Store tile on AfterLabs tab 2 (no fragment in XML). */

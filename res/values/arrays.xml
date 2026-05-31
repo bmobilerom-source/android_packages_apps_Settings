@@ -1692,8 +1692,9 @@
         <item>16</item>
     </string-array>
 
-    <!-- BMobile dashboard styles — ids 6, 7, 8, 10, 12, 15 -->
+    <!-- BMobile dashboard styles — ids 4 (Kathaleya), 6, 7, 8, 10, 12, 15 -->
     <string-array name="settings_dashboard_style_bmobile_entries">
+        <item>@string/dashboard_style_top_level_material</item>
         <item>@string/dashboard_style_top_level_custom_v2</item>
         <item>@string/dashboard_style_top_level_fun_display</item>
         <item>@string/dashboard_style_top_level_bmobile_expressive</item>
@@ -1702,6 +1703,7 @@
         <item>@string/dashboard_style_top_level_bmobile_neo</item>
     </string-array>
     <string-array name="settings_dashboard_style_bmobile_values" translatable="false">
+        <item>4</item>
         <item>6</item>
         <item>7</item>
         <item>8</item>

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import com.android.settings.R;
 import com.android.settings.homepage.DashboardStyleHelper;
 
-/** BMobile-branded dashboard picker (Cards, Home, Expressive, Icons, DynamicTabs, Neo). */
+/** BMobile-branded dashboard picker (Kathaleya, Cards, Home, Expressive, Icons, DynamicTabs, Neo). */
 public class BMobileDashboardSettings extends BrandDashboardSettings {
 
     public static void launchFrom(@NonNull Context context) {

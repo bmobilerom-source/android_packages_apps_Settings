@@ -235,8 +235,7 @@
         settings:highlightableMenuKey="@string/menu_key_support"
         settings:controller="com.android.settings.support.SupportPreferenceController"/>
 
-    <!-- YR Custom Dashboard (hidden) -->
-    <!--
+    <!-- YR Custom Dashboard -->
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.epic.fragments.YrCustomDashboardSettings"
         android:icon="@drawable/ic_custom_dashboard"
@@ -245,6 +244,5 @@
         android:title="@string/yr_custom_dashboard_title"
         android:summary="@string/yr_custom_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_system"/>
-    -->
 
 </PreferenceScreen>

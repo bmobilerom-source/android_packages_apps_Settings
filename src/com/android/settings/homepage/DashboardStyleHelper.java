@@ -120,6 +120,65 @@ public class DashboardStyleHelper {
         return (style >= 0 && style <= 8) || (style >= 10 && style <= 16);
     }
 
+    /** BMobile-branded homepage layouts (Kathaleya, Everlides, Home, Expressive, Icons, DynamicTabs, Neo). */
+    public static boolean isBmobileStyle(int style) {
+        return style == 4 || style == 6 || style == 7 || style == 8
+                || style == 10 || style == 12 || style == 15;
+    }
+
+    /** YR-branded homepage layouts (Study, School, Social, Expressive). */
+    public static boolean isYrStyle(int style) {
+        return style == 1 || style == 11 || style == 13 || style == 14;
+    }
+
+    /** KidsSafe-branded homepage layouts (School, Fun). */
+    public static boolean isKidsSafeStyle(int style) {
+        return style == 5 || style == 16;
+    }
+
+    /** Dashboard picker fragment for the brand that owns {@code style}. */
+    @NonNull
+    public static String getBrandDashboardFragmentClass(int style) {
+        if (isBmobileStyle(style)) {
+            return "com.epic.fragments.BMobileDashboardSettings";
+        }
+        if (isYrStyle(style)) {
+            return "com.epic.fragments.YrCustomDashboardSettings";
+        }
+        if (isKidsSafeStyle(style)) {
+            return "com.epic.fragments.KidsSafeDashboardSettings";
+        }
+        return "com.epic.fragments.CustomDashboardSettings";
+    }
+
+    /** Title string for the brand dashboard picker that owns {@code style}. */
+    public static int getBrandDashboardTitleResId(int style) {
+        if (isBmobileStyle(style)) {
+            return com.android.settings.R.string.bmobile_dashboard_title;
+        }
+        if (isYrStyle(style)) {
+            return com.android.settings.R.string.yr_custom_dashboard_title;
+        }
+        if (isKidsSafeStyle(style)) {
+            return com.android.settings.R.string.kidssafe_dashboard_title;
+        }
+        return com.android.settings.R.string.custom_dashboard_title;
+    }
+
+    /** Summary string for the brand dashboard picker that owns {@code style}. */
+    public static int getBrandDashboardSummaryResId(int style) {
+        if (isBmobileStyle(style)) {
+            return com.android.settings.R.string.bmobile_dashboard_summary;
+        }
+        if (isYrStyle(style)) {
+            return com.android.settings.R.string.yr_custom_dashboard_summary;
+        }
+        if (isKidsSafeStyle(style)) {
+            return com.android.settings.R.string.kidssafe_dashboard_summary;
+        }
+        return com.android.settings.R.string.custom_dashboard_summary;
+    }
+
     /**
      * Resolves the user-visible label for a dashboard style id.
      */

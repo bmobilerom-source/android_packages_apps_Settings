@@ -90,9 +90,9 @@ public class FunDisplaySettings extends SettingsPreferenceFragment {
             // System Basic Defaults
             items.add(new FunDisplaySettingsAdapter.CardItem(
                     FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.custom_dashboard_title,
-                    R.string.custom_dashboard_summary,
-                    "com.epic.fragments.CustomDashboardSettings",
+                    R.string.bmobile_dashboard_title,
+                    R.string.bmobile_dashboard_summary,
+                    "com.epic.fragments.BMobileDashboardSettings",
                     R.drawable.ic_settings_system_dashboard_filled));
             
             // Connected Devices
