@@ -24,13 +24,4 @@
         android:order="-1990"
         android:selectable="false" />
 
-    <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.YrCustomDashboardSettings"
-        android:icon="@drawable/ic_custom_dashboard"
-        android:key="top_level_yr_custom_dashboard"
-        android:order="99"
-        android:title="@string/yr_custom_dashboard_title"
-        android:summary="@string/yr_custom_dashboard_summary"
-        settings:highlightableMenuKey="@string/menu_key_system"/>
-
 </PreferenceScreen>

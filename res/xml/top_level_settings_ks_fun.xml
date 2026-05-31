@@ -43,13 +43,4 @@
         android:selectable="false"
         android:layout="@layout/kidssafe_expressive_two_column_grid" />
 
-    <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.KidsSafeDashboardSettings"
-        android:icon="@drawable/ic_custom_dashboard"
-        android:key="top_level_kidssafe_dashboard"
-        android:order="99"
-        android:title="@string/kidssafe_dashboard_title"
-        android:summary="@string/kidssafe_dashboard_summary"
-        settings:highlightableMenuKey="@string/menu_key_system"/>
-
 </PreferenceScreen>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  HOMEPAGE: style 6 | @string/dashboard_style_top_level_custom_v2 (BMobile Cards)
+  HOMEPAGE: style 6 | @string/dashboard_style_top_level_custom_v2 (Everlides Cards)
 
   Copyright (C) 2025 The Android Open Source Project
 
@@ -58,12 +58,14 @@
             android:selectable="false"
             android:order="-1996" />
 
-        <!-- Toplevel Card Navigation -->
+        <!-- Toplevel Card Navigation (hidden) -->
+        <!--
         <com.android.settingslib.widget.LayoutPreference
             android:key="top_level_card_navigation"
             android:selectable="false"
             android:layout="@layout/toplevel_card_navigation"
             android:order="-1995" />
+        -->
 
         <!-- Connected Devices -->
         <com.android.settings.widget.HomepagePreference

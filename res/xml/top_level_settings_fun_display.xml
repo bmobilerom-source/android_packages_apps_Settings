@@ -36,14 +36,5 @@
         android:selectable="false"
         android:layout="@layout/fundisplaysettings_two_column_grid" />
 
-    <com.android.settings.widget.HomepagePreference
-        android:fragment="com.epic.fragments.BMobileDashboardSettings"
-        android:icon="@drawable/ic_custom_dashboard"
-        android:key="top_level_bmobile_dashboard"
-        android:order="99"
-        android:title="@string/bmobile_dashboard_title"
-        android:summary="@string/bmobile_dashboard_summary"
-        settings:highlightableMenuKey="@string/menu_key_system"/>
-
 </PreferenceScreen>
 

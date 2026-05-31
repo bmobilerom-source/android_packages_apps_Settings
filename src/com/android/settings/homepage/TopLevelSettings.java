@@ -99,6 +99,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     private static final String KEY_AFTERLABS_TAB_STRIP = "afterlabs_tab_strip";
     private static final String SAVE_AFTERLABS_TAB_INDEX = "afterlabs_tab_index";
+    private static final int MAIN_USER_STYLE = 0;
     private static final int EPIC_STYLE = 1;
     private static final int CLASSIC_STYLE = 5;
     private static final int BMOBILE_NEO_STYLE = 15;
@@ -214,13 +215,14 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         return createTopLevelViewWithBottomBar(inflater, container, savedInstanceState);
     }
 
-    /** Epic (1), KS School (5), BMobile Home (7), BMobile Expressive (8), AfterLabs tab/grid omit bottom bar. */
+    /** Styles that omit the homepage bottom bar entirely. */
     private static boolean shouldShowTopLevelBottomBar(@Nullable Context context) {
         if (context == null) {
             return true;
         }
         final int style = DashboardStyleHelper.getDashboardStyle(context);
-        return style != EPIC_STYLE
+        return style != MAIN_USER_STYLE
+                && style != EPIC_STYLE
                 && style != CLASSIC_STYLE
                 && style != FUN_DISPLAY_STYLE
                 && style != BMOBILE_EXPRESSIVE_STYLE
@@ -229,31 +231,14 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 && style != AFTERLABS_GRID_STYLE;
     }
 
+    private static boolean usesFloatingHomepageBottomBar(@Nullable Context context) {
+        return shouldShowTopLevelBottomBar(context);
+    }
+
     private View createTopLevelViewWithBottomBar(@NonNull LayoutInflater inflater,
             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View content = super.onCreateView(inflater, container, savedInstanceState);
-        final Context styleContext = getContext();
-        final boolean useBottomBar = shouldShowTopLevelBottomBar(styleContext);
-        final int style = styleContext != null
-                ? DashboardStyleHelper.getDashboardStyle(styleContext) : -1;
-
-        if (useBottomBar && style == OOS11_STYLE) {
-            // Bar is pinned on the activity CoordinatorLayout in onViewCreated (not here).
-            return content;
-        }
-
-        final FrameLayout wrapper = new FrameLayout(requireContext());
-        wrapper.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        if (content != null) {
-            wrapper.addView(content, new FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
-        }
-
-        attachFixedTopLevelBottomBar(inflater, wrapper, useBottomBar);
-        return wrapper;
+        // Bottom bar is pinned on the activity CoordinatorLayout in onViewCreated (YR School pattern).
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     /** OOS11: bottom bar is a sibling of the homepage NestedScrollView, not inside it. */
@@ -438,29 +423,26 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         super.onDestroyView();
     }
 
-    /** BMobile Cards (6): remove hidden prefs and card-row Display shortcut. */
-    private void removeBmobileCardsDisplayGrid() {
+    /** Everlides Cards (6): strip card navigation and unused list prefs. */
+    private void removeEverlidesCardsHomepageExtras() {
         final PreferenceScreen screen = getPreferenceScreen();
         if (screen == null) {
             return;
         }
         for (String key : new String[] {
                 "display_grid",
+                "top_level_network",
                 "top_level_display",
+                "top_level_system",
+                "top_level_custom_dashboard",
                 "top_level_battery",
                 "top_level_wallpaper",
-                "top_level_priority_modes"
+                "top_level_priority_modes",
+                "top_level_card_navigation"
         }) {
             final Preference pref = screen.findPreference(key);
             if (pref != null) {
                 screen.removePreference(pref);
-            }
-        }
-        final LayoutPreference cardNav = screen.findPreference("top_level_card_navigation");
-        if (cardNav != null) {
-            final View displayCard = cardNav.findViewById(R.id.card_display);
-            if (displayCard != null) {
-                displayCard.setVisibility(View.GONE);
             }
         }
     }
@@ -496,16 +478,13 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     || currentStyle == KS_FUN_STYLE) {
                 hideSearchBar();
             }
-            if (TopLevelDashboardBottomBarHelper.findBottomBar(view) != null
-                    || currentStyle == OOS11_STYLE) {
+            if (usesFloatingHomepageBottomBar(context)) {
                 applyTopLevelBottomBarPadding();
-            }
-            if (currentStyle == OOS11_STYLE) {
                 attachOos11ActivityBottomBar();
                 attachOos11FloatingBottomBarScroll();
             }
             if (currentStyle == BMOBILE_CARDS_STYLE) {
-                removeBmobileCardsDisplayGrid();
+                removeEverlidesCardsHomepageExtras();
             }
         }
         
