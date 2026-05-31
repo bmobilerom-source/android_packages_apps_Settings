@@ -116,7 +116,7 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     SystemBasicDefaultsAdapter.CARD_TYPE_ABOUT_US,
                     R.string.system_basic_defaults_default_apps_title,
                     R.string.system_basic_defaults_default_apps_summary,
-                    R.drawable.ic_system_basic_defaults_default_apps,
+                    R.drawable.ic_apps_filled,
                     "default_apps")); // Special key for intent launch
             
             // Circular buttons (6 buttons)
@@ -125,7 +125,7 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.system_basic_defaults_gesture_navigation_title,
                     R.string.system_basic_defaults_gesture_navigation_summary,
-                    R.drawable.ic_system_basic_defaults_gesture,
+                    R.drawable.ic_settings_gestures,
                     "com.android.settings.gestures.SystemNavigationGestureSettings"));
 
             // 2. WiFi Hotspot (from tether_prefs.xml 34-39)
@@ -133,7 +133,7 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.wifi_hotspot_checkbox_text,
                     R.string.wifi_hotspot_off_subtext,
-                    R.drawable.ic_system_basic_defaults_one_handed,
+                    R.drawable.ic_settings_wireless_filled,
                     "com.android.settings.wifi.tether.WifiTetherSettings"));
 
             // 3. Media Controls (from sound_settings.xml 162-170)
@@ -141,7 +141,7 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.media_controls_title,
                     R.string.keywords_media_controls,
-                    R.drawable.ic_system_basic_defaults_brightness,
+                    R.drawable.ic_settings_display_filled,
                     "com.android.settings.sound.MediaControlsSettings"));
 
             // 4. Dark Theme
@@ -149,7 +149,7 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.dark_ui_mode,
                     R.string.dark_ui_mode_summary,
-                    R.drawable.ic_system_basic_defaults_dark_theme,
+                    R.drawable.ic_settings_night_display,
                     "com.android.settings.display.darkmode.DarkModeSettingsFragment"));
 
             // 5. PhotoWidget App (package: com.fibelatti.photowidget, class: com.fibelatti.photowidget.home.HomeActivity)
@@ -157,7 +157,7 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.system_basic_defaults_photowidget_title,
                     R.string.system_basic_defaults_photowidget_summary,
-                    R.drawable.ic_system_basic_defaults_anatolia,
+                    R.drawable.ic_settings_wallpaper_filled,
                     "photowidget_app")); // Special key for PhotoWidget intent
 
             // 6. TapTap Settings (from gesture_navigation_settings.xml 40-46)
@@ -165,7 +165,7 @@ public class SystemBasicDefaults extends SettingsPreferenceFragment implements
                     SystemBasicDefaultsAdapter.CARD_TYPE_CIRCULAR_BUTTON,
                     R.string.taptap_title,
                     R.string.taptap_summary,
-                    R.drawable.ic_system_basic_defaults_more,
+                    R.drawable.ic_settings_system_dashboard_filled,
                     "com.android.settings.gestures.TapScreenGestureSettings"));
 
             rv.setAdapter(new SystemBasicDefaultsAdapter(activity, items, getMetricsCategory()));

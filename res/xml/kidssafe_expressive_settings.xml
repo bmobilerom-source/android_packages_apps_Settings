@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/kidssafe_expressive_settings_title">
+
+    <PreferenceCategory
+        android:layout="@layout/settings_title_header_small"
+        android:order="-1001"
+        android:title="@string/kidssafe_expressive_settings_title" />
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="kidssafe_expressive_grid"
+        android:layout="@layout/kidssafe_expressive_two_column_grid"
+        android:selectable="false" />
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="extended_homepage_widgets"
+        android:layout="@layout/extended_homepage_widgets"
+        android:order="100"
+        android:selectable="false" />
+</PreferenceScreen>

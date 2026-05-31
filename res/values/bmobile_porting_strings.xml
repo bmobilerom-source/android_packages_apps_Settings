@@ -36,6 +36,10 @@
     <string name="bmobile_firewall_summary">Network firewall controls</string>
     <string name="bmobile_ad_services_title">Ad Services</string>
     <string name="bmobile_ad_services_summary">Advertisement service controls</string>
+
+    <!-- DAVx⁵ (CalDAV / CardDAV) -->
+    <string name="dav_title">DAV</string>
+    <string name="dav_summary">Sync calendars and contacts with CalDAV and CardDAV accounts</string>
     
     <!-- Session/Journal -->
     <string name="my_session_title">My Session</string>
@@ -219,6 +223,11 @@
     <string name="auto_reboot_interval_every_3_days">Every 3 days</string>
     <string name="auto_reboot_interval_weekly">Weekly</string>
     <string name="auto_reboot_interval_custom">Every %1$d hours</string>
+    <string name="auto_reboot_interval_one_day">Every day</string>
+    <string name="auto_reboot_interval_days">Every %1$d days</string>
+    <string name="auto_reboot_interval_one_hour">Every hour</string>
+    <string name="auto_reboot_interval_hours">Every %1$d hours</string>
+    <string name="auto_reboot_interval_minutes">Every %1$d minutes</string>
     
     <string name="auto_reboot_time_title">Reboot Time</string>
     <string name="auto_reboot_time_summary">Time of day to reboot (24-hour format)</string>
@@ -226,6 +235,9 @@
     <string name="auto_reboot_time_picker_title">Select Reboot Time</string>
     
     <string name="auto_reboot_footer">Auto reboot helps maintain device security and performance by periodically restarting the system. The device will reboot even when the screen is off.</string>
+
+    <!-- Display -->
+    <string name="display_rotation_title">Display rotation</string>
 
     <!-- UserInfo Bubble Setting -->
     <string name="userinfo_bubble_setting_description">Configure bubble notification settings</string>
