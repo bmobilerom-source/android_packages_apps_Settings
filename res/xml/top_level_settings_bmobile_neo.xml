@@ -12,16 +12,16 @@
     android:title="Settings">
 
     <com.android.settingslib.widget.LayoutPreference
-        android:key="top_level_homepage_widgets"
-        android:selectable="false"
-        android:layout="@layout/homepage_widgets"
-        android:order="-2000" />
-
-    <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/mainuser_profile_card"
         android:key="about_device_info"
         android:selectable="true"
         android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment"
+        android:order="-2001" />
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="top_level_homepage_widgets"
+        android:selectable="false"
+        android:layout="@layout/homepage_widgets"
         android:order="-1995" />
 
     <PreferenceCategory
