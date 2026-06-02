@@ -81,5 +81,4 @@
         settings:controller="com.bmobile.fragments.ThermalThrottlingController"
         settings:searchable="false" />
 
-
 </PreferenceScreen>

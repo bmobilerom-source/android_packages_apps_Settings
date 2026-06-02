@@ -8,7 +8,7 @@
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,13 +17,19 @@ package com.bmobile.fragments;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.util.Log;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import com.android.settings.core.BasePreferenceController;
+
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
 public class AutoRebootIntervalController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
+
+    private static final String TAG = "AutoRebootInterval";
+    private static final long MIN_INTERVAL_MS = 60L * 60L * 1000L;
 
     private ListPreference mPreference;
 
@@ -33,111 +39,108 @@ public class AutoRebootIntervalController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        // Only available if auto reboot is enabled
-        return PrivacySecurityHelper.isAutoRebootEnabled(mContext) 
+        return PrivacySecurityHelper.isAutoRebootEnabled(mContext)
                 ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 
     @Override
     public String getSummary() {
-        long intervalMs = PrivacySecurityHelper.getAutoRebootInterval(mContext);
-        return formatInterval(intervalMs);
+        return formatInterval(PrivacySecurityHelper.getAutoRebootInterval(mContext));
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (preference instanceof ListPreference) {
-            ListPreference listPreference = (ListPreference) preference;
-            mPreference = listPreference;
-            long intervalMs = PrivacySecurityHelper.getAutoRebootInterval(mContext);
-            String value = String.valueOf(intervalMs);
-
-            // Find the closest matching value from available options
-            CharSequence[] entryValues = listPreference.getEntryValues();
-            if (entryValues != null && entryValues.length > 0) {
-                // Check if exact match exists
-                boolean found = false;
-                for (CharSequence entryValue : entryValues) {
-                    if (entryValue != null && entryValue.toString().equals(value)) {
-                        found = true;
-                        break;
-                    }
-                }
-                // If no exact match, use the first available value (default: 1 hour)
-                if (!found && entryValues.length > 0 && entryValues[0] != null) {
-                    value = entryValues[0].toString();
-                    // Update the setting to match the default
-                    PrivacySecurityHelper.setAutoRebootInterval(mContext, Long.parseLong(value));
-                    intervalMs = Long.parseLong(value);
-                }
-            }
-
-            listPreference.setValue(value);
-            listPreference.setSummary(formatInterval(intervalMs));
-            // Enable/disable based on auto reboot toggle
-            boolean autoRebootEnabled = PrivacySecurityHelper.isAutoRebootEnabled(mContext);
-            listPreference.setEnabled(autoRebootEnabled);
+        if (!(preference instanceof ListPreference)) {
+            return;
         }
+
+        ListPreference listPreference = (ListPreference) preference;
+        mPreference = listPreference;
+
+        long intervalMs = PrivacySecurityHelper.getAutoRebootInterval(mContext);
+        String value = resolveListValue(listPreference, intervalMs);
+        intervalMs = Long.parseLong(value);
+
+        if (intervalMs != PrivacySecurityHelper.getAutoRebootInterval(mContext)) {
+            PrivacySecurityHelper.setAutoRebootInterval(mContext, intervalMs);
+        }
+
+        listPreference.setValue(value);
+        listPreference.setSummary(formatInterval(intervalMs));
+        listPreference.setEnabled(PrivacySecurityHelper.isAutoRebootEnabled(mContext));
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference instanceof ListPreference) {
-            try {
-                String valueStr = newValue.toString();
-                long intervalMs = Long.parseLong(valueStr);
+        if (!(preference instanceof ListPreference)) {
+            return false;
+        }
 
-                // Validate the interval is within acceptable range (minimum 1 hour)
-                long minInterval = 60 * 60 * 1000L; // 1 hour
-                if (intervalMs < minInterval) {
-                    android.util.Log.w("AutoRebootIntervalController",
-                            "Interval too short, using minimum: " + minInterval);
-                    intervalMs = minInterval;
-                    valueStr = String.valueOf(intervalMs);
-                }
+        try {
+            long intervalMs = Long.parseLong(newValue.toString());
+            if (intervalMs < MIN_INTERVAL_MS) {
+                Log.w(TAG, "Interval too short, using minimum: " + MIN_INTERVAL_MS);
+                intervalMs = MIN_INTERVAL_MS;
+            }
 
-                boolean success = PrivacySecurityHelper.setAutoRebootInterval(mContext, intervalMs);
-                if (success) {
-                    final ContentResolver resolver = mContext.getContentResolver();
-                    resolver.notifyChange(
-                            android.provider.Settings.Secure.getUriFor(
-                                    android.provider.Settings.Secure.AUTO_REBOOT_DELAY),
-                            null, false);
-                    resolver.notifyChange(
-                            android.provider.Settings.Secure.getUriFor(
-                                    android.provider.Settings.Secure.AUTO_REBOOT_ENABLED),
-                            null, false);
-
-                    if (mPreference != null) {
-                        mPreference.setValue(String.valueOf(intervalMs));
-                        mPreference.setSummary(formatInterval(intervalMs));
-                    }
-
-                    // Broadcast to receiver to reschedule
-                    android.content.Intent intent = new android.content.Intent(
-                            "com.bmobile.action.AUTO_REBOOT_CONFIG_CHANGED");
-                    intent.setPackage(mContext.getPackageName());
-                    mContext.sendBroadcast(intent);
-
-                    android.util.Log.d("AutoRebootIntervalController",
-                            "Auto reboot interval set to: " + formatInterval(intervalMs) +
-                                    " (" + intervalMs + " ms)");
-                } else {
-                    android.util.Log.e("AutoRebootIntervalController",
-                            "Failed to save auto reboot interval");
-                }
-                return success;
-            } catch (NumberFormatException e) {
-                android.util.Log.e("AutoRebootIntervalController",
-                        "Invalid interval value: " + newValue, e);
-                return false;
-            } catch (Exception e) {
-                android.util.Log.e("AutoRebootIntervalController", "Failed to set auto reboot interval", e);
+            if (!PrivacySecurityHelper.setAutoRebootInterval(mContext, intervalMs)) {
+                Log.e(TAG, "Failed to save auto reboot interval");
                 return false;
             }
+
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.notifyChange(
+                    android.provider.Settings.Secure.getUriFor(
+                            android.provider.Settings.Secure.AUTO_REBOOT_DELAY),
+                    null, false);
+            resolver.notifyChange(
+                    android.provider.Settings.Secure.getUriFor(
+                            android.provider.Settings.Secure.AUTO_REBOOT_ENABLED),
+                    null, false);
+
+            if (mPreference != null) {
+                mPreference.setValue(String.valueOf(intervalMs));
+                mPreference.setSummary(formatInterval(intervalMs));
+            }
+
+            Log.d(TAG, "Auto reboot interval set to " + formatInterval(intervalMs)
+                    + " (" + intervalMs + " ms)");
+            return true;
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "Invalid interval value: " + newValue, e);
+            return false;
         }
-        return false;
+    }
+
+    /** Pick exact or closest entry value (milliseconds). */
+    private static String resolveListValue(ListPreference listPreference, long intervalMs) {
+        CharSequence[] entryValues = listPreference.getEntryValues();
+        if (entryValues == null || entryValues.length == 0) {
+            return String.valueOf(intervalMs);
+        }
+
+        String exact = String.valueOf(intervalMs);
+        for (CharSequence entryValue : entryValues) {
+            if (entryValue != null && exact.equals(entryValue.toString())) {
+                return exact;
+            }
+        }
+
+        long bestMs = Long.parseLong(entryValues[0].toString());
+        long bestDelta = Math.abs(intervalMs - bestMs);
+        for (CharSequence entryValue : entryValues) {
+            if (entryValue == null) {
+                continue;
+            }
+            long candidate = Long.parseLong(entryValue.toString());
+            long delta = Math.abs(intervalMs - candidate);
+            if (delta < bestDelta) {
+                bestDelta = delta;
+                bestMs = candidate;
+            }
+        }
+        return String.valueOf(bestMs);
     }
 
     private String formatInterval(long intervalMs) {
@@ -147,18 +150,16 @@ public class AutoRebootIntervalController extends BasePreferenceController
         if (days >= 1) {
             if (days == 1) {
                 return mContext.getString(R.string.auto_reboot_interval_one_day);
-            } else {
-                return mContext.getString(R.string.auto_reboot_interval_days, days);
             }
-        } else if (hours >= 1) {
+            return mContext.getString(R.string.auto_reboot_interval_days, days);
+        }
+        if (hours >= 1) {
             if (hours == 1) {
                 return mContext.getString(R.string.auto_reboot_interval_one_hour);
-            } else {
-                return mContext.getString(R.string.auto_reboot_interval_hours, hours);
             }
-        } else {
-            long minutes = intervalMs / (60 * 1000);
-            return mContext.getString(R.string.auto_reboot_interval_minutes, minutes);
+            return mContext.getString(R.string.auto_reboot_interval_hours, hours);
         }
+        long minutes = intervalMs / (60 * 1000);
+        return mContext.getString(R.string.auto_reboot_interval_minutes, minutes);
     }
 }

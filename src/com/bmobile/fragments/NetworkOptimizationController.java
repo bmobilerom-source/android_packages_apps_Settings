@@ -49,10 +49,12 @@ public class NetworkOptimizationController extends TogglePreferenceController {
     private void updateSummary(Preference preference) {
         if (preference != null) {
             boolean enabled = isChecked();
+            boolean dataSaverActive = SystemOptimizationHelper.isDataSaverActive(mContext);
             String networkStatus = SystemOptimizationHelper.getNetworkStatus(mContext);
-            String status = enabled 
-                ? "Active • Optimizing network usage • Connected: " + networkStatus
-                : "Inactive • Network: " + networkStatus;
+            String status = enabled
+                    ? "Active • Data Saver " + (dataSaverActive ? "on" : "pending")
+                            + " • " + networkStatus
+                    : "Inactive • Network: " + networkStatus;
             preference.setSummary(status);
         }
     }

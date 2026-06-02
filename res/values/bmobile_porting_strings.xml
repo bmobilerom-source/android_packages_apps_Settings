@@ -116,6 +116,9 @@
     <!-- BLocation -->
     <string name="location_privacy_dashboard_title">Enhanced Location Privacy</string>
     <string name="location_privacy_dashboard_summary">Advanced location controls and privacy indicators</string>
+    <string name="location_privacy_hierarchy_summary">Turn on system Location first, then sharing, then background access. Enforcement applies to apps after a full ROM flash with system server updates.</string>
+    <string name="location_privacy_footer">Enhanced location privacy controls apply to app GPS and network updates. Status rows are informational only. Per-app overrides are not available yet.</string>
+    <string name="location_sharing_hierarchy_summary">Requires system Location to be on. Disabling sharing blocks location for apps. Background access requires sharing to be enabled.</string>
     <string name="blocation_confirm_credential_title">Confirm your device credential</string>
     <string name="blocation_confirm_credential_description">Authentication required to access Enhanced Location Privacy settings</string>
     <string name="keywords_location">location, privacy, gps, tracking</string>

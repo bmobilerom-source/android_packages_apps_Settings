@@ -33,7 +33,8 @@
         settings:layout="@layout/adaptive_preference_card"
         android:summary="@string/location_time_restrictions_summary"
         android:order="1"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:searchable="false"/>
 
     <SwitchPreference
         android:key="location_time_restrictions_enabled"

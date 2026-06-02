@@ -6,12 +6,12 @@
         <item>@string/auto_reboot_interval_every_3_days</item>
         <item>@string/auto_reboot_interval_weekly</item>
     </array>
-    
+
+    <!-- Values in milliseconds (must match PrivacySecurityHelper / AutoRebootManager). -->
     <array name="auto_reboot_interval_values">
-        <item>24</item>
-        <item>48</item>
-        <item>72</item>
-        <item>168</item>
+        <item>86400000</item>
+        <item>172800000</item>
+        <item>259200000</item>
+        <item>604800000</item>
     </array>
 </resources>
-

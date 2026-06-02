@@ -32,7 +32,7 @@
         android:summary="@string/auto_reboot_interval_summary"
         android:entries="@array/auto_reboot_interval_entries"
         android:entryValues="@array/auto_reboot_interval_values"
-        android:defaultValue="3600000"
+        android:defaultValue="86400000"
         android:order="0"
         settings:controller="com.bmobile.fragments.AutoRebootIntervalController" />
 
@@ -40,7 +40,9 @@
     <com.android.settingslib.widget.FooterPreference
         android:key="auto_reboot_footer"
         android:title="@string/auto_reboot_footer"
+        android:selectable="false"
+        android:order="999"
         settings:searchable="false" />
-    
+
 </PreferenceScreen>
 

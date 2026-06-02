@@ -18,16 +18,20 @@ package com.bmobile.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.widget.SwitchWidgetController;
-import com.android.settings.password.ConfirmDeviceCredentialActivity;
 
-public class AutoRebootMainSwitchController extends TogglePreferenceController
-        implements SwitchWidgetController.OnSwitchChangeListener {
+import com.android.settings.widget.SettingsMainSwitchPreferenceController;
+import com.android.settingslib.widget.MainSwitchPreference;
 
+public class AutoRebootMainSwitchController extends SettingsMainSwitchPreferenceController {
+
+    private static final String TAG = "AutoRebootMainSwitch";
     private static final int REQUEST_CODE_CONFIRM_CREDENTIAL = 1001;
+    private static final String KEY_INTERVAL = "auto_reboot_interval";
+
     private boolean mPendingCheckedState = false;
     private PreferenceScreen mScreen;
 
@@ -47,75 +51,47 @@ public class AutoRebootMainSwitchController extends TogglePreferenceController
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        // Store the desired state
         mPendingCheckedState = isChecked;
 
-        // Get the fragment to launch credential confirmation
         if (mContext instanceof Activity) {
             Activity activity = (Activity) mContext;
-            // Check if device has secure lock screen
-            android.app.KeyguardManager km = activity.getSystemService(android.app.KeyguardManager.class);
+            android.app.KeyguardManager km =
+                    activity.getSystemService(android.app.KeyguardManager.class);
             if (km != null && !km.isKeyguardSecure()) {
-                // No lock screen, allow directly without PIN verification
-                android.util.Log.d("AutoRebootMainSwitchController",
-                        "No secure lock screen, enabling auto reboot directly");
+                Log.d(TAG, "No secure lock screen, applying auto reboot directly");
                 return applyPendingChange();
             }
-            // Launch credential confirmation
-            AutoRebootPinHelper.launchCredentialConfirmation(activity, REQUEST_CODE_CONFIRM_CREDENTIAL);
-            // Return false for now - will be set after PIN verification
-            return false;
-        } else {
-            // If not an Activity context, try to find the fragment
-            // For now, require PIN verification
-            android.util.Log.w("AutoRebootMainSwitchController",
-                    "Cannot verify PIN - context is not an Activity");
+            AutoRebootPinHelper.launchCredentialConfirmation(activity,
+                    REQUEST_CODE_CONFIRM_CREDENTIAL);
             return false;
         }
+
+        Log.w(TAG, "Context is not an Activity, applying without credential UI");
+        return applyPendingChange();
     }
 
-    /**
-     * Called after PIN verification succeeds or when no lock screen is present.
-     */
     public boolean applyPendingChange() {
         boolean success = PrivacySecurityHelper.setAutoRebootEnabled(mContext, mPendingCheckedState);
         if (success) {
-            android.util.Log.d("AutoRebootMainSwitchController", 
-                    "Auto reboot " + (mPendingCheckedState ? "enabled" : "disabled"));
-            // Notify that the setting changed
-            android.content.ContentResolver resolver = mContext.getContentResolver();
-            resolver.notifyChange(
+            Log.d(TAG, "Auto reboot " + (mPendingCheckedState ? "enabled" : "disabled"));
+            mContext.getContentResolver().notifyChange(
                     android.provider.Settings.Secure.getUriFor(
-                            "auto_reboot_enabled"),
+                            android.provider.Settings.Secure.AUTO_REBOOT_ENABLED),
                     null, false);
-            
-            // Send broadcast to AutoRebootReceiver to trigger scheduling
-            android.content.Intent intent = new android.content.Intent("com.bmobile.action.AUTO_REBOOT_CONFIG_CHANGED");
-            intent.setPackage(mContext.getPackageName());
-            mContext.sendBroadcast(intent);
-            
-            // Update UI
-            updateState(null);
+            refreshUi();
         } else {
-            android.util.Log.e("AutoRebootMainSwitchController", 
-                    "Failed to set auto reboot enabled state");
+            Log.e(TAG, "Failed to set auto reboot enabled state");
         }
         return success;
     }
 
-    /**
-     * Handle activity result from credential confirmation.
-     */
     public boolean handleActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_CONFIRM_CREDENTIAL) {
             if (AutoRebootPinHelper.isCredentialConfirmed(resultCode)) {
                 return applyPendingChange();
-            } else {
-                android.util.Log.w("AutoRebootMainSwitchController", 
-                        "Credential verification failed or cancelled");
-                // Reset UI to current state
-                updateState(null);
             }
+            Log.w(TAG, "Credential verification failed or cancelled");
+            refreshUi();
         }
         return false;
     }
@@ -124,43 +100,49 @@ public class AutoRebootMainSwitchController extends TogglePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mScreen = screen;
-        // Update interval preference state when switch changes
-        Preference intervalPref = screen.findPreference("auto_reboot_interval");
-        if (intervalPref != null) {
-            updateState(intervalPref);
-        }
+        refreshUi();
     }
 
     @Override
     public void updateState(Preference preference) {
-        super.updateState(preference);
-        // Update interval preference enabled state and refresh its state
-        if (preference != null && preference.getPreferenceManager() != null) {
-            PreferenceScreen screen = preference.getPreferenceManager().getPreferenceScreen();
-            if (screen != null) {
-                Preference intervalPref = screen.findPreference("auto_reboot_interval");
-                if (intervalPref != null) {
-                    boolean enabled = isChecked();
-                    intervalPref.setEnabled(enabled);
-                    // Refresh the interval preference state
-                    if (intervalPref.getContext() != null) {
-                        AutoRebootIntervalController intervalController = 
-                                new AutoRebootIntervalController(intervalPref.getContext(), "auto_reboot_interval");
-                        intervalController.updateState(intervalPref);
-                    }
-                }
+        if (preference == null
+                || preference instanceof MainSwitchPreference
+                || getPreferenceKey().equals(preference.getKey())) {
+            if (mSwitchPreference != null) {
+                super.updateState(mSwitchPreference);
+            }
+        } else {
+            super.updateState(preference);
+        }
+        updateIntervalEnabledState();
+    }
+
+    @Override
+    public void onCheckedChanged(android.widget.CompoundButton buttonView, boolean isChecked) {
+        if (!setChecked(isChecked)) {
+            final boolean persisted = isChecked();
+            buttonView.setChecked(persisted);
+            if (mSwitchPreference != null) {
+                mSwitchPreference.setChecked(persisted);
             }
         }
     }
 
-    @Override
-    public boolean onSwitchToggled(boolean isChecked) {
-        boolean result = setChecked(isChecked);
-        if (result) {
-            // Update interval preference state
-            updateState(null);
+    private void refreshUi() {
+        if (mSwitchPreference != null) {
+            super.updateState(mSwitchPreference);
         }
-        return result;
+        updateIntervalEnabledState();
+    }
+
+    private void updateIntervalEnabledState() {
+        if (mScreen == null) {
+            return;
+        }
+        Preference intervalPref = mScreen.findPreference(KEY_INTERVAL);
+        if (intervalPref != null) {
+            intervalPref.setEnabled(isChecked());
+        }
     }
 
     @Override
@@ -168,4 +150,3 @@ public class AutoRebootMainSwitchController extends TogglePreferenceController
         return 0;
     }
 }
-

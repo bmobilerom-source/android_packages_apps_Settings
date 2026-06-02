@@ -19,6 +19,7 @@ package com.bmobile.fragments;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkPolicyManager;
 import android.os.PowerManager;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
@@ -106,19 +107,26 @@ public class SystemOptimizationHelper {
     }
 
     private static void applyNetworkOptimization(Context context, boolean enabled) {
+        // AOSP: same API as DataSaverBackend / DataSaverSummary (NetworkPolicyManager).
         try {
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
-            if (cm != null) {
-                cm.setDataSaverEnabled(enabled);
-                Log.d(TAG, "Network optimization (Data Saver) " + 
-                    (enabled ? "enabled" : "disabled"));
-            }
+            NetworkPolicyManager npm = NetworkPolicyManager.from(context);
+            npm.setRestrictBackground(enabled);
+            Log.d(TAG, "Network optimization (Data Saver) "
+                    + (enabled ? "enabled" : "disabled"));
         } catch (SecurityException e) {
-            // Data saver requires system permissions - cannot set via fallback
             Log.w(TAG, "Cannot set data saver: requires system permissions", e);
         } catch (Exception e) {
             Log.e(TAG, "Failed to set network optimization", e);
+        }
+    }
+
+    /** Reflects live Data Saver state (restrict background), for status text. */
+    public static boolean isDataSaverActive(Context context) {
+        try {
+            return NetworkPolicyManager.from(context).getRestrictBackground();
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to read data saver state", e);
+            return false;
         }
     }
 
@@ -140,6 +148,9 @@ public class SystemOptimizationHelper {
     }
 
     private static void applyBatteryOptimization(Context context, boolean enabled) {
+        // Persist low power mode intent even when direct API calls are blocked.
+        Settings.Global.putInt(context.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE, enabled ? 1 : 0);
         try {
             PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
             if (pm != null) {

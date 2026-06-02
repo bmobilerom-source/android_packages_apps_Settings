@@ -51,7 +51,7 @@ public final class PrivacySecurityHelper {
 
     public static long getAutoRebootInterval(Context context) {
         return Settings.Secure.getLong(context.getContentResolver(),
-                Settings.Secure.AUTO_REBOOT_DELAY, 60 * 60 * 1000L);
+                Settings.Secure.AUTO_REBOOT_DELAY, 24L * 60L * 60L * 1000L);
     }
 
     public static boolean setAutoRebootInterval(Context context, long delayMs) {

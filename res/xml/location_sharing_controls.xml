@@ -28,9 +28,10 @@
     <Preference
         android:key="sharing_controls_info"
         android:title="@string/location_sharing_controls_title"
-        android:summary="@string/location_sharing_controls_summary"
+        android:summary="@string/location_sharing_hierarchy_summary"
         android:order="1"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:searchable="false"/>
 
     <SwitchPreference
         android:key="location_sharing_enabled"

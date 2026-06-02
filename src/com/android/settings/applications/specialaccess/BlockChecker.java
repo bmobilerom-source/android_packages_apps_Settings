@@ -129,6 +129,7 @@ public class BlockChecker {
      */
     public static boolean checkAndShowMessage(Context context, String fragmentName) {
         if (isBlocked(context, fragmentName)) {
+            Log.i(TAG, "Blocked fragment launch: " + fragmentName);
             Toast.makeText(context, 
                 getBlockedMessage(context, fragmentName), 
                 Toast.LENGTH_SHORT).show();

@@ -38,7 +38,7 @@ public class LocationPrivacyFooterController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        return "These enhanced location privacy features help you maintain better control over your location data and understand location service status.";
+        return mContext.getString(R.string.location_privacy_footer);
     }
 }
 
