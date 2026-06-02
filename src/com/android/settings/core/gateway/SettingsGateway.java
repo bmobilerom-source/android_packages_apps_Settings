@@ -222,6 +222,7 @@ import com.bmobile.fragments.KidsSafeDashboardSettings;
 import com.bmobile.fragments.YrCustomDashboardSettings;
 import com.bmobile.fragments.DashboardStyleSettings;
 import com.bmobile.fragments.ExtendedHomepageWidgetsFragment;
+import com.bmobile.fragments.DisplayCustomizationsSettings;
 import com.bmobile.fragments.FunDisplaySettings;
 import com.bmobile.fragments.HomepageWidgetsFragment;
 
@@ -453,6 +454,7 @@ public class SettingsGateway {
             com.bmobile.fragments.SystemOptimizationSettings.class.getName(),
             com.bmobile.fragments.DeviceTweaksSettings.class.getName(),
             com.bmobile.fragments.AutoRebootSettings.class.getName(),
+            DisplayCustomizationsSettings.class.getName(),
             com.bmobile.fragments.SystemBasicDefaultsSettings.class.getName(),
             com.bmobile.fragments.KidsSafeBasicDefaultsSettings.class.getName(),
             com.bmobile.fragments.KidsSafeExpressiveSettings.class.getName(),

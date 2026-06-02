@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="display_customizations_screen"
+    android:title="@string/display_customization_title">
+
+    <PreferenceCategory
+        android:title="@string/display_customization_category_qs">
+        <ListPreference
+            android:key="qs_header_clock_style"
+            android:title="@string/qs_header_clock_style_title"
+            android:summary="@string/qs_header_clock_style_summary"
+            android:entries="@array/qs_header_clock_style_entries"
+            android:entryValues="@array/qs_header_clock_style_values"
+            android:defaultValue="2"
+            settings:controller="com.bmobile.customization.QsHeaderClockStyleController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/display_customization_category_lockscreen">
+        <ListPreference
+            android:key="lockscreen_clock_style"
+            android:title="@string/lockscreen_clock_style_title"
+            android:summary="@string/lockscreen_clock_style_summary"
+            android:entries="@array/lockscreen_clock_style_entries"
+            android:entryValues="@array/lockscreen_clock_style_values"
+            android:defaultValue="0"
+            settings:controller="com.bmobile.customization.LockscreenClockStyleController" />
+        <ListPreference
+            android:key="lockscreen_clock_position"
+            android:title="@string/lockscreen_clock_position_title"
+            android:summary="@string/lockscreen_clock_position_summary"
+            android:entries="@array/lockscreen_clock_position_entries"
+            android:entryValues="@array/lockscreen_clock_position_values"
+            android:defaultValue="1"
+            settings:controller="com.bmobile.customization.LockscreenClockPositionController" />
+        <SwitchPreferenceCompat
+            android:key="lockscreen_widgets_enabled"
+            android:title="@string/lockscreen_widgets_title"
+            android:summary="@string/lockscreen_widgets_summary"
+            android:defaultValue="true"
+            settings:controller="com.bmobile.customization.LockscreenWidgetsPreferenceController" />
+        <MultiSelectListPreference
+            android:key="lockscreen_widgets_extras"
+            android:title="@string/lockscreen_widget_extras_title"
+            android:summary="@string/lockscreen_widget_extras_summary"
+            android:entries="@array/lockscreen_widget_extras_entries"
+            android:entryValues="@array/lockscreen_widget_extras_values"
+            settings:controller="com.bmobile.customization.LockscreenWidgetExtrasController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/display_customization_category_statusbar">
+        <ListPreference
+            android:key="status_bar_battery_style_customization"
+            android:title="@string/battery_style_title"
+            android:summary="@string/battery_style_summary"
+            android:entries="@array/customization_battery_style_entries"
+            android:entryValues="@array/customization_battery_style_values"
+            android:defaultValue="0"
+            settings:controller="com.bmobile.customization.BatteryStylePreferenceController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/display_customization_category_wallpaper">
+        <com.android.settingslib.RestrictedPreference
+            android:key="wallpaper_and_style"
+            android:title="@string/wallpaper_style_title"
+            android:summary="@string/wallpaper_style_summary"
+            settings:controller="com.android.settings.display.WallpaperPreferenceController" />
+    </PreferenceCategory>
+</PreferenceScreen>
