@@ -142,7 +142,7 @@
 
         <com.android.settings.widget.HomepagePreference
 
-            android:fragment="com.android.settings.DisplaySettings"
+            android:fragment="com.bmobile.fragments.DisplayPageGrid"
 
             android:icon="@drawable/ic_settings_display_filled"
 
@@ -150,9 +150,9 @@
 
             android:order="-20"
 
-            android:title="@string/display_settings"
+            android:title="@string/display_page_grid_title"
 
-            android:summary="@string/display_dashboard_summary"
+            android:summary="@string/display_page_grid_summary"
 
             settings:highlightableMenuKey="@string/menu_key_display"/>
 

@@ -50,7 +50,8 @@ public abstract class BrandDashboardSettings extends SettingsPreferenceFragment
     private static final String KEY_DASHBOARD_STYLE_RESET = "dashboard_style_reset";
     private static final String KEY_SYSTEMUI_RESET = "systemui_reset";
     private static final String KEY_CURRENT_STYLE = "custom_dashboard_current_style";
-    private static final String FRAGMENT_DISPLAY = "com.android.settings.DisplaySettings";
+    private static final String FRAGMENT_DISPLAY_PAGE_GRID =
+            "com.bmobile.fragments.DisplayPageGrid";
     private static final int BOTTOM_NAV_PADDING_DP = 88;
 
     private ListPreference mDashboardStyle;
@@ -392,8 +393,8 @@ public abstract class BrandDashboardSettings extends SettingsPreferenceFragment
             return;
         }
         new SubSettingLauncher(context)
-                .setDestination(FRAGMENT_DISPLAY)
-                .setTitleRes(R.string.display_settings)
+                .setDestination(FRAGMENT_DISPLAY_PAGE_GRID)
+                .setTitleRes(R.string.display_page_grid_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }

@@ -32,7 +32,8 @@ public final class TopLevelCardNavigationHelper {
 
     private static final String FRAGMENT_NETWORK =
             "com.android.settings.network.NetworkDashboardFragment";
-    private static final String FRAGMENT_DISPLAY = "com.android.settings.DisplaySettings";
+    private static final String FRAGMENT_DISPLAY_PAGE_GRID =
+            "com.bmobile.fragments.DisplayPageGrid";
     private static final String FRAGMENT_CONNECTED_DEVICES =
             "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment";
     private static final String AURORA_STORE_PACKAGE = "com.aurora.store";
@@ -75,10 +76,10 @@ public final class TopLevelCardNavigationHelper {
         bindCard(layoutPref, R.id.card_network, () -> launchFragment(activity,
                 FRAGMENT_NETWORK, R.string.network_dashboard_title, sourceMetricsCategory));
         bindCard(layoutPref, R.id.card_display, () -> launchFragment(activity,
-                displayOpensConnected ? FRAGMENT_CONNECTED_DEVICES : FRAGMENT_DISPLAY,
+                displayOpensConnected ? FRAGMENT_CONNECTED_DEVICES : FRAGMENT_DISPLAY_PAGE_GRID,
                 displayOpensConnected
                         ? R.string.connected_devices_dashboard_title
-                        : R.string.display_settings,
+                        : R.string.display_page_grid_title,
                 sourceMetricsCategory));
         bindCard(layoutPref, R.id.card_custom_dashboard, () -> {
             final int style = DashboardStyleHelper.getDashboardStyle(context);

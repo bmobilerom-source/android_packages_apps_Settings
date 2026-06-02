@@ -93,7 +93,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     private static final String FRAGMENT_NETWORK =
             "com.android.settings.network.NetworkDashboardFragment";
-    private static final String FRAGMENT_DISPLAY = "com.android.settings.DisplaySettings";
+    private static final String FRAGMENT_DISPLAY_PAGE_GRID =
+            "com.bmobile.fragments.DisplayPageGrid";
     private static final String FRAGMENT_SYSTEM =
             "com.android.settings.system.SystemDashboardFragment";
 
@@ -331,7 +332,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     @Override
                     public void onDisplaySelected() {
                         launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_DISPLAY,
-                                FRAGMENT_DISPLAY, R.string.display_settings);
+                                FRAGMENT_DISPLAY_PAGE_GRID, R.string.display_page_grid_title);
                     }
 
                     @Override
@@ -894,9 +895,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             // Modes and Communal removed per user request
             items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
                     com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.display_dashboard_summary,
-                    "com.android.settings.DisplaySettings",
+                    R.string.display_page_grid_title,
+                    R.string.display_page_grid_summary,
+                    FRAGMENT_DISPLAY_PAGE_GRID,
                     R.drawable.ic_settings_display_filled));
             // Wallpaper removed per user request
             
@@ -1117,9 +1118,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             
             items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
                     com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.display_dashboard_summary,
-                    "com.android.settings.DisplaySettings",
+                    R.string.display_page_grid_title,
+                    R.string.display_page_grid_summary,
+                    FRAGMENT_DISPLAY_PAGE_GRID,
                     R.drawable.ic_settings_display_filled));
             
             items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
@@ -1612,8 +1613,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 "com.android.settings.notification.SoundSettings",
                 R.drawable.ic_volume_up_filled));
         items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
-                R.string.display_settings, R.string.display_dashboard_summary,
-                "com.android.settings.DisplaySettings",
+                R.string.display_page_grid_title, R.string.display_page_grid_summary,
+                FRAGMENT_DISPLAY_PAGE_GRID,
                 R.drawable.ic_settings_display_filled));
         items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.storage_settings, R.string.summary_placeholder,

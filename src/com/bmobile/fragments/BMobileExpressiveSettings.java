@@ -151,9 +151,9 @@ public class BMobileExpressiveSettings extends SettingsPreferenceFragment {
             // Display - opens DisplayPageGrid
             items.add(new BMobileExpressiveSettingsAdapter.CardItem(
                     BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.display_dashboard_summary,
-                    "com.android.settings.DisplaySettings",
+                    R.string.display_page_grid_title,
+                    R.string.display_page_grid_summary,
+                    "com.bmobile.fragments.DisplayPageGrid",
                     R.drawable.ic_settings_display_filled));
             
             // Battery

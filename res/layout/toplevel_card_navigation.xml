@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/display_settings"
+                android:text="@string/display_page_grid_title"
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceListItemSecondary" />
         </LinearLayout>

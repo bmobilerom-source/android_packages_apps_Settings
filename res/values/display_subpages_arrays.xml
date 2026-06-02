@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Arrays for display sub-pages stubbed until a later commit.
+
+     QS Header (com.bmobile.fragments.QsHeader / res/xml/qs_header.xml):
+       - custom_header_provider_entries
+       - custom_header_provider_values
+
+     Animation (com.bmobile.fragments.DisplayCustomizations3):
+       - system_animation_styles_entries
+       - system_animation_styles_values
+-->
+<resources>
+    <string-array name="system_animation_styles_entries">
+        <item>Default</item>
+        <item>Fade</item>
+        <item>Slide</item>
+        <item>Zoom</item>
+        <item>Rotate</item>
+    </string-array>
+
+    <string-array name="system_animation_styles_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="custom_header_provider_entries">
+        <item>Auto</item>
+        <item>Gallery</item>
+    </string-array>
+
+    <string-array name="custom_header_provider_values" translatable="false">
+        <item>daylight</item>
+        <item>static</item>
+    </string-array>
+</resources>

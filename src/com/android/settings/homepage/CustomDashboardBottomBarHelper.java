@@ -98,7 +98,7 @@ public final class CustomDashboardBottomBarHelper {
             bar.getMenu().add(new MenuItemDescriptor.Builder(context)
                     .id(R.id.custom_dashboard_nav_display)
                     .icon(R.drawable.ic_settings_display_filled)
-                    .textRes(R.string.display_settings)
+                    .textRes(R.string.display_page_grid_title)
                     .color(displayColor)
                     .build());
             bar.setOnItemSelectedListener(

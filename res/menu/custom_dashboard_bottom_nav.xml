@@ -14,5 +14,5 @@
     <item
         android:id="@+id/custom_dashboard_nav_display"
         android:icon="@drawable/ic_settings_display_filled"
-        android:title="@string/display_settings" />
+        android:title="@string/display_page_grid_title" />
 </menu>

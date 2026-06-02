@@ -221,10 +221,20 @@ import com.bmobile.fragments.CustomDashboardSettings;
 import com.bmobile.fragments.KidsSafeDashboardSettings;
 import com.bmobile.fragments.YrCustomDashboardSettings;
 import com.bmobile.fragments.DashboardStyleSettings;
+import com.bmobile.fragments.DisplayPageGrid;
 import com.bmobile.fragments.ExtendedHomepageWidgetsFragment;
 import com.bmobile.fragments.DisplayCustomizationsSettings;
 import com.bmobile.fragments.FunDisplaySettings;
 import com.bmobile.fragments.HomepageWidgetsFragment;
+import com.android.settings.awaken.fragments.DisplayCustomizations;
+import com.android.settings.awaken.fragments.DisplayCustomizations2;
+import com.android.settings.awaken.fragments.DisplayCustomizations4;
+import com.android.settings.awaken.fragments.DisplayCustomizations5;
+import com.bmobile.fragments.DisplayCustomizations3;
+import com.bmobile.fragments.QsHeader;
+import com.bmobile.fragments.SmartPixels;
+import com.android.settings.display.MonetColorSettings;
+import com.android.settings.display.StatusBarSettings;
 
 public class SettingsGateway {
 
@@ -432,6 +442,7 @@ public class SettingsGateway {
             KidsSafeDashboardSettings.class.getName(),
             BMobileDashboardSettings.class.getName(),
             DashboardStyleSettings.class.getName(),
+            DisplayPageGrid.class.getName(),
             FunDisplaySettings.class.getName(),
             BMobileExpressiveSettings.class.getName(),
             KidsSafeUserInfoFragment.class.getName(),
@@ -461,7 +472,17 @@ public class SettingsGateway {
             com.bmobile.fragments.SettingsBackupRestore.class.getName(),
             com.android.settings.applications.specialaccess.AppSecSettings.class.getName(),
             com.palladium.atomichub.Atomichub.class.getName(),
-            com.palladium.atomichub.Atomichub2.class.getName()
+            com.palladium.atomichub.Atomichub2.class.getName(),
+            // Display Page Grid sub-pages
+            DisplayCustomizations.class.getName(),
+            DisplayCustomizations2.class.getName(),
+            DisplayCustomizations3.class.getName(),
+            DisplayCustomizations4.class.getName(),
+            DisplayCustomizations5.class.getName(),
+            QsHeader.class.getName(),
+            SmartPixels.class.getName(),
+            MonetColorSettings.class.getName(),
+            StatusBarSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

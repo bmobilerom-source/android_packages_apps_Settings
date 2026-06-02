@@ -89,7 +89,7 @@
 
     <!-- AOSP homepage bottom bar (dashboard style 10) -->
     <string name="top_level_dashboard_nav_network">Network</string>
-    <string name="top_level_dashboard_nav_display">Display</string>
+    <string name="top_level_dashboard_nav_display">Display Page Grid</string>
     <string name="top_level_dashboard_nav_system">System</string>
     <string name="top_level_dashboard_nav_wallpaper">Wallpaper</string>
 

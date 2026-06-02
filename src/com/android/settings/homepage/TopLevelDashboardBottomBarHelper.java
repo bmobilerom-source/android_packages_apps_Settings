@@ -26,7 +26,7 @@ import kotlin.jvm.functions.Function3;
 
 /**
  * Expandable bottom bar on the Settings homepage ({@link TopLevelSettings}).
- * Opens Network, Display, System, and Wallpaper destinations.
+ * Opens Network, Display Page Grid, System, and Wallpaper destinations.
  */
 public final class TopLevelDashboardBottomBarHelper {
 

@@ -6,7 +6,7 @@ Four separate settings screens let users choose homepage layouts. All share the 
 
 | | |
 |--|--|
-| **Fragment** | `com.epic.fragments.CustomDashboardSettings` |
+| **Fragment** | `com.bmobile.fragments.CustomDashboardSettings` |
 | **XML** | `res/xml/custom_dashboard_settings.xml` |
 | **Title string** | `custom_dashboard_title` |
 | **Bottom bar** | Yes (reset / SystemUI / Display) |
@@ -21,7 +21,7 @@ Four separate settings screens let users choose homepage layouts. All share the 
 
 | | |
 |--|--|
-| **Fragment** | `com.epic.fragments.YrCustomDashboardSettings` |
+| **Fragment** | `com.bmobile.fragments.YrCustomDashboardSettings` |
 | **XML** | `res/xml/yr_custom_dashboard_settings.xml` |
 | **Title string** | `yr_custom_dashboard_title` |
 | **Styles** | YR Study (1), YR School (11), YR Social (13), YR Expressive (14) |
@@ -37,7 +37,7 @@ Four separate settings screens let users choose homepage layouts. All share the 
 
 | | |
 |--|--|
-| **Fragment** | `com.epic.fragments.BMobileDashboardSettings` |
+| **Fragment** | `com.bmobile.fragments.BMobileDashboardSettings` |
 | **XML** | `res/xml/bmobile_dashboard_settings.xml` |
 | **Title string** | `bmobile_dashboard_title` |
 | **Styles** | Cards (6), Home (7), Expressive (8), Icons (10), DynamicTabs (12), Neo (15) |
@@ -53,7 +53,7 @@ Four separate settings screens let users choose homepage layouts. All share the 
 
 | | |
 |--|--|
-| **Fragment** | `com.epic.fragments.KidsSafeDashboardSettings` |
+| **Fragment** | `com.bmobile.fragments.KidsSafeDashboardSettings` |
 | **XML** | `res/xml/kidssafe_dashboard_settings.xml` |
 | **Title string** | `kidssafe_dashboard_title` |
 | **Styles** | KS School (5), KS Fun (16) |

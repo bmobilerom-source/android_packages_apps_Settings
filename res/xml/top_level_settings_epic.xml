@@ -74,10 +74,11 @@
         settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 		
 	<com.android.settings.widget.HomepagePreference
-        android:fragment="com.android.settings.DisplaySettings"
+        android:fragment="com.bmobile.fragments.DisplayPageGrid"
         android:key="top_level_display"
         android:order="-70"
-        android:title="@string/display_settings"
+        android:title="@string/display_page_grid_title"
+        android:summary="@string/display_page_grid_summary"
         settings:highlightableMenuKey="@string/menu_key_display"/>
 		
 	<!-- Accessibility hidden per user request -->
