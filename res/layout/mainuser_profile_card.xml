@@ -74,7 +74,7 @@
             android:id="@+id/build_variant_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:text="@string/branding_string"
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
             android:textStyle="bold"
             android:gravity="center"

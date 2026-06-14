@@ -17,32 +17,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:title="@string/my_session_title">
+    android:title="@string/yr_your_chat_title">
    <com.android.settingslib.widget.IllustrationPreference
         android:key="qs_header_illustration"
         android:order="-1001"
         settings:searchable="false"
         app:lottie_rawRes="@raw/display" />
 
-    <!-- Session Messenger Intro -->
     <com.android.settingslib.widget.TopIntroPreference
-        android:key="session_intro"
-        android:title="@string/session_messenger_intro_title"
-        android:summary="@string/session_messenger_intro_summary"
+        android:key="your_chat_intro"
+        android:title="@string/yr_your_chat_title"
+        android:summary="@string/yr_your_chat_summary"
         android:order="1"
         settings:searchable="false" />
 
-    <!-- Session Messenger -->
     <Preference
-        android:key="session_messenger_pref"
-        android:title="@string/session_messenger_title"
-        android:summary="@string/session_messenger_summary"
+        android:key="yr_your_chat_pref"
+        android:title="@string/yr_your_chat_title"
+        android:summary="@string/yr_your_chat_summary"
         android:order="3"
-        settings:controller="com.bmobile.fragments.SessionMessengerController">
+        settings:controller="com.bmobile.fragments.ArcaneChatController">
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetPackage="network.loki.messenger"
-            android:targetClass="network.loki.messenger.RoutingActivity" />
+            android:targetPackage="chat.delta.lite"
+            android:targetClass="org.thoughtcrime.securesms.RoutingActivity" />
     </Preference>
 
 </PreferenceScreen>

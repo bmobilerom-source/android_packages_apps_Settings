@@ -17,17 +17,13 @@
 package com.bmobile.fragments;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 
 import com.android.settings.core.BasePreferenceController;
 
 /**
- * Controller for Session messenger preference.
- * Only shows the preference if Session messenger is installed.
+ * Legacy controller name — shows Your chat when Arcane messenger is installed.
  */
 public class SessionMessengerController extends BasePreferenceController {
-
-    private static final String PACKAGE_NAME = "network.loki.messenger";
 
     public SessionMessengerController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -35,15 +31,6 @@ public class SessionMessengerController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return isAppInstalled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    private boolean isAppInstalled() {
-        try {
-            mContext.getPackageManager().getPackageInfo(PACKAGE_NAME, 0);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
+        return ArcaneChatController.isInstalled(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }

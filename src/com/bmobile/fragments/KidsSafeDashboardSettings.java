@@ -50,4 +50,9 @@ public class KidsSafeDashboardSettings extends BrandDashboardSettings {
     protected boolean shouldShowBottomBar() {
         return false;
     }
+
+    @Override
+    protected String getDisplayPageGridFragmentClass() {
+        return "com.bmobile.fragments.KsDisplayPageGrid";
+    }
 }

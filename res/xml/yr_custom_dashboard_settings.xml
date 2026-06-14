@@ -9,10 +9,13 @@
     android:title=" "
     android:key="yr_custom_dashboard_screen">
 
+    <!-- Only these two rows; reset / SystemUI / Display are on the bottom bar. -->
+
     <Preference
         android:key="custom_dashboard_current_style"
         android:title="@string/custom_dashboard_current_style_title"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card_top"/>
 
     <ListPreference
         android:key="settings_dashboard_style"
@@ -21,6 +24,7 @@
         android:entries="@array/settings_dashboard_style_yr_entries"
         android:entryValues="@array/settings_dashboard_style_yr_values"
         android:defaultValue="11"
-        android:persistent="false" />
+        android:persistent="false"
+        settings:layout="@layout/adaptive_preference_card_bottom" />
 
 </PreferenceScreen>

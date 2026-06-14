@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="qs_header_clock_style_entries">
+        <item>@string/qs_header_clock_off</item>
+        <item>@string/qs_header_clock_chip</item>
+        <item>@string/qs_header_clock_oos</item>
+        <item>@string/qs_header_clock_analog</item>
+        <item>@string/qs_header_clock_daisy</item>
+        <item>@string/qs_header_clock_iris</item>
+        <item>@string/qs_header_clock_orchid</item>
+        <item>@string/qs_header_clock_fern</item>
+        <item>@string/qs_header_clock_bloom</item>
+        <item>@string/qs_header_clock_clover</item>
+        <item>@string/qs_header_clock_weather</item>
+        <item>@string/qs_header_clock_peony</item>
+        <item>@string/qs_header_clock_lily</item>
+        <item>@string/qs_header_clock_rose</item>
+        <item>@string/qs_header_clock_azalea</item>
+        <item>@string/qs_header_clock_juniper</item>
+    </string-array>
+    <string-array name="qs_header_clock_style_values" translatable="false">
+        <item>0</item><item>1</item><item>2</item><item>3</item>
+        <item>4</item><item>5</item><item>6</item><item>7</item>
+        <item>8</item><item>9</item><item>10</item>
+        <item>11</item><item>12</item><item>13</item><item>14</item><item>15</item>
+    </string-array>
+    <string-array name="lockscreen_clock_style_entries">
+        <item>@string/lockscreen_clock_default</item>
+        <item>@string/lockscreen_clock_oos</item>
+        <item>@string/lockscreen_clock_center</item>
+        <item>@string/lockscreen_clock_simple</item>
+        <item>@string/lockscreen_clock_ide</item>
+        <item>@string/lockscreen_clock_miui</item>
+        <item>@string/lockscreen_clock_moto</item>
+        <item>@string/lockscreen_clock_presentation</item>
+        <item>@string/lockscreen_clock_fern</item>
+        <item>@string/lockscreen_clock_bloom</item>
+        <item>@string/lockscreen_clock_clover</item>
+        <item>@string/lockscreen_clock_willow</item>
+        <item>@string/lockscreen_clock_hazel</item>
+        <item>@string/lockscreen_clock_maple</item>
+        <item>@string/lockscreen_clock_azalea</item>
+    </string-array>
+    <string-array name="lockscreen_clock_style_values" translatable="false">
+        <item>0</item><item>1</item><item>2</item><item>3</item>
+        <item>4</item><item>5</item><item>6</item><item>7</item>
+        <item>8</item><item>9</item><item>10</item><item>11</item>
+        <item>12</item><item>13</item><item>14</item>
+    </string-array>
+    <array name="lockscreen_clock_style_icons">
+        <item>@drawable/ic_lockscreen_clock_classic</item>
+        <item>@drawable/ic_lockscreen_clock_magnolia</item>
+        <item>@drawable/ic_lockscreen_clock_rose</item>
+        <item>@drawable/ic_lockscreen_clock_daisy</item>
+        <item>@drawable/ic_lockscreen_clock_orchid</item>
+        <item>@drawable/ic_lockscreen_clock_peony</item>
+        <item>@drawable/ic_lockscreen_clock_iris</item>
+        <item>@drawable/ic_lockscreen_clock_lily</item>
+        <item>@drawable/ic_lockscreen_clock_fern</item>
+        <item>@drawable/ic_lockscreen_clock_bloom</item>
+        <item>@drawable/ic_lockscreen_clock_clover</item>
+        <item>@drawable/ic_lockscreen_clock_willow</item>
+        <item>@drawable/ic_lockscreen_clock_hazel</item>
+        <item>@drawable/ic_lockscreen_clock_maple</item>
+        <item>@drawable/ic_lockscreen_clock_azalea</item>
+    </array>
+    <string-array name="lockscreen_clock_position_entries">
+        <item>@string/lockscreen_clock_position_left</item>
+        <item>@string/lockscreen_clock_position_center</item>
+        <item>@string/lockscreen_clock_position_right</item>
+    </string-array>
+    <string-array name="lockscreen_clock_position_values" translatable="false">
+        <item>0</item><item>1</item><item>2</item>
+    </string-array>
+    <string-array name="lockscreen_widget_extras_entries">
+        <item>@string/lockscreen_widget_wifi</item>
+        <item>@string/lockscreen_widget_data</item>
+        <item>@string/lockscreen_widget_ringer</item>
+        <item>@string/lockscreen_widget_bt</item>
+        <item>@string/lockscreen_widget_torch</item>
+        <item>@string/lockscreen_widget_media</item>
+        <item>@string/lockscreen_widget_hotspot</item>
+        <item>@string/lockscreen_widget_timer</item>
+        <item>@string/lockscreen_widget_calculator</item>
+        <item>@string/lockscreen_widget_wallet</item>
+        <item>@string/lockscreen_widget_qr</item>
+    </string-array>
+    <string-array name="lockscreen_widget_extras_values" translatable="false">
+        <item>WIFI</item><item>DATA</item><item>RINGER</item><item>BT</item>
+        <item>TORCH</item><item>MEDIA</item><item>HOTSPOT</item><item>TIMER</item>
+        <item>CALCULATOR</item><item>WALLET</item><item>QRSCANNER</item>
+    </string-array>
+    <string-array name="customization_battery_style_entries">
+        <item>@string/customization_battery_style_icon_portrait</item>
+        <item>@string/customization_battery_style_circle</item>
+        <item>@string/customization_battery_style_text</item>
+        <item>@string/customization_battery_style_rlandscape</item>
+        <item>@string/customization_battery_style_landscape</item>
+    </string-array>
+    <string-array name="customization_battery_style_values" translatable="false">
+        <item>0</item><item>1</item><item>2</item><item>3</item><item>4</item>
+    </string-array>
+</resources>

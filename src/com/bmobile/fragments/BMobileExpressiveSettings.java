@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.content.Context;
 import android.view.View;
 
+import com.android.settings.homepage.RestrictedDashboardContentHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -148,12 +149,12 @@ public class BMobileExpressiveSettings extends SettingsPreferenceFragment {
                     "com.android.settings.notification.SoundSettings",
                     R.drawable.ic_volume_up_filled));
             
-            // Display - opens DisplayPageGrid
+            // Display - opens BMobile DisplayPageGrid
             items.add(new BMobileExpressiveSettingsAdapter.CardItem(
                     BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.display_dashboard_summary,
-                    "com.android.settings.DisplaySettings",
+                    R.string.display_page_grid_title,
+                    R.string.display_page_grid_summary,
+                    "com.bmobile.fragments.BmobileDisplayPageGrid",
                     R.drawable.ic_settings_display_filled));
             
             // Battery
@@ -180,12 +181,12 @@ public class BMobileExpressiveSettings extends SettingsPreferenceFragment {
                     "com.android.settings.security.SecuritySettings",
                     R.drawable.ic_settings_security_filled));
             
-            // Privacy
+            // Privacy → Controls page
             items.add(new BMobileExpressiveSettingsAdapter.CardItem(
                     BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.privacy_dashboard_title,
                     R.string.privacy_dashboard_summary,
-                    "com.android.settings.privacy.PrivacyDashboardFragment",
+                    "com.android.settings.privacy.PrivacyControlsFragment",
                     R.drawable.ic_settings_privacy_filled));
             
             // Location
@@ -204,6 +205,7 @@ public class BMobileExpressiveSettings extends SettingsPreferenceFragment {
                     "com.android.settings.accessibility.AccessibilitySettings",
                     R.drawable.ic_settings_accessibility_filled));
 
+            RestrictedDashboardContentHelper.filterExpressiveGridItems(context, items);
             rv.setAdapter(new BMobileExpressiveSettingsAdapter(activity, items, getMetricsCategory()));
         } catch (Exception e) {
             android.util.Log.e("BMobileExpressiveSettings", "Error setting up grid", e);
@@ -381,16 +383,9 @@ public class BMobileExpressiveSettings extends SettingsPreferenceFragment {
                     searchWidget.setClickable(true);
                     searchWidget.setFocusable(true);
                     searchWidget.setEnabled(true);
-                    searchWidget.setOnClickListener(v -> {
-                        try {
-                            android.content.Intent searchIntent = new android.content.Intent();
-                            searchIntent.setAction(android.app.SearchManager.INTENT_ACTION_GLOBAL_SEARCH);
-                            searchIntent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(searchIntent);
-                        } catch (Exception e) {
-                            android.util.Log.e("BMobileExpressiveSettings", "Error opening search", e);
-                        }
-                    });
+                    searchWidget.setOnClickListener(v ->
+                            com.android.settings.preferences.ui.HomepageWidgetsView
+                                    .launchSettingsSearch(activity));
                 }
                 
                 View systemWidget = lp.findViewById(R.id.system_widget);

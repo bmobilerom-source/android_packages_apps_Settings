@@ -62,8 +62,7 @@ public class AtomichubView extends LinearLayout {
                         "com.android.settings.privatespace.PrivateSpaceDashboardFragment",
                         R.string.private_space_title));
         setInteractiveClick(findViewById(R.id.mctheme), () ->
-                launchFragment(activity, "com.bmobile.fragments.MySessionFragment",
-                        R.string.my_session_title));
+                com.bmobile.fragments.ArcaneChatController.launch(activity));
     }
 
     private void setInteractiveClick(View v, Runnable action) {

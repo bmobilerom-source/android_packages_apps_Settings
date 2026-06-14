@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title=" ">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:layout="@layout/bmobile_user_info_frag"
+        android:key="bmobile_user_header"
+        android:selectable="false"
+        android:order="10" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="yr_userinfo_intro"
+        android:order="20"
+        android:title="@string/yr_userinfo_intro"
+        android:selectable="false"
+        settings:searchable="false"/>
+
+    <PreferenceCategory
+        android:title="Quick Access"
+        android:key="yr_quick_access_category"
+        android:order="30">
+
+        <Preference
+            android:key="yr_your_chat_pref"
+            android:title="@string/yr_your_chat_title"
+            android:summary="@string/yr_your_chat_summary"
+            android:order="31"
+            settings:layout="@layout/adaptive_preference_card_top"
+            settings:controller="com.bmobile.fragments.ArcaneChatController">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="chat.delta.lite"
+                android:targetClass="org.thoughtcrime.securesms.RoutingActivity" />
+        </Preference>
+
+        <Preference
+            android:key="yr_daily_you_pref"
+            android:title="@string/kidssafe_daily_you_title"
+            android:summary="@string/kidssafe_daily_you_summary"
+            android:order="32"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            settings:controller="com.bmobile.fragments.DailyJournalController">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.demizo.daily_you"
+                android:targetClass="com.demizo.daily_you.MainActivity" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

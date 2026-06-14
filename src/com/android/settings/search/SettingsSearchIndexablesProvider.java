@@ -116,8 +116,9 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     @Override
     public Cursor queryXmlResources(String[] projection) {
         final MatrixCursor cursor = new MatrixCursor(INDEXABLES_XML_RES_COLUMNS);
+        final Context context = getContext();
         final List<SearchIndexableResource> resources =
-                getSearchIndexableResourcesFromProvider(getContext());
+                filterXmlResources(context, getSearchIndexableResourcesFromProvider(context));
         for (SearchIndexableResource val : resources) {
             final Object[] ref = new Object[INDEXABLES_XML_RES_COLUMNS.length];
             ref[COLUMN_INDEX_XML_RES_RANK] = val.rank;
@@ -139,7 +140,9 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     @Override
     public Cursor queryRawData(String[] projection) {
         final MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
-        final List<SearchIndexableRaw> raws = getSearchIndexableRawFromProvider(getContext());
+        final Context context = getContext();
+        final List<SearchIndexableRaw> raws = filterRawData(context,
+                getSearchIndexableRawFromProvider(context));
         for (SearchIndexableRaw val : raws) {
             cursor.addRow(createIndexableRawColumnObjects(val));
         }
@@ -178,6 +181,10 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
 
         for (SearchIndexableData bundle : bundles) {
+            if (ChildSafeSearchHelper.shouldSuppressIndexable(context,
+                    bundle.getTargetClass().getName())) {
+                continue;
+            }
             rawList.addAll(getDynamicSearchIndexableRawData(context, bundle));
 
             // Refresh the search enabled state for indexing injection raw data
@@ -189,7 +196,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         rawList.addAll(getInjectionIndexableRawData(context));
 
         final MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
-        for (SearchIndexableRaw raw : rawList) {
+        for (SearchIndexableRaw raw : filterRawData(context, rawList)) {
             cursor.addRow(createIndexableRawColumnObjects(raw));
         }
 
@@ -224,6 +231,10 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
                 if (childClass == null) {
                     continue;
                 }
+                if (ChildSafeSearchHelper.shouldSuppressIndexable(context, parentClass)
+                        || ChildSafeSearchHelper.shouldSuppressIndexable(context, childClass)) {
+                    continue;
+                }
                 cursor.newRow()
                         .add(SearchIndexablesContract.SiteMapColumns.PARENT_CLASS, parentClass)
                         .add(SearchIndexablesContract.SiteMapColumns.CHILD_CLASS, childClass)
@@ -234,6 +245,10 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         // Loop through custom site map registry to build additional SiteMapPairs
         for (String childClass : CustomSiteMapRegistry.CUSTOM_SITE_MAP.keySet()) {
             final String parentClass = CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(childClass);
+            if (ChildSafeSearchHelper.shouldSuppressIndexable(context, parentClass)
+                    || ChildSafeSearchHelper.shouldSuppressIndexable(context, childClass)) {
+                continue;
+            }
             cursor.newRow()
                     .add(SearchIndexablesContract.SiteMapColumns.PARENT_CLASS, parentClass)
                     .add(SearchIndexablesContract.SiteMapColumns.CHILD_CLASS, childClass);
@@ -278,6 +293,10 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         final List<String> nonIndexableKeys = new ArrayList<>();
 
         for (SearchIndexableData bundle : bundles) {
+            if (ChildSafeSearchHelper.shouldSuppressIndexable(context,
+                    bundle.getTargetClass().getName())) {
+                continue;
+            }
             final long startTime = System.currentTimeMillis();
             Indexable.SearchIndexProvider provider = bundle.getSearchIndexProvider();
             List<String> providerNonIndexableKeys;
@@ -327,6 +346,10 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         List<SearchIndexableResource> resourceList = new ArrayList<>();
 
         for (SearchIndexableData bundle : bundles) {
+            if (ChildSafeSearchHelper.shouldSuppressIndexable(context,
+                    bundle.getTargetClass().getName())) {
+                continue;
+            }
             Indexable.SearchIndexProvider provider = bundle.getSearchIndexProvider();
             final List<SearchIndexableResource> resList =
                     provider.getXmlResourcesToIndex(context, true);
@@ -353,6 +376,10 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         final List<SearchIndexableRaw> rawList = new ArrayList<>();
 
         for (SearchIndexableData bundle : bundles) {
+            if (ChildSafeSearchHelper.shouldSuppressIndexable(context,
+                    bundle.getTargetClass().getName())) {
+                continue;
+            }
             Indexable.SearchIndexProvider provider = bundle.getSearchIndexProvider();
             final List<SearchIndexableRaw> providerRaws = provider.getRawDataToIndex(context,
                     true /* enabled */);
@@ -416,6 +443,9 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
                 raw.summaryOn = TextUtils.isEmpty(summary) ? null : summary.toString();
                 raw.summaryOff = raw.summaryOn;
                 raw.className = CATEGORY_KEY_TO_PARENT_MAP.get(tile.getCategory());
+                if (ChildSafeSearchHelper.shouldSuppressIndexable(context, raw.className)) {
+                    continue;
+                }
                 rawList.add(raw);
             }
         }
@@ -473,5 +503,35 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         ref[COLUMN_INDEX_RAW_KEY] = raw.key;
         ref[COLUMN_INDEX_RAW_USER_ID] = raw.userId;
         return ref;
+    }
+
+    private static List<SearchIndexableResource> filterXmlResources(Context context,
+            List<SearchIndexableResource> resources) {
+        if (!ChildSafeSearchHelper.isSearchRestricted(context)) {
+            return resources;
+        }
+        final List<SearchIndexableResource> filtered = new ArrayList<>();
+        for (SearchIndexableResource resource : resources) {
+            if (!ChildSafeSearchHelper.isBlockedSearchTarget(resource.className)) {
+                filtered.add(resource);
+            }
+        }
+        return filtered;
+    }
+
+    private static List<SearchIndexableRaw> filterRawData(Context context,
+            List<SearchIndexableRaw> raws) {
+        if (!ChildSafeSearchHelper.isSearchRestricted(context)) {
+            return raws;
+        }
+        final List<SearchIndexableRaw> filtered = new ArrayList<>();
+        for (SearchIndexableRaw raw : raws) {
+            if (ChildSafeSearchHelper.isBlockedSearchTarget(raw.className)
+                    || ChildSafeSearchHelper.isBlockedSearchTarget(raw.intentTargetClass)) {
+                continue;
+            }
+            filtered.add(raw);
+        }
+        return filtered;
     }
 }

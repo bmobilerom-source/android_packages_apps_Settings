@@ -72,6 +72,7 @@
     <uses-permission android:name="android.permission.MOVE_PACKAGE" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.BACKUP" />
+    <uses-permission android:name="com.stevesoltys.seedvault.OPEN_SETTINGS" />
     <uses-permission android:name="android.permission.READ_SYNC_STATS" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
@@ -4240,7 +4241,7 @@
    
         <!-- Auto Reboot Receiver - reschedule on config change -->
         <receiver
-            android:name=".bmobile.fragments.AutoRebootReceiver"
+            android:name="com.bmobile.fragments.AutoRebootReceiver"
             android:exported="false"
             android:enabled="true">
             <intent-filter>

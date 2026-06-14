@@ -23,6 +23,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.android.settings.R;
+import com.android.settings.homepage.RestrictedDashboardContentHelper;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.List;
@@ -119,12 +120,12 @@ public class FunDisplaySettings extends SettingsPreferenceFragment {
                     "com.android.settings.notification.SoundSettings",
                     R.drawable.ic_volume_up_filled));
             
-            // Display - opens DisplayPageGrid
+            // Display - opens BMobile DisplayPageGrid
             items.add(new FunDisplaySettingsAdapter.CardItem(
                     FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.display_dashboard_summary,
-                    "com.android.settings.DisplaySettings",
+                    R.string.display_page_grid_title,
+                    R.string.display_page_grid_summary,
+                    "com.bmobile.fragments.BmobileDisplayPageGrid",
                     R.drawable.ic_settings_display_filled));
             
             // Battery
@@ -161,6 +162,7 @@ public class FunDisplaySettings extends SettingsPreferenceFragment {
                     "com.android.settings.accessibility.AccessibilitySettings",
                     R.drawable.ic_settings_accessibility_filled));
 
+            RestrictedDashboardContentHelper.filterFunDisplayGridItems(context, items);
             rv.setAdapter(new FunDisplaySettingsAdapter(activity, items, getMetricsCategory()));
         } catch (Exception e) {
             android.util.Log.e("FunDisplaySettings", "Error setting up FunDisplaySettings", e);

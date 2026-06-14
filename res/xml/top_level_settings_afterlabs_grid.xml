@@ -16,7 +16,7 @@
         android:key="about_device_info"
         android:order="-2000"
         android:selectable="true"
-        android:fragment="com.android.settings.deviceinfo.BMobileUserInfoFragment" />
+        android:fragment="com.android.settings.deviceinfo.YrUserInfoFragment" />
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="afterlabs_grid"

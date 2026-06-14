@@ -16,10 +16,29 @@
         android:title="@string/kidssafe_userinfo_summary"/>
 
     <Preference
-        android:key="kidssafe_basic_defaults"
-        android:title="@string/system_basic_defaults_title"
-        android:summary="@string/system_basic_defaults_summary"
+        android:key="kidssafe_daily_you_pref"
+        android:title="@string/kidssafe_daily_you_title"
+        android:summary="@string/kidssafe_daily_you_summary"
         android:order="30"
-        android:fragment="com.bmobile.fragments.KidsSafeBasicDefaultsSettings" />
+        settings:layout="@layout/adaptive_preference_card_top"
+        settings:controller="com.bmobile.fragments.KidsJournalController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.demizo.daily_you"
+            android:targetClass="com.demizo.daily_you.MainActivity" />
+    </Preference>
+
+    <Preference
+        android:key="kidssafe_your_chat_pref"
+        android:title="@string/kidssafe_your_chat_title"
+        android:summary="@string/kidssafe_your_chat_summary"
+        android:order="40"
+        settings:layout="@layout/adaptive_preference_card_bottom"
+        settings:controller="com.bmobile.fragments.ArcaneChatController">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="chat.delta.lite"
+            android:targetClass="org.thoughtcrime.securesms.RoutingActivity" />
+    </Preference>
 
 </PreferenceScreen>

@@ -23,6 +23,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.android.settings.R;
+import com.android.settings.homepage.RestrictedDashboardContentHelper;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.List;
@@ -116,12 +117,12 @@ public class KidsSafeExpressiveSettings extends SettingsPreferenceFragment {
                     "com.android.settings.notification.SoundSettings",
                     R.drawable.ic_volume_up_filled));
 
-            // Display - opens DisplayPageGrid
+            // Display - opens KS DisplayPageGrid
             items.add(new KidsSafeGridAdapter.CardItem(
                     KidsSafeGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.display_dashboard_summary,
-                    "com.bmobile.fragments.DisplayPageGrid",
+                    R.string.display_page_grid_title,
+                    R.string.display_page_grid_summary,
+                    "com.bmobile.fragments.KsDisplayPageGrid",
                     R.drawable.ic_settings_display_filled));
 
             // Privacy
@@ -140,6 +141,11 @@ public class KidsSafeExpressiveSettings extends SettingsPreferenceFragment {
                     "com.android.settings.location.LocationSettings",
                     R.drawable.ic_settings_location_filled));
 
+            if (RestrictedDashboardContentHelper.isContentRestricted(context)) {
+                items.removeIf(item ->
+                        RestrictedDashboardContentHelper.isBlockedDestination(
+                                item.destFragment));
+            }
             rv.setAdapter(new KidsSafeGridAdapter(activity, items, getMetricsCategory()));
         } catch (Exception e) {
             android.util.Log.e("KidsSafeExpressiveSettings", "Error setting up grid", e);
@@ -317,16 +323,9 @@ public class KidsSafeExpressiveSettings extends SettingsPreferenceFragment {
                     searchWidget.setClickable(true);
                     searchWidget.setFocusable(true);
                     searchWidget.setEnabled(true);
-                    searchWidget.setOnClickListener(v -> {
-                        try {
-                            android.content.Intent searchIntent = new android.content.Intent();
-                            searchIntent.setAction(android.app.SearchManager.INTENT_ACTION_GLOBAL_SEARCH);
-                            searchIntent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(searchIntent);
-                        } catch (Exception e) {
-                            android.util.Log.e("BMobileExpressiveSettings", "Error opening search", e);
-                        }
-                    });
+                    searchWidget.setOnClickListener(v ->
+                            com.android.settings.preferences.ui.HomepageWidgetsView
+                                    .launchSettingsSearch(activity));
                 }
                 
                 View systemWidget = lp.findViewById(R.id.system_widget);

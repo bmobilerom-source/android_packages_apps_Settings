@@ -25,7 +25,7 @@
 
     <com.android.settingslib.widget.LayoutPreference
         android:layout="@layout/usercard_oos11"
-        android:fragment="com.android.settings.users.UserSettings"
+        android:fragment="com.android.settings.deviceinfo.YrUserInfoFragment"
         android:key="top_level_usercard"
         android:order="-170" />
         
@@ -65,12 +65,12 @@
     <!-- Display (hidden) -->
     <!--
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.android.settings.DisplaySettings"
+        android:fragment="com.bmobile.fragments.DisplayPageGrid"
         android:icon="@drawable/ic_settings_display_filled"
         android:key="top_level_display"
         android:order="-120"
-        android:title="@string/display_settings"
-        android:summary="@string/display_dashboard_summary"
+        android:title="@string/display_page_grid_title"
+        android:summary="@string/display_page_grid_summary"
         settings:highlightableMenuKey="@string/menu_key_display"
         settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
     -->
@@ -137,6 +137,8 @@
         android:summary="@string/sound_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_sound"/>
 
+    <!-- Accessibility removed per product request (YR School) -->
+    <!--
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.accessibility.AccessibilitySettings"
         android:icon="@drawable/ic_settings_accessibility_filled"
@@ -146,6 +148,7 @@
         android:summary="@string/accessibility_settings_summary"
         settings:highlightableMenuKey="@string/menu_key_accessibility"
         settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
+    -->
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.security.SecuritySettings"

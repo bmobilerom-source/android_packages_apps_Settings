@@ -67,6 +67,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.preferences.ui.HomepageWidgetsView;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.display.TopLevelWallpaperPreferenceController;
 import com.android.settings.support.SupportPreferenceController;
@@ -93,7 +94,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     private static final String FRAGMENT_NETWORK =
             "com.android.settings.network.NetworkDashboardFragment";
-    private static final String FRAGMENT_DISPLAY = "com.android.settings.DisplaySettings";
+    private static final String FRAGMENT_DISPLAY_PAGE_GRID =
+            "com.bmobile.fragments.DisplayPageGrid";
     private static final String FRAGMENT_SYSTEM =
             "com.android.settings.system.SystemDashboardFragment";
 
@@ -330,8 +332,11 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
                     @Override
                     public void onDisplaySelected() {
+                        final int style = DashboardStyleHelper.getDashboardStyle(requireContext());
+                        final String displayFragment =
+                                DashboardStyleHelper.getBrandDisplayPageGridFragmentClass(style);
                         launchTopLevelPage(TopLevelDashboardBottomBarHelper.KEY_DISPLAY,
-                                FRAGMENT_DISPLAY, R.string.display_settings);
+                                displayFragment, R.string.display_page_grid_title);
                     }
 
                     @Override
@@ -701,14 +706,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                             searchWidget.setFocusable(true);
                             searchWidget.setEnabled(true);
                             searchWidget.setOnClickListener(v -> {
-                                try {
-                                    android.content.Intent searchIntent = new android.content.Intent();
-                                    searchIntent.setAction(android.app.SearchManager.INTENT_ACTION_GLOBAL_SEARCH);
-                                    searchIntent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    activity.startActivity(searchIntent);
-                                } catch (Exception e) {
-                                    Log.e(TAG, "Error opening search", e);
-                                }
+                                HomepageWidgetsView.launchSettingsSearch(activity);
                             });
                         }
                         
@@ -851,20 +849,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
             java.util.List<com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem> items = new java.util.ArrayList<>();
             
-            // All preferences from top_level_settings_v2.xml as cards
             // Connectivity Category
-            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.network_dashboard_title,
-                    R.string.summary_placeholder,
-                    "com.android.settings.network.NetworkDashboardFragment",
-                    R.drawable.ic_settings_wireless_filled));
-            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.bmobile_dashboard_title,
-                    R.string.bmobile_dashboard_summary,
-                    "com.bmobile.fragments.BMobileDashboardSettings",
-                    R.drawable.ic_custom_dashboard));
             items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
                     com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.connected_devices_dashboard_title,
@@ -873,12 +858,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     R.drawable.ic_devices_other_filled));
             
             // Personalize Category
-            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.apps_dashboard_title,
-                    R.string.app_and_notification_dashboard_summary,
-                    "com.android.settings.applications.AppDashboardFragment",
-                    R.drawable.ic_apps_filled));
             items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
                     com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
                     R.string.configure_notification_settings,
@@ -891,14 +870,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     R.string.sound_dashboard_summary_with_dnd,
                     "com.android.settings.notification.SoundSettings",
                     R.drawable.ic_volume_up_filled));
-            // Modes and Communal removed per user request
-            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.display_dashboard_summary,
-                    "com.android.settings.DisplaySettings",
-                    R.drawable.ic_settings_display_filled));
-            // Wallpaper removed per user request
+            // Network, BMobile dashboard, Apps, Display page grid removed per user request
             
             // System Info Category
             items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
@@ -913,12 +885,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     R.string.summary_placeholder,
                     "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
                     R.drawable.ic_settings_battery_filled));
-            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.header_category_system,
-                    R.string.system_dashboard_summary,
-                    "com.android.settings.system.SystemDashboardFragment",
-                    R.drawable.ic_settings_system_dashboard_filled));
+            // System removed per user request
             // About Phone, Safety Center, Security, Privacy, Wallpaper, Modes, Communal, Tips and Support removed per user request
             
             // Security & Privacy Category (aligned with V2)
@@ -933,12 +900,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     R.string.privacy_controls_title,
                     R.string.privacy_controls_summary,
                     "com.android.settings.privacy.PrivacyControlsFragment",
-                    R.drawable.ic_settings_privacy_filled));
-            items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
-                    com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.privacy_dashboard_title,
-                    R.string.privacy_dashboard_summary,
-                    "com.android.settings.privacy.PrivacyDashboardFragment",
                     R.drawable.ic_settings_privacy_filled));
             items.add(new com.bmobile.fragments.MaterialDashboardGridAdapter.CardItem(
                     com.bmobile.fragments.MaterialDashboardGridAdapter.CARD_TYPE_STANDARD,
@@ -965,6 +926,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 return;
             }
             
+            RestrictedDashboardContentHelper.filterMaterialGridItems(context, items);
+
             // Create adapter with error handling - following DisplayPageGrid pattern
             com.bmobile.fragments.MaterialDashboardGridAdapter adapter = null;
             try {
@@ -979,7 +942,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 return;
             }
             
-            // Set adapter with error handling - following DisplayPageGrid pattern
             try {
                 rv.setAdapter(adapter);
                 Log.d(TAG, "Material dashboard grid setup completed successfully with " + items.size() + " items");
@@ -1117,9 +1079,10 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             
             items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
                     com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_settings,
-                    R.string.display_dashboard_summary,
-                    "com.android.settings.DisplaySettings",
+                    R.string.display_page_grid_title,
+                    R.string.display_page_grid_summary,
+                    DashboardStyleHelper.getBrandDisplayPageGridFragmentClass(
+                            DashboardStyleHelper.getDashboardStyle(context)),
                     R.drawable.ic_settings_display_filled));
             
             items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
@@ -1145,9 +1108,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             
             items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
                     com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.privacy_dashboard_title,
-                    R.string.privacy_dashboard_summary,
-                    "com.android.settings.privacy.PrivacyDashboardFragment",
+                    R.string.privacy_controls_title,
+                    R.string.privacy_controls_summary,
+                    "com.android.settings.privacy.PrivacyControlsFragment",
                     R.drawable.ic_settings_privacy_filled));
             
             items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(
@@ -1163,6 +1126,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     R.string.accessibility_settings_summary,
                     "com.android.settings.accessibility.AccessibilitySettings",
                     R.drawable.ic_settings_accessibility_filled));
+
+            RestrictedDashboardContentHelper.filterExpressiveGridItems(context, items);
 
             rv.setAdapter(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter(activity, items, getMetricsCategory()));
             Log.d(TAG, "BMobile Expressive grid setup completed successfully with " + items.size() + " items");
@@ -1260,6 +1225,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             java.util.List<com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem> items =
                     new java.util.ArrayList<>();
             populateYrExpressiveGridItems(items);
+            RestrictedDashboardContentHelper.filterExpressiveGridItems(context, items);
 
             rv.setAdapter(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter(activity, items,
                     getMetricsCategory()));
@@ -1287,6 +1253,10 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 "com.android.settings.notification.SoundSettings",
                 R.drawable.ic_volume_up_filled));
         items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
+                R.string.display_page_grid_title, R.string.display_page_grid_summary,
+                DashboardStyleHelper.getBrandDisplayPageGridFragmentClass(YR_EXPRESSIVE_STYLE),
+                R.drawable.ic_settings_display_filled));
+        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.power_usage_summary_title, R.string.summary_placeholder,
                 "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
                 R.drawable.ic_settings_battery_filled));
@@ -1295,18 +1265,14 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 "com.android.settings.security.SecuritySettings",
                 R.drawable.ic_settings_security_filled));
         items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
-                R.string.privacy_dashboard_title, R.string.privacy_dashboard_summary,
-                "com.android.settings.privacy.PrivacyDashboardFragment",
+                R.string.privacy_controls_title, R.string.privacy_controls_summary,
+                "com.android.settings.privacy.PrivacyControlsFragment",
                 R.drawable.ic_settings_privacy_filled));
         items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
                 R.string.location_settings_title,
                 R.string.location_settings_loading_app_permission_stats,
                 "com.android.settings.location.LocationSettings",
                 R.drawable.ic_settings_location_filled));
-        items.add(new com.bmobile.fragments.BMobileExpressiveSettingsAdapter.CardItem(type,
-                R.string.accessibility_settings, R.string.accessibility_settings_summary,
-                "com.android.settings.accessibility.AccessibilitySettings",
-                R.drawable.ic_settings_accessibility_filled));
     }
 
     /**
@@ -1499,6 +1465,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             } else {
                 populateFunDisplayGridItems(items);
             }
+            RestrictedDashboardContentHelper.filterFunDisplayGridItems(context, items);
 
             // Create adapter with error handling
             com.bmobile.fragments.FunDisplaySettingsAdapter adapter = null;
@@ -1570,9 +1537,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     "com.android.settings.security.SecuritySettings",
                     R.drawable.ic_settings_security_filled));
             items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
-                    R.string.privacy_dashboard_title,
-                    R.string.privacy_dashboard_summary,
-                    "com.android.settings.privacy.PrivacyDashboardFragment",
+                    R.string.privacy_controls_title,
+                    R.string.privacy_controls_summary,
+                    "com.android.settings.privacy.PrivacyControlsFragment",
                     R.drawable.ic_settings_privacy_filled));
             items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                     R.string.location_settings_title,
@@ -1612,8 +1579,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                 "com.android.settings.notification.SoundSettings",
                 R.drawable.ic_volume_up_filled));
         items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
-                R.string.display_settings, R.string.display_dashboard_summary,
-                "com.android.settings.DisplaySettings",
+                R.string.display_page_grid_title, R.string.display_page_grid_summary,
+                DashboardStyleHelper.getBrandDisplayPageGridFragmentClass(AFTERLABS_GRID_STYLE),
                 R.drawable.ic_settings_display_filled));
         items.add(new com.bmobile.fragments.FunDisplaySettingsAdapter.CardItem(type,
                 R.string.storage_settings, R.string.summary_placeholder,
@@ -1976,6 +1943,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             mAfterlabsTabIndex = savedInstanceState.getInt(SAVE_AFTERLABS_TAB_INDEX, 0);
         }
         super.onCreatePreferences(savedInstanceState, rootKey);
+        RestrictedDashboardContentHelper.removeHiddenHomepagePreferences(
+                getPreferenceScreen(), getContext());
         if (Flags.homepageRevamp()) {
             return;
         }
@@ -2125,7 +2094,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                         EntityHeaderController.ActionType.ACTION_NONE);
 
         userCard.setOnClickListener(v -> {
-            if (DashboardStyleHelper.isBmobileStyle(mDashBoardStyle)) {
+            if (DashboardStyleHelper.isBmobileStyle(mDashBoardStyle)
+                    || DashboardStyleHelper.isYrStyle(mDashBoardStyle)
+                    || DashboardStyleHelper.isKidsSafeStyle(mDashBoardStyle)) {
                 new SubSettingLauncher(context)
                         .setDestination(DashboardStyleHelper.getHomepageUserInfoFragmentClass(
                                 mDashBoardStyle))

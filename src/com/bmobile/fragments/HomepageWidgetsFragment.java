@@ -71,19 +71,8 @@ public class HomepageWidgetsFragment extends SettingsPreferenceFragment {
                     R.string.storage_settings));
         }
         if (search != null) {
-            search.setOnClickListener(v -> {
-                try {
-                    Intent intent = new Intent(Settings.ACTION_APP_SEARCH_SETTINGS);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    activity.startActivity(intent);
-                } catch (Exception e) {
-                    try {
-                        Intent intent = new Intent(Settings.ACTION_SETTINGS);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        activity.startActivity(intent);
-                    } catch (Exception ignore) { }
-                }
-            });
+            search.setOnClickListener(v -> com.android.settings.preferences.ui.HomepageWidgetsView
+                    .launchSettingsSearch(activity));
         }
         if (system != null) {
             system.setOnClickListener(v -> launchSubsetting(activity,

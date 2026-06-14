@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="?android:selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Color Swatch -->
+    <ImageView
+        android:id="@+id/monet_preset_color_swatch"
+        android:layout_width="@dimen/monet_color_swatch_size"
+        android:layout_height="@dimen/monet_color_swatch_size"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/monet_color_preset_color_description" />
+
+    <!-- Preset Name -->
+    <TextView
+        android:id="@+id/monet_preset_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="?android:textColorPrimary"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:paddingTop="4dp"
+        android:gravity="center" />
+
+</LinearLayout>

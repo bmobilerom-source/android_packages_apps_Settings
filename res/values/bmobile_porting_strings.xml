@@ -53,12 +53,12 @@
     <string name="audiofx_settings_summary">Equalizer, bass, reverb, and audio effects for music and media</string>
     <string name="keywords_audiofx_settings">audiofx equalizer audio effects bass reverb sound music</string>
     
-    <!-- Session/Journal -->
-    <string name="my_session_title">My Session</string>
-    <string name="session_messenger_title">Session Messenger</string>
-    <string name="session_messenger_summary">Launch Session routing activity</string>
-    <string name="session_messenger_intro_title">Session Messenger</string>
-    <string name="session_messenger_intro_summary">Private messenger overview</string>
+    <!-- Session/Journal (legacy string names — Your chat uses Arcane) -->
+    <string name="my_session_title">Your chat</string>
+    <string name="session_messenger_title">Your chat</string>
+    <string name="session_messenger_summary">Open Arcane chat</string>
+    <string name="session_messenger_intro_title">Your chat</string>
+    <string name="session_messenger_intro_summary">Open Arcane messenger</string>
     <string name="daily_journal_title">Daily Journal</string>
     <string name="daily_journal_summary">Open Daily You journal</string>
     

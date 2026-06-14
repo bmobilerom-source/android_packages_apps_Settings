@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Settings for My Session - Session Messenger integration
+ * Your chat dashboard — launches Arcane messenger when installed.
  */
 public class MySessionFragment extends DashboardFragment {
 
@@ -58,7 +58,7 @@ public class MySessionFragment extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SessionMessengerController(context, "session_messenger_pref"));
+        controllers.add(new ArcaneChatController(context, "yr_your_chat_pref"));
         return controllers;
     }
 }

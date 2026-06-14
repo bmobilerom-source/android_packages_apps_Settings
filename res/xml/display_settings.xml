@@ -87,6 +87,14 @@
         android:title="@string/category_name_appearance"
         android:order="-180">
 
+        <Preference
+            android:fragment="com.bmobile.fragments.DisplayCustomizationsSettings"
+            android:key="display_customizations"
+            android:title="@string/display_customization_title"
+            android:summary="@string/display_customization_summary"
+            android:icon="@drawable/ic_settings_display_filled"
+            android:order="-179" />
+
         <com.android.settings.display.darkmode.DarkModePreference
             android:key="dark_ui_mode"
             android:title="@string/dark_ui_mode"

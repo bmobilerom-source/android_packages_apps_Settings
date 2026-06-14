@@ -60,7 +60,7 @@ public class BMobileExpressiveSettingsAdapter extends RecyclerView.Adapter<BMobi
         final int cardType;
         final int titleResId;
         final int summaryResId;
-        final String destFragment;
+        public final String destFragment;
         final Integer iconResId;
         
         public CardItem(int cardType, int titleResId, int summaryResId, String destFragment, Integer iconResId) {

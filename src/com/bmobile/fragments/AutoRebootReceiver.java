@@ -12,8 +12,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.PowerManager;
 import android.os.SystemClock;
-import android.provider.Settings;
 import android.util.Log;
 
 public class AutoRebootReceiver extends BroadcastReceiver {
@@ -25,10 +25,24 @@ public class AutoRebootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent == null) return;
         String action = intent.getAction();
-        if (ACTION_CONFIG_CHANGED.equals(action)
+        if (ACTION_TRIGGER.equals(action)) {
+            performAutoReboot(context);
+        } else if (ACTION_CONFIG_CHANGED.equals(action)
                 || Intent.ACTION_BOOT_COMPLETED.equals(action)
                 || Intent.ACTION_USER_PRESENT.equals(action)) {
             scheduleAutoReboot(context);
+        }
+    }
+
+    private void performAutoReboot(Context context) {
+        if (!PrivacySecurityHelper.isAutoRebootEnabled(context)) {
+            Log.d(TAG, "Auto reboot alarm fired but feature is disabled");
+            return;
+        }
+        Log.i(TAG, "Auto reboot alarm fired — rebooting device");
+        PowerManager pm = context.getSystemService(PowerManager.class);
+        if (pm != null) {
+            pm.reboot("auto_reboot");
         }
     }
 

@@ -50,9 +50,9 @@ public final class KsFunDashboardHelper {
                 R.drawable.ic_volume_up_filled));
 
         items.add(new KidsSafeGridAdapter.CardItem(type,
-                R.string.display_settings,
-                R.string.display_dashboard_summary,
-                "com.android.settings.DisplaySettings",
+                R.string.display_page_grid_title,
+                R.string.display_page_grid_summary,
+                "com.bmobile.fragments.KsDisplayPageGrid",
                 R.drawable.ic_settings_display_filled));
 
         items.add(new KidsSafeGridAdapter.CardItem(type,
@@ -80,6 +80,7 @@ public final class KsFunDashboardHelper {
 
             List<KidsSafeGridAdapter.CardItem> items = new ArrayList<>();
             populateGridItems(items);
+            RestrictedDashboardContentHelper.filterKidsSafeGridItems(context, items);
 
             rv.setAdapter(new KidsSafeGridAdapter(activity, items, sourceMetrics));
             Log.d(TAG, "KS Fun grid setup completed with " + items.size() + " items");

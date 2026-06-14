@@ -15,7 +15,7 @@
   limitations under the License.
 
   HOMEPAGE: style 0 | @string/dashboard_style_top_level_settings
-  (picker label MainUser — this file is top_level_settings.xml, NOT top_level_settings_aosp.xml)
+  (picker label Parent — this file is top_level_settings.xml, NOT top_level_settings_aosp.xml)
   -->
 
 <PreferenceScreen
@@ -23,10 +23,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
    
-  <!-- Main user info, about phone, accounts, skyline ui, anatolia, wallpaper are hidden -->
-  <!-- Connected devices is shown, all text centered, icons added, system changed to SystemGrid -->
-
-  <!-- MainUser: parental action hub (userinfo_pref + Atomichub2) -->
+  <!-- Parent: master profile action hub (userinfo_pref + Atomichub2) -->
   <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.deviceinfo.UserInfoFragement"
         android:icon="@drawable/ic_settings_about_device_filled"
@@ -53,6 +50,33 @@
         android:order="-148"
         android:title="@string/custom_dashboard_title"
         android:summary="@string/custom_dashboard_summary"
+        settings:highlightableMenuKey="@string/menu_key_system"/>
+
+    <com.android.settings.widget.HomepagePreference
+        android:fragment="com.bmobile.fragments.BMobileDashboardSettings"
+        android:icon="@drawable/ic_custom_dashboard"
+        android:key="top_level_bmobile_dashboard"
+        android:order="-147"
+        android:title="@string/bmobile_dashboard_title"
+        android:summary="@string/bmobile_dashboard_summary"
+        settings:highlightableMenuKey="@string/menu_key_system"/>
+
+    <com.android.settings.widget.HomepagePreference
+        android:fragment="com.bmobile.fragments.YrCustomDashboardSettings"
+        android:icon="@drawable/ic_custom_dashboard"
+        android:key="top_level_yr_dashboard"
+        android:order="-146"
+        android:title="@string/yr_custom_dashboard_title"
+        android:summary="@string/yr_custom_dashboard_summary"
+        settings:highlightableMenuKey="@string/menu_key_system"/>
+
+    <com.android.settings.widget.HomepagePreference
+        android:fragment="com.bmobile.fragments.KidsSafeDashboardSettings"
+        android:icon="@drawable/ic_custom_dashboard"
+        android:key="top_level_kidssafe_dashboard"
+        android:order="-145"
+        android:title="@string/kidssafe_dashboard_title"
+        android:summary="@string/kidssafe_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_system"/>
 
     <com.android.settings.widget.HomepagePreference
@@ -125,12 +149,12 @@
         settings:controller="com.android.settings.sound.TopLevelSoundPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.android.settings.DisplaySettings"
+        android:fragment="com.bmobile.fragments.DisplayPageGrid"
         android:icon="@drawable/ic_settings_display_filled"
         android:key="top_level_display"
         android:order="-80"
-        android:title="@string/display_settings"
-        android:summary="@string/display_dashboard_summary"
+        android:title="@string/display_page_grid_title"
+        android:summary="@string/display_page_grid_summary"
         settings:highlightableMenuKey="@string/menu_key_display"/>
 
     <com.android.settings.widget.HomepagePreference

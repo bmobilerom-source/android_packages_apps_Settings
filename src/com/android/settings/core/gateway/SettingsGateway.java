@@ -217,13 +217,20 @@ import com.android.settings.wifi.tether.WifiTetherSettings;
 import com.android.settings.kidssafe.KidsSafeUserInfoFragment;
 import com.bmobile.fragments.BMobileExpressiveSettings;
 import com.bmobile.fragments.BMobileDashboardSettings;
+import com.bmobile.fragments.BmobileDisplayPageGrid;
+import com.bmobile.fragments.DisplayPageGrid;
 import com.bmobile.fragments.CustomDashboardSettings;
 import com.bmobile.fragments.KidsSafeDashboardSettings;
 import com.bmobile.fragments.YrCustomDashboardSettings;
 import com.bmobile.fragments.DashboardStyleSettings;
 import com.bmobile.fragments.ExtendedHomepageWidgetsFragment;
+import com.bmobile.fragments.DeviceControlsSettingsFragment;
+import com.bmobile.fragments.DisplayCustomizationsSettings;
+import com.bmobile.fragments.LockscreenClockStyleFragment;
 import com.bmobile.fragments.FunDisplaySettings;
 import com.bmobile.fragments.HomepageWidgetsFragment;
+import com.bmobile.fragments.KsDisplayPageGrid;
+import com.bmobile.fragments.YrDisplayPageGrid;
 
 public class SettingsGateway {
 
@@ -430,8 +437,12 @@ public class SettingsGateway {
             YrCustomDashboardSettings.class.getName(),
             KidsSafeDashboardSettings.class.getName(),
             BMobileDashboardSettings.class.getName(),
+            BmobileDisplayPageGrid.class.getName(),
+            DisplayPageGrid.class.getName(),
             DashboardStyleSettings.class.getName(),
             FunDisplaySettings.class.getName(),
+            KsDisplayPageGrid.class.getName(),
+            YrDisplayPageGrid.class.getName(),
             BMobileExpressiveSettings.class.getName(),
             KidsSafeUserInfoFragment.class.getName(),
             HomepageWidgetsFragment.class.getName(),
@@ -440,6 +451,7 @@ public class SettingsGateway {
             // bMobile User & Accounts + Atomichub Fragments
             com.android.settings.deviceinfo.UserInfoFragement.class.getName(),
             com.android.settings.deviceinfo.BMobileUserInfoFragment.class.getName(),
+            com.android.settings.deviceinfo.YrUserInfoFragment.class.getName(),
             com.android.settings.deviceinfo.BMobileAccountsFragment.class.getName(),
             com.bmobile.fragments.MySessionFragment.class.getName(),
             com.android.settings.location.BLocationSettings.class.getName(),
@@ -453,6 +465,9 @@ public class SettingsGateway {
             com.bmobile.fragments.SystemOptimizationSettings.class.getName(),
             com.bmobile.fragments.DeviceTweaksSettings.class.getName(),
             com.bmobile.fragments.AutoRebootSettings.class.getName(),
+            DisplayCustomizationsSettings.class.getName(),
+            LockscreenClockStyleFragment.class.getName(),
+            DeviceControlsSettingsFragment.class.getName(),
             com.bmobile.fragments.SystemBasicDefaultsSettings.class.getName(),
             com.bmobile.fragments.KidsSafeBasicDefaultsSettings.class.getName(),
             com.bmobile.fragments.KidsSafeExpressiveSettings.class.getName(),

@@ -44,4 +44,9 @@ public class BMobileDashboardSettings extends BrandDashboardSettings {
     protected String getLogTag() {
         return "BMobileDashboardSettings";
     }
+
+    @Override
+    protected String getDisplayPageGridFragmentClass() {
+        return "com.bmobile.fragments.BmobileDisplayPageGrid";
+    }
 }

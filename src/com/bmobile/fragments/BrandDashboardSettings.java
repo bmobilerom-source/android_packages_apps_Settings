@@ -50,7 +50,6 @@ public abstract class BrandDashboardSettings extends SettingsPreferenceFragment
     private static final String KEY_DASHBOARD_STYLE_RESET = "dashboard_style_reset";
     private static final String KEY_SYSTEMUI_RESET = "systemui_reset";
     private static final String KEY_CURRENT_STYLE = "custom_dashboard_current_style";
-    private static final String FRAGMENT_DISPLAY = "com.android.settings.DisplaySettings";
     private static final int BOTTOM_NAV_PADDING_DP = 88;
 
     private ListPreference mDashboardStyle;
@@ -70,6 +69,17 @@ public abstract class BrandDashboardSettings extends SettingsPreferenceFragment
 
     protected abstract String getLogTag();
 
+    /** Display page grid destination opened by the picker bottom bar. */
+    @NonNull
+    protected String getDisplayPageGridFragmentClass() {
+        final Context context = getContext();
+        if (context == null) {
+            return "com.bmobile.fragments.DisplayPageGrid";
+        }
+        final int currentStyle = DashboardStyleHelper.getDashboardStyle(context);
+        return DashboardStyleHelper.getBrandDisplayPageGridFragmentClass(currentStyle);
+    }
+
     /** Whether this picker shows the reset / SystemUI / Display bottom bar. */
     protected boolean shouldShowBottomBar() {
         return true;
@@ -85,11 +95,9 @@ public abstract class BrandDashboardSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        Log.d(getLogTag(), "onCreate");
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         try {
-            addPreferencesFromResource(getPreferenceScreenResId());
+            super.onCreatePreferences(savedInstanceState, rootKey);
         } catch (Exception e) {
             Log.e(getLogTag(), "Error loading dashboard picker XML", e);
             if (getContext() != null) {
@@ -97,11 +105,21 @@ public abstract class BrandDashboardSettings extends SettingsPreferenceFragment
                         getString(getLoadErrorResId(), e.getMessage()),
                         android.widget.Toast.LENGTH_LONG).show();
             }
+            return;
         }
+        bindDashboardPreferences();
+    }
 
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        Log.d(getLogTag(), "onCreate");
+    }
+
+    private void bindDashboardPreferences() {
         final Context context = getContext();
         if (context == null) {
-            Log.e(getLogTag(), "Context is null in onCreate");
+            Log.e(getLogTag(), "Context is null while binding dashboard preferences");
             return;
         }
 
@@ -392,8 +410,8 @@ public abstract class BrandDashboardSettings extends SettingsPreferenceFragment
             return;
         }
         new SubSettingLauncher(context)
-                .setDestination(FRAGMENT_DISPLAY)
-                .setTitleRes(R.string.display_settings)
+                .setDestination(getDisplayPageGridFragmentClass())
+                .setTitleRes(R.string.display_page_grid_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }

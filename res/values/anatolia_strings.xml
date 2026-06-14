@@ -31,9 +31,62 @@
     <string name="dark_ui_mode_summary">Dark theme for your eyes</string>
     <string name="monet_color_settings_title">Monet Colors</string>
     <string name="monet_color_settings_summary">Customize system colors</string>
+    <string name="monet_color_preset_color_description">Color preset swatch</string>
+    <string name="monet_current_style">Current style: %s</string>
     <string name="system_basic_defaults_photowidget_title">PhotoWidget</string>
     <string name="system_basic_defaults_photowidget_summary">Home screen photo widgets</string>
     <string name="taptap_title">Tap to wake</string>
     <string name="taptap_summary">Wake your screen with a tap</string>
+
+    <!-- Display Page Grid -->
+    <string name="display_page_grid_title">Display</string>
+    <string name="display_page_grid_summary">Display, theme, and visual customization</string>
+    <string name="display_text_title">Display Text</string>
+    <string name="qs_header_title">QS Header</string>
+    <string name="qs_header_summary">Customize the Quick Settings header image and visibility</string>
+    <string name="qs_header_image_title">QS Header Image</string>
+    <string name="qs_header_image_summary">Choose a custom image for the quick settings header</string>
+    <string name="qs_header_image_gallery_title">Select Header Image</string>
+    <string name="qs_header_image_preview">Preview</string>
+    <string name="qs_header_image_none_selected">No image selected</string>
+    <string name="qs_header_image_custom_selected">Custom image selected</string>
+    <string name="qs_header_image_none">None</string>
+    <string name="qs_header_image_selected">Selected</string>
+    <string name="qs_header_provider_title">Header Provider</string>
+    <string name="qs_header_provider_summary">Choose header image source</string>
+    <string name="qs_header_visibility_title">Header Visibility</string>
+    <string name="qs_header_visibility_summary">When to show the header image</string>
+    <string name="qs_header_daylight_pack_title">Daylight header pack</string>
+    <string name="qs_header_daylight_pack_summary">Choose header pack for daylight provider</string>
+    <string name="qs_header_daylight_pack_default">Default</string>
+    <string name="qs_header_file_pick_title">Choose image file</string>
+    <string name="qs_header_file_pick_summary">Pick an image from storage for file provider</string>
+    <string name="qs_header_footer">Customize the Quick Settings panel header with different images and control when they are displayed.</string>
+    <string name="display_customizations3_title">Animation</string>
+    <string name="display_customizations3_intro_title">Display Effects</string>
+    <string name="display_customizations3_intro_summary">Customize display effects and animations</string>
+    <string name="display_customizations_summary">Color temperature, animation scales</string>
+    <string name="display_color_settings_title">Animation</string>
+    <string name="display_color_settings_summary">Color calibration and modes</string>
+    <string name="image_toolbox_title">Image Toolbox</string>
+    <string name="image_toolbox_summary">Advanced image processing tools</string>
+    <string name="display_grid_status_bar_title">Status Bar</string>
+    <string name="display_grid_status_bar_summary">Status bar customization</string>
+    <string name="dynamic_island_settings_title">Dynamic Island</string>
+    <string name="dynamic_island_settings_summary">Notification, media, and charging popups in the cutout area</string>
+    <string name="system_animation_style_title">System Animation Style</string>
+
+    <!-- Smart Pixels -->
+    <string name="smart_pixels_title">Smart Pixels</string>
+    <string name="smart_pixels_summary">Reduce power consumption by turning off pixels in a pattern</string>
+    <string name="smart_pixels_enable_title">Enable Smart Pixels</string>
+    <string name="smart_pixels_enable_summary">Turn off pixels in a pattern to save battery</string>
+    <string name="smart_pixels_on_power_save_title">Enable on Power Save</string>
+    <string name="smart_pixels_on_power_save_summary">Automatically enable Smart Pixels when battery saver is active</string>
+    <string name="smart_pixels_pattern_title">Pixel Pattern</string>
+    <string name="smart_pixels_pattern_summary">Percentage of pixels to turn off</string>
+    <string name="smart_pixels_shift_time_title">Shift Time</string>
+    <string name="smart_pixels_shift_time_summary">Time interval to shift the pixel pattern</string>
+    <string name="smart_pixels_footer">Smart Pixels helps reduce power consumption by turning off a percentage of pixels in a shifting pattern. This can extend battery life but may slightly affect display quality.</string>
 
 </resources>

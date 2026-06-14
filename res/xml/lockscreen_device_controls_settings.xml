@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="lockscreen_device_controls_screen"
+    android:title="@string/lockscreen_device_controls_title">
+
+    <PreferenceCategory
+        android:key="device_controls_lockscreen_category"
+        android:title="@string/device_controls_lockscreen_category">
+        <SwitchPreferenceCompat
+            android:key="lockscreen_privacy_controls_switch"
+            android:title="@string/lockscreen_privacy_controls_setting_toggle"
+            android:summary="@string/lockscreen_privacy_controls_summary"
+            settings:layout="@layout/adaptive_preference_card_top_switch"
+            settings:controller="com.android.settings.display.ControlsPrivacyPreferenceController" />
+        <SwitchPreferenceCompat
+            android:key="lockscreen_trivial_controls_switch"
+            android:title="@string/lockscreen_trivial_controls_setting_toggle"
+            android:summary="@string/lockscreen_trivial_controls_summary"
+            android:dependency="lockscreen_privacy_controls_switch"
+            settings:layout="@layout/adaptive_preference_card_bottom_switch"
+            settings:controller="com.android.settings.display.ControlsTrivialPrivacyPreferenceController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="device_controls_shortcuts_category"
+        android:title="@string/device_controls_shortcuts_category">
+        <Preference
+            android:key="customizable_lock_screen_quick_affordances"
+            android:title="@string/lockscreen_quick_affordances_title"
+            android:summary="@string/summary_placeholder"
+            settings:layout="@layout/adaptive_preference_card"
+            settings:controller="com.android.settings.display.CustomizableLockScreenQuickAffordancesPreferenceController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="device_controls_apps_category"
+        android:title="@string/device_controls_apps_category">
+        <Preference
+            android:key="device_controls_add_provider"
+            android:title="@string/device_controls_add_provider_title"
+            android:summary="@string/device_controls_add_provider_summary"
+            settings:layout="@layout/adaptive_preference_card_top"
+            settings:controller="com.bmobile.customization.AddDeviceControlsPreferenceController" />
+        <Preference
+            android:key="device_controls_manage_panel"
+            android:title="@string/device_controls_manage_panel_title"
+            android:summary="@string/device_controls_manage_panel_summary"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            settings:controller="com.bmobile.customization.ManageDeviceControlsPreferenceController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="device_controls_power_menu_category"
+        android:title="@string/device_controls_power_menu_category">
+        <SwitchPreferenceCompat
+            android:key="power_menu_device_controls"
+            android:title="@string/power_menu_device_controls_title"
+            android:summary="@string/power_menu_device_controls_summary"
+            settings:layout="@layout/adaptive_preference_card" />
+    </PreferenceCategory>
+</PreferenceScreen>

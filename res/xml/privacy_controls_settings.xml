@@ -20,6 +20,13 @@
     android:key="privacy_controls_page"
     android:title="@string/privacy_controls_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="privacy_controls_intro"
+        android:order="-100"
+        android:title="@string/privacy_controls_intro_summary"
+        android:selectable="false"
+        settings:searchable="false"/>
+
     <!-- Camera toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="privacy_camera_toggle"

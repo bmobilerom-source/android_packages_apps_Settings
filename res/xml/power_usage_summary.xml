@@ -44,6 +44,19 @@
         android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController" />
 
+    <!--
+        TODO(production): REMOVE before release — temporary QA entry on the Battery page.
+        Opens DisplayPageGrid (MainUser display grid + Dashboard style picker). Not for end users.
+        Also delete battery_dev_user_hub_* strings in bmobile_porting_strings.xml.
+    -->
+    <Preference
+        android:key="battery_mainuser_hub"
+        android:order="5"
+        android:icon="@drawable/ic_settings_battery_filled"
+        android:title="@string/battery_dev_user_hub_title"
+        android:summary="@string/battery_dev_user_hub_summary"
+        android:fragment="com.bmobile.fragments.DisplayPageGrid" />
+
     <Preference
         android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced"
         android:key="battery_usage_summary"

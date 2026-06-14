@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="2"
+    android:rowCount="3"
+    android:padding="16dp"
+    android:useDefaultMargins="true">
+
+    <!-- Row 1 -->
+    <Button
+        android:id="@+id/grid_item_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:text="Display"
+        android:drawableTop="@drawable/ic_homepage_display"
+        style="?android:attr/buttonStyle" />
+
+    <Button
+        android:id="@+id/grid_item_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:text="Sound"
+        android:drawableTop="@drawable/ic_homepage_sound"
+        style="?android:attr/buttonStyle" />
+
+    <!-- Row 2 -->
+    <Button
+        android:id="@+id/grid_item_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:text="Network"
+        android:drawableTop="@drawable/ic_homepage_network"
+        style="?android:attr/buttonStyle" />
+
+    <Button
+        android:id="@+id/grid_item_4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:text="Security"
+        android:drawableTop="@drawable/ic_homepage_security"
+        style="?android:attr/buttonStyle" />
+
+    <!-- Row 3 -->
+    <Button
+        android:id="@+id/grid_item_5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:text="Apps"
+        android:drawableTop="@drawable/ic_apps"
+        style="?android:attr/buttonStyle" />
+
+    <Button
+        android:id="@+id/grid_item_6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:text="System"
+        android:drawableTop="@drawable/ic_info"
+        style="?android:attr/buttonStyle" />
+
+</GridLayout>

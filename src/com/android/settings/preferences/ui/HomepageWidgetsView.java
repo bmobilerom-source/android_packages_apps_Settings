@@ -17,16 +17,22 @@
 package com.android.settings.preferences.ui;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.ComponentName;
 import android.provider.Settings;
+
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.SearchFeatureProvider;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -88,7 +94,7 @@ public class HomepageWidgetsView extends LinearLayout {
             Activity activity = findActivity(getContext());
             View search = findViewById(R.id.search_widget);
             if (search != null) {
-                setInteractiveClick(search, () -> launchSystemLaunchPad(activity));
+                setInteractiveClick(search, () -> launchSettingsSearch(activity));
             }
         } catch (Exception e) {
             // Silently handle exceptions to prevent crashes during initialization
@@ -184,41 +190,39 @@ public class HomepageWidgetsView extends LinearLayout {
         }
     }
 
-    private void launchSystemLaunchPad(Activity activity) {
-        // Try System Launch Pad app first
-        Intent launchPadIntent = new Intent(Intent.ACTION_MAIN);
-        launchPadIntent.setClassName("com.devrinth.launchpad",
-                "com.devrinth.launchpad.activities.LaunchpadOverlayActivity");
-        launchPadIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        try {
-            if (activity != null) {
-                activity.startActivity(launchPadIntent);
-            } else {
-                getContext().startActivity(launchPadIntent);
-            }
+    /** Opens Settings search (Settings Intelligence). */
+    public static void launchSettingsSearch(@Nullable Activity activity) {
+        if (activity == null) {
             return;
-        } catch (Exception ignored) { }
-
-        // Fallback to Settings search, then main Settings
+        }
         try {
-            Intent intent = new Intent(Settings.ACTION_APP_SEARCH_SETTINGS);
-            if (activity != null) {
+            final Context context = activity.getApplicationContext();
+            final SearchFeatureProvider provider =
+                    FeatureFactory.getFeatureFactory().getSearchFeatureProvider();
+            final Intent intent = provider.buildSearchIntent(context, SettingsEnums.SETTINGS_HOMEPAGE)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            final PackageManager pm = activity.getPackageManager();
+            final java.util.List<ResolveInfo> resolveInfos =
+                    pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            if (!resolveInfos.isEmpty()) {
+                final ComponentName component = resolveInfos.get(0).getComponentInfo().getComponentName();
+                intent.setComponent(component);
                 activity.startActivity(intent);
-            } else {
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getContext().startActivity(intent);
+                return;
             }
+            activity.startActivity(new Intent(Settings.ACTION_APP_SEARCH_SETTINGS));
         } catch (Exception e) {
+            android.util.Log.w("HomepageWidgetsView", "Failed to launch Settings search", e);
             try {
-                Intent intent = new Intent(Settings.ACTION_SETTINGS);
-                if (activity != null) {
-                    activity.startActivity(intent);
-                } else {
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getContext().startActivity(intent);
-                }
+                activity.startActivity(new Intent(Settings.ACTION_SETTINGS));
             } catch (Exception ignored) { }
         }
+    }
+
+    /** @deprecated Use {@link #launchSettingsSearch(Activity)} */
+    @Deprecated
+    public static void launchSystemLaunchPad(@Nullable Activity activity) {
+        launchSettingsSearch(activity);
     }
 
     private Activity findActivity(Context context) {

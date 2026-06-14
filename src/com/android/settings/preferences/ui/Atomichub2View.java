@@ -73,8 +73,8 @@ public class Atomichub2View extends LinearLayout {
                 "com.android.settings.applications.specialaccess.AppSecSettings",
                 R.string.appsec_category_title));
         setInteractiveClick(bigCard, () -> launchFragment(activity,
-                "com.android.settings.deviceinfo.BMobileUserInfoFragment",
-                R.string.bmobile_userinfo_title));
+                "com.bmobile.fragments.BMobileSettingsFragment",
+                R.string.bmobile_settings_title));
     }
 
     private void setInteractiveClick(View v, Runnable action) {

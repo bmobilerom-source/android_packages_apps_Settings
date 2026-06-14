@@ -51,7 +51,7 @@ public class HomepageWidgetsPreference extends Preference {
 
         bindWidget(battery, () -> openBattery());
         bindWidget(storage, () -> openStorage());
-        bindWidget(search, () -> launchSystemLaunchPad());
+        bindWidget(search, () -> HomepageWidgetsView.launchSettingsSearch(findActivity(getContext())));
         bindWidget(system, () -> openConnectedDevices());
     }
 
@@ -134,33 +134,6 @@ public class HomepageWidgetsPreference extends Preference {
             } catch (Exception ignored) { }
         }
     }
-
-    private void launchSystemLaunchPad() {
-        Activity activity = findActivity(getContext());
-        if (activity == null) return;
-
-        // Try System Launch Pad app first
-        Intent launchPadIntent = new Intent(Intent.ACTION_MAIN);
-        launchPadIntent.setClassName("com.devrinth.launchpad",
-                "com.devrinth.launchpad.activities.LaunchpadOverlayActivity");
-        launchPadIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        try {
-            activity.startActivity(launchPadIntent);
-            return;
-        } catch (Exception ignored) { }
-
-        // Fallback to Settings search, then main Settings
-        try {
-            Intent intent = new Intent(android.provider.Settings.ACTION_APP_SEARCH_SETTINGS);
-            activity.startActivity(intent);
-        } catch (Exception e) {
-            try {
-                Intent intent = new Intent(android.provider.Settings.ACTION_SETTINGS);
-                activity.startActivity(intent);
-            } catch (Exception ignored) { }
-        }
-    }
-
     private Activity findActivity(Context context) {
         while (context instanceof ContextWrapper) {
             if (context instanceof Activity) {

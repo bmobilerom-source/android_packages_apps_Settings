@@ -50,8 +50,8 @@ public class Atomichub2CardsPreference extends Preference {
                 "com.android.settings.applications.specialaccess.AppSecSettings",
                 R.string.appsec_category_title);
         bindCard(holder, R.id.card2,
-                "com.android.settings.deviceinfo.BMobileUserInfoFragment",
-                R.string.bmobile_userinfo_title);
+                "com.bmobile.fragments.BMobileSettingsFragment",
+                R.string.bmobile_settings_title);
     }
 
     private void bindCard(PreferenceViewHolder holder, int viewId, String fragment, int titleRes) {

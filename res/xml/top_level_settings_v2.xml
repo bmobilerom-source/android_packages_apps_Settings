@@ -135,12 +135,12 @@
             settings:controller="com.android.settings.communal.CommunalPreferenceController"/> -->
 
         <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.DisplaySettings"
+            android:fragment="com.bmobile.fragments.DisplayPageGrid"
             android:icon="@drawable/ic_settings_display_filled"
             android:key="top_level_display"
             android:order="-20"
-            android:title="@string/display_settings"
-            android:summary="@string/display_dashboard_summary"
+            android:title="@string/display_page_grid_title"
+            android:summary="@string/display_page_grid_summary"
             settings:highlightableMenuKey="@string/menu_key_display"
             settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
@@ -226,7 +226,7 @@
             settings:highlightableMenuKey="@string/menu_key_privacy"/>
 
         <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
+            android:fragment="com.android.settings.privacy.PrivacyControlsFragment"
             android:icon="@drawable/ic_settings_privacy_filled"
             android:key="top_level_privacy"
             android:order="-30"

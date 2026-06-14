@@ -18,15 +18,11 @@ import com.android.settings.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import github.com.st235.lib_expandablebottombar.ExpandableBottomBar;
-import github.com.st235.lib_expandablebottombar.MenuItem;
 import github.com.st235.lib_expandablebottombar.MenuItemDescriptor;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function3;
 
 /**
  * Expandable bottom bar on the Settings homepage ({@link TopLevelSettings}).
- * Opens Network, Display, System, and Wallpaper destinations.
+ * Opens Network, Display Page Grid, System, and Wallpaper destinations.
  */
 public final class TopLevelDashboardBottomBarHelper {
 
@@ -98,7 +94,7 @@ public final class TopLevelDashboardBottomBarHelper {
             expandable.setVisibility(View.GONE);
         }
         if (material != null) {
-            bindMaterialBar(material, listener);
+            bindMaterialBar(material, context, listener);
             return;
         }
         Log.w(TAG, "No bottom bar view found in layout");
@@ -135,11 +131,8 @@ public final class TopLevelDashboardBottomBarHelper {
                     .textRes(R.string.top_level_dashboard_nav_wallpaper)
                     .color(wallpaperColor)
                     .build());
-            bar.setOnItemSelectedListener(
-                    (Function3<View, MenuItem, Boolean, Unit>) (view, menuItem, reselected) -> {
-                        dispatchSelection(menuItem.getId(), listener);
-                        return Unit.INSTANCE;
-                    });
+            DashboardExpandableBottomBarUi.bindExpandableBarActions(bar,
+                    itemId -> dispatchSelection(itemId, listener));
             // Library crashes in onSaveInstanceState when no item was ever selected.
             bar.setSaveEnabled(false);
             return true;
@@ -150,15 +143,13 @@ public final class TopLevelDashboardBottomBarHelper {
     }
 
     private static void bindMaterialBar(@NonNull BottomNavigationView nav,
-            @NonNull Listener listener) {
+            @NonNull Context context, @NonNull Listener listener) {
         nav.setVisibility(View.VISIBLE);
         nav.getMenu().clear();
         nav.inflateMenu(R.menu.top_level_dashboard_bottom_nav);
         DashboardExpandableBottomBarUi.applyMaterialNavColors(nav);
-        nav.setOnItemSelectedListener(item -> {
-            dispatchSelection(item.getItemId(), listener);
-            return true;
-        });
+        DashboardExpandableBottomBarUi.bindMaterialNavActions(nav,
+                itemId -> dispatchSelection(itemId, listener));
     }
 
     private static void dispatchSelection(int itemId, @NonNull Listener listener) {

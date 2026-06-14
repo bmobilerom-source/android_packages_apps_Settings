@@ -18,24 +18,23 @@ package com.android.settings.kidssafe;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
+import android.app.AlertDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.UserInfo;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.UserManager;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -45,20 +44,20 @@ import java.io.FileNotFoundException;
 public class KidsSafeUserInfoFragment extends SettingsPreferenceFragment {
 
     private static final String KEY_USER_CARD = "kidssafe_user_header";
+    private static final String PREFS_NAME = "kidssafe_user_profile";
+    private static final String KEY_DISPLAY_NAME = "display_name";
 
-    private Context mContext;
     private ImageView mAvatarView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.kidssafe_userinfo_pref);
-        mContext = getActivity();
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         bindUserCard();
     }
 
@@ -67,23 +66,12 @@ public class KidsSafeUserInfoFragment extends SettingsPreferenceFragment {
         return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
     }
 
-    static String getEmail(Context context) {
-        AccountManager accountManager = AccountManager.get(context);
-        Account account = getAccount(accountManager);
-        return account != null ? account.name : null;
-    }
-
-    private static Account getAccount(AccountManager accountManager) {
-        Account[] accounts = accountManager.getAccountsByType("com.google");
-        return accounts.length > 0 ? accounts[0] : null;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && data != null && data.getData() != null
-                && requestCode == 100 && mAvatarView != null && mContext != null) {
+                && requestCode == 100 && mAvatarView != null) {
             String path = data.getData().toString();
             try {
                 mAvatarView.setImageBitmap(BitmapFactory.decodeStream(
@@ -91,11 +79,23 @@ public class KidsSafeUserInfoFragment extends SettingsPreferenceFragment {
             } catch (FileNotFoundException e) {
                 mAvatarView.setImageResource(R.drawable.user_png);
             }
-            mContext.getSharedPreferences("image_path", Context.MODE_PRIVATE)
+            requireContext().getSharedPreferences("image_path", Context.MODE_PRIVATE)
                     .edit()
                     .putString("image_path", path)
                     .commit();
         }
+    }
+
+    private SharedPreferences profilePrefs() {
+        return requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    }
+
+    private String getDisplayName() {
+        return profilePrefs().getString(KEY_DISPLAY_NAME, "");
+    }
+
+    private void saveDisplayName(String name) {
+        profilePrefs().edit().putString(KEY_DISPLAY_NAME, name.trim()).commit();
     }
 
     private void bindUserCard() {
@@ -106,15 +106,29 @@ public class KidsSafeUserInfoFragment extends SettingsPreferenceFragment {
         }
 
         final View userCard = headerPreference.findViewById(R.id.entity_header);
-        final TextView userEmail = headerPreference.findViewById(R.id.email);
+        final TextView titleView = headerPreference.findViewById(R.id.entity_header_title);
+        final TextView emailView = headerPreference.findViewById(R.id.email);
         mAvatarView = headerPreference.findViewById(R.id.image_holder);
 
-        String email = getEmail(getContext());
-        userEmail.setText(email != null ? email : "Add a Google account to show email");
+        if (emailView != null) {
+            emailView.setVisibility(View.GONE);
+        }
+
+        final String displayName = getDisplayName();
+        final CharSequence label = !TextUtils.isEmpty(displayName)
+                ? displayName
+                : getString(R.string.kidssafe_owner_name_hint);
+
+        if (titleView != null) {
+            titleView.setText(label);
+            titleView.setOnClickListener(v -> showNameDialog(titleView));
+        }
 
         Intent pickImage = new Intent(Intent.ACTION_GET_CONTENT);
         pickImage.setType("image/*");
-        mAvatarView.setOnClickListener(v -> startActivityForResult(pickImage, 100));
+        if (mAvatarView != null) {
+            mAvatarView.setOnClickListener(v -> startActivityForResult(pickImage, 100));
+        }
 
         final Activity activity = getActivity();
         if (activity == null) {
@@ -132,20 +146,37 @@ public class KidsSafeUserInfoFragment extends SettingsPreferenceFragment {
             }
         }
 
-        final Bundle bundle = getArguments() != null ? getArguments() : Bundle.EMPTY;
         final EntityHeaderController controller = EntityHeaderController
                 .newInstance(activity, this, userCard)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
-                        EntityHeaderController.ActionType.ACTION_NONE);
-
-        if (bundle.getInt("icon_id", 0) == 0) {
-            final UserManager userManager =
-                    (UserManager) activity.getSystemService(Context.USER_SERVICE);
-            final UserInfo info = Utils.getExistingUser(userManager,
-                    android.os.Process.myUserHandle());
-            controller.setLabel(info.name);
-        }
+                        EntityHeaderController.ActionType.ACTION_NONE)
+                .setLabel(label);
 
         controller.done(true);
+    }
+
+    private void showNameDialog(TextView titleView) {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        final EditText input = new EditText(activity);
+        input.setHint(R.string.kidssafe_owner_name_dialog_hint);
+        input.setText(getDisplayName());
+        input.setSingleLine(true);
+
+        new AlertDialog.Builder(activity)
+                .setTitle(R.string.kidssafe_owner_name_dialog_title)
+                .setView(input)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    final String name = input.getText().toString().trim();
+                    saveDisplayName(name);
+                    titleView.setText(TextUtils.isEmpty(name)
+                            ? getString(R.string.kidssafe_owner_name_hint)
+                            : name);
+                    bindUserCard();
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
     }
 }

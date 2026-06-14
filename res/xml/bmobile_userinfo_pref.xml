@@ -39,18 +39,18 @@
             settings:layout="@layout/adaptive_preference_card_top"
             android:fragment="com.android.settings.privatespace.PrivateSpaceSetupActivity" />
 
-    <!-- Session Messenger -->
+    <!-- Your chat (Arcane) -->
     <Preference
-        android:key="session_messenger_pref"
-        android:title="@string/session_messenger_title"
-        android:summary="@string/session_messenger_summary"
+        android:key="yr_your_chat_pref"
+        android:title="@string/yr_your_chat_title"
+        android:summary="@string/yr_your_chat_summary"
         android:order="40"
         settings:layout="@layout/adaptive_preference_card_middle"
-        settings:controller="com.bmobile.fragments.SessionMessengerController">
+        settings:controller="com.bmobile.fragments.ArcaneChatController">
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetPackage="network.loki.messenger"
-            android:targetClass="network.loki.messenger.RoutingActivity" />
+            android:targetPackage="chat.delta.lite"
+            android:targetClass="org.thoughtcrime.securesms.RoutingActivity" />
     </Preference>
     <!-- Daily Journal -->
     <Preference

@@ -212,7 +212,7 @@ public class BMobileUserInfoFragment extends SettingsPreferenceFragment {
         }
     }
 
-    /** User hub (Atomichub2) is only reachable from MainUser and DynamicTabs dashboards. */
+    /** Parent hub (Atomichub2) is only reachable from the Parent (style 0) dashboard. */
     private void updateUserHubVisibility() {
         Preference hub = findPreference("bmobile_action_hub");
         if (hub == null) {

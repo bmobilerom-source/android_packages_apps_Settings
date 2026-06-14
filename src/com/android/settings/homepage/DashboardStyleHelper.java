@@ -136,9 +136,14 @@ public class DashboardStyleHelper {
         return style == 5 || style == 16;
     }
 
-    /** MainUser (0) and DynamicTabs (12) use the Atomichub2 action hub. */
+    /** Parent (0) keeps the full Privacy dashboard; all other styles use Controls. */
+    public static boolean usesPrivacyControlsPage(int style) {
+        return style != 0;
+    }
+
+    /** Parent (0) only — DynamicTabs (12) uses standard BMobile user info without Parent hub. */
     public static boolean usesUserInfoActionHub(int style) {
-        return style == 0 || style == 12;
+        return style == 0;
     }
 
     /** Homepage profile card fragment for {@code style}. */
@@ -149,6 +154,9 @@ public class DashboardStyleHelper {
         }
         if (usesUserInfoActionHub(style)) {
             return "com.android.settings.deviceinfo.UserInfoFragement";
+        }
+        if (isYrStyle(style)) {
+            return "com.android.settings.deviceinfo.YrUserInfoFragment";
         }
         return "com.android.settings.deviceinfo.BMobileUserInfoFragment";
     }
@@ -194,6 +202,21 @@ public class DashboardStyleHelper {
             return com.android.settings.R.string.kidssafe_dashboard_summary;
         }
         return com.android.settings.R.string.custom_dashboard_summary;
+    }
+
+    /** Display page grid fragment class for the brand that owns {@code style}. */
+    @NonNull
+    public static String getBrandDisplayPageGridFragmentClass(int style) {
+        if (isBmobileStyle(style)) {
+            return "com.bmobile.fragments.BmobileDisplayPageGrid";
+        }
+        if (isYrStyle(style)) {
+            return "com.bmobile.fragments.YrDisplayPageGrid";
+        }
+        if (isKidsSafeStyle(style)) {
+            return "com.bmobile.fragments.KsDisplayPageGrid";
+        }
+        return "com.bmobile.fragments.DisplayPageGrid";
     }
 
     /**

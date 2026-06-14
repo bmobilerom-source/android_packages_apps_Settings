@@ -12,7 +12,8 @@
     <Preference
         android:key="custom_dashboard_current_style"
         android:title="@string/custom_dashboard_current_style_title"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card_top"/>
 
     <ListPreference
         android:key="settings_dashboard_style"
@@ -21,6 +22,7 @@
         android:entries="@array/settings_dashboard_style_kidssafe_entries"
         android:entryValues="@array/settings_dashboard_style_kidssafe_values"
         android:defaultValue="16"
-        android:persistent="false" />
+        android:persistent="false"
+        settings:layout="@layout/adaptive_preference_card_bottom" />
 
 </PreferenceScreen>

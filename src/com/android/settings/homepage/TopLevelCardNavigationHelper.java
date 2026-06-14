@@ -6,6 +6,7 @@
 package com.android.settings.homepage;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -32,10 +33,12 @@ public final class TopLevelCardNavigationHelper {
 
     private static final String FRAGMENT_NETWORK =
             "com.android.settings.network.NetworkDashboardFragment";
-    private static final String FRAGMENT_DISPLAY = "com.android.settings.DisplaySettings";
     private static final String FRAGMENT_CONNECTED_DEVICES =
             "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment";
     private static final String AURORA_STORE_PACKAGE = "com.aurora.store";
+    private static final String SEED_VAULT_PACKAGE = "com.stevesoltys.seedvault";
+    private static final String SEED_VAULT_SETTINGS_ACTIVITY =
+            "com.stevesoltys.seedvault.settings.SettingsActivity";
 
     private TopLevelCardNavigationHelper() {}
 
@@ -64,6 +67,9 @@ public final class TopLevelCardNavigationHelper {
         }
         final Activity activity = (Activity) context;
         final boolean displayOpensConnected = afterlabsExtrasOnTab && isExtrasNav;
+        final int currentStyle = DashboardStyleHelper.getDashboardStyle(context);
+        final String displayPageGridFragment =
+                DashboardStyleHelper.getBrandDisplayPageGridFragmentClass(currentStyle);
 
         if (displayOpensConnected) {
             final TextView displayTitle = layoutPref.findViewById(R.id.card_display_title);
@@ -75,10 +81,10 @@ public final class TopLevelCardNavigationHelper {
         bindCard(layoutPref, R.id.card_network, () -> launchFragment(activity,
                 FRAGMENT_NETWORK, R.string.network_dashboard_title, sourceMetricsCategory));
         bindCard(layoutPref, R.id.card_display, () -> launchFragment(activity,
-                displayOpensConnected ? FRAGMENT_CONNECTED_DEVICES : FRAGMENT_DISPLAY,
+                displayOpensConnected ? FRAGMENT_CONNECTED_DEVICES : displayPageGridFragment,
                 displayOpensConnected
                         ? R.string.connected_devices_dashboard_title
-                        : R.string.display_settings,
+                        : R.string.display_page_grid_title,
                 sourceMetricsCategory));
         bindCard(layoutPref, R.id.card_custom_dashboard, () -> {
             final int style = DashboardStyleHelper.getDashboardStyle(context);
@@ -95,20 +101,49 @@ public final class TopLevelCardNavigationHelper {
         }
     }
 
-    /** Aurora Store tile on AfterLabs tab 2 (no fragment in XML). */
-    public static void setupAuroraStorePreference(@NonNull Context context,
+    /** External-app tiles on AfterLabs System tab (no fragment in XML). */
+    public static void setupAfterlabsSystemTabPreferences(@NonNull Context context,
             @Nullable PreferenceScreen screen) {
         if (screen == null || !(context instanceof Activity)) {
             return;
         }
-        androidx.preference.Preference pref = screen.findPreference("top_level_aurora_store");
-        if (pref == null) {
-            return;
+        final Activity activity = (Activity) context;
+
+        androidx.preference.Preference auroraPref =
+                screen.findPreference("top_level_aurora_store");
+        if (auroraPref != null) {
+            auroraPref.setOnPreferenceClickListener(preference -> {
+                launchAuroraStore(activity);
+                return true;
+            });
         }
-        pref.setOnPreferenceClickListener(preference -> {
-            launchAuroraStore((Activity) context);
-            return true;
-        });
+
+        androidx.preference.Preference backupPref = screen.findPreference("top_level_backup");
+        if (backupPref != null) {
+            backupPref.setOnPreferenceClickListener(preference -> {
+                launchSeedVault(activity);
+                return true;
+            });
+        }
+    }
+
+    /** @deprecated Use {@link #setupAfterlabsSystemTabPreferences} */
+    public static void setupAuroraStorePreference(@NonNull Context context,
+            @Nullable PreferenceScreen screen) {
+        setupAfterlabsSystemTabPreferences(context, screen);
+    }
+
+    private static void launchSeedVault(@NonNull Activity activity) {
+        try {
+            Intent launch = new Intent();
+            launch.setComponent(new ComponentName(SEED_VAULT_PACKAGE, SEED_VAULT_SETTINGS_ACTIVITY));
+            launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(launch);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to launch Seed Vault", e);
+            android.widget.Toast.makeText(activity, R.string.seed_vault_not_installed,
+                    android.widget.Toast.LENGTH_SHORT).show();
+        }
     }
 
     private static void launchAuroraStore(@NonNull Activity activity) {

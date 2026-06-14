@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="display_customization_title">Customization</string>
+    <string name="display_customization_summary">Clocks, lockscreen widgets, and status bar battery</string>
+
+    <string name="display_customization_category_qs">Quick Settings</string>
+    <string name="display_customization_category_lockscreen">Lock screen</string>
+    <string name="display_customization_category_device_controls">Device controls</string>
+    <string name="display_customization_category_ambient">Ambient</string>
+    <string name="display_customization_category_statusbar">Status bar</string>
+
+    <string name="qs_header_clock_style_title">QS header clock</string>
+    <string name="qs_header_clock_style_summary">Choose the clock style shown in the Quick Settings header</string>
+
+    <string name="lockscreen_clock_style_title">Lock screen clock style</string>
+    <string name="lockscreen_clock_style_summary">Each flower style uses a different layout</string>
+
+    <string name="lockscreen_clock_position_title">Lock screen clock position</string>
+    <string name="lockscreen_clock_position_summary">Horizontal alignment of the lock screen clock</string>
+
+    <string name="lockscreen_widgets_title">Lock screen widgets</string>
+    <string name="lockscreen_widgets_summary">Show quick action widgets on the lock screen</string>
+
+    <string name="lockscreen_widget_extras_title">Lock screen widget buttons</string>
+    <string name="lockscreen_widget_extras_summary">Choose which shortcuts appear on the lock screen</string>
+
+    <string name="statusbar_clock_chip_title">Status bar clock chip</string>
+    <string name="statusbar_clock_chip_summary">Show a rounded pill background behind the status bar clock</string>
+
+    <string name="battery_style_title">Battery style</string>
+    <string name="battery_style_summary">Status bar battery icon appearance</string>
+
+    <string name="qs_header_clock_off">Off (stock)</string>
+    <string name="qs_header_clock_chip">Chip</string>
+    <string name="qs_header_clock_oos">OOS</string>
+    <string name="qs_header_clock_analog">Analog</string>
+    <string name="qs_header_clock_daisy">Daisy — Swiss dot time</string>
+    <string name="qs_header_clock_iris">Iris — time beside date</string>
+    <string name="qs_header_clock_orchid">Orchid — dot studio</string>
+    <string name="qs_header_clock_fern">Fern — accent colon</string>
+    <string name="qs_header_clock_bloom">Bloom — date above pill</string>
+    <string name="qs_header_clock_clover">Clover — accent minutes</string>
+    <string name="qs_header_clock_weather">Weather — time with forecast</string>
+    <string name="qs_header_clock_peony">Peony — date above time</string>
+    <string name="qs_header_clock_lily">Lily — stacked hours/minutes</string>
+    <string name="qs_header_clock_rose">Rose — day + accent minutes</string>
+    <string name="qs_header_clock_azalea">Azalea — hero bar clock</string>
+    <string name="qs_header_clock_juniper">Juniper — pixel dot time</string>
+
+    <string name="lockscreen_clock_default">No clock</string>
+    <string name="lockscreen_clock_oos">Magnolia — OOS hero clock</string>
+    <string name="lockscreen_clock_center">Rose — day + colon time</string>
+    <string name="lockscreen_clock_simple">Daisy — time + seconds</string>
+    <string name="lockscreen_clock_ide">Orchid — dot studio clock</string>
+    <string name="lockscreen_clock_miui">Peony — date above time</string>
+    <string name="lockscreen_clock_moto">Iris — time beside date</string>
+    <string name="lockscreen_clock_presentation">Lily — stacked hours/minutes</string>
+    <string name="lockscreen_clock_fern">Fern — accent colon</string>
+    <string name="lockscreen_clock_bloom">Bloom — date above pill</string>
+    <string name="lockscreen_clock_clover">Clover — accent minutes</string>
+    <string name="lockscreen_clock_willow">Willow — time with weather</string>
+    <string name="lockscreen_clock_hazel">Hazel — chip pill</string>
+    <string name="lockscreen_clock_maple">Maple — analog face</string>
+    <string name="lockscreen_clock_azalea">Azalea — hero bar clock</string>
+
+    <string name="lockscreen_clock_style_picker_title">Choose lock screen clock</string>
+    <string name="lockscreen_clock_style_selected">Selected</string>
+
+    <string name="lockscreen_clock_tagline_title">Lock screen clock tagline</string>
+    <string name="lockscreen_clock_tagline_summary">Shown on Orchid, Lily, Fern, and Azalea</string>
+    <string name="lockscreen_clock_tagline_empty_summary">Not set — tagline is hidden until you add text</string>
+    <string name="lockscreen_clock_tagline_dialog_title">Edit clock tagline</string>
+    <string name="lockscreen_clock_tagline_default">LineageOS</string>
+
+    <string name="lockscreen_device_controls_title">Device controls</string>
+    <string name="display_customization_device_controls_off">Not shown on lock screen</string>
+    <string name="display_customization_device_controls_with_power_menu">%1$s · Also in power menu</string>
+    <string name="device_controls_lockscreen_category">Lock screen</string>
+    <string name="device_controls_shortcuts_category">Lock screen shortcuts</string>
+    <string name="device_controls_apps_category">Controls apps</string>
+    <string name="device_controls_power_menu_category">Power menu</string>
+    <string name="device_controls_add_provider_title">Add controls</string>
+    <string name="device_controls_add_provider_summary">Choose an app to add device controls from</string>
+    <string name="device_controls_manage_panel_title">Manage controls</string>
+    <string name="device_controls_manage_panel_summary">Reorder and edit your device controls panel</string>
+    <string name="power_menu_device_controls_title">Device controls</string>
+    <string name="power_menu_device_controls_summary">Show device controls in the power menu</string>
+
+    <string name="lockscreen_clock_position_left">Left</string>
+    <string name="lockscreen_clock_position_center">Center</string>
+    <string name="lockscreen_clock_position_right">Right</string>
+
+    <string name="lockscreen_widget_wifi">Wi‑Fi</string>
+    <string name="lockscreen_widget_data">Mobile data</string>
+    <string name="lockscreen_widget_ringer">Ringer</string>
+    <string name="lockscreen_widget_bt">Bluetooth</string>
+    <string name="lockscreen_widget_torch">Flashlight</string>
+    <string name="lockscreen_widget_media">Media</string>
+    <string name="lockscreen_widget_hotspot">Hotspot</string>
+    <string name="lockscreen_widget_timer">Timer</string>
+    <string name="lockscreen_widget_calculator">Calculator</string>
+    <string name="lockscreen_widget_wallet">Wallet</string>
+    <string name="lockscreen_widget_qr">QR scanner</string>
+
+    <string name="customization_battery_style_icon_portrait">Icon portrait</string>
+    <string name="customization_battery_style_circle">Circle</string>
+    <string name="customization_battery_style_text">Text</string>
+    <string name="customization_battery_style_rlandscape">Rounded landscape</string>
+    <string name="customization_battery_style_landscape">Landscape</string>
+</resources>

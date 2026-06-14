@@ -233,7 +233,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Session"
+                    android:text="@string/yr_your_chat_title"
                     android:textSize="20sp"
                     android:clickable="false"
                     android:focusable="false" />

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Customer branding strings — see docs/branding.md for customization notes.
+  SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- ROM name label on Parent profile card (right tile). -->
+    <string name="branding_string">Your ROM</string>
+
+    <!-- YR user info intro — %1$s = branding_yr_user_name -->
+    <string name="branding_yr_user_name">friend</string>
+    <string name="yr_userinfo_intro">Hi %1$s, this is your space. Keep it personal and yours alone.</string>
+
+    <!-- YR user info quick links -->
+    <string name="yr_your_chat_title">Your chat</string>
+    <string name="yr_your_chat_summary">Open Arcane chat</string>
+    <string name="yr_accounts_title">Accounts</string>
+    <string name="yr_accounts_summary">Manage accounts on this device</string>
+
+    <!-- Privacy Controls page intro -->
+    <string name="privacy_controls_intro_summary">These are the privacy controls you asked for — the place to try privacy settings on your device.</string>
+
+    <!-- KidsSafe user info -->
+    <string name="kidssafe_daily_you_title">Daily You</string>
+    <string name="kidssafe_daily_you_summary">Open your journal app</string>
+    <string name="kidssafe_your_chat_title">Your chat</string>
+    <string name="kidssafe_your_chat_summary">Open Arcane chat</string>
+    <string name="kidssafe_owner_name_hint">Tap to add your name</string>
+    <string name="kidssafe_owner_name_dialog_title">Your name</string>
+    <string name="kidssafe_owner_name_dialog_hint">What should we call you?</string>
+</resources>

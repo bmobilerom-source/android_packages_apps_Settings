@@ -6,8 +6,11 @@
 package com.bmobile.fragments;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
@@ -44,5 +47,39 @@ public class YrCustomDashboardSettings extends BrandDashboardSettings {
     @Override
     protected String getLogTag() {
         return "YrCustomDashboardSettings";
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        stripDuplicateToolbarPreferences();
+    }
+
+    /**
+     * Reset / SystemUI / Display live on the bottom bar only — remove if duplicated in XML
+     * (e.g. vendor overlay copied from the full Custom Dashboard screen).
+     */
+    private void stripDuplicateToolbarPreferences() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
+        final String[] duplicateKeys = {
+                "dashboard_style_reset",
+                "systemui_reset",
+                "declanxafterlab_style",
+                "settings_compact_dashboard_enabled",
+        };
+        for (String key : duplicateKeys) {
+            final Preference preference = screen.findPreference(key);
+            if (preference != null) {
+                screen.removePreference(preference);
+            }
+        }
+    }
+
+    @Override
+    protected String getDisplayPageGridFragmentClass() {
+        return "com.bmobile.fragments.YrDisplayPageGrid";
     }
 }

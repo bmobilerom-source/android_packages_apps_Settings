@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/lockscreen_clock_style_picker_title">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="lockscreen_clock_grid_pref"
+        android:selectable="false"
+        android:layout="@layout/lockscreen_clock_style_fragment" />
+</PreferenceScreen>

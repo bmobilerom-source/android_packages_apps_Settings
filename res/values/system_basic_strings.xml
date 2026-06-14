@@ -22,7 +22,7 @@
     <string name="custom_dashboard_current_style_title">Active layout</string>
     <string name="custom_dashboard_load_error">Could not open Custom Dashboard: %1$s</string>
     <string name="yr_custom_dashboard_title">YR Custom Dashboard</string>
-    <string name="yr_custom_dashboard_summary">Choose a YR Settings home page layout</string>
+    <string name="yr_custom_dashboard_summary">Pick a home layout</string>
     <string name="yr_custom_dashboard_load_error">Could not open YR Custom Dashboard: %1$s</string>
     <string name="kidssafe_dashboard_title">KidsSafe Dashboard</string>
     <string name="kidssafe_dashboard_summary">Choose a KidsSafe Settings home page layout</string>
@@ -34,7 +34,7 @@
     <string name="dashboard_style_title">Dashboard style</string>
     <string name="dashboard_style_summary">Applies when you open Settings home</string>
     <!-- style 0 → top_level_settings.xml (NOT top_level_settings_aosp.xml) -->
-    <string name="dashboard_style_top_level_settings">MainUser</string>
+    <string name="dashboard_style_top_level_settings">Parent</string>
     <!-- style 1 -->
     <string name="dashboard_style_top_level_epic">YR Study</string>
     <!-- style 2 -->
@@ -89,7 +89,7 @@
 
     <!-- AOSP homepage bottom bar (dashboard style 10) -->
     <string name="top_level_dashboard_nav_network">Network</string>
-    <string name="top_level_dashboard_nav_display">Display</string>
+    <string name="top_level_dashboard_nav_display">Display Page Grid</string>
     <string name="top_level_dashboard_nav_system">System</string>
     <string name="top_level_dashboard_nav_wallpaper">Wallpaper</string>
 
@@ -110,6 +110,7 @@
     <string name="afterlabs_user_title">User</string>
     <string name="aurora_store_title">Aurora Store</string>
     <string name="aurora_store_summary">Open Aurora Store app</string>
+    <string name="seed_vault_not_installed">Seed Vault is not installed</string>
 
     <!-- CustomerOS / Arcana headers -->
     <string name="customeros_header_title">Customer OS</string>
