@@ -57,7 +57,14 @@
             android:title="@string/lockscreen_device_controls_title"
             android:summary="@string/summary_placeholder"
             android:fragment="com.bmobile.fragments.DeviceControlsSettingsFragment"
-            settings:layout="@layout/adaptive_preference_card"
+            settings:layout="@layout/adaptive_preference_card_top"
             settings:controller="com.bmobile.customization.DeviceControlsPreferenceController" />
+        <Preference
+            android:key="ambient_customization"
+            android:title="@string/ambient_customization_title"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.bmobile.fragments.AmbientCustomizations"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            settings:controller="com.bmobile.customization.AmbientCustomizationPreferenceController" />
     </PreferenceCategory>
 </PreferenceScreen>

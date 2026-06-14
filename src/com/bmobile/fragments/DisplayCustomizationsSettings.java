@@ -8,6 +8,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.bmobile.customization.AmbientCustomizationPreferenceController;
 import com.bmobile.customization.DeviceControlsPreferenceController;
 import com.bmobile.customization.LockscreenClockStyleController;
 import com.bmobile.customization.LockscreenClockTaglineController;
@@ -47,6 +48,10 @@ public class DisplayCustomizationsSettings extends DashboardFragment {
                 new DeviceControlsPreferenceController(context, "lockscreen_device_controls");
         getSettingsLifecycle().addObserver(deviceControlsController);
         controllers.add(deviceControlsController);
+        AmbientCustomizationPreferenceController ambientController =
+                new AmbientCustomizationPreferenceController(context, "ambient_customization");
+        getSettingsLifecycle().addObserver(ambientController);
+        controllers.add(ambientController);
         return controllers;
     }
 

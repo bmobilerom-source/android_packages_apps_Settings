@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/ambient_text_category_title">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="ambient_preview"
+        android:layout="@layout/ambient_customization_preview"
+        android:order="-1"
+        settings:searchable="false" />
+
+    <SwitchPreferenceCompat
+        android:key="ambient_customization_enable"
+        android:title="@string/ambient_master_title"
+        android:summary="@string/ambient_master_summary"
+        android:defaultValue="false"
+        android:order="0" />
+
+    <SwitchPreferenceCompat
+        android:key="doze_always_on"
+        android:title="@string/doze_always_on_title"
+        android:summary="@string/doze_always_on_summary"
+        android:defaultValue="false"
+        android:order="5" />
+
+    <PreferenceCategory
+        android:key="ambient_text_category"
+        android:title="@string/ambient_text_category"
+        android:order="1">
+
+        <SwitchPreferenceCompat
+            android:key="ambient_text_enable"
+            android:title="@string/ambient_text_enable_title"
+            android:summary="@string/ambient_text_enable_summary"
+            android:defaultValue="false"
+            android:order="5" />
+
+        <com.android.settingslib.CustomEditTextPreferenceCompat
+            android:key="ambient_text"
+            android:title="@string/ambient_text_title"
+            android:summary="@string/ambient_text_summary"
+            android:dialogTitle="@string/ambient_text_title"
+            android:dependency="ambient_text_enable"
+            android:order="10" />
+
+        <com.android.settings.widget.SeekBarPreference
+            android:key="ambient_text_size"
+            android:title="@string/ambient_text_size_title"
+            android:summary="@string/ambient_text_size_summary"
+            android:defaultValue="30"
+            android:min="10"
+            android:max="100"
+            android:dependency="ambient_text_enable"
+            android:order="15" />
+
+        <SwitchPreferenceCompat
+            android:key="ambient_text_animation"
+            android:title="@string/ambient_text_animation_title"
+            android:summary="@string/ambient_text_animation_summary"
+            android:defaultValue="false"
+            android:dependency="ambient_text_enable"
+            android:order="18" />
+
+        <ListPreference
+            android:key="ambient_text_align"
+            android:title="@string/ambient_text_alignment_title"
+            android:summary="@string/ambient_text_alignment_summary"
+            android:entries="@array/ambient_text_alignment_entries"
+            android:entryValues="@array/ambient_text_alignment_values"
+            android:defaultValue="0"
+            android:dependency="ambient_text_enable"
+            android:order="20" />
+
+        <ListPreference
+            android:key="ambient_text_type_color"
+            android:title="@string/ambient_text_color_type_title"
+            android:summary="@string/ambient_text_color_type_summary"
+            android:entries="@array/ambient_text_type_color_entries"
+            android:entryValues="@array/ambient_text_type_color_values"
+            android:defaultValue="0"
+            android:dependency="ambient_text_enable"
+            android:order="30" />
+
+        <Preference
+            android:key="ambient_text_color"
+            android:title="@string/ambient_text_color_title"
+            android:summary="@string/default_string"
+            android:dependency="ambient_text_enable"
+            android:order="40" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="ambient_image_category"
+        android:title="@string/ambient_image_category"
+        android:order="2">
+
+        <SwitchPreferenceCompat
+            android:key="ambient_image_enable"
+            android:title="@string/ambient_image_enable_title"
+            android:summary="@string/ambient_image_enable_summary"
+            android:defaultValue="false"
+            android:order="5" />
+
+        <Preference
+            android:key="ambient_custom_image"
+            android:title="@string/ambient_image_title"
+            android:summary="@string/ambient_image_summary"
+            android:dependency="ambient_image_enable"
+            android:order="10" />
+
+    </PreferenceCategory>
+
+    <ListPreference
+        android:key="aod_clock_style"
+        android:title="@string/aod_clock_style_title"
+        android:summary="@string/aod_clock_style_summary"
+        android:entries="@array/aod_clock_style_entries"
+        android:entryValues="@array/aod_clock_style_values"
+        android:defaultValue="0"
+        android:order="50" />
+
+    <ListPreference
+        android:key="music_visualizer_mode"
+        android:title="@string/music_visualizer_mode_title"
+        android:summary="@string/music_visualizer_mode_summary"
+        android:entries="@array/music_visualizer_mode_entries"
+        android:entryValues="@array/music_visualizer_mode_values"
+        android:defaultValue="0"
+        android:order="60" />
+
+</PreferenceScreen>

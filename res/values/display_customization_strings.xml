@@ -10,7 +10,8 @@
     <string name="display_customization_category_qs">Quick Settings</string>
     <string name="display_customization_category_lockscreen">Lock screen</string>
     <string name="display_customization_category_device_controls">Device controls</string>
-    <string name="display_customization_category_ambient">Ambient</string>
+    <string name="ambient_customization_title">Ambient customization</string>
+    <string name="ambient_customization_summary_off">No custom AoD content enabled</string>
     <string name="display_customization_category_statusbar">Status bar</string>
 
     <string name="qs_header_clock_style_title">QS header clock</string>

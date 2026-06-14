@@ -231,6 +231,7 @@ import com.bmobile.fragments.KidsSafeDashboardSettings;
 import com.bmobile.fragments.YrCustomDashboardSettings;
 import com.bmobile.fragments.DashboardStyleSettings;
 import com.bmobile.fragments.ExtendedHomepageWidgetsFragment;
+import com.bmobile.fragments.AmbientCustomizations;
 import com.bmobile.fragments.DeviceControlsSettingsFragment;
 import com.bmobile.fragments.DisplayCustomizationsSettings;
 import com.bmobile.fragments.LockscreenClockStyleFragment;
@@ -484,6 +485,7 @@ public class SettingsGateway {
             LockscreenClockStyleFragment.class.getName(),
             QsHeader.class.getName(),
             DeviceControlsSettingsFragment.class.getName(),
+            AmbientCustomizations.class.getName(),
             com.bmobile.fragments.SystemBasicDefaultsSettings.class.getName(),
             com.bmobile.fragments.KidsSafeBasicDefaultsSettings.class.getName(),
             com.bmobile.fragments.KidsSafeExpressiveSettings.class.getName(),

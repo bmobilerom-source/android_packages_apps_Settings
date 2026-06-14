@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <FrameLayout
+        android:layout_width="200dp"
+        android:layout_height="350dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/ambient_preview_bg">
+
+        <!-- Custom Image -->
+        <ImageView
+            android:id="@+id/ambient_preview_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha="0.7" />
+
+        <!-- AOD Clock View -->
+        <com.bmobile.view.AODClockView
+            android:id="@+id/ambient_preview_clock"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="40dp" />
+
+        <!-- Date (Simulated) -->
+        <TextView
+            android:id="@+id/ambient_preview_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="120dp"
+            android:text="Tue, Jan 1"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF" />
+
+        <!-- Ambient Text -->
+        <TextView
+            android:id="@+id/ambient_preview_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Ambient Text"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:padding="16dp"
+            android:gravity="center" />
+
+        <!-- Notification Preview -->
+        <com.bmobile.view.AmbientNotificationView
+            android:id="@+id/ambient_preview_notification"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="70dp" />
+
+        <!-- Music Visualizer -->
+        <com.bmobile.view.AmbientMusicVisualizer
+            android:id="@+id/ambient_preview_visualizer"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="10dp" />
+
+    </FrameLayout>
+
+</LinearLayout>
+
