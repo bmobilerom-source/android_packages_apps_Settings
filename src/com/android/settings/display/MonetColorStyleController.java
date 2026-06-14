@@ -23,9 +23,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class MonetColorStyleController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
@@ -43,9 +40,10 @@ public class MonetColorStyleController extends BasePreferenceController
         super.updateState(preference);
         if (preference instanceof ListPreference) {
             ListPreference listPreference = (ListPreference) preference;
-            String currentStyleString = getCurrentThemeStyle();
-            // Map string to the value expected by the list preference
-            String styleValue = mapStyleNameToPreferenceValue(currentStyleString);
+            int currentStyle = Settings.System.getInt(mContext.getContentResolver(),
+                    "monet_color_style", 1); // Default to TONAL_SPOT (1)
+            // Map integer back to string value
+            String styleValue = mapIntToStyleString(currentStyle);
             listPreference.setValue(styleValue);
         }
     }
@@ -53,16 +51,17 @@ public class MonetColorStyleController extends BasePreferenceController
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String styleString = (String) newValue;
-        String styleName = mapPreferenceValueToStyleName(styleString);
-
-        // Save to the proper theme customization JSON structure
-        boolean styleSaved = saveThemeStyle(styleName);
-
+        int styleValue = mapStyleStringToInt(styleString);
+        
+        // Save the style setting
+        boolean styleSaved = Settings.System.putInt(mContext.getContentResolver(),
+                "monet_color_style", styleValue);
+        
         if (styleSaved) {
             // Trigger theme refresh so style change takes effect immediately
             triggerThemeRefresh();
         }
-
+        
         return styleSaved;
     }
 
@@ -83,66 +82,31 @@ public class MonetColorStyleController extends BasePreferenceController
         }
     }
 
-    /**
-     * Get the current theme style from Settings
-     */
-    private String getCurrentThemeStyle() {
-        String overlayPackagesJson = Settings.Secure.getString(
-                mContext.getContentResolver(),
-                Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES);
-
-        if (overlayPackagesJson != null && !overlayPackagesJson.isEmpty()) {
-            try {
-                JSONObject object = new JSONObject(overlayPackagesJson);
-                return object.optString("android.theme.customization.theme_style", "tonal_spot");
-            } catch (JSONException e) {
-                // Ignore and return default
-            }
-        }
-        return "tonal_spot"; // Default style
-    }
-
-    /**
-     * Save the theme style to Settings using the proper JSON structure
-     */
-    private boolean saveThemeStyle(String styleName) {
-        try {
-            String overlayPackagesJson = Settings.Secure.getString(
-                    mContext.getContentResolver(),
-                    Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES);
-
-            JSONObject object;
-            if (overlayPackagesJson != null && !overlayPackagesJson.isEmpty()) {
-                object = new JSONObject(overlayPackagesJson);
-            } else {
-                object = new JSONObject();
-            }
-
-            object.put("android.theme.customization.theme_style", styleName);
-
-            return Settings.Secure.putString(
-                    mContext.getContentResolver(),
-                    Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
-                    object.toString());
-
-        } catch (JSONException e) {
-            return false;
+    private String mapIntToStyleString(int styleInt) {
+        switch (styleInt) {
+            case 0: return "spritz";
+            case 1: return "tonal_spot";
+            case 2: return "vibrant";
+            case 3: return "expressive";
+            case 4: return "rainbow";
+            case 5: return "fruit_salad";
+            case 6: return "content";
+            case 7: return "monochrome";
+            default: return "tonal_spot";
         }
     }
 
-    /**
-     * Map preference value (from arrays.xml) to style name
-     */
-    private String mapPreferenceValueToStyleName(String preferenceValue) {
-        // The preferenceValue is already the style name from arrays.xml
-        return preferenceValue;
-    }
-
-    /**
-     * Map style name to preference value (for display)
-     */
-    private String mapStyleNameToPreferenceValue(String styleName) {
-        // The preference value is the style name itself
-        return styleName;
+    private int mapStyleStringToInt(String styleString) {
+        switch (styleString) {
+            case "spritz": return 0;
+            case "tonal_spot": return 1;
+            case "vibrant": return 2;
+            case "expressive": return 3;
+            case "rainbow": return 4;
+            case "fruit_salad": return 5;
+            case "content": return 6;
+            case "monochrome": return 7;
+            default: return 1; // Default to TONAL_SPOT (1)
+        }
     }
 }

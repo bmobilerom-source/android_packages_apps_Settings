@@ -37,20 +37,11 @@ public class MonetColorPresetsController extends BasePreferenceController
     }
 
     @Override
-    public void displayPreference(androidx.preference.PreferenceScreen screen) {
-        super.displayPreference(screen);
-        Preference preference = screen.findPreference(getPreferenceKey());
-        if (preference != null) {
-            preference.setOnPreferenceChangeListener(this);
-        }
-    }
-
-    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (preference instanceof androidx.preference.ListPreference) {
             androidx.preference.ListPreference listPreference = (androidx.preference.ListPreference) preference;
-            String currentPreset = Settings.Secure.getString(
+            String currentPreset = Settings.System.getString(
                     mContext.getContentResolver(), "monet_color_preset");
 
             // Default to french_violet if no preset is set
@@ -68,11 +59,11 @@ public class MonetColorPresetsController extends BasePreferenceController
         // Handle "wallpaper" preset - disable preset mode to use wallpaper colors
         if ("wallpaper".equals(presetName)) {
             // Disable preset mode to use wallpaper colors
-            boolean modeSaved = Settings.Secure.putInt(mContext.getContentResolver(),
+            boolean modeSaved = Settings.System.putInt(mContext.getContentResolver(),
                     "monet_preset_enabled", 0);
             
             // Clear preset name
-            boolean presetSaved = Settings.Secure.putString(mContext.getContentResolver(),
+            boolean presetSaved = Settings.System.putString(mContext.getContentResolver(),
                     "monet_color_preset", "wallpaper");
 
             if (modeSaved && presetSaved) {
@@ -88,11 +79,11 @@ public class MonetColorPresetsController extends BasePreferenceController
 
         if (baseSeedColor != 0) {
             // Check if tint is currently enabled - we need to preserve that state
-            boolean tintWasEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
+            boolean tintWasEnabled = Settings.System.getInt(mContext.getContentResolver(),
                     "monet_tint_background", 0) == 1;
 
             // Save the selected preset name FIRST (before applying any color changes)
-            boolean presetSaved = Settings.Secure.putString(mContext.getContentResolver(),
+            boolean presetSaved = Settings.System.putString(mContext.getContentResolver(),
                     "monet_color_preset", presetName);
 
             // If tint is enabled, we need to apply tint to the new base color
@@ -104,11 +95,11 @@ public class MonetColorPresetsController extends BasePreferenceController
             }
 
             // Set the system background color
-            boolean colorSaved = Settings.Secure.putInt(mContext.getContentResolver(),
+            boolean colorSaved = Settings.System.putInt(mContext.getContentResolver(),
                     "monet_seed_color", finalSeedColor);
 
             // Enable custom color mode
-            boolean modeSaved = Settings.Secure.putInt(mContext.getContentResolver(),
+            boolean modeSaved = Settings.System.putInt(mContext.getContentResolver(),
                     "monet_preset_enabled", 1);
 
             boolean result = colorSaved && presetSaved && modeSaved;
@@ -216,7 +207,7 @@ public class MonetColorPresetsController extends BasePreferenceController
         }
     }
 
-    private int getPresetSeedColor(String name) {
+    public int getPresetSeedColor(String name) {
         int baseColor;
         switch (name) {
             case "wallpaper": baseColor = 0xFF4285F4; break;           // Default - use wallpaper colors

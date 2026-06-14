@@ -108,10 +108,17 @@ import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
+import com.android.settings.display.AdvancedMonetSettings;
 import com.android.settings.display.ColorContrastFragment;
+import com.android.settings.display.ContextualColorsSettings;
+import com.android.settings.display.ContextualColorsSupportedApps;
+import com.android.settings.display.CustomGradientsSettings;
+import com.android.settings.display.MonetColorSettings;
+import com.android.settings.display.MonetExtendedColorsSettings;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.display.SmartAutoRotatePreferenceFragment;
+import com.android.settings.display.TimeBasedColorsSettings;
 import com.android.settings.display.darkmode.DarkModeSettingsFragment;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
@@ -467,6 +474,13 @@ public class SettingsGateway {
             com.bmobile.fragments.DeviceTweaksSettings.class.getName(),
             com.bmobile.fragments.AutoRebootSettings.class.getName(),
             DisplayCustomizationsSettings.class.getName(),
+            MonetColorSettings.class.getName(),
+            MonetExtendedColorsSettings.class.getName(),
+            AdvancedMonetSettings.class.getName(),
+            TimeBasedColorsSettings.class.getName(),
+            ContextualColorsSettings.class.getName(),
+            ContextualColorsSupportedApps.class.getName(),
+            CustomGradientsSettings.class.getName(),
             LockscreenClockStyleFragment.class.getName(),
             QsHeader.class.getName(),
             DeviceControlsSettingsFragment.class.getName(),

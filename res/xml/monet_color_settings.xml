@@ -17,13 +17,97 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="monet_color_settings_screen"
     android:title="@string/monet_color_settings_title">
 
-    <Preference
-        android:key="monet_extended_colors"
-        android:title="@string/monet_extended_colors_title"
-        android:summary="@string/monet_extended_colors_summary"
-        android:fragment="com.android.settings.display.MonetExtendedColorsSettings" />
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="monet_color_illustration"
+        android:order="-1999"
+        app:lottie_rawRes="@raw/monet"
+        app:lottie_speed="0.3" />
+
+    <PreferenceCategory
+        android:title="@string/monet_dark_mode_notice_title"
+        android:summary="@string/monet_dark_mode_notice_summary"
+        android:key="dark_mode_notice_category"
+        android:order="-1000" />
+
+    <PreferenceCategory
+        android:title="@string/monet_choose_background_color_category"
+        android:key="color_presets_category">
+
+        <Preference
+            android:key="monet_color_presets"
+            android:title="@string/monet_color_presets_select_title"
+            android:summary="@string/monet_color_presets_select_summary"
+            settings:layout="@layout/adaptive_preference_card" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/monet_dynamic_colors_category"
+        android:key="dynamic_colors_category">
+
+        <SwitchPreference
+            android:key="monet_color_cycling"
+            android:title="@string/monet_color_cycling_title"
+            android:summary="@string/monet_color_cycling_summary"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.display.MonetColorCyclingController" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/monet_color_style_category"
+        android:key="color_style_category">
+
+        <ListPreference
+            android:key="monet_color_style"
+            android:title="@string/monet_material_you_style_title"
+            android:summary="@string/monet_material_you_style_summary"
+            android:entries="@array/monet_color_styles"
+            android:entryValues="@array/monet_color_style_values"
+            android:defaultValue="tonal_spot"
+            settings:layout="@layout/adaptive_preference_card"
+            settings:controller="com.android.settings.display.MonetColorStyleController" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/monet_more_settings_category"
+        android:key="monet_more_settings_category">
+
+        <Preference
+            android:key="monet_extended_colors"
+            android:title="@string/monet_extended_colors_title"
+            android:summary="@string/monet_extended_colors_summary"
+            android:fragment="com.android.settings.display.MonetExtendedColorsSettings" />
+
+        <Preference
+            android:key="monet_advanced"
+            android:title="@string/monet_advanced_settings_title"
+            android:summary="@string/monet_advanced_title"
+            android:fragment="com.android.settings.display.AdvancedMonetSettings" />
+
+        <Preference
+            android:key="monet_time_based"
+            android:title="@string/monet_time_based_colors_title"
+            android:summary="@string/monet_time_based_colors_summary"
+            android:fragment="com.android.settings.display.TimeBasedColorsSettings" />
+
+        <Preference
+            android:key="monet_contextual"
+            android:title="@string/monet_contextual_colors_title"
+            android:summary="@string/monet_contextual_colors_summary"
+            android:fragment="com.android.settings.display.ContextualColorsSettings" />
+
+        <Preference
+            android:key="monet_gradients"
+            android:title="@string/monet_custom_gradients_title"
+            android:summary="@string/monet_custom_gradients_summary"
+            android:fragment="com.android.settings.display.CustomGradientsSettings" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

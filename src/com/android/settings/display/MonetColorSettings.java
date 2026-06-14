@@ -28,6 +28,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,9 +38,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 import androidx.core.graphics.ColorUtils;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -53,6 +51,8 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -95,21 +95,6 @@ public class MonetColorSettings extends DashboardFragment {
         loadWallpaperColors();
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-
-        // Initialize UI components
-        initializeViews(view);
-
-        return view;
-    }
-
-    private void initializeViews(View view) {
-        // Monet UI components - views removed from XML for compatibility
-        // All functionality now handled through preference controllers
-    }
 
     private void loadWallpaperColors() {
         mExecutor.execute(() -> {
@@ -239,6 +224,46 @@ public class MonetColorSettings extends DashboardFragment {
         return "TONAL_SPOT";
     }
 
+    public static List<MonetPresetInfo> loadMonetPresets(Context context) {
+        List<MonetPresetInfo> presets = new ArrayList<>();
+        if (context == null) return presets;
+
+        // Load preset names and values from arrays
+        String[] presetNames = context.getResources().getStringArray(R.array.monet_color_presets);
+        String[] presetValues = context.getResources().getStringArray(R.array.monet_color_preset_values);
+
+        if (presetNames.length != presetValues.length) {
+            return presets; // Safety check
+        }
+
+        // Create MonetColorPresetsController to get colors
+        MonetColorPresetsController controller = new MonetColorPresetsController(context, "temp");
+
+        for (int i = 0; i < presetNames.length && i < presetValues.length; i++) {
+            String name = presetNames[i];
+            String value = presetValues[i];
+
+            // Get the color for this preset
+            int color = controller.getPresetSeedColor(value);
+            if (color != 0) {
+                presets.add(new MonetPresetInfo(name, value, color));
+            }
+        }
+
+        return presets;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if ("monet_color_presets".equals(preference.getKey())) {
+            // Launch the preset gallery activity
+            Intent intent = new Intent(getContext(), MonetPresetGalleryActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onPreferenceTreeClick(preference);
+    }
+
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getSettingsLifecycle());
@@ -251,8 +276,10 @@ public class MonetColorSettings extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
-        // Stub screen — preferences wired in a later commit.
-        return new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new MonetColorCyclingController(context, "monet_color_cycling"));
+        controllers.add(new MonetColorStyleController(context, "monet_color_style"));
+        return controllers;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -268,110 +295,5 @@ public class MonetColorSettings extends DashboardFragment {
     @Override
     public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
         return "monet_color_settings";
-    }
-
-    /**
-     * Load monet color presets for the gallery
-     */
-    public static List<MonetPresetInfo> loadMonetPresets(Context context) {
-        List<MonetPresetInfo> presets = new ArrayList<>();
-
-        // Get preset names and values from resources
-        String[] presetNames = context.getResources().getStringArray(R.array.monet_color_presets);
-        String[] presetValues = context.getResources().getStringArray(R.array.monet_color_preset_values);
-
-        // Create preset colors based on values (simplified mapping)
-        int[] presetColors = getPresetColors(presetValues);
-
-        // Create MonetPresetInfo objects
-        for (int i = 0; i < presetNames.length && i < presetValues.length && i < presetColors.length; i++) {
-            presets.add(new MonetPresetInfo(presetNames[i], presetValues[i], presetColors[i]));
-        }
-
-        return presets;
-    }
-
-    /**
-     * Get preset colors based on preset values
-     * This is a simplified mapping - in a full implementation, this would derive colors from the preset values
-     */
-    private static int[] getPresetColors(String[] presetValues) {
-        int[] colors = new int[presetValues.length];
-
-        // Map curated preset values to ultra-strong colors (250% stronger by default)
-        for (int i = 0; i < presetValues.length; i++) {
-            String value = presetValues[i];
-            switch (value) {
-                case "wallpaper":
-                    colors[i] = 0xFF0D47A1; // Ultra-strong blue
-                    break;
-                case "french_violet":
-                    colors[i] = 0xFFAD1457; // Ultra-strong french violet
-                    break;
-                case "rose_bonbon":
-                    colors[i] = 0xFFC2185B; // Ultra-strong rose bonbon
-                    break;
-                case "turquoise":
-                    colors[i] = 0xFF00695C; // Ultra-strong turquoise
-                    break;
-                case "orange_pantone":
-                    colors[i] = 0xFFE65100; // Ultra-strong orange pantone
-                    break;
-                case "off_red_rgb":
-                    colors[i] = 0xFFB71C1C; // Ultra-strong off red RGB
-                    break;
-                case "blue_orchid":
-                    colors[i] = 0xFF0D47A1; // Ultra-strong blue orchid
-                    break;
-                case "screamin_green":
-                    colors[i] = 0xFF1B5E20; // Ultra-strong screamin green
-                    break;
-                case "orange_crayola":
-                    colors[i] = 0xFFD84315; // Ultra-strong orange crayola
-                    break;
-                case "lime_green":
-                    colors[i] = 0xFF33691E; // Ultra-strong lime green
-                    break;
-                case "palatinate_blue":
-                    colors[i] = 0xFF0D47A1; // Ultra-strong palestine blue (was palatinate)
-                    break;
-                case "steel_pink":
-                    colors[i] = 0xFFAD1457; // Ultra-strong steel pink
-                    break;
-                case "dark_purple":
-                    colors[i] = 0xFF311B92; // Ultra-strong dark purple
-                    break;
-                case "pastel_pink":
-                    colors[i] = 0xFFC2185B; // Ultra-bright pastel pink
-                    break;
-                case "lilac":
-                    colors[i] = 0xFF7B1FA2; // Ultra-strong lilac
-                    break;
-                case "deep_moss_green":
-                    colors[i] = 0xFF1B5E20; // Ultra-strong dark moss green
-                    break;
-                case "dark_sea_green":
-                    colors[i] = 0xFF2E7D32; // Ultra-strong dark sea green
-                    break;
-                case "red_accent":
-                    colors[i] = 0xFFB71C1C; // Ultra-strong Katheleya (was red accent)
-                    break;
-                case "purple_accent":
-                    colors[i] = 0xFF4A148C; // Ultra-strong purple accent
-                    break;
-                case "cyan_accent":
-                    colors[i] = 0xFF00695C; // Ultra-strong cyan accent
-                    break;
-                case "yellow_accent":
-                    colors[i] = 0xFFE65100; // Ultra-strong yellow accent
-                    break;
-                default:
-                    // Default fallback color - ultra-strong
-                    colors[i] = 0xFF0D47A1; // Ultra-strong Material Blue
-                    break;
-            }
-        }
-
-        return colors;
     }
 }

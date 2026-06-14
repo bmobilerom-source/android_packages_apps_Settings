@@ -69,6 +69,18 @@
         <item>monochrome</item>
     </string-array>
 
+    <string-array name="monet_wallpaper_source_entries">
+        <item>System wallpaper</item>
+        <item>Lock screen wallpaper</item>
+        <item>Both</item>
+    </string-array>
+
+    <string-array name="monet_wallpaper_source_values" translatable="false">
+        <item>system</item>
+        <item>lock</item>
+        <item>both</item>
+    </string-array>
+
     <!-- Smart Pixels -->
     <string-array name="smart_pixels_percent_strings" translatable="false">
         <item>12</item>

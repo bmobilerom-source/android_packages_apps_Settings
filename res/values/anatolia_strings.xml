@@ -29,15 +29,12 @@
     <string name="system_basic_defaults_one_handed_title">One-handed Mode</string>
     <string name="system_basic_defaults_one_handed_summary">Easy one-handed operation</string>
     <string name="dark_ui_mode_summary">Dark theme for your eyes</string>
-    <string name="monet_color_settings_title">Monet Colors</string>
-    <string name="monet_color_settings_summary">Customize system colors</string>
     <string name="monet_extended_colors_title">Extended colors</string>
     <string name="monet_extended_colors_summary">20 accent presets plus 10 night-optimized colors</string>
     <string name="monet_extended_colors_section">Extended accents</string>
     <string name="monet_night_colors_section">Night accents</string>
     <string name="monet_extended_colors_unavailable">Extended color presets are unavailable. Rebuild and install ThemesStub.</string>
     <string name="monet_color_preset_color_description">Color preset swatch</string>
-    <string name="monet_current_style">Current style: %s</string>
     <string name="system_basic_defaults_photowidget_title">PhotoWidget</string>
     <string name="system_basic_defaults_photowidget_summary">Home screen photo widgets</string>
     <string name="taptap_title">Tap to wake</string>

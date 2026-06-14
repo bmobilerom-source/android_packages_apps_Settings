@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The LineageOS Project
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,37 @@
 package com.android.settings.display;
 
 /**
- * Monet color preset metadata for the preset gallery.
+ * Data class for Monet color preset information
  */
-public final class MonetPresetInfo {
-    public final String name;
-    public final String value;
-    public final int color;
+public class MonetPresetInfo {
+    private final String mName;
+    private final String mValue;
+    private final int mColor;
 
     public MonetPresetInfo(String name, String value, int color) {
-        this.name = name;
-        this.value = value;
-        this.color = color;
+        mName = name;
+        mValue = value;
+        mColor = color;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public String getValue() {
+        return mValue;
+    }
+
+    public int getColor() {
+        return mColor;
+    }
+
+    @Override
+    public String toString() {
+        return "MonetPresetInfo{" +
+                "name='" + mName + '\'' +
+                ", value='" + mValue + '\'' +
+                ", color=" + String.format("#%06X", (0xFFFFFF & mColor)) +
+                '}';
     }
 }
