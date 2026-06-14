@@ -88,6 +88,16 @@ public class HeaderFilePickerActivity extends Activity {
                 Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER,
                 "file", UserHandle.USER_CURRENT);
 
+        resolver.notifyChange(
+                Settings.System.getUriFor(Settings.System.STATUS_BAR_FILE_HEADER_IMAGE),
+                null, false);
+        resolver.notifyChange(
+                Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER),
+                null, false);
+        resolver.notifyChange(
+                Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER),
+                null, false);
+
         finish();
     }
 

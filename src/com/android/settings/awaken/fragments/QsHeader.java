@@ -75,7 +75,8 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
         mHeaderImageGallery = findPreference(KEY_QS_HEADER_IMAGE_GALLERY);
         if (mHeaderImageGallery != null) {
             mHeaderImageGallery.setOnPreferenceClickListener(pref -> {
-                startActivity(new Intent(requireContext(), HeaderImageGalleryActivity.class));
+                requireActivity().startActivity(
+                        new Intent(requireActivity(), HeaderImageGalleryActivity.class));
                 return true;
             });
         }
@@ -83,7 +84,8 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
         mFilePick = findPreference(KEY_QS_HEADER_FILE_PICK);
         if (mFilePick != null) {
             mFilePick.setOnPreferenceClickListener(pref -> {
-                startActivity(new Intent(requireContext(), HeaderFilePickerActivity.class));
+                requireActivity().startActivity(
+                        new Intent(requireActivity(), HeaderFilePickerActivity.class));
                 return true;
             });
         }
@@ -135,9 +137,7 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
                     Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER,
                     provider, UserHandle.USER_CURRENT);
             if (success) {
-                resolver.notifyChange(
-                        Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER),
-                        null, false);
+                notifyCustomHeaderChanged(resolver);
                 updateProviderSummary(provider);
                 updateProviderDependentPreferences(provider);
             }
@@ -153,6 +153,7 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
                     value != null && !value.isEmpty() ? value : null,
                     UserHandle.USER_CURRENT);
             if (success) {
+                notifyCustomHeaderChanged(resolver);
                 resolver.notifyChange(
                         Settings.System.getUriFor(Settings.System.STATUS_BAR_DAYLIGHT_HEADER_PACK),
                         null, false);
@@ -293,6 +294,15 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
             return;
         }
         mDaylightPack.setSummary(R.string.qs_header_daylight_pack_summary);
+    }
+
+    private static void notifyCustomHeaderChanged(ContentResolver resolver) {
+        resolver.notifyChange(
+                Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER),
+                null, false);
+        resolver.notifyChange(
+                Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER),
+                null, false);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

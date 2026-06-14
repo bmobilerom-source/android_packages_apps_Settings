@@ -20,8 +20,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -103,22 +105,37 @@ public class HeaderImageGalleryActivity extends Activity {
     }
 
     private void applySelection() {
-        String uriString = mSelectedImageUri != null ? mSelectedImageUri.toString() : null;
-        Settings.System.putString(getContentResolver(),
-                Settings.System.STATUS_BAR_CUSTOM_HEADER_IMAGE, uriString);
+        final ContentResolver resolver = getContentResolver();
+        final String uriString = mSelectedImageUri != null ? mSelectedImageUri.toString() : null;
 
-        // Also enable custom header
-        Settings.System.putInt(getContentResolver(),
-                Settings.System.STATUS_BAR_CUSTOM_HEADER, uriString != null ? 1 : 0);
+        Settings.System.putStringForUser(resolver,
+                Settings.System.STATUS_BAR_CUSTOM_HEADER_IMAGE, uriString,
+                UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.STATUS_BAR_CUSTOM_HEADER, uriString != null ? 1 : 0,
+                UserHandle.USER_CURRENT);
+        Settings.System.putStringForUser(resolver,
+                Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER, "static",
+                UserHandle.USER_CURRENT);
 
-        // Ensure the static provider is selected for drawable-based headers.
-        Settings.System.putString(getContentResolver(),
-                Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER, "static");
+        notifyHeaderSettingsChanged(resolver);
 
         Intent result = new Intent();
         result.putExtra("selected_image", uriString);
         setResult(RESULT_OK, result);
         finish();
+    }
+
+    private static void notifyHeaderSettingsChanged(ContentResolver resolver) {
+        resolver.notifyChange(
+                Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_IMAGE),
+                null, false);
+        resolver.notifyChange(
+                Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER),
+                null, false);
+        resolver.notifyChange(
+                Settings.System.getUriFor(Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER),
+                null, false);
     }
 
     private void selectNone() {
@@ -157,6 +174,10 @@ public class HeaderImageGalleryActivity extends Activity {
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to load SystemUI header images", e);
+        }
+        if (images.isEmpty()) {
+            Log.w(TAG, "No qs_header_image_* drawables found in " + SYSUI_PACKAGE_NAME
+                    + ". Apply the SystemUI custom-header image pack ([2/2] QS patch).");
         }
         return images;
     }
