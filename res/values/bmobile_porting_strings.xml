@@ -21,6 +21,11 @@
     <!-- bMobile Accounts -->
     <string name="bmobile_accounts_title">bMobile accounts</string>
     <string name="bmobile_accounts_summary">View and manage your accounts (Google, Outlook, others)</string>
+
+    <!-- Zenith (digital wellbeing) -->
+    <string name="zenith_title">Zenith</string>
+    <string name="zenith_summary">Mindful app usage and digital wellbeing</string>
+    <string name="zenith_not_installed">Zenith is not installed</string>
     
     <!-- bMobile Profile -->
     <string name="bmobile_profile_title">bMobile profile</string>

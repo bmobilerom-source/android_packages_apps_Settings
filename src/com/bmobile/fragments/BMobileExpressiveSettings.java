@@ -117,22 +117,6 @@ public class BMobileExpressiveSettings extends SettingsPreferenceFragment {
                     "com.android.settings.network.NetworkDashboardFragment",
                     R.drawable.ic_settings_wireless_filled));
             
-            // System Basic Defaults
-            items.add(new BMobileExpressiveSettingsAdapter.CardItem(
-                    BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.bmobile_dashboard_title,
-                    R.string.bmobile_dashboard_summary,
-                    "com.bmobile.fragments.BMobileDashboardSettings",
-                    R.drawable.ic_settings_system_dashboard_filled));
-            
-            // Connected Devices
-            items.add(new BMobileExpressiveSettingsAdapter.CardItem(
-                    BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.connected_devices_dashboard_title,
-                    R.string.connected_devices_dashboard_default_summary,
-                    "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
-                    R.drawable.ic_devices_other_filled));
-            
             // Notifications
             items.add(new BMobileExpressiveSettingsAdapter.CardItem(
                     BMobileExpressiveSettingsAdapter.CARD_TYPE_STANDARD,

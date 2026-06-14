@@ -20,6 +20,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.widget.LayoutPreference;
+import com.bmobile.fragments.ZenithController;
 
 /**
  * Wires click actions for {@code toplevel_card_navigation.xml} on the Settings homepage.
@@ -33,8 +34,6 @@ public final class TopLevelCardNavigationHelper {
 
     private static final String FRAGMENT_NETWORK =
             "com.android.settings.network.NetworkDashboardFragment";
-    private static final String FRAGMENT_CONNECTED_DEVICES =
-            "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment";
     private static final String AURORA_STORE_PACKAGE = "com.aurora.store";
     private static final String SEED_VAULT_PACKAGE = "com.stevesoltys.seedvault";
     private static final String SEED_VAULT_SETTINGS_ACTIVITY =
@@ -48,8 +47,8 @@ public final class TopLevelCardNavigationHelper {
     }
 
     /**
-     * @param afterlabsExtrasOnTab when true, middle card label is Bluetooth and opens Connected
-     *        devices (AfterLabs tab 0 only).
+     * @param afterlabsExtrasOnTab when true, middle card on DynamicTabs Connect tab is Wellbeing
+     *        and opens Zenith.
      */
     public static void setup(@NonNull Context context, @Nullable PreferenceScreen screen,
             int sourceMetricsCategory, boolean afterlabsExtrasOnTab) {
@@ -66,26 +65,28 @@ public final class TopLevelCardNavigationHelper {
             return;
         }
         final Activity activity = (Activity) context;
-        final boolean displayOpensConnected = afterlabsExtrasOnTab && isExtrasNav;
+        final boolean displayOpensWellbeing = afterlabsExtrasOnTab && isExtrasNav;
         final int currentStyle = DashboardStyleHelper.getDashboardStyle(context);
         final String displayPageGridFragment =
                 DashboardStyleHelper.getBrandDisplayPageGridFragmentClass(currentStyle);
 
-        if (displayOpensConnected) {
+        if (displayOpensWellbeing) {
             final TextView displayTitle = layoutPref.findViewById(R.id.card_display_title);
             if (displayTitle != null) {
-                displayTitle.setText(R.string.afterlabs_card_bluetooth_title);
+                displayTitle.setText(R.string.wellbeing_title);
             }
         }
 
         bindCard(layoutPref, R.id.card_network, () -> launchFragment(activity,
                 FRAGMENT_NETWORK, R.string.network_dashboard_title, sourceMetricsCategory));
-        bindCard(layoutPref, R.id.card_display, () -> launchFragment(activity,
-                displayOpensConnected ? FRAGMENT_CONNECTED_DEVICES : displayPageGridFragment,
-                displayOpensConnected
-                        ? R.string.connected_devices_dashboard_title
-                        : R.string.display_page_grid_title,
-                sourceMetricsCategory));
+        bindCard(layoutPref, R.id.card_display, () -> {
+            if (displayOpensWellbeing) {
+                ZenithController.launch(activity);
+                return;
+            }
+            launchFragment(activity, displayPageGridFragment,
+                    R.string.display_page_grid_title, sourceMetricsCategory);
+        });
         bindCard(layoutPref, R.id.card_custom_dashboard, () -> {
             final int style = DashboardStyleHelper.getDashboardStyle(context);
             launchFragment(activity,

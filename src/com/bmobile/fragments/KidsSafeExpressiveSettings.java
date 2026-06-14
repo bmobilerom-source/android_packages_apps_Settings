@@ -23,7 +23,9 @@ import android.content.Context;
 import android.view.View;
 
 import com.android.settings.R;
+import com.android.settings.homepage.KsFunDashboardHelper;
 import com.android.settings.homepage.RestrictedDashboardContentHelper;
+import com.android.settings.kidssafe.KidsSafeGridAdapter;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.List;
@@ -108,44 +110,10 @@ public class KidsSafeExpressiveSettings extends SettingsPreferenceFragment {
             rv.setLayoutManager(layoutManager);
 
             java.util.List<KidsSafeGridAdapter.CardItem> items = new java.util.ArrayList<>();
+            KsFunDashboardHelper.populateGridItems(items);
 
-            // Sound
-            items.add(new KidsSafeGridAdapter.CardItem(
-                    KidsSafeGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.sound_settings,
-                    R.string.sound_dashboard_summary_with_dnd,
-                    "com.android.settings.notification.SoundSettings",
-                    R.drawable.ic_volume_up_filled));
+            RestrictedDashboardContentHelper.filterKidsSafeGridItems(context, items);
 
-            // Display - opens KS DisplayPageGrid
-            items.add(new KidsSafeGridAdapter.CardItem(
-                    KidsSafeGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_page_grid_title,
-                    R.string.display_page_grid_summary,
-                    "com.bmobile.fragments.KsDisplayPageGrid",
-                    R.drawable.ic_settings_display_filled));
-
-            // Privacy
-            items.add(new KidsSafeGridAdapter.CardItem(
-                    KidsSafeGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.privacy_dashboard_title,
-                    R.string.privacy_dashboard_summary,
-                    "com.android.settings.privacy.PrivacyControlsFragment",
-                    R.drawable.ic_settings_privacy_filled));
-
-            // Location
-            items.add(new KidsSafeGridAdapter.CardItem(
-                    KidsSafeGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.location_settings_title,
-                    R.string.location_settings_loading_app_permission_stats,
-                    "com.android.settings.location.LocationSettings",
-                    R.drawable.ic_settings_location_filled));
-
-            if (RestrictedDashboardContentHelper.isContentRestricted(context)) {
-                items.removeIf(item ->
-                        RestrictedDashboardContentHelper.isBlockedDestination(
-                                item.destFragment));
-            }
             rv.setAdapter(new KidsSafeGridAdapter(activity, items, getMetricsCategory()));
         } catch (Exception e) {
             android.util.Log.e("KidsSafeExpressiveSettings", "Error setting up grid", e);

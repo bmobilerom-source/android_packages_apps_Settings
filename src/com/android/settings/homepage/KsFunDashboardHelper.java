@@ -40,8 +40,21 @@ public final class KsFunDashboardHelper {
     private KsFunDashboardHelper() {
     }
 
+    /** Same card set as YR Expressive top-level grid, with KS display page destination. */
     public static void populateGridItems(List<KidsSafeGridAdapter.CardItem> items) {
         final int type = KidsSafeGridAdapter.CARD_TYPE_STANDARD;
+
+        items.add(new KidsSafeGridAdapter.CardItem(type,
+                R.string.system_basic_defaults_title,
+                R.string.system_basic_defaults_summary,
+                "com.bmobile.fragments.SystemBasicDefaultsSettings",
+                R.drawable.ic_settings_system_dashboard_filled));
+
+        items.add(new KidsSafeGridAdapter.CardItem(type,
+                R.string.configure_notification_settings,
+                R.string.notification_dashboard_summary,
+                "com.android.settings.notification.ConfigureNotificationSettings",
+                R.drawable.ic_notifications_filled));
 
         items.add(new KidsSafeGridAdapter.CardItem(type,
                 R.string.sound_settings,
@@ -56,10 +69,16 @@ public final class KsFunDashboardHelper {
                 R.drawable.ic_settings_display_filled));
 
         items.add(new KidsSafeGridAdapter.CardItem(type,
-                R.string.privacy_dashboard_title,
-                R.string.privacy_dashboard_summary,
+                R.string.privacy_controls_title,
+                R.string.privacy_controls_summary,
                 "com.android.settings.privacy.PrivacyControlsFragment",
                 R.drawable.ic_settings_privacy_filled));
+
+        items.add(new KidsSafeGridAdapter.CardItem(type,
+                R.string.header_category_system,
+                R.string.system_dashboard_summary,
+                "com.android.settings.system.SystemDashboardFragment",
+                R.drawable.ic_settings_system_dashboard_filled));
 
         items.add(new KidsSafeGridAdapter.CardItem(type,
                 R.string.location_settings_title,
