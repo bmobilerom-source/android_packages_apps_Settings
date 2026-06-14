@@ -24,7 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Applies preset accent colors via the canonical ThemePicker / SystemUI overlay JSON contract.
+ * Applies Monet accent colors via the canonical ThemePicker / SystemUI overlay JSON contract.
  */
 public final class MonetThemeApplier {
     private static final String OVERLAY_CATEGORY_COLOR = "android.theme.customization.accent_color";
@@ -35,6 +35,7 @@ public final class MonetThemeApplier {
     private static final String OVERLAY_COLOR_SOURCE = "android.theme.customization.color_source";
     private static final String OVERLAY_COLOR_INDEX = "android.theme.customization.color_index";
     private static final String OVERLAY_COLOR_BOTH = "android.theme.customization.color_both";
+    private static final String OVERLAY_CHROMA_FACTOR = "android.theme.customization.chroma_factor";
     private static final String COLOR_SOURCE_PRESET = "preset";
 
     private MonetThemeApplier() {
@@ -42,39 +43,49 @@ public final class MonetThemeApplier {
 
     public static boolean applyPreset(Context context, int seedColor, String style, int index) {
         String hex = String.format("%06X", 0xFFFFFF & seedColor);
-        String styleName = (style == null || style.isEmpty()) ? "TONAL_SPOT" : style.toUpperCase();
+        String styleName = normalizeStyle(style);
 
         try {
-            String current = Settings.Secure.getString(context.getContentResolver(),
-                    Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES);
-            JSONObject object;
-            if (current != null && !current.isEmpty()) {
-                object = new JSONObject(current);
-            } else {
-                object = new JSONObject();
-            }
-
-            object.remove(OVERLAY_CATEGORY_SYSTEM_PALETTE);
-            object.remove(OVERLAY_CATEGORY_COLOR);
-            object.remove(OVERLAY_COLOR_SOURCE);
-            object.remove(OVERLAY_CATEGORY_THEME_STYLE);
+            JSONObject object = loadOrCreate(context);
             object.remove(OVERLAY_COLOR_BOTH);
-
             object.put(OVERLAY_CATEGORY_SYSTEM_PALETTE, hex);
             object.put(OVERLAY_CATEGORY_COLOR, hex);
             object.put(OVERLAY_CATEGORY_THEME_STYLE, styleName);
             object.put(OVERLAY_COLOR_SOURCE, COLOR_SOURCE_PRESET);
             object.put(OVERLAY_COLOR_INDEX, String.valueOf(index));
-
-            boolean saved = Settings.Secure.putString(context.getContentResolver(),
-                    Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES, object.toString());
-            if (saved) {
-                triggerThemeRefresh(context);
-            }
-            return saved;
+            return saveAndRefresh(context, object);
         } catch (JSONException e) {
             return false;
         }
+    }
+
+    public static boolean applyStyle(Context context, String style) {
+        try {
+            JSONObject object = loadOrCreate(context);
+            object.put(OVERLAY_CATEGORY_THEME_STYLE, normalizeStyle(style));
+            return saveAndRefresh(context, object);
+        } catch (JSONException e) {
+            return false;
+        }
+    }
+
+    public static boolean applyChromaFactor(Context context, float chromaFactor) {
+        try {
+            JSONObject object = loadOrCreate(context);
+            object.put(OVERLAY_CHROMA_FACTOR, chromaFactor);
+            return saveAndRefresh(context, object);
+        } catch (JSONException e) {
+            return false;
+        }
+    }
+
+    public static boolean clearToWallpaper(Context context) {
+        boolean saved = Settings.Secure.putString(context.getContentResolver(),
+                Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES, "");
+        if (saved) {
+            triggerThemeRefresh(context);
+        }
+        return saved;
     }
 
     public static int getCurrentSeedColor(Context context) {
@@ -96,6 +107,46 @@ public final class MonetThemeApplier {
         } catch (JSONException | NumberFormatException e) {
             return 0;
         }
+    }
+
+    public static String getCurrentStyle(Context context) {
+        String current = Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES);
+        if (current == null || current.isEmpty()) {
+            return "tonal_spot";
+        }
+        try {
+            JSONObject object = new JSONObject(current);
+            String style = object.optString(OVERLAY_CATEGORY_THEME_STYLE, "TONAL_SPOT");
+            return style.toLowerCase();
+        } catch (JSONException e) {
+            return "tonal_spot";
+        }
+    }
+
+    private static JSONObject loadOrCreate(Context context) throws JSONException {
+        String current = Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES);
+        if (current != null && !current.isEmpty()) {
+            return new JSONObject(current);
+        }
+        return new JSONObject();
+    }
+
+    private static boolean saveAndRefresh(Context context, JSONObject object) {
+        boolean saved = Settings.Secure.putString(context.getContentResolver(),
+                Settings.Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES, object.toString());
+        if (saved) {
+            triggerThemeRefresh(context);
+        }
+        return saved;
+    }
+
+    private static String normalizeStyle(String style) {
+        if (style == null || style.isEmpty()) {
+            return "TONAL_SPOT";
+        }
+        return style.toUpperCase().replace('-', '_');
     }
 
     private static void triggerThemeRefresh(Context context) {

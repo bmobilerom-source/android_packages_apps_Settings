@@ -22,9 +22,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.provider.Settings;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,6 +37,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,24 +135,22 @@ public class CustomGradientsSettings extends DashboardFragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        // Add custom gradient grid
-        addGradientGrid(view);
+        LayoutPreference layoutPreference = findPreference("custom_gradients_grid_pref");
+        if (layoutPreference == null) {
+            return;
+        }
 
-        return view;
-    }
+        LinearLayout container = layoutPreference.findViewById(R.id.gradients_container);
+        if (container == null) {
+            return;
+        }
 
-    private void addGradientGrid(View view) {
-        LinearLayout container = view.findViewById(R.id.gradients_container);
-        if (container == null) return;
+        Context context = requireContext();
+        container.removeAllViews();
 
-        Context context = getContext();
-        if (context == null) return;
-
-        // Create grid layout
         GridLayout gridLayout = new GridLayout(context);
         gridLayout.setColumnCount(2);
         gridLayout.setUseDefaultMargins(true);
@@ -164,10 +162,8 @@ public class CustomGradientsSettings extends DashboardFragment {
         gridParams.setMargins(16, 16, 16, 16);
         gridLayout.setLayoutParams(gridParams);
 
-        // Add gradient cards
         for (GradientPreset preset : GRADIENT_PRESETS) {
-            View gradientCard = createGradientCard(context, preset);
-            gridLayout.addView(gradientCard);
+            gridLayout.addView(createGradientCard(context, preset));
         }
 
         container.addView(gridLayout);
@@ -223,48 +219,29 @@ public class CustomGradientsSettings extends DashboardFragment {
     }
 
     private void applyGradient(GradientPreset preset) {
-        // Apply the gradient like wallpaper picker applies colors
-        android.provider.Settings.Secure.putString(
-            getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_COLOR_GRADIENT,
-            preset.id);
+        Context context = getContext();
+        if (context == null) {
+            return;
+        }
 
-        // Save gradient colors as comma-separated values
+        Settings.Secure.putString(context.getContentResolver(),
+            Settings.Secure.MONET_COLOR_GRADIENT, preset.id);
+
         StringBuilder colorString = new StringBuilder();
         for (int i = 0; i < preset.colors.length; i++) {
             if (i > 0) colorString.append(",");
-            colorString.append(preset.colors[i]);
+            colorString.append(String.format("#%06X", 0xFFFFFF & preset.colors[i]));
         }
-        android.provider.Settings.Secure.putString(
-            getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_GRADIENT_COLORS,
-            colorString.toString());
+        Settings.Secure.putString(context.getContentResolver(),
+            Settings.Secure.MONET_GRADIENT_COLORS, colorString.toString());
+        Settings.Secure.putInt(context.getContentResolver(),
+            Settings.Secure.MONET_GRADIENT_ENABLED, 1);
 
-        // Enable gradient override
-        android.provider.Settings.Secure.putInt(
-            getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_GRADIENT_ENABLED, 1);
+        String style = MonetThemeApplier.getCurrentStyle(context);
+        MonetThemeApplier.applyPreset(context, preset.colors[2], style,
+                Math.abs(preset.id.hashCode()) % 1000);
 
-        // Notify system of gradient change
-        notifyGradientChange();
-
-        // Show confirmation
         showGradientAppliedMessage(preset.name);
-    }
-
-    private void notifyGradientChange() {
-        try {
-            // Send broadcast to notify gradient change
-            Intent intent = new Intent("com.android.settings.MONET_GRADIENT_CHANGED");
-            intent.setPackage("com.android.systemui");
-            getContext().sendBroadcast(intent);
-
-            // Also notify Settings app
-            Intent settingsIntent = new Intent("com.android.settings.GRADIENT_CHANGED");
-            getContext().sendBroadcast(settingsIntent);
-        } catch (Exception e) {
-            android.util.Log.e("CustomGradientsSettings", "Error notifying gradient change", e);
-        }
     }
 
     private void showGradientAppliedMessage(String gradientName) {

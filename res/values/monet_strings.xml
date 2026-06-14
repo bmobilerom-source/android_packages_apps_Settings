@@ -17,6 +17,7 @@
     <!-- Monet Color Settings -->
     <string name="monet_color_settings_title">Monet Colors</string>
     <string name="monet_color_settings_summary">Customize system colors and themes</string>
+    <string name="monet_color_settings_intro">Personalize Material You colors across the system with extended accents, color cycling, and palette styles.</string>
     <string name="monet_dark_mode_notice_title">Dark mode notice</string>
     <string name="monet_dark_mode_notice_summary">Background and wallpaper features work best in dark mode for maximum visual impact</string>
     <string name="monet_color_presets_select_title">Select color preset</string>

@@ -85,9 +85,9 @@ public class KsDisplayPageGrid extends SettingsPreferenceFragment implements
 
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_MONET_COLOR,
-                    R.string.monet_color_settings_title,
-                    R.string.monet_color_settings_summary,
-                    "com.android.settings.display.MonetColorSettings",
+                    R.string.dark_ui_mode,
+                    R.string.dark_ui_mode_summary,
+                    "com.android.settings.display.darkmode.DarkModeSettingsFragment",
                     null));
 
             items.add(new DisplayPageGridAdapter.CardItem(
@@ -125,7 +125,12 @@ public class KsDisplayPageGrid extends SettingsPreferenceFragment implements
                     "com.bmobile.fragments.KidsSafeDashboardSettings",
                     null));
 
-
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
+                    R.string.monet_color_settings_title,
+                    R.string.monet_color_settings_summary,
+                    "com.android.settings.display.MonetColorSettings",
+                    null));
 
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,

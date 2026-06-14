@@ -37,8 +37,8 @@ public class ContextualColorsController extends TogglePreferenceController {
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (preference != null) {
-            boolean isEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                    "monet_contextual_enabled", 0) == 1;
+            boolean isEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.MONET_CONTEXTUAL_ENABLED, 0) == 1;
             preference.setSummary(isEnabled ?
                 "Colors change based on notifications (enabled)" :
                 "Colors change based on notifications (disabled)");
@@ -47,22 +47,21 @@ public class ContextualColorsController extends TogglePreferenceController {
 
     @Override
     public boolean isChecked() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                "monet_contextual_enabled", 0) == 1;
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.MONET_CONTEXTUAL_ENABLED, 0) == 1;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            // Clear any existing contextual data when enabled
-            Settings.System.putString(mContext.getContentResolver(),
-                    "monet_contextual_colors", null);
-            Settings.System.putString(mContext.getContentResolver(),
-                    "monet_last_notification", null);
+            Settings.Secure.putString(mContext.getContentResolver(),
+                    Settings.Secure.MONET_CONTEXTUAL_COLORS, null);
+            Settings.Secure.putString(mContext.getContentResolver(),
+                    Settings.Secure.MONET_LAST_NOTIFICATION_PACKAGE, null);
         }
 
-        return Settings.System.putInt(mContext.getContentResolver(),
-                "monet_contextual_enabled", isChecked ? 1 : 0);
+        return Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.MONET_CONTEXTUAL_ENABLED, isChecked ? 1 : 0);
     }
 
     @Override

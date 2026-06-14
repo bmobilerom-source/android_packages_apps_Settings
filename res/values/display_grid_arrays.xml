@@ -56,7 +56,6 @@
         <item>Rainbow</item>
         <item>Fruit Salad</item>
         <item>Content</item>
-        <item>Monochrome</item>
     </string-array>
 
     <string-array name="monet_color_style_values" translatable="false">
@@ -66,7 +65,6 @@
         <item>rainbow</item>
         <item>fruit_salad</item>
         <item>content</item>
-        <item>monochrome</item>
     </string-array>
 
     <string-array name="monet_wallpaper_source_entries">

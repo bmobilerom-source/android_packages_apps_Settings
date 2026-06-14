@@ -281,6 +281,29 @@
                   android:theme="@style/Theme.SubSettings"
                   android:label="@string/monet_preset_gallery_title" />
 
+        <receiver android:name=".display.MonetTimeChangeReceiver"
+                  android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.settings.MONET_TIME_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".display.MonetColorCycleReceiver"
+                  android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.settings.action.COLOR_CYCLE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".display.MonetContextualNotificationListener"
+                 android:label="@string/monet_contextual_colors_title"
+                 android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+                 android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
         <activity android:name=".display.HeaderFilePickerActivity"
                   android:exported="false"
                   android:theme="@style/Theme.SubSettings"
