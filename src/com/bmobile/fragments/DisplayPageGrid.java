@@ -132,6 +132,13 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
                     "com.bmobile.fragments.DisplayCustomizationsSettings",
                     null));
 
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
+                    R.string.display_grid_demo_settings_title,
+                    R.string.display_grid_demo_settings_summary,
+                    "com.bmobile.fragments.DisplayCustomizations3",
+                    null));
+
 
 
             items.add(new DisplayPageGridAdapter.CardItem(

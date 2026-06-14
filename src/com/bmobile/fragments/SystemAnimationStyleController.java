@@ -17,53 +17,29 @@
 package com.bmobile.fragments;
 
 import android.content.Context;
-import android.provider.Settings;
 
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
+import com.bmobile.customization.AbstractIntListPreferenceController;
 
-import com.android.settings.core.BasePreferenceController;
-
-public class SystemAnimationStyleController extends BasePreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class SystemAnimationStyleController extends AbstractIntListPreferenceController {
 
     private static final String SYSTEM_ANIMATION_STYLE_KEY = "system_animation_style";
 
-    public SystemAnimationStyleController(Context context, String key) {
-        super(context, key);
+    public SystemAnimationStyleController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
+    protected int getDefaultValue() {
+        return 0;
     }
 
     @Override
-    public String getPreferenceKey() {
+    protected String getSettingKey() {
         return SYSTEM_ANIMATION_STYLE_KEY;
     }
 
     @Override
-    public void updateState(Preference preference) {
-        if (preference instanceof ListPreference) {
-            final ListPreference listPreference = (ListPreference) preference;
-            final int currentValue = Settings.System.getInt(mContext.getContentResolver(),
-                    "system_animation_style", 0);
-            listPreference.setValue(String.valueOf(currentValue));
-            // Set summary to show selected animation style
-            int index = listPreference.findIndexOfValue(String.valueOf(currentValue));
-            if (index >= 0 && index < listPreference.getEntries().length) {
-                listPreference.setSummary(listPreference.getEntries()[index]);
-            }
-        }
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final int value = Integer.parseInt((String) newValue);
-        Settings.System.putInt(mContext.getContentResolver(),
-                "system_animation_style", value);
-        updateState(preference);
-        return true;
+    protected boolean isSecure() {
+        return false;
     }
 }

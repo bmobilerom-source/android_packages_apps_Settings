@@ -17,25 +17,49 @@
 
 package com.bmobile.fragments;
 
-import android.os.Bundle;
+import android.content.Context;
 
-import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.core.AbstractPreferenceController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Display animation / effects — stub until preferences are ported.
+ * Demo settings page — system animation style (Default / Android P / Scale).
+ * Opened from the Display grid Demo settings card.
  */
-public class DisplayCustomizations3 extends SettingsPreferenceFragment {
+@SearchIndexable
+public class DisplayCustomizations3 extends DashboardFragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.display_customizations3);
-    }
+    private static final String TAG = "DisplayCustomizations3";
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
+        return MetricsEvent.CUSTOM_SETTINGS;
     }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.display_customizations3;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new SystemAnimationStyleController(context, "system_animation_style"));
+        return controllers;
+    }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.display_customizations3);
 }

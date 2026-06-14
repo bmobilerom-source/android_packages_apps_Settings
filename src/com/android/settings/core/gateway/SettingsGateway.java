@@ -233,6 +233,7 @@ import com.bmobile.fragments.DashboardStyleSettings;
 import com.bmobile.fragments.ExtendedHomepageWidgetsFragment;
 import com.bmobile.fragments.AmbientCustomizations;
 import com.bmobile.fragments.DeviceControlsSettingsFragment;
+import com.bmobile.fragments.DisplayCustomizations3;
 import com.bmobile.fragments.DisplayCustomizationsSettings;
 import com.bmobile.fragments.LockscreenClockStyleFragment;
 import com.bmobile.fragments.QsHeader;
@@ -475,6 +476,7 @@ public class SettingsGateway {
             com.bmobile.fragments.DeviceTweaksSettings.class.getName(),
             com.bmobile.fragments.AutoRebootSettings.class.getName(),
             DisplayCustomizationsSettings.class.getName(),
+            DisplayCustomizations3.class.getName(),
             MonetColorSettings.class.getName(),
             MonetExtendedColorsSettings.class.getName(),
             AdvancedMonetSettings.class.getName(),

@@ -16,8 +16,17 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="display_customizations3"
-    android:title=" ">
+    android:title="@string/display_grid_demo_settings_title">
+
+    <ListPreference
+        android:key="system_animation_style"
+        android:title="@string/system_animation_style_title"
+        android:entries="@array/system_animation_styles_entries"
+        android:entryValues="@array/system_animation_styles_values"
+        android:defaultValue="0"
+        android:summary="%s"
+        settings:layout="@layout/adaptive_preference_card" />
 
 </PreferenceScreen>
