@@ -40,6 +40,73 @@ public final class AmbientCustomizationsHelper {
     private AmbientCustomizationsHelper() {
     }
 
+    /** Enable Always-on display defaults the first time ambient customization is opened. */
+    public static void ensureAmbientDefaults(Context context) {
+        if (context == null) {
+            return;
+        }
+        final ContentResolver resolver = context.getContentResolver();
+        try {
+            if (Settings.Secure.getIntForUser(resolver, Settings.Secure.DOZE_ENABLED, 1,
+                    UserHandle.USER_CURRENT) == 0) {
+                Settings.Secure.putIntForUser(resolver, Settings.Secure.DOZE_ENABLED, 1,
+                        UserHandle.USER_CURRENT);
+            }
+            if (Settings.Secure.getIntForUser(resolver, Settings.Secure.DOZE_ALWAYS_ON, 0,
+                    UserHandle.USER_CURRENT) == 0) {
+                Settings.Secure.putIntForUser(resolver, Settings.Secure.DOZE_ALWAYS_ON, 1,
+                        UserHandle.USER_CURRENT);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to apply ambient defaults", e);
+        }
+    }
+
+    /** Experimental overlay features disabled until custom AOD clock / visualizer are fixed. */
+    public static void disableExperimentalAmbientFeatures(Context context) {
+        if (context == null) {
+            return;
+        }
+        try {
+            Settings.Secure.putInt(context.getContentResolver(), "aod_clock_style", 0);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to reset aod_clock_style", e);
+        }
+    }
+
+    /** Master switch: Always-on display plus custom ambient text overlay. */
+    public static boolean isAmbientDisplayEnabled(Context context) {
+        if (context == null) {
+            return false;
+        }
+        final ContentResolver resolver = context.getContentResolver();
+        final boolean alwaysOn = Settings.Secure.getIntForUser(resolver,
+                Settings.Secure.DOZE_ALWAYS_ON, 0, UserHandle.USER_CURRENT) == 1;
+        return alwaysOn && isAmbientTextEnabled(context);
+    }
+
+    public static boolean setAmbientDisplayEnabled(Context context, boolean enabled) {
+        if (context == null) {
+            return false;
+        }
+        boolean success = true;
+        if (enabled) {
+            ensureAmbientDefaults(context);
+        }
+        success &= setAmbientTextEnabled(context, enabled);
+        try {
+            success &= Settings.Secure.putIntForUser(context.getContentResolver(),
+                    Settings.Secure.DOZE_ALWAYS_ON, enabled ? 1 : 0, UserHandle.USER_CURRENT);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to set DOZE_ALWAYS_ON", e);
+            success = false;
+        }
+        if (!enabled) {
+            disableExperimentalAmbientFeatures(context);
+        }
+        return success;
+    }
+
     public static String getAmbientText(Context context) {
         ContentResolver resolver = context.getContentResolver();
         String text = Settings.System.getString(resolver, AMBIENT_TEXT_STRING);
@@ -109,6 +176,14 @@ public final class AmbientCustomizationsHelper {
         if (success) {
             notifyAmbientChange(context);
         }
+        return success;
+    }
+
+    public static boolean disableAll(Context context) {
+        boolean success = true;
+        success &= setAmbientTextEnabled(context, false);
+        success &= setAmbientImageEnabled(context, false);
+        success &= setAmbientTextAnimationEnabled(context, false);
         return success;
     }
 

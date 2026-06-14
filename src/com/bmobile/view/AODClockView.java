@@ -61,6 +61,8 @@ public class AODClockView extends View {
     private int mSecondaryColor = Color.parseColor("#B0B0B0");
     private int mAccentColor = Color.parseColor("#00BFFF");
 
+    private static final float CLOCK_SCALE = 1.15f;
+
     public AODClockView(Context context) {
         super(context);
         init();
@@ -122,6 +124,9 @@ public class AODClockView extends View {
         int centerX = width / 2;
         int centerY = height / 2;
 
+        canvas.save();
+        canvas.scale(CLOCK_SCALE, CLOCK_SCALE, centerX, centerY);
+
         // Update time
         mCalendar.setTimeInMillis(System.currentTimeMillis());
         int hours = mCalendar.get(Calendar.HOUR);
@@ -145,6 +150,7 @@ public class AODClockView extends View {
                 drawGeometricClock(canvas, centerX, centerY, width, height, hours, minutes, seconds);
                 break;
         }
+        canvas.restore();
     }
 
     private void drawClassicClock(Canvas canvas, int centerX, int centerY, int width, int height,
