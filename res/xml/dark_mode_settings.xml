@@ -60,10 +60,10 @@
         android:entries="@array/dark_ui_scheduler_preference_titles"
         android:entryValues="@array/dark_ui_scheduler_preference_titles"
         settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
-        settings:iconSpaceReserved="false" 
+        settings:iconSpaceReserved="false"
         settings:keywords="@string/keywords_dark_ui_mode"/>
 
-     <Preference
+    <Preference
         android:key="dark_theme_start_time"
         android:title="@string/night_display_start_time_title"
         settings:searchable="false"/>
