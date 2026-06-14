@@ -17,13 +17,12 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="monet_color_settings_screen"
-    android:title="@string/monet_color_settings_title">
+    android:key="monet_extended_colors_screen"
+    android:title="@string/monet_extended_colors_title">
 
-    <Preference
-        android:key="monet_extended_colors"
-        android:title="@string/monet_extended_colors_title"
-        android:summary="@string/monet_extended_colors_summary"
-        android:fragment="com.android.settings.display.MonetExtendedColorsSettings" />
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="monet_extended_colors_grid_pref"
+        android:selectable="false"
+        android:layout="@layout/monet_extended_colors_grid" />
 
 </PreferenceScreen>

@@ -20,6 +20,7 @@
     <dimen name="monet_color_swatch_size">40dp</dimen>
     <dimen name="monet_color_swatch_corner_radius">8dp</dimen>
     <dimen name="monet_color_swatch_margin">8dp</dimen>
+    <dimen name="monet_extended_selected_stroke">3dp</dimen>
 
     <!-- Preset card dimensions -->
     <dimen name="monet_preset_card_width">0dp</dimen>
