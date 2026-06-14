@@ -18,6 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/media_controls_title">
 
     <SwitchPreferenceCompat
@@ -38,5 +39,32 @@
         android:title="@string/media_controls_recommendations_title"
         android:summary="@string/media_controls_recommendations_description"
         app:controller="com.android.settings.sound.MediaControlsRecommendationController" />
+
+    <Preference
+        android:key="musictap_settings"
+        android:title="@string/musictap_settings_title"
+        android:summary="@string/musictap_settings_summary"
+        app:iconSpaceReserved="false"
+        app:keywords="@string/keywords_musictap_settings"
+        settings:layout="@layout/adaptive_preference_card_top">
+        <intent
+            android:action="org.lineageos.musictap.action.SETTINGS"
+            android:targetPackage="org.lineageos.musictap"
+            android:targetClass="org.lineageos.musictap.MainActivity" />
+    </Preference>
+
+    <Preference
+        android:key="audiofx_settings"
+        android:title="@string/audiofx_settings_title"
+        android:summary="@string/audiofx_settings_summary"
+        app:iconSpaceReserved="false"
+        app:keywords="@string/keywords_audiofx_settings"
+        app:controller="com.android.settings.sound.AudioFxPreferenceController"
+        settings:layout="@layout/adaptive_preference_card_bottom">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="org.lineageos.audiofx"
+            android:targetClass="org.lineageos.audiofx.activity.ActivityMusic" />
+    </Preference>
 
 </PreferenceScreen>

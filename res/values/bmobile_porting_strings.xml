@@ -10,6 +10,10 @@
     <string name="bmobile_userinfo_title">User info</string>
     <string name="user_action_hub_title">User hub</string>
     <string name="user_action_hub_summary">Your control center — accounts, apps, security, and quick actions</string>
+
+    <!-- TODO(production): Remove with battery_mainuser_hub in power_usage_summary.xml — dev/QA only -->
+    <string name="battery_dev_user_hub_title">Power profile lab</string>
+    <string name="battery_dev_user_hub_summary">Battery-page test shortcut to display grid and dashboard picker</string>
     <string name="bmobile_userinfo_summary">This is where you can keep things personal. This is for you and only you - no one else but you. This is your own special zone.</string>
     <string name="bmobile_userinfo_confirm_credential_title">Confirm your device credential</string>
     <string name="bmobile_userinfo_confirm_credential_description">Authentication required to access User Information settings</string>
@@ -40,6 +44,14 @@
     <!-- DAVx⁵ (CalDAV / CardDAV) -->
     <string name="dav_title">DAV</string>
     <string name="dav_summary">Sync calendars and contacts with CalDAV and CardDAV accounts</string>
+
+    <!-- Music Tap -->
+    <string name="musictap_settings_title">Music Tap</string>
+    <string name="musictap_settings_summary">Volume-button media controls — no network, no analytics</string>
+    <string name="keywords_musictap_settings">music tap volume button media controls playback haptic</string>
+    <string name="audiofx_settings_title">AudioFX</string>
+    <string name="audiofx_settings_summary">Equalizer, bass, reverb, and audio effects for music and media</string>
+    <string name="keywords_audiofx_settings">audiofx equalizer audio effects bass reverb sound music</string>
     
     <!-- Session/Journal -->
     <string name="my_session_title">My Session</string>
