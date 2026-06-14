@@ -26,8 +26,8 @@ import java.util.Set;
  * Boosts Lineage extended / night preset seeds before they are applied to Monet.
  */
 public final class MonetSeedColorTransform {
-    private static final float EXTENDED_SATURATION_FACTOR = 1.40f;
-    private static final float EXTENDED_LIGHTNESS_FACTOR = 0.82f;
+    private static final float EXTENDED_SATURATION_FACTOR = 1.55f;
+    private static final float EXTENDED_LIGHTNESS_FACTOR = 0.95f;
     private static final float NIGHT_SATURATION_FACTOR = 1.30f;
     private static final float NIGHT_LIGHTNESS_FACTOR = 0.30f;
 

@@ -37,8 +37,8 @@ public class TimeBasedColorsController extends TogglePreferenceController {
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (preference != null) {
-            boolean isEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                    "monet_time_based_enabled", 0) == 1;
+            boolean isEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.MONET_TIME_BASED_ENABLED, 0) == 1;
             preference.setSummary(isEnabled ?
                 "Colors change based on time of day (enabled)" :
                 "Colors change based on time of day (disabled)");
@@ -47,23 +47,33 @@ public class TimeBasedColorsController extends TogglePreferenceController {
 
     @Override
     public boolean isChecked() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                "monet_time_based_enabled", 0) == 1;
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.MONET_TIME_BASED_ENABLED, 0) == 1;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            // Set default time slot colors when enabled
-            String defaultColors = "#FFF8E1,#FFE0B2,#FFCC02,#FF9800"; // Sunrise colors
-            Settings.System.putString(mContext.getContentResolver(),
-                    "monet_time_slot_colors", defaultColors);
-            Settings.System.putString(mContext.getContentResolver(),
-                    "monet_current_time_slot", "dawn");
+            String defaultColors = "#FFF8E1,#FFE0B2,#FFCC02,#FF9800";
+            Settings.Secure.putString(mContext.getContentResolver(),
+                    Settings.Secure.MONET_TIME_SLOT_COLORS, defaultColors);
+            Settings.Secure.putString(mContext.getContentResolver(),
+                    Settings.Secure.MONET_CURRENT_TIME_SLOT, "dawn");
         }
 
-        return Settings.System.putInt(mContext.getContentResolver(),
-                "monet_time_based_enabled", isChecked ? 1 : 0);
+        boolean saved = Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.MONET_TIME_BASED_ENABLED, isChecked ? 1 : 0);
+
+        if (saved) {
+            if (isChecked) {
+                MonetTimeBasedColorHelper.applyCurrentTimeSlot(mContext);
+                MonetTimeBasedColorHelper.scheduleNextColorChange(mContext);
+            } else {
+                MonetTimeBasedColorHelper.cancelScheduledChanges(mContext);
+            }
+        }
+
+        return saved;
     }
 
     @Override

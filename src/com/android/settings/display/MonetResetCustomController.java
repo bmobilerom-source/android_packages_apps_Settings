@@ -57,30 +57,9 @@ public class MonetResetCustomController extends BasePreferenceController {
 
     private void resetToWallpaperColors() {
         try {
-            // Remove custom seed color setting
-            Settings.Secure.putString(mContext.getContentResolver(), "monet_custom_seed_color", null);
-
-            // Reset chroma multiplier to default
             Settings.Secure.putInt(mContext.getContentResolver(), "monet_chroma_multiplier", 100);
-
-            // Reset wallpaper source to default
             Settings.Secure.putString(mContext.getContentResolver(), "monet_wallpaper_source", "system");
-
-            // Send theme change broadcast to reset to wallpaper colors
-            android.content.Intent themeIntent = new android.content.Intent("android.intent.action.THEME_CHANGED");
-            themeIntent.putExtra("monet_reset_to_wallpaper", true);
-            themeIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(themeIntent);
-
-            // Send wallpaper changed broadcast to trigger color re-extraction
-            android.content.Intent wallpaperIntent = new android.content.Intent("android.intent.action.WALLPAPER_CHANGED");
-            wallpaperIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(wallpaperIntent);
-
-            // Force configuration change
-            android.content.Intent configIntent = new android.content.Intent("android.intent.action.CONFIGURATION_CHANGED");
-            configIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(configIntent);
+            MonetThemeApplier.clearToWallpaper(mContext);
 
             android.widget.Toast.makeText(mContext,
                 "Reset to wallpaper colors!", android.widget.Toast.LENGTH_SHORT).show();

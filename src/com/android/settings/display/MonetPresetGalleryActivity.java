@@ -86,7 +86,7 @@ public class MonetPresetGalleryActivity extends Activity {
     private void updatePresetSelection() {
         if (mAdapter == null) return;
 
-        String currentPreset = Settings.System.getString(
+        String currentPreset = Settings.Secure.getString(
                 getContentResolver(), "monet_color_preset");
 
         if (currentPreset == null || currentPreset.isEmpty()) {

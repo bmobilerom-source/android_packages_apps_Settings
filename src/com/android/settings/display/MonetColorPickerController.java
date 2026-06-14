@@ -61,8 +61,8 @@ public class MonetColorPickerController extends BasePreferenceController {
         try {
             // Use array to hold mutable currentColor value (workaround for lambda final variable restriction)
             final int[] currentColorHolder = new int[1];
-            currentColorHolder[0] = Settings.Secure.getInt(mContext.getContentResolver(),
-                    "monet_custom_seed_color", 0xFF6750A4); // Default Material You purple
+            int existing = MonetThemeApplier.getCurrentSeedColor(mContext);
+            currentColorHolder[0] = existing != 0 ? existing : 0xFF6750A4;
 
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mContext);
             builder.setTitle("Choose Custom Seed Color");
@@ -127,19 +127,8 @@ public class MonetColorPickerController extends BasePreferenceController {
 
     private void applyCustomColor(int color) {
         try {
-            // Save the custom seed color
-            Settings.Secure.putInt(mContext.getContentResolver(), "monet_custom_seed_color", color);
-
-            // Send theme change broadcast
-            android.content.Intent themeIntent = new android.content.Intent("android.intent.action.THEME_CHANGED");
-            themeIntent.putExtra("monet_custom_seed_color", color);
-            themeIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(themeIntent);
-
-            // Force configuration change
-            android.content.Intent configIntent = new android.content.Intent("android.intent.action.CONFIGURATION_CHANGED");
-            configIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(configIntent);
+            String style = MonetThemeApplier.getCurrentStyle(mContext);
+            MonetThemeApplier.applyPreset(mContext, color, style, 0);
 
             android.widget.Toast.makeText(mContext,
                 "Custom color applied!", android.widget.Toast.LENGTH_SHORT).show();

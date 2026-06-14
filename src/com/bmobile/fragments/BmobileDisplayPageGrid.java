@@ -75,9 +75,9 @@ public class BmobileDisplayPageGrid extends SettingsPreferenceFragment implement
 
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_MONET_COLOR,
-                    R.string.monet_color_settings_title,
-                    R.string.monet_color_settings_summary,
-                    "com.android.settings.display.MonetColorSettings",
+                    R.string.dark_ui_mode,
+                    R.string.dark_ui_mode_summary,
+                    "com.android.settings.display.darkmode.DarkModeSettingsFragment",
                     null));
 
             items.add(new DisplayPageGridAdapter.CardItem(
@@ -125,11 +125,9 @@ public class BmobileDisplayPageGrid extends SettingsPreferenceFragment implement
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
                     R.string.display_grid_demo_settings_title,
-                    R.string.display_grid_demo_settings_summary,
-                    "com.bmobile.fragments.DisplayCustomizations3",
+                    R.string.accessibility_text_reading_options_suggestion_title,
+                    "com.android.settings.display.MonetColorSettings",
                     null));
-
-
 
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
@@ -138,7 +136,12 @@ public class BmobileDisplayPageGrid extends SettingsPreferenceFragment implement
                     "com.bmobile.fragments.BMobileDashboardSettings",
                     null));
 
-
+            items.add(new DisplayPageGridAdapter.CardItem(
+                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
+                    R.string.monet_color_settings_title,
+                    R.string.monet_color_settings_summary,
+                    "com.android.settings.display.MonetColorSettings",
+                    null));
 
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,

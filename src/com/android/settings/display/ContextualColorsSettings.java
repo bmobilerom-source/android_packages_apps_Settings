@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
 
 import androidx.annotation.NonNull;
@@ -165,37 +166,13 @@ public class ContextualColorsSettings extends DashboardFragment {
     }
 
     private void handleNotificationReceived(String packageName) {
-        boolean enabled = android.provider.Settings.Secure.getInt(
-            getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_CONTEXTUAL_ENABLED, 0) == 1;
-
-        if (!enabled) return;
-
-        ContextualColor color = CONTEXTUAL_COLORS.get(packageName);
-        if (color != null) {
-            // Apply contextual colors
-            applyContextualColors(color);
-
-            // Save last notification package
-            android.provider.Settings.Secure.putString(
-                getContext().getContentResolver(),
-                android.provider.Settings.Secure.MONET_LAST_NOTIFICATION_PACKAGE,
-                packageName);
-
+        if (MonetContextualColorHelper.applyForPackage(getContext(), packageName)) {
             mLastNotificationPackage = packageName;
-            updateColorPreview(color);
+            ContextualColor color = CONTEXTUAL_COLORS.get(packageName);
+            if (color != null) {
+                updateColorPreview(color);
+            }
         }
-    }
-
-    private void applyContextualColors(ContextualColor color) {
-        // Apply the contextual colors (this would need framework implementation)
-        // For now, just save preference
-        String colorString = color.colors[0] + "," + color.colors[1] + "," +
-                           color.colors[2] + "," + color.colors[3];
-        android.provider.Settings.Secure.putString(
-            getContext().getContentResolver(),
-            android.provider.Settings.Secure.MONET_CONTEXTUAL_COLORS,
-            colorString);
     }
 
     @Override

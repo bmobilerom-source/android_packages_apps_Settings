@@ -76,29 +76,6 @@ public class MonetChromaMultiplierController extends BasePreferenceController
     }
 
     private void applyChromaMultiplier(float multiplier) {
-        try {
-            // Apply chroma multiplier by updating system theme properties
-            // This simulates MonetCompat behavior by triggering theme refresh
-
-            // Send theme change broadcast to trigger UI refresh
-            android.content.Intent themeIntent = new android.content.Intent("android.intent.action.THEME_CHANGED");
-            themeIntent.putExtra("monet_chroma_multiplier", multiplier);
-            themeIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(themeIntent);
-
-            // Also send configuration change to refresh system UI
-            android.content.Intent configIntent = new android.content.Intent("android.intent.action.CONFIGURATION_CHANGED");
-            configIntent.addFlags(android.content.Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-            mContext.sendBroadcast(configIntent);
-
-            // Force activity recreation for settings app
-            if (mContext instanceof android.app.Activity) {
-                ((android.app.Activity) mContext).recreate();
-            }
-
-        } catch (Exception e) {
-            // Log error but don't crash
-            android.util.Log.e("MonetChromaMultiplier", "Failed to apply chroma multiplier", e);
-        }
+        MonetThemeApplier.applyChromaFactor(mContext, multiplier);
     }
 }

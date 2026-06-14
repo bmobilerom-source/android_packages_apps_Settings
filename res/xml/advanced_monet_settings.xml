@@ -32,8 +32,7 @@
             android:max="200"
             android:min="50"
             android:defaultValue="100"
-            android:icon="@drawable/ic_settings_display"
-            settings:controller="com.android.settings.display.MonetChromaMultiplierController" />
+            android:icon="@drawable/ic_settings_display" />
 
         <ListPreference
             android:key="monet_wallpaper_source"
@@ -42,22 +41,19 @@
             android:entries="@array/monet_wallpaper_source_entries"
             android:entryValues="@array/monet_wallpaper_source_values"
             android:defaultValue="system"
-            settings:layout="@layout/adaptive_preference_card"
-            settings:controller="com.android.settings.display.MonetWallpaperSourceController" />
+            settings:layout="@layout/adaptive_preference_card" />
 
         <SwitchPreference
             android:key="monet_apply_to_menus"
             android:title="Theme Menus &amp; Toolbars"
             android:summary="Apply Material You colors to popup menus and toolbars"
-            android:defaultValue="true"
-            settings:controller="com.android.settings.display.MonetMenuController" />
+            android:defaultValue="true" />
 
         <SwitchPreference
             android:key="monet_apply_to_window"
             android:title="Theme Window Background"
             android:summary="Apply generated background color to app windows"
-            android:defaultValue="false"
-            settings:controller="com.android.settings.display.MonetWindowController" />
+            android:defaultValue="false" />
 
     </PreferenceCategory>
 
@@ -70,15 +66,12 @@
             android:key="monet_custom_color_picker"
             android:title="Pick Custom Seed Color"
             android:summary="Choose your own base color for Material You theming"
-            settings:layout="@layout/adaptive_preference_card"
-            settings:controller="com.android.settings.display.MonetColorPickerController" />
+            settings:layout="@layout/adaptive_preference_card" />
 
         <Preference
             android:key="monet_reset_custom_color"
             android:title="Reset to Wallpaper Colors"
-            android:summary="Return to dynamic wallpaper-based theming"
-            settings:layout="@layout/adaptive_preference_card"
-            settings:controller="com.android.settings.display.MonetResetCustomController" />
+            android:summary="Return to dynamic wallpaper-based theming" />
 
     </PreferenceCategory>
 
