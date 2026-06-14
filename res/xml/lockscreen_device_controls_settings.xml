@@ -9,22 +9,103 @@
     android:key="lockscreen_device_controls_screen"
     android:title="@string/lockscreen_device_controls_title">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="device_controls_illustration"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/devicecontrols" />
+
+    <Preference
+        android:key="device_controls_screen_lock_setup"
+        android:title="@string/device_controls_screen_lock_setup_title"
+        android:summary="@string/lockscreen_privacy_not_secure"
+        android:fragment="com.android.settings.security.LockscreenDashboardFragment"
+        settings:layout="@layout/adaptive_preference_card_top"
+        settings:controller="com.bmobile.customization.DeviceControlsScreenLockSetupController" />
+
     <PreferenceCategory
-        android:key="device_controls_lockscreen_category"
-        android:title="@string/device_controls_lockscreen_category">
+        android:key="device_controls_media_category"
+        android:title="@string/device_controls_media_category">
+        <SwitchPreferenceCompat
+            android:key="media_controls_lockscreen"
+            android:title="@string/device_controls_now_playing_title"
+            android:summary="@string/media_controls_lockscreen_description"
+            settings:layout="@layout/adaptive_preference_card"
+            settings:controller="com.android.settings.sound.MediaControlsLockScreenPreferenceController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="device_controls_notifications_category"
+        android:title="@string/device_controls_notifications_category">
+        <SwitchPreferenceCompat
+            android:key="ambient_display_notification"
+            android:title="@string/doze_title"
+            android:summary="@string/doze_summary"
+            settings:layout="@layout/adaptive_preference_card_top_switch"
+            settings:controller="com.android.settings.display.AmbientDisplayNotificationsPreferenceController" />
+        <Preference
+            android:key="ambient_display_double_tap"
+            android:title="@string/ambient_display_title"
+            android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
+            settings:layout="@layout/adaptive_preference_card_middle"
+            settings:searchable="false"
+            settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
+        <Preference
+            android:key="ambient_display_pick_up"
+            android:title="@string/ambient_display_pickup_title"
+            android:fragment="com.android.settings.gestures.PickupGestureSettings"
+            settings:layout="@layout/adaptive_preference_card_middle"
+            settings:searchable="false"
+            settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
+        <Preference
+            android:key="device_controls_lock_screen_notifications"
+            android:title="@string/lock_screen_notifs_title"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="device_controls_privacy_category"
+        android:title="@string/device_controls_privacy_category">
+        <SwitchPreferenceCompat
+            android:key="lockscreen_privacy_wallet_switch"
+            android:title="@string/lockscreen_privacy_wallet_setting_toggle"
+            android:summary="@string/lockscreen_privacy_wallet_summary"
+            settings:layout="@layout/adaptive_preference_card_top_switch"
+            settings:controller="com.android.settings.display.WalletPrivacyPreferenceController" />
+        <SwitchPreferenceCompat
+            android:key="lock_screen_show_qr_scanner"
+            android:title="@string/lockscreen_privacy_qr_code_scanner_setting_toggle"
+            android:summary="@string/lockscreen_privacy_qr_code_scanner_summary"
+            settings:layout="@layout/adaptive_preference_card_middle_switch"
+            settings:controller="com.android.settings.display.QRCodeScannerPreferenceController" />
         <SwitchPreferenceCompat
             android:key="lockscreen_privacy_controls_switch"
             android:title="@string/lockscreen_privacy_controls_setting_toggle"
             android:summary="@string/lockscreen_privacy_controls_summary"
-            settings:layout="@layout/adaptive_preference_card_top_switch"
+            settings:layout="@layout/adaptive_preference_card_middle_switch"
             settings:controller="com.android.settings.display.ControlsPrivacyPreferenceController" />
         <SwitchPreferenceCompat
             android:key="lockscreen_trivial_controls_switch"
             android:title="@string/lockscreen_trivial_controls_setting_toggle"
             android:summary="@string/lockscreen_trivial_controls_summary"
             android:dependency="lockscreen_privacy_controls_switch"
-            settings:layout="@layout/adaptive_preference_card_bottom_switch"
+            settings:layout="@layout/adaptive_preference_card_middle_switch"
             settings:controller="com.android.settings.display.ControlsTrivialPrivacyPreferenceController" />
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="lock_screen_redact"
+            android:title="@string/lock_screen_notifs_redact"
+            android:summary="@string/lock_screen_notifs_redact_summary"
+            settings:layout="@layout/adaptive_preference_card_middle_switch"
+            settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="lock_screen_work_redact"
+            android:title="@string/lock_screen_notifs_redact_work"
+            android:summary="@string/lock_screen_notifs_redact_work_summary"
+            settings:layout="@layout/adaptive_preference_card_bottom_switch"
+            settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -39,29 +120,12 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="device_controls_apps_category"
-        android:title="@string/device_controls_apps_category">
-        <Preference
-            android:key="device_controls_add_provider"
-            android:title="@string/device_controls_add_provider_title"
-            android:summary="@string/device_controls_add_provider_summary"
-            settings:layout="@layout/adaptive_preference_card_top"
-            settings:controller="com.bmobile.customization.AddDeviceControlsPreferenceController" />
-        <Preference
-            android:key="device_controls_manage_panel"
-            android:title="@string/device_controls_manage_panel_title"
-            android:summary="@string/device_controls_manage_panel_summary"
-            settings:layout="@layout/adaptive_preference_card_bottom"
-            settings:controller="com.bmobile.customization.ManageDeviceControlsPreferenceController" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="device_controls_power_menu_category"
-        android:title="@string/device_controls_power_menu_category">
-        <SwitchPreferenceCompat
-            android:key="power_menu_device_controls"
-            android:title="@string/power_menu_device_controls_title"
-            android:summary="@string/power_menu_device_controls_summary"
-            settings:layout="@layout/adaptive_preference_card" />
+        android:key="device_controls_display_category"
+        android:title="@string/device_controls_display_category">
+        <lineageos.preference.LineagePartsPreference
+            android:key="rotation"
+            settings:layout="@layout/adaptive_preference_card"
+            settings:requiresConfig="@*lineageos.platform:bool/config_enableAdvancedRotationSettings"
+            settings:requiresFeature="android.hardware.sensor.accelerometer" />
     </PreferenceCategory>
 </PreferenceScreen>

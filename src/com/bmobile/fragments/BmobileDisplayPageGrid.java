@@ -102,17 +102,10 @@ public class BmobileDisplayPageGrid extends SettingsPreferenceFragment implement
                     null));
 
             items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_STANDARD,
-                    R.string.accelerometer_title,
-                    R.string.auto_rotate_settings_primary_switch_title,
-                    "auto_rotate",
-                    null));
-
-            items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_WIDE,
-                    R.string.ambient_display_screen_title,
-                    R.string.ambient_display_category_triggers,
-                    "ambient_display",
+                    R.string.dynamic_island_settings_title,
+                    R.string.dynamic_island_settings_summary,
+                    "dynamic_island",
                     null));
 
             items.add(new DisplayPageGridAdapter.CardItem(
@@ -131,7 +124,7 @@ public class BmobileDisplayPageGrid extends SettingsPreferenceFragment implement
 
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.accessibility_text_reading_options_title,
+                    R.string.display_grid_demo_settings_title,
                     R.string.accessibility_text_reading_options_suggestion_title,
                     "com.android.settings.display.MonetColorSettings",
                     null));

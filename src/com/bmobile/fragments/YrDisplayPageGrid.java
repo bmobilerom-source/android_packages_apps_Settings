@@ -127,7 +127,7 @@ public class YrDisplayPageGrid extends SettingsPreferenceFragment implements
 
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.accessibility_text_reading_options_title,
+                    R.string.display_grid_demo_settings_title,
                     R.string.accessibility_text_reading_options_suggestion_title,
                     "com.android.settings.display.MonetColorSettings",
                     null));

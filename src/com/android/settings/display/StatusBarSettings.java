@@ -31,8 +31,8 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
-
-import lineageos.providers.LineageSettings;
+import com.bmobile.customization.BatteryStylePreferenceController;
+import com.bmobile.customization.StatusbarClockChipController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,6 +135,9 @@ public class StatusBarSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new StatusbarClockChipController(context, "statusbar_clock_chip"));
+        controllers.add(new BatteryStylePreferenceController(context,
+                "status_bar_battery_style_customization"));
         return controllers;
     }
 

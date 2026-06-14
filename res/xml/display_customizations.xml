@@ -60,42 +60,4 @@
             settings:layout="@layout/adaptive_preference_card"
             settings:controller="com.bmobile.customization.DeviceControlsPreferenceController" />
     </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/display_customization_category_ambient">
-        <Preference
-            android:key="ambient_display_double_tap"
-            android:title="@string/ambient_display_title"
-            android:fragment="com.android.settings.gestures.DoubleTapScreenSettings"
-            settings:layout="@layout/adaptive_preference_card_top"
-            settings:searchable="false"
-            settings:controller="com.android.settings.gestures.DoubleTapScreenPreferenceController" />
-        <Preference
-            android:key="ambient_display_pick_up"
-            android:title="@string/ambient_display_pickup_title"
-            android:fragment="com.android.settings.gestures.PickupGestureSettings"
-            settings:layout="@layout/adaptive_preference_card_bottom"
-            settings:searchable="false"
-            settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/display_customization_category_statusbar">
-        <SwitchPreferenceCompat
-            android:key="statusbar_clock_chip"
-            android:title="@string/statusbar_clock_chip_title"
-            android:summary="@string/statusbar_clock_chip_summary"
-            android:defaultValue="false"
-            settings:layout="@layout/adaptive_preference_card_top_switch"
-            settings:controller="com.bmobile.customization.StatusbarClockChipController" />
-        <ListPreference
-            android:key="status_bar_battery_style_customization"
-            android:title="@string/battery_style_title"
-            android:summary="@string/battery_style_summary"
-            android:entries="@array/customization_battery_style_entries"
-            android:entryValues="@array/customization_battery_style_values"
-            android:defaultValue="0"
-            settings:layout="@layout/adaptive_preference_card_bottom"
-            settings:controller="com.bmobile.customization.BatteryStylePreferenceController" />
-    </PreferenceCategory>
 </PreferenceScreen>

@@ -9,6 +9,12 @@
     android:title=" "
     android:key="bmobile_dashboard_screen">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="custom_dashboard_lottie"
+        settings:searchable="false"
+        android:order="-1000"
+        settings:lottie_rawRes="@raw/customdashboard"/>
+
     <Preference
         android:key="custom_dashboard_current_style"
         android:title="@string/custom_dashboard_current_style_title"
