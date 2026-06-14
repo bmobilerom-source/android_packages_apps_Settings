@@ -1277,7 +1277,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     /**
      * Sets up the RecyclerView grid for KS Fun dashboard style (16).
-     * KidsSafe profile card + extended widgets + Sound / Display / Privacy / Location grid.
+     * KidsSafe profile card + extended widgets + grid aligned with YR Expressive.
      */
     private void setupKsFunGrid() {
         try {
