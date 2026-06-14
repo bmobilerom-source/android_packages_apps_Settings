@@ -17,8 +17,8 @@
 <resources>
     <!-- Ambient Customization -->
     <string name="ambient_text_category_title">Ambient Customization</string>
-    <string name="ambient_master_title">Ambient display content</string>
-    <string name="ambient_master_summary">Show custom elements on Always On Display</string>
+    <string name="ambient_master_title">Ambient display</string>
+    <string name="ambient_master_summary">Show the lock screen clock with your custom ambient text on Always On Display</string>
     <string name="ambient_text_category">Text customization</string>
     <string name="ambient_image_category">Image customization</string>
     
@@ -37,7 +37,8 @@
     <string name="ambient_text_color_type_title">Color type</string>
     <string name="ambient_text_color_type_summary">Choose color source for ambient text</string>
     <string name="ambient_text_color_title">Custom color</string>
-    
+    <string name="default_string">Default</string>
+
     <!-- Image Customization -->
     <string name="ambient_image_enable_title">Show custom image</string>
     <string name="ambient_image_enable_summary">Display a custom image alongside ambient text</string>

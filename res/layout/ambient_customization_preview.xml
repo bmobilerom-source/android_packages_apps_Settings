@@ -23,8 +23,8 @@
         <!-- AOD Clock View -->
         <com.bmobile.view.AODClockView
             android:id="@+id/ambient_preview_clock"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+        android:layout_width="138dp"
+        android:layout_height="138dp"
             android:layout_gravity="center_horizontal|top"
             android:layout_marginTop="40dp" />
 

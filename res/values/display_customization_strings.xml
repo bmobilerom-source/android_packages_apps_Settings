@@ -120,7 +120,8 @@
 
     <string name="lockscreen_device_controls_title">Device controls</string>
     <string name="display_customization_device_controls_off">Not shown on lock screen</string>
-    <string name="device_controls_page_summary_no_feature">Lock screen privacy, notifications, and display</string>
+    <string name="device_controls_page_summary_no_feature">Gestures, shortcuts, and rotation</string>
+    <string name="device_controls_page_summary_simple">Double tap, lift, shortcuts, and rotation</string>
     <string name="device_controls_page_summary_wake_only">Wake screen for notifications</string>
     <string name="device_controls_page_summary_with_wake">%1$s · Wake for notifications</string>
     <string name="device_controls_screen_lock_setup_title">Set a screen lock</string>
@@ -131,6 +132,14 @@
     <string name="device_controls_display_category">Display</string>
     <string name="device_controls_lockscreen_category">Lock screen</string>
     <string name="device_controls_shortcuts_category">Lock screen shortcuts</string>
+    <string name="device_controls_apps_category">Controls apps</string>
+    <string name="device_controls_power_menu_category">Power menu</string>
+    <string name="device_controls_add_provider_title">Add controls</string>
+    <string name="device_controls_add_provider_summary">Choose an app to add device controls from</string>
+    <string name="device_controls_manage_panel_title">Manage controls</string>
+    <string name="device_controls_manage_panel_summary">Reorder and edit your device controls panel</string>
+    <string name="power_menu_device_controls_title">Device controls</string>
+    <string name="power_menu_device_controls_summary">Show device controls in the power menu</string>
 
     <string name="lockscreen_clock_position_left">Left</string>
     <string name="lockscreen_clock_position_center">Center</string>

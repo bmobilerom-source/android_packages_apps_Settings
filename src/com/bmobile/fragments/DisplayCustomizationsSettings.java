@@ -46,7 +46,6 @@ public class DisplayCustomizationsSettings extends DashboardFragment {
         controllers.add(new LockscreenWidgetsPreferenceController(context, "lockscreen_widgets_enabled"));
         DeviceControlsPreferenceController deviceControlsController =
                 new DeviceControlsPreferenceController(context, "lockscreen_device_controls");
-        getSettingsLifecycle().addObserver(deviceControlsController);
         controllers.add(deviceControlsController);
         AmbientCustomizationPreferenceController ambientController =
                 new AmbientCustomizationPreferenceController(context, "ambient_customization");

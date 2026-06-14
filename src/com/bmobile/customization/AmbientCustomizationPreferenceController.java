@@ -75,6 +75,9 @@ public class AmbientCustomizationPreferenceController extends BasePreferenceCont
     }
 
     private CharSequence buildSummary() {
+        if (AmbientCustomizationsHelper.isAmbientDisplayEnabled(mContext)) {
+            return mContext.getString(R.string.ambient_master_title);
+        }
         if (!AmbientCustomizationsHelper.isAmbientCustomizationEnabled(mContext)) {
             return mContext.getString(R.string.ambient_customization_summary_off);
         }
