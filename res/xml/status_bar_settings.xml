@@ -36,8 +36,39 @@
             android:entries="@array/customization_battery_style_entries"
             android:entryValues="@array/customization_battery_style_values"
             android:defaultValue="0"
-            settings:layout="@layout/adaptive_preference_card_bottom"
+            settings:layout="@layout/adaptive_preference_card_middle"
             settings:controller="com.bmobile.customization.BatteryStylePreferenceController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/display_customization_category_statusbar_logo">
+        <SwitchPreferenceCompat
+            android:key="status_bar_logo"
+            android:title="@string/status_bar_logo_title"
+            android:summary="@string/status_bar_logo_summary"
+            android:defaultValue="false"
+            settings:layout="@layout/adaptive_preference_card_top_switch"
+            settings:controller="com.bmobile.customization.StatusBarLogoController" />
+
+        <ListPreference
+            android:key="status_bar_logo_position"
+            android:title="@string/status_bar_logo_position_title"
+            android:entries="@array/status_bar_logo_position_entries"
+            android:entryValues="@array/status_bar_logo_position_values"
+            android:defaultValue="0"
+            android:dependency="status_bar_logo"
+            settings:layout="@layout/adaptive_preference_card_middle"
+            settings:controller="com.bmobile.customization.StatusBarLogoPositionController" />
+
+        <ListPreference
+            android:key="status_bar_logo_style"
+            android:title="@string/status_bar_logo_style_title"
+            android:entries="@array/status_bar_logo_style_entries"
+            android:entryValues="@array/status_bar_logo_style_values"
+            android:defaultValue="0"
+            android:dependency="status_bar_logo"
+            settings:layout="@layout/adaptive_preference_card_bottom"
+            settings:controller="com.bmobile.customization.StatusBarLogoStyleController" />
     </PreferenceCategory>
 
 </PreferenceScreen>

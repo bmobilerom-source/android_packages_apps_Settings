@@ -51,17 +51,19 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
         super.displayPreference(screen);
 
         mPreference = screen.findPreference(getPreferenceKey());
-
-        mPreference.setEntries(new CharSequence[]{
-                mContext.getString(R.string.night_display_auto_mode_never),
-                mContext.getString(R.string.night_display_auto_mode_custom),
-                mContext.getString(R.string.night_display_auto_mode_twilight)
-        });
-        mPreference.setEntryValues(new CharSequence[]{
-                String.valueOf(ColorDisplayManager.AUTO_MODE_DISABLED),
-                String.valueOf(ColorDisplayManager.AUTO_MODE_CUSTOM_TIME),
-                String.valueOf(ColorDisplayManager.AUTO_MODE_TWILIGHT)
-        });
+        if (mPreference != null) {
+            mPreference.setLayoutResource(R.layout.adaptive_preference_card_top);
+            mPreference.setEntries(new CharSequence[]{
+                    mContext.getString(R.string.night_display_auto_mode_never),
+                    mContext.getString(R.string.night_display_auto_mode_custom),
+                    mContext.getString(R.string.night_display_auto_mode_twilight)
+            });
+            mPreference.setEntryValues(new CharSequence[]{
+                    String.valueOf(ColorDisplayManager.AUTO_MODE_DISABLED),
+                    String.valueOf(ColorDisplayManager.AUTO_MODE_CUSTOM_TIME),
+                    String.valueOf(ColorDisplayManager.AUTO_MODE_TWILIGHT)
+            });
+        }
     }
 
     @Override

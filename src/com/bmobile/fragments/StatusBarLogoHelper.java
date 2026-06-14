@@ -10,6 +10,10 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
+/**
+ * Persists status bar logo settings and notifies SystemUI.
+ * Style indices 0-32 must match crDroid SystemUI {@code LogoImage.updateLogo()}.
+ */
 public class StatusBarLogoHelper {
 
     // Settings keys

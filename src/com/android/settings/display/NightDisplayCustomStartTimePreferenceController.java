@@ -22,6 +22,7 @@ import android.hardware.display.ColorDisplayManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class NightDisplayCustomStartTimePreferenceController extends BasePreferenceController {
@@ -46,6 +47,9 @@ public class NightDisplayCustomStartTimePreferenceController extends BasePrefere
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setLayoutResource(R.layout.adaptive_preference_card_middle);
+        }
         updateState(preference);
     }
 

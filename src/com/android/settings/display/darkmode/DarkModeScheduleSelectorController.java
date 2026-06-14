@@ -55,7 +55,10 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        if (mBedtimeSettings.getBedtimeSettingsIntent() != null) {
+        if (mPreference != null) {
+            mPreference.setLayoutResource(R.layout.adaptive_preference_card);
+        }
+        if (mPreference != null && mBedtimeSettings.getBedtimeSettingsIntent() != null) {
             String[] entries = mContext.getResources().getStringArray(
                     R.array.dark_ui_scheduler_with_bedtime_preference_titles);
             mPreference.setEntries(entries);
