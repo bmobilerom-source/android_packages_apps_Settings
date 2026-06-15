@@ -17,16 +17,67 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="display_customizations3"
     android:title="@string/display_grid_demo_settings_title">
 
-    <ListPreference
-        android:key="system_animation_style"
-        android:title="@string/system_animation_style_title"
-        android:entries="@array/system_animation_styles_entries"
-        android:entryValues="@array/system_animation_styles_values"
-        android:defaultValue="0"
-        android:summary="%s"
-        settings:layout="@layout/adaptive_preference_card" />
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="demo_settings_illustration"
+        android:order="-1001"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/anim_ui" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="demo_settings_intro"
+        android:order="-1000"
+        android:title="@string/display_customizations3_intro_title"
+        android:summary="@string/display_customizations3_intro_summary"
+        settings:searchable="false" />
+
+    <PreferenceCategory
+        android:key="demo_animation_style_category"
+        android:title="@string/demo_animation_style_category">
+
+        <ListPreference
+            android:key="system_animation_style"
+            android:title="@string/system_animation_style_title"
+            android:summary="@string/system_animation_style_summary"
+            android:entries="@array/system_animation_styles_entries"
+            android:entryValues="@array/system_animation_styles_values"
+            android:defaultValue="0"
+            settings:layout="@layout/adaptive_preference_card" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="demo_animation_speed_category"
+        android:title="@string/demo_animation_speed_category">
+
+        <ListPreference
+            android:key="window_animation_scale"
+            android:title="@string/window_animation_scale_title"
+            android:entries="@array/window_animation_scale_entries"
+            android:entryValues="@array/window_animation_scale_values"
+            android:defaultValue="1"
+            android:summary="%s"
+            settings:layout="@layout/adaptive_preference_card_top" />
+
+        <ListPreference
+            android:key="transition_animation_scale"
+            android:title="@string/transition_animation_scale_title"
+            android:entries="@array/transition_animation_scale_entries"
+            android:entryValues="@array/transition_animation_scale_values"
+            android:defaultValue="1"
+            android:summary="%s"
+            settings:layout="@layout/adaptive_preference_card_middle" />
+
+        <ListPreference
+            android:key="animator_duration_scale"
+            android:title="@string/animator_duration_scale_title"
+            android:entries="@array/animator_duration_scale_entries"
+            android:entryValues="@array/animator_duration_scale_values"
+            android:defaultValue="1"
+            android:summary="%s"
+            settings:layout="@layout/adaptive_preference_card_bottom" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
