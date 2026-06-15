@@ -12,7 +12,8 @@ import android.util.Log;
 
 /**
  * Persists status bar logo settings and notifies SystemUI.
- * Style indices 0-32 must match crDroid SystemUI {@code LogoImage.updateLogo()}.
+ * Style indices 0-32 must match SystemUI {@code LogoImage.updateLogo()}.
+ * Position: 0 = left ({@code LogoImageView}), 1 = right ({@code LogoImageViewRight}).
  */
 public class StatusBarLogoHelper {
 

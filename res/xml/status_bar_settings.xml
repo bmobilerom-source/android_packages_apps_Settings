@@ -20,6 +20,12 @@
     android:key="status_bar_settings_screen"
     android:title="@string/display_grid_status_bar_title">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="status_bar_logo_illustration"
+        android:order="-1000"
+        settings:searchable="false"
+        settings:lottie_rawRes="@raw/statusbarlogo" />
+
     <PreferenceCategory
         android:title="@string/display_customization_category_statusbar">
         <SwitchPreferenceCompat
