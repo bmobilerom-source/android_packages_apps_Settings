@@ -98,6 +98,11 @@ public class AmbientCustomizations extends SettingsPreferenceFragment
             mAmbientTextAlign.setOnPreferenceChangeListener(this);
         }
 
+        final Preference preview = findPreference("ambient_preview");
+        if (preview != null) {
+            preview.setVisible(false);
+        }
+
         updatePreview();
     }
 

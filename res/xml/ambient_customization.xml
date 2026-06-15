@@ -6,14 +6,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/ambient_text_category_title">
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="ambient_customization_illustration"
         settings:searchable="false"
         android:order="-1000"
-        settings:lottie_rawRes="@raw/aod" />
+        app:lottie_rawRes="@raw/aod" />
 
+    <!-- Hidden: live phone mockup preview — top Lottie is the only header animation. -->
     <com.android.settingslib.widget.LayoutPreference
         android:key="ambient_preview"
         android:layout="@layout/ambient_customization_preview"
