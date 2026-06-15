@@ -24,8 +24,15 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="monet_color_illustration"
         android:order="-1999"
+        settings:searchable="false"
         app:lottie_rawRes="@raw/monet"
         app:lottie_speed="0.3" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="monet_color_settings_intro"
+        android:order="-1998"
+        android:title="@string/monet_color_settings_intro"
+        settings:searchable="false" />
 
     <!-- Select color preset disabled until preset gallery pipeline is fixed.
     <PreferenceCategory
