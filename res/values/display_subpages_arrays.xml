@@ -2,13 +2,13 @@
 <!--
      Arrays for display sub-pages.
 
-     Demo settings (com.bmobile.fragments.DisplayCustomizations3):
+     Animation settings (com.bmobile.fragments.DisplayCustomizations3):
        - system_animation_styles_entries
        - system_animation_styles_values
 -->
 <resources>
     <string-array name="system_animation_styles_entries">
-        <item>@string/color_default</item>
+        <item>@string/default_system_animation_style</item>
         <item>@string/pie_system_animation_style</item>
         <item>@string/scale_system_animation_style</item>
     </string-array>

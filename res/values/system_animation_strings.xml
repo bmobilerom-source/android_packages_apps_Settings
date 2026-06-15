@@ -15,9 +15,23 @@
      limitations under the License.
 -->
 <resources>
-    <!-- System Animation Style -->
-    <string name="system_animation_style_title">System animation style</string>
-    <string name="color_default">Default</string>
-    <string name="pie_system_animation_style">Android P</string>
-    <string name="scale_system_animation_style">Scale</string>
+    <!-- System transition style -->
+    <string name="system_animation_style_title">App transition style</string>
+    <string name="system_animation_style_summary">How apps open and close on screen</string>
+    <string name="default_system_animation_style">Stock</string>
+    <string name="pie_system_animation_style">Slide up (Pie)</string>
+    <string name="scale_system_animation_style">Scale &amp; slide</string>
+
+    <!-- Animation settings page -->
+    <string name="animation_style_category">Transition style</string>
+    <string name="animation_speed_category">Animation speed</string>
+
+    <!-- Animation speed scale labels -->
+    <string name="animation_scale_off">Off</string>
+    <string name="animation_scale_half">0.5×</string>
+    <string name="animation_scale_normal">1× (Normal)</string>
+    <string name="animation_scale_one_half">1.5×</string>
+    <string name="animation_scale_double">2×</string>
+    <string name="animation_scale_five">5×</string>
+    <string name="animation_scale_ten">10×</string>
 </resources>

@@ -44,8 +44,8 @@
     <string name="display_page_grid_title">Display</string>
     <string name="display_page_grid_summary">Display, theme, and visual customization</string>
     <string name="display_text_title">Display Text</string>
-    <string name="display_grid_demo_settings_title">Demo settings</string>
-    <string name="display_grid_demo_settings_summary">Android P system animation and display effects</string>
+    <string name="display_grid_demo_settings_title">Animation</string>
+    <string name="display_grid_demo_settings_summary">App transitions and animation speed</string>
     <string name="qs_header_title">QS Header</string>
     <string name="qs_header_summary">Customize the Quick Settings header image and visibility</string>
     <string name="qs_header_intro_title">Quick Settings header image</string>
@@ -81,10 +81,10 @@
     <string name="qs_header_file_pick_summary">Pick an image from storage for file provider</string>
     <string name="qs_header_footer">Customize the Quick Settings panel header with different images and control when they are displayed.</string>
     <string name="display_customizations3_title">Animation</string>
-    <string name="display_customizations3_intro_title">Display Effects</string>
-    <string name="display_customizations3_intro_summary">Customize display effects and animations</string>
+    <string name="display_customizations3_intro_title">Animation</string>
+    <string name="display_customizations3_intro_summary">Pick an app transition style and adjust how fast system animations play.</string>
     <string name="display_customizations_summary">Color temperature, animation scales</string>
-    <string name="display_color_settings_title">Animation</string>
+    <string name="display_color_settings_title">Color</string>
     <string name="display_color_settings_summary">Color calibration and modes</string>
     <string name="image_toolbox_title">Image Toolbox</string>
     <string name="image_toolbox_summary">Advanced image processing tools</string>

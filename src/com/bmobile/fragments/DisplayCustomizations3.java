@@ -25,13 +25,16 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.bmobile.customization.AnimatorDurationScaleController;
+import com.bmobile.customization.TransitionAnimationScaleController;
+import com.bmobile.customization.WindowAnimationScaleController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Demo settings page — system animation style (Default / Android P / Scale).
- * Opened from the Display grid Demo settings card.
+ * Animation settings page — transition style and animation speed controls.
+ * Opened from the Display grid Animation card.
  */
 @SearchIndexable
 public class DisplayCustomizations3 extends DashboardFragment {
@@ -57,6 +60,9 @@ public class DisplayCustomizations3 extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new SystemAnimationStyleController(context, "system_animation_style"));
+        controllers.add(new WindowAnimationScaleController(context));
+        controllers.add(new TransitionAnimationScaleController(context));
+        controllers.add(new AnimatorDurationScaleController(context));
         return controllers;
     }
 

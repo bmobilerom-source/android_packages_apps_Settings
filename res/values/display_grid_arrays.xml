@@ -123,14 +123,14 @@
     </string-array>
 
     <!-- Animation scale settings -->
-    <string-array name="animator_duration_scale_entries" translatable="false">
-        <item>Animation off</item>
-        <item>0.5x</item>
-        <item>1x</item>
-        <item>1.5x</item>
-        <item>2x</item>
-        <item>5x</item>
-        <item>10x</item>
+    <string-array name="animator_duration_scale_entries">
+        <item>@string/animation_scale_off</item>
+        <item>@string/animation_scale_half</item>
+        <item>@string/animation_scale_normal</item>
+        <item>@string/animation_scale_one_half</item>
+        <item>@string/animation_scale_double</item>
+        <item>@string/animation_scale_five</item>
+        <item>@string/animation_scale_ten</item>
     </string-array>
 
     <string-array name="animator_duration_scale_values" translatable="false">
@@ -143,14 +143,14 @@
         <item>10</item>
     </string-array>
 
-    <string-array name="transition_animation_scale_entries" translatable="false">
-        <item>Animation off</item>
-        <item>0.5x</item>
-        <item>1x</item>
-        <item>1.5x</item>
-        <item>2x</item>
-        <item>5x</item>
-        <item>10x</item>
+    <string-array name="transition_animation_scale_entries">
+        <item>@string/animation_scale_off</item>
+        <item>@string/animation_scale_half</item>
+        <item>@string/animation_scale_normal</item>
+        <item>@string/animation_scale_one_half</item>
+        <item>@string/animation_scale_double</item>
+        <item>@string/animation_scale_five</item>
+        <item>@string/animation_scale_ten</item>
     </string-array>
 
     <string-array name="transition_animation_scale_values" translatable="false">
@@ -163,14 +163,14 @@
         <item>10</item>
     </string-array>
 
-    <string-array name="window_animation_scale_entries" translatable="false">
-        <item>Animation off</item>
-        <item>0.5x</item>
-        <item>1x</item>
-        <item>1.5x</item>
-        <item>2x</item>
-        <item>5x</item>
-        <item>10x</item>
+    <string-array name="window_animation_scale_entries">
+        <item>@string/animation_scale_off</item>
+        <item>@string/animation_scale_half</item>
+        <item>@string/animation_scale_normal</item>
+        <item>@string/animation_scale_one_half</item>
+        <item>@string/animation_scale_double</item>
+        <item>@string/animation_scale_five</item>
+        <item>@string/animation_scale_ten</item>
     </string-array>
 
     <string-array name="window_animation_scale_values" translatable="false">
