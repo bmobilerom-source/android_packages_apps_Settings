@@ -45,10 +45,10 @@ public final class KsFunDashboardHelper {
         final int type = KidsSafeGridAdapter.CARD_TYPE_STANDARD;
 
         items.add(new KidsSafeGridAdapter.CardItem(type,
-                R.string.connected_devices_dashboard_title,
-                R.string.connected_devices_dashboard_default_summary,
-                "com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment",
-                R.drawable.ic_devices_other_filled));
+                R.string.system_basic_defaults_title,
+                R.string.system_basic_defaults_summary,
+                "com.bmobile.fragments.SystemBasicDefaultsSettings",
+                R.drawable.ic_settings_system_dashboard_filled));
 
         items.add(new KidsSafeGridAdapter.CardItem(type,
                 R.string.configure_notification_settings,
@@ -69,10 +69,10 @@ public final class KsFunDashboardHelper {
                 R.drawable.ic_settings_display_filled));
 
         items.add(new KidsSafeGridAdapter.CardItem(type,
-                R.string.power_usage_summary_title,
-                R.string.summary_placeholder,
-                "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
-                R.drawable.ic_settings_battery_filled));
+                R.string.privacy_controls_title,
+                R.string.privacy_controls_summary,
+                "com.android.settings.privacy.PrivacyControlsFragment",
+                R.drawable.ic_settings_privacy_filled));
 
         items.add(new KidsSafeGridAdapter.CardItem(type,
                 R.string.header_category_system,

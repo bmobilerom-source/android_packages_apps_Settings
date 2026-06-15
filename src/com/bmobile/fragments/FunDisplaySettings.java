@@ -88,14 +88,6 @@ public class FunDisplaySettings extends SettingsPreferenceFragment {
                     "com.android.settings.network.NetworkDashboardFragment",
                     R.drawable.ic_settings_wireless_filled));
             
-            // System Basic Defaults
-            items.add(new FunDisplaySettingsAdapter.CardItem(
-                    FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.bmobile_dashboard_title,
-                    R.string.bmobile_dashboard_summary,
-                    "com.bmobile.fragments.BMobileDashboardSettings",
-                    R.drawable.ic_settings_system_dashboard_filled));
-            
             // Connected Devices
             items.add(new FunDisplaySettingsAdapter.CardItem(
                     FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
@@ -120,31 +112,34 @@ public class FunDisplaySettings extends SettingsPreferenceFragment {
                     "com.android.settings.notification.SoundSettings",
                     R.drawable.ic_volume_up_filled));
             
-            // Display - opens BMobile DisplayPageGrid
-            items.add(new FunDisplaySettingsAdapter.CardItem(
-                    FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.display_page_grid_title,
-                    R.string.display_page_grid_summary,
-                    "com.bmobile.fragments.BmobileDisplayPageGrid",
-                    R.drawable.ic_settings_display_filled));
-            
-            // Battery
-            items.add(new FunDisplaySettingsAdapter.CardItem(
-                    FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.power_usage_summary_title,
-                    R.string.summary_placeholder,
-                    "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
-                    R.drawable.ic_settings_battery_filled));
-            
-            // System
+            // System (replaces storage shortcut)
             items.add(new FunDisplaySettingsAdapter.CardItem(
                     FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
                     R.string.header_category_system,
                     R.string.system_dashboard_summary,
                     "com.android.settings.system.SystemDashboardFragment",
                     R.drawable.ic_settings_system_dashboard_filled));
-            
-            // Security and Privacy cards removed per user request
+
+            items.add(new FunDisplaySettingsAdapter.CardItem(
+                    FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+                    R.string.power_usage_summary_title,
+                    R.string.summary_placeholder,
+                    "com.android.settings.fuelgauge.batteryusage.PowerUsageSummary",
+                    R.drawable.ic_settings_battery_filled));
+
+            items.add(new FunDisplaySettingsAdapter.CardItem(
+                    FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+                    R.string.security_settings_title,
+                    R.string.security_dashboard_summary,
+                    "com.android.settings.security.SecuritySettings",
+                    R.drawable.ic_settings_security_filled));
+
+            items.add(new FunDisplaySettingsAdapter.CardItem(
+                    FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
+                    R.string.privacy_controls_title,
+                    R.string.privacy_controls_summary,
+                    "com.android.settings.privacy.PrivacyControlsFragment",
+                    R.drawable.ic_settings_privacy_filled));
             
             // Location
             items.add(new FunDisplaySettingsAdapter.CardItem(
@@ -154,13 +149,13 @@ public class FunDisplaySettings extends SettingsPreferenceFragment {
                     "com.android.settings.location.LocationSettings",
                     R.drawable.ic_settings_location_filled));
             
-            // Accessibility
+            // Display page grid (replaces accessibility shortcut)
             items.add(new FunDisplaySettingsAdapter.CardItem(
                     FunDisplaySettingsAdapter.CARD_TYPE_STANDARD,
-                    R.string.accessibility_settings,
-                    R.string.accessibility_settings_summary,
-                    "com.android.settings.accessibility.AccessibilitySettings",
-                    R.drawable.ic_settings_accessibility_filled));
+                    R.string.display_page_grid_title,
+                    R.string.display_page_grid_summary,
+                    "com.bmobile.fragments.BmobileDisplayPageGrid",
+                    R.drawable.ic_settings_display_filled));
 
             RestrictedDashboardContentHelper.filterFunDisplayGridItems(context, items);
             rv.setAdapter(new FunDisplaySettingsAdapter(activity, items, getMetricsCategory()));
