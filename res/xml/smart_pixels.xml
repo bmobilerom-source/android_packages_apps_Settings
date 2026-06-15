@@ -26,11 +26,13 @@
         settings:searchable="false"
         app:lottie_rawRes="@raw/display" />
 
-    <com.android.settingslib.widget.TopIntroPreference
+    <Preference
         android:key="smart_pixels_intro"
         android:title="@string/smart_pixels_intro_title"
         android:summary="@string/smart_pixels_intro_summary"
-        android:order="-1000" />
+        android:order="-1000"
+        android:selectable="false"
+        settings:searchable="false" />
 
     <PreferenceCategory
         android:title="@string/smart_pixels_title"
@@ -69,12 +71,5 @@
             settings:layout="@layout/adaptive_preference_card_bottom" />
 
     </PreferenceCategory>
-
-    <com.android.settingslib.widget.FooterPreference
-        android:key="smart_pixels_footer"
-        android:title="@string/smart_pixels_footer"
-        android:selectable="false"
-        android:order="999"
-        settings:searchable="false" />
 
 </PreferenceScreen>
