@@ -26,48 +26,54 @@
         settings:searchable="false"
         app:lottie_rawRes="@raw/display" />
 
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="qs_header_intro"
-        android:title="@string/qs_header_title"
-        android:summary="@string/qs_header_summary"
-        android:order="-1000" />
-
-    <ListPreference
-        android:key="qs_header_provider"
-        android:title="@string/qs_header_provider_title"
-        android:summary="@string/qs_header_provider_summary"
-        android:entries="@array/custom_header_provider_entries"
-        android:entryValues="@array/custom_header_provider_values"
-        android:defaultValue="static"
-        android:order="0" />
-
-    <Preference
-        android:key="qs_header_image_gallery"
-        android:title="@string/qs_header_image_title"
-        android:summary="@string/qs_header_image_summary"
-        android:order="1"
-        settings:layout="@layout/adaptive_preference_card" />
-
-    <Preference
-        android:key="qs_header_file_pick"
-        android:title="@string/qs_header_file_pick_title"
-        android:summary="@string/qs_header_file_pick_summary"
-        android:order="2"
-        settings:layout="@layout/adaptive_preference_card" />
-
-    <ListPreference
-        android:key="qs_header_daylight_pack"
-        android:title="@string/qs_header_daylight_pack_title"
-        android:summary="@string/qs_header_daylight_pack_summary"
-        android:order="3" />
-
-
-    <com.android.settingslib.widget.FooterPreference
-        android:key="qs_header_footer"
-        android:title="@string/qs_header_footer"
-        android:selectable="false"
-        android:order="999"
+    <!-- Hidden: custom header stays enabled; toggle not shown in UI. -->
+    <SwitchPreferenceCompat
+        android:key="qs_header_enable"
+        android:title="@string/qs_header_enable_title"
+        android:summary="@string/qs_header_enable_summary"
+        android:defaultValue="true"
+        android:order="-999"
         settings:searchable="false" />
 
-</PreferenceScreen>
+    <PreferenceCategory
+        android:key="qs_header_image_category"
+        android:title="@string/qs_header_image_category"
+        android:order="0">
 
+        <Preference
+            android:key="qs_header_image_gallery"
+            android:title="@string/qs_header_provider_gallery"
+            android:summary="@string/qs_header_image_summary"
+            android:order="0"
+            settings:layout="@layout/adaptive_preference_card" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="qs_header_appearance_category"
+        android:title="@string/qs_header_appearance_category"
+        android:order="1">
+
+        <com.android.settings.widget.SeekBarPreference
+            android:key="qs_header_height"
+            android:title="@string/qs_header_height_title"
+            android:summary="@string/qs_header_height_summary"
+            android:defaultValue="142"
+            android:min="80"
+            android:max="260"
+            android:order="0" />
+
+        <!-- Developer: shadow fade hidden until QS header fade UX is finalized.
+        <com.android.settings.widget.SeekBarPreference
+            android:key="qs_header_shadow"
+            android:title="@string/qs_header_shadow_title"
+            android:summary="@string/qs_header_shadow_summary"
+            android:defaultValue="0"
+            android:min="0"
+            android:max="255"
+            android:order="1" />
+        -->
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

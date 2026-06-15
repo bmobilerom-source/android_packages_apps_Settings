@@ -34,11 +34,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Activity for selecting QS header images from a gallery grid
@@ -63,9 +66,19 @@ public class HeaderImageGalleryActivity extends Activity {
 
         mPreviewImage = findViewById(R.id.preview_image);
         mRecyclerView = findViewById(R.id.image_grid);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3)); // 3 columns
+
+        final GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        layoutManager.setInitialPrefetchItemCount(6);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setItemViewCacheSize(24);
+        if (mRecyclerView.getItemAnimator() instanceof SimpleItemAnimator animator) {
+            animator.setSupportsChangeAnimations(false);
+            animator.setChangeDuration(0);
+        }
 
         mImages = loadHeaderImages();
+        preloadThumbnails();
         mAdapter = new HeaderImageAdapter(this, mImages, this::onImageSelected);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -180,6 +193,14 @@ public class HeaderImageGalleryActivity extends Activity {
                     + ". Apply the SystemUI custom-header image pack ([2/2] QS patch).");
         }
         return images;
+    }
+
+    private void preloadThumbnails() {
+        final ExecutorService executor = Executors.newFixedThreadPool(4);
+        for (HeaderImageInfo image : mImages) {
+            executor.execute(() -> image.getThumbnail(getApplicationContext()));
+        }
+        executor.shutdown();
     }
 
     @Nullable

@@ -34,6 +34,8 @@ import java.util.List;
  */
 public class HeaderImageAdapter extends RecyclerView.Adapter<HeaderImageAdapter.ViewHolder> {
 
+    private static final Object PAYLOAD_SELECTION = new Object();
+
     private final Context mContext;
     private final List<HeaderImageInfo> mImages;
     private final OnImageSelectedListener mListener;
@@ -44,7 +46,7 @@ public class HeaderImageAdapter extends RecyclerView.Adapter<HeaderImageAdapter.
     }
 
     public HeaderImageAdapter(Context context, List<HeaderImageInfo> images,
-                             OnImageSelectedListener listener) {
+            OnImageSelectedListener listener) {
         mContext = context;
         mImages = images;
         mListener = listener;
@@ -55,29 +57,33 @@ public class HeaderImageAdapter extends RecyclerView.Adapter<HeaderImageAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext)
                 .inflate(R.layout.header_image_item, parent, false);
-        return new ViewHolder(view);
+        ViewHolder holder = new ViewHolder(view);
+        holder.itemView.setOnClickListener(v -> {
+            final int position = holder.getBindingAdapterPosition();
+            if (position == RecyclerView.NO_POSITION || mListener == null) {
+                return;
+            }
+            mListener.onImageSelected(mImages.get(position), position);
+            setSelectedPosition(position);
+        });
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HeaderImageInfo imageInfo = mImages.get(position);
         holder.thumbnailView.setImageDrawable(imageInfo.getThumbnail(mContext));
+        holder.updateSelection(position == mSelectedPosition);
+    }
 
-        // Handle selection indicator
-        View selectionIndicator = holder.itemView.findViewById(R.id.selection_indicator);
-        if (selectionIndicator != null) {
-            selectionIndicator.setVisibility(position == mSelectedPosition ? View.VISIBLE : View.GONE);
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position,
+            @NonNull List<Object> payloads) {
+        if (!payloads.isEmpty()) {
+            holder.updateSelection(position == mSelectedPosition);
+            return;
         }
-
-        // Handle background based on selection
-        holder.itemView.setSelected(position == mSelectedPosition);
-
-        holder.itemView.setOnClickListener(v -> {
-            if (mListener != null) {
-                mListener.onImageSelected(imageInfo, position);
-            }
-            setSelectedPosition(position);
-        });
+        onBindViewHolder(holder, position);
     }
 
     @Override
@@ -89,10 +95,10 @@ public class HeaderImageAdapter extends RecyclerView.Adapter<HeaderImageAdapter.
         int oldPosition = mSelectedPosition;
         mSelectedPosition = position;
         if (oldPosition >= 0) {
-            notifyItemChanged(oldPosition);
+            notifyItemChanged(oldPosition, PAYLOAD_SELECTION);
         }
         if (position >= 0) {
-            notifyItemChanged(position);
+            notifyItemChanged(position, PAYLOAD_SELECTION);
         }
     }
 
@@ -102,10 +108,19 @@ public class HeaderImageAdapter extends RecyclerView.Adapter<HeaderImageAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final ImageView thumbnailView;
+        private final View mSelectionIndicator;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             thumbnailView = itemView.findViewById(R.id.image_thumbnail);
+            mSelectionIndicator = itemView.findViewById(R.id.selection_indicator);
+        }
+
+        void updateSelection(boolean selected) {
+            if (mSelectionIndicator != null) {
+                mSelectionIndicator.setVisibility(selected ? View.VISIBLE : View.GONE);
+            }
+            itemView.setSelected(selected);
         }
     }
 }

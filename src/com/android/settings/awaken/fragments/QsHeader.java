@@ -18,44 +18,38 @@ package com.android.settings.awaken.fragments;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.display.HeaderFilePickerActivity;
 import com.android.settings.display.HeaderImageGalleryActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
 import android.provider.SearchIndexableResource;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
 public class QsHeader extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
-    private static final String KEY_QS_HEADER_PROVIDER = "qs_header_provider";
+    private static final String KEY_QS_HEADER_ENABLE = "qs_header_enable";
     private static final String KEY_QS_HEADER_IMAGE_GALLERY = "qs_header_image_gallery";
-    private static final String KEY_QS_HEADER_FILE_PICK = "qs_header_file_pick";
-    private static final String KEY_QS_HEADER_DAYLIGHT_PACK = "qs_header_daylight_pack";
-    private static final String DEFAULT_PROVIDER = "static";
+    private static final String KEY_QS_HEADER_HEIGHT = "qs_header_height";
+    private static final String GALLERY_PROVIDER = "static";
+    private static final int DEFAULT_HEADER_HEIGHT = 142;
 
-    private ListPreference mHeaderProvider;
     private Preference mHeaderImageGallery;
-    private Preference mFilePick;
-    private ListPreference mDaylightPack;
+    private SeekBarPreference mHeaderHeight;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,60 +57,58 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
         addPreferencesFromResource(R.xml.qs_header);
 
         final ContentResolver resolver = requireActivity().getContentResolver();
+        ensureHeaderEnabled(resolver);
 
-        mHeaderProvider = findPreference(KEY_QS_HEADER_PROVIDER);
-        if (mHeaderProvider != null) {
-            mHeaderProvider.setOnPreferenceChangeListener(this);
-            final String provider = getNormalizedProvider(resolver);
-            mHeaderProvider.setValue(provider);
-            updateProviderSummary(provider);
+        final SwitchPreferenceCompat headerEnable = findPreference(KEY_QS_HEADER_ENABLE);
+        if (headerEnable != null) {
+            // Developer: hidden toggle — header remains enabled via ensureHeaderEnabled().
+            headerEnable.setVisible(false);
+            headerEnable.setChecked(true);
         }
 
         mHeaderImageGallery = findPreference(KEY_QS_HEADER_IMAGE_GALLERY);
         if (mHeaderImageGallery != null) {
             mHeaderImageGallery.setOnPreferenceClickListener(pref -> {
+                ensureHeaderEnabled(requireActivity().getContentResolver());
                 requireActivity().startActivity(
                         new Intent(requireActivity(), HeaderImageGalleryActivity.class));
                 return true;
             });
         }
 
-        mFilePick = findPreference(KEY_QS_HEADER_FILE_PICK);
-        if (mFilePick != null) {
-            mFilePick.setOnPreferenceClickListener(pref -> {
-                requireActivity().startActivity(
-                        new Intent(requireActivity(), HeaderFilePickerActivity.class));
-                return true;
-            });
+        mHeaderHeight = findPreference(KEY_QS_HEADER_HEIGHT);
+        if (mHeaderHeight != null) {
+            final int height = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER_HEIGHT,
+                    DEFAULT_HEADER_HEIGHT, UserHandle.USER_CURRENT);
+            mHeaderHeight.setProgress(height);
+            mHeaderHeight.setOnPreferenceChangeListener(this);
+            updateHeaderHeightSummary(height);
         }
 
-        mDaylightPack = findPreference(KEY_QS_HEADER_DAYLIGHT_PACK);
-        if (mDaylightPack != null) {
-            mDaylightPack.setOnPreferenceChangeListener(this);
-            refreshDaylightPackEntries();
-        }
-
-        final String provider = mHeaderProvider != null ? mHeaderProvider.getValue() : DEFAULT_PROVIDER;
-        updateProviderDependentPreferences(provider);
         updateGallerySummary();
-        updateFilePickSummary();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         final ContentResolver resolver = requireActivity().getContentResolver();
-        if (mHeaderProvider != null) {
-            final String provider = getNormalizedProvider(resolver);
-            mHeaderProvider.setValue(provider);
-            updateProviderSummary(provider);
-            updateProviderDependentPreferences(provider);
-            if ("daylight".equals(provider)) {
-                refreshDaylightPackEntries();
-            }
+        ensureHeaderEnabled(resolver);
+
+        final SwitchPreferenceCompat headerEnable = findPreference(KEY_QS_HEADER_ENABLE);
+        if (headerEnable != null) {
+            headerEnable.setVisible(false);
+            headerEnable.setChecked(true);
+        }
+
+        if (mHeaderHeight != null) {
+            final int height = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER_HEIGHT,
+                    DEFAULT_HEADER_HEIGHT, UserHandle.USER_CURRENT);
+            mHeaderHeight.setProgress(height);
+            updateHeaderHeightSummary(height);
         }
         updateGallerySummary();
-        updateFilePickSummary();
     }
 
     @Override
@@ -127,90 +119,42 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final ContentResolver resolver = requireActivity().getContentResolver();
-        if (preference == mHeaderProvider) {
-            final String provider = (String) newValue;
-            // Ensure the feature is enabled if user is configuring providers.
-            Settings.System.putIntForUser(resolver,
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER,
-                    1, UserHandle.USER_CURRENT);
-            final boolean success = Settings.System.putStringForUser(resolver,
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER,
-                    provider, UserHandle.USER_CURRENT);
-            if (success) {
-                notifyCustomHeaderChanged(resolver);
-                updateProviderSummary(provider);
-                updateProviderDependentPreferences(provider);
-            }
-            return success;
-        }
-        if (preference == mDaylightPack) {
-            final String value = (String) newValue;
-            Settings.System.putIntForUser(resolver,
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER,
-                    1, UserHandle.USER_CURRENT);
-            final boolean success = Settings.System.putStringForUser(resolver,
-                    Settings.System.STATUS_BAR_DAYLIGHT_HEADER_PACK,
-                    value != null && !value.isEmpty() ? value : null,
-                    UserHandle.USER_CURRENT);
+        if (preference == mHeaderHeight) {
+            final int height = (Integer) newValue;
+            final boolean success = Settings.System.putIntForUser(resolver,
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER_HEIGHT,
+                    height, UserHandle.USER_CURRENT);
             if (success) {
                 notifyCustomHeaderChanged(resolver);
                 resolver.notifyChange(
-                        Settings.System.getUriFor(Settings.System.STATUS_BAR_DAYLIGHT_HEADER_PACK),
+                        Settings.System.getUriFor(
+                                Settings.System.STATUS_BAR_CUSTOM_HEADER_HEIGHT),
                         null, false);
-                updateDaylightPackSummary(value);
+                updateHeaderHeightSummary(height);
             }
             return success;
         }
         return false;
     }
 
-    private void updateProviderSummary(String provider) {
-        if (mHeaderProvider == null) {
-            return;
+    /** Custom header is always enabled; toggle hidden in UI. */
+    private static void ensureHeaderEnabled(ContentResolver resolver) {
+        if (Settings.System.getIntForUser(resolver,
+                Settings.System.STATUS_BAR_CUSTOM_HEADER,
+                1, UserHandle.USER_CURRENT) != 1) {
+            Settings.System.putIntForUser(resolver,
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER,
+                    1, UserHandle.USER_CURRENT);
+            notifyCustomHeaderChanged(resolver);
         }
-        final String[] entries = getResources().getStringArray(R.array.custom_header_provider_entries);
-        final String[] values = getResources().getStringArray(R.array.custom_header_provider_values);
-        for (int i = 0; i < values.length; i++) {
-            if (provider.equals(values[i])) {
-                mHeaderProvider.setSummary(entries[i]);
-                return;
-            }
-        }
-    }
-
-    private void updateProviderDependentPreferences(String provider) {
-        final boolean isStatic = "static".equals(provider);
-        final boolean isDaylight = "daylight".equals(provider);
-        final boolean isFile = "file".equals(provider);
-
-        if (mHeaderImageGallery != null) {
-            mHeaderImageGallery.setVisible(isStatic);
-        }
-        if (mFilePick != null) {
-            mFilePick.setVisible(isFile);
-        }
-        if (mDaylightPack != null) {
-            mDaylightPack.setVisible(isDaylight);
-        }
-    }
-
-    private String getNormalizedProvider(ContentResolver resolver) {
-        String provider = Settings.System.getStringForUser(resolver,
+        final String provider = Settings.System.getStringForUser(resolver,
                 Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER, UserHandle.USER_CURRENT);
-        if (TextUtils.isEmpty(provider) || !isKnownProvider(provider)) {
-            return DEFAULT_PROVIDER;
+        if (!GALLERY_PROVIDER.equals(provider)) {
+            Settings.System.putStringForUser(resolver,
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER_PROVIDER,
+                    GALLERY_PROVIDER, UserHandle.USER_CURRENT);
+            notifyCustomHeaderChanged(resolver);
         }
-        return provider;
-    }
-
-    private boolean isKnownProvider(String provider) {
-        final String[] values = getResources().getStringArray(R.array.custom_header_provider_values);
-        for (String value : values) {
-            if (provider.equals(value)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void updateGallerySummary() {
@@ -228,72 +172,10 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
         }
     }
 
-    private void updateFilePickSummary() {
-        if (mFilePick == null) {
-            return;
+    private void updateHeaderHeightSummary(int height) {
+        if (mHeaderHeight != null) {
+            mHeaderHeight.setSummary(getString(R.string.qs_header_height_summary_value, height));
         }
-        final String currentPath = Settings.System.getStringForUser(
-                requireActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_FILE_HEADER_IMAGE,
-                UserHandle.USER_CURRENT);
-        if (!TextUtils.isEmpty(currentPath)) {
-            mFilePick.setSummary(R.string.qs_header_image_custom_selected);
-        } else {
-            mFilePick.setSummary(R.string.qs_header_file_pick_summary);
-        }
-    }
-
-    private void refreshDaylightPackEntries() {
-        if (mDaylightPack == null) {
-            return;
-        }
-
-        final List<String> entries = new ArrayList<>();
-        final List<String> values = new ArrayList<>();
-
-        entries.add(getString(R.string.qs_header_daylight_pack_default));
-        values.add("");
-
-        final PackageManager pm = requireActivity().getPackageManager();
-        final List<ApplicationInfo> apps = pm.getInstalledApplications(0);
-        for (ApplicationInfo app : apps) {
-            if (app == null || app.packageName == null) {
-                continue;
-            }
-            try {
-                final Resources res = pm.getResourcesForApplication(app.packageName);
-                try (InputStream in = res.getAssets().open("daylight_header.xml")) {
-                    // If we can open the asset, it looks like a valid pack.
-                    entries.add(pm.getApplicationLabel(app).toString());
-                    values.add(app.packageName);
-                }
-            } catch (Exception ignored) {
-                // Not a header pack.
-            }
-        }
-
-        mDaylightPack.setEntries(entries.toArray(new CharSequence[0]));
-        mDaylightPack.setEntryValues(values.toArray(new CharSequence[0]));
-
-        final String currentValue = Settings.System.getStringForUser(
-                requireActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_DAYLIGHT_HEADER_PACK,
-                UserHandle.USER_CURRENT);
-        final String normalized = currentValue != null ? currentValue : "";
-        mDaylightPack.setValue(normalized);
-        updateDaylightPackSummary(normalized);
-    }
-
-    private void updateDaylightPackSummary(String value) {
-        if (mDaylightPack == null) {
-            return;
-        }
-        final CharSequence entry = mDaylightPack.getEntry();
-        if (entry != null) {
-            mDaylightPack.setSummary(entry);
-            return;
-        }
-        mDaylightPack.setSummary(R.string.qs_header_daylight_pack_summary);
     }
 
     private static void notifyCustomHeaderChanged(ContentResolver resolver) {
@@ -318,4 +200,3 @@ public class QsHeader extends SettingsPreferenceFragment implements OnPreference
                 }
             };
 }
-
