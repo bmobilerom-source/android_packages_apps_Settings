@@ -96,6 +96,8 @@
     <!-- Smart Pixels -->
     <string name="smart_pixels_title">Smart Pixels</string>
     <string name="smart_pixels_summary">Reduce power consumption by turning off pixels in a pattern</string>
+    <string name="smart_pixels_intro_title">Save battery on OLED screens</string>
+    <string name="smart_pixels_intro_summary">Smart Pixels dims the display by turning off a percentage of pixels in a shifting checkerboard pattern. Choose how aggressive the pattern is and how often it moves. You can also turn it on automatically when battery saver is active. Higher settings save more power but may make the screen look slightly uneven.</string>
     <string name="smart_pixels_enable_title">Enable Smart Pixels</string>
     <string name="smart_pixels_enable_summary">Turn off pixels in a pattern to save battery</string>
     <string name="smart_pixels_on_power_save_title">Enable on Power Save</string>

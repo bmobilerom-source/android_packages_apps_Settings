@@ -26,47 +26,51 @@
         settings:searchable="false"
         app:lottie_rawRes="@raw/display" />
 
-    <com.android.settingslib.widget.TopIntroPreference
+    <Preference
         android:key="smart_pixels_intro"
+        android:title="@string/smart_pixels_intro_title"
+        android:summary="@string/smart_pixels_intro_summary"
+        android:order="-1000"
+        android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card"
+        settings:searchable="false" />
+
+    <PreferenceCategory
         android:title="@string/smart_pixels_title"
-        android:summary="@string/smart_pixels_summary"
-        android:order="-1000" />
+        android:order="0">
 
-    <!-- Smart Pixels Enable -->
-    <SwitchPreference
-        android:key="smart_pixels_enable"
-        android:title="@string/smart_pixels_enable_title"
-        android:summary="@string/smart_pixels_enable_summary"
-        android:defaultValue="false"
-        app:position="0" />
+        <SwitchPreferenceCompat
+            android:key="smart_pixels_enable"
+            android:title="@string/smart_pixels_enable_title"
+            android:summary="@string/smart_pixels_enable_summary"
+            android:defaultValue="false"
+            settings:layout="@layout/adaptive_preference_card_top_switch" />
 
-    <!-- Smart Pixels on Power Save -->
-    <SwitchPreference
-        android:key="smart_pixels_on_power_save"
-        android:title="@string/smart_pixels_on_power_save_title"
-        android:summary="@string/smart_pixels_on_power_save_summary"
-        android:defaultValue="false"
-        app:position="1" />
+        <SwitchPreferenceCompat
+            android:key="smart_pixels_on_power_save"
+            android:title="@string/smart_pixels_on_power_save_title"
+            android:summary="@string/smart_pixels_on_power_save_summary"
+            android:defaultValue="false"
+            settings:layout="@layout/adaptive_preference_card_middle_switch" />
 
-    <!-- Smart Pixels Pattern -->
-    <ListPreference
-        android:key="smart_pixels_pattern"
-        android:title="@string/smart_pixels_pattern_title"
-        android:summary="@string/smart_pixels_pattern_summary"
-        android:entries="@array/smart_pixels_percent_strings"
-        android:entryValues="@array/smart_pixels_percent_values"
-        android:defaultValue="0"
-        app:position="2" />
+        <ListPreference
+            android:key="smart_pixels_pattern"
+            android:title="@string/smart_pixels_pattern_title"
+            android:summary="@string/smart_pixels_pattern_summary"
+            android:entries="@array/smart_pixels_percent_strings"
+            android:entryValues="@array/smart_pixels_percent_values"
+            android:defaultValue="0"
+            settings:layout="@layout/adaptive_preference_card_middle" />
 
-    <!-- Smart Pixels Shift Time -->
-    <ListPreference
-        android:key="smart_pixels_shift_time"
-        android:title="@string/smart_pixels_shift_time_title"
-        android:summary="@string/smart_pixels_shift_time_summary"
-        android:entries="@array/smart_pixels_shift_times"
-        android:entryValues="@array/smart_pixels_shift_values"
-        android:defaultValue="0"
-        app:position="3" />
+        <ListPreference
+            android:key="smart_pixels_shift_time"
+            android:title="@string/smart_pixels_shift_time_title"
+            android:summary="@string/smart_pixels_shift_time_summary"
+            android:entries="@array/smart_pixels_shift_times"
+            android:entryValues="@array/smart_pixels_shift_values"
+            android:defaultValue="0"
+            settings:layout="@layout/adaptive_preference_card_bottom" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
-
