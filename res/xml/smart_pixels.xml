@@ -32,6 +32,7 @@
         android:summary="@string/smart_pixels_intro_summary"
         android:order="-1000"
         android:selectable="false"
+        settings:layout="@layout/adaptive_preference_card"
         settings:searchable="false" />
 
     <PreferenceCategory
