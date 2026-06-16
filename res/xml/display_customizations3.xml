@@ -19,24 +19,24 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="display_customizations3"
-    android:title="@string/display_grid_demo_settings_title">
+    android:title="@string/display_customizations3_title">
 
     <com.android.settingslib.widget.IllustrationPreference
-        android:key="demo_settings_illustration"
+        android:key="animation_settings_illustration"
         android:order="-1001"
         settings:searchable="false"
         app:lottie_rawRes="@raw/anim_ui" />
 
     <com.android.settingslib.widget.TopIntroPreference
-        android:key="demo_settings_intro"
+        android:key="animation_settings_intro"
         android:order="-1000"
         android:title="@string/display_customizations3_intro_title"
         android:summary="@string/display_customizations3_intro_summary"
         settings:searchable="false" />
 
     <PreferenceCategory
-        android:key="demo_animation_style_category"
-        android:title="@string/demo_animation_style_category">
+        android:key="animation_style_category"
+        android:title="@string/animation_style_category">
 
         <ListPreference
             android:key="system_animation_style"
@@ -49,8 +49,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="demo_animation_speed_category"
-        android:title="@string/demo_animation_speed_category">
+        android:key="animation_speed_category"
+        android:title="@string/animation_speed_category">
 
         <ListPreference
             android:key="window_animation_scale"

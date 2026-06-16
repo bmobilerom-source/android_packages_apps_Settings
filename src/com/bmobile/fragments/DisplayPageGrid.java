@@ -134,13 +134,6 @@ public class DisplayPageGrid extends SettingsPreferenceFragment implements
 
             items.add(new DisplayPageGridAdapter.CardItem(
                     DisplayPageGridAdapter.CARD_TYPE_SMALL,
-                    R.string.font_settings_title,
-                    R.string.font_settings_summary,
-                    "com.bmobile.fragments.FontSettingsFragment",
-                    null));
-
-            items.add(new DisplayPageGridAdapter.CardItem(
-                    DisplayPageGridAdapter.CARD_TYPE_SMALL,
                     R.string.display_grid_demo_settings_title,
                     R.string.display_grid_demo_settings_summary,
                     "com.bmobile.fragments.DisplayCustomizations3",

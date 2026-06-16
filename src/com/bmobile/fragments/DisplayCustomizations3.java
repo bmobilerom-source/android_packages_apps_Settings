@@ -33,8 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Demo settings page — transition style and animation speed controls.
- * Opened from the Display grid Demo settings card.
+ * Animation settings page — transition style and animation speed controls.
+ * Opened from the Display grid Animation card.
  */
 @SearchIndexable
 public class DisplayCustomizations3 extends DashboardFragment {

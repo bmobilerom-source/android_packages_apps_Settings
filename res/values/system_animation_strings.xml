@@ -22,9 +22,9 @@
     <string name="pie_system_animation_style">Slide up (Pie)</string>
     <string name="scale_system_animation_style">Scale &amp; slide</string>
 
-    <!-- Demo settings page -->
-    <string name="demo_animation_style_category">Transition style</string>
-    <string name="demo_animation_speed_category">Animation speed</string>
+    <!-- Animation settings page -->
+    <string name="animation_style_category">Transition style</string>
+    <string name="animation_speed_category">Animation speed</string>
 
     <!-- Animation speed scale labels -->
     <string name="animation_scale_off">Off</string>
