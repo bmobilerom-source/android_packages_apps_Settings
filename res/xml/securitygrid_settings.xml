@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/securitygrid_title">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="securitygrid_recycler_pref"
+        android:selectable="false"
+        android:layout="@layout/securitygrid_two_column_grid" />
+</PreferenceScreen>

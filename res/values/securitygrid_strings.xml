@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile — portable SecurityGrid bundle -->
+<resources>
+    <string name="securitygrid_title">BMobile Security</string>
+    <string name="securitygrid_summary">Security, privacy, and device protection</string>
+    <string name="securitygrid_unavailable">This feature is not available on this device</string>
+
+    <string name="securitygrid_fingerprint_title">Fingerprint</string>
+    <string name="securitygrid_fingerprint_summary">Manage fingerprint settings</string>
+    <string name="securitygrid_pocket_mode_title">Pocket Mode</string>
+    <string name="securitygrid_pocket_mode_summary">Prevent accidental touches in pocket</string>
+    <string name="securitygrid_special_access_title">Special Access</string>
+    <string name="securitygrid_special_access_summary">Special access settings</string>
+    <string name="securitygrid_disable_qs_title">Disable QS</string>
+    <string name="securitygrid_disable_qs_summary">Disable Quick Settings on lockscreen</string>
+    <string name="securitygrid_lockscreen_title">Lockscreen</string>
+    <string name="securitygrid_lockscreen_summary">Customize lock screen</string>
+    <string name="securitygrid_timeout_title">Timeout</string>
+    <string name="securitygrid_timeout_summary">Screen timeout settings</string>
+    <string name="securitygrid_disable_saf_title">Disable SAF</string>
+    <string name="securitygrid_disable_saf_summary">Disable Secure Application Framework</string>
+    <string name="securitygrid_window_ignore_secure_title">Window Ignore Secure</string>
+    <string name="securitygrid_window_ignore_secure_summary">Allow windows to ignore secure flag</string>
+
+    <string name="securitygrid_header_android_version">Android version</string>
+    <string name="securitygrid_header_android_version_summary">—</string>
+    <string name="securitygrid_header_patch_level">Security patch level</string>
+    <string name="securitygrid_header_patch_level_summary">—</string>
+    <string name="securitygrid_header_build_number">Build number</string>
+    <string name="securitygrid_header_build_number_summary">—</string>
+    <string name="securitygrid_header_api_level">API level</string>
+    <string name="securitygrid_header_api_level_summary">—</string>
+    <string name="securitygrid_header_kernel_version">Kernel version</string>
+    <string name="securitygrid_header_kernel_version_summary">—</string>
+
+    <string name="securitygrid_pocket_page_title">Pocket Mode</string>
+    <string name="securitygrid_pocket_intro_title">Prevent Accidental Touches</string>
+    <string name="securitygrid_pocket_intro_summary">Configure pocket mode to prevent accidental screen touches, unlocks, and wake gestures when your device is in a pocket or bag.</string>
+    <string name="securitygrid_pocket_lock_title">Pocket Lock</string>
+    <string name="securitygrid_pocket_lock_summary">Prevent accidental touches when device is in pocket or bag</string>
+    <string name="securitygrid_pocket_always_on_title">Always-on Pocket Mode</string>
+    <string name="securitygrid_pocket_always_on_summary">Keep pocket mode active even when screen is on</string>
+    <string name="securitygrid_pocket_disable_dt2w_title">Disable double tap to wake</string>
+    <string name="securitygrid_pocket_disable_dt2w_summary">Prevent screen from waking when double tapped in pocket</string>
+    <string name="securitygrid_pocket_disable_fingerprint_title">Disable fingerprint sensor</string>
+    <string name="securitygrid_pocket_disable_fingerprint_summary">Prevent fingerprint auth when device is in pocket</string>
+    <string name="securitygrid_pocket_disable_lift_title">Disable lift to wake</string>
+    <string name="securitygrid_pocket_disable_lift_summary">Prevent screen from waking when lifted in pocket</string>
+</resources>

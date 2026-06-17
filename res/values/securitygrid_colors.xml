@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile -->
+<resources>
+    <color name="securitygrid_card_ripple">@*android:color/ripple_material_light</color>
+    <color name="securitygrid_card_bg">@color/contextual_card_background</color>
+    <color name="securitygrid_clock_bg">@android:color/system_accent1_50</color>
+    <color name="securitygrid_clock_color">@android:color/system_accent1_800</color>
+</resources>

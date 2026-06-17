@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile -->
+<resources>
+    <dimen name="securitygrid_card_radius">24dp</dimen>
+    <dimen name="securitygrid_header_ill_height">133dp</dimen>
+    <dimen name="securitygrid_header_ill_width">110dp</dimen>
+    <dimen name="securitygrid_grid_padding">16dp</dimen>
+</resources>

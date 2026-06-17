@@ -207,12 +207,12 @@
         <!-- Safety Center disabled and removed per user request -->
         
         <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.security.SecuritySettings"
+            android:fragment="com.bmobile.fragments.SecurityPrivacyGrid"
             android:icon="@drawable/ic_settings_security_filled"
             android:key="top_level_security"
             android:order="-40"
-            android:title="@string/security_settings_title"
-            android:summary="@string/security_dashboard_summary"
+            android:title="@string/securitygrid_title"
+            android:summary="@string/securitygrid_summary"
             settings:highlightableMenuKey="@string/menu_key_security"
             settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 

@@ -15,7 +15,7 @@
   limitations under the License.
 
   HOMEPAGE: style 0 | @string/dashboard_style_top_level_settings
-  (picker label Parent — this file is top_level_settings.xml, NOT top_level_settings_aosp.xml)
+  (picker label Parent ΓÇö this file is top_level_settings.xml, NOT top_level_settings_aosp.xml)
   -->
 
 <PreferenceScreen
@@ -170,12 +170,12 @@
     <!-- Safety Center disabled and hidden per user request -->
 
     <com.android.settings.widget.HomepagePreference
-        android:fragment="com.android.settings.security.SecuritySettings"
+        android:fragment="com.bmobile.fragments.SecurityPrivacyGrid"
         android:icon="@drawable/ic_settings_security_filled"
         android:key="top_level_security"
         android:order="-50"
-        android:title="@string/security_settings_title"
-        android:summary="@string/security_dashboard_summary"
+        android:title="@string/securitygrid_title"
+        android:summary="@string/securitygrid_summary"
         settings:highlightableMenuKey="@string/menu_key_security"
         settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 		

@@ -93,10 +93,11 @@
 	-->
 		
 	<com.android.settings.widget.HomepagePreference
-        android:fragment="com.android.settings.security.SecuritySettings"
+        android:fragment="com.bmobile.fragments.SecurityPrivacyGrid"
         android:key="top_level_security"
         android:order="-50"
-        android:title="@string/security_settings_title"
+        android:title="@string/securitygrid_title"
+        android:summary="@string/securitygrid_summary"
         settings:highlightableMenuKey="@string/menu_key_security"
         settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 		
@@ -130,7 +131,7 @@
         settings:highlightableMenuKey="@string/menu_key_emergency"/>
     -->
 
-    <!-- YR Custom Dashboard (no icon — picker lives elsewhere) -->
+    <!-- YR Custom Dashboard (no icon ΓÇö picker lives elsewhere) -->
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.bmobile.fragments.YrCustomDashboardSettings"
         android:key="top_level_yr_custom_dashboard"

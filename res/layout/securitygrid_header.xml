@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/securitygrid_header_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="200dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
+    android:background="@drawable/securitygrid_pref_card"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:clipToPadding="false"
+        android:baselineAligned="false">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="-8dp"
+            android:paddingEnd="12dp">
+
+            <TextView
+                android:id="@+id/securitygrid_header_device"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/securitygrid_header_android_version"
+                style="@style/securitygrid_text_primary"/>
+
+            <TextView
+                android:id="@+id/securitygrid_header_device_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@string/securitygrid_header_android_version_summary"
+                android:singleLine="true"
+                android:layout_below="@id/securitygrid_header_device"
+                android:layout_alignStart="@id/securitygrid_header_device"
+                style="@style/securitygrid_text_secondary"/>
+
+            <TextView
+                android:id="@+id/securitygrid_header_patch"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/securitygrid_header_patch_level"
+                android:layout_below="@id/securitygrid_header_device_desc"
+                android:layout_alignStart="@id/securitygrid_header_device_desc"
+                style="@style/securitygrid_text_primary"/>
+
+            <TextView
+                android:id="@+id/securitygrid_header_patch_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@string/securitygrid_header_patch_level_summary"
+                android:singleLine="true"
+                android:layout_below="@id/securitygrid_header_patch"
+                android:layout_alignStart="@id/securitygrid_header_patch"
+                style="@style/securitygrid_text_secondary"/>
+
+            <TextView
+                android:id="@+id/securitygrid_header_build"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/securitygrid_header_build_number"
+                android:layout_below="@id/securitygrid_header_patch_desc"
+                android:layout_alignStart="@id/securitygrid_header_patch_desc"
+                style="@style/securitygrid_text_primary"/>
+
+            <TextView
+                android:id="@+id/securitygrid_header_build_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@string/securitygrid_header_build_number_summary"
+                android:singleLine="true"
+                android:layout_below="@id/securitygrid_header_build"
+                android:layout_alignStart="@id/securitygrid_header_build"
+                style="@style/securitygrid_text_secondary"/>
+
+            <TextView
+                android:id="@+id/securitygrid_header_api"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/securitygrid_header_api_level"
+                android:layout_below="@id/securitygrid_header_build_desc"
+                android:layout_alignStart="@id/securitygrid_header_build_desc"
+                style="@style/securitygrid_text_primary"/>
+
+            <TextView
+                android:id="@+id/securitygrid_header_api_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@string/securitygrid_header_api_level_summary"
+                android:singleLine="true"
+                android:layout_below="@id/securitygrid_header_api"
+                android:layout_alignStart="@id/securitygrid_header_api"
+                style="@style/securitygrid_text_secondary"/>
+
+            <TextView
+                android:id="@+id/securitygrid_header_kernel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/securitygrid_header_kernel_version"
+                android:layout_below="@id/securitygrid_header_api_desc"
+                android:layout_alignStart="@id/securitygrid_header_api_desc"
+                style="@style/securitygrid_text_primary"/>
+
+            <TextView
+                android:id="@+id/securitygrid_header_kernel_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@string/securitygrid_header_kernel_version_summary"
+                android:singleLine="true"
+                android:layout_below="@id/securitygrid_header_kernel"
+                android:layout_alignStart="@id/securitygrid_header_kernel"
+                style="@style/securitygrid_text_secondary"/>
+
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/securitygrid_header_illustration"
+            android:layout_width="@dimen/securitygrid_header_ill_width"
+            android:layout_height="@dimen/securitygrid_header_ill_height"
+            android:layout_marginEnd="6dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="18dp">
+
+            <ImageView
+                android:id="@+id/securitygrid_header_wallpaper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_settings_wallpaper_filled" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/securitygrid_clock_bg"
+                android:alpha="0.7" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextClock
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="-12dp"
+                    android:format12Hour="hh"
+                    android:format24Hour="kk"
+                    style="@style/securitygrid_clock"/>
+
+                <TextClock
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="-12dp"
+                    android:format12Hour="mm"
+                    android:format24Hour="mm"
+                    style="@style/securitygrid_clock"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</FrameLayout>

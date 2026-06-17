@@ -117,6 +117,8 @@ public class Settings extends SettingsActivity {
     public static class KidsSafeDashboardActivity extends SettingsActivity { /* empty */ }
     /** Opens {@link com.bmobile.fragments.BMobileDashboardSettings}. */
     public static class BMobileDashboardActivity extends SettingsActivity { /* empty */ }
+    /** Opens {@link com.bmobile.fragments.SecurityPrivacyGrid}. */
+    public static class SecurityPrivacyGridActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySuggestionActivity extends NightDisplaySettingsActivity { /* empty */ }
     public static class SmartAutoRotateSettingsActivity extends SettingsActivity { /* empty */ }

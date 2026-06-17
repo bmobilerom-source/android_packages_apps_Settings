@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/securitygrid_pocket_page_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="securitygrid_pocket_illustration"
+        settings:searchable="false"
+        android:order="-1001"
+        app:lottie_rawRes="@raw/security" />
+
+    <PreferenceCategory
+        android:title="@string/securitygrid_pocket_page_title"
+        android:order="-1000"
+        android:layout="@layout/settings_title_header_small" />
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="securitygrid_pocket_intro"
+        android:title="@string/securitygrid_pocket_intro_title"
+        android:summary="@string/securitygrid_pocket_intro_summary"
+        android:persistent="false"
+        android:order="-999"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="pocket_lock"
+        android:title="@string/securitygrid_pocket_lock_title"
+        android:summary="@string/securitygrid_pocket_lock_summary"
+        android:defaultValue="false"
+        android:order="0" />
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="always_on_pocket_mode"
+        android:title="@string/securitygrid_pocket_always_on_title"
+        android:summary="@string/securitygrid_pocket_always_on_summary"
+        android:defaultValue="false"
+        android:order="1" />
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="pocket_mode_disable_dt2w"
+        android:title="@string/securitygrid_pocket_disable_dt2w_title"
+        android:summary="@string/securitygrid_pocket_disable_dt2w_summary"
+        android:defaultValue="true"
+        android:order="2" />
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="pocket_mode_disable_fingerprint"
+        android:title="@string/securitygrid_pocket_disable_fingerprint_title"
+        android:summary="@string/securitygrid_pocket_disable_fingerprint_summary"
+        android:defaultValue="true"
+        android:order="3" />
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="pocket_mode_disable_lift_to_wake"
+        android:title="@string/securitygrid_pocket_disable_lift_title"
+        android:summary="@string/securitygrid_pocket_disable_lift_summary"
+        android:defaultValue="true"
+        android:order="4" />
+
+</PreferenceScreen>
