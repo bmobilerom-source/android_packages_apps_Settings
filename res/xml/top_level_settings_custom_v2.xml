@@ -186,15 +186,14 @@
             settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
         -->
 
-        <!-- System hidden in Custom V2 -->
-        <!-- <com.android.settings.widget.HomepagePreference
-            android:fragment="com.bmobile.fragments.SystemGrid" 
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.bmobile.fragments.SystemGrid"
             android:icon="@drawable/ic_settings_system_dashboard_filled"
             android:key="top_level_system"
             android:order="-20"
             android:title="@string/header_category_system"
             android:summary="@string/system_dashboard_summary"
-            settings:highlightableMenuKey="@string/menu_key_system"/> -->
+            settings:highlightableMenuKey="@string/menu_key_system"/>
 
         <!-- About phone hidden in Custom V2 -->
         <!-- <com.android.settings.widget.HomepagePreference

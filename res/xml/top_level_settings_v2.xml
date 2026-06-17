@@ -180,7 +180,7 @@
             settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 
         <com.android.settings.widget.HomepagePreference
-            android:fragment="com.android.settings.system.SystemDashboardFragment"
+            android:fragment="com.bmobile.fragments.SystemGrid"
             android:icon="@drawable/ic_settings_system_dashboard_filled"
             android:key="top_level_system"
             android:order="-20"

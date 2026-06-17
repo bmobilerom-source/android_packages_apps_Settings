@@ -139,6 +139,13 @@
         android:summary="@string/yr_custom_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_system"/>
 
+    <com.android.settings.widget.HomepagePreference
+        android:fragment="com.bmobile.fragments.SystemGrid"
+        android:key="top_level_system"
+        android:order="10"
+        android:title="@string/header_category_system"
+        settings:highlightableMenuKey="@string/menu_key_system"/>
+
     <!-- Tips and Support hidden per user request -->
     <!-- <com.android.settings.widget.HomepagePreference
         android:key="top_level_support"

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2025 BashaMobile
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="system_grid_title">System Grid</string>
+    <string name="system_grid_summary">Access essential system settings and tools</string>
+    <string name="system_grid_gesture_summary">Configure touch gestures and shortcuts</string>
+    <string name="system_grid_navigation_summary">Choose navigation style: buttons or gestures</string>
+    <string name="system_grid_power_usage_summary">View battery usage and manage power settings</string>
+    <string name="date_and_time_summary">Set date, time, and time zone</string>
+    <string name="category_buttons_title">Buttons</string>
+    <string name="button_summary">Customize hardware button behavior</string>
+    <string name="system_grid_statusbar_summary">Customize status bar icons and indicators</string>
+    <string name="system_grid_backup_transport_summary">Select backup provider (Seed Vault, microG, etc.)</string>
+    <string name="system_grid_emergency_summary">Configure emergency contacts and SOS features</string>
+    <string name="system_reset_summary">Reset network, apps, or factory reset device</string>
+    <string name="system_tuner_title">System tuner</string>
+    <string name="system_grid_tuner_summary">Advanced system UI customization</string>
+    <string name="system_grid_backup_summary">Backup and restore your data</string>
+</resources>

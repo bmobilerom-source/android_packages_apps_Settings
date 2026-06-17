@@ -37,8 +37,9 @@
     <string name="monet_color_preset_color_description">Color preset swatch</string>
     <string name="system_basic_defaults_photowidget_title">PhotoWidget</string>
     <string name="system_basic_defaults_photowidget_summary">Home screen photo widgets</string>
-    <string name="taptap_title">Tap to wake</string>
-    <string name="taptap_summary">Wake your screen with a tap</string>
+
+    <!-- System Grid -->
+    <string name="statusbar_title">Status bar</string>
 
     <!-- Display Page Grid -->
     <string name="display_page_grid_title">Display</string>
